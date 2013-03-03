@@ -4,7 +4,7 @@ GoogleApi
 C# .NET Google Web Services Api (Complete)*
 
 
-* Google Maps
+Google Maps
   * Directions API (Full)
   * Distance Matrix API (Full)
   * Elevation API (Full)
@@ -12,7 +12,7 @@ C# .NET Google Web Services Api (Complete)*
   * Time Zone API (Full)
 
 
-* Google Places
+Google Places
   * Place Search (None)
   * Place Details (Full)
   * Place Actions (None)
@@ -21,8 +21,8 @@ C# .NET Google Web Services Api (Complete)*
   * Query Autocomplete (Full)
 
 
-* Google Translate 
+Google Translate 
   * Translate (Partial)
 
 
-* Will add api methods per request.
+Will add api methods per request.
