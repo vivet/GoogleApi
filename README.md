@@ -1,7 +1,9 @@
 GoogleApi
 =========
 
-C# .NET Google Web Services Api (Complete)*
+C# .NET Google Web Services Api (Complete).
+
+Will add api methods per request.
 
 
 Google Maps
@@ -10,6 +12,7 @@ Google Maps
   * Elevation API (Full)
   * Geocoding (Reverse Geocoding) API (Full)
   * Time Zone API (Full)
+
 
 
 Google Places
@@ -21,8 +24,8 @@ Google Places
   * Query Autocomplete (Full)
 
 
+
 Google Translate 
   * Translate (Partial)
 
 
-Will add api methods per request.
