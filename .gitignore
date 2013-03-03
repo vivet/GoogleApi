@@ -1,0 +1,7 @@
+*.user
+*.userprefs
+*.suo
+_ReSharper*
+**/bin
+**/obj
+*.DotSettings
