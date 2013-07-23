@@ -135,7 +135,8 @@ namespace GoogleApi.Engine
 		{
 			var _serializer = new DataContractJsonSerializer(typeof(TResponse));
 			var _stream = new MemoryStream(_serializedObject, false);
-			return (TResponse)_serializer.ReadObject(_stream);
+
+            return (TResponse)_serializer.ReadObject(_stream);
 		}
 		private static bool IndicatesAuthenticationFailed(Exception _ex)
 		{

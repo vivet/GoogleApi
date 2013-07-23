@@ -70,7 +70,7 @@ namespace GoogleApi.Engine
         /// <exception cref="WebException">Thrown when an error occurred while downloading data.</exception>
         public TResponse Query(TRequest _request)
         {
-            return Query(_request, this._defaultTimeout);
+            return this.Query(_request, this._defaultTimeout);
         }
         /// <summary>
         /// Query the Google Maps API using the provided request and timeout period.
@@ -96,7 +96,7 @@ namespace GoogleApi.Engine
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         public Task<TResponse> QueryAsync(TRequest _request)
         {
-            return QueryAsync(_request, CancellationToken.None);
+            return this.QueryAsync(_request, CancellationToken.None);
         }
         /// <summary>
         /// Asynchronously query the Google Maps API using the provided request.
@@ -110,7 +110,7 @@ namespace GoogleApi.Engine
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
         public Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout)
         {
-            return QueryAsync(_request, _timeout, CancellationToken.None);
+            return this.QueryAsync(_request, _timeout, CancellationToken.None);
         }
         /// <summary>
         /// Asynchronously query the Google Maps API using the provided request.

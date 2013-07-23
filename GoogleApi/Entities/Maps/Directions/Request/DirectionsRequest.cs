@@ -120,8 +120,8 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             if (this.ArrivalTime != default(DateTime))
                 _parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.ArrivalTime).ToString(CultureInfo.InvariantCulture));
 
-            if (this.DepartureTime != default(DateTime))
-                _parameters.Add("departure_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.DepartureTime).ToString(CultureInfo.InvariantCulture));
+		    if (this.DepartureTime != default(DateTime))
+		        _parameters.Add("departure_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.DepartureTime).ToString(CultureInfo.InvariantCulture));
 
 			return _parameters;
 		}

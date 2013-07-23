@@ -197,9 +197,9 @@ namespace GoogleApi.Test
 		[Test]
         public void DirectionsAsyncSumOfStepDistancesCorrectTest()
 		{
-			var _request = new DirectionsRequest { Origin = "285 Bedford Ave, Brooklyn, NY, USA", Destination = "185 Broadway Ave, Manhattan, NY, USA" };
+            var _request = new DirectionsRequest { Origin = "55.866413, 12.501063", Destination = "55.781495, 12.50114", DepartureTime = DateTime.UtcNow, TravelMode = TravelMode.Driving };
 
-			var _result = GoogleMaps.Directions.QueryAsync(_request).Result;
+            var _result = GoogleMaps.Directions.QueryAsync(_request).Result;
 
             if (_result.Status == Status.OVER_QUERY_LIMIT)
 				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
