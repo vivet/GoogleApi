@@ -53,8 +53,9 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Request
             if (!string.IsNullOrWhiteSpace(this.Language)) 
                 _parameters.Add("language", this.Language);
 
-            if (!string.IsNullOrWhiteSpace(this.Language))
-                _parameters.Add("extensions", this.Extensions.ToString().ToLower());
+            // TODO: fails with REQUEST_DENIED
+            //if (!string.IsNullOrWhiteSpace(this.Language))
+            //    _parameters.Add("extensions", this.Extensions.ToString().ToLower());
             
             return _parameters;
         }

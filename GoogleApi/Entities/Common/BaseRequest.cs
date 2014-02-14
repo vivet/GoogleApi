@@ -47,7 +47,6 @@ namespace GoogleApi.Entities.Common
         protected virtual QueryStringParametersList GetQueryStringParameters()
         {
             var _parametersList = new QueryStringParametersList();
-
             _parametersList.Add("sensor", Sensor.ToString().ToLower());
 
             return _parametersList;
