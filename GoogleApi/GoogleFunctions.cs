@@ -15,7 +15,7 @@ namespace GoogleApi
         /// </summary>
         /// <param name="_encdodedLocations"></param>
         /// <returns></returns>
-        public static IEnumerable<Location> Decode(string _encdodedLocations)
+        public static IEnumerable<Location> DecodePolyLine(string _encdodedLocations)
         {
             if (string.IsNullOrEmpty(_encdodedLocations))
                 throw new ArgumentNullException("_encdodedLocations");
@@ -66,7 +66,7 @@ namespace GoogleApi
         /// </summary>
         /// <param name="_locations"></param>
         /// <returns></returns>
-        public static string Encode(IEnumerable<Location> _locations)
+        public static string EncodePolyLine(IEnumerable<Location> _locations)
         {
             var _str = new StringBuilder();
 
