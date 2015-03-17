@@ -29,3 +29,8 @@ Google Translate
   * Translate (Partial)
 
 
+
+Google Functions 
+  * DecodePolyLine
+  * EncodePolyLine
+
