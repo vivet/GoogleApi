@@ -192,6 +192,7 @@
     <Compile Include="Entities\Translate\Translate\Response\Translation.cs" />
     <Compile Include="GoogleMaps.cs" />
     <Compile Include="GooglePlaces.cs" />
+    <Compile Include="GoogleFunctions.cs" />
     <Compile Include="GoogleTranslate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\QueryStringParametersList.cs" />
@@ -210,8 +211,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-
-</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
