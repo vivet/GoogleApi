@@ -9,6 +9,6 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
 	public class GeocodingResponse : MapsBaseResponse, IResponseFor
 	{
 		[DataMember(Name = "results")]
-		public IEnumerable<Result> Results { get; set; }
+        public virtual IEnumerable<Result> Results { get; set; }
 	}
 }

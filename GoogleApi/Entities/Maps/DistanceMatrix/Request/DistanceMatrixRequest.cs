@@ -21,17 +21,17 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 		/// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values.
 		/// </summary>
-        public IEnumerable<Location> Origins { get; set; }
+        public virtual IEnumerable<Location> Origins { get; set; }
 
 		/// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, to which to calculate distance and time. If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values
 		/// </summary>
-        public IEnumerable<Location> Destinations { get; set; }
+        public virtual IEnumerable<Location> Destinations { get; set; }
 
         /// <summary>
         /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
         /// </summary>
-        public TravelMode TravelMode { get; set; }
+        public virtual TravelMode TravelMode { get; set; }
 
         /// <summary>
         /// language (optional) — The language in which to return results. See the supported list of domain languages. 
@@ -40,7 +40,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// You may also explicitly bias the results by using localized domains of http://map.google.com. 
         /// See Region Biasing for more information.
         /// </summary>
-        public string Language { get; set; }
+        public virtual string Language { get; set; }
         
 		/// <summary>
 		/// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
@@ -48,7 +48,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 		/// highways indicates that the calculated route should avoid highways.
 		/// (For more information see Route Restrictions below.)
 		/// </summary>
-		public AvoidWay Avoid { get; set; }
+        public virtual AvoidWay Avoid { get; set; }
 
         /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
@@ -56,8 +56,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Units=imperial returns distances in miles and feet.
         /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
         /// </summary>
-        public Units Units { get; set; }
+        public virtual Units Units { get; set; }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DistanceMatrixRequest()
         {
             this.Avoid = AvoidWay.Nothing;

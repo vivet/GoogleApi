@@ -10,6 +10,6 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Response
         /// location contains the geocoded latitude,longitude value for this place.
         /// </summary>
         [DataMember(Name = "location")]
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

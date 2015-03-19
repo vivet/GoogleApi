@@ -12,6 +12,6 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response
         /// Contains an array of predictions, with information about the prediction.
 		/// </summary>
 		[DataMember(Name = "predictions")]
-		public IEnumerable<Prediction> Predictions { get; set; }
+        public virtual IEnumerable<Prediction> Predictions { get; set; }
 	}
 }

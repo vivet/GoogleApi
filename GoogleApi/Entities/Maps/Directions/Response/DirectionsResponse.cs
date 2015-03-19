@@ -12,6 +12,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		/// "routes" contains an array of routes from the origin to the destination. See Routes below.
 		/// </summary>
 		[DataMember(Name = "routes")]
-		public IEnumerable<Route> Routes { get; set; }
+        public virtual IEnumerable<Route> Routes { get; set; }
 	}
 }

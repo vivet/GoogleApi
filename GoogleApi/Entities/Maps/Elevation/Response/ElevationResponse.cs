@@ -12,6 +12,6 @@ namespace GoogleApi.Entities.Maps.Elevation.Response
         /// Results.
         /// </summary>
 		[DataMember(Name = "results")]
-		public IEnumerable<Result> Results { get; set; }
+        public virtual IEnumerable<Result> Results { get; set; }
 	}
 }

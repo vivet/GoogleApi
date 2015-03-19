@@ -188,7 +188,8 @@
     <Compile Include="Entities\Places\PlacesAutoComplete\Response\Term.cs" />
     <Compile Include="Entities\Maps\TimeZone\Request\TimeZoneRequest.cs" />
     <Compile Include="Entities\Maps\TimeZone\Response\TimeZoneResponse.cs" />
-    <Compile Include="Entities\Translate\Translate\Request\Format.cs" />
+    <Compile Include="Entities\Translate\Translate\Request\Enums\Format.cs" />
+    <Compile Include="Entities\Translate\Translate\Response\Data.cs" />
     <Compile Include="Entities\Translate\Translate\Response\Translation.cs" />
     <Compile Include="GoogleMaps.cs" />
     <Compile Include="GooglePlaces.cs" />
@@ -204,10 +205,7 @@
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Translate\Detection\" />
-    <Folder Include="Entities\Translate\Languages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

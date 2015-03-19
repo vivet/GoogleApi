@@ -1,5 +1,6 @@
 using System.Linq;
 using GoogleApi.Entities.Translate.Translate.Request;
+using GoogleApi.Entities.Translate.Translate.Request.Enums;
 using NUnit.Framework;
 
 namespace GoogleApi.Test

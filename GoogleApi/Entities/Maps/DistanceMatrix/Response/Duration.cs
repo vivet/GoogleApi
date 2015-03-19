@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 	public class Duration
 	{
 		[DataMember(Name = "value")]
-		internal int ValueInSec
+        internal virtual int ValueInSec
 		{
 			get
 			{
@@ -32,9 +32,9 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 		/// text contains a human-readable representation of the duration.
 		/// </summary>
 		[DataMember(Name = "text")]
-		public string Text { get; set; }
+        public virtual string Text { get; set; }
 
 		[DataMember(Name = "time_zone")]
-		public string TimeZone { get; set; }
+        public virtual string TimeZone { get; set; }
 	}
 }

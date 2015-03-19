@@ -15,17 +15,17 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// <summary>
         /// A comma-separated lat,lng tuple (eg. location=-33.86,151.20), representing the location to look up
         /// </summary>
-        public Location Location { get; set; } 
+        public virtual Location Location { get; set; } 
 
         /// <summary>
         /// Timestamp specifies the desired time as seconds since midnight, January 1, 1970 UTC. The Time Zone API uses the timestamp to determine whether or not Daylight Savings should be applied. Times before 1970 can be expressed as negative values.
         /// </summary>
-        public DateTime TimeStamp { get; set; }
+        public virtual DateTime TimeStamp { get; set; }
         
         /// <summary>
         /// The language in which to return results. See the list of supported domain languages. Note that we often update supported languages so this list may not be exhaustive. Defaults to en.
         /// </summary>
-        public string Language { get; set; } 
+        public virtual string Language { get; set; } 
 
         public override bool IsSsl
         {

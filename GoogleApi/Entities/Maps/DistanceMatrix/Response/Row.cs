@@ -15,7 +15,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 		/// summary contains a short textual description for the route, suitable for naming and disambiguating the route from alternatives.
 		/// </summary>
 		[DataMember(Name = "elements")]
-		public IEnumerable<Element> Elements { get; set; }
+        public virtual IEnumerable<Element> Elements { get; set; }
 
 	}
 }

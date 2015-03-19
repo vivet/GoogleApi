@@ -7,9 +7,9 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
 	public class FramedLocation
 	{
 		[DataMember(Name = "southwest")]
-		public Location SouthWest { get; set; }
+        public virtual Location SouthWest { get; set; }
 
 		[DataMember(Name = "northeast")]
-		public Location NorthEast { get; set; }
+        public virtual Location NorthEast { get; set; }
 	}
 }

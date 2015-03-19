@@ -13,7 +13,7 @@ namespace GoogleApi.Entities.Maps.Common
         public Status Status { get; set; }
 
         [DataMember(Name = "status")]
-        internal string StatusStr
+        internal virtual string StatusStr
         {
             get
             {

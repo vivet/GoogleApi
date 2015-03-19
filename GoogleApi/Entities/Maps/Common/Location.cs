@@ -8,10 +8,10 @@ namespace GoogleApi.Entities.Maps.Common
 	public class Location : ILocationString
 	{
 		[DataMember(Name = "lat")]
-		public double Latitude { get; set; }
+        public virtual double Latitude { get; set; }
 
 		[DataMember(Name = "lng")]
-		public double Longitude { get; set; }
+        public virtual double Longitude { get; set; }
 
         public Location(double _latitude, double _longitude)
 		{

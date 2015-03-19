@@ -9,12 +9,12 @@ namespace GoogleApi.Entities.Translate.Translate.Response
         /// The source language detected by google when not supplied in the request. (optional)
         /// </summary>
         [DataMember(Name = "translatedText")]
-        public string TranslatedText { get; set; }
+        public virtual string TranslatedText { get; set; }
 
         /// <summary>
         /// The source language detected by google when not supplied in the request. (optional)
         /// </summary>
         [DataMember(Name = "detectedSourceLanguage")]
-        public string DetectedSourceLanguage { get; set; }
+        public virtual string DetectedSourceLanguage { get; set; }
     }
 }

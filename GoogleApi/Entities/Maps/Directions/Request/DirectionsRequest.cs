@@ -20,40 +20,40 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 		/// <summary>
 		/// origin (required) — The address or textual latitude/longitude value from which you wish to calculate directions. *
 		/// </summary>
-		public string Origin { get; set; }
+        public virtual string Origin { get; set; }
 
 		/// <summary>
 		/// destination (required) — The address or textual latitude/longitude value from which you wish to calculate directions.*
 		/// </summary>
-		public string Destination { get; set; }
+        public virtual string Destination { get; set; }
 
 		/// <summary>
 		/// The time of departure.
 		/// Required when TravelMode = Transit
 		/// </summary>
-		public DateTime DepartureTime { get; set; }
+        public virtual DateTime DepartureTime { get; set; }
 
 		/// <summary>
 		/// The time of arrival.
 		/// Required when TravelMode = Transit
 		/// </summary>
-		public DateTime ArrivalTime { get; set; }
+        public virtual DateTime ArrivalTime { get; set; }
 
 		/// <summary>
 		/// waypoints (optional) specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded. (For more information on waypoints, see Using Waypoints in Routes below.)
 		/// </summary>
-		public string[] Waypoints { get; set; }
+        public virtual string[] Waypoints { get; set; }
 
 		/// <summary>
 		/// optimize the provided route by rearranging the waypoints in a more efficient order. (This optimization is an application of the Travelling Salesman Problem.)
 		/// http://en.wikipedia.org/wiki/Travelling_salesman_problem
 		/// </summary>
-		public bool OptimizeWaypoints { get; set; }
+        public virtual bool OptimizeWaypoints { get; set; }
 
 		/// <summary>
 		/// alternatives (optional), if set to true, specifies that the Directions service may provide more than one route alternative in the response. Note that providing route alternatives may increase the response time from the server.
 		/// </summary>
-		public bool Alternatives { get; set; }
+        public virtual bool Alternatives { get; set; }
 
 		/// <summary>
 		/// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
@@ -61,7 +61,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 		/// highways indicates that the calculated route should avoid highways.
 		/// (For more information see Route Restrictions below.)
 		/// </summary>
-		public AvoidWay Avoid { get; set; }
+        public virtual AvoidWay Avoid { get; set; }
 
 		/// <summary>
 		/// language (optional) — The language in which to return results. See the supported list of domain languages. 
@@ -70,12 +70,12 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 		/// You may also explicitly bias the results by using localized domains of http://map.google.com. 
 		/// See Region Biasing for more information.
 		/// </summary>
-		public string Language { get; set; }
+        public virtual string Language { get; set; }
 
 		/// <summary>
 		/// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
 		/// </summary>
-		public TravelMode TravelMode { get; set; }
+        public virtual TravelMode TravelMode { get; set; }
 
         public DirectionsRequest()
         {

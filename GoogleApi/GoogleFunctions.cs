@@ -68,7 +68,7 @@ namespace GoogleApi
         /// <returns></returns>
         public static string EncodePolyLine(IEnumerable<Location> _locations)
         {
-            var _str = new StringBuilder();
+            var _encodedString = new StringBuilder();
 
             var _encodeDiff = (Action<int>)(_diff =>
             {
@@ -80,11 +80,11 @@ namespace GoogleApi
 
                 while (_rem >= 0x20)
                 {
-                    _str.Append((char)((0x20 | (_rem & 0x1f)) + 63));
+                    _encodedString.Append((char)((0x20 | (_rem & 0x1f)) + 63));
                     _rem >>= 5;
                 }
 
-                _str.Append((char)(_rem + 63));
+                _encodedString.Append((char)(_rem + 63));
             });
 
             var _lastLat = 0;
@@ -102,7 +102,7 @@ namespace GoogleApi
                 _lastLng = _lng;
             }
 
-            return _str.ToString();
+            return _encodedString.ToString();
         }
     }
 }

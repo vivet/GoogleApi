@@ -4,7 +4,7 @@ namespace GoogleApi.Entities.Maps.Common
 {
 	public class AddressLocation : ILocationString
 	{
-		public string Address { get; private set; }
+        public virtual string Address { get; private set; }
 
 		public AddressLocation(string _address)
 		{

@@ -11,13 +11,13 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		/// Contains the name of the vehicle on this line. eg. "Subway."
 		/// </summary>
 		[DataMember(Name = "name")]
-		public string Name { get; set; }
+        public virtual string Name { get; set; }
 
 		/// <summary>
 		/// Contains the type of vehicle that runs on this line.
 		/// </summary>
 		[DataMember(Name = "type")]
-		public string VehicleTypeString
+        public virtual string VehicleTypeString
 		{
 			get { return VehicleType.ToString(); }
 			set { VehicleType = (VehicleType)Enum.Parse(typeof(VehicleType), value); }
@@ -26,12 +26,12 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		/// <summary>
 		/// Contains the type of vehicle that runs on this line.
 		/// </summary>
-		public VehicleType VehicleType { get; set; }
+        public virtual VehicleType VehicleType { get; set; }
 
 		/// <summary>
 		/// Contains the URL for an icon associated with this vehicle type.
 		/// </summary>
 		[DataMember(Name = "icon")]
-		public string Icon { get; set; }
+        public virtual string Icon { get; set; }
 	}
 }

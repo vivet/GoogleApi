@@ -13,18 +13,18 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		/// Contains the name of the transit agency.
 		/// </summary>
 		[DataMember(Name = "name")]
-		public string Name { get; set; }
+        public virtual string Name { get; set; }
 
 		/// <summary>
 		/// Contains the URL for the transit agency.
 		/// </summary>
 		[DataMember(Name = "url")]
-		public string Url { get; set; }
+        public virtual string Url { get; set; }
 
 		/// <summary>
 		/// Contains the phone number of the transit agency.
 		/// </summary>
 		[DataMember(Name = "phone")]
-		public string Phone { get; set; }
+        public virtual string Phone { get; set; }
 	}
 }

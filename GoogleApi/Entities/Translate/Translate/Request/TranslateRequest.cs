@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Translate.Translate.Request.Enums;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Translate.Translate.Request
@@ -17,34 +18,34 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// Your application's API key. This key identifies your application for purposes of quota management and so that Places 
         /// added from your application are made immediately available to your app. Visit the APIs Console to create an API Project and obtain your key.
         /// </summary>
-        public string ApiKey { get; set; }
+        public virtual string ApiKey { get; set; }
 
         /// <summary>
         /// Use the Source query parameter to specify the language you want to translate from. (optional)
         /// </summary>
-        public string Source { get; set; }
+        public virtual string Source { get; set; }
 
         /// <summary>
         /// Use the target query parameter to specify the language you want to translate into.
         /// </summary>
-        public string Target { get; set; } 
+        public virtual string Target { get; set; } 
 
         /// <summary>
         /// Use the q query parameter to identify the string to translate
         /// </summary>
-        public IEnumerable<string> Qs { get; set; } 
+        public virtual IEnumerable<string> Qs { get; set; } 
 
         /// <summary>
         /// If prettyprint=true, the results returned by the server will be human readable (pretty printed).
         /// Default: prettyprint=true.
         /// </summary>
-        public bool PrettyPrint { get; set; } 
+        public virtual bool PrettyPrint { get; set; } 
 
         /// <summary>
         /// This optional parameter allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates HTML and a value of text indicates plain-text.
         /// Default: format=html.
         /// </summary>
-        public Format Format { get; set; } 
+        public virtual Format Format { get; set; } 
 
         public override bool IsSsl
         {

@@ -28,43 +28,43 @@ namespace GoogleApi.Entities.Places.PlacesAutoComplete.Request
 		/// Your application's API key. This key identifies your application for purposes of quota management and so that Places 
 		/// added from your application are made immediately available to your app. Visit the APIs Console to create an API Project and obtain your key.
 		/// </summary>
-        public string ApiKey { get; set; } 
+        public virtual string ApiKey { get; set; } 
 
         /// <summary>
         /// The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
         /// </summary>
-        public string Input { get; set; } 
+        public virtual string Input { get; set; } 
 
         /// <summary>
         /// The character position in the input term at which the service uses text for predictions. For example, if the input is 'Googl' and the completion point is 3, the service will match on 'Goo'. The offset should generally be set to the position of the text caret. If no offset is supplied, the service will use the entire term.        
         /// </summary>
-        public string Offset { get; set; }
+        public virtual string Offset { get; set; }
 
         /// <summary>
         /// The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
 		/// </summary>
-		public Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
         /// <summary>
         /// The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area. See Location Biasing below.
 		/// </summary>
-		public double? Radius { get; set; }
+        public virtual double? Radius { get; set; }
 
 		/// <summary>
         /// The language in which to return results. See the supported list of domain languages. Note that we often update supported languages so this list may not be exhaustive. If language is not supplied, the Place service will attempt to use the native language of the domain from which the request is sent.
 		/// </summary>
-		public string Language { get; set; }
+        public virtual string Language { get; set; }
 
 		/// <summary>
         /// The types of Place results to return. See Place Types below. If no type is specified, all types will be returned.
         /// See the list of supported types - https://developers.google.com/maps/documentation/places/supported_types
 		/// </summary>
-		public string Types { get; set; }
+        public virtual string Types { get; set; }
 
         /// <summary>
         /// The component filters, separated by a pipe (|). Each component filter consists of a component:value pair and will fully restrict the results from the geocoder. For more information see Component Filtering.
 		/// </summary>
-        public Dictionary<Component, string> Components { get; set; }
+        public virtual Dictionary<Component, string> Components { get; set; }
         
         public override bool IsSsl
 		{
