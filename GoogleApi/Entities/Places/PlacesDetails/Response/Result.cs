@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using GoogleApi.Entities.Maps.Geocode.Response;
+using GoogleApi.Entities.Places.Common.Response;
 using Geometry = GoogleApi.Entities.Places.Common.Response.Geometry;
 
 namespace GoogleApi.Entities.Places.PlacesDetails.Response

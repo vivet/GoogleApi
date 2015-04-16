@@ -1,4 +1,5 @@
 ﻿using GoogleApi.Engine;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.PlacesAutoComplete.Request;
 using GoogleApi.Entities.Places.PlacesAutoComplete.Response;
 using GoogleApi.Entities.Places.PlacesDetails.Request;
@@ -15,28 +16,36 @@ namespace GoogleApi
     /// </summary>
     public class GooglePlaces
     {
-        /// <summary>Perform places details search operations.</summary>
+        /// <summary>
+        /// Perform places details search operations.
+        /// </summary>
         public static EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse> Details
         {
             get
             {
-                return EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse>._instance;
+                return EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse>.Instance();
             }
         }
-        /// <summary>Perform places autocomplete operations.</summary>
+        
+        /// <summary>
+        /// Perform places autocomplete operations.
+        /// </summary>
         public static EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse> AutoComplete
         {
             get
             {
-                return EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>._instance;
+                return EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>.Instance();
             }
         }
-        /// <summary>Perform places query autocomplete operations.</summary>
+        
+        /// <summary>
+        /// Perform places query autocomplete operations.
+        /// </summary>
         public static EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse> QueryAutoComplete
         {
             get
             {
-                return EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>._instance;
+                return EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>.Instance();
             }
         }
 
@@ -47,7 +56,29 @@ namespace GoogleApi
         {
             get
             {
-                return EngineFacade<PlacesNearbySearchRequest, PlacesNearbySearchResponse>._instance;
+                return EngineFacade<PlacesNearbySearchRequest, PlacesNearbySearchResponse>.Instance();
+            }
+        }
+
+        /// <summary>
+        /// Performs Places Radar query
+        /// </summary>
+        public static EngineFacade<PlacesRadarSearchRequest, PlacesRadarSearchResponse> Radar
+        {
+            get
+            {
+                return EngineFacade<PlacesRadarSearchRequest, PlacesRadarSearchResponse>.Instance();
+            }
+        }
+
+        /// <summary>
+        /// Performs Places Test query
+        /// </summary>
+        public static EngineFacade<PlacesTextSearchRequest, PlacesTextSearchResponse> Text
+        {
+            get
+            {
+                return EngineFacade<PlacesTextSearchRequest, PlacesTextSearchResponse>.Instance();
             }
         }
     }

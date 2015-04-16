@@ -16,7 +16,7 @@ Google Maps
  
  
 Google Places
-  * Place Search (NearBy)
+  * Place Search (NearBy, Text, Radar)
   * Place Details (Full)
   * Place Actions (None)
   * Place Photos (None)

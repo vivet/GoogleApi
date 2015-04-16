@@ -93,9 +93,9 @@ namespace GoogleApi.Test
 		[ExpectedException(typeof(TimeoutException))]
         public void GeocodingAsyncTimeoutTooShortThrowsTest()
 		{
-            var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA" };
+            var request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA" };
 
-            MapsTest.ThrowInnerException(() => GoogleMaps.Geocode.QueryAsync(_request, TimeSpan.FromMilliseconds(1)).Wait());
+            ThrowInnerException(() => GoogleMaps.Geocode.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Wait());
 		}
 		[Test]
 		[ExpectedException(typeof(TaskCanceledException))]

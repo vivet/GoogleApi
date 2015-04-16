@@ -11,5 +11,13 @@ namespace GoogleApi.Entities.Places.Common
                 return "maps.googleapis.com/maps/api/place/";
             }
         }
+
+        public override bool IsSsl
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

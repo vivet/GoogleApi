@@ -6,9 +6,9 @@ using GoogleApi.Entities.Maps.Common;
 namespace GoogleApi.Entities.Places.PlacesSearch.Response
 {
     [DataContract]
-    public class PlacesNearbySearchResponse : MapsBaseResponse, IResponseFor
+    public class PlacesRadarSearchResponse : MapsBaseResponse, IResponseFor
     {
         [DataMember(Name = "results")]
-        public virtual IEnumerable<NearByResult> Results { get; set; }
+        public virtual IEnumerable<RadarResult> Results { get; set; }
     }
 }

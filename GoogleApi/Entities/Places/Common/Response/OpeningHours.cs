@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Places.PlacesDetails.Response;
 
-namespace GoogleApi.Entities.Places.PlacesDetails.Response
+namespace GoogleApi.Entities.Places.Common.Response
 {
     [DataContract]
     public class OpeningHours
