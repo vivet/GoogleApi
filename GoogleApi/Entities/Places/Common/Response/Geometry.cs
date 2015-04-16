@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Common;
 
-namespace GoogleApi.Entities.Places.PlacesDetails.Response
+namespace GoogleApi.Entities.Places.Common.Response
 {
     [DataContract]
     public class Geometry

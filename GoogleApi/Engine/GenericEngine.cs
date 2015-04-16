@@ -1,19 +1,25 @@
 using System;
+using System.CodeDom;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Extensions;
+using GoogleApi.Helpers;
 
 namespace GoogleApi.Engine
 {
 	public abstract class GenericEngine<TRequest, TResponse> where TRequest : BaseRequest, new() where TResponse : IResponseFor
 	{
-        private const string AUTHENTICATION_FAILED_MESSAGE = "The request to Google API failed with HTTP error '(403) Forbidden', which usually indicates that the provided client ID or signing key is invalid or expired.";
+        private const string AuthenticationFailedMessage = "The request to Google API failed with HTTP error '(403) Forbidden', which usually indicates that the provided client ID or signing key is invalid or expired.";
 
         private static ServicePoint HttpServicePoint { get; set; }
         private static ServicePoint HttpsServicePoint { get; set; }
@@ -43,108 +49,111 @@ namespace GoogleApi.Engine
 
 		static GenericEngine()
 		{
-			var _baseUrl = new TRequest().BaseUrl;
-			HttpServicePoint = ServicePointManager.FindServicePoint(new Uri("http://" + _baseUrl));
-			HttpsServicePoint = ServicePointManager.FindServicePoint(new Uri("https://" + _baseUrl));
+			var baseUrl = new TRequest().BaseUrl;
+			HttpServicePoint = ServicePointManager.FindServicePoint(new Uri("http://" + baseUrl));
+			HttpsServicePoint = ServicePointManager.FindServicePoint(new Uri("https://" + baseUrl));
 		}
 
-		protected internal static TResponse QueryGoogleApi(TRequest _request, TimeSpan _timeout)
+		protected internal static TResponse QueryGoogleApi(TRequest request, TimeSpan timeout)
 		{
-			if (_request == null)
-				throw new ArgumentNullException("_request");
+			if (request == null)
+				throw new ArgumentNullException("request");
 
 			try
 			{
-				var _data = new WebClientEx(_timeout).DownloadData(_request.GetUri());
-				return Deserialize(_data);
+				var data = new WebClientEx(timeout).DownloadData(request.GetUri());
+				return Deserialize(data);
 			}
-			catch (WebException _ex)
+			catch (WebException ex)
 			{
-				if (IndicatesAuthenticationFailed(_ex))
-					throw new AuthenticationException(AUTHENTICATION_FAILED_MESSAGE, _ex);
+				if (IndicatesAuthenticationFailed(ex))
+					throw new AuthenticationException(AuthenticationFailedMessage, ex);
 
-				if (_ex.Status == WebExceptionStatus.Timeout)
-					throw new TimeoutException(string.Format("The request has exceeded the timeout limit of {0} and has been aborted.", _timeout));
+				if (ex.Status == WebExceptionStatus.Timeout)
+					throw new TimeoutException(string.Format("The request has exceeded the timeout limit of {0} and has been aborted.", timeout));
 
 				throw;
 			}
 		}
-        protected internal static Task<TResponse> QueryGoogleApiAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token = default(CancellationToken))
+        protected internal static Task<TResponse> QueryGoogleApiAsync(TRequest request, TimeSpan timeout, CancellationToken token = default(CancellationToken))
         {
-            if (_request == null)
-                throw new ArgumentNullException("_request");
+            if (request == null)
+                throw new ArgumentNullException("request");
 
-            var _completionSource = new TaskCompletionSource<TResponse>();
+            var completionSource = new TaskCompletionSource<TResponse>();
 
-            new WebClient().DownloadDataTaskAsync(_request.GetUri(), _timeout, _token)
-                .ContinueWith(_t => DownloadDataComplete(_t, _completionSource), TaskContinuationOptions.ExecuteSynchronously);
+            new WebClient().DownloadDataTaskAsync(request.GetUri(), timeout, token)
+                .ContinueWith(t => DownloadDataComplete(t, completionSource), TaskContinuationOptions.ExecuteSynchronously);
 
-            return _completionSource.Task;
+            return completionSource.Task;
         }
 
-		protected static IAsyncResult BeginQueryGoogleApi(TRequest _request, AsyncCallback _asyncCallback, object _state)
+		protected static IAsyncResult BeginQueryGoogleApi(TRequest request, AsyncCallback asyncCallback, object state)
 		{
 			// Must use TaskCompletionSource because in .NET 4.0 there's no overload of ContinueWith that accepts a state object (used in IAsyncResult).
 			// Such overloads have been added in .NET 4.5, so this can be removed if/when the project is promoted to that version.
 			// An example of such an added overload can be found at: http://msdn.microsoft.com/en-us/library/hh160386.aspx
 
-			var _completionSource = new TaskCompletionSource<TResponse>(_state);
-			QueryGoogleApiAsync(_request).ContinueWith(_t =>
+			var completionSource = new TaskCompletionSource<TResponse>(state);
+			QueryGoogleApiAsync(request).ContinueWith(t =>
 														{
-															if (_t.IsFaulted && _t.Exception != null)
+															if (t.IsFaulted && t.Exception != null)
 															{
-                                                                _completionSource.SetException(_t.Exception.InnerException);
+                                                                completionSource.SetException(t.Exception.InnerException);
 															}
-															else if (_t.IsCanceled)
-																_completionSource.SetCanceled();
+															else if (t.IsCanceled)
+																completionSource.SetCanceled();
 															else
-																_completionSource.SetResult(_t.Result);
+																completionSource.SetResult(t.Result);
 
-															_asyncCallback(_completionSource.Task);
+															asyncCallback(completionSource.Task);
 														}, TaskContinuationOptions.ExecuteSynchronously);
 
-			return _completionSource.Task;
+			return completionSource.Task;
 		}
-		protected static TResponse EndQueryGoogleApi(IAsyncResult _asyncResult)
+		protected static TResponse EndQueryGoogleApi(IAsyncResult asyncResult)
 		{
-			return ((Task<TResponse>)_asyncResult).Result;
+			return ((Task<TResponse>)asyncResult).Result;
 		}
-		protected static Task<TResponse> QueryGoogleApiAsync(TRequest _request)
+		protected static Task<TResponse> QueryGoogleApiAsync(TRequest request)
 		{
-			return QueryGoogleApiAsync(_request, TimeSpan.FromMilliseconds(Timeout.Infinite), CancellationToken.None);
+			return QueryGoogleApiAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), CancellationToken.None);
 		}
 
-        private static void DownloadDataComplete(Task<byte[]> _task, TaskCompletionSource<TResponse> _completionSource)
+        private static void DownloadDataComplete(Task<byte[]> task, TaskCompletionSource<TResponse> completionSource)
 		{
-			if (_task.IsCanceled)
+			if (task.IsCanceled)
 			{
-				_completionSource.SetCanceled();
+				completionSource.SetCanceled();
 			}
-			else if (_task.IsFaulted)
+			else if (task.IsFaulted)
 			{
-				if (_task.Exception != null && IndicatesAuthenticationFailed(_task.Exception.InnerException))
-					_completionSource.SetException(new AuthenticationException(AUTHENTICATION_FAILED_MESSAGE, _task.Exception.InnerException));
-				else if (_task.Exception != null) _completionSource.SetException(_task.Exception.InnerException);
+				if (task.Exception != null && IndicatesAuthenticationFailed(task.Exception.InnerException))
+					completionSource.SetException(new AuthenticationException(AuthenticationFailedMessage, task.Exception.InnerException));
+				else if (task.Exception != null) completionSource.SetException(task.Exception.InnerException);
 			}
 			else
 			{
-				_completionSource.SetResult(Deserialize(_task.Result));
+				completionSource.SetResult(Deserialize(task.Result));
 			}
 		}
-		private static TResponse Deserialize(byte[] _serializedObject)
+		private static TResponse Deserialize(byte[] serializedObject)
 		{
-			var _serializer = new DataContractJsonSerializer(typeof(TResponse));
-			var _stream = new MemoryStream(_serializedObject, false);
+		    var serializer = new DataContractJsonSerializer(typeof (TResponse));
 
-            return (TResponse)_serializer.ReadObject(_stream);
+		    using (var stream = new MemoryStream(serializedObject, false))
+		    {
+                return (TResponse)serializer.ReadObject(stream);   
+		    }
 		}
-		private static bool IndicatesAuthenticationFailed(Exception _ex)
+		private static bool IndicatesAuthenticationFailed(Exception ex)
 		{
-			var _webException = _ex as WebException;
+			var webException = ex as WebException;
 
-			return _webException != null &&
-				   _webException.Status == WebExceptionStatus.ProtocolError &&
-				   ((HttpWebResponse)_webException.Response).StatusCode == HttpStatusCode.Forbidden;
+			return webException != null &&
+				   webException.Status == WebExceptionStatus.ProtocolError &&
+				   ((HttpWebResponse)webException.Response).StatusCode == HttpStatusCode.Forbidden;
 		}
 	}
+    
 }

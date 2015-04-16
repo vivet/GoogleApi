@@ -5,6 +5,8 @@ using GoogleApi.Entities.Places.PlacesDetails.Request;
 using GoogleApi.Entities.Places.PlacesDetails.Response;
 using GoogleApi.Entities.Places.PlacesQueryAutoComplete.Request;
 using GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response;
+using GoogleApi.Entities.Places.PlacesSearch.Request;
+using GoogleApi.Entities.Places.PlacesSearch.Response;
 
 namespace GoogleApi
 {
@@ -35,6 +37,17 @@ namespace GoogleApi
             get
             {
                 return EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>._instance;
+            }
+        }
+
+        /// <summary>
+        /// Performs Places Nearby query
+        /// </summary>
+        public static EngineFacade<PlacesNearbySearchRequest, PlacesNearbySearchResponse> NearBy
+        {
+            get
+            {
+                return EngineFacade<PlacesNearbySearchRequest, PlacesNearbySearchResponse>._instance;
             }
         }
     }
