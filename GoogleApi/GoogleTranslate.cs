@@ -14,7 +14,7 @@ namespace GoogleApi
         {
             get
             {
-                return EngineFacade<TranslateRequest, TranslateResponse>._instance;
+                return EngineFacade<TranslateRequest, TranslateResponse>.Instance();
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Places.Common;
@@ -65,35 +66,35 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Request
 			}
 		}
 
-	    protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
-            if (string.IsNullOrEmpty(this.ApiKey))
+            if (string.IsNullOrEmpty(ApiKey))
                 throw new ArgumentException("ApiKey must not null or empty");
 
-            if (string.IsNullOrEmpty(this.Input))
+            if (string.IsNullOrEmpty(Input))
                 throw new ArgumentException("_input must not null or empty"); 
             
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+            if (Radius.HasValue && (Radius > 50000 || Radius < 1))
 				throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50000.");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("key", this.ApiKey);
-            _parameters.Add("input", this.Input);
+            parameters.Add("key", ApiKey);
+            parameters.Add("input", Input);
 
-            if (!string.IsNullOrEmpty(this.Offset))
-                _parameters.Add("offset", this.Offset);
+            if (!string.IsNullOrEmpty(Offset))
+                parameters.Add("offset", Offset);
 
-            if (this.Location != null)
-                _parameters.Add("location", this.Location.ToString());
+            if (Location != null)
+                parameters.Add("location", Location.ToString());
 	
-            if (this.Radius.HasValue)
-				_parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+            if (Radius.HasValue)
+				parameters.Add("radius", Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (string.IsNullOrEmpty(this.Language))
-                _parameters.Add("language", this.Language);
+            if (string.IsNullOrEmpty(Language))
+                parameters.Add("language", Language);
 
-            return _parameters;
+            return parameters;
 		}
 	}
 }

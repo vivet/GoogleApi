@@ -10,7 +10,10 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 {
     public class DistanceMatrixRequest : SignableRequest
 	{
-		protected internal override string BaseUrl
+        private AvoidWay _avoid = AvoidWay.Nothing;
+        private Units _units = Units.Metric;
+
+        protected internal override string BaseUrl
 		{
 			get
 			{
@@ -41,14 +44,18 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// See Region Biasing for more information.
         /// </summary>
         public virtual string Language { get; set; }
-        
-		/// <summary>
-		/// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
-		/// tolls indicates that the calculated route should avoid toll roads/bridges.
-		/// highways indicates that the calculated route should avoid highways.
-		/// (For more information see Route Restrictions below.)
-		/// </summary>
-        public virtual AvoidWay Avoid { get; set; }
+
+        /// <summary>
+        /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
+        /// tolls indicates that the calculated route should avoid toll roads/bridges.
+        /// highways indicates that the calculated route should avoid highways.
+        /// (For more information see Route Restrictions below.)
+        /// </summary>
+        public virtual AvoidWay Avoid
+        {
+            get { return _avoid; }
+            set { _avoid = value; }
+        }
 
         /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
@@ -56,45 +63,40 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Units=imperial returns distances in miles and feet.
         /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
         /// </summary>
-        public virtual Units Units { get; set; }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public DistanceMatrixRequest()
+        public virtual Units Units
         {
-            this.Avoid = AvoidWay.Nothing;
-            this.Units = Units.METRIC;
+            get { return _units; }
+            set { _units = value; }
         }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
-			if (this.Origins == null)
+			if (Origins == null)
 				throw new ArgumentException("Must specify an Origins");
 
-            if (this.Destinations == null)
+            if (Destinations == null)
 				throw new ArgumentException("Must specify a Destinations");
             
-            if (!Enum.IsDefined(typeof(AvoidWay), this.Avoid))
+            if (!Enum.IsDefined(typeof(AvoidWay), Avoid))
 				throw new ArgumentException("Invalid enumeration value for 'Avoid'");
 
-            if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
+            if (!Enum.IsDefined(typeof(TravelMode), TravelMode))
 				throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("origins", string.Join("|", this.Origins));
-            _parameters.Add("destinations", string.Join("|", this.Destinations));
-            _parameters.Add("mode", this.TravelMode.ToString().ToLower());
-            _parameters.Add("units", this.Units.ToString().ToLower());
+            parameters.Add("origins", string.Join("|", Origins));
+            parameters.Add("destinations", string.Join("|", Destinations));
+            parameters.Add("mode", TravelMode.ToString().ToLower());
+            parameters.Add("units", Units.ToString().ToLower());
 
-            if (!string.IsNullOrWhiteSpace(this.Language))
-                _parameters.Add("language", this.Language);
+            if (!string.IsNullOrWhiteSpace(Language))
+                parameters.Add("language", Language);
 
-            if (this.Avoid != AvoidWay.Nothing)
-				_parameters.Add("avoid", this.Avoid.ToString().ToLower());
+            if (Avoid != AvoidWay.Nothing)
+				parameters.Add("avoid", Avoid.ToString().ToLower());
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

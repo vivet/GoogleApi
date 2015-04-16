@@ -6,14 +6,14 @@ namespace GoogleApi.Entities.Maps.Common
 	{
         public virtual string Address { get; private set; }
 
-		public AddressLocation(string _address)
+		public AddressLocation(string address)
 		{
-            this.Address = _address;
+            Address = address;
 		}
 
 	    public string LocationString
 		{
-			get { return this.Address; }
+			get { return Address; }
 		}
 	}
 }

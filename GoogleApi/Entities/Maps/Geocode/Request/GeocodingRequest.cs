@@ -52,31 +52,31 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
 		/// </summary>
         public virtual Dictionary<Component, string> Components { get; set; }
 
-		protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
-            if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
+            if (Location == null && string.IsNullOrWhiteSpace(Address))
 				throw new ArgumentException("Location OR Address is required");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
-            if (this.Location != null)
-                _parameters.Add("latlng", this.Location.ToString());
+            if (Location != null)
+                parameters.Add("latlng", Location.ToString());
 			else
-                _parameters.Add("address", this.Address);
+                parameters.Add("address", Address);
 
-            if (this.Bounds != null && this.Bounds.Any())
-                _parameters.Add("bounds", string.Join("|", this.Bounds.AsEnumerable()));
+            if (Bounds != null && Bounds.Any())
+                parameters.Add("bounds", string.Join("|", Bounds.AsEnumerable()));
 
-            if (!string.IsNullOrWhiteSpace(this.Region))
-                _parameters.Add("region", this.Region);
+            if (!string.IsNullOrWhiteSpace(Region))
+                parameters.Add("region", Region);
 
-            if (!string.IsNullOrWhiteSpace(this.Language))
-                _parameters.Add("language", this.Language);
+            if (!string.IsNullOrWhiteSpace(Language))
+                parameters.Add("language", Language);
 
-            if (this.Components != null && this.Components.Any())
-                _parameters.Add("components", string.Join("|", this.Components.Select(_x => string.Format("{0}:{1}", _x.Key, _x.Value))));
+            if (Components != null && Components.Any())
+                parameters.Add("components", string.Join("|", Components.Select(x => string.Format("{0}:{1}", x.Key, x.Value))));
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

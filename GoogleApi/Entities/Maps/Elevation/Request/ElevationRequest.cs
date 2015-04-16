@@ -37,15 +37,15 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
 		/// </summary>
         public virtual IEnumerable<Location> Path { get; set; }
 
-		protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
-            if ((this.Locations == null) == (this.Path == null))
+            if ((Locations == null) == (Path == null))
 				throw new ArgumentException("Either Locations or Path must be specified, and both cannot be specified.");
 
-			var _parameters = base.GetQueryStringParameters();
-            _parameters.Add(this.Locations != null ? "locations" : "path", string.Join("|", this.Locations ?? (this.Path ?? new[] { new Location(0, 0) })));
+			var parameters = base.GetQueryStringParameters();
+            parameters.Add(Locations != null ? "locations" : "path", string.Join("|", Locations ?? (Path ?? new[] { new Location(0, 0) })));
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

@@ -13,23 +13,23 @@ namespace GoogleApi.Entities.Maps.Common
 		[DataMember(Name = "lng")]
         public virtual double Longitude { get; set; }
 
-        public Location(double _latitude, double _longitude)
+        public Location(double latitude, double longitude)
 		{
-            this.Latitude = _latitude;
-            this.Longitude = _longitude;
+            Latitude = latitude;
+            Longitude = longitude;
 		}
 
 		public string LocationString
 		{
 			get
 			{
-				return this.Latitude.ToString(CultureInfo.InvariantCulture) + "," + this.Longitude.ToString(CultureInfo.InvariantCulture);
+				return Latitude.ToString(CultureInfo.InvariantCulture) + "," + Longitude.ToString(CultureInfo.InvariantCulture);
 			}
 		}
 
 		public override string ToString()
 		{
-			return this.LocationString;
+			return LocationString;
 		}
 	}
 }

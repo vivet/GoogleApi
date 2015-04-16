@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Helpers;
 
@@ -37,27 +38,27 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Request
             set { throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL"); }
         }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.Reference))
+            if (string.IsNullOrWhiteSpace(Reference))
                 throw new ArgumentException("Reference must be provided.");
 
-            if (string.IsNullOrWhiteSpace(this.ApiKey))
+            if (string.IsNullOrWhiteSpace(ApiKey))
                 throw new ArgumentException("ApiKey must be provided");
 
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("reference", this.Reference);
-            _parameters.Add("key", this.ApiKey);
+            parameters.Add("reference", Reference);
+            parameters.Add("key", ApiKey);
 
-            if (!string.IsNullOrWhiteSpace(this.Language)) 
-                _parameters.Add("language", this.Language);
+            if (!string.IsNullOrWhiteSpace(Language)) 
+                parameters.Add("language", Language);
 
             // TODO: fails with REQUEST_DENIED
             //if (!string.IsNullOrWhiteSpace(this.Language))
             //    _parameters.Add("extensions", this.Extensions.ToString().ToLower());
             
-            return _parameters;
+            return parameters;
         }
     }
 }

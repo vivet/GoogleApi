@@ -73,6 +73,9 @@
     <Compile Include="Entities\Maps\Common\Enums\Type.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entities\Places\Common\Enums\PlaceType.cs" />
+    <Compile Include="Entities\Places\Common\Enums\PriceLevel.cs" />
+    <Compile Include="Entities\Places\Common\Enums\RankBy.cs" />
     <Compile Include="Entities\Places\Common\PlacesBaseRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\Enums\Units.cs" />
@@ -82,14 +85,14 @@
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Element.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Row.cs" />
     <Compile Include="Entities\Common\Enums\Component.cs" />
+    <Compile Include="Entities\Places\Common\Response\Geometry.cs" />
+    <Compile Include="Entities\Places\Common\Response\OpeningHours.cs" />
     <Compile Include="Entities\Places\PlacesAutoComplete\Response\Prediction.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Request\Enums\Extensions.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Request\PlacesDetailsRequest.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\Aspect.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\DayTime.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\Events.cs" />
-    <Compile Include="Entities\Places\PlacesDetails\Response\Geometry.cs" />
-    <Compile Include="Entities\Places\PlacesDetails\Response\OpeningHours.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\Period.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\PlacesDetailsResponse.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\Result.cs" />
@@ -188,22 +191,33 @@
     <Compile Include="Entities\Places\PlacesAutoComplete\Response\Term.cs" />
     <Compile Include="Entities\Maps\TimeZone\Request\TimeZoneRequest.cs" />
     <Compile Include="Entities\Maps\TimeZone\Response\TimeZoneResponse.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Request\PlacesBaseSearchRequest.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Request\PlacesNearbySearchRequest.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Request\PlacesRadarSearchRequest.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Request\PlacesTextSearchRequest.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Response\PlacesNearbySearchResponse.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Response\PlacesRadarSearchResponse.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Response\PlacesTextSearchResponse.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Response\RadarResult.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Response\NearByResult.cs" />
+    <Compile Include="Entities\Places\PlacesSearch\Response\TextResult.cs" />
     <Compile Include="Entities\Translate\Translate\Request\Enums\Format.cs" />
     <Compile Include="Entities\Translate\Translate\Response\Data.cs" />
     <Compile Include="Entities\Translate\Translate\Response\Translation.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="GoogleMaps.cs" />
     <Compile Include="GooglePlaces.cs" />
     <Compile Include="GoogleFunctions.cs" />
     <Compile Include="GoogleTranslate.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\QueryStringParametersList.cs" />
-    <Compile Include="Helpers\UnixTimeConverter.cs" />
-    <Compile Include="Entities\Translate\Translate\Request\TranslateRequest.cs" />
-    <Compile Include="Entities\Translate\Translate\Response\TranslateResponse.cs" />
-    <Compile Include="Extensions\WebClientExtensionMethods.cs" />
-    <Compile Include="Extensions\WebClientEx.cs">
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Http\WebClientEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\Translate\Translate\Request\TranslateRequest.cs" />
+    <Compile Include="Entities\Translate\Translate\Response\TranslateResponse.cs" />
+    <Compile Include="Extensions\WebClientExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Common
 {
@@ -15,14 +15,8 @@ namespace GoogleApi.Entities.Maps.Common
         [DataMember(Name = "status")]
         internal virtual string StatusStr
         {
-            get
-            {
-                return this.Status.ToString();
-            }
-            set
-            {
-                this.Status = (Status)Enum.Parse(typeof(Status), value);
-            }
+            get { return EnumHelper.ToEnumString(Status); }
+            set { Status = EnumHelper.ToEnum<Status>(value); }
         }
     }
 }

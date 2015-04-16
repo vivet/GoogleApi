@@ -22,7 +22,7 @@ namespace GoogleApi
 		{
 			get
 			{
-				return EngineFacade<GeocodingRequest, GeocodingResponse>._instance;
+                return EngineFacade<GeocodingRequest, GeocodingResponse>.Instance();
 			}
 		}
 		/// <summary>Perform directions operations.</summary>
@@ -30,7 +30,7 @@ namespace GoogleApi
 		{
 			get
 			{
-				return EngineFacade<DirectionsRequest, DirectionsResponse>._instance;
+				return EngineFacade<DirectionsRequest, DirectionsResponse>.Instance();
 			}
 		}
 		/// <summary>Perform elevation operations.</summary>
@@ -38,7 +38,7 @@ namespace GoogleApi
 		{
 			get
 			{
-				return EngineFacade<ElevationRequest, ElevationResponse>._instance;
+                return EngineFacade<ElevationRequest, ElevationResponse>.Instance();
 			}
 		}
         /// <summary>Perform places details operations.</summary>
@@ -46,7 +46,7 @@ namespace GoogleApi
         {
             get
             {
-                return EngineFacade<DistanceMatrixRequest, DistanceMatrixResponse>._instance;
+                return EngineFacade<DistanceMatrixRequest, DistanceMatrixResponse>.Instance();
             }
         }
         /// <summary>Perform places details operations.</summary>
@@ -54,7 +54,7 @@ namespace GoogleApi
         {
             get
             {
-                return EngineFacade<TimeZoneRequest, TimeZoneResponse>._instance;
+                return EngineFacade<TimeZoneRequest, TimeZoneResponse>.Instance();
             }
         }
     }

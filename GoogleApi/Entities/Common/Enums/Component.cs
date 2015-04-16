@@ -16,11 +16,11 @@
         /// <summary>
         /// administrative_area matches all the administrative_area levels. 
         /// </summary>
-        Administrative_area,
+        AdministrativeArea,
         /// <summary>
         /// postal_code matches postal_code and postal_code_prefix.
         /// </summary>
-        Postal_code,
+        PostalCode,
         /// <summary>
         /// country matches a country name or a two letter ISO 3166-1 country code.
         /// </summary>

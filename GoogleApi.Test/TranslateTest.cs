@@ -8,17 +8,17 @@ namespace GoogleApi.Test
     [TestFixture]
     public class TranslateTest
     {
-        public string _apiKey = ""; // your API key goes here...
+        public string ApiKey = ""; // your API key goes here...
 
         [Test]
         public void TranslateCorrectTest()
         {
-            var _request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, ApiKey = this._apiKey, Format = Format.Text };
+            var request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, ApiKey = this.ApiKey, Format = Format.Text };
 
-            var _result = GoogleTranslate.Translate.Query(_request);
+            var result = GoogleTranslate.Translate.Query(request);
 
-            Assert.AreEqual("Hallo Welt", _result.Data.Translations.First().TranslatedText);
-            Assert.AreEqual("en", _result.Data.Translations.First().DetectedSourceLanguage);
+            Assert.AreEqual("Hallo Welt", result.Data.Translations.First().TranslatedText);
+            Assert.AreEqual("en", result.Data.Translations.First().DetectedSourceLanguage);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Request
@@ -33,23 +35,23 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
             set { throw new NotSupportedException("This operation is not supported, TimeZoneRequest must use SSL"); }
         }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
         {
-            if (this.Location == null)
+            if (Location == null)
                 throw new ArgumentException("Location is required");
 
-            if (this.TimeStamp == null)
+            if (TimeStamp == null)
                 throw new ArgumentException("TimeStamp is required");
 
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("location", this.Location.LocationString);
-            _parameters.Add("timestamp", UnixTimeConverter.DateTimeToUnixTimestamp(this.TimeStamp).ToString());
+            parameters.Add("location", Location.LocationString);
+            parameters.Add("timestamp", TimeStamp.ToUnixTimestamp().ToString());
 
-            if (!string.IsNullOrWhiteSpace(this.Language)) 
-                _parameters.Add("language", Language);
+            if (!string.IsNullOrWhiteSpace(Language)) 
+                parameters.Add("language", Language);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

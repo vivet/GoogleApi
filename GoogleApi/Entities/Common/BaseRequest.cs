@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
@@ -36,20 +38,22 @@ namespace GoogleApi.Entities.Common
         
 		public virtual Uri GetUri()
 		{
-            var _scheme = this.IsSsl ? "https://" : "http://";
-            var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
+            var scheme = IsSsl ? "https://" : "http://";
+		    var queryString = GetQueryStringParameters().ToQueryString();
 
-            return new Uri(_scheme + this.BaseUrl + "json?" + _queryString);
+            return new Uri(scheme + BaseUrl + "json?" + queryString);
 		}
 
         protected internal abstract string BaseUrl { get; }
 
-        protected virtual QueryStringParametersList GetQueryStringParameters()
+        protected virtual IDictionary<string, string> GetQueryStringParameters()
         {
-            var _parametersList = new QueryStringParametersList();
-            _parametersList.Add("sensor", Sensor.ToString().ToLower());
+            var parametersList = new Dictionary<string, string>
+            {
+                {"sensor", Sensor.ToString().ToLower()}
+            };
 
-            return _parametersList;
+            return parametersList;
         }
     }
 }
