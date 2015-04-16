@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using System.Collections.Generic;
 using GoogleApi.Entities.Maps.Geocode.Response;
 using Geometry = GoogleApi.Entities.Places.Common.Response.Geometry;
@@ -48,6 +49,7 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Response
         /// id contains a unique stable identifier denoting this place. This identifier may not be used to retrieve information about this place, but can be used to consolidate data about this Place, and to verify the identity of a Place across separate searches. As ids can occasionally change, it's recommended that the stored id for a Place be compared with the id returned in later Details requests for the same Place, and updated if necessary.
         /// </summary>
         [DataMember(Name = "id")]
+        [Obsolete("Deprecated as of 2014-06-24 https://developers.google.com/places/webservice/search")]
         public virtual string Id { get; set; }
 
         /// <summary>
@@ -78,6 +80,7 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Response
         /// reference contains a token that can be used to query the Details service in future. This token may differ from the reference used in the request to the Details service. It is recommended that stored references for Places be regularly updated. Although this token uniquely identifies the Place, the converse is not true: a Place may have many valid reference tokens.
         /// </summary>
         [DataMember(Name = "reference")]
+        [Obsolete("Deprecated as of 2014-06-24 https://developers.google.com/places/webservice/search")]
         public virtual string Reference { get; set; }
 
         /// <summary>
