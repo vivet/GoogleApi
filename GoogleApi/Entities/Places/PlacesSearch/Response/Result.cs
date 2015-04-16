@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Common.Response;
+using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Places.PlacesSearch.Response
 {
@@ -52,8 +57,15 @@ namespace GoogleApi.Entities.Places.PlacesSearch.Response
         /// <summary>
         /// types[] contains an array of feature types describing the given result. See the list of supported types for more information. XML responses include multiple type elements if more than one type is assigned to the result.
         /// </summary>
+        
+        public IEnumerable<PlaceType> Types { get; set; }
+
         [DataMember(Name = "types")]
-        public IEnumerable<string> Types { get; set; }
+        internal virtual IEnumerable<string> TypesStr
+        {
+            get { return Types.Select(EnumHelper.ToEnumString); }
+            set { Types = value.Select(EnumHelper.ToEnum<PlaceType>); }
+        }
 
         /// <summary>
         /// Vicinity lists a simplified address for the Place, including the street name, street number, and locality, but not the province/state, postal code, or country. For example, Google's Sydney, Australia office has a vicinity value of 48 Pirrama Road, Pyrmont.
