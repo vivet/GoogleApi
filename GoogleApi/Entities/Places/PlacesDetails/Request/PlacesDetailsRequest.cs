@@ -39,25 +39,25 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.Reference))
+            if (string.IsNullOrWhiteSpace(Reference))
                 throw new ArgumentException("Reference must be provided.");
 
-            if (string.IsNullOrWhiteSpace(this.ApiKey))
+            if (string.IsNullOrWhiteSpace(ApiKey))
                 throw new ArgumentException("ApiKey must be provided");
 
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("reference", this.Reference);
-            _parameters.Add("key", this.ApiKey);
+            parameters.Add("reference", Reference);
+            parameters.Add("key", ApiKey);
 
-            if (!string.IsNullOrWhiteSpace(this.Language)) 
-                _parameters.Add("language", this.Language);
+            if (!string.IsNullOrWhiteSpace(Language)) 
+                parameters.Add("language", Language);
 
             // TODO: fails with REQUEST_DENIED
             //if (!string.IsNullOrWhiteSpace(this.Language))
             //    _parameters.Add("extensions", this.Extensions.ToString().ToLower());
             
-            return _parameters;
+            return parameters;
         }
     }
 }

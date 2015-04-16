@@ -13,14 +13,14 @@ namespace GoogleApi.Helpers
 			List = new List<KeyValuePair<string, string>>();
 		}
 
-		public void Add(string _key, string _value)
+		public void Add(string key, string value)
 		{
-			List.Add(new KeyValuePair<string, string>(_key, _value));
+			List.Add(new KeyValuePair<string, string>(key, value));
 		}
 
 		public string GetQueryStringPostfix()
 		{
-			return string.Join("&", List.Select(_p => Uri.EscapeDataString(_p.Key) + "=" + Uri.EscapeDataString(_p.Value)));
+			return string.Join("&", List.Select(p => Uri.EscapeDataString(p.Key) + "=" + Uri.EscapeDataString(p.Value)));
 		}
 	}
 }

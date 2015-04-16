@@ -17,20 +17,20 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		{
 		}
 
-        public PointsDecodingException(string _message)
-            : base(_message)
+        public PointsDecodingException(string message)
+            : base(message)
 		{
 		}
 
-        public PointsDecodingException(string _message, string _encodedString, Exception _inner)
-            : base(_message, _inner)
+        public PointsDecodingException(string message, string encodedString, Exception inner)
+            : base(message, inner)
 		{
-            EncodedString = _encodedString;
+            EncodedString = encodedString;
 		}
 
 		protected PointsDecodingException(
-			SerializationInfo _info,
-			StreamingContext _context) : base(_info, _context)
+			SerializationInfo info,
+			StreamingContext context) : base(info, context)
 		{
 		}
 	}

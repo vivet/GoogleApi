@@ -9,6 +9,9 @@ namespace GoogleApi.Entities.Translate.Translate.Request
 {
     public class TranslateRequest : BaseRequest
     {
+        private Format _format = Format.Html;
+        private bool _prettyPrint = true;
+
         protected internal override string BaseUrl
         {
             get { return "www.googleapis.com/language/translate/v2"; }
@@ -33,67 +36,71 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// <summary>
         /// Use the q query parameter to identify the string to translate
         /// </summary>
-        public virtual IEnumerable<string> Qs { get; set; } 
+        public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
         /// If prettyprint=true, the results returned by the server will be human readable (pretty printed).
         /// Default: prettyprint=true.
         /// </summary>
-        public virtual bool PrettyPrint { get; set; } 
+        public virtual bool PrettyPrint
+        {
+            get { return _prettyPrint; }
+            set { _prettyPrint = value; }
+        }
 
         /// <summary>
         /// This optional parameter allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates HTML and a value of text indicates plain-text.
         /// Default: format=html.
         /// </summary>
-        public virtual Format Format { get; set; } 
+        public virtual Format Format
+        {
+            get { return _format; }
+            set { _format = value; }
+        }
+
 
         public override bool IsSsl
         {
             get { return true; }
             set { throw new NotSupportedException("This operation is not supported, TimeZoneRequest must use SSL"); }
         }
-
-        public TranslateRequest()
-        {
-            this.Format = Format.Html;
-            this.PrettyPrint = true;
-        }
+        
 
         public override Uri GetUri()
         {
-            var _scheme = this.IsSsl ? "https://" : "http://";
-            var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
-            return new Uri(_scheme + this.BaseUrl + "?" + _queryString);
+            var scheme = IsSsl ? "https://" : "http://";
+            var queryString = GetQueryStringParameters().GetQueryStringPostfix();
+            return new Uri(scheme + BaseUrl + "?" + queryString);
         }
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.ApiKey))
+            if (string.IsNullOrWhiteSpace(ApiKey))
                 throw new ArgumentException("ApiKey is required");
 
-            if (string.IsNullOrWhiteSpace(this.Target))
+            if (string.IsNullOrWhiteSpace(Target))
                 throw new ArgumentException("ApiKey is required");
 
-            if (this.Qs == null || !this.Qs.Any())
+            if (Qs == null || !Qs.Any())
                 throw new ArgumentException("Qs is required");
 
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("key", this.ApiKey);
-            _parameters.Add("target", this.Target);
+            parameters.Add("key", ApiKey);
+            parameters.Add("target", Target);
 
-            foreach (var _q in this.Qs)
+            foreach (var q in Qs)
             {
-                _parameters.Add("q", _q);
+                parameters.Add("q", q);
             }
 
-            _parameters.Add("prettyprint", this.PrettyPrint.ToString().ToLower());
-            _parameters.Add("format", this.Format.ToString().ToLower());
+            parameters.Add("prettyprint", PrettyPrint.ToString().ToLower());
+            parameters.Add("format", Format.ToString().ToLower());
             
-            if (!string.IsNullOrWhiteSpace(this.Source))
-                _parameters.Add("source", this.Source);
+            if (!string.IsNullOrWhiteSpace(Source))
+                parameters.Add("source", Source);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

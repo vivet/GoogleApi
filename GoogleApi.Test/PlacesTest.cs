@@ -53,7 +53,7 @@ namespace GoogleApi.Test
             var response = GooglePlaces.QueryAutoComplete.Query(request);
             var results = response.Predictions.ToList();
 
-            Assert.AreEqual(Status.OK, response.Status);
+            Assert.AreEqual(Status.Ok, response.Status);
             
             // Just think these asserts are a bad idea as they have changed and will keep changing prob
             //Assert.AreEqual(results[0].Description, "Jagtvej 2200, Copenhagen, Denmark");
@@ -88,7 +88,7 @@ namespace GoogleApi.Test
             };
 
             var response2 = GooglePlaces.Details.Query(request2);
-            Assert.AreEqual(Status.OK, response2.Status);
+            Assert.AreEqual(Status.Ok, response2.Status);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace GoogleApi.Test
             var response = GooglePlaces.NearBy.Query(request);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual(Status.OK, response.Status);
+            Assert.AreEqual(Status.Ok, response.Status);
         }
 
         [Test]
@@ -126,7 +126,7 @@ namespace GoogleApi.Test
             var response = GooglePlaces.Radar.Query(request);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual(Status.OK, response.Status);
+            Assert.AreEqual(Status.Ok, response.Status);
         }
 
         [Test]
@@ -146,7 +146,7 @@ namespace GoogleApi.Test
             var response = GooglePlaces.Text.Query(request);
 
             Assert.IsNotNull(response);
-            Assert.AreEqual(Status.OK, response.Status);
+            Assert.AreEqual(Status.Ok, response.Status);
         }
     }
 }

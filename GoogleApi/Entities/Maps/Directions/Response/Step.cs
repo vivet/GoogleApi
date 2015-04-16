@@ -73,10 +73,10 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 			get { return TravelMode.ToString(); }
 			set
 			{
-				TravelMode _travelMode;
-				if (Enum.TryParse(value, true, out _travelMode))
+				TravelMode travelMode;
+				if (Enum.TryParse(value, true, out travelMode))
 				{
-					TravelMode = _travelMode;
+					TravelMode = travelMode;
 				}
 			}
 		}

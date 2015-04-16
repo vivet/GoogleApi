@@ -35,21 +35,21 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            if (this.Location == null)
+            if (Location == null)
                 throw new ArgumentException("Location is required");
 
-            if (this.TimeStamp == null)
+            if (TimeStamp == null)
                 throw new ArgumentException("TimeStamp is required");
 
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("location", this.Location.LocationString);
-            _parameters.Add("timestamp", UnixTimeConverter.DateTimeToUnixTimestamp(this.TimeStamp).ToString());
+            parameters.Add("location", Location.LocationString);
+            parameters.Add("timestamp", UnixTimeConverter.DateTimeToUnixTimestamp(TimeStamp).ToString());
 
-            if (!string.IsNullOrWhiteSpace(this.Language)) 
-                _parameters.Add("language", Language);
+            if (!string.IsNullOrWhiteSpace(Language)) 
+                parameters.Add("language", Language);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

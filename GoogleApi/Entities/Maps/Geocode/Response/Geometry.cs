@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Geocode.Response.Enums;
+using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {
@@ -35,14 +36,8 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
 		[DataMember(Name = "location_type")]
         internal virtual string LocationTypeStr
 		{
-			get
-			{
-                return this.LocationType.ToString();
-			}
-			set
-			{
-                this.LocationType = (GeocodeLocationType)Enum.Parse(typeof(GeocodeLocationType), value);
-			}
+			get { return EnumHelper.ToEnumString(LocationType); }
+			set { LocationType = EnumHelper.ToEnum<GeocodeLocationType>(value); }
 		}
 	}
 }

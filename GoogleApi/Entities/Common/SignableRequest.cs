@@ -35,44 +35,44 @@ namespace GoogleApi.Entities.Common
         /// <returns></returns>
 		public override Uri GetUri()
 		{
-            return this.ClientId != null ? this.Sign(base.GetUri()) : base.GetUri();
+            return ClientId != null ? Sign(base.GetUri()) : base.GetUri();
 		}
 
-		internal Uri Sign(Uri _uri)
+		internal Uri Sign(Uri uri)
 		{
             // Based on the C# sample from: https://developers.google.com/maps/documentation/business/webservices
             
-            if (_uri == null)
-				throw new ArgumentNullException("_uri");
+            if (uri == null)
+				throw new ArgumentNullException("uri");
 
-            if (this.ClientId == null)
+            if (ClientId == null)
                 throw new NullReferenceException("ClientID");
 
-            if (string.IsNullOrWhiteSpace(this.SigningKey))
+            if (string.IsNullOrWhiteSpace(SigningKey))
 				throw new ArgumentException("Invalid signing key.");
 
-            if (!this.ClientId.StartsWith("gme-"))
+            if (!ClientId.StartsWith("gme-"))
 				throw new ArgumentException("A user ID must start with 'gme-'.");
 
-            var _urlSegmentToSign = _uri.LocalPath + _uri.Query + "&client=" + this.ClientId;
-			var _privateKey = SignableRequest.FromBase64UrlString(SigningKey);
-			byte[] _signature;
+            var urlSegmentToSign = uri.LocalPath + uri.Query + "&client=" + ClientId;
+			var privateKey = FromBase64UrlString(SigningKey);
+			byte[] signature;
 
-			using (var _algorithm = new HMACSHA1(_privateKey))
+			using (var algorithm = new HMACSHA1(privateKey))
 			{
-				_signature = _algorithm.ComputeHash(Encoding.ASCII.GetBytes(_urlSegmentToSign));
+				signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(urlSegmentToSign));
 			}
 
-            return new Uri(_uri.Scheme + "://" + _uri.Host + _urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(_signature));
+            return new Uri(uri.Scheme + "://" + uri.Host + urlSegmentToSign + "&signature=" + ToBase64UrlString(signature));
 		}
 
-        private static string ToBase64UrlString(byte[] _data)
+        private static string ToBase64UrlString(byte[] data)
         {
-            return Convert.ToBase64String(_data).Replace("+", "-").Replace("/", "_");
+            return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_");
         }
-        private static byte[] FromBase64UrlString(string _base64UrlString)
+        private static byte[] FromBase64UrlString(string base64UrlString)
 		{
-			return Convert.FromBase64String(_base64UrlString.Replace("-", "+").Replace("_", "/"));
+			return Convert.FromBase64String(base64UrlString.Replace("-", "+").Replace("_", "/"));
 		}
 	}
 }

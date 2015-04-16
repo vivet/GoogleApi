@@ -2,6 +2,6 @@
 {
     public enum Extensions
     {
-        Review_summary,
+        ReviewSummary,
     }
 }

@@ -9,7 +9,10 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 {
 	public class DirectionsRequest : SignableRequest
 	{
-		protected internal override string BaseUrl
+	    private AvoidWay _avoid = AvoidWay.Nothing;
+        private TravelMode _travelMode = TravelMode.Driving;
+
+	    protected internal override string BaseUrl
 		{
 			get
 			{
@@ -55,75 +58,77 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 		/// </summary>
         public virtual bool Alternatives { get; set; }
 
-		/// <summary>
-		/// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
-		/// tolls indicates that the calculated route should avoid toll roads/bridges.
-		/// highways indicates that the calculated route should avoid highways.
-		/// (For more information see Route Restrictions below.)
-		/// </summary>
-        public virtual AvoidWay Avoid { get; set; }
+	    /// <summary>
+	    /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
+	    /// tolls indicates that the calculated route should avoid toll roads/bridges.
+	    /// highways indicates that the calculated route should avoid highways.
+	    /// (For more information see Route Restrictions below.)
+	    /// </summary>
+	    public virtual AvoidWay Avoid
+	    {
+	        get { return _avoid; }
+	        set { _avoid = value; }
+	    }
 
-		/// <summary>
-		/// language (optional) — The language in which to return results. See the supported list of domain languages. 
-		/// Note that we often update supported languages so this list may not be exhaustive. 
-		/// If language is not supplied, the Directions service will attempt to use the native language of the browser wherever possible. 
-		/// You may also explicitly bias the results by using localized domains of http://map.google.com. 
-		/// See Region Biasing for more information.
-		/// </summary>
-        public virtual string Language { get; set; }
+	    /// <summary>
+	    /// language (optional) — The language in which to return results. See the supported list of domain languages. 
+	    /// Note that we often update supported languages so this list may not be exhaustive. 
+	    /// If language is not supplied, the Directions service will attempt to use the native language of the browser wherever possible. 
+	    /// You may also explicitly bias the results by using localized domains of http://map.google.com. 
+	    /// See Region Biasing for more information.
+	    /// </summary>
+	    public virtual string Language { get; set; }
 
-		/// <summary>
-		/// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
-		/// </summary>
-        public virtual TravelMode TravelMode { get; set; }
-
-        public DirectionsRequest()
-        {
-            this.Avoid = AvoidWay.Nothing;
-            this.TravelMode = TravelMode.Driving;
-        }
+	    /// <summary>
+	    /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
+	    /// </summary>
+	    public virtual TravelMode TravelMode
+	    {
+	        get { return _travelMode; }
+	        set { _travelMode = value; }
+	    }
 
 		protected override QueryStringParametersList GetQueryStringParameters()
 		{
-			if (string.IsNullOrWhiteSpace(this.Origin))
+			if (string.IsNullOrWhiteSpace(Origin))
 				throw new ArgumentException("Must specify an Origin");
             
-            if (string.IsNullOrWhiteSpace(this.Destination))
+            if (string.IsNullOrWhiteSpace(Destination))
 				throw new ArgumentException("Must specify a Destination");
             
-            if (!Enum.IsDefined(typeof(AvoidWay), this.Avoid))
+            if (!Enum.IsDefined(typeof(AvoidWay), Avoid))
 				throw new ArgumentException("Invalid enumeration value for 'Avoid'");
             
-            if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
+            if (!Enum.IsDefined(typeof(TravelMode), TravelMode))
 				throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
 
-            if (this.TravelMode == TravelMode.Transit && (this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime)))
+            if (TravelMode == TravelMode.Transit && (DepartureTime == default(DateTime) && ArrivalTime == default(DateTime)))
 				throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
 
-			var _parameters = base.GetQueryStringParameters();
-            _parameters.Add("origin", this.Origin);
-            _parameters.Add("destination", this.Destination);
-            _parameters.Add("mode", this.TravelMode.ToString().ToLower());
+			var parameters = base.GetQueryStringParameters();
+            parameters.Add("origin", Origin);
+            parameters.Add("destination", Destination);
+            parameters.Add("mode", TravelMode.ToString().ToLower());
 
-            if (this.Alternatives)
-				_parameters.Add("alternatives", "true");
+            if (Alternatives)
+				parameters.Add("alternatives", "true");
 
-            if (this.Avoid != AvoidWay.Nothing)
-                _parameters.Add("avoid", this.Avoid.ToString().ToLower());
+            if (Avoid != AvoidWay.Nothing)
+                parameters.Add("avoid", Avoid.ToString().ToLower());
 
-            if (!string.IsNullOrWhiteSpace(this.Language))
-                _parameters.Add("language", this.Language);
+            if (!string.IsNullOrWhiteSpace(Language))
+                parameters.Add("language", Language);
 
-            if (this.Waypoints != null && this.Waypoints.Any())
-                _parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(Waypoints) : this.Waypoints));
+            if (Waypoints != null && Waypoints.Any())
+                parameters.Add("waypoints", string.Join("|", OptimizeWaypoints ? new[] { "optimize:true" }.Concat(Waypoints) : Waypoints));
 
-            if (this.ArrivalTime != default(DateTime))
-                _parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.ArrivalTime).ToString(CultureInfo.InvariantCulture));
+            if (ArrivalTime != default(DateTime))
+                parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(ArrivalTime).ToString(CultureInfo.InvariantCulture));
 
-		    if (this.DepartureTime != default(DateTime))
-		        _parameters.Add("departure_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.DepartureTime).ToString(CultureInfo.InvariantCulture));
+		    if (DepartureTime != default(DateTime))
+		        parameters.Add("departure_time", UnixTimeConverter.DateTimeToUnixTimestamp(DepartureTime).ToString(CultureInfo.InvariantCulture));
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

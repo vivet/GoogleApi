@@ -34,19 +34,19 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Response
         /// <summary>
         /// time the time that the review was submitted, measured in the number of seconds since since midnight, January 1, 1970 UTC.
         /// </summary>
-        public DateTime _time;
+        public DateTime Time;
 
         [DataMember(Name = "time")]
         internal virtual int IntStartTime
         {
             get
             {
-                return UnixTimeConverter.DateTimeToUnixTimestamp(this._time);
+                return UnixTimeConverter.DateTimeToUnixTimestamp(Time);
             }
             set
             {
-                var _epoch = new DateTime(1970, 1, 1);
-                this._time = _epoch.AddSeconds(value);
+                var epoch = new DateTime(1970, 1, 1);
+                Time = epoch.AddSeconds(value);
             }
         }
     }

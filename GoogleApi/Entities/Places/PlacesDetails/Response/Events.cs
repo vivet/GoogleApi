@@ -10,18 +10,18 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Response
         /// <summary>
         /// start_time: The event's start time, expressed in Unix time.
         /// </summary>
-        public DateTime _startTime;
+        public DateTime StartTime;
         [DataMember(Name = "start_time")]
         internal virtual int IntStartTime
         {
             get
             {
-                return UnixTimeConverter.DateTimeToUnixTimestamp(_startTime);
+                return UnixTimeConverter.DateTimeToUnixTimestamp(StartTime);
             }
             set
             {
-                var _epoch = new DateTime(1970, 1, 1);
-                _startTime = _epoch.AddSeconds(value);
+                var epoch = new DateTime(1970, 1, 1);
+                StartTime = epoch.AddSeconds(value);
             }
         }
 

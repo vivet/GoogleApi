@@ -27,7 +27,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 
 		public OverviewPolyline()
 		{
-			this.InitLazyPoints(default(StreamingContext));
+			InitLazyPoints(default(StreamingContext));
 		}
 
 		/// <summary>
@@ -36,11 +36,11 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		/// <returns></returns>
         public virtual string GetRawPointsData()
 		{
-			return this.EncodedPoints;
+			return EncodedPoints;
 		}
 
         [OnDeserializing]
-        private void InitLazyPoints(StreamingContext _contex)
+        private void InitLazyPoints(StreamingContext contex)
         {
             _pointsLazy = new Lazy<IEnumerable<Location>>(DecodePoints);
         }
@@ -48,11 +48,11 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         {
             try
             {
-                return GoogleFunctions.DecodePolyLine(this.EncodedPoints);
+                return GoogleFunctions.DecodePolyLine(EncodedPoints);
             }
-            catch (Exception _ex)
+            catch (Exception ex)
             {
-                throw new PointsDecodingException("Couldn't decode points", this.EncodedPoints, _ex);
+                throw new PointsDecodingException("Couldn't decode points", EncodedPoints, ex);
             }
         }
     }
