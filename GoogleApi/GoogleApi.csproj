@@ -73,7 +73,9 @@
     <Compile Include="Entities\Maps\Common\Enums\Type.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Places\Common\Enums\Type.cs" />
+    <Compile Include="Entities\Places\Common\Enums\PlaceType.cs" />
+    <Compile Include="Entities\Places\Common\Enums\PriceLevel.cs" />
+    <Compile Include="Entities\Places\Common\Enums\RankBy.cs" />
     <Compile Include="Entities\Places\Common\PlacesBaseRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\Enums\Units.cs" />
@@ -202,20 +204,20 @@
     <Compile Include="Entities\Translate\Translate\Request\Enums\Format.cs" />
     <Compile Include="Entities\Translate\Translate\Response\Data.cs" />
     <Compile Include="Entities\Translate\Translate\Response\Translation.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="GoogleMaps.cs" />
     <Compile Include="GooglePlaces.cs" />
     <Compile Include="GoogleFunctions.cs" />
     <Compile Include="GoogleTranslate.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\QueryStringParametersList.cs" />
-    <Compile Include="Helpers\UnixTimeConverter.cs" />
-    <Compile Include="Entities\Translate\Translate\Request\TranslateRequest.cs" />
-    <Compile Include="Entities\Translate\Translate\Response\TranslateResponse.cs" />
-    <Compile Include="Extensions\WebClientExtensionMethods.cs" />
-    <Compile Include="Extensions\WebClientEx.cs">
+    <Compile Include="Http\WebClientEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\Translate\Translate\Request\TranslateRequest.cs" />
+    <Compile Include="Entities\Translate\Translate\Response\TranslateResponse.cs" />
+    <Compile Include="Extensions\WebClientExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

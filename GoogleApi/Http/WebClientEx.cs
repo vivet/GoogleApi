@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Net;
+using GoogleApi.Extensions;
 
-namespace GoogleApi.Extensions
+namespace GoogleApi.Http
 {
     /// <summary>
     /// 
     /// </summary>
     public class WebClientEx : WebClient
     {
+        /// <summary>
+        /// Constant. Specified an infinite timeout duration. This is a TimeSpan of negative one (-1) milliseconds.
+        /// </summary>
+        public static readonly TimeSpan InfiniteTimeout = TimeSpan.FromMilliseconds(-1);
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -17,6 +24,7 @@ namespace GoogleApi.Extensions
         /// 
         /// </summary>
         public WebClientEx() { }
+
         /// <summary>
         /// 
         /// </summary>
@@ -24,7 +32,7 @@ namespace GoogleApi.Extensions
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public WebClientEx(TimeSpan timeout)
         {
-            if (timeout != WebClientExtensionMethods.InfiniteTimeout && timeout <= TimeSpan.Zero)
+            if (timeout != InfiniteTimeout && timeout <= TimeSpan.Zero)
                 throw new ArgumentOutOfRangeException("timeout", timeout, "The specified timeout must be greater than zero or infinite.");
 
             Timeout = timeout;

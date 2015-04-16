@@ -11,5 +11,7 @@ namespace GoogleApi.Entities.Places.PlacesSearch.Request
                 return base.BaseUrl + "radarsearch/";
             }
         }
+
+        public virtual string Keyword { get; set; }
     }
 }

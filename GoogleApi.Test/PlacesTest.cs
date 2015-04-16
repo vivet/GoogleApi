@@ -6,7 +6,6 @@ using GoogleApi.Entities.Places.PlacesAutoComplete.Request;
 using GoogleApi.Entities.Places.PlacesDetails.Request;
 using GoogleApi.Entities.Places.PlacesQueryAutoComplete.Request;
 using GoogleApi.Entities.Places.PlacesSearch.Request;
-using GoogleApi.Helpers;
 using NUnit.Framework;
 
 namespace GoogleApi.Test
@@ -16,7 +15,7 @@ namespace GoogleApi.Test
     {
         //TODO: These are Integration Tests, really need unit tests 
 
-        private const string ApiKey = "AIzaSyAMaxRRrZDKBxC1Rezpzmnwj-3HpzRZyx0"; // your API key goes here...
+        private const string ApiKey = ""; // your API key goes here...
 
         [Test]
         public void PlacesAutoCompleteTest()
@@ -101,7 +100,8 @@ namespace GoogleApi.Test
                 Sensor = true,
                 Language = "en",
                 Radius = 500,
-                Types = new[] { PlaceType.School, PlaceType.Police }
+                Types = new[] { PlaceType.School, PlaceType.Police },
+                MinPrice = PriceLevel.Free
             };
 
             var response = GooglePlaces.NearBy.Query(request);

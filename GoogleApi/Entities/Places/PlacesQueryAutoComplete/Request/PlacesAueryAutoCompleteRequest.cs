@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Places.Common;
@@ -65,7 +66,7 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Request
 			}
 		}
 
-	    protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
             if (string.IsNullOrEmpty(ApiKey))
                 throw new ArgumentException("ApiKey must not null or empty");

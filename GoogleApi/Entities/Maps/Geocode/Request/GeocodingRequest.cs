@@ -52,7 +52,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
 		/// </summary>
         public virtual Dictionary<Component, string> Components { get; set; }
 
-		protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
             if (Location == null && string.IsNullOrWhiteSpace(Address))
 				throw new ArgumentException("Location OR Address is required");

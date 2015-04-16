@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Translate.Translate.Request
@@ -31,7 +32,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// <summary>
         /// Use the target query parameter to specify the language you want to translate into.
         /// </summary>
-        public virtual string Target { get; set; } 
+        public virtual string Target { get; set; }
 
         /// <summary>
         /// Use the q query parameter to identify the string to translate
@@ -64,16 +65,16 @@ namespace GoogleApi.Entities.Translate.Translate.Request
             get { return true; }
             set { throw new NotSupportedException("This operation is not supported, TimeZoneRequest must use SSL"); }
         }
-        
+
 
         public override Uri GetUri()
         {
             var scheme = IsSsl ? "https://" : "http://";
-            var queryString = GetQueryStringParameters().GetQueryStringPostfix();
+            var queryString = GetQueryStringParameters().ToQueryString();
             return new Uri(scheme + BaseUrl + "?" + queryString);
         }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(ApiKey))
                 throw new ArgumentException("ApiKey is required");
@@ -96,7 +97,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
 
             parameters.Add("prettyprint", PrettyPrint.ToString().ToLower());
             parameters.Add("format", Format.ToString().ToLower());
-            
+
             if (!string.IsNullOrWhiteSpace(Source))
                 parameters.Add("source", Source);
 

@@ -37,7 +37,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
 		/// </summary>
         public virtual IEnumerable<Location> Path { get; set; }
 
-		protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
             if ((Locations == null) == (Path == null))
 				throw new ArgumentException("Either Locations or Path must be specified, and both cannot be specified.");

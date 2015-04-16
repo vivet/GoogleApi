@@ -1,4 +1,4 @@
-﻿using GoogleApi.Helpers;
+﻿using System.Collections.Generic;
 
 namespace GoogleApi.Entities.Places.PlacesSearch.Request
 {
@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Places.PlacesSearch.Request
 
         public string Query { get; set; }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 

@@ -69,7 +69,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             set { _units = value; }
         }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
 			if (Origins == null)
 				throw new ArgumentException("Must specify an Origins");

@@ -36,7 +36,7 @@ namespace GoogleApi.Entities.Places.PlacesSearch.Request
 
 
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
         {
             if (string.IsNullOrEmpty(ApiKey))
                 throw new ArgumentException("ApiKey must not null or empty", "ApiKey");

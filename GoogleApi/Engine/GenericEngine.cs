@@ -14,6 +14,7 @@ using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Extensions;
 using GoogleApi.Helpers;
+using GoogleApi.Http;
 
 namespace GoogleApi.Engine
 {

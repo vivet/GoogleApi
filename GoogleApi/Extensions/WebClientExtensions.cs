@@ -13,11 +13,11 @@ namespace GoogleApi.Extensions
     /// at http://msdn.microsoft.com/en-us/magazine/ff959203.aspx under the "Converting an Event-Based Pattern" section,
     /// and follows the general TAP guidelines found at http://www.microsoft.com/en-us/download/details.aspx?id=19957.
     /// </remarks>
-    public static class WebClientExtensionMethods
+    public static class WebClientExtensions
     {
         private static readonly Task<byte[]> PreCancelledTask;
 
-        static WebClientExtensionMethods()
+        static WebClientExtensions()
         {
             var tcs = new TaskCompletionSource<byte[]>();
             tcs.SetCanceled();

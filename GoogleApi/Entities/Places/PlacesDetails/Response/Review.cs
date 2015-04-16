@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Places.PlacesDetails.Response
@@ -39,10 +40,7 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Response
         [DataMember(Name = "time")]
         internal virtual int IntStartTime
         {
-            get
-            {
-                return UnixTimeConverter.DateTimeToUnixTimestamp(Time);
-            }
+            get { return Time.ToUnixTimestamp(); }
             set
             {
                 var epoch = new DateTime(1970, 1, 1);

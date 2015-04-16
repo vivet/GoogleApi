@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
@@ -88,7 +90,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 	        set { _travelMode = value; }
 	    }
 
-		protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
 		{
 			if (string.IsNullOrWhiteSpace(Origin))
 				throw new ArgumentException("Must specify an Origin");
@@ -123,10 +125,10 @@ namespace GoogleApi.Entities.Maps.Directions.Request
                 parameters.Add("waypoints", string.Join("|", OptimizeWaypoints ? new[] { "optimize:true" }.Concat(Waypoints) : Waypoints));
 
             if (ArrivalTime != default(DateTime))
-                parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(ArrivalTime).ToString(CultureInfo.InvariantCulture));
+                parameters.Add("arrival_time", ArrivalTime.ToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
 		    if (DepartureTime != default(DateTime))
-		        parameters.Add("departure_time", UnixTimeConverter.DateTimeToUnixTimestamp(DepartureTime).ToString(CultureInfo.InvariantCulture));
+                parameters.Add("departure_time", DepartureTime.ToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
 			return parameters;
 		}

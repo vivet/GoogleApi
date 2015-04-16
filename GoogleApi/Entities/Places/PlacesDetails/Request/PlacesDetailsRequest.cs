@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Helpers;
 
@@ -37,7 +38,7 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Request
             set { throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL"); }
         }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override IDictionary<string, string> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(Reference))
                 throw new ArgumentException("Reference must be provided.");
