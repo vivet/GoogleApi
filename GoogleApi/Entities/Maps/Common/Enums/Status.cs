@@ -15,12 +15,13 @@ namespace GoogleApi.Entities.Maps.Common.Enums
 		REQUEST_DENIED, // indicates that your request was denied, generally because of lack of a sensor parameter.
 		[EnumMember(Value = "INVALID_REQUEST")]
 		INVALID_REQUEST, // generally indicates that the query parameter (location or radius) is missing.
+		[EnumMember(Value = "MAX_ELEMENTS_EXCEEDED")]
+		MAX_ELEMENTS_EXCEEDED, // indicates the allowed amount of elements has been exceeeded.
 		[EnumMember]
 		MAX_WAYPOINTS_EXCEEDED, // indicates that too many waypointss were provided in the request The maximum allowed waypoints is 8, plus the origin, and destination. ( Google Maps Premier customers may contain requests with up to 23 waypoints.)
 		[EnumMember]
 		NOT_FOUND, // indicates at least one of the locations specified in the requests's origin, destination, or waypoints could not be geocoded.
 		[EnumMember]
 		UNKNOWN_ERROR, // indicates a directions request could not be processed due to a server error. The request may succeed if you try again
-    
     }
 }
