@@ -17,9 +17,9 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Request
         public virtual string ApiKey { get; set; }
 
         /// <summary>
-        /// Reference (required) — A textual identifier that uniquely identifies a place, returned from a Place search or place autocomplete search.
+        /// A textual identifier that uniquely identifies a place, returned from a Place Search.
         /// </summary>
-        public virtual string Reference { get; set; }
+        public virtual string PlaceId { get; set; }
 
         /// <summary>
         /// Language (optional) — The language code, indicating in which language the results should be returned, if possible. See the list of supported languages and their codes. Note that we often update supported languages so this list may not be exhaustive.
@@ -39,15 +39,15 @@ namespace GoogleApi.Entities.Places.PlacesDetails.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.Reference))
-                throw new ArgumentException("Reference must be provided.");
+            if (string.IsNullOrWhiteSpace(this.PlaceId))
+                throw new ArgumentException("PlaceId must be provided.");
 
             if (string.IsNullOrWhiteSpace(this.ApiKey))
                 throw new ArgumentException("ApiKey must be provided");
 
             var _parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("reference", this.Reference);
+            _parameters.Add("placeid", this.PlaceId);
             _parameters.Add("key", this.ApiKey);
 
             if (!string.IsNullOrWhiteSpace(this.Language)) 

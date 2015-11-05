@@ -9,11 +9,14 @@ using GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response;
 namespace GoogleApi
 {
     /// <summary>
-    /// Methods to access Google Places Api: https://developers.google.com/places/documentation/
+    /// Methods to access Google Places Api: 
+    /// Documentation: https://developers.google.com/places
     /// </summary>
     public class GooglePlaces
     {
-        /// <summary>Perform places details search operations.</summary>
+        /// <summary>
+        /// Perform places details search operations.
+        /// </summary>
         public static EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse> Details
         {
             get
@@ -21,7 +24,9 @@ namespace GoogleApi
                 return EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse>._instance;
             }
         }
-        /// <summary>Perform places autocomplete operations.</summary>
+        /// <summary>
+        /// Perform places autocomplete operations.
+        /// </summary>
         public static EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse> AutoComplete
         {
             get
@@ -29,7 +34,9 @@ namespace GoogleApi
                 return EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>._instance;
             }
         }
-        /// <summary>Perform places query autocomplete operations.</summary>
+        /// <summary>
+        /// Perform places query autocomplete operations.
+        /// </summary>
         public static EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse> QueryAutoComplete
         {
             get

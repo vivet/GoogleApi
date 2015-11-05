@@ -3,8 +3,11 @@ using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
 {
+    /// <summary>
+    /// Base abstract class for requests.
+    /// </summary>
 	public abstract class BaseRequest
-    {        
+    {
         /// <summary>
         /// True to indicate that request comes from a device with a location sensor, otherwise false. 
         /// This information is required by Google and does not affect the results.
@@ -28,13 +31,16 @@ namespace GoogleApi.Entities.Common
         /// information is a sensor or not, regardless if the request is being performed by a location sensor equipped device or not.
         /// </remarks>
         public bool Sensor { get; set; }
-
 		/// <summary>
 		/// True to use use the https protocol; false to use http. The default is false.
 		/// </summary>
 		public virtual bool IsSsl { get; set; }
-        
-		public virtual Uri GetUri()
+
+        /// <summary>
+        /// Returns the Uri.
+        /// </summary>
+        /// <returns>Uri</returns>
+        public virtual Uri GetUri()
 		{
             var _scheme = this.IsSsl ? "https://" : "http://";
             var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
@@ -43,7 +49,6 @@ namespace GoogleApi.Entities.Common
 		}
 
         protected internal abstract string BaseUrl { get; }
-
         protected virtual QueryStringParametersList GetQueryStringParameters()
         {
             var _parametersList = new QueryStringParametersList();

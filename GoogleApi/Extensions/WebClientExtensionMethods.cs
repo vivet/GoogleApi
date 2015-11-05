@@ -17,6 +17,9 @@ namespace GoogleApi.Extensions
     {
         private static readonly Task<byte[]> _preCancelledTask;
 
+        /// <summary>
+        /// Static constructor. 
+        /// </summary>
         static WebClientExtensionMethods()
         {
             var _tcs = new TaskCompletionSource<byte[]>();

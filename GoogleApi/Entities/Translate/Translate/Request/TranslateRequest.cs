@@ -7,12 +7,12 @@ using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Translate.Translate.Request
 {
+    /// <summary>
+    /// Translate Request.
+    /// </summary>
     public class TranslateRequest : BaseRequest
     {
-        protected internal override string BaseUrl
-        {
-            get { return "www.googleapis.com/language/translate/v2"; }
-        }
+        private const string BASE_URL = "www.googleapis.com/language/translate/v2";
 
         /// <summary>
         /// Your application's API key. This key identifies your application for purposes of quota management and so that Places 
@@ -45,25 +45,41 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// This optional parameter allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates HTML and a value of text indicates plain-text.
         /// Default: format=html.
         /// </summary>
-        public virtual Format Format { get; set; } 
+        public virtual Format Format { get; set; } // TODO: Support this (minor)
 
+        /// <summary>
+        /// Always true. Setter is not supported.
+        /// </summary>
         public override bool IsSsl
         {
             get { return true; }
             set { throw new NotSupportedException("This operation is not supported, TimeZoneRequest must use SSL"); }
         }
 
+        /// <summary>
+        /// Default Constructor.
+        /// </summary>
         public TranslateRequest()
         {
-            this.Format = Format.Html;
+            this.Format = Format.HTML;
             this.PrettyPrint = true;
         }
 
+        /// <summary>
+        /// Returns the Uri.
+        /// </summary>
+        /// <returns>Uri</returns>
         public override Uri GetUri()
         {
             var _scheme = this.IsSsl ? "https://" : "http://";
             var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
+
             return new Uri(_scheme + this.BaseUrl + "?" + _queryString);
+        }
+
+        protected internal override string BaseUrl
+        {
+            get { return TranslateRequest.BASE_URL; }
         }
 
         protected override QueryStringParametersList GetQueryStringParameters()

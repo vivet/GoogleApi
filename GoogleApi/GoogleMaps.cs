@@ -13,11 +13,21 @@ using GoogleApi.Entities.Maps.TimeZone.Response;
 namespace GoogleApi
 {
 	/// <summary>
-    /// Methods to access Google Maps Api: https://developers.google.com/maps/documentation/webservices/
+	/// The Google Maps Web Services are a collection of HTTP interfaces to Google services providing geographic data for your maps applications. 
+	/// - Google Maps Directions API
+    /// - Google Maps Distance Matrix API
+    /// - Google Maps Elevation API
+    /// - Google Maps Geocoding API
+    /// - Google Maps Geolocation API
+    /// - Google Maps Roads API
+    /// - Google Maps Time Zone API
+    /// Documentation: https://developers.google.com/maps/web-services/overview
 	/// </summary>
 	public class GoogleMaps
 	{
-		/// <summary>Perform geocoding operations.</summary>
+		/// <summary>
+		/// Perform geocoding and reverse geocoding operations.
+		/// </summary>
 		public static EngineFacade<GeocodingRequest, GeocodingResponse> Geocode
 		{
 			get
@@ -25,7 +35,9 @@ namespace GoogleApi
 				return EngineFacade<GeocodingRequest, GeocodingResponse>._instance;
 			}
 		}
-		/// <summary>Perform directions operations.</summary>
+		/// <summary>
+		/// Perform directions operations.
+		/// </summary>
 		public static EngineFacade<DirectionsRequest, DirectionsResponse> Directions
 		{
 			get
@@ -33,7 +45,9 @@ namespace GoogleApi
 				return EngineFacade<DirectionsRequest, DirectionsResponse>._instance;
 			}
 		}
-		/// <summary>Perform elevation operations.</summary>
+		/// <summary>
+		/// Perform elevation operations.
+		/// </summary>
 		public static EngineFacade<ElevationRequest, ElevationResponse> Elevation
 		{
 			get
@@ -41,7 +55,9 @@ namespace GoogleApi
 				return EngineFacade<ElevationRequest, ElevationResponse>._instance;
 			}
 		}
-        /// <summary>Perform places details operations.</summary>
+        /// <summary>
+        /// Perform places details operations.
+        /// </summary>
         public static EngineFacade<DistanceMatrixRequest, DistanceMatrixResponse> DistanceMatrix
         {
             get
@@ -49,7 +65,11 @@ namespace GoogleApi
                 return EngineFacade<DistanceMatrixRequest, DistanceMatrixResponse>._instance;
             }
         }
-        /// <summary>Perform places details operations.</summary>
+        /// <summary>
+        /// The Google Maps Time Zone API provides a simple interface to request the time zone for a 
+        /// location on the earth, as well as that location's time offset from UTC.
+        /// https://developers.google.com/maps/documentation/timezone/intro
+        /// </summary>
         public static EngineFacade<TimeZoneRequest, TimeZoneResponse> TimeZone
         {
             get

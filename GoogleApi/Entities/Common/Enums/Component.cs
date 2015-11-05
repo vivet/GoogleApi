@@ -8,22 +8,22 @@
         /// <summary>
         /// route matches long or short name of a route.
         /// </summary>
-        Route,
+        ROUTE,
         /// <summary>
         /// locality matches against both locality and sublocality types. 
         /// </summary>
-        Locality,
+        LOCALITY,
         /// <summary>
         /// administrative_area matches all the administrative_area levels. 
         /// </summary>
-        Administrative_area,
+        ADMINISTRATIVE_AREA,
         /// <summary>
         /// postal_code matches postal_code and postal_code_prefix.
         /// </summary>
-        Postal_code,
+        POSTAL_CODE,
         /// <summary>
         /// country matches a country name or a two letter ISO 3166-1 country code.
         /// </summary>
-        Country,
+        COUNTRY,
     }
 }

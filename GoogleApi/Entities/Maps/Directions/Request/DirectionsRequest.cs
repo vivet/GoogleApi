@@ -9,14 +9,6 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 {
 	public class DirectionsRequest : SignableRequest
 	{
-		protected internal override string BaseUrl
-		{
-			get
-			{
-				return base.BaseUrl + "directions/";
-			}
-		}
-
 		/// <summary>
 		/// origin (required) — The address or textual latitude/longitude value from which you wish to calculate directions. *
 		/// </summary>
@@ -79,8 +71,16 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 
         public DirectionsRequest()
         {
-            this.Avoid = AvoidWay.Nothing;
-            this.TravelMode = TravelMode.Driving;
+            this.Avoid = AvoidWay.NOTHING;
+            this.TravelMode = TravelMode.DRIVING;
+        }
+
+        protected internal override string BaseUrl
+        {
+            get
+            {
+                return base.BaseUrl + "directions/";
+            }
         }
 
 		protected override QueryStringParametersList GetQueryStringParameters()
@@ -97,7 +97,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
 				throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
 
-            if (this.TravelMode == TravelMode.Transit && (this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime)))
+            if (this.TravelMode == TravelMode.TRANSIT && (this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime)))
 				throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
 
 			var _parameters = base.GetQueryStringParameters();
@@ -108,7 +108,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             if (this.Alternatives)
 				_parameters.Add("alternatives", "true");
 
-            if (this.Avoid != AvoidWay.Nothing)
+            if (this.Avoid != AvoidWay.NOTHING)
                 _parameters.Add("avoid", this.Avoid.ToString().ToLower());
 
             if (!string.IsNullOrWhiteSpace(this.Language))

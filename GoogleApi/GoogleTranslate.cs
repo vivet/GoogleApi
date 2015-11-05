@@ -5,11 +5,15 @@ using GoogleApi.Entities.Translate.Translate.Response;
 namespace GoogleApi
 {
     /// <summary>
-    /// Methods to access Google Translate Api: https://developers.google.com/translate/v2/getting_started
+    /// With Google Translate, you can dynamically translate text between thousands of language pairs.
+    /// The Google Translate API lets websites and programs integrate with Google Translate programmatically
+    /// Documentation: https://cloud.google.com/translate/v2/getting_started
     /// </summary>
     public class GoogleTranslate
     {
-        /// <summary>Perform places text search operations.</summary>
+        /// <summary>
+        /// Translate text.
+        /// </summary>
         public static EngineFacade<TranslateRequest, TranslateResponse> Translate
         {
             get

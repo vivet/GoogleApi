@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Places.PlacesAutoComplete.Request;
 using GoogleApi.Entities.Places.PlacesDetails.Request;
@@ -7,11 +8,10 @@ using NUnit.Framework;
 
 namespace GoogleApi.Test
 {
+    // TODO: Improve tests
     [TestFixture]
-    public class PlacesTest
+    public class PlacesTest : BaseTest
     {
-        public string _apiKey = ""; // your API key goes here...
-        
         [Test]
         public void PlacesAutoCompleteTest()
         {
@@ -26,13 +26,14 @@ namespace GoogleApi.Test
             var _response = GooglePlaces.AutoComplete.Query(_request);
             var _results = _response.Predictions.ToList();
 
-            Assert.AreEqual(_results[0].Description, "Jagtvej 2200, Copenhagen, Denmark");
-            Assert.AreEqual(_results[1].Description, "2200 Jagtvej, Nuuk, Greenland");
-            Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Odense, Denmark");
-            Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Esbjerg, Denmark");
-            Assert.AreEqual(_results[4].Description, "Jagtvej 2200, Naestved, Denmark");
+            Assert.AreEqual(_results[0].Description, "Jagtvej 2200, Denmark");
+            Assert.AreEqual(_results[1].Description, "Jagtvej, 2200 Copenhagen, Denmark");
+            Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Hillerød, Denmark");
+            Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Fredensborg, Denmark");
+            Assert.AreEqual(_results[4].Description, "Jagtvej, 2200 Denmark");
             Assert.AreEqual(5, _results.Count);
         }
+
         [Test]
         public void PlacesQueryAutoCompleteTest()
         {
@@ -46,13 +47,19 @@ namespace GoogleApi.Test
             var _response = GooglePlaces.QueryAutoComplete.Query(_request);
             var _results = _response.Predictions.ToList();
 
-            Assert.AreEqual(_results[0].Description, "Jagtvej 2200, Copenhagen, Denmark");
-            Assert.AreEqual(_results[1].Description, "2200 Jagtvej, Nuuk, Greenland");
-            Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Odense, Denmark");
-            Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Esbjerg, Denmark");
-            Assert.AreEqual(_results[4].Description, "Jagtvej 2200, Naestved, Denmark");
+            foreach (var _prediction in _results)
+            {
+                Console.WriteLine(_prediction.Description);
+            }
+
+            Assert.AreEqual(_results[0].Description, "Jagtvej 2200, Nuuk, Greenland");
+            Assert.AreEqual(_results[1].Description, "Jagtvej 2200, Denmark");
+            Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Hillerød, Denmark");
+            Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Fredensborg, Denmark");
+            Assert.AreEqual(_results[4].Description, "Jagtvej 2200, Lemvig, Denmark");
             Assert.AreEqual(5, _results.Count);
         }
+        
         [Test]
         public void PlacesDetauilsTest()
         {
@@ -67,11 +74,11 @@ namespace GoogleApi.Test
             var _response = GooglePlaces.AutoComplete.Query(_request);
             var _results = _response.Predictions.ToList();
             var _result = _results.First();
-
+            
             var _request2 = new PlacesDetailsRequest
             {
                 ApiKey = _apiKey,
-                Reference = _result.Reference,
+                PlaceId = _result.PlaceId,
                 Sensor = true,
             };
 

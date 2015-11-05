@@ -3,6 +3,9 @@ using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
 {
+    /// <summary>
+    /// Translate Response.
+    /// </summary>
     [DataContract]
     public class TranslateResponse : IResponseFor
     {        

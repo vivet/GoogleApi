@@ -3,31 +3,27 @@ GoogleApi
 
 C# .NET Google Web Services Api (Complete).
  
-Will add api methods per request.
- 
- 
-Google Maps
-  * Directions API (Full)
-  * Distance Matrix API (Full)
-  * Elevation API (Full)
-  * Geocoding (Reverse Geocoding) API (Full)
-  * Time Zone API (Full)
- 
- 
- 
-Google Places
-  * Place Search (None)
-  * Place Details (Full)
-  * Place Actions (None)
-  * Place Photos (None)
-  * Place Autocomplete (Full)
-  * Query Autocomplete (Full)
- 
- 
- 
-Google Translate 
-  * Translate (Partial)
 
+Google Maps
+  * Directions (missing v2.0 Update)
+  * Distance Matrix
+  * Elevation
+  * Geocoding 
+  * Reverse Geocoding
+  * Time Zone
+ 
+
+Google Places
+  * Place Search (missing v2.0 Update)
+  * Place Details (missing v2.0 Update)
+  * Place Actions (missing v2.0 Update)
+  * Place Photos (missing v2.0 Update)
+  * Place Autocomplete
+  * Query Autocomplete
+
+
+Google Translate 
+  * Translate
 
 
 Google Functions 

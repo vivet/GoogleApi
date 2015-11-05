@@ -11,6 +11,11 @@ using GoogleApi.Extensions;
 
 namespace GoogleApi.Engine
 {
+    /// <summary>
+    /// Generic base class for facade engine.
+    /// </summary>
+    /// <typeparam name="TRequest"></typeparam>
+    /// <typeparam name="TResponse"></typeparam>
 	public abstract class GenericEngine<TRequest, TResponse> where TRequest : BaseRequest, new() where TResponse : IResponseFor
 	{
         private const string AUTHENTICATION_FAILED_MESSAGE = "The request to Google API failed with HTTP error '(403) Forbidden', which usually indicates that the provided client ID or signing key is invalid or expired.";

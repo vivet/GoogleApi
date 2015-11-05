@@ -16,14 +16,6 @@ namespace GoogleApi.Entities.Places.PlacesAutoComplete.Request
 	/// </summary>
     public class PlacesAutoCompleteRequest : PlacesBaseRequest
 	{
-		protected internal override string BaseUrl
-		{
-			get
-			{
-                return base.BaseUrl + "autocomplete/";
-			}
-		}
-
 		/// <summary>
 		/// Your application's API key. This key identifies your application for purposes of quota management and so that Places 
 		/// added from your application are made immediately available to your app. Visit the APIs Console to create an API Project and obtain your key.
@@ -59,13 +51,16 @@ namespace GoogleApi.Entities.Places.PlacesAutoComplete.Request
         /// The types of Place results to return. See Place Types below. If no type is specified, all types will be returned.
         /// See the list of supported types - https://developers.google.com/maps/documentation/places/supported_types
 		/// </summary>
-        public virtual string Types { get; set; }
+        public virtual string Types { get; set; } // TODO: Enum Type
 
         /// <summary>
         /// The component filters, separated by a pipe (|). Each component filter consists of a component:value pair and will fully restrict the results from the geocoder. For more information see Component Filtering.
 		/// </summary>
         public virtual Dictionary<Component, string> Components { get; set; }
-        
+
+        /// <summary>
+        /// Always true. Setter is not supported.
+        /// </summary>
         public override bool IsSsl
 		{
 			get
@@ -77,6 +72,14 @@ namespace GoogleApi.Entities.Places.PlacesAutoComplete.Request
 				throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL");
 			}
 		}
+
+        protected internal override string BaseUrl
+        {
+            get
+            {
+                return base.BaseUrl + "autocomplete/";
+            }
+        }
 
 	    protected override QueryStringParametersList GetQueryStringParameters()
 		{
@@ -110,7 +113,7 @@ namespace GoogleApi.Entities.Places.PlacesAutoComplete.Request
                 _parameters.Add("types", this.Types);
 
             if (this.Components != null && this.Components.Any())
-                _parameters.Add("components", string.Join("|", this.Components.Select(_x => string.Format("{0}:{1}", _x.Key, _x.Value))));
+                _parameters.Add("components", string.Join("|", this.Components.Select(_x => string.Format("{0}:{1}", _x.Key.ToString().ToLower(), _x.Value))));
             
             return _parameters;
 		}

@@ -12,10 +12,9 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 	public class Row
 	{
 		/// <summary>
-		/// summary contains a short textual description for the route, suitable for naming and disambiguating the route from alternatives.
+        /// Each row array contains one or more element entries, which in turn contain the information about a single origin-destination pairing
 		/// </summary>
 		[DataMember(Name = "elements")]
         public virtual IEnumerable<Element> Elements { get; set; }
-
 	}
 }

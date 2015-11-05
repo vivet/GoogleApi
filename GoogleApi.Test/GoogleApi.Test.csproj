@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTest.cs" />
     <Compile Include="MapsTest.cs" />
     <Compile Include="TranslateTest.cs" />
     <Compile Include="PlacesTest.cs" />

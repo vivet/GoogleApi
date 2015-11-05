@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response
+namespace GoogleApi.Entities.Places.Common
 {
+    /// <summary>
+    /// Prediction
+    /// </summary>
     [DataContract]
     public class Prediction
     {
@@ -11,6 +14,13 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response
         /// </summary>
         [DataMember(Name = "description")]
         public virtual string Description { get; set; }
+
+        /// <summary>
+        /// PlaceId is a textual identifier that uniquely identifies a place. 
+        /// To retrieve information about the place, pass this identifier in the placeId field of a Google Places API Web Service request
+        /// </summary>
+        [DataMember(Name = "place_id")]
+        public virtual string PlaceId { get; set; }
 
         /// <summary>
         /// Terms contains an array of terms identifying each section of the returned description (a section of the description is generally terminated with a comma). Each entry in the array has a value field, containing the text of the term, and an offset field, defining the start position of this term in the description, measured in Unicode characters.
@@ -28,6 +38,6 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response
         /// types[] is an array indicating the type of the prediction.
         /// </summary>
         [DataMember(Name = "types")]
-        public virtual IEnumerable<string> Types { get; set; }
+        public virtual IEnumerable<string> Types { get; set; } // TODO: Enum Type
     }
 }

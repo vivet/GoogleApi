@@ -1,7 +1,10 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response
+namespace GoogleApi.Entities.Places.Common
 {
+    /// <summary>
+    /// Term.
+    /// </summary>
     [DataContract]
     public class Term
     {

@@ -2,6 +2,9 @@ using System.Runtime.Serialization;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
 {
+    /// <summary>
+    /// Translation.
+    /// </summary>
     [DataContract(Name = "translation")]
     public class Translation
     {

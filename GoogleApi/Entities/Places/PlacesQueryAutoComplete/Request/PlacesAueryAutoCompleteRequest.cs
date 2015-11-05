@@ -14,14 +14,6 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Request
 	/// </summary>
 	public class PlacesQueryAutoCompleteRequest : PlacesBaseRequest
 	{
-		protected internal override string BaseUrl
-		{
-			get
-			{
-                return base.BaseUrl + "queryautocomplete/";
-			}
-		}
-
 		/// <summary>
 		/// Your application's API key. This key identifies your application for purposes of quota management and so that Places 
 		/// added from your application are made immediately available to your app. Visit the APIs Console to create an API Project and obtain your key.
@@ -53,7 +45,10 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Request
 		/// </summary>
         public virtual string Language { get; set; }
 
-		public override bool IsSsl
+        /// <summary>
+        /// Always true. Setter is not supported.
+        /// </summary>
+        public override bool IsSsl
 		{
 			get
 			{
@@ -65,7 +60,15 @@ namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Request
 			}
 		}
 
-	    protected override QueryStringParametersList GetQueryStringParameters()
+        protected internal override string BaseUrl
+        {
+            get
+            {
+                return base.BaseUrl + "queryautocomplete/";
+            }
+        }
+        
+        protected override QueryStringParametersList GetQueryStringParameters()
 		{
             if (string.IsNullOrEmpty(this.ApiKey))
                 throw new ArgumentException("ApiKey must not null or empty");

@@ -4,27 +4,34 @@ using GoogleApi.Entities.Maps.Common.Enums;
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
     /// <summary>
-    /// The information about each origin-destination pairing is returned in an element entry.
+    /// Element.
     /// /// </summary>
     [DataContract(Name = "element")]
     public class Element
     {
         /// <summary>
-        /// status: See Status Codes for a list of possible status codes.
+        /// Status: See Status Codes for a list of possible status codes.
         /// </summary>
-        [DataMember(Name = "elements")]
+        [DataMember(Name = "status")]
         public virtual Status Status { get; set; }
 
         /// <summary>
-        /// duration: The duration of this route, expressed in seconds (the value field) and as text. The textual representation is localized according to the query's language parameter.
+        /// Duration: The duration of this route, expressed in seconds (the value field) and as text. The textual representation is localized according to the query's language parameter.
         /// </summary>
         [DataMember(Name = "duration")]
         public virtual Duration Duration { get; set; }
 
         /// <summary>
-        /// distance: The total distance of this route, expressed in meters (value) and as text. The textual value uses the unit system specified with the unit parameter of the original request, or the origin's region.
+        /// Distance: The total distance of this route, expressed in meters (value) and as text. The textual value uses the unit system specified with the unit parameter of the original request, or the origin's region.
         /// </summary>
         [DataMember(Name = "distance")]
         public virtual Distance Distance { get; set; }
+
+        /// <summary>
+        /// If present, contains the total fare (that is, the total ticket costs) on this route. 
+        /// This property is only returned for transit requests and only for transit providers where fare information is available.
+        /// </summary>
+        [DataMember(Name = "fare")]
+        public virtual Fare Fare { get; set; }
     }
 }

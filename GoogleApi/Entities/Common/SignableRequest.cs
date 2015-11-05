@@ -12,12 +12,12 @@ namespace GoogleApi.Entities.Common
 	/// See https://developers.google.com/maps/documentation/business/webservices for details about signing.
 	/// </remarks>
 	public abstract class SignableRequest : MapsBaseRequest
-	{
+    {
 		/// <summary>
-		/// The client ID provided to you by Google Enterprise Support, or null to disable URL signing. All client IDs begin with a "gme-" prefix.
+		/// The client ID provided to you by Google Enterprise Support, or null to disable URL signing. 
+		/// All client IDs begin with a "gme-" prefix.
 		/// </summary>
 		public string ClientId { get; set; }
-
 		/// <summary>
 		/// A cryptographic signing key (secret shared key), in base64url format, provided to you by Google Enterprise Support.
 		/// The key will only be used if the ClientID property is set, otherwise it will be ignored.
@@ -38,10 +38,8 @@ namespace GoogleApi.Entities.Common
             return this.ClientId != null ? this.Sign(base.GetUri()) : base.GetUri();
 		}
 
-		internal Uri Sign(Uri _uri)
+		protected Uri Sign(Uri _uri)
 		{
-            // Based on the C# sample from: https://developers.google.com/maps/documentation/business/webservices
-            
             if (_uri == null)
 				throw new ArgumentNullException("_uri");
 
@@ -56,8 +54,8 @@ namespace GoogleApi.Entities.Common
 
             var _urlSegmentToSign = _uri.LocalPath + _uri.Query + "&client=" + this.ClientId;
 			var _privateKey = SignableRequest.FromBase64UrlString(SigningKey);
-			byte[] _signature;
-
+		
+            byte[] _signature;
 			using (var _algorithm = new HMACSHA1(_privateKey))
 			{
 				_signature = _algorithm.ComputeHash(Encoding.ASCII.GetBytes(_urlSegmentToSign));

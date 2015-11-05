@@ -6,18 +6,24 @@ using NUnit.Framework;
 namespace GoogleApi.Test
 {
     [TestFixture]
-    public class TranslateTest
+    public class TranslateTest : BaseTest
     {
-        public string _apiKey = ""; // your API key goes here...
-
         [Test]
-        public void TranslateCorrectTest()
+        public void TranslateCorrectGermanTest()
         {
-            var _request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, ApiKey = this._apiKey, Format = Format.Text };
-
+            var _request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, ApiKey = this._apiKey, Format = Format.TEXT };
             var _result = GoogleTranslate.Translate.Query(_request);
 
             Assert.AreEqual("Hallo Welt", _result.Data.Translations.First().TranslatedText);
+            Assert.AreEqual("en", _result.Data.Translations.First().DetectedSourceLanguage);
+        }
+        [Test]
+        public void TranslateCorrectDanishTest()
+        {
+            var _request = new TranslateRequest { Target = "da", Qs = new[] { "Hello World" }, ApiKey = this._apiKey, Format = Format.TEXT };
+            var _result = GoogleTranslate.Translate.Query(_request);
+
+            Assert.AreEqual("Hej Verden", _result.Data.Translations.First().TranslatedText);
             Assert.AreEqual("en", _result.Data.Translations.First().DetectedSourceLanguage);
         }
     }

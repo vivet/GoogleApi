@@ -5,6 +5,9 @@ using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Elevation.Response
 {
+    /// <summary>
+    /// For each valid request, the Elevation service will return an Elevation response in the format indicated within the request URL.
+    /// </summary>
 	[DataContract]
 	public class ElevationResponse : MapsBaseResponse, IResponseFor
 	{

@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.PlacesQueryAutoComplete.Response
 {

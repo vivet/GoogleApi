@@ -73,16 +73,19 @@
     <Compile Include="Entities\Maps\Common\Enums\Type.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entities\Maps\Common\Enums\TransitMode.cs" />
+    <Compile Include="Entities\Maps\Common\Enums\TransitRoutingPreference.cs" />
+    <Compile Include="Entities\Maps\DistanceMatrix\Response\Fare.cs" />
     <Compile Include="Entities\Places\Common\PlacesBaseRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs" />
-    <Compile Include="Entities\Maps\DistanceMatrix\Request\Enums\Units.cs" />
+    <Compile Include="Entities\Maps\Common\Enums\Units.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\DistanceMatrixResponse.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Distance.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Duration.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Element.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Row.cs" />
     <Compile Include="Entities\Common\Enums\Component.cs" />
-    <Compile Include="Entities\Places\PlacesAutoComplete\Response\Prediction.cs" />
+    <Compile Include="Entities\Places\Common\Prediction.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Request\Enums\Extensions.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Request\PlacesDetailsRequest.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\Aspect.cs" />
@@ -95,13 +98,10 @@
     <Compile Include="Entities\Places\PlacesDetails\Response\Result.cs" />
     <Compile Include="Entities\Places\PlacesDetails\Response\Review.cs" />
     <Compile Include="Entities\Places\PlacesQueryAutoComplete\Request\PlacesAueryAutoCompleteRequest.cs" />
-    <Compile Include="Entities\Places\PlacesQueryAutoComplete\Response\MatchedSubstring.cs" />
     <Compile Include="Entities\Places\PlacesQueryAutoComplete\Response\PlacesAutoCompleteResponse.cs" />
-    <Compile Include="Entities\Places\PlacesQueryAutoComplete\Response\Prediction.cs" />
-    <Compile Include="Entities\Places\PlacesQueryAutoComplete\Response\Term.cs" />
     <Compile Include="Entities\Places\PlacesAutoComplete\Request\PlacesAutoCompleteRequest.cs" />
     <Compile Include="Entities\Maps\Common\MapsBaseResponse.cs" />
-    <Compile Include="Entities\Places\PlacesAutoComplete\Response\MatchedSubstring.cs" />
+    <Compile Include="Entities\Places\Common\MatchedSubstring.cs" />
     <Compile Include="Entities\Places\PlacesAutoComplete\Response\PlacesAutoCompleteResponse.cs" />
     <Compile Include="Entities\Maps\Common\Enums\Status.cs" />
     <Compile Include="Entities\Maps\Common\Enums\AvoidWay.cs">
@@ -170,7 +170,7 @@
     <Compile Include="Entities\Maps\Geocode\Response\AddressComponent.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Maps\Geocode\Response\FramedLocation.cs">
+    <Compile Include="Entities\Maps\Geocode\Response\ViewPort.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Maps\Geocode\Response\GeocodingResponse.cs">
@@ -185,7 +185,7 @@
     <Compile Include="Entities\Maps\Geocode\Response\Result.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Places\PlacesAutoComplete\Response\Term.cs" />
+    <Compile Include="Entities\Places\Common\Term.cs" />
     <Compile Include="Entities\Maps\TimeZone\Request\TimeZoneRequest.cs" />
     <Compile Include="Entities\Maps\TimeZone\Response\TimeZoneResponse.cs" />
     <Compile Include="Entities\Translate\Translate\Request\Enums\Format.cs" />

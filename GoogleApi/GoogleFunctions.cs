@@ -11,6 +11,49 @@ namespace GoogleApi
     public static class GoogleFunctions
     {
         /// <summary>
+        /// Encode it
+        /// </summary>
+        /// <param name="_locations"></param>
+        /// <returns></returns>
+        public static string EncodePolyLine(IEnumerable<Location> _locations)
+        {
+            var _encodedString = new StringBuilder();
+
+            var _encodeDiff = (Action<int>)(_diff =>
+            {
+                var _shifted = _diff << 1;
+                if (_diff < 0)
+                    _shifted = ~_shifted;
+
+                var _rem = _shifted;
+
+                while (_rem >= 0x20)
+                {
+                    _encodedString.Append((char)((0x20 | (_rem & 0x1f)) + 63));
+                    _rem >>= 5;
+                }
+
+                _encodedString.Append((char)(_rem + 63));
+            });
+
+            var _lastLat = 0;
+            var _lastLng = 0;
+
+            foreach (var _location in _locations)
+            {
+                var _lat = (int)Math.Round(_location.Latitude * 1E5);
+                var _lng = (int)Math.Round(_location.Longitude * 1E5);
+
+                _encodeDiff(_lat - _lastLat);
+                _encodeDiff(_lng - _lastLng);
+
+                _lastLat = _lat;
+                _lastLng = _lng;
+            }
+
+            return _encodedString.ToString();
+        }
+        /// <summary>
         /// Decode google style polyline coordinates.
         /// </summary>
         /// <param name="_encdodedLocations"></param>
@@ -60,49 +103,6 @@ namespace GoogleApi
                 _currentLng += (_sum & 1) == 1 ? ~(_sum >> 1) : (_sum >> 1);
                 yield return new Location(Convert.ToDouble(_currentLat) / 1E5, Convert.ToDouble(_currentLng) / 1E5);
             }
-        }
-        /// <summary>
-        /// Encode it
-        /// </summary>
-        /// <param name="_locations"></param>
-        /// <returns></returns>
-        public static string EncodePolyLine(IEnumerable<Location> _locations)
-        {
-            var _encodedString = new StringBuilder();
-
-            var _encodeDiff = (Action<int>)(_diff =>
-            {
-                var _shifted = _diff << 1;
-                if (_diff < 0)
-                    _shifted = ~_shifted;
-
-                var _rem = _shifted;
-
-                while (_rem >= 0x20)
-                {
-                    _encodedString.Append((char)((0x20 | (_rem & 0x1f)) + 63));
-                    _rem >>= 5;
-                }
-
-                _encodedString.Append((char)(_rem + 63));
-            });
-
-            var _lastLat = 0;
-            var _lastLng = 0;
-
-            foreach (var _location in _locations)
-            {
-                var _lat = (int)Math.Round(_location.Latitude * 1E5);
-                var _lng = (int)Math.Round(_location.Longitude * 1E5);
-
-                _encodeDiff(_lat - _lastLat);
-                _encodeDiff(_lng - _lastLng);
-
-                _lastLat = _lat;
-                _lastLng = _lng;
-            }
-
-            return _encodedString.ToString();
         }
     }
 }

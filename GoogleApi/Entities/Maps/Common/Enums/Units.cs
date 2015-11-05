@@ -1,5 +1,8 @@
-﻿namespace GoogleApi.Entities.Maps.DistanceMatrix.Request.Enums
+﻿namespace GoogleApi.Entities.Maps.Common.Enums
 {
+    /// <summary>
+    /// Units
+    /// </summary>
     public enum Units
     {
         /// <summary>

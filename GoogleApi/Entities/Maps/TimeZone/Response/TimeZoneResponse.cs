@@ -4,6 +4,9 @@ using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Response
 {
+    /// <summary>
+    /// For each valid request, the time zone service will return a response in the format indicated within the request URL.
+    /// </summary>
     [DataContract]
     public class TimeZoneResponse : MapsBaseResponse, IResponseFor
     {        
@@ -12,7 +15,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Response
         /// </summary>
         [DataMember(Name = "dstOffset")]
         public virtual double OffSet { get; set; }
-
+        
         /// <summary>
         /// RawOffset: the offset from UTC (in seconds) for the given location. This does not take into effect daylight savings.
         /// </summary>
@@ -23,8 +26,8 @@ namespace GoogleApi.Entities.Maps.TimeZone.Response
         /// TimeZoneId: a string containing the ID of the time zone, such as "America/Los_Angeles" or "Australia/Sydney".
         /// </summary>
         [DataMember(Name = "timeZoneId")]
-        public virtual string TimeZoneId { get; set; }
-        
+        public virtual string TimeZoneId { get; set; }        
+
         /// <summary>
         /// TimeZoneName: a string containing the long form name of the time zone. This field will be localized if the language parameter is set. eg. "Pacific Daylight Time" or "Australian.
         /// </summary>
@@ -32,6 +35,3 @@ namespace GoogleApi.Entities.Maps.TimeZone.Response
         public virtual string TimeZoneName { get; set; }
     }
 }
- 
- 
-

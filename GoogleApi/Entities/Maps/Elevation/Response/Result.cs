@@ -3,6 +3,9 @@ using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Elevation.Response
 {
+    /// <summary>
+    /// Result.
+    /// </summary>
 	[DataContract]
 	public class Result
 	{
