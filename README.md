@@ -10,6 +10,8 @@ Google Maps
   * Elevation
   * Geocoding 
   * Reverse Geocoding
+  * Geolocation (missing v2.0 add)
+  * Roads (missing v2.0 add)
   * Time Zone
  
 
