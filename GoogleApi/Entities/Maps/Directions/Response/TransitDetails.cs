@@ -1,7 +1,11 @@
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
+    /// <summary>
+    /// Transit Details.
+    /// </summary>
 	[DataContract(Name = "transit_details")]
 	public class TransitDetails
 	{

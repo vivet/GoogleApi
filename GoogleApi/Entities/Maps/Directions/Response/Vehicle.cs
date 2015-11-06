@@ -14,24 +14,25 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         public virtual string Name { get; set; }
 
 		/// <summary>
-		/// Contains the type of vehicle that runs on this line.
-		/// </summary>
-		[DataMember(Name = "type")]
-        public virtual string VehicleTypeString
-		{
-			get { return VehicleType.ToString(); }
-			set { VehicleType = (VehicleType)Enum.Parse(typeof(VehicleType), value); }
-		}
-
-		/// <summary>
-		/// Contains the type of vehicle that runs on this line.
-		/// </summary>
-        public virtual VehicleType VehicleType { get; set; }
-
-		/// <summary>
 		/// Contains the URL for an icon associated with this vehicle type.
 		/// </summary>
 		[DataMember(Name = "icon")]
         public virtual string Icon { get; set; }
-	}
+
+        /// <summary>
+        /// Contains the type of vehicle that runs on this line.
+        /// </summary>
+        public virtual VehicleType VehicleType { get; set; }
+
+        /// <summary>
+        /// Contains the type of vehicle that runs on this line.
+        /// </summary>
+        [DataMember(Name = "type")]
+        protected virtual string VehicleTypeStr
+        {
+            get { return VehicleType.ToString(); }
+            set { this.VehicleType = (VehicleType)Enum.Parse(typeof(VehicleType), value); }
+        }
+
+    }
 }

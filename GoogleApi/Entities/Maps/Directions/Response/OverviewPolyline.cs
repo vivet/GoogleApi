@@ -12,19 +12,21 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 	public class OverviewPolyline
 	{
         private Lazy<IEnumerable<Location>> _pointsLazy;
-        
+
+        /// <summary>
+        /// An array of Location objects representing the points in the overview path, decoded from the string contained in the EncodedPoints property.
+        /// </summary>
+        public IEnumerable<Location> Points { get { return _pointsLazy.Value; } }
+
         /// <summary>
 		/// The encoded string containing the overview path points as they were received.
 		/// </summary>
 		[DataMember(Name = "points")]
-        internal virtual string EncodedPoints { get; set; }
+        protected virtual string EncodedPoints { get; set; }
 
-		/// <summary>
-		/// An array of Location objects representing the points in the overview path, decoded from the string contained in the EncodedPoints property.
-		/// </summary>
-		/// <exception cref="PointsDecodingException">Unexpectedly couldn't decode points</exception>
-		public IEnumerable<Location> Points { get { return _pointsLazy.Value; } }
-
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
 		public OverviewPolyline()
 		{
 			this.InitLazyPoints(default(StreamingContext));
@@ -44,16 +46,10 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         {
             _pointsLazy = new Lazy<IEnumerable<Location>>(DecodePoints);
         }
+ 
         private IEnumerable<Location> DecodePoints()
         {
-            try
-            {
-                return GoogleFunctions.DecodePolyLine(this.EncodedPoints);
-            }
-            catch (Exception _ex)
-            {
-                throw new PointsDecodingException("Couldn't decode points", this.EncodedPoints, _ex);
-            }
+            return GoogleFunctions.DecodePolyLine(this.EncodedPoints);
         }
     }
 }

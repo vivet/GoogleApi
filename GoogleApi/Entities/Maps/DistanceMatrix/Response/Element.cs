@@ -1,5 +1,7 @@
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Entities.Maps.Directions.Response;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {

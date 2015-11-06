@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Maps.Directions.Response
+namespace GoogleApi.Entities.Maps.Common
 {
 	/// <summary>
 	/// duration indicates the total duration of this leg

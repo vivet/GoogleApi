@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
@@ -16,12 +17,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		/// </summary>
 		[DataMember(Name = "html_instructions")]
         public virtual string HtmlInstructions { get; set; }
-
-		/// <summary>
-		/// Contains an object holding an array of encoded points that represent an approximate (smoothed) path of the resulting directions.
-		/// </summary>
-		[DataMember(Name = "polyline")]
-        public virtual OverviewPolyline PolyLine { get; set; }
 
 		/// <summary>
 		/// distance contains the distance covered by this step until the next step. (See the discussion of this field in Directions Legs above.) This field may be undefined if the distance is unknown.
@@ -47,38 +42,23 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		[DataMember(Name = "end_location")]
         public virtual Location EndLocation { get; set; }
 
-		/// <summary>
+        /// <summary>
+        /// Contains an object holding an array of encoded points that represent an approximate (smoothed) path of the resulting directions.
+        /// </summary>
+        [DataMember(Name = "polyline")]
+        public virtual OverviewPolyline PolyLine { get; set; }
+
+        /// <summary>
 		/// More information about the step. Only avaliable when TravelMode = Transit
 		/// </summary>
 		[DataMember(Name = "transit_details")]
         public virtual TransitDetails TransitDetails { get; set; }
 
-		/// <summary>
-		/// Contains detailed directions for walking or driving steps in transit directions. Substeps are only available when TravelMode is set to Transit.
-		/// </summary>
-		[DataMember(Name = "sub_steps")]
-        public virtual Step SubSteps { get; set; }
-
-		/// <summary>
-		/// Gets the mode of transportation used in this step
-		/// </summary>
-        public virtual TravelMode TravelMode { get; set; }
-
-		/// <summary>
-		/// Gets the mode of transportation used in this step
-		/// </summary>
-		[DataMember(Name = "travel_mode")]
-        internal virtual string TravelModeString
-		{
-			get { return TravelMode.ToString(); }
-			set
-			{
-				TravelMode _travelMode;
-				if (Enum.TryParse(value, true, out _travelMode))
-				{
-					TravelMode = _travelMode;
-				}
-			}
-		}
-	}
+        /// <summary>
+        /// steps contains detailed directions for walking or driving steps in transit directions. Substeps are only available when travel_mode is set to "transit". 
+        /// The inner steps array is of the same type as steps.
+        /// </summary>
+        [DataMember(Name = "steps")]
+        public virtual IEnumerable<Step> Steps { get; set; }
+    }
 }

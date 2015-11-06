@@ -26,6 +26,7 @@
     <DocumentationFile>bin\debug\GoogleApi.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,13 +76,12 @@
     </Compile>
     <Compile Include="Entities\Maps\Common\Enums\TransitMode.cs" />
     <Compile Include="Entities\Maps\Common\Enums\TransitRoutingPreference.cs" />
-    <Compile Include="Entities\Maps\DistanceMatrix\Response\Fare.cs" />
+    <Compile Include="Entities\Maps\Common\Fare.cs" />
     <Compile Include="Entities\Places\Common\PlacesBaseRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs" />
     <Compile Include="Entities\Maps\Common\Enums\Units.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\DistanceMatrixResponse.cs" />
-    <Compile Include="Entities\Maps\DistanceMatrix\Response\Distance.cs" />
-    <Compile Include="Entities\Maps\DistanceMatrix\Response\Duration.cs" />
+    <Compile Include="Entities\Maps\Common\Distance.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Element.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Row.cs" />
     <Compile Include="Entities\Common\Enums\Component.cs" />
@@ -116,10 +116,7 @@
     <Compile Include="Entities\Maps\Directions\Response\DirectionsResponse.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Maps\Directions\Response\Distance.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Entities\Maps\Directions\Response\Duration.cs">
+    <Compile Include="Entities\Maps\Common\Duration.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Maps\Directions\Response\Leg.cs">
@@ -129,9 +126,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Maps\Directions\Response\OverviewPolyline.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Entities\Maps\Directions\Response\PointsDecodingException.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Maps\Directions\Response\Route.cs">

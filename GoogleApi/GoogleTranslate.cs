@@ -12,7 +12,7 @@ namespace GoogleApi
     public class GoogleTranslate
     {
         /// <summary>
-        /// Translate text.
+        /// This document details the background knowledge that you need to use the Google Translate API v2.
         /// </summary>
         public static EngineFacade<TranslateRequest, TranslateResponse> Translate
         {

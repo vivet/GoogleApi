@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
+namespace GoogleApi.Entities.Maps.Common
 {
     /// <summary>
     /// Distance.

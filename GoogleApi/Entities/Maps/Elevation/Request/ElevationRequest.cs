@@ -10,7 +10,6 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
 	/// The Elevation API provides elevation data for all locations on the surface of the earth, including depth locations on the ocean floor (which return negative values). In those cases where Google does not possess exact elevation measurements at the precise location you request, the service will interpolate and return an averaged value using the four nearest locations.
 	/// With the Elevation API, you can develop hiking and biking applications, mobile positioning applications, or low resolution surveying applications.
 	/// You access the Elevation API through an HTTP interface Users of the Google JavaScript API V3 may also access this API directly by using the ElevationService() object. (See Elevation Service for more information.)
-	/// The Elevation API is a new service; we encourage you to join the Maps API discussion group to give us feedback.
 	/// </summary>
 	public class ElevationRequest : SignableRequest
 	{

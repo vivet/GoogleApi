@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
@@ -7,6 +8,10 @@ using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 {
+    /// <summary>
+    /// The Google Maps Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. 
+    /// The information returned is based on the recommended route between start and end points,  as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
+    /// </summary>
     public class DistanceMatrixRequest : SignableRequest
 	{
 		/// <summary>
@@ -70,13 +75,13 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Note: Requests that include the departure_time parameter are limited to 100 elements
         /// Note: You can specify either DepartureTime or ArrivalTime, but not both
         /// </summary>
-        public virtual int? DepartureTime { get; set; }
+        public virtual DateTime DepartureTime { get; set; }
         
         /// <summary>
         /// Specifies the desired time of arrival for transit requests, in seconds since midnight, January 1, 1970 UTC. 
         /// Note: You can specify either DepartureTime or ArrivalTime, but not both
         /// </summary>
-        public virtual int? ArrivalTime { get; set; }
+        public virtual DateTime ArrivalTime { get; set; }
         
         /// <summary>
         /// language (optional) — The language in which to return results. See the supported list of domain languages. 
@@ -136,11 +141,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                 _parameters.Add("transit_mode", this.TransitMode.ToString().ToLower()); // TODO: Support Flags (minor)
                 _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower()); // TODO: Support Flags (minor)
 
-                if (this.DepartureTime != null)
-                    _parameters.Add("departure_time", this.DepartureTime.ToString());
+                if (this.ArrivalTime != default(DateTime))
+                    _parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.ArrivalTime).ToString(CultureInfo.InvariantCulture));
 
-                if (this.ArrivalTime != null)
-                    _parameters.Add("arrival_time", this.ArrivalTime.ToString());
+                if (this.DepartureTime != default(DateTime))
+                    _parameters.Add("departure_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.DepartureTime).ToString(CultureInfo.InvariantCulture));
             }
 
 			return _parameters;

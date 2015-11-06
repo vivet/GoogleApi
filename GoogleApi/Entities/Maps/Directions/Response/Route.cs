@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
 	/// <summary>
-	/// When the Directions API returns results, it places them within a (JSON) routes array. Even if the service returns no results (such as if the origin and/or destination doesn't exist) it still returns an empty routes array. (XML responses consist of zero or more route elements.)
-	/// Each element of the routes array contains a single result from the specified origin and destination. This route may consist of one or more legs depending on whether any waypoints were specified. As well, the route also contains copyright and warning information which must be displayed to the user in addition to the routing information.
+	/// Route Request.
 	/// </summary>
 	[DataContract(Name = "route")]
 	public class Route
@@ -45,5 +45,18 @@ namespace GoogleApi.Entities.Maps.Directions.Response
 		/// </summary>
 		[DataMember(Name = "warnings")]
         public virtual string[] Warnings { get; set; }
+
+        /// <summary>
+        /// If present, contains the total fare (that is, the total ticket costs) on this route. 
+        /// This property is only returned for transit requests and only for transit providers where fare information is available.
+        /// </summary>
+        [DataMember(Name = "fare")]
+        public virtual Fare Fare { get; set; }
+
+        /// <summary>
+        /// Bounds contains the viewport bounding box of the overview_polyline.
+        /// </summary>
+        [DataMember(Name = "bounds")]
+        public virtual Location[] Bounds { get; set; }
 	}
 }

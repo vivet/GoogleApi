@@ -5,7 +5,7 @@ C# .NET Google Web Services Api (Complete).
  
 
 Google Maps
-  * Directions (missing v2.0 Update)
+  * Directions
   * Distance Matrix
   * Elevation
   * Geocoding 
