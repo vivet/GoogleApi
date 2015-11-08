@@ -50,11 +50,6 @@ namespace GoogleApi.Test.Places
             var _response = GooglePlaces.QueryAutoComplete.Query(_request);
             var _results = _response.Predictions.ToList();
 
-            foreach (var _prediction in _results)
-            {
-                Console.WriteLine(_prediction.Description);
-            }
-
             Assert.AreEqual(_results[0].Description, "Jagtvej 2200, Nuuk, Greenland");
             Assert.AreEqual(_results[1].Description, "Jagtvej 2200, Denmark");
             Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Hillerød, Denmark");
