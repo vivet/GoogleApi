@@ -1,5 +1,4 @@
 GoogleApi v2 Beta (08-11-2015) 
--- Test coverage isn't satisfactory, improvements are in progress --
 =========
 
 C# .NET Google Web Services Api (Complete).
