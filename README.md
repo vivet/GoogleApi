@@ -17,6 +17,7 @@ Google Maps
   * Time Zone
 
 
+
 Google Places
   * Place Search
     * Near By
@@ -29,8 +30,10 @@ Google Places
   * Query Autocomplete
 
 
+
 Google Translate 
   * Translate
+
 
 
 Google Functions 
