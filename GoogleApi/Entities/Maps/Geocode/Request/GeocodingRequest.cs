@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Geocode.Request

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Elevation.Request

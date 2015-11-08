@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using GoogleApi.Entities.Maps.Common;
 
-namespace GoogleApi.Entities.Common
+namespace GoogleApi.Entities.Maps.Common
 {
 	/// <summary>
 	/// An abstract base class for requests that can be authenticated via URL signing.
@@ -11,23 +10,13 @@ namespace GoogleApi.Entities.Common
 	/// <remarks>
 	/// See https://developers.google.com/maps/documentation/business/webservices for details about signing.
 	/// </remarks>
-	public abstract class SignableRequest : MapsBaseRequest
+	public abstract class SignableRequest : BaseMapsRequest
     {
 		/// <summary>
 		/// The client ID provided to you by Google Enterprise Support, or null to disable URL signing. 
 		/// All client IDs begin with a "gme-" prefix.
 		/// </summary>
 		public string ClientId { get; set; }
-		/// <summary>
-		/// A cryptographic signing key (secret shared key), in base64url format, provided to you by Google Enterprise Support.
-		/// The key will only be used if the ClientID property is set, otherwise it will be ignored.
-		/// </summary>
-		/// <remarks>
-		/// This cryptographic signing key is not the same as the (freely available) Maps API key (typically beginning with 'ABQ..') 
-		/// that developers without a Maps API for Business license are required to use when loading the Maps JavaScript API V2 and 
-		/// Maps API for Flash, or the keys issued by the Google APIs Console for use with the Google Places API.
-		/// </remarks>
-		public string SigningKey { get; set; }
 
         /// <summary>
         /// Gets Uri of Signed Request with signature paramter.

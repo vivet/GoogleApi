@@ -16,12 +16,6 @@ namespace GoogleApi.Entities.Places.Search.Common
     public abstract class BasePlacesSearchRequest : BasePlacesRequest
     {
         /// <summary>
-        /// Your application's API key (required). This key identifies your application for purposes of quota management and so that Places 
-        /// added from your application are made immediately available to your app. Visit the APIs Console to create an API Project and obtain your key.
-        /// </summary>
-        public virtual string ApiKey { get; set; }
-
-        /// <summary>
         /// The point around which you wish to retrieve Place information (required). Must be specified as latitude,longitude.
         /// </summary>
         public virtual Location Location { get; set; }

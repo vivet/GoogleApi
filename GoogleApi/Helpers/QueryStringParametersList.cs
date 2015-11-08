@@ -26,7 +26,7 @@ namespace GoogleApi.Helpers
         /// <param name="_value"></param>
 		public void Add(string _key, string _value)
 		{
-			List.Add(new KeyValuePair<string, string>(_key, _value));
+			this.List.Add(new KeyValuePair<string, string>(_key, _value));
 		}
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace GoogleApi.Helpers
         /// <returns></returns>
 		public string GetQueryStringPostfix()
 		{
-			return string.Join("&", List.Select(_p => Uri.EscapeDataString(_p.Key) + "=" + Uri.EscapeDataString(_p.Value)));
+			return string.Join("&", this.List.Select(_p => Uri.EscapeDataString(_p.Key) + "=" + Uri.EscapeDataString(_p.Value)));
 		}
 	}
 }

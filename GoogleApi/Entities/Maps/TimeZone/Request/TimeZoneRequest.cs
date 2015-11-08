@@ -1,5 +1,6 @@
 ﻿using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Request

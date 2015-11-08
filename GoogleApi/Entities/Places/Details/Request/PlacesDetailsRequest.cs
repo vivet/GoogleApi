@@ -10,11 +10,6 @@ namespace GoogleApi.Entities.Places.Details.Request
     public class PlacesDetailsRequest : BasePlacesRequest
     {
         /// <summary>
-        /// Key (required) — Your application's API key. This key identifies your application for purposes of quota management and so that Places added from your application are made immediately available to your app. Visit the APIs Console to create an API Project and obtain your key.
-        /// </summary>
-        public virtual string ApiKey { get; set; }
-
-        /// <summary>
         /// A textual identifier that uniquely identifies a place, returned from a Place Search.
         /// </summary>
         public virtual string PlaceId { get; set; }

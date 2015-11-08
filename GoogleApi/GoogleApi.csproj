@@ -65,10 +65,10 @@
     <Compile Include="Entities\Common\Location.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Maps\Common\MapsBaseRequest.cs">
+    <Compile Include="Entities\Maps\Common\BaseMapsRequest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Common\SignableRequest.cs">
+    <Compile Include="Entities\Maps\Common\SignableRequest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Maps\Common\Enums\LocationType.cs">
@@ -77,6 +77,13 @@
     <Compile Include="Entities\Maps\Common\Enums\TransitMode.cs" />
     <Compile Include="Entities\Maps\Common\Enums\TransitRoutingPreference.cs" />
     <Compile Include="Entities\Maps\Common\Fare.cs" />
+    <Compile Include="Entities\Maps\Roads\SpeedLimits\Response\SpeedLimit.cs" />
+    <Compile Include="Entities\Maps\Roads\SnapToRoads\Request\SnapToRoadsRequest.cs" />
+    <Compile Include="Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs" />
+    <Compile Include="Entities\Maps\Roads\Common\SnappedPoint.cs" />
+    <Compile Include="Entities\Maps\Roads\SpeedLimits\Request\Enums\Units.cs" />
+    <Compile Include="Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs" />
+    <Compile Include="Entities\Maps\Roads\SpeedLimits\Response\SpeedLimitsResponse.cs" />
     <Compile Include="Entities\Places\Common\BasePlacesRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs" />
     <Compile Include="Entities\Maps\Common\Enums\Units.cs" />
@@ -225,7 +232,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\Maps\Geolocation\" />
-    <Folder Include="Entities\Maps\Roads\" />
     <Folder Include="Entities\Places\Actions\Request\" />
     <Folder Include="Entities\Places\Actions\Response\" />
   </ItemGroup>

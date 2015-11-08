@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Helpers;
 
