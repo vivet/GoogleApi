@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
     /// <summary>
-    /// Responses to Google Maps Distance Matrix API queries are returned in the format indicated by the output flag within the URL request's path.
+    /// DistanceMatrix Response.
     /// </summary>
     [DataContract(Name = "DistanceMatrixResponse")]
-	public class DistanceMatrixResponse : MapsBaseResponse, IResponseFor
+	public class DistanceMatrixResponse : BaseResponse, IResponseFor
 	{
 		/// <summary>
         /// OriginAddresses contains an array of addresses as returned by the API from your original request. These are formatted by the geocoder and localized according to the language parameter passed with the request.

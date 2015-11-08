@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {

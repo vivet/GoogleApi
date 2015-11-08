@@ -8,7 +8,7 @@ using GoogleApi.Helpers;
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
     /// <summary>
-    /// Google Maps Directions API is a service that calculates directions between locations using an HTTP request
+    /// Directions Request.
     /// </summary>
 	public class DirectionsRequest : SignableRequest
 	{
@@ -110,8 +110,11 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// </summary>
         public DirectionsRequest()
         {
+            this.Units = Units.METRIC;
             this.Avoid = AvoidWay.NOTHING;
             this.TravelMode = TravelMode.DRIVING;
+            this.TransitMode = TransitMode.BUS | TransitMode.TRAIN | TransitMode.SUBWAY | TransitMode.TRAM;
+            this.TransitRoutingPreference = TransitRoutingPreference.NOTHING;
         }
 
         protected internal override string BaseUrl
@@ -140,16 +143,20 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 				throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
 
 			var _parameters = base.GetQueryStringParameters();
+            
             _parameters.Add("origin", this.Origin);
             _parameters.Add("destination", this.Destination);
-            _parameters.Add("mode", this.TravelMode.ToString().ToLower());
             _parameters.Add("units", this.Units.ToString().ToLower());
+            _parameters.Add("mode", this.TransitMode.ToString().ToLower());
+
+            if (this.Region != null)
+                _parameters.Add("region", this.Region);
 
             if (this.Alternatives)
 				_parameters.Add("alternatives", "true");
 
-            if (this.Avoid != AvoidWay.NOTHING)
-                _parameters.Add("avoid", this.Avoid.ToString().ToLower());
+		    if (this.Avoid != AvoidWay.NOTHING)
+                _parameters.Add("avoid", this.Avoid.ToString('|'));
 
             if (!string.IsNullOrWhiteSpace(this.Language))
                 _parameters.Add("language", this.Language);
@@ -157,11 +164,12 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             if (this.Waypoints != null && this.Waypoints.Any())
                 _parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(Waypoints) : this.Waypoints));
 
-
             if (this.TravelMode == TravelMode.TRANSIT)
             {
-                _parameters.Add("transit_mode", this.TransitMode.ToString().ToLower()); // TODO: Support Flags (minor)
-                _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower()); // TODO: Support Flags (minor)
+                _parameters.Add("transit_mode", this.TransitMode.ToString('|'));
+
+                if (this.TransitRoutingPreference != TransitRoutingPreference.NOTHING)
+                    _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString('|'));
                 
                 if (this.ArrivalTime != default(DateTime))
                     _parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.ArrivalTime).ToString(CultureInfo.InvariantCulture));

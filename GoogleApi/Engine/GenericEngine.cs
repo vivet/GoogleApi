@@ -60,8 +60,10 @@ namespace GoogleApi.Engine
 
 			try
 			{
-				var _data = new WebClientEx(_timeout).DownloadData(_request.GetUri());
-				return Deserialize(_data);
+                var _uri = _request.GetUri();
+                var _data = new WebClientEx(_timeout).DownloadData(_uri);
+
+                return Deserialize(_data);
 			}
 			catch (WebException _ex)
 			{
@@ -146,10 +148,7 @@ namespace GoogleApi.Engine
 		private static bool IndicatesAuthenticationFailed(Exception _ex)
 		{
 			var _webException = _ex as WebException;
-
-			return _webException != null &&
-				   _webException.Status == WebExceptionStatus.ProtocolError &&
-				   ((HttpWebResponse)_webException.Response).StatusCode == HttpStatusCode.Forbidden;
+			return _webException != null && _webException.Status == WebExceptionStatus.ProtocolError && ((HttpWebResponse)_webException.Response).StatusCode == HttpStatusCode.Forbidden;
 		}
 	}
 }

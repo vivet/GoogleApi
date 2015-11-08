@@ -49,9 +49,11 @@ namespace GoogleApi.Entities.Common
 		}
 
         protected internal abstract string BaseUrl { get; }
+
         protected virtual QueryStringParametersList GetQueryStringParameters()
         {
             var _parametersList = new QueryStringParametersList();
+           
             _parametersList.Add("sensor", Sensor.ToString().ToLower());
 
             return _parametersList;

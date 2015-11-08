@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi
 {

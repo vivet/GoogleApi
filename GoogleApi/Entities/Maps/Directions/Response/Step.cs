@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {

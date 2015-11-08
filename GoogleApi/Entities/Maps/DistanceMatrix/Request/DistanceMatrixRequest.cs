@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 {
     /// <summary>
-    /// The Google Maps Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. 
-    /// The information returned is based on the recommended route between start and end points,  as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
+    /// DistanceMatrix Request.
     /// </summary>
     public class DistanceMatrixRequest : SignableRequest
 	{
@@ -97,8 +95,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// </summary>
         public DistanceMatrixRequest()
         {
-            this.Avoid = AvoidWay.NOTHING;
             this.Units = Units.METRIC;
+            this.Avoid = AvoidWay.NOTHING;
+            this.TravelMode = TravelMode.DRIVING;
+            this.TransitMode = TransitMode.BUS | TransitMode.TRAIN | TransitMode.SUBWAY | TransitMode.TRAM;
+            this.TransitRoutingPreference = TransitRoutingPreference.NOTHING;
         }
 
         protected internal override string BaseUrl
@@ -123,6 +124,9 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
 				throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
 
+            if (this.TravelMode == TravelMode.TRANSIT && (this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime)))
+                throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
+
 			var _parameters = base.GetQueryStringParameters();
 
             _parameters.Add("origins", string.Join("|", this.Origins));
@@ -134,12 +138,14 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                 _parameters.Add("language", this.Language);
 
             if (this.Avoid != AvoidWay.NOTHING)
-                _parameters.Add("avoid", this.Avoid.ToString().ToLower()); // TODO: Support Flags (minor)
+                _parameters.Add("avoid", this.Avoid.ToString('|'));
 
             if (this.TravelMode == TravelMode.TRANSIT)
             {
-                _parameters.Add("transit_mode", this.TransitMode.ToString().ToLower()); // TODO: Support Flags (minor)
-                _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower()); // TODO: Support Flags (minor)
+                _parameters.Add("transit_mode", this.TransitMode.ToString('|'));
+
+                if (this.TransitRoutingPreference != TransitRoutingPreference.NOTHING)
+                    _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString('|'));
 
                 if (this.ArrivalTime != default(DateTime))
                     _parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.ArrivalTime).ToString(CultureInfo.InvariantCulture));

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Geocode.Request
 {
     /// <summary>
-    /// Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), 
-    /// which you can use to place markers on a map, or position the map
+    /// Geocoding Request.
     /// </summary>
     public class GeocodingRequest : SignableRequest
 	{

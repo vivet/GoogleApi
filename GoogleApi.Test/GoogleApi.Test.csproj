@@ -50,9 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="MapsTest.cs" />
-    <Compile Include="TranslateTest.cs" />
-    <Compile Include="PlacesTest.cs" />
+    <Compile Include="Helpers\EnumHelperTests.cs" />
+    <Compile Include="Maps\MapsTest.cs" />
+    <Compile Include="Translate\TranslateTest.cs" />
+    <Compile Include="Places\PlacesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// Directions Response.
     /// </summary>
 	[DataContract(Name = "DirectionsResponse")]
-	public class DirectionsResponse : MapsBaseResponse, IResponseFor
+	public class DirectionsResponse : BaseResponse, IResponseFor
 	{
 		/// <summary>
 		/// "routes" contains an array of routes from the origin to the destination. See Routes below.

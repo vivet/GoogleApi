@@ -1,8 +1,8 @@
-GoogleApi
+GoogleApi v2 Beta (08-11-2015) (Test coverage isn't satisfactory, improvements are in progress)
 =========
 
 C# .NET Google Web Services Api (Complete).
- 
+
 
 Google Maps
   * Directions
@@ -10,16 +10,16 @@ Google Maps
   * Elevation
   * Geocoding 
   * Reverse Geocoding
-  * Geolocation (missing v2.0 add)
-  * Roads (missing v2.0 add)
+  * Geolocation (in progress)
+  * Roads (in progress)
   * Time Zone
- 
+
 
 Google Places
-  * Place Search (missing v2.0 Update)
-  * Place Details (missing v2.0 Update)
-  * Place Actions (missing v2.0 Update)
-  * Place Photos (missing v2.0 Update)
+  * Place Search
+  * Place Details
+  * Place Actions (in progress)
+  * Place Photos (in progress)
   * Place Autocomplete
   * Query Autocomplete
 

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Common;
+﻿using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Geocode.Response.Enums;
+using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {
@@ -32,19 +32,13 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// <summary>
         /// location_type stores additional data about the specified location. 
         /// </summary>
-        public virtual GeocodeLocationType LocationType { get; set; }
+        public virtual GeometryLocationType LocationType { get; set; }
 
 		[DataMember(Name = "location_type")]
         internal virtual string LocationTypeStr
 		{
-			get
-			{
-                return this.LocationType.ToString();
-			}
-			set
-			{
-                this.LocationType = (GeocodeLocationType)Enum.Parse(typeof(GeocodeLocationType), value);
-			}
+            get { return EnumHelper.ToEnumString(this.LocationType); }
+            set { this.LocationType = EnumHelper.ToEnum<GeometryLocationType>(value); }
 		}
     }
 }

@@ -45,7 +45,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// This optional parameter allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates HTML and a value of text indicates plain-text.
         /// Default: format=html.
         /// </summary>
-        public virtual Format Format { get; set; } // TODO: Support this (minor)
+        public virtual Format Format { get; set; }
 
         /// <summary>
         /// Always true. Setter is not supported.
@@ -54,15 +54,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         {
             get { return true; }
             set { throw new NotSupportedException("This operation is not supported, TimeZoneRequest must use SSL"); }
-        }
-
-        /// <summary>
-        /// Default Constructor.
-        /// </summary>
-        public TranslateRequest()
-        {
-            this.Format = Format.HTML;
-            this.PrettyPrint = true;
         }
 
         /// <summary>
@@ -104,7 +95,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
             }
 
             _parameters.Add("prettyprint", this.PrettyPrint.ToString().ToLower());
-            _parameters.Add("format", this.Format.ToString().ToLower());
             
             if (!string.IsNullOrWhiteSpace(this.Source))
                 _parameters.Add("source", this.Source);

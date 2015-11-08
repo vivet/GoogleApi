@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -16,7 +16,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// An array of Location objects representing the points in the overview path, decoded from the string contained in the EncodedPoints property.
         /// </summary>
-        public IEnumerable<Location> Points { get { return _pointsLazy.Value; } }
+        public IEnumerable<Location> Points { get { return this._pointsLazy.Value; } }
 
         /// <summary>
 		/// The encoded string containing the overview path points as they were received.
@@ -44,7 +44,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         [OnDeserializing]
         private void InitLazyPoints(StreamingContext _contex)
         {
-            _pointsLazy = new Lazy<IEnumerable<Location>>(DecodePoints);
+            this._pointsLazy = new Lazy<IEnumerable<Location>>(DecodePoints);
         }
  
         private IEnumerable<Location> DecodePoints()

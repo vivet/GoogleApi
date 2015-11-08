@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Places.Common.Enums;
+using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -37,7 +40,13 @@ namespace GoogleApi.Entities.Places.Common
         /// <summary>
         /// types[] is an array indicating the type of the prediction.
         /// </summary>
+        public virtual IEnumerable<LocationType> Types { get; set; }
+
         [DataMember(Name = "types")]
-        public virtual IEnumerable<string> Types { get; set; } // TODO: Enum Type
+        protected virtual IEnumerable<string> TypesStr
+        {
+            get { return this.Types.Select(EnumHelper.ToEnumString); }
+            set { this.Types = value.Select(EnumHelper.ToEnum<LocationType>); }
+        }
     }
 }

@@ -1,13 +1,11 @@
 ﻿using System;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Request
 {
     /// <summary>
-    /// The Google Maps Time Zone API provides time offset data for locations on the surface of the earth. 
-    /// Requesting the time zone information for a specific Latitude/Longitude pair will return the name of that time zone, the time offset from UTC, and the Daylight Savings offset
+    /// TimeZone Request.
     /// </summary>
     public class TimeZoneRequest : SignableRequest
     {
