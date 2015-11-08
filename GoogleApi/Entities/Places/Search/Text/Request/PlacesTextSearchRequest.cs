@@ -25,10 +25,10 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
+            var _parameters = base.GetQueryStringParameters();
+
             if (string.IsNullOrWhiteSpace(this.Query))
                 throw new ArgumentException("Query must not be null");
-
-            var _parameters = base.GetQueryStringParameters();
 
             _parameters.Add("query", this.Query);
 

@@ -45,6 +45,8 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
+            var _parameters = base.GetQueryStringParameters();
+
             if (this.Location == null)
                 throw new ArgumentException("Location must not be null");
 
@@ -56,8 +58,6 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
 
             if (this.Rankby == Ranking.DISTANCE && string.IsNullOrWhiteSpace(this.Name) && !this.Types.Any())
                 throw new ArgumentException("If rankby=distance is specified, then one or more of keyword, name, or types is required.");
-
-            var _parameters = base.GetQueryStringParameters();
 
             if (!string.IsNullOrWhiteSpace(this.Name))
                 _parameters.Add("name", this.Name);

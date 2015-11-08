@@ -8,7 +8,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
     /// <summary>
     /// TimeZone Request.
     /// </summary>
-    public class TimeZoneRequest : SignableRequest
+    public class TimeZoneRequest : BaseMapsRequest
     {
         private const string BASE_URL = "maps.googleapis.com/maps/api/timezone/";
 

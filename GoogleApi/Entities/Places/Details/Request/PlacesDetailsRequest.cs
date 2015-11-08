@@ -42,16 +42,12 @@ namespace GoogleApi.Entities.Places.Details.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
+            var _parameters = base.GetQueryStringParameters();
+
             if (string.IsNullOrWhiteSpace(this.PlaceId))
                 throw new ArgumentException("PlaceId must be provided.");
 
-            if (string.IsNullOrWhiteSpace(this.ApiKey))
-                throw new ArgumentException("ApiKey must be provided");
-
-            var _parameters = base.GetQueryStringParameters();
-
             _parameters.Add("placeid", this.PlaceId);
-            _parameters.Add("key", this.ApiKey);
 
             if (this.Extensions != Enums.Extensions.NONE)
                 _parameters.Add("extensions", this.Extensions.ToString().ToLower());

@@ -15,12 +15,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         private const string BASE_URL = "www.googleapis.com/language/translate/v2";
 
         /// <summary>
-        /// Your application's API key. This key identifies your application for purposes of quota management and so that Places 
-        /// added from your application are made immediately available to your app. Visit the APIs Console to create an API Project and obtain your key.
-        /// </summary>
-        public virtual string ApiKey { get; set; }
-
-        /// <summary>
         /// Use the Source query parameter to specify the language you want to translate from. (optional)
         /// </summary>
         public virtual string Source { get; set; }
@@ -75,18 +69,17 @@ namespace GoogleApi.Entities.Translate.Translate.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.ApiKey))
+            if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("ApiKey is required");
 
             if (string.IsNullOrWhiteSpace(this.Target))
-                throw new ArgumentException("ApiKey is required");
+                throw new ArgumentException("Target is required");
 
             if (this.Qs == null || !this.Qs.Any())
                 throw new ArgumentException("Qs is required");
 
             var _parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("key", this.ApiKey);
             _parameters.Add("target", this.Target);
 
             foreach (var _q in this.Qs)

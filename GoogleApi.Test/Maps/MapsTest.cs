@@ -69,7 +69,7 @@ namespace GoogleApi.Test.Maps
         [Test]
         public void GeocodingWhenInvalidClientCredentialsTest()
         {
-            var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", SigningKey = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
+            var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", Key = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
             Assert.Throws<AuthenticationException>(() => MapsTest.ThrowInnerException(() => GoogleMaps.Geocode.Query(_request)));
         }
         [Test]
@@ -88,7 +88,7 @@ namespace GoogleApi.Test.Maps
 		[Test]
         public void GeocodingAsyncWhenInvalidClientCredentialsTest()
 		{
-			var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", SigningKey = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
+			var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", Key = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
             Assert.Throws<AuthenticationException>(() => MapsTest.ThrowInnerException(() => GoogleMaps.Geocode.QueryAsync(_request).Wait()));
 		}
 		[Test]

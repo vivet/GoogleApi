@@ -20,7 +20,7 @@ namespace GoogleApi.Test.Places
         {
             var _request = new PlacesAutoCompleteRequest
             {
-                ApiKey = this._apiKey,
+                Key = this._apiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -42,7 +42,7 @@ namespace GoogleApi.Test.Places
         {
             var _request = new PlacesQueryAutoCompleteRequest
             {
-                ApiKey = this._apiKey,
+                Key = this._apiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -68,7 +68,7 @@ namespace GoogleApi.Test.Places
         {
             var _request = new PlacesAutoCompleteRequest
             {
-                ApiKey = _apiKey,
+                Key = _apiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -80,7 +80,7 @@ namespace GoogleApi.Test.Places
             
             var _request2 = new PlacesDetailsRequest
             {
-                ApiKey = _apiKey,
+                Key = _apiKey,
                 PlaceId = _result.PlaceId,
                 Sensor = true,
             };
@@ -94,7 +94,7 @@ namespace GoogleApi.Test.Places
         {
             var _request = new PlacesNearBySearchRequest
             {
-                ApiKey = this._apiKey,
+                Key = this._apiKey,
                 Location = new Location(51.491431, -3.16668),
                 Sensor = true,
                 Language = "en",
@@ -113,7 +113,7 @@ namespace GoogleApi.Test.Places
         {
             var _request = new PlacesTextSearchRequest
             {
-                ApiKey = this._apiKey,
+                Key = this._apiKey,
                 Sensor = true,
                 Language = "en",
                 Query = "picadelly circus"
@@ -130,7 +130,7 @@ namespace GoogleApi.Test.Places
         {
             var _request = new PlacesRadarSearchRequest
             {
-                ApiKey = this._apiKey,
+                Key = this._apiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = 500,
                 Sensor = true,
@@ -151,7 +151,7 @@ namespace GoogleApi.Test.Places
 
             //var _request = new PlacesAutoCompleteRequest
             //{
-            //    ApiKey = _apiKey,
+            //    Key = _apiKey,
             //    Input = "det kongelige teater",
             //    Sensor = true,
             //    Language = "en",
@@ -163,19 +163,20 @@ namespace GoogleApi.Test.Places
 
             //var _request2 = new PlacesDetailsRequest
             //{
-            //    ApiKey = _apiKey,
+            //    Key = _apiKey,
             //    PlaceId = _result.PlaceId,
             //    Sensor = true,
             //};
 
             //var _response2 = GooglePlaces.Details.Query(_request2);
             //Assert.AreEqual(Status.OK, _response2.Status);
-            
+
             //var _photo = _response2.Result.Photos.FirstOrDefault();
             //Assert.IsNotNull(_photo);
 
             //var _request3 = new PlacesPhotosRequest
             //{
+            //    Key = _apiKey,
             //    Sensor = true,
             //    PhotoReference = _photo.PhotoReference,
             //    MaxWidth = 1600

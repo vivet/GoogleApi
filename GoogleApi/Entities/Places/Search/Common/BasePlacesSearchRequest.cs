@@ -84,12 +84,7 @@ namespace GoogleApi.Entities.Places.Search.Common
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            if (string.IsNullOrEmpty(this.ApiKey))
-                throw new ArgumentException("ApiKey must not null or empty");
-
             var _parameters = base.GetQueryStringParameters();
-
-            _parameters.Add("key", this.ApiKey);
 
             if (Location != null)
                 _parameters.Add("location", Location.ToString());

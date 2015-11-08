@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
 	/// <summary>
     /// Elevation Request.
 	/// </summary>
-	public class ElevationRequest : SignableRequest
+    public class ElevationRequest : BaseMapsRequest
 	{
         /// <summary>
 		/// Sampled path requests are indicated through use of the path and samples parameters, indicating a request for elevation data along a path at specified intervals. As with positional requests using the locations parameter, the path parameter specifies a set of latitude and longitude values. Unlike a positional request, however, the path specifies an ordered set of vertices. Rather than return elevation data only at the vertices, path requests are sampled along the length of the path, based on the number of samples specified (inclusive of the endpoints).

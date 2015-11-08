@@ -61,8 +61,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
-            if (string.IsNullOrEmpty(this.ApiKey))
-                throw new ArgumentException("ApiKey must not null or empty");
+            var _parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrEmpty(this.Input))
                 throw new ArgumentException("_input must not null or empty"); 
@@ -70,9 +69,6 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
 				throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50000.");
 
-			var _parameters = base.GetQueryStringParameters();
-
-            _parameters.Add("key", this.ApiKey);
             _parameters.Add("input", this.Input);
 
             if (!string.IsNullOrEmpty(this.Offset))

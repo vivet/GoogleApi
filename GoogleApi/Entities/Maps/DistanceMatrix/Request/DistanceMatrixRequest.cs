@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
     /// <summary>
     /// DistanceMatrix Request.
     /// </summary>
-    public class DistanceMatrixRequest : SignableRequest
+    public class DistanceMatrixRequest : BaseMapsRequest
 	{
 		/// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. If you pass an address as a string, 
@@ -103,7 +103,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             this.TransitRoutingPreference = TransitRoutingPreference.NOTHING;
         }
 
-        protected internal override string BaseUrl
+        protected  internal override string BaseUrl
         {
             get
             {

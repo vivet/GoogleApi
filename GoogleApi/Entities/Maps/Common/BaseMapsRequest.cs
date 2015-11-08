@@ -1,4 +1,5 @@
-﻿using GoogleApi.Entities.Common;
+﻿using System;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Common
 {
@@ -10,17 +11,19 @@ namespace GoogleApi.Entities.Maps.Common
         private const string BASE_URL = "maps.google.com/maps/api/";
 
         /// <summary>
-        /// A cryptographic signing key (secret shared key), in base64url format, provided to you by Google Enterprise Support.
-        /// The key will only be used if the ClientID property is set, otherwise it will be ignored.
+        /// Always true. Setter is not supported.
         /// </summary>
-        /// <remarks>
-        /// This cryptographic signing key is not the same as the (freely available) Maps API key (typically beginning with 'ABQ..') 
-        /// that developers without a Maps API for Business license are required to use when loading the Maps JavaScript API V2 and 
-        /// Maps API for Flash, or the keys issued by the Google APIs Console for use with the Google Places API.
-        /// </remarks>
-        public string SigningKey { get; set; }
-
-
+        public override bool IsSsl
+        {
+            get
+            {
+                return true;
+            }
+            set
+            {
+                throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL");
+            }
+        }
 
         protected internal override string BaseUrl
         {

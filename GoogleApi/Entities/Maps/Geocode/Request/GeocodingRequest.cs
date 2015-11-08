@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
     /// <summary>
     /// Geocoding Request.
     /// </summary>
-    public class GeocodingRequest : SignableRequest
+    public class GeocodingRequest : BaseMapsRequest
 	{
 		/// <summary>
         /// address (required) — The address that you want to geocode. Required or Location.

@@ -88,7 +88,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
 
 	    protected override QueryStringParametersList GetQueryStringParameters()
 		{
-            if (string.IsNullOrEmpty(this.ApiKey))
+            if (string.IsNullOrEmpty(this.Key))
                 throw new ArgumentException("ApiKey must not null or empty");
 
             if (string.IsNullOrEmpty(this.Input))
@@ -99,7 +99,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
 
 			var _parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("key", this.ApiKey);
+            _parameters.Add("key", this.Key);
             _parameters.Add("input", this.Input);
 
             if (!string.IsNullOrEmpty(this.Offset))

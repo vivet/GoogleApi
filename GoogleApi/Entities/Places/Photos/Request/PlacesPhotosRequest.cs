@@ -41,6 +41,8 @@ namespace GoogleApi.Entities.Places.Photos.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
+            var _parameters = base.GetQueryStringParameters();
+
             if (string.IsNullOrWhiteSpace(this.PhotoReference))
                 throw new ArgumentException("Must specify a PhotoReference");
       
@@ -52,8 +54,6 @@ namespace GoogleApi.Entities.Places.Photos.Request
 
             if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
                 throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
-
-            var _parameters = base.GetQueryStringParameters();
 
             _parameters.Add("photoreference", this.PhotoReference);
 

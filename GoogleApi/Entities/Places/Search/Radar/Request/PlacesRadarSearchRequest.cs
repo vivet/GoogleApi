@@ -35,6 +35,8 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
         {
+            var _parameters = base.GetQueryStringParameters();
+
             if (this.Location == null)
                 throw new ArgumentException("Location must not be null");
 
@@ -46,8 +48,6 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
 
             if (string.IsNullOrWhiteSpace(this.Keyword) && string.IsNullOrWhiteSpace(this.Name) && !this.Types.Any())
                 throw new ArgumentException("Request must include at least one of keyword, name, or types");
-
-            var _parameters = base.GetQueryStringParameters();
 
             if (!string.IsNullOrWhiteSpace(this.Name))
                 _parameters.Add("name", this.Name);

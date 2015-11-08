@@ -18,7 +18,7 @@ namespace GoogleApi.Test.Translate
                 {
                     "Hello World"
                 },
-                ApiKey = this._apiKey
+                Key = this._apiKey
             };
             var _result = GoogleTranslate.Translate.Query(_request);
 
@@ -28,7 +28,7 @@ namespace GoogleApi.Test.Translate
         [Test]
         public void TranslateWhenGermanTest()
         {
-            var _request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, ApiKey = this._apiKey, Format = Format.TEXT };
+            var _request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this._apiKey, Format = Format.TEXT };
             var _result = GoogleTranslate.Translate.Query(_request);
 
             Assert.AreEqual("Hallo Welt", _result.Data.Translations.First().TranslatedText);

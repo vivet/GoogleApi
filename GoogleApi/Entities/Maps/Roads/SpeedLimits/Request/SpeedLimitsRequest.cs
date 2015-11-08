@@ -26,7 +26,7 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
         /// <summary>
         /// units (optional) — Whether to return speed limits in kilometers or miles per hour. This can be set to either KPH or MPH. Defaults to KPH.
         /// </summary>
-        public virtual Units Unit { get; set; } 
+        public virtual Units Unit { get; set; }
 
         protected internal override string BaseUrl
         {

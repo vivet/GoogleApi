@@ -68,9 +68,6 @@
     <Compile Include="Entities\Maps\Common\BaseMapsRequest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Maps\Common\SignableRequest.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Entities\Maps\Common\Enums\LocationType.cs">
       <SubType>Code</SubType>
     </Compile>

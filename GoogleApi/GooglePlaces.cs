@@ -36,6 +36,7 @@ namespace GoogleApi
                 return EngineFacade<PlacesPhotosRequest, PlacesPhotosResponse>._instance;
             }
         }
+        
         /// <summary>
         /// The Google Places API Text Search Service is a web service that returns information about a set of places based on a string — for example "pizza in New York" or "shoe stores near Ottawa". 
         /// The service responds with a list of places matching the text string and any location bias that has been set. 
@@ -49,6 +50,7 @@ namespace GoogleApi
                 return EngineFacade<PlacesTextSearchRequest, PlacesTextSearchResponse>._instance;
             }
         }
+        
         /// <summary>
         /// The Google Places API Radar Search Service allows you to search for up to 200 places at once, but with less detail than is typically returned from a Text Search or Nearby Search request. 
         /// With Radar Search, you can create applications that help users identify specific areas of interest within a geographic area.
@@ -61,6 +63,7 @@ namespace GoogleApi
                 return EngineFacade<PlacesRadarSearchRequest, PlacesRadarSearchResponse>._instance;
             }
         }
+        
         /// <summary>
         /// A Nearby Search lets you search for places within a specified area. 
         /// You can refine your search request by supplying keywords or specifying the type of place you are searching for
@@ -73,6 +76,7 @@ namespace GoogleApi
                 return EngineFacade<PlacesNearBySearchRequest, PlacesNearbySearchResponse>._instance;
             }
         }
+        
         /// <summary>
         /// Once you have a place_id or a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. 
         /// A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
@@ -85,6 +89,7 @@ namespace GoogleApi
                 return EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse>._instance;
             }
         }
+        
         /// <summary>
         /// The Query Autocomplete service can be used to provide a query prediction for text-based geographic searches, by returning suggested queries as you type.
         /// https://developers.google.com/places/web-service/query
@@ -96,6 +101,7 @@ namespace GoogleApi
                 return EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>._instance;
             }
         }
+        
         /// <summary>
         /// The Place Autocomplete service is a web service that returns place predictions in response to an HTTP request. 
         /// The request specifies a textual search string and optional geographic bounds. The service can be used to provide autocomplete functionality for text-based geographic searches, 
