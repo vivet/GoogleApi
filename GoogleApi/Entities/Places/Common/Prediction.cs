@@ -38,15 +38,15 @@ namespace GoogleApi.Entities.Places.Common
         public virtual IEnumerable<MatchedSubstring> MatchedSubstrings { get; set; }
 
         /// <summary>
-        /// types[] is an array indicating the type of the prediction.
+        /// Types is an array indicating the type of the prediction.
         /// </summary>
-        public virtual IEnumerable<LocationType> Types { get; set; }
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
         protected virtual IEnumerable<string> TypesStr
         {
             get { return this.Types.Select(EnumHelper.ToEnumString); }
-            set { this.Types = value.Select(EnumHelper.ToEnum<LocationType>); }
+            set { this.Types = value.Select(EnumHelper.ToEnum<PlaceLocationType>); }
         }
     }
 }

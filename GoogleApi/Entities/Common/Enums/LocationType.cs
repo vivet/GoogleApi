@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Maps.Common.Enums
+namespace GoogleApi.Entities.Common.Enums
 {
     /// <summary>
     /// Location types.

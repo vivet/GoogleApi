@@ -68,7 +68,7 @@
     <Compile Include="Entities\Maps\Common\BaseMapsRequest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Maps\Common\Enums\LocationType.cs">
+    <Compile Include="Entities\Common\Enums\LocationType.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Maps\Common\Enums\TransitMode.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Row.cs" />
     <Compile Include="Entities\Common\Enums\Component.cs" />
     <Compile Include="Entities\Places\Common\BasePlacesResponse.cs" />
-    <Compile Include="Entities\Places\Common\Enums\LocationType.cs" />
+    <Compile Include="Entities\Places\Common\Enums\PlaceLocationType.cs" />
     <Compile Include="Entities\Places\Common\Prediction.cs" />
     <Compile Include="Entities\Places\Details\Request\Enums\Extensions.cs" />
     <Compile Include="Entities\Places\Details\Request\PlacesDetailsRequest.cs" />
@@ -186,7 +186,7 @@
     <Compile Include="Entities\Maps\Geocode\Request\GeocodingRequest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Maps\Geocode\Response\AddressComponent.cs">
+    <Compile Include="Entities\Common\AddressComponent.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Entities\Maps\Geocode\Response\ViewPort.cs">

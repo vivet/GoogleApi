@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
     /// Location types.
     /// </summary>
 	[DataContract]
-	public enum LocationType
+	public enum PlaceLocationType
 	{
         /// <summary>
         /// Geocode instructs the Place Autocomplete service to return only geocoding results, 

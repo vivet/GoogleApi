@@ -46,7 +46,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// <summary>
         /// The types of Place results to return. See Place Types below. If no type is specified, all types will be returned.
         /// </summary>
-        public virtual IEnumerable<LocationType> Types { get; set; }
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
         protected virtual IEnumerable<string> TypesStr
@@ -54,7 +54,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
             get { return this.Types.Select(EnumHelper.ToEnumString); }
             set
             {
-                this.Types = value.Select(EnumHelper.ToEnum<LocationType>);
+                this.Types = value.Select(EnumHelper.ToEnum<PlaceLocationType>);
             }
         }
 
