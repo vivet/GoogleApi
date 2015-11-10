@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Geocode.Response;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Helpers;

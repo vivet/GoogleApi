@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Common.Enums;

@@ -2,10 +2,9 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Helpers;
 
-namespace GoogleApi.Entities.Maps.Geocode.Response
+namespace GoogleApi.Entities.Common
 {
     /// <summary>
     /// Address Component.
