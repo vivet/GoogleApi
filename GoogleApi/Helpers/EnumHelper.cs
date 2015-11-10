@@ -45,7 +45,8 @@ namespace GoogleApi.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Converts a enum value to string. 
+        /// If Flags enum then the delimeter will separate the values.
         /// </summary>
         /// <param name="_enum"></param>
         /// <param name="_delimeter"></param>

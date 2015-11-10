@@ -18,7 +18,6 @@ namespace GoogleApi
 {
     /// <summary>
     /// Methods to access Google Places Api: 
-    /// Documentation: https://developers.google.com/places
     /// https://developers.google.com/places/web-service/intro
     /// </summary>
     public class GooglePlaces
