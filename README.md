@@ -1,7 +1,7 @@
 GoogleApi v2 Beta (08-11-2015) 
 =========
 
-C# .NET Google Web Services Api (Complete).
+C# .NET Google Web Services Api.
 
 
 Google Maps
@@ -13,7 +13,7 @@ Google Maps
   * Geolocation (missing)
   * Roads 
     * Snap To Roads
-	* Speed Limits
+    * Speed Limits
   * Time Zone
 
 
