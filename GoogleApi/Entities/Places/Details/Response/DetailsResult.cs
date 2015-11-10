@@ -136,7 +136,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// Types contains an array of feature types describing the given result. See the list of supported types for more information. 
         /// XML responses include multiple type elements if more than one type is assigned to the result.
         /// </summary>
-        public virtual IEnumerable<PlaceType> Types { get; set; }
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
         protected virtual IEnumerable<string> TypesStr
@@ -144,7 +144,7 @@ namespace GoogleApi.Entities.Places.Details.Response
             get { return this.Types.Select(EnumHelper.ToEnumString); }
             set
             {
-                this.Types = value.Select(EnumHelper.ToEnum<PlaceType>);
+                this.Types = value.Select(EnumHelper.ToEnum<PlaceLocationType>);
             }
         }
 

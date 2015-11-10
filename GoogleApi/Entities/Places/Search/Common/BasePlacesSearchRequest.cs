@@ -5,6 +5,7 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
+using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Places.Search.Common
@@ -41,8 +42,9 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// <summary>
         /// types — Restricts the results to places matching at least one of the specified types. 
         /// Types should be separated with a pipe symbol (type1|type2|etc). See the list of supported types.
+        /// https://developers.google.com/places/supported_types
         /// </summary>
-        public virtual IEnumerable<PlaceType> Types { get; set; }
+        public virtual IEnumerable<SearchPlaceType> Types { get; set; }
 
         /// <summary>
         /// minprice and maxprice (optional) — Restricts results to only those places within the specified range. 

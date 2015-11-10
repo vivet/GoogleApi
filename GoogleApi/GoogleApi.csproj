@@ -91,7 +91,6 @@
     <Compile Include="Entities\Maps\DistanceMatrix\Response\Row.cs" />
     <Compile Include="Entities\Common\Enums\Component.cs" />
     <Compile Include="Entities\Places\Common\BasePlacesResponse.cs" />
-    <Compile Include="Entities\Places\Common\Enums\PlaceLocationType.cs" />
     <Compile Include="Entities\Places\Common\Prediction.cs" />
     <Compile Include="Entities\Places\Details\Request\Enums\Extensions.cs" />
     <Compile Include="Entities\Places\Details\Request\PlacesDetailsRequest.cs" />
@@ -99,10 +98,12 @@
     <Compile Include="Entities\Places\Photos\Request\PlacesPhotosRequest.cs" />
     <Compile Include="Entities\Places\Photos\Response\PlacesPhotosResponse.cs" />
     <Compile Include="Entities\Places\Common\AlternativePlace.cs" />
+    <Compile Include="Entities\Places\AutoComplete\Request\Enums\RestrictPlaceType.cs" />
     <Compile Include="Entities\Places\Search\Common\BasePlacesSearchRequest.cs" />
     <Compile Include="Entities\Places\Search\Common\BaseResult.cs" />
     <Compile Include="Entities\Places\Common\Enums\Scope.cs" />
     <Compile Include="Entities\Places\Common\Enums\PriceLevel.cs" />
+    <Compile Include="Entities\Places\Search\Common\Enums\SearchPlaceType.cs" />
     <Compile Include="Entities\Places\Search\Common\OpeningHours.cs" />
     <Compile Include="Entities\Places\Common\Photo.cs" />
     <Compile Include="Entities\Places\Search\Common\BasePlacesSearchResponse.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Entities\Places\Search\NearBy\Response\PlacesNearbySearchResponse.cs" />
     <Compile Include="Entities\Places\Search\Radar\Request\PlacesRadarSearchRequest.cs" />
     <Compile Include="Entities\Places\Search\Text\Request\PlacesTextSearchRequest.cs" />
-    <Compile Include="Entities\Places\Common\Enums\PlaceType.cs" />
+    <Compile Include="Entities\Places\Common\Enums\PlaceLocationType.cs" />
     <Compile Include="Entities\Places\Details\Response\Aspect.cs" />
     <Compile Include="Entities\Places\Details\Response\DayTime.cs" />
     <Compile Include="Entities\Places\Common\Geometry.cs" />
@@ -123,7 +124,7 @@
     <Compile Include="Entities\Places\Details\Response\PlacesDetailsResponse.cs" />
     <Compile Include="Entities\Places\Details\Response\DetailsResult.cs" />
     <Compile Include="Entities\Places\Details\Response\Review.cs" />
-    <Compile Include="Entities\Places\QueryAutoComplete\Request\PlacesAueryAutoCompleteRequest.cs" />
+    <Compile Include="Entities\Places\QueryAutoComplete\Request\PlacesQueryAutoCompleteRequest.cs" />
     <Compile Include="Entities\Places\QueryAutoComplete\Response\PlacesAutoCompleteResponse.cs" />
     <Compile Include="Entities\Places\AutoComplete\Request\PlacesAutoCompleteRequest.cs" />
     <Compile Include="Entities\Common\BaseResponse.cs" />

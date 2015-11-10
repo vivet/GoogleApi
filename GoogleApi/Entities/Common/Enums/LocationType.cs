@@ -64,6 +64,11 @@ namespace GoogleApi.Entities.Common.Enums
         [EnumMember(Value = "colloquial_area")]
 		COLLOQUIAL_AREA,
         /// <summary>
+        /// Ward indicates a specific type of Japanese locality, to facilitate distinction between multiple locality components within a Japanese address.
+        /// </summary>
+        [EnumMember(Value = "ward")]
+        WARD,
+        /// <summary>
         /// Indicates an incorporated city or town political entity.
         /// </summary>
         [EnumMember(Value = "locality")]
@@ -73,6 +78,31 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         [EnumMember(Value = "sublocality")]
 		SUBLOCALITY,
+        /// <summary>
+        /// indicates an first-order civil entity below a locality
+        /// </summary>
+        [EnumMember(Value = "sublocality_level_1")]
+        SUBLOCALITY_LEVEL_1,
+        /// <summary>
+        /// indicates an second-order civil entity below a locality
+        /// </summary>
+        [EnumMember(Value = "sublocality_level_2")]
+        SUBLOCALITY_LEVEL_2,
+        /// <summary>
+        /// indicates an third-order civil entity below a locality
+        /// </summary>
+        [EnumMember(Value = "sublocality_level_3")]
+        SUBLOCALITY_LEVEL_3,
+        /// <summary>
+        /// indicates an first-order civil entity below a locality
+        /// </summary>
+        [EnumMember(Value = "sublocality_level_4")]
+        SUBLOCALITY_LEVEL_4,
+        /// <summary>
+        /// indicates an first-order civil entity below a locality
+        /// </summary>
+        [EnumMember(Value = "sublocality_level_5")]
+        SUBLOCALITY_LEVEL_5,
         /// <summary>
         /// Indicates a named neighborhood
         /// </summary>

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
 using GoogleApi.Entities.Places.Common;
-using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Places.AutoComplete.Request
@@ -45,8 +45,9 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
 
         /// <summary>
         /// The types of Place results to return. See Place Types below. If no type is specified, all types will be returned.
+        /// https://developers.google.com/places/supported_types#table3
         /// </summary>
-        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
+        public virtual IEnumerable<RestrictPlaceType> Types { get; set; }
 
         [DataMember(Name = "types")]
         protected virtual IEnumerable<string> TypesStr
@@ -54,7 +55,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
             get { return this.Types.Select(EnumHelper.ToEnumString); }
             set
             {
-                this.Types = value.Select(EnumHelper.ToEnum<PlaceLocationType>);
+                this.Types = value.Select(EnumHelper.ToEnum<RestrictPlaceType>);
             }
         }
 

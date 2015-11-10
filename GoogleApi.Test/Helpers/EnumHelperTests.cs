@@ -11,7 +11,7 @@ namespace GoogleApi.Test.Helpers
         [Test]
         public void ToEnumString_Success()
         {
-            var _result = EnumHelper.ToEnumString(PlaceType.POST_OFFICE);
+            var _result = EnumHelper.ToEnumString(PlaceLocationType.POST_OFFICE);
             Assert.AreEqual("post_office", _result);
         }
 
@@ -19,8 +19,8 @@ namespace GoogleApi.Test.Helpers
         [Test]
         public void ToEnum_Success()
         {
-            var _result = EnumHelper.ToEnum<PlaceType>("post_office");
-            Assert.AreEqual(PlaceType.POST_OFFICE, _result);
+            var _result = EnumHelper.ToEnum<PlaceLocationType>("post_office");
+            Assert.AreEqual(PlaceLocationType.POST_OFFICE, _result);
         }
     }
 }

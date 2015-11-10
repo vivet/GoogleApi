@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.AutoComplete.Request;
-using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
+using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using GoogleApi.Entities.Places.Search.Radar.Request;
 using GoogleApi.Entities.Places.Search.Text.Request;
@@ -93,7 +93,7 @@ namespace GoogleApi.Test.Places
                 Sensor = true,
                 Language = "en",
                 Radius = 500,
-                Types = new[] { PlaceType.SCHOOL, PlaceType.POLICE }
+                Types = new[] { SearchPlaceType.SCHOOL, SearchPlaceType.POLICE }
             };
 
             var _response = GooglePlaces.NearBySearch.Query(_request);
