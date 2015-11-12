@@ -42,22 +42,22 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates a second-order civil entity below the country level. Within the United States, these administrative levels are counties. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_2")]
-		ADMINISTRATIVE_AEA_LVEL_2,
+		ADMINISTRATIVE_AREA_LVEL_2,
         /// <summary>
         /// Indicates a third-order civil entity below the country level. This type indicates a minor civil division. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_3")]
-        ADMINISTRATIVE_AEA_LEVEL_3,
+        ADMINISTRATIVE_AREA_LEVEL_3,
         /// <summary>
         /// Indicates a fourth-order civil entity below the country level. This type indicates a minor civil division. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_4")]
-        ADMINISTRATIVE_AEA_LEVEL_4,
+        ADMINISTRATIVE_AREA_LEVEL_4,
         /// <summary>
         /// Indicates a fifth-order civil entity below the country level. This type indicates a minor civil division. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_5")]
-        ADMINISTRATIVE_AEA_LEVEL_5,
+        ADMINISTRATIVE_AREA_LEVEL_5,
         /// <summary>
         /// Indicates a commonly-used alternative name for the entity.
         /// </summary>
