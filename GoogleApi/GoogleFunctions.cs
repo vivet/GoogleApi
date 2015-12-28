@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using GoogleApi.Entities.Common;
 
@@ -56,6 +57,21 @@ namespace GoogleApi
             }
 
             return _encodedString.ToString();
+        }
+        /// <summary>
+        /// Merge polylines into one encoded polyline string.
+        /// </summary>
+        /// <param name="_encdodedLocations"></param>
+        /// <returns></returns>
+        public static string MergePolyLine(params string[] _encdodedLocations)
+        {
+            if (_encdodedLocations == null)
+                throw new ArgumentNullException("_encdodedLocations");
+
+            IList<Location> _locations = new List<Location>();
+            _locations = _encdodedLocations.Where(_x => !string.IsNullOrEmpty(_x)).Aggregate(_locations, (_current, _encdodedLocation) => _current.Concat(GoogleApi.GoogleFunctions.DecodePolyLine(_encdodedLocation)).ToList());
+
+            return GoogleApi.GoogleFunctions.EncodePolyLine(_locations);
         }
         /// <summary>
         /// Decode a polyline string into locations.
