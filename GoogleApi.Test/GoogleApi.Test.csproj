@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="Functions\FunctionsTest.cs" />
     <Compile Include="Helpers\EnumHelperTests.cs" />
     <Compile Include="Maps\MapsTest.cs" />
     <Compile Include="Translate\TranslateTest.cs" />
