@@ -37,6 +37,7 @@ Google Translate
 
 
 Google Functions 
-  * DecodePolyLine
   * EncodePolyLine
+  * MergePolyLine
+  * DecodePolyLine
 
