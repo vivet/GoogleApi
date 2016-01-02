@@ -1,4 +1,4 @@
-GoogleApi v2 Beta (08-11-2015) 
+GoogleApi v2 (08-11-2015) 
 =========
 
 C# .NET Google Web Services Api.
