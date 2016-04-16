@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Helpers;
@@ -17,13 +17,13 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. If you pass an address as a string, 
         /// the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values.
 		/// </summary>
-        public virtual IEnumerable<Location> Origins { get; set; }
+        public virtual IEnumerable<ILocationString> Origins { get; set; }
 
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, to which to calculate distance and time. 
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values
 		/// </summary>
-        public virtual IEnumerable<Location> Destinations { get; set; }
+        public virtual IEnumerable<ILocationString> Destinations { get; set; }
         
         /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:

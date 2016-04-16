@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Directions.Request;
+using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using NUnit.Framework;
@@ -164,7 +165,21 @@ namespace GoogleApi.Test.Maps
         [Test]
         public void DistanceMatrixTest()
         {
-            Assert.Inconclusive();
+            var request = new DistanceMatrixRequest { Origins = new [] {new Location(40.7141289, -73.9614074), }, Destinations = new [] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") }};
+
+            var _result = GoogleMaps.DistanceMatrix.Query(request);
+
+            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value);
+        }
+
+        [Test]
+        public void DistanceMatrixAsyncTest()
+        {
+            var request = new DistanceMatrixRequest { Origins = new[] { new Location(40.7141289, -73.9614074), }, Destinations = new[] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") } };
+
+            var _result = GoogleMaps.DistanceMatrix.QueryAsync(request).GetAwaiter().GetResult();
+
+            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value);
         }
 
         [Test]

@@ -52,14 +52,10 @@
     <Compile Include="Engine\GenericEngine.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Entities\Common\AddressLocation.cs" />
+    <Compile Include="Entities\Common\Interfaces\ILocationString.cs" />
     <Compile Include="Entities\Common\SignableRequest.cs" />
-    <Compile Include="Entities\Maps\Common\AddressLocation.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Entities\Common\BaseRequest.cs" />
-    <Compile Include="Entities\Maps\Common\Interfaces\ILocationString.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Entities\Common\Interfaces\IResponseFor.cs">
       <SubType>Code</SubType>
     </Compile>
