@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Common.Interfaces;
+using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Common
 {

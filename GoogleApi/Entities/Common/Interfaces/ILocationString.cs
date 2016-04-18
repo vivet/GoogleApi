@@ -1,4 +1,4 @@
-namespace GoogleApi.Entities.Maps.Common.Interfaces
+namespace GoogleApi.Entities.Common.Interfaces
 {
     /// <summary>
     /// Interface for converting addresses and coordinates into google compatible location strings.

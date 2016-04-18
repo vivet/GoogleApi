@@ -1,6 +1,6 @@
-using GoogleApi.Entities.Maps.Common.Interfaces;
+using GoogleApi.Entities.Common.Interfaces;
 
-namespace GoogleApi.Entities.Maps.Common
+namespace GoogleApi.Entities.Common
 {
     /// <summary>
     /// 
@@ -28,5 +28,10 @@ namespace GoogleApi.Entities.Maps.Common
 		{
 			get { return this.Address; }
 		}
+
+        public override string ToString()
+        {
+            return LocationString;
+        }
 	}
 }
