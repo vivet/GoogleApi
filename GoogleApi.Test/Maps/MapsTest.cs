@@ -165,9 +165,9 @@ namespace GoogleApi.Test.Maps
         [Test]
         public void DistanceMatrixTest()
         {
-            var request = new DistanceMatrixRequest { Origins = new [] {new Location(40.7141289, -73.9614074), }, Destinations = new [] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") }};
+            var _request = new DistanceMatrixRequest { Origins = new [] {new Location(40.7141289, -73.9614074), }, Destinations = new [] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") }};
 
-            var _result = GoogleMaps.DistanceMatrix.Query(request);
+            var _result = GoogleMaps.DistanceMatrix.Query(_request);
 
             Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value);
         }
@@ -175,9 +175,9 @@ namespace GoogleApi.Test.Maps
         [Test]
         public void DistanceMatrixAsyncTest()
         {
-            var request = new DistanceMatrixRequest { Origins = new[] { new Location(40.7141289, -73.9614074), }, Destinations = new[] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") } };
+            var _request = new DistanceMatrixRequest { Origins = new[] { new Location(40.7141289, -73.9614074), }, Destinations = new[] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") } };
 
-            var _result = GoogleMaps.DistanceMatrix.QueryAsync(request).GetAwaiter().GetResult();
+            var _result = GoogleMaps.DistanceMatrix.QueryAsync(_request).GetAwaiter().GetResult();
 
             Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value);
         }

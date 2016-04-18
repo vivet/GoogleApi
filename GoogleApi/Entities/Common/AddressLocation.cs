@@ -11,6 +11,13 @@ namespace GoogleApi.Entities.Common
         /// Address.
         /// </summary>
         public virtual string Address { get; private set; }
+        /// <summary>
+        /// Address expressed as Google compatible string.
+        /// </summary>
+        public string LocationString
+        {
+            get { return this.Address; }
+        }
 
         /// <summary>
         /// Constructor initializing a valid AddressLocation
@@ -21,13 +28,6 @@ namespace GoogleApi.Entities.Common
             this.Address = _address;
 		}
 
-        /// <summary>
-        /// Address expressed as Google compatible string.
-        /// </summary>
-        public string LocationString
-		{
-			get { return this.Address; }
-		}
 
         public override string ToString()
         {

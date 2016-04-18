@@ -125,7 +125,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
 				throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
 
-            if (this.TravelMode == TravelMode.TRANSIT && (this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime)))
+            if (this.TravelMode == TravelMode.TRANSIT && this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime))
                 throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
 
 			var _parameters = base.GetQueryStringParameters();

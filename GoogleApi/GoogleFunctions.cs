@@ -105,7 +105,7 @@ namespace GoogleApi
                 if (_index >= _polylineChars.Length)
                     break;
 
-                _currentLat += (_sum & 1) == 1 ? ~(_sum >> 1) : (_sum >> 1);
+                _currentLat += (_sum & 1) == 1 ? ~(_sum >> 1) : _sum >> 1;
 
                 // Calculate next longitude
                 _sum = 0;
@@ -120,7 +120,7 @@ namespace GoogleApi
                 if (_index >= _polylineChars.Length && _next5Bits >= 32)
                     break;
 
-                _currentLng += (_sum & 1) == 1 ? ~(_sum >> 1) : (_sum >> 1);
+                _currentLng += (_sum & 1) == 1 ? ~(_sum >> 1) : _sum >> 1;
                 yield return new Location(Convert.ToDouble(_currentLat) / 1E5, Convert.ToDouble(_currentLng) / 1E5);
             }
         }

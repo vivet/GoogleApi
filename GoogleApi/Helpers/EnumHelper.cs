@@ -59,14 +59,14 @@ namespace GoogleApi.Helpers
             var _stringBuilder = new StringBuilder();
             var _binaryCharArray = Convert.ToString(_enum).Reverse().ToArray();
 
-            for (var _i = 0; _i < _binaryCharArray.Count(); _i++)
+            for (var _i = 0; _i < _binaryCharArray.Length; _i++)
             {
                 if (_binaryCharArray[_i] != '1')
                     continue;
 
                 _stringBuilder.AppendFormat("{0}", 1 << _i);
 
-                if (_i != _binaryCharArray.Count() - 1)
+                if (_i != _binaryCharArray.Length - 1)
                     _stringBuilder.Append(_delimeter);
             }
 

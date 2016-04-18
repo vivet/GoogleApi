@@ -43,7 +43,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
 
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
-            if ((this.Locations == null) == (this.Path == null))
+            if (this.Locations == null == (this.Path == null))
 				throw new ArgumentException("Either Locations or Path must be specified, and both cannot be specified.");
 
 			var _parameters = base.GetQueryStringParameters();
