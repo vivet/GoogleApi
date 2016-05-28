@@ -61,6 +61,13 @@ namespace GoogleApi.Engine
 			try
 			{
                 var _uri = _request.GetUri();
+
+                if (!string.IsNullOrWhiteSpace(_request.Key))
+                {
+                    var keyParam = "&key=" + _request.Key;
+                    _uri = new Uri(_uri.ToString() + keyParam);
+                }
+
                 var _data = new WebClientEx(_timeout).DownloadData(_uri);
 
                 return Deserialize(_data);
