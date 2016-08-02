@@ -1,4 +1,4 @@
-GoogleApi v2.0.7 (18-04-2016) 
+GoogleApi v2.0.8 (01-08-2016) 
 =========
 
 C# .NET Google Web Services Api. (https://www.nuget.org/packages/GoogleApi/)
