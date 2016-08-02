@@ -58,7 +58,7 @@ namespace GoogleApi.Test.Places
         }
         
         [Test]
-        public void PlacesDetauilsTest()
+        public void PlacesDetailsTest()
         {
             var _request = new PlacesAutoCompleteRequest
             {
