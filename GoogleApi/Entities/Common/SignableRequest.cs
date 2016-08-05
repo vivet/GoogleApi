@@ -54,15 +54,6 @@ namespace GoogleApi.Entities.Common
             return new Uri(_uri.Scheme + "://" + _uri.Host + _urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(_signature));
         }
 
-//        protected override QueryStringParametersList GetQueryStringParameters()
-//        {
-//            var _parameters = base.GetQueryStringParameters();
-
-////            _parameters.Add("sensor", Sensor.ToString().ToLower());
-
-//            return _parameters;
-//        }
-
         private static string ToBase64UrlString(byte[] _data)
         {
             if (_data == null) 
