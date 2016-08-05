@@ -40,12 +40,12 @@ namespace GoogleApi.Entities.Common
                 throw new NullReferenceException("ClientID");
 
             if (!this.ClientId.StartsWith("gme-"))
-                throw new ArgumentException("A user ID must start with 'gme-'.");
+                throw new ArgumentException("A clientId must start with 'gme-'.");
 
             var _urlSegmentToSign = _uri.LocalPath + _uri.Query + "&client=" + this.ClientId;
             var _privateKey = SignableRequest.FromBase64UrlString(this.Key);
             byte[] _signature;
-
+            
             using (var _algorithm = new HMACSHA1(_privateKey))
             {
                 _signature = _algorithm.ComputeHash(Encoding.ASCII.GetBytes(_urlSegmentToSign));
@@ -54,14 +54,14 @@ namespace GoogleApi.Entities.Common
             return new Uri(_uri.Scheme + "://" + _uri.Host + _urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(_signature));
         }
 
-        protected override QueryStringParametersList GetQueryStringParameters()
-        {
-            var _parameters = new QueryStringParametersList();
+//        protected override QueryStringParametersList GetQueryStringParameters()
+//        {
+//            var _parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("sensor", Sensor.ToString().ToLower());
+////            _parameters.Add("sensor", Sensor.ToString().ToLower());
 
-            return _parameters;
-        }
+//            return _parameters;
+//        }
 
         private static string ToBase64UrlString(byte[] _data)
         {
