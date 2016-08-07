@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using GoogleApi.Helpers;
@@ -68,6 +69,17 @@ namespace GoogleApi.Entities.Common
                 throw new ArgumentNullException("_base64UrlString");
             
             return Convert.FromBase64String(_base64UrlString.Replace("-", "+").Replace("_", "/"));
+        }
+
+        protected override QueryStringParametersList GetQueryStringParameters()
+        {
+            if (string.IsNullOrEmpty(this.ClientId))
+                return base.GetQueryStringParameters();
+
+            var _parameters = new QueryStringParametersList();
+            _parameters.Add("sensor", Sensor.ToString().ToLower());
+
+            return _parameters;
         }
     }
 }
