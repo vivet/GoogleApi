@@ -38,6 +38,12 @@
     <DocumentationFile>bin\Release\GoogleApi.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -229,6 +235,9 @@
     <Folder Include="Entities\Maps\Geolocation\" />
     <Folder Include="Entities\Places\Actions\Request\" />
     <Folder Include="Entities\Places\Actions\Response\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GoogleApi.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
