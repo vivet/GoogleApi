@@ -169,7 +169,7 @@ namespace GoogleApi.Test.Maps
 
             var _result = GoogleMaps.DistanceMatrix.Query(_request);
 
-            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value);
+            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value, 100);
         }
 
         [Test]
@@ -179,7 +179,7 @@ namespace GoogleApi.Test.Maps
 
             var _result = GoogleMaps.DistanceMatrix.QueryAsync(_request).GetAwaiter().GetResult();
 
-            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value);
+            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value, 100);
         }
 
         [Test]

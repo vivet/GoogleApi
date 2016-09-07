@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Places.Common
     /// <summary>
     /// Base abstract class for Places requests.
     /// </summary>
-    public abstract class BasePlacesRequest : BaseRequest
+    public abstract class BasePlacesRequest : SignableRequest
     {
         private const string BASE_URL = "maps.googleapis.com/maps/api/place/";
 
