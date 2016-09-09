@@ -80,7 +80,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
             if (this.Radius.HasValue)
 				_parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (string.IsNullOrEmpty(this.Language))
+            if (!string.IsNullOrEmpty(this.Language))
                 _parameters.Add("language", this.Language);
 
             return _parameters;
