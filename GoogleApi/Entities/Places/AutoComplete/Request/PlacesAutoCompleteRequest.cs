@@ -52,7 +52,10 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         [DataMember(Name = "types")]
         protected virtual IEnumerable<string> TypesStr
         {
-            get { return this.Types.Select(EnumHelper.ToEnumString); }
+            get
+            {
+                return this.Types.Select(EnumHelper.ToEnumString);
+            }
             set
             {
                 this.Types = value.Select(EnumHelper.ToEnum<RestrictPlaceType>);
