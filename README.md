@@ -1,4 +1,4 @@
-GoogleApi v2.0.12 (07-09-2016) 
+GoogleApi v2.0.13 (09-09-2016) 
 =========
 
 C# .NET Google Web Services Api. (https://www.nuget.org/packages/GoogleApi/)
@@ -36,7 +36,7 @@ Google Translate
 
 
 Google Functions 
-  * EncodePolyLine
   * MergePolyLine
+  * EncodePolyLine
   * DecodePolyLine
 
