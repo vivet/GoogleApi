@@ -125,7 +125,7 @@ namespace GoogleApi.Test.Places
             var _request = new PlacesRadarSearchRequest
             {
                 Key = this._apiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Location(55.673323, 12.527438),
                 Radius = 500,
                 Sensor = true,
                 Language = "en",

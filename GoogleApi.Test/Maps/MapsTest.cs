@@ -29,9 +29,9 @@ namespace GoogleApi.Test.Maps
 
             Assert.AreEqual(Status.OK, _result.Status);
             Assert.AreEqual(133, _overviewPath.Points.Count(), 5);
-            Assert.AreEqual(4, _polyline.Points.Count());
-            Assert.AreEqual(8253, _result.Routes.First().Legs.First().Steps.Sum(_s => _s.Distance.Value), 100);
-            Assert.AreEqual(355, _result.Routes.First().Legs.First().Steps.Sum(_s => _s.Duration.Value.Seconds), 20);
+            Assert.AreEqual(5, _polyline.Points.Count());
+            Assert.AreEqual(8253, _result.Routes.First().Legs.First().Steps.Sum(_s => _s.Distance.Value), 300);
+            Assert.AreEqual(355, _result.Routes.First().Legs.First().Steps.Sum(_s => _s.Duration.Value.Seconds), 50);
         }
         [Test]
         public void DirectionsWhenhWayPointsTest()
@@ -44,7 +44,7 @@ namespace GoogleApi.Test.Maps
                 Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
             Assert.AreEqual(Status.OK, _result.Status);
-            Assert.AreEqual(156084, _result.Routes.First().Legs.First().Steps.Sum(_s => _s.Distance.Value), 100);
+            Assert.AreEqual(156084, _result.Routes.First().Legs.First().Steps.Sum(_s => _s.Distance.Value), 500);
 
             StringAssert.Contains("Philadelphia", _result.Routes.First().Legs.First().EndAddress);
         }
@@ -59,7 +59,8 @@ namespace GoogleApi.Test.Maps
                 Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
             Assert.AreEqual(Status.OK, _result.Status);
-            Assert.AreEqual("40.7140415,-73.9613119", _result.Results.First().Geometry.Location.LocationString);
+            Assert.AreEqual(40.7140415, _result.Results.First().Geometry.Location.Latitude, 0.001);
+            Assert.AreEqual(-73.9613119, _result.Results.First().Geometry.Location.Longitude, 0.001);
         }
         [Test]
         public void GeocodingWhenTimeoutTest()
@@ -84,7 +85,8 @@ namespace GoogleApi.Test.Maps
                 Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
             Assert.AreEqual(Status.OK, _result.Status);
-            Assert.AreEqual("40.7140415,-73.9613119", _result.Results.First().Geometry.Location.LocationString);
+            Assert.AreEqual(40.7140415, _result.Results.First().Geometry.Location.Latitude, 0.001);
+            Assert.AreEqual(-73.9613119, _result.Results.First().Geometry.Location.Longitude, 0.001);
         }
 		[Test]
         public void GeocodingAsyncWhenInvalidClientCredentialsTest()
