@@ -31,14 +31,12 @@ namespace GoogleApi.Entities.Common
         /// information is a sensor or not, regardless if the request is being performed by a location sensor equipped device or not.
         /// </remarks>
         public bool Sensor { get; set; }
-		
         /// <summary>
         /// Your application's API key (required). 
         /// This key identifies your application for purposes of quota management and so that Places  added from your application are made immediately available to your app. 
         /// Visit the APIs Console to create an API Project and obtain your key.
         /// </summary>
         public virtual string Key { get; set; }
-
         /// <summary>
         /// True to use use the https protocol; false to use http. The default is false.
         /// </summary>
@@ -57,7 +55,6 @@ namespace GoogleApi.Entities.Common
         }
 
         protected internal abstract string BaseUrl { get; }
-
         protected virtual QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = new QueryStringParametersList();

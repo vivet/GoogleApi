@@ -6,31 +6,32 @@ using System.Threading.Tasks;
 namespace GoogleApi.Extensions
 {
     /// <summary>
-    /// Provides asynchronous methods based on the Task-based Asynchronous Pattern for the WebClient class.
+    /// Provides asynchronous extension methods based on the Task-based Asynchronous Pattern for the WebClient class.
     /// </summary>
     /// <remarks>
     /// The code below uses the guidelines outlined in the MSDN article "Simplify Asynchronous Programming with Tasks" 
     /// at http://msdn.microsoft.com/en-us/magazine/ff959203.aspx under the "Converting an Event-Based Pattern" section,
     /// and follows the general TAP guidelines found at http://www.microsoft.com/en-us/download/details.aspx?id=19957.
     /// </remarks>
-    public static class WebClientExtensionMethods
+    public static class WebClientExtension
     {
         private static readonly Task<byte[]> _preCancelledTask;
-
-        /// <summary>
-        /// Static constructor. 
-        /// </summary>
-        static WebClientExtensionMethods()
-        {
-            var _tcs = new TaskCompletionSource<byte[]>();
-            _tcs.SetCanceled();
-            _preCancelledTask = _tcs.Task;
-        }
 
         /// <summary>
         /// Constant. Specified an infinite timeout duration. This is a TimeSpan of negative one (-1) milliseconds.
         /// </summary>
         public static readonly TimeSpan _infiniteTimeout = TimeSpan.FromMilliseconds(-1);
+
+        /// <summary>
+        /// Static constructor. 
+        /// </summary>
+        static WebClientExtension()
+        {
+            var _taskCompletionSource = new TaskCompletionSource<byte[]>();
+            _taskCompletionSource.SetCanceled();
+
+            WebClientExtension._preCancelledTask = _taskCompletionSource.Task;
+        }
 
         /// <summary>
         /// Asynchronously downloads the resource with the specified URI as a Byte array limited by the specified timeout.
@@ -45,9 +46,14 @@ namespace GoogleApi.Extensions
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
         public static Task<byte[]> DownloadDataTaskAsync(this WebClient _client, Uri _address, TimeSpan _timeout)
         {
+            if (_client == null) 
+                throw new ArgumentNullException("_client");
+          
+            if (_address == null) 
+                throw new ArgumentNullException("_address");
+
             return _client.DownloadDataTaskAsync(_address, _timeout, CancellationToken.None);
         }
-
         /// <summary>
         /// Asynchronously downloads the resource with the specified URI as a Byte array and allows cancelling the operation. 
         /// Note that this overload specifies an infinite timeout.
@@ -59,9 +65,14 @@ namespace GoogleApi.Extensions
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the client or address parameters.</exception>
         public static Task<byte[]> DownloadDataTaskAsync(this WebClient _client, Uri _address, CancellationToken _token)
         {
+            if (_client == null) 
+                throw new ArgumentNullException("_client");
+           
+            if (_address == null) 
+                throw new ArgumentNullException("_address");
+
             return _client.DownloadDataTaskAsync(_address, _infiniteTimeout, _token);
         }
-
         /// <summary>
         /// Asynchronously downloads the resource with the specified URI as a Byte array limited by the specified timeout and allows cancelling the operation.
         /// </summary>
@@ -76,22 +87,26 @@ namespace GoogleApi.Extensions
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
         public static Task<byte[]> DownloadDataTaskAsync(this WebClient _client, Uri _address, TimeSpan _timeout, CancellationToken _token)
         {
-            if (_client == null) throw new ArgumentNullException("_client");
-            if (_address == null) throw new ArgumentNullException("_address");
+            if (_client == null) 
+                throw new ArgumentNullException("_client");
+           
+            if (_address == null) 
+                throw new ArgumentNullException("_address");
+           
             if (_timeout.TotalMilliseconds < 0 && _timeout != _infiniteTimeout)
                 throw new ArgumentOutOfRangeException("_address", _timeout, "The timeout value must be a positive or equal to InfiniteTimeout.");
 
             if (_token.IsCancellationRequested)
                 return _preCancelledTask;
 
-            var _tcs = new TaskCompletionSource<byte[]>();
-            var _delayTokenSource = new CancellationTokenSource();
+            var _taskCompletionSource = new TaskCompletionSource<byte[]>();
+            var _cancellationTokenSource = new CancellationTokenSource();
 
             if (_timeout != _infiniteTimeout)
             {
-                Task.Delay(_timeout, _delayTokenSource.Token).ContinueWith(_t =>
+                Task.Delay(_timeout, _cancellationTokenSource.Token).ContinueWith(_x =>
                     {
-                        _tcs.TrySetException(new TimeoutException(string.Format("The request has exceeded the timeout limit of {0} and has been aborted.", _timeout)));
+                        _taskCompletionSource.TrySetException(new TimeoutException(string.Format("The request has exceeded the timeout limit of {0} and has been aborted.", _timeout)));
                         _client.CancelAsync();
                     }, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.NotOnCanceled);
             }
@@ -100,13 +115,20 @@ namespace GoogleApi.Extensions
             _completedHandler = (_sender, _args) =>
              {
                  _client.DownloadDataCompleted -= _completedHandler;
-                 _delayTokenSource.Cancel();
+                 _cancellationTokenSource.Cancel();
 
                  if (_args.Cancelled)
-                     _tcs.TrySetCanceled();
+                 {
+                     _taskCompletionSource.TrySetCanceled();
+                 }
                  else if (_args.Error != null)
-                     _tcs.TrySetException(_args.Error);
-                 else _tcs.TrySetResult(_args.Result);
+                 {
+                     _taskCompletionSource.TrySetException(_args.Error);
+                 }
+                 else
+                 {
+                     _taskCompletionSource.TrySetResult(_args.Result);
+                 }
              };
 
             _client.DownloadDataCompleted += _completedHandler;
@@ -123,11 +145,11 @@ namespace GoogleApi.Extensions
 
             _token.Register(() =>
             {
-                _delayTokenSource.Cancel();
+                _cancellationTokenSource.Cancel();
                 _client.CancelAsync();
             });
 
-            return _tcs.Task;
+            return _taskCompletionSource.Task;
         }
     }
 }

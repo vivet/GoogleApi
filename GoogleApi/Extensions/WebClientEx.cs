@@ -4,30 +4,33 @@ using System.Net;
 namespace GoogleApi.Extensions
 {
     /// <summary>
-    /// 
+    /// WebClient class.
     /// </summary>
     public class WebClientEx : WebClient
     {
         /// <summary>
         /// 
         /// </summary>
-        public TimeSpan? Timeout { get; set; }
+        public virtual TimeSpan? Timeout { get; set; }
 
         /// <summary>
-        /// 
+        /// Default Constructor
         /// </summary>
-        public WebClientEx() { }
+        public WebClientEx()
+        {
+            
+        }
         /// <summary>
-        /// 
+        /// Constructor, setting custom timeout.
         /// </summary>
         /// <param name="_timeout"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public WebClientEx(TimeSpan _timeout)
         {
-            if (_timeout != WebClientExtensionMethods._infiniteTimeout && _timeout <= TimeSpan.Zero)
+            if (_timeout != WebClientExtension._infiniteTimeout && _timeout <= TimeSpan.Zero)
                 throw new ArgumentOutOfRangeException("_timeout", _timeout, "The specified timeout must be greater than zero or infinite.");
 
-            Timeout = _timeout;
+            this.Timeout = _timeout;
         }
 
         /// <summary>
@@ -41,8 +44,10 @@ namespace GoogleApi.Extensions
         {
             var _request = base.GetWebRequest(_address);
 
-            if (_request != null && this.Timeout != null)
-                _request.Timeout = (int)Timeout.Value.TotalMilliseconds;
+            if (_request == null)
+                return null;
+
+            _request.Timeout = this.Timeout == null ? _request.Timeout : (int)Timeout.Value.TotalMilliseconds;
 
             return _request;
         }

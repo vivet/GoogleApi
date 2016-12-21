@@ -16,7 +16,6 @@ namespace GoogleApi.Engine
     public class EngineFacade<TRequest, TResponse> where TRequest : BaseRequest, new() where TResponse : IResponseFor
     {
         internal readonly TimeSpan _defaultTimeout;
-        
         internal static readonly EngineFacade<TRequest, TResponse> _instance = new EngineFacade<TRequest, TResponse>();
 
         private EngineFacade()
@@ -34,13 +33,14 @@ namespace GoogleApi.Engine
         {
             get
             {
-                return GenericEngine<TRequest, TResponse>.HttpConnectionLimit;
+                return GenericEngine.HttpConnectionLimit;
             }
             set
             {
-                GenericEngine<TRequest, TResponse>.HttpConnectionLimit = value;
+                GenericEngine.HttpConnectionLimit = value;
             }
         }
+
 	    /// <summary>
         /// Determines the maximum number of concurrent HTTPS connections to open to this engine's host address. The default value is 2 connections.
         /// </summary>
@@ -51,11 +51,11 @@ namespace GoogleApi.Engine
         {
             get
             {
-                return GenericEngine<TRequest, TResponse>.HttpsConnectionLimit;
+                return GenericEngine.HttpsConnectionLimit;
             }
             set
             {
-                GenericEngine<TRequest, TResponse>.HttpsConnectionLimit = value;
+                GenericEngine.HttpsConnectionLimit = value;
             }
         }
 
@@ -70,8 +70,12 @@ namespace GoogleApi.Engine
         /// <exception cref="WebException">Thrown when an error occurred while downloading data.</exception>
         public TResponse Query(TRequest _request)
         {
+            if (_request == null)
+                throw new ArgumentNullException("_request");
+
             return this.Query(_request, this._defaultTimeout);
         }
+
         /// <summary>
         /// Query the Google Maps API using the provided request and timeout period.
         /// </summary>
@@ -86,8 +90,12 @@ namespace GoogleApi.Engine
         /// <exception cref="WebException">Thrown when an error occurred while downloading data.</exception>
         public TResponse Query(TRequest _request, TimeSpan _timeout)
         {
+            if (_request == null)
+                throw new ArgumentNullException("_request");
+
             return GenericEngine<TRequest, TResponse>.QueryGoogleApi(_request, _timeout);
         }
+
         /// <summary>
         /// Asynchronously query the Google Maps API using the provided request.
         /// </summary>
@@ -96,8 +104,12 @@ namespace GoogleApi.Engine
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         public Task<TResponse> QueryAsync(TRequest _request)
         {
+            if (_request == null)
+                throw new ArgumentNullException("_request");
+
             return this.QueryAsync(_request, CancellationToken.None);
         }
+
         /// <summary>
         /// Asynchronously query the Google Maps API using the provided request.
         /// </summary>
@@ -110,8 +122,12 @@ namespace GoogleApi.Engine
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
         public Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout)
         {
+            if (_request == null)
+                throw new ArgumentNullException("_request");
+
             return this.QueryAsync(_request, _timeout, CancellationToken.None);
         }
+
         /// <summary>
         /// Asynchronously query the Google Maps API using the provided request.
         /// </summary>
@@ -121,8 +137,15 @@ namespace GoogleApi.Engine
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         public Task<TResponse> QueryAsync(TRequest _request, CancellationToken _token)
         {
+            if (_request == null)
+                throw new ArgumentNullException("_request");
+
+            if (_token == null)
+                throw new ArgumentNullException("_token");
+            
             return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(_request, TimeSpan.FromMilliseconds(Timeout.Infinite), _token);
         }
+
         /// <summary>
         /// Asynchronously query the Google Maps API using the provided request.
         /// </summary>
@@ -136,6 +159,12 @@ namespace GoogleApi.Engine
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
         public Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token)
         {
+            if (_request == null)
+                throw new ArgumentNullException("_request");
+
+            if (_token == null)
+                throw new ArgumentNullException("_token");
+         
             return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(_request, _timeout, _token);
         }
     }
