@@ -240,8 +240,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\Places\Actions\Request\" />
-    <Folder Include="Entities\Places\Actions\Response\" />
+    <Folder Include="Entities\Places\Add\Request\" />
+    <Folder Include="Entities\Places\Add\Response\" />
+    <Folder Include="Entities\Places\Delete\Request\" />
+    <Folder Include="Entities\Places\Delete\Response\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GoogleApi.snk" />
