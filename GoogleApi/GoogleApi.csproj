@@ -55,9 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\EngineFacade.cs" />
-    <Compile Include="Engine\GenericEngine.cs">
+    <Compile Include="Engine\GenericEngineT.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Engine\GenericEngine.cs" />
     <Compile Include="Entities\Common\AddressLocation.cs" />
     <Compile Include="Entities\Common\Interfaces\ILocationString.cs" />
     <Compile Include="Entities\Common\SignableRequest.cs" />
@@ -77,6 +78,13 @@
     <Compile Include="Entities\Maps\Common\Enums\TransitMode.cs" />
     <Compile Include="Entities\Maps\Common\Enums\TransitRoutingPreference.cs" />
     <Compile Include="Entities\Maps\Common\Fare.cs" />
+    <Compile Include="Entities\Maps\Geolocation\Request\CellTower.cs" />
+    <Compile Include="Entities\Maps\Geolocation\Request\Enums\RadioType.cs" />
+    <Compile Include="Entities\Maps\Geolocation\Request\GeolocationRequest.cs" />
+    <Compile Include="Entities\Maps\Geolocation\Request\WifiAccessPoint.cs" />
+    <Compile Include="Entities\Maps\Geolocation\Response\Error.cs" />
+    <Compile Include="Entities\Maps\Geolocation\Response\Errors.cs" />
+    <Compile Include="Entities\Maps\Geolocation\Response\GeolocationResponse.cs" />
     <Compile Include="Entities\Maps\Roads\SpeedLimits\Response\SpeedLimit.cs" />
     <Compile Include="Entities\Maps\Roads\SnapToRoads\Request\SnapToRoadsRequest.cs" />
     <Compile Include="Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs" />
@@ -226,13 +234,12 @@
     <Compile Include="Helpers\UnixTimeConverter.cs" />
     <Compile Include="Entities\Translate\Translate\Request\TranslateRequest.cs" />
     <Compile Include="Entities\Translate\Translate\Response\TranslateResponse.cs" />
-    <Compile Include="Extensions\WebClientExtensionMethods.cs" />
+    <Compile Include="Extensions\WebClientExtension.cs" />
     <Compile Include="Extensions\WebClientEx.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\Maps\Geolocation\" />
     <Folder Include="Entities\Places\Actions\Request\" />
     <Folder Include="Entities\Places\Actions\Response\" />
   </ItemGroup>

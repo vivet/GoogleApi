@@ -113,6 +113,16 @@ namespace GoogleApi.Test.Maps
         }
 
         [Test]
+        public void GeolocationTest()
+        {
+            Assert.Inconclusive();
+            //var _request = new GeolocationRequest();
+            //var _result = GoogleMaps.Geolocation.Query(_request);
+
+            //Assert.AreEqual(Status.OK, _result.Status);
+        }
+
+        [Test]
         public void ReverseGeocodingTest()
 		{
 			var _request = new GeocodingRequest { Location = new Location(40.7141289, -73.9614074) };
@@ -198,7 +208,7 @@ namespace GoogleApi.Test.Maps
             }
             catch (AggregateException _ex)
             {
-                throw _ex.Flatten().InnerException;
+                throw _ex.Flatten().InnerException ?? _ex;
             }
         }
         private static void ThrowInnerException(Action _action)
@@ -209,7 +219,7 @@ namespace GoogleApi.Test.Maps
             }
             catch (AggregateException _ex)
             {
-                throw _ex.InnerException;
+                throw _ex.InnerException ?? _ex;
             }
         }
 	}

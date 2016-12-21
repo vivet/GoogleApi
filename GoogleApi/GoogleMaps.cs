@@ -7,6 +7,8 @@ using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Elevation.Response;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geocode.Response;
+using GoogleApi.Entities.Maps.Geolocation.Request;
+using GoogleApi.Entities.Maps.Geolocation.Response;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Response;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
@@ -44,6 +46,21 @@ namespace GoogleApi
 				return EngineFacade<GeocodingRequest, GeocodingResponse>._instance;
 			}
 		}
+
+        /// <summary>
+        /// The Google Maps Geolocation API returns a location and accuracy radius based on information about cell towers and WiFi nodes that the mobile client can detect. 
+        /// This document describes the protocol used to send this data to the server and to return a response to the client.
+        /// Communication is done over HTTPS using POST. Both request and response are formatted as JSON, and the content type of both is application/json.            
+        /// Before you start developing with the Geolocation API, review the authentication requirements (you need an API key) and the API usage limits.
+        /// https://developers.google.com/maps/documentation/geolocation/intro
+        /// </summary>
+        public static EngineFacade<GeolocationRequest, GeolocationResponse> Geolocation
+        {
+            get
+            {
+                return EngineFacade<GeolocationRequest, GeolocationResponse>._instance;
+            }
+        }
 
         /// <summary>
         /// The Google Maps Elevation API provides you a simple interface to query locations on the earth for elevation data. Additionally, 
