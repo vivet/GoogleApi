@@ -44,7 +44,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Properties\GoogleApi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
@@ -258,7 +258,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="GoogleApi.snk" />
+    <None Include="Properties\GoogleApi.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
