@@ -24,12 +24,9 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// </summary>
         public virtual Enums.Extensions Extensions { get; set; }
 
-        public override bool IsSsl
-        {
-            get { return true; }
-            set { throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL"); }
-        }
-
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public PlacesDetailsRequest()
         {
             this.Extensions = Enums.Extensions.NONE;

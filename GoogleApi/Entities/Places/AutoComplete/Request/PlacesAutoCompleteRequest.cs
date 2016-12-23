@@ -67,21 +67,6 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
 		/// </summary>
         public virtual Dictionary<Component, string> Components { get; set; }
 
-        /// <summary>
-        /// Always true. Setter is not supported.
-        /// </summary>
-        public override bool IsSsl
-		{
-			get
-			{
-				return true;
-			}
-			set
-			{
-				throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL");
-			}
-		}
-
         protected internal override string BaseUrl
         {
             get

@@ -69,21 +69,6 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// </summary>
         public virtual string PageToken { get; set; }
 
-        /// <summary>
-        /// Always true. Setter is not supported.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL");
-            }
-        }
-
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = base.GetQueryStringParameters();

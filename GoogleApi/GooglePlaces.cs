@@ -1,6 +1,10 @@
 ﻿using GoogleApi.Engine;
+using GoogleApi.Entities.Places.Add.Request;
+using GoogleApi.Entities.Places.Add.Response;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.AutoComplete.Response;
+using GoogleApi.Entities.Places.Delete.Request;
+using GoogleApi.Entities.Places.Delete.Response;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Response;
 using GoogleApi.Entities.Places.Photos.Request;
@@ -75,7 +79,39 @@ namespace GoogleApi
                 return EngineFacade<PlacesNearBySearchRequest, PlacesNearbySearchResponse>._instance;
             }
         }
-        
+
+        /// <summary>
+        /// By adding a place, you can supplement the data in the Google Maps database with data from your application. This allows you to:
+        /// Instantly update the data in Google's database for your users.
+        /// Submit new places to a moderation queue for addition to the Google places database.
+        /// Differentiate your application from other apps with similar functionality.
+        /// Create applications that are targeted to a specific user base or geographic location.
+        /// Influence the results of a Places Search issued from your application.
+        /// https://developers.google.com/places/web-service/add-place
+        /// </summary>
+        public static EngineFacade<PlacesAddRequest, PlacesAddResponse> Add
+        {
+            get
+            {
+                return EngineFacade<PlacesAddRequest, PlacesAddResponse>._instance;
+            }
+        }
+
+        /// <summary>
+        /// A place can only be deleted if:
+        /// The place was added by the application that is requesting the deletion.
+        /// The place add request has not successfully passed through the Google Maps moderation process, and the place is therefore visible only to the application that added it.
+        /// If you try to delete a place that does not meet these criteria, the API will return a REQUEST_DENIED status code.
+        /// https://developers.google.com/places/web-service/add-place
+        /// </summary>
+        public static EngineFacade<PlacesDeleteRequest, PlacesDeleteResponse> Delete
+        {
+            get
+            {
+                return EngineFacade<PlacesDeleteRequest, PlacesDeleteResponse>._instance;
+            }
+        }
+
         /// <summary>
         /// Once you have a place_id or a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. 
         /// A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.

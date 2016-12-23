@@ -13,7 +13,7 @@ Google Maps
   * Elevation
   * Geocoding 
   * Reverse Geocoding
-  * Geolocation*
+  * Geolocation
   * Roads 
     * Snap To Roads
     * Speed Limits
@@ -27,8 +27,8 @@ Google Places
 	* Text
 	* Radar
   * Place Details
-  * Place Add*
-  * Place Delete*
+  * Place Add
+  * Place Delete
   * Place Photos*
   * Place Autocomplete
   * Query Autocomplete

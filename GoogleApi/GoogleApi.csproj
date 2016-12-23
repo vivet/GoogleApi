@@ -98,6 +98,8 @@
     <Compile Include="Entities\Maps\Roads\SpeedLimits\Request\Enums\Units.cs" />
     <Compile Include="Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs" />
     <Compile Include="Entities\Maps\Roads\SpeedLimits\Response\SpeedLimitsResponse.cs" />
+    <Compile Include="Entities\Places\Add\Response\PlacesAddResponse.cs" />
+    <Compile Include="Entities\Places\Add\Request\PlacesAddRequest.cs" />
     <Compile Include="Entities\Places\Common\BasePlacesRequest.cs" />
     <Compile Include="Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs" />
     <Compile Include="Entities\Maps\Common\Enums\Units.cs" />
@@ -108,6 +110,8 @@
     <Compile Include="Entities\Common\Enums\Component.cs" />
     <Compile Include="Entities\Places\Common\BasePlacesResponse.cs" />
     <Compile Include="Entities\Places\Common\Prediction.cs" />
+    <Compile Include="Entities\Places\Delete\Request\PlacesAddRequest.cs" />
+    <Compile Include="Entities\Places\Delete\Response\PlacesAddResponse.cs" />
     <Compile Include="Entities\Places\Details\Request\Enums\Extensions.cs" />
     <Compile Include="Entities\Places\Details\Request\PlacesDetailsRequest.cs" />
     <Compile Include="Entities\Places\Details\Response\AspectRating.cs" />
@@ -245,12 +249,7 @@
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Places\Add\Request\" />
-    <Folder Include="Entities\Places\Add\Response\" />
-    <Folder Include="Entities\Places\Delete\Request\" />
-    <Folder Include="Entities\Places\Delete\Response\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="GoogleApi.snk" />
     <None Include="packages.config" />
