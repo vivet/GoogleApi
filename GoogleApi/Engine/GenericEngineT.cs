@@ -2,16 +2,12 @@ using System;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
-using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Entities.Places.Details.Request;
-using GoogleApi.Entities.Places.Details.Response;
-using GoogleApi.Entities.Places.Photos.Request;
-using GoogleApi.Entities.Places.Photos.Response;
 using GoogleApi.Extensions;
+using GoogleApi.Web;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Engine
@@ -26,6 +22,42 @@ namespace GoogleApi.Engine
         where TResponse : IResponseFor
 	{
         /// <summary>
+        /// Determines the maximum number of concurrent HTTP connections to open to this engine's host address. The default value is 2 connections.
+        /// </summary>
+        /// <remarks>
+        /// This value is determined by the ServicePointManager and is shared across other engines that use the same host address.
+        /// </remarks>
+        public static int HttpConnectionLimit
+        {
+            get
+            {
+                return GenericEngine.HttpServicePoint.ConnectionLimit;
+            }
+            set
+            {
+                GenericEngine.HttpServicePoint.ConnectionLimit = value;
+            }
+        }
+        
+        /// <summary>
+        /// Determines the maximum number of concurrent HTTPS connections to open to this engine's host address. The default value is 2 connections.
+        /// </summary>
+        /// <remarks>
+        /// This value is determined by the ServicePointManager and is shared across other engines that use the same host address.
+        /// </remarks>
+        public static int HttpsConnectionLimit
+        {
+            get
+            {
+                return GenericEngine.HttpsServicePoint.ConnectionLimit;
+            }
+            set
+            {
+                GenericEngine.HttpsServicePoint.ConnectionLimit = value;
+            }
+        }
+        
+        /// <summary>
         /// Default static constructor.
         /// </summary>
         static GenericEngine()
@@ -36,49 +68,72 @@ namespace GoogleApi.Engine
             GenericEngine.HttpsServicePoint = ServicePointManager.FindServicePoint(new Uri("https://" + _baseUrl));
         }
 
+        /// <summary>
+        /// Query Google.
+        /// </summary>
+        /// <param name="_request"></param>
+        /// <param name="_timeout"></param>
+        /// <returns>TResponse</returns>
 		protected internal static TResponse QueryGoogleApi(TRequest _request, TimeSpan _timeout)
 		{
 			if (_request == null)
 				throw new ArgumentNullException("_request");
 
-			try
-			{
-                var _uri = _request.GetUri();
-                var _webClientEx = new WebClientEx(_timeout);
-                
-                if (_request.IsJson)
-			    {
-                    _webClientEx.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            var _uri = _request.GetUri();
+            var _webClientEx = new WebClientTimeout(_timeout);
 
-                    var _json = JsonConvert.SerializeObject(_request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                    var _uploadString = _webClientEx.UploadString(_uri, "POST", _json);
+            if (_request.IsJson)
+            {
+                _webClientEx.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-                    return GenericEngine<TRequest, TResponse>.Deserialize(_uploadString);
-			    }
+                var _json = JsonConvert.SerializeObject(_request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                var _uploadString = _webClientEx.UploadString(_uri, "POST", _json);
 
+                return GenericEngine<TRequest, TResponse>.Deserialize(_uploadString);
+            }
+            else
+            {
                 var _downloadData = _webClientEx.DownloadData(_uri);
-                return GenericEngine<TRequest, TResponse>.Deserialize(_downloadData);
-			}
-			catch (WebException _ex)
-			{
-                if (GenericEngine.IndicatesAuthenticationFailed(_ex))
-                    throw new AuthenticationException(GenericEngine.AUTHENTICATION_FAILED_MESSAGE, _ex);
 
-				if (_ex.Status == WebExceptionStatus.Timeout)
-					throw new TimeoutException(string.Format("The request has exceeded the timeout limit of {0} and has been aborted.", _timeout));
-
-				throw;
-			}
+                return GenericEngine<TRequest, TResponse>.Deserialize(_downloadData);                
+            }
 		}
+       
+        /// <summary>
+        /// Query Google Async.
+        /// </summary>
+        /// <param name="_request"></param>
+        /// <param name="_timeout"></param>
+        /// <param name="_token"></param>
+        /// <returns>Task[TResponse]</returns>
         protected internal static Task<TResponse> QueryGoogleApiAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token = default(CancellationToken))
         {
             if (_request == null)
                 throw new ArgumentNullException("_request");
 
+            var _uri = _request.GetUri();
+            var _webClientEx = new WebClient();
             var _taskCompletionSource = new TaskCompletionSource<TResponse>();
 
-            new WebClient().DownloadDataTaskAsync(_request.GetUri(), _timeout, _token)
-                .ContinueWith(_t => GenericEngine<TRequest, TResponse>.DownloadDataComplete(_t, _taskCompletionSource), TaskContinuationOptions.ExecuteSynchronously);
+            _webClientEx.DownloadDataTaskAsync(_uri, _timeout, _token)
+                .ContinueWith(_x =>
+                {
+                    if (_x.IsCanceled)
+                    {
+                        _taskCompletionSource.SetCanceled();
+                    }
+                    else if (_x.IsFaulted)
+                    {
+                        if (_x.Exception != null)
+                            _taskCompletionSource.SetException(_x.Exception.InnerException ?? _x.Exception);
+                    }
+                    else
+                    {
+                        var _deserialize = GenericEngine<TRequest, TResponse>.Deserialize(_x.Result);
+                        _taskCompletionSource.SetResult(_deserialize);
+                    }
+
+                }, TaskContinuationOptions.ExecuteSynchronously);
 
             return _taskCompletionSource.Task;
         }
@@ -100,35 +155,5 @@ namespace GoogleApi.Engine
 
             return JsonConvert.DeserializeObject<TResponse>(_serializedObject);
         }
-
-        private static void DownloadDataComplete(Task<byte[]> _task, TaskCompletionSource<TResponse> _completionSource)
-        {
-            if (_task == null) 
-                throw new ArgumentNullException("_task");
-            
-            if (_completionSource == null) 
-                throw new ArgumentNullException("_completionSource");
-
-            if (_task.IsCanceled)
-			{
-				_completionSource.SetCanceled();
-			}
-			else if (_task.IsFaulted)
-			{
-                if (_task.Exception != null && GenericEngine.IndicatesAuthenticationFailed(_task.Exception.InnerException))
-			    {
-                    _completionSource.SetException(new AuthenticationException(GenericEngine.AUTHENTICATION_FAILED_MESSAGE, _task.Exception.InnerException));
-			    }
-				else if (_task.Exception != null)
-				{
-				    _completionSource.SetException(_task.Exception.InnerException ?? _task.Exception);
-				}
-			}
-			else
-			{
-                var _deserialize = GenericEngine<TRequest, TResponse>.Deserialize(_task.Result);
-				_completionSource.SetResult(_deserialize);
-			}
-        }
-	}
+    }
 }

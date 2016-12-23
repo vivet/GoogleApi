@@ -28,6 +28,9 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
         /// </summary>
         public virtual Units Unit { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -36,6 +39,10 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
             }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
             if ((this.Path == null || !this.Path.Any()) && (this.PlaceIds == null || !this.PlaceIds.Any()))

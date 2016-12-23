@@ -72,6 +72,9 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
             }
         }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get

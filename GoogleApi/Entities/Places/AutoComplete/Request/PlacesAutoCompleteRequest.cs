@@ -7,6 +7,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
 using GoogleApi.Entities.Places.Common;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Places.AutoComplete.Request
@@ -50,15 +51,15 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         public virtual IEnumerable<RestrictPlaceType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        protected virtual IEnumerable<string> TypesStr
+        private IEnumerable<string> TypesStr
         {
             get
             {
-                return this.Types.Select(EnumHelper.ToEnumString);
+                return this.Types.Select(_x => _x.ToEnumString());
             }
             set
             {
-                this.Types = value.Select(EnumHelper.ToEnum<RestrictPlaceType>);
+                this.Types = value.Select(_x => _x.ToEnum<RestrictPlaceType>());
             }
         }
 
@@ -67,6 +68,9 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
 		/// </summary>
         public virtual Dictionary<Component, string> Components { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -75,6 +79,10 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
             }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
 	    protected override QueryStringParametersList GetQueryStringParameters()
 		{
             if (string.IsNullOrEmpty(this.Key))

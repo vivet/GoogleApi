@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
@@ -117,6 +118,9 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             this.TransitRoutingPreference = TransitRoutingPreference.NOTHING;
         }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -125,7 +129,11 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             }
         }
 
-		protected override QueryStringParametersList GetQueryStringParameters()
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
+        protected override QueryStringParametersList GetQueryStringParameters()
 		{
 			if (string.IsNullOrWhiteSpace(this.Origin))
 				throw new ArgumentException("Must specify an Origin");
@@ -156,7 +164,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 				_parameters.Add("alternatives", "true");
 
 		    if (this.Avoid != AvoidWay.NOTHING)
-                _parameters.Add("avoid", this.Avoid.ToString('|'));
+                _parameters.Add("avoid", this.Avoid.ToEnumString('|'));
 
             if (!string.IsNullOrWhiteSpace(this.Language))
                 _parameters.Add("language", this.Language);
@@ -166,16 +174,16 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 
             if (this.TravelMode == TravelMode.TRANSIT)
             {
-                _parameters.Add("transit_mode", this.TransitMode.ToString('|'));
+                _parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
                 if (this.TransitRoutingPreference != TransitRoutingPreference.NOTHING)
-                    _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString('|'));
+                    _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
                 
                 if (this.ArrivalTime != default(DateTime))
-                    _parameters.Add("arrival_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.ArrivalTime).ToString(CultureInfo.InvariantCulture));
+                    _parameters.Add("arrival_time", this.ArrivalTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
                 if (this.DepartureTime != default(DateTime))
-                    _parameters.Add("departure_time", UnixTimeConverter.DateTimeToUnixTimestamp(this.DepartureTime).ToString(CultureInfo.InvariantCulture));
+                    _parameters.Add("departure_time", this.DepartureTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
             }
 
 			return _parameters;

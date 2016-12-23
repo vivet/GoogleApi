@@ -10,6 +10,9 @@ namespace GoogleApi.Entities.Places.Search.Text.Response
     [DataContract]
     public class PlacesTextSearchResponse : BasePlacesSearchResponse
     {
+        /// <summary>
+        /// Results
+        /// </summary>
         [DataMember(Name = "results")]
         public virtual IEnumerable<TextResult> Results { get; set; }
     }

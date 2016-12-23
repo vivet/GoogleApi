@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common;
@@ -69,6 +68,10 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// </summary>
         public virtual string PageToken { get; set; }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = base.GetQueryStringParameters();

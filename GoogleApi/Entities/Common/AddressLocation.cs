@@ -28,10 +28,13 @@ namespace GoogleApi.Entities.Common
             this.Address = _address;
 		}
 
-
+        /// <summary>
+        /// Returns locations as Google formatted locationstring. 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return LocationString;
+            return this.LocationString;
         }
 	}
 }

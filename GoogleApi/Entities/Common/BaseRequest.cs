@@ -62,7 +62,15 @@ namespace GoogleApi.Entities.Common
             return new Uri(_scheme + this.BaseUrl + _qeryStringJson + "?" + _queryString);
         }
 
+        /// <summary>
+        /// Abstract proeprty BaseUrl.
+        /// </summary>
         protected internal abstract string BaseUrl { get; }
+
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected virtual QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = new QueryStringParametersList();

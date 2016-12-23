@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Details.Response
 {
@@ -53,16 +53,15 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual DateTime Time { get; set; }
 
         [DataMember(Name = "time")]
-        protected virtual int TimeInt
+        private int TimeInt
         {
             get
             {
-                return UnixTimeConverter.DateTimeToUnixTimestamp(this.Time);
+                return this.Time.DateTimeToUnixTimestamp();
             }
             set
             {
-                var _epoch = new DateTime(1970, 1, 1);
-                this.Time = _epoch.AddSeconds(value);
+                this.Time = DateTimeExtension._epoch.AddSeconds(value);
             }
         }
     }

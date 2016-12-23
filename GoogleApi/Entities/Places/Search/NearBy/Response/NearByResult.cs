@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Response
 {
@@ -58,12 +58,15 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        protected virtual IEnumerable<string> TypesStr
+        private IEnumerable<string> TypesStr
         {
-            get { return this.Types.Select(EnumHelper.ToEnumString); }
+            get
+            {
+                return this.Types.Select(_x => _x.ToEnumString());
+            }
             set
             {
-                this.Types = value.Select(EnumHelper.ToEnum<PlaceLocationType>);
+                this.Types = value.Select(_x => _x.ToEnum<PlaceLocationType>());
             }
         }
 
@@ -81,10 +84,16 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         public virtual Scope Scope { get; set; }
 
         [DataMember(Name = "scope")]
-        protected virtual string ScopeStr
+        private string ScopeStr
         {
-            get { return EnumHelper.ToEnumString(this.Scope); }
-            set { this.Scope = EnumHelper.ToEnum<Scope>(value); }
+            get
+            {
+                return this.Scope.ToEnumString();
+            }
+            set
+            {
+                this.Scope = value.ToEnum<Scope>();
+            }
         }
 
         /// <summary>
@@ -93,10 +102,16 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         public virtual PriceLevel PriceLevel { get; set; }
 
         [DataMember(Name = "price_level")]
-        protected virtual string PriceLevelStr
+        private string PriceLevelStr
         {
-            get { return EnumHelper.ToEnumString(this.PriceLevel); }
-            set { this.PriceLevel = EnumHelper.ToEnum<PriceLevel>(value); }
+            get
+            {
+                return this.PriceLevel.ToEnumString();
+            }
+            set
+            {
+                this.PriceLevel = value.ToEnum<PriceLevel>();
+            }
         }
     }
 }

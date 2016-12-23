@@ -32,11 +32,18 @@ namespace GoogleApi.Entities.Places.Details.Request
             this.Extensions = Enums.Extensions.NONE;
         }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get { return base.BaseUrl + "details/"; }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = base.GetQueryStringParameters();

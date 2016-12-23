@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
+    /// <summary>
+    /// Line
+    /// </summary>
 	[DataContract(Name = "line")]
 	public class Line
 	{

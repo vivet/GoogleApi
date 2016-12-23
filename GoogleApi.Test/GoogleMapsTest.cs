@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Authentication;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
@@ -8,13 +8,12 @@ using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Geocode.Request;
-using GoogleApi.Entities.Maps.Geolocation.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Maps
+namespace GoogleApi.Test
 {
     [TestFixture]
-    public class MapsTest : BaseTest
+    public class GoogleMapsTest : BaseTest
 	{
         [Test]
         public void DirectionsTestTest()
@@ -67,13 +66,13 @@ namespace GoogleApi.Test.Maps
         public void GeocodingWhenTimeoutTest()
         {
             var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA" };
-            Assert.Throws<TimeoutException>(() => MapsTest.ThrowInnerException(() => GoogleMaps.Geocode.Query(_request, TimeSpan.FromMilliseconds(1))));
+            Assert.Throws<WebException>(() => GoogleMapsTest.ThrowInnerException(() => GoogleMaps.Geocode.Query(_request, TimeSpan.FromMilliseconds(1))));
         }
         [Test]
         public void GeocodingWhenInvalidClientCredentialsTest()
         {
             var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", Key = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
-            Assert.Throws<AuthenticationException>(() => MapsTest.ThrowInnerException(() => GoogleMaps.Geocode.Query(_request)));
+            Assert.Throws<WebException>(() => GoogleMapsTest.ThrowInnerException(() => GoogleMaps.Geocode.Query(_request)));
         }
         [Test]
         public void GeocodingAsyncTest()
@@ -93,13 +92,13 @@ namespace GoogleApi.Test.Maps
         public void GeocodingAsyncWhenInvalidClientCredentialsTest()
 		{
 			var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", Key = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
-            Assert.Throws<AuthenticationException>(() => MapsTest.ThrowInnerException(() => GoogleMaps.Geocode.QueryAsync(_request).Wait()));
+            Assert.Throws<WebException>(() => GoogleMapsTest.ThrowInnerException(() => GoogleMaps.Geocode.QueryAsync(_request).Wait()));
 		}
 		[Test]
         public void GeocodingAsyncWhenTimeoutTest()
 		{
             var _request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA" };
-            Assert.Throws<TimeoutException>(() => MapsTest.ThrowInnerException(() => GoogleMaps.Geocode.QueryAsync(_request, TimeSpan.FromMilliseconds(1)).Wait()));
+            Assert.Throws<TimeoutException>(() => GoogleMapsTest.ThrowInnerException(() => GoogleMaps.Geocode.QueryAsync(_request, TimeSpan.FromMilliseconds(1)).Wait()));
 		}
         [Test]
         public void GeocodingAsyncCancelThrowsTest()
@@ -110,7 +109,7 @@ namespace GoogleApi.Test.Maps
             var _task = GoogleMaps.Geocode.QueryAsync(_request, _cancellationTokenSource.Token);
 			_cancellationTokenSource.Cancel();
 
-            Assert.Throws<TaskCanceledException>(() => MapsTest.ThrowInnerException(_task));
+            Assert.Throws<TaskCanceledException>(() => GoogleMapsTest.ThrowInnerException(_task));
         }
 
         [Test]
@@ -118,31 +117,31 @@ namespace GoogleApi.Test.Maps
         {
             Assert.Inconclusive();
 
-            var _request = new GeolocationRequest
-            {
-                //Key = this._apiKey,
-                //Key = "9-vZAa8SbwPEboFXvfH4nmiHamc=", ClientId = "gme-clickataxiaps",
-                ConsiderIp = false,
-                WifiAccessPoints = new[]
-                {
-                    new WifiAccessPoint
-                    {
-                        MacAddress =  "00:25:9c:cf:1c:ac",
-                        SignalStrength = -43,
-                        SignalToNoiseRatio = 0
-                    },
-                    new WifiAccessPoint
-                    {
-                        MacAddress =  "00:25:9c:cf:1c:ad",
-                        SignalStrength = -55,
-                        SignalToNoiseRatio = 0
-                    }
-                } 
-            };
+            //var _request = new GeolocationRequest
+            //{
+            //    //Key = this._apiKey,
+            //    //Key = "9-vZAa8SbwPEboFXvfH4nmiHamc=", ClientId = "gme-clickataxiaps",
+            //    ConsiderIp = false,
+            //    WifiAccessPoints = new[]
+            //    {
+            //        new WifiAccessPoint
+            //        {
+            //            MacAddress =  "00:25:9c:cf:1c:ac",
+            //            SignalStrength = -43,
+            //            SignalToNoiseRatio = 0
+            //        },
+            //        new WifiAccessPoint
+            //        {
+            //            MacAddress =  "00:25:9c:cf:1c:ad",
+            //            SignalStrength = -55,
+            //            SignalToNoiseRatio = 0
+            //        }
+            //    } 
+            //};
 
-            var _result = GoogleMaps.Geolocation.Query(_request);
+            //var _result = GoogleMaps.Geolocation.Query(_request);
 
-            Assert.AreEqual(Status.OK, _result.Status);
+            //Assert.AreEqual(Status.OK, _result.Status);
         }
 
         [Test]

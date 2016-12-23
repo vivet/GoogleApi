@@ -33,6 +33,9 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
         /// </summary>
         public virtual int? Samples { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -41,6 +44,10 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
             }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
             if (this.Locations == null == (this.Path == null))

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Geocode.Response.Enums;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {
@@ -37,8 +37,14 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
 		[DataMember(Name = "location_type")]
         internal virtual string LocationTypeStr
 		{
-            get { return EnumHelper.ToEnumString(this.LocationType); }
-            set { this.LocationType = EnumHelper.ToEnum<GeometryLocationType>(value); }
+		    get
+		    {
+                return this.LocationType.ToEnumString();
+		    }
+		    set
+		    {
+                this.LocationType = value.ToEnum<GeometryLocationType>();
+		    }
 		}
     }
 }

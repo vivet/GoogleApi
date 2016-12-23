@@ -1,5 +1,8 @@
 namespace GoogleApi.Entities.Maps.Directions.Response.Enums
 {
+    /// <summary>
+    /// VehicleType.
+    /// </summary>
 	public enum VehicleType
 	{
 		/// <summary>

@@ -35,6 +35,9 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// </summary>
         public virtual Ranking Rankby { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -43,6 +46,10 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
             }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = base.GetQueryStringParameters();

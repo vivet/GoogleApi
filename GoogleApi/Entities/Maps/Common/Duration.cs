@@ -24,16 +24,19 @@ namespace GoogleApi.Entities.Maps.Common
 		}
 
 		/// <summary>
-		/// value indicates the duration in seconds.
+		/// Value indicates the duration in seconds.
 		/// </summary>
         public virtual TimeSpan Value { get; set; }
 
 		/// <summary>
-		/// text contains a human-readable representation of the duration.
+		/// Text contains a human-readable representation of the duration.
 		/// </summary>
 		[DataMember(Name = "text")]
         public virtual string Text { get; set; }
 
+        /// <summary>
+        /// Timezone.
+        /// </summary>
 		[DataMember(Name = "time_zone")]
         public virtual string TimeZone { get; set; }
 	}

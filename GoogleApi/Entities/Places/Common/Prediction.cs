@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Places.Common.Enums;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -43,10 +43,16 @@ namespace GoogleApi.Entities.Places.Common
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        protected virtual IEnumerable<string> TypesStr
+        private IEnumerable<string> TypesStr
         {
-            get { return this.Types.Select(EnumHelper.ToEnumString); }
-            set { this.Types = value.Select(EnumHelper.ToEnum<PlaceLocationType>); }
+            get
+            {
+                return this.Types.Select(_x => _x.ToEnumString());
+            }
+            set
+            {
+                this.Types = value.Select(_x => _x.ToEnum<PlaceLocationType>());
+            }
         }
     }
 }

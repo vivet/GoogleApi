@@ -1,9 +1,12 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
+    /// <summary>
+    /// Vehicle
+    /// </summary>
 	[DataContract(Name = "vehicle")]
 	public class Vehicle
 	{
@@ -25,10 +28,16 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         public virtual VehicleType VehicleType { get; set; }
 
         [DataMember(Name = "type")]
-        protected virtual string VehicleTypeStr
+        private string VehicleTypeStr
         {
-            get { return EnumHelper.ToEnumString(this.VehicleType); }
-            set { this.VehicleType = EnumHelper.ToEnum<VehicleType>(value); }
+            get
+            {
+                return this.VehicleType.ToEnumString();
+            }
+            set
+            {
+                this.VehicleType = value.ToEnum<VehicleType>();
+            }
         }
     }
 }

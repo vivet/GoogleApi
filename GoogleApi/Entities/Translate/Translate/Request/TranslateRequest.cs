@@ -62,11 +62,18 @@ namespace GoogleApi.Entities.Translate.Translate.Request
             return new Uri(_scheme + this.BaseUrl + "?" + _queryString);
         }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get { return TranslateRequest.BASE_URL; }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Key))

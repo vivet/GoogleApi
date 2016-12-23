@@ -3,21 +3,18 @@ using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Translate
+namespace GoogleApi.Test
 {
     [TestFixture]
-    public class TranslateTest : BaseTest
+    public class GoogleTranslateTest : BaseTest
     {
         [Test]
-        public void TranslateWhenDanishTest()
+        public void TranslateDanishTest()
         {
             var _request = new TranslateRequest
             {
                 Target = "da",
-                Qs = new[]
-                {
-                    "Hello World"
-                },
+                Qs = new[] { "Hello World" },
                 Key = this._apiKey
             };
             var _result = GoogleTranslate.Translate.Query(_request);
@@ -26,7 +23,7 @@ namespace GoogleApi.Test.Translate
             Assert.AreEqual("en", _result.Data.Translations.First().DetectedSourceLanguage);
         }
         [Test]
-        public void TranslateWhenGermanTest()
+        public void TranslateGermanTest()
         {
             var _request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this._apiKey, Format = Format.TEXT };
             var _result = GoogleTranslate.Translate.Query(_request);

@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
@@ -19,8 +19,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
         [DataMember(Name = "status")]
         internal virtual string StatusStr
         {
-            get { return EnumHelper.ToEnumString(this.Status); }
-            set { this.Status = EnumHelper.ToEnum<Status>(value); }
+            get { return this.Status.ToEnumString(); }
+            set { this.Status = value.ToEnum<Status>(); }
         }
 
         /// <summary>

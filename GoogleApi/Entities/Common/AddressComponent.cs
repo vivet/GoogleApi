@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Common
 {
@@ -20,10 +20,13 @@ namespace GoogleApi.Entities.Common
         [DataMember(Name = "types")]
         internal virtual IEnumerable<string> TypesStr
         {
-            get { return this.Types.Select(EnumHelper.ToEnumString); }
+            get
+            {
+                return this.Types.Select(_x => _x.ToEnumString());
+            }
             set
             {
-                this.Types = value.Select(EnumHelper.ToEnum<LocationType>);
+                this.Types = value.Select(_x => _x.ToEnum<LocationType>());
             }
         }
 

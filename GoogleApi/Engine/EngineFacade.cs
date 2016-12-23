@@ -20,7 +20,11 @@ namespace GoogleApi.Engine
         internal readonly TimeSpan _defaultTimeout;
         internal static readonly EngineFacade<TRequest, TResponse> _instance = new EngineFacade<TRequest, TResponse>();
 
-        private EngineFacade()
+        /// <summary>
+        /// Default constructor.
+        /// Initializes Timeout.
+        /// </summary>
+        public EngineFacade()
         {
             this._defaultTimeout = TimeSpan.FromSeconds(100);
         }
@@ -35,11 +39,11 @@ namespace GoogleApi.Engine
         {
             get
             {
-                return GenericEngine.HttpConnectionLimit;
+                return GenericEngine<TRequest, TResponse>.HttpConnectionLimit;
             }
             set
             {
-                GenericEngine.HttpConnectionLimit = value;
+                GenericEngine<TRequest, TResponse>.HttpConnectionLimit = value;
             }
         }
 
@@ -53,11 +57,11 @@ namespace GoogleApi.Engine
         {
             get
             {
-                return GenericEngine.HttpsConnectionLimit;
+                return GenericEngine<TRequest, TResponse>.HttpsConnectionLimit;
             }
             set
             {
-                GenericEngine.HttpsConnectionLimit = value;
+                GenericEngine<TRequest, TResponse>.HttpsConnectionLimit = value;
             }
         }
 
@@ -70,7 +74,7 @@ namespace GoogleApi.Engine
         /// <exception cref="AuthenticationException">Thrown when the provided Google client ID or signing key are invalid.</exception>
         /// <exception cref="TimeoutException">Thrown when the operation has exceeded the allotted time.</exception>
         /// <exception cref="WebException">Thrown when an error occurred while downloading data.</exception>
-        public TResponse Query(TRequest _request)
+        public virtual TResponse Query(TRequest _request)
         {
             if (_request == null)
                 throw new ArgumentNullException("_request");
@@ -90,7 +94,7 @@ namespace GoogleApi.Engine
         /// <exception cref="AuthenticationException">Thrown when the provided Google client ID or signing key are invalid.</exception>
         /// <exception cref="TimeoutException">Thrown when the operation has exceeded the allotted time.</exception>
         /// <exception cref="WebException">Thrown when an error occurred while downloading data.</exception>
-        public TResponse Query(TRequest _request, TimeSpan _timeout)
+        public virtual TResponse Query(TRequest _request, TimeSpan _timeout)
         {
             if (_request == null)
                 throw new ArgumentNullException("_request");
@@ -104,7 +108,7 @@ namespace GoogleApi.Engine
         /// <param name="_request">The request that will be sent.</param>
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        public Task<TResponse> QueryAsync(TRequest _request)
+        public virtual Task<TResponse> QueryAsync(TRequest _request)
         {
             if (_request == null)
                 throw new ArgumentNullException("_request");
@@ -122,7 +126,7 @@ namespace GoogleApi.Engine
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout)
+        public virtual Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout)
         {
             if (_request == null)
                 throw new ArgumentNullException("_request");
@@ -137,13 +141,10 @@ namespace GoogleApi.Engine
         /// <param name="_token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        public Task<TResponse> QueryAsync(TRequest _request, CancellationToken _token)
+        public virtual Task<TResponse> QueryAsync(TRequest _request, CancellationToken _token)
         {
             if (_request == null)
                 throw new ArgumentNullException("_request");
-
-            if (_token == null)
-                throw new ArgumentNullException("_token");
             
             return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(_request, TimeSpan.FromMilliseconds(Timeout.Infinite), _token);
         }
@@ -159,13 +160,10 @@ namespace GoogleApi.Engine
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token)
+        public virtual Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token)
         {
             if (_request == null)
                 throw new ArgumentNullException("_request");
-
-            if (_token == null)
-                throw new ArgumentNullException("_token");
          
             return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(_request, _timeout, _token);
         }

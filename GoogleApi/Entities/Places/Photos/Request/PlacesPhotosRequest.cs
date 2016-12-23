@@ -31,6 +31,9 @@ namespace GoogleApi.Entities.Places.Photos.Request
         /// </summary>
         public virtual int? MaxWidth { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -39,6 +42,10 @@ namespace GoogleApi.Entities.Places.Photos.Request
             }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = base.GetQueryStringParameters();

@@ -36,6 +36,9 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
 		/// </summary>
         public virtual string Language { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -43,7 +46,11 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
                 return base.BaseUrl + "queryautocomplete/";
             }
         }
-        
+
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
             var _parameters = base.GetQueryStringParameters();

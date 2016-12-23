@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Net;
 
-namespace GoogleApi.Extensions
+namespace GoogleApi.Web
 {
     /// <summary>
     /// WebClient class.
     /// </summary>
-    public class WebClientEx : WebClient
+    public class WebClientTimeout : WebClient
     {
         /// <summary>
         /// 
@@ -14,22 +14,13 @@ namespace GoogleApi.Extensions
         public virtual TimeSpan? Timeout { get; set; }
 
         /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public WebClientEx()
-        {
-            
-        }
-        /// <summary>
         /// Constructor, setting custom timeout.
         /// </summary>
         /// <param name="_timeout"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public WebClientEx(TimeSpan _timeout)
+        public WebClientTimeout(TimeSpan _timeout)
+            : base()
         {
-            if (_timeout != WebClientExtension._infiniteTimeout && _timeout <= TimeSpan.Zero)
-                throw new ArgumentOutOfRangeException("_timeout", _timeout, "The specified timeout must be greater than zero or infinite.");
-
             this.Timeout = _timeout;
         }
 
@@ -39,15 +30,18 @@ namespace GoogleApi.Extensions
         /// <returns>
         /// A new <see cref="T:System.Net.WebRequest"/> object for the specified resource.
         /// </returns>
-        /// <param name="_address">A <see cref="T:System.Uri"/> that identifies the resource to request.</param>
-        protected override WebRequest GetWebRequest(Uri _address)
+        /// <param name="_uri">A <see cref="T:System.Uri"/> that identifies the resource to request.</param>
+        protected override WebRequest GetWebRequest(Uri _uri)
         {
-            var _request = base.GetWebRequest(_address);
-
+            if (_uri == null) 
+                throw new ArgumentNullException("_uri");
+            
+            var _request = base.GetWebRequest(_uri);
+            
             if (_request == null)
                 return null;
 
-            _request.Timeout = this.Timeout == null ? _request.Timeout : (int)Timeout.Value.TotalMilliseconds;
+            _request.Timeout = this.Timeout == null ? _request.Timeout : (int)this.Timeout.Value.TotalMilliseconds;
 
             return _request;
         }

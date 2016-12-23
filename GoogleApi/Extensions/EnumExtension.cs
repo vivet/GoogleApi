@@ -1,47 +1,29 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace GoogleApi.Helpers
+namespace GoogleApi.Extensions
 {
     /// <summary>
-    /// Helper methods to convert enums to strings for query string parameters.
+    /// Enum Extension methods.
     /// </summary>
-    public static class EnumHelper
+    public static class EnumExtension
     {
         /// <summary>
         /// Convert enum to string.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="_type"></param>
+        /// <param name="_enum"></param>
         /// <returns></returns>
-        public static string ToEnumString<T>(T _type)
+        public static string ToEnumString<T>(this T _enum) 
+            where T : struct, IConvertible
         {
             var _enumType = typeof(T);
-            var _name = Enum.GetName(_enumType, _type);
+            var _name = Enum.GetName(_enumType, _enum);
             var _enumMemberAttribute = ((EnumMemberAttribute[])_enumType.GetField(_name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
 
             return _enumMemberAttribute.Value;
-        }
-      
-        /// <summary>
-        /// convert string to enum.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="_str"></param>
-        /// <returns></returns>
-        public static T ToEnum<T>(string _str)
-        {
-            var _enumType = typeof(T);
-            foreach (var _name in Enum.GetNames(_enumType))
-            {
-                var _enumMemberAttribute = ((EnumMemberAttribute[])_enumType.GetField(_name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-                if (_enumMemberAttribute.Value == _str) 
-                    return (T)Enum.Parse(_enumType, _name);
-            }
-
-            return default(T);
         }
 
         /// <summary>
@@ -51,7 +33,8 @@ namespace GoogleApi.Helpers
         /// <param name="_enum"></param>
         /// <param name="_delimeter"></param>
         /// <returns></returns>
-        public static string ToString(this Enum _enum, char _delimeter)
+        public static string ToEnumString<T>(this T _enum, char _delimeter) 
+            where T : struct, IConvertible
         {
             if (_enum.GetType().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
                 return Convert.ToString(_enum).ToLower();

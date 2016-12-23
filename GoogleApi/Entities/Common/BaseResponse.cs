@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using GoogleApi.Helpers;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Common
 {
@@ -25,8 +25,14 @@ namespace GoogleApi.Entities.Common
         [DataMember(Name = "status")]
         internal virtual string StatusStr
         {
-            get { return EnumHelper.ToEnumString(this.Status); }
-            set { this.Status = EnumHelper.ToEnum<Status>(value); }
+            get
+            {
+                return this.Status.ToEnumString();
+            }
+            set
+            {
+                this.Status = value.ToEnum<Status>();
+            }
         }
 
         [DataMember(Name = "error_message")]

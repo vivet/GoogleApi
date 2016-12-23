@@ -3,6 +3,9 @@ using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Places.Common
 {
+    /// <summary>
+    /// Geometry
+    /// </summary>
     [DataContract]
     public class Geometry
     {

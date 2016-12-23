@@ -26,6 +26,9 @@ namespace GoogleApi.Entities.Places.Common
             }
         }
 
+        /// <summary>
+        /// BaseUrl property overriden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -34,6 +37,10 @@ namespace GoogleApi.Entities.Places.Common
             }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             var _parameters = base.GetQueryStringParameters();

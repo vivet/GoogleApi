@@ -25,11 +25,18 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
 		/// </summary>
         public virtual bool Interpolate { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get { return "roads.googleapis.com/v1/snapToRoads/"; }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
             if (this.Path == null || !this.Path.Any())

@@ -47,6 +47,9 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
 		/// </summary>
         public virtual Dictionary<Component, string> Components { get; set; }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get
@@ -55,6 +58,10 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
             }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
             if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))

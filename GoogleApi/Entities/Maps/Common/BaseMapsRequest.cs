@@ -25,6 +25,9 @@ namespace GoogleApi.Entities.Maps.Common
             }
         }
 
+        /// <summary>
+        /// BaseUrl property overriden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get

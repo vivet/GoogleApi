@@ -1,6 +1,7 @@
 ﻿using System;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Extensions;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Request
@@ -36,11 +37,18 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
             set { throw new NotSupportedException("This operation is not supported, TimeZoneRequest must use SSL"); }
         }
 
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
         protected internal override string BaseUrl
         {
             get { return TimeZoneRequest.BASE_URL; }
         }
 
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             if (this.Location == null)
@@ -52,7 +60,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
             var _parameters = base.GetQueryStringParameters();
 
             _parameters.Add("location", this.Location.LocationString);
-            _parameters.Add("timestamp", UnixTimeConverter.DateTimeToUnixTimestamp(this.TimeStamp).ToString());
+            _parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
 
             if (!string.IsNullOrWhiteSpace(this.Language)) 
                 _parameters.Add("language", this.Language);

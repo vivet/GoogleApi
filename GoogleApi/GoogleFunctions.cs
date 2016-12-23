@@ -22,6 +22,9 @@ namespace GoogleApi
         /// <returns></returns>
         public static string EncodePolyLine(IEnumerable<Location> _locations)
         {
+            if (_locations == null) 
+                throw new ArgumentNullException("_locations");
+            
             var _encodedString = new StringBuilder();
 
             var _encodeDiff = (Action<int>)(_diff =>
@@ -58,6 +61,7 @@ namespace GoogleApi
 
             return _encodedString.ToString();
         }
+
         /// <summary>
         /// Merge polylines into one encoded polyline string.
         /// </summary>
@@ -68,11 +72,14 @@ namespace GoogleApi
             if (_encdodedLocations == null)
                 throw new ArgumentNullException("_encdodedLocations");
 
-            IList<Location> _locations = new List<Location>();
-            _locations = _encdodedLocations.Where(_x => !string.IsNullOrEmpty(_x)).Aggregate(_locations, (_current, _encdodedLocation) => _current.Concat(GoogleApi.GoogleFunctions.DecodePolyLine(_encdodedLocation)).ToList());
+            var _length = _encdodedLocations.Length;
+            var _locations = new Location[_length];
 
-            return GoogleApi.GoogleFunctions.EncodePolyLine(_locations);
+            _locations = _encdodedLocations.Where(_x => !string.IsNullOrEmpty(_x)).Aggregate(_locations, (_current, _encdodedLocation) => _current.Concat(GoogleApi.GoogleFunctions.DecodePolyLine(_encdodedLocation)).ToArray());
+
+            return GoogleFunctions.EncodePolyLine(_locations);
         }
+        
         /// <summary>
         /// Decode a polyline string into locations.
         /// </summary>
@@ -95,6 +102,7 @@ namespace GoogleApi
                 var _sum = 0;
                 var _shifter = 0;
                 int _next5Bits;
+                
                 do
                 {
                     _next5Bits = _polylineChars[_index++] - 63;
@@ -110,6 +118,7 @@ namespace GoogleApi
                 // Calculate next longitude
                 _sum = 0;
                 _shifter = 0;
+                
                 do
                 {
                     _next5Bits = _polylineChars[_index++] - 63;

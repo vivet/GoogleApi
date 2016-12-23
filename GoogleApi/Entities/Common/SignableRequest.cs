@@ -30,6 +30,11 @@ namespace GoogleApi.Entities.Common
             return this.ClientId == null ? _uri : this.Sign(_uri);
         }
 
+        /// <summary>
+        /// Signs the request using premium subscription.
+        /// </summary>
+        /// <param name="_uri"></param>
+        /// <returns></returns>
         protected virtual Uri Sign(Uri _uri)
         {
             if (_uri == null)
@@ -55,6 +60,11 @@ namespace GoogleApi.Entities.Common
 
             return new Uri(_uri.Scheme + "://" + _uri.Host + _urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(_signature));
         }
+
+        /// <summary>
+        /// Get the query string collection of added parameters for the request.
+        /// </summary>
+        /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             if (string.IsNullOrEmpty(this.ClientId))
