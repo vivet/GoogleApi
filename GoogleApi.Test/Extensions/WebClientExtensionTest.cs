@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
+using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using GoogleApi.Extensions;
 
@@ -12,7 +14,12 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void StaticConstructorInitializesPreCancelledTaskTest()
         {
-            Assert.Inconclusive();
+            var _type = typeof(WebClientExtension);
+            var _fieldInfo = _type.GetField("_preCancelledTask", BindingFlags.NonPublic | BindingFlags.Static);
+            var _value = _fieldInfo == null ? null : (Task<byte[]>)_fieldInfo.GetValue(null);
+        
+            Assert.IsNotNull(_value);
+            Assert.IsTrue(_value.IsCanceled);
         }
 
         [Test]

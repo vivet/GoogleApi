@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using GoogleApi.Helpers;
 using NUnit.Framework;
 
@@ -79,7 +80,16 @@ namespace GoogleApi.Test.Helpers
         [Test]
         public void GetQueryStringPostfixTest()
 		{
-            Assert.Inconclusive();
+            var _queryStringParametersList = new QueryStringParametersList();
+            _queryStringParametersList.Add("1", "1");
+            _queryStringParametersList.Add("2", "2");
+            _queryStringParametersList.Add("3", "3");
+
+            var _actual = _queryStringParametersList.GetQueryStringPostfix();
+            var _expected = string.Join("&", _queryStringParametersList.List.Select(_x => Uri.EscapeDataString(_x.Key) + "=" + Uri.EscapeDataString(_x.Value)));
+
+            Assert.IsNotNull(_actual);
+            Assert.AreEqual(_expected, _actual);
 		}
 	}
 }

@@ -7,6 +7,7 @@ using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Geocode.Request;
+using GoogleApi.Entities.Maps.TimeZone.Request;
 using NUnit.Framework;
 
 namespace GoogleApi.Test
@@ -254,12 +255,30 @@ namespace GoogleApi.Test
         [Test]
         public void TimeZoneTest()
         {
-            Assert.Inconclusive();
+            var _location = new Location(40.7141289, -73.9614074);
+            var _request = new TimeZoneRequest { Location = _location };
+            var _response = GoogleMaps.TimeZone.Query(_request);
+
+            Assert.IsNotNull(_response);
+            Assert.AreEqual(Status.OK, _response.Status);
+            Assert.AreEqual("America/New_York", _response.TimeZoneId);
+            Assert.AreEqual("GMT-05:00", _response.TimeZoneName);
+            Assert.AreEqual(0.00, _response.OffSet);
+            Assert.AreEqual(-18000.00, _response.RawOffSet);
         }
         [Test]
         public void TimeZoneAsyncTest()
         {
-            Assert.Inconclusive();
+            var _location = new Location(40.7141289, -73.9614074);
+            var _request = new TimeZoneRequest { Location = _location };
+            var _response = GoogleMaps.TimeZone.QueryAsync(_request).Result;
+
+            Assert.IsNotNull(_response);
+            Assert.AreEqual(Status.OK, _response.Status);
+            Assert.AreEqual("America/New_York", _response.TimeZoneId);
+            Assert.AreEqual("GMT-05:00", _response.TimeZoneName);
+            Assert.AreEqual(0.00, _response.OffSet);
+            Assert.AreEqual(-18000.00, _response.RawOffSet);
         }
 	}
 }

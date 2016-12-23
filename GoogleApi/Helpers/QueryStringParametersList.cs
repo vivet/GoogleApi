@@ -27,7 +27,7 @@ namespace GoogleApi.Helpers
         /// </summary>
         /// <param name="_key"></param>
         /// <param name="_value"></param>
-		public void Add(string _key, string _value)
+		public virtual void Add(string _key, string _value)
         {
             if (_key == null) 
                 throw new ArgumentNullException("_key");
@@ -48,7 +48,7 @@ namespace GoogleApi.Helpers
         /// Remove a parameter.
         /// </summary>
         /// <param name="_key"></param>
-        public void Remove(string _key)
+        public virtual void Remove(string _key)
         {
             if (_key == null)
                 throw new ArgumentNullException("_key");
@@ -60,7 +60,7 @@ namespace GoogleApi.Helpers
         /// returns the query string collection as url paremer string.
         ///  </summary>
         /// <returns></returns>
-		public string GetQueryStringPostfix()
+		public  virtual string GetQueryStringPostfix()
 		{
 			return string.Join("&", this.List.Select(_x => Uri.EscapeDataString(_x.Key) + "=" + Uri.EscapeDataString(_x.Value)));
 		}
