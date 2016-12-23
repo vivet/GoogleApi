@@ -25,10 +25,12 @@ namespace GoogleApi.Entities.Common
         /// <returns></returns>
         public override Uri GetUri()
         {
-            return this.ClientId != null ? this.Sign(base.GetUri()) : base.GetUri();
+            var _uri = base.GetUri();
+
+            return this.ClientId == null ? _uri : this.Sign(_uri);
         }
 
-        protected internal Uri Sign(Uri _uri)
+        protected virtual Uri Sign(Uri _uri)
         {
             if (_uri == null)
                 throw new ArgumentNullException("_uri");
@@ -53,23 +55,6 @@ namespace GoogleApi.Entities.Common
 
             return new Uri(_uri.Scheme + "://" + _uri.Host + _urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(_signature));
         }
-
-        private static string ToBase64UrlString(byte[] _data)
-        {
-            if (_data == null) 
-                throw new ArgumentNullException("_data");
-
-            return Convert.ToBase64String(_data).Replace("+", "-").Replace("/", "_");
-        }
-
-        private static byte[] FromBase64UrlString(string _base64UrlString)
-        {
-            if (_base64UrlString == null) 
-                throw new ArgumentNullException("_base64UrlString");
-            
-            return Convert.FromBase64String(_base64UrlString.Replace("-", "+").Replace("_", "/"));
-        }
-
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             if (string.IsNullOrEmpty(this.ClientId))
@@ -79,6 +64,21 @@ namespace GoogleApi.Entities.Common
             _parameters.Add("sensor", Sensor.ToString().ToLower());
 
             return _parameters;
+        }
+
+        private static string ToBase64UrlString(byte[] _data)
+        {
+            if (_data == null) 
+                throw new ArgumentNullException("_data");
+
+            return Convert.ToBase64String(_data).Replace("+", "-").Replace("/", "_");
+        }
+        private static byte[] FromBase64UrlString(string _base64UrlString)
+        {
+            if (_base64UrlString == null) 
+                throw new ArgumentNullException("_base64UrlString");
+            
+            return Convert.FromBase64String(_base64UrlString.Replace("-", "+").Replace("_", "/"));
         }
     }
 }

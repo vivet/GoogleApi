@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Extensions;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Engine
 {
@@ -39,14 +40,26 @@ namespace GoogleApi.Engine
 			try
 			{
                 var _uri = _request.GetUri();
-                var _data = new WebClientEx(_timeout).DownloadData(_uri);
+                var _webClientEx = new WebClientEx(_timeout);
+                
+                if (_request.IsJson)
+			    {
+                    _webClientEx.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-                return GenericEngine<TRequest, TResponse>.Deserialize(_data);
+                    var _json = JsonConvert.SerializeObject(_request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                    var _uploadString = _webClientEx.UploadString(_uri, "POST", _json);
+
+                    return GenericEngine<TRequest, TResponse>.Deserialize(_uploadString);
+			    }
+
+			    var _downloadData = _webClientEx.DownloadData(_uri);
+                
+			    return GenericEngine<TRequest, TResponse>.Deserialize(_downloadData);
 			}
 			catch (WebException _ex)
 			{
                 if (GenericEngine.IndicatesAuthenticationFailed(_ex))
-					throw new AuthenticationException(AUTHENTICATION_FAILED_MESSAGE, _ex);
+                    throw new AuthenticationException(GenericEngine.AUTHENTICATION_FAILED_MESSAGE, _ex);
 
 				if (_ex.Status == WebExceptionStatus.Timeout)
 					throw new TimeoutException(string.Format("The request has exceeded the timeout limit of {0} and has been aborted.", _timeout));
@@ -77,6 +90,14 @@ namespace GoogleApi.Engine
 
             return (TResponse)_serializer.ReadObject(_stream);
         }
+        private static TResponse Deserialize(string _serializedObject)
+        {
+            if (_serializedObject == null)
+                throw new ArgumentNullException("_serializedObject");
+
+            return JsonConvert.DeserializeObject<TResponse>(_serializedObject);
+        }
+       
         private static void DownloadDataComplete(Task<byte[]> _task, TaskCompletionSource<TResponse> _completionSource)
         {
             if (_task == null) 
@@ -84,7 +105,7 @@ namespace GoogleApi.Engine
             
             if (_completionSource == null) 
                 throw new ArgumentNullException("_completionSource");
-           
+
             if (_task.IsCanceled)
 			{
 				_completionSource.SetCanceled();
@@ -93,7 +114,7 @@ namespace GoogleApi.Engine
 			{
                 if (_task.Exception != null && GenericEngine.IndicatesAuthenticationFailed(_task.Exception.InnerException))
 			    {
-			        _completionSource.SetException(new AuthenticationException(AUTHENTICATION_FAILED_MESSAGE, _task.Exception.InnerException));
+                    _completionSource.SetException(new AuthenticationException(GenericEngine.AUTHENTICATION_FAILED_MESSAGE, _task.Exception.InnerException));
 			    }
 				else if (_task.Exception != null)
 				{

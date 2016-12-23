@@ -8,6 +8,7 @@ using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Geocode.Request;
+using GoogleApi.Entities.Maps.Geolocation.Request;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps
@@ -116,82 +117,100 @@ namespace GoogleApi.Test.Maps
         public void GeolocationTest()
         {
             Assert.Inconclusive();
-            //var _request = new GeolocationRequest();
-            //var _result = GoogleMaps.Geolocation.Query(_request);
 
-            //Assert.AreEqual(Status.OK, _result.Status);
+            var _request = new GeolocationRequest
+            {
+                //Key = this._apiKey,
+                //Key = "9-vZAa8SbwPEboFXvfH4nmiHamc=", ClientId = "gme-clickataxiaps",
+                ConsiderIp = false,
+                WifiAccessPoints = new[]
+                {
+                    new WifiAccessPoint
+                    {
+                        MacAddress =  "00:25:9c:cf:1c:ac",
+                        SignalStrength = -43,
+                        SignalToNoiseRatio = 0
+                    },
+                    new WifiAccessPoint
+                    {
+                        MacAddress =  "00:25:9c:cf:1c:ad",
+                        SignalStrength = -55,
+                        SignalToNoiseRatio = 0
+                    }
+                } 
+            };
+
+            var _result = GoogleMaps.Geolocation.Query(_request);
+
+            Assert.AreEqual(Status.OK, _result.Status);
         }
 
         [Test]
         public void ReverseGeocodingTest()
 		{
 			var _request = new GeocodingRequest { Location = new Location(40.7141289, -73.9614074) };
-			var _result = GoogleMaps.Geocode.Query(_request);
+			var _response = GoogleMaps.Geocode.Query(_request);
 
-			if (_result.Status == Status.OVER_QUERY_LIMIT)
+			if (_response.Status == Status.OVER_QUERY_LIMIT)
 				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
-			Assert.AreEqual(Status.OK, _result.Status);
-            Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", _result.Results.First().FormattedAddress);
+			Assert.AreEqual(Status.OK, _response.Status);
+            Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", _response.Results.First().FormattedAddress);
 		}
 		[Test]
         public void ReverseGeocodingAsyncTest()
 		{
 			var _request = new GeocodingRequest { Location = new Location(40.7141289, -73.9614074) };
-			var _result = GoogleMaps.Geocode.QueryAsync(_request).Result;
+			var _response = GoogleMaps.Geocode.QueryAsync(_request).Result;
 
-			if (_result.Status == Status.OVER_QUERY_LIMIT)
+			if (_response.Status == Status.OVER_QUERY_LIMIT)
 				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
-			Assert.AreEqual(Status.OK, _result.Status);
-            Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", _result.Results.First().FormattedAddress);
+			Assert.AreEqual(Status.OK, _response.Status);
+            Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", _response.Results.First().FormattedAddress);
 		}
 		
         [Test]
         public void ElevationTest()
 		{
 			var _request = new ElevationRequest { Locations = new[] { new Location(40.7141289, -73.9614074) } };
+            var _response = GoogleMaps.Elevation.Query(_request);
 
-			var _result = GoogleMaps.Elevation.Query(_request);
-
-            if (_result.Status == Status.OVER_QUERY_LIMIT)
+            if (_response.Status == Status.OVER_QUERY_LIMIT)
 				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
-            Assert.AreEqual(Status.OK, _result.Status);
-			Assert.AreEqual(14.782454490661619, _result.Results.First().Elevation, 0.10);
+            Assert.AreEqual(Status.OK, _response.Status);
+			Assert.AreEqual(14.782454490661619, _response.Results.First().Elevation, 0.10);
 		}
 		[Test]
         public void ElevationAsyncTest()
 		{
 			var _request = new ElevationRequest { Locations = new[] { new Location(40.7141289, -73.9614074) } };
+            var _response = GoogleMaps.Elevation.QueryAsync(_request).Result;
 
-			var _result = GoogleMaps.Elevation.QueryAsync(_request).Result;
-
-			if (_result.Status == Status.OVER_QUERY_LIMIT)
+			if (_response.Status == Status.OVER_QUERY_LIMIT)
 				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
-			Assert.AreEqual(Status.OK, _result.Status);
-			Assert.AreEqual(14.782454490661619, _result.Results.First().Elevation, 0.10);
+			Assert.AreEqual(Status.OK, _response.Status);
+			Assert.AreEqual(14.782454490661619, _response.Results.First().Elevation, 0.10);
 		}
 
         [Test]
         public void DistanceMatrixTest()
         {
             var _request = new DistanceMatrixRequest { Origins = new [] {new Location(40.7141289, -73.9614074), }, Destinations = new [] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") }};
+            var _response = GoogleMaps.DistanceMatrix.Query(_request);
 
-            var _result = GoogleMaps.DistanceMatrix.Query(_request);
-
-            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value, 100);
+            Assert.AreEqual(8247, _response.Rows.First().Elements.First().Distance.Value, 100);
         }
 
         [Test]
         public void DistanceMatrixAsyncTest()
         {
             var _request = new DistanceMatrixRequest { Origins = new[] { new Location(40.7141289, -73.9614074), }, Destinations = new[] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") } };
+            var _response = GoogleMaps.DistanceMatrix.QueryAsync(_request).GetAwaiter().GetResult();
 
-            var _result = GoogleMaps.DistanceMatrix.QueryAsync(_request).GetAwaiter().GetResult();
-
-            Assert.AreEqual(8247, _result.Rows.First().Elements.First().Distance.Value, 100);
+            Assert.AreEqual(8247, _response.Rows.First().Elements.First().Distance.Value, 100);
         }
 
         [Test]
