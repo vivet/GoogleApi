@@ -7,6 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Places.Details.Request;
+using GoogleApi.Entities.Places.Details.Response;
+using GoogleApi.Entities.Places.Photos.Request;
+using GoogleApi.Entities.Places.Photos.Response;
 using GoogleApi.Extensions;
 using Newtonsoft.Json;
 
@@ -52,9 +56,8 @@ namespace GoogleApi.Engine
                     return GenericEngine<TRequest, TResponse>.Deserialize(_uploadString);
 			    }
 
-			    var _downloadData = _webClientEx.DownloadData(_uri);
-                
-			    return GenericEngine<TRequest, TResponse>.Deserialize(_downloadData);
+                var _downloadData = _webClientEx.DownloadData(_uri);
+                return GenericEngine<TRequest, TResponse>.Deserialize(_downloadData);
 			}
 			catch (WebException _ex)
 			{
@@ -97,7 +100,7 @@ namespace GoogleApi.Engine
 
             return JsonConvert.DeserializeObject<TResponse>(_serializedObject);
         }
-       
+
         private static void DownloadDataComplete(Task<byte[]> _task, TaskCompletionSource<TResponse> _completionSource)
         {
             if (_task == null) 

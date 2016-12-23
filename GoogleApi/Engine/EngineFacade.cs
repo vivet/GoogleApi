@@ -13,7 +13,9 @@ namespace GoogleApi.Engine
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public class EngineFacade<TRequest, TResponse> where TRequest : BaseRequest, new() where TResponse : IResponseFor
+    public class EngineFacade<TRequest, TResponse> 
+        where TRequest : BaseRequest, new() 
+        where TResponse : IResponseFor
     {
         internal readonly TimeSpan _defaultTimeout;
         internal static readonly EngineFacade<TRequest, TResponse> _instance = new EngineFacade<TRequest, TResponse>();
