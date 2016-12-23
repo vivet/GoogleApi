@@ -26,16 +26,15 @@ namespace GoogleApi.Test
             };
 
             var _response = GooglePlaces.AutoComplete.Query(_request);
-            var _results = _response.Predictions.ToList();
+            var _results = _response.Predictions.ToArray();
 
             Assert.AreEqual(_results[0].Description, "Jagtvej, 2200 Denmark");
             Assert.AreEqual(_results[1].Description, "Jagtvej, 2200 Copenhagen, Denmark");
             Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Lemvig, Denmark");
             Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Denmark");
             Assert.AreEqual(_results[4].Description, "Jagtvej 2200, Hillerød, Denmark");
-            Assert.AreEqual(5, _results.Count);
+            Assert.AreEqual(5, _results.Length);
         }
-
         [Test]
         public void PlacesAutoCompleteAsyncTest()
         {
@@ -48,14 +47,14 @@ namespace GoogleApi.Test
             };
 
             var _response = GooglePlaces.AutoComplete.QueryAsync(_request).Result;
-            var _results = _response.Predictions.ToList();
+            var _results = _response.Predictions.ToArray();
 
             Assert.AreEqual(_results[0].Description, "Jagtvej, 2200 Denmark");
             Assert.AreEqual(_results[1].Description, "Jagtvej, 2200 Copenhagen, Denmark");
             Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Lemvig, Denmark");
             Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Denmark");
             Assert.AreEqual(_results[4].Description, "Jagtvej 2200, Hillerød, Denmark");
-            Assert.AreEqual(5, _results.Count);
+            Assert.AreEqual(5, _results.Length);
         }
 
         [Test]
@@ -69,14 +68,56 @@ namespace GoogleApi.Test
                 Language = "en",
             };
             var _response = GooglePlaces.QueryAutoComplete.Query(_request);
-            var _results = _response.Predictions.ToList();
+            var _results = _response.Predictions.ToArray();
 
             Assert.AreEqual(_results[0].Description, "Jagtvej 2200, Denmark");
             Assert.AreEqual(_results[1].Description, "Jagtvej 2200, Lemvig, Denmark");
             Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Hillerød, Denmark");
             Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Næstved, Denmark");
             Assert.AreEqual(_results[4].Description, "Jagtvej 2200, Fredensborg, Denmark");
-            Assert.AreEqual(5, _results.Count);
+            Assert.AreEqual(5, _results.Length);
+        }
+        [Test]
+        public void PlacesQueryAutoCompleteAsyncTest()
+        {
+            var _request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = this._apiKey,
+                Input = "jagtvej 2200",
+                Sensor = true,
+                Language = "en",
+            };
+            var _response = GooglePlaces.QueryAutoComplete.QueryAsync(_request).Result;
+            var _results = _response.Predictions.ToArray();
+
+            Assert.AreEqual(_results[0].Description, "Jagtvej 2200, Denmark");
+            Assert.AreEqual(_results[1].Description, "Jagtvej 2200, Lemvig, Denmark");
+            Assert.AreEqual(_results[2].Description, "Jagtvej 2200, Hillerød, Denmark");
+            Assert.AreEqual(_results[3].Description, "Jagtvej 2200, Næstved, Denmark");
+            Assert.AreEqual(_results[4].Description, "Jagtvej 2200, Fredensborg, Denmark");
+            Assert.AreEqual(5, _results.Length);
+        }
+
+        [Test]
+        public void PlacesAddTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void PlacesAddAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesDeleteTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void PlacesDeleteAsyncTest()
+        {
+            Assert.Inconclusive();
         }
         
         [Test]
@@ -91,9 +132,34 @@ namespace GoogleApi.Test
             };
 
             var _response = GooglePlaces.AutoComplete.Query(_request);
-            var _results = _response.Predictions.ToList();
+            var _results = _response.Predictions.ToArray();
             var _result = _results.First();
             
+            var _request2 = new PlacesDetailsRequest
+            {
+                Key = _apiKey,
+                PlaceId = _result.PlaceId,
+                Sensor = true,
+            };
+
+            var _response2 = GooglePlaces.Details.Query(_request2);
+            Assert.AreEqual(Status.OK, _response2.Status);
+        }
+        [Test]
+        public void PlacesDetailsAsyncTest()
+        {
+            var _request = new PlacesAutoCompleteRequest
+            {
+                Key = _apiKey,
+                Input = "jagtvej 2200",
+                Sensor = true,
+                Language = "en",
+            };
+
+            var _response = GooglePlaces.AutoComplete.QueryAsync(_request).Result;
+            var _results = _response.Predictions.ToArray();
+            var _result = _results.First();
+
             var _request2 = new PlacesDetailsRequest
             {
                 Key = _apiKey,
@@ -123,6 +189,24 @@ namespace GoogleApi.Test
             Assert.IsNotNull(_response);
             Assert.AreEqual(Status.OK, _response.Status);
         }
+        [Test]
+        public void PlacesNearBySearchAsyncTest()
+        {
+            var _request = new PlacesNearBySearchRequest
+            {
+                Key = this._apiKey,
+                Location = new Location(51.491431, -3.16668),
+                Sensor = true,
+                Language = "en",
+                Radius = 500,
+                Types = new[] { SearchPlaceType.SCHOOL, SearchPlaceType.POLICE }
+            };
+
+            var _response = GooglePlaces.NearBySearch.QueryAsync(_request).Result;
+
+            Assert.IsNotNull(_response);
+            Assert.AreEqual(Status.OK, _response.Status);
+        }
         
         [Test]
         public void PlacesTextSearchTest()
@@ -136,6 +220,22 @@ namespace GoogleApi.Test
             };
 
             var _response = GooglePlaces.TextSearch.Query(_request);
+
+            Assert.IsNotNull(_response);
+            Assert.AreEqual(Status.OK, _response.Status);
+        }
+        [Test]
+        public void PlacesTextSearchAsyncTest()
+        {
+            var _request = new PlacesTextSearchRequest
+            {
+                Key = this._apiKey,
+                Sensor = true,
+                Language = "en",
+                Query = "picadelly circus"
+            };
+
+            var _response = GooglePlaces.TextSearch.QueryAsync(_request).Result;
 
             Assert.IsNotNull(_response);
             Assert.AreEqual(Status.OK, _response.Status);
@@ -159,9 +259,27 @@ namespace GoogleApi.Test
             Assert.IsNotNull(_response);
             Assert.AreEqual(Status.OK, _response.Status);
         }
+        [Test]
+        public void PlacesRadarSearchAsyncTest()
+        {
+            var _request = new PlacesRadarSearchRequest
+            {
+                Key = this._apiKey,
+                Location = new Location(55.673323, 12.527438),
+                Radius = 500,
+                Sensor = true,
+                Language = "en",
+                Keyword = "abc"
+            };
+
+            var _response = GooglePlaces.RadarSearch.QueryAsync(_request).Result;
+
+            Assert.IsNotNull(_response);
+            Assert.AreEqual(Status.OK, _response.Status);
+        }
 
         [Test]
-        public void PhotosTest()
+        public void PlacesPhotosTest()
         {
             Assert.Inconclusive();
 
@@ -203,6 +321,11 @@ namespace GoogleApi.Test
             //Assert.IsNotNull(_response3);
             //Assert.IsNotNull(_response3.Photo);
             //Assert.AreEqual(Status.OK, _response3.Status);
+        }
+        [Test]
+        public void PlacesPhotosAsyncTest()
+        {
+            Assert.Inconclusive();
         }
     }
 }
