@@ -24,7 +24,7 @@
     <OutputPath>bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>3</WarningLevel>
+    <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\debug\GoogleApi.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
@@ -46,6 +46,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -60,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Solution.cs">
+      <Link>Properties\Solution.cs</Link>
+    </Compile>
     <Compile Include="Engine\EngineFacade.cs" />
     <Compile Include="Engine\GenericEngineT.cs">
       <SubType>Code</SubType>
@@ -238,14 +244,15 @@
     <Compile Include="GooglePlaces.cs" />
     <Compile Include="GoogleFunctions.cs" />
     <Compile Include="GoogleTranslate.cs" />
-    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Extensions\EnumExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\QueryStringParametersList.cs" />
-    <Compile Include="Helpers\UnixTimeConverter.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Entities\Translate\Translate\Request\TranslateRequest.cs" />
     <Compile Include="Entities\Translate\Translate\Response\TranslateResponse.cs" />
     <Compile Include="Extensions\WebClientExtension.cs" />
-    <Compile Include="Extensions\WebClientEx.cs">
+    <Compile Include="Web\WebClientTimeout.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

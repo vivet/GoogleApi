@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi", "GoogleApi\GoogleApi.csproj", "{61E9FC82-47B0-43C3-8749-95D3A9967060}"
 EndProject
@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{15291FDD-57EE-480D-BFDB-92FDDCDB1B96}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		Solution.cs = Solution.cs
 	EndProjectSection
 EndProject
 Global
