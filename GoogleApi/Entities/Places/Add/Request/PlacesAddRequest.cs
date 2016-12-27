@@ -102,7 +102,7 @@ namespace GoogleApi.Entities.Places.Add.Request
                 throw new ArgumentException("Location must be provided.");
 
             if (this.Types == null || !this.Types.Any())
-                throw new ArgumentException("Types must be provided.");
+                throw new ArgumentException("Types must be provided. At least one type must be specified.");
             
             return _parameters;
         }

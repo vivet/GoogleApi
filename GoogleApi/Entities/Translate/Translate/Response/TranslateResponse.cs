@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
@@ -7,7 +8,7 @@ namespace GoogleApi.Entities.Translate.Translate.Response
     /// Translate Response.
     /// </summary>
     [DataContract]
-    public class TranslateResponse : IResponseFor
+    public class TranslateResponse : BaseResponse, IResponseFor
     {        
         /// <summary>
         /// Data container returned by google translate.
