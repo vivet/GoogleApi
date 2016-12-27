@@ -14,13 +14,14 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// "status" contains metadata on the request.
         /// </summary>
-        public Status Status { get; set; }
+        public virtual Status Status { get; set; }
+     
         /// <summary>
         /// When the status code is other than OK, there may be an additional error_message field within the Directions response object. 
         /// This field contains more detailed information about the reasons behind the given status code.
         /// Note: This field is not guaranteed to be always present, and its content is subject to change.
         /// </summary>
-        public Status ErrorMessage { get; set; }
+        public virtual string ErrorMessage { get; set; }
 
         [DataMember(Name = "status")]
         internal virtual string StatusStr
