@@ -31,7 +31,13 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void DownloadDataTaskAsyncTest()
         {
-            Assert.Inconclusive();
+            var _uri = new Uri("https://www.google.com");
+            var _timout = new TimeSpan(0, 0, 30);
+            var _webClient = new WebClient();
+            var _result = _webClient.DownloadDataTaskAsync(_uri, _timout).Result;
+
+            Assert.IsNotNull(_result);
+            Assert.AreEqual(typeof(byte[]), _result.GetType());
         }
         [Test]
         public void DownloadDataTaskAsyncWhenWebClientIsNullTest()
@@ -53,7 +59,14 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenTest()
         {
-            Assert.Inconclusive();
+            var _uri = new Uri("https://www.google.com");
+            var _cancellationToken = new CancellationToken();
+            var _webClient = new WebClient();
+
+            var _result = _webClient.DownloadDataTaskAsync(_uri, _cancellationToken).Result;
+
+            Assert.IsNotNull(_result);
+            Assert.AreEqual(typeof(byte[]), _result.GetType());
         }
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndWebClientIsNullTest()
@@ -75,7 +88,15 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndTimeoutTest()
         {
-            Assert.Inconclusive();
+            var _uri = new Uri("https://www.google.com");
+            var _timout = new TimeSpan(0, 0, 30);
+            var _cancellationToken = new CancellationToken();
+            var _webClient = new WebClient();
+
+            var _result = _webClient.DownloadDataTaskAsync(_uri, _timout, _cancellationToken).Result;
+
+            Assert.IsNotNull(_result);
+            Assert.AreEqual(typeof(byte[]), _result.GetType());
         }
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndTimeoutAndWebClientIsNullTest()

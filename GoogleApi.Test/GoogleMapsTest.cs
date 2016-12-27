@@ -7,6 +7,7 @@ using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Geocode.Request;
+using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using NUnit.Framework;
 
@@ -151,38 +152,58 @@ namespace GoogleApi.Test
         [Test]
         public void GeolocationTest()
         {
-            Assert.Inconclusive();
+            var _request = new GeolocationRequest
+            {
+                Key = this._apiKey,
+                ConsiderIp = false,
+                WifiAccessPoints = new[]
+                {
+                    new WifiAccessPoint
+                    {
+                        MacAddress =  "00:25:9c:cf:1c:ac",
+                        SignalStrength = -43,
+                        SignalToNoiseRatio = 0
+                    },
+                    new WifiAccessPoint
+                    {
+                        MacAddress =  "00:25:9c:cf:1c:ad",
+                        SignalStrength = -55,
+                        SignalToNoiseRatio = 0
+                    }
+                }
+            };
 
-            //var _request = new GeolocationRequest
-            //{
-            //    //Key = this._apiKey,
-            //    //Key = "9-vZAa8SbwPEboFXvfH4nmiHamc=", ClientId = "gme-clickataxiaps",
-            //    ConsiderIp = false,
-            //    WifiAccessPoints = new[]
-            //    {
-            //        new WifiAccessPoint
-            //        {
-            //            MacAddress =  "00:25:9c:cf:1c:ac",
-            //            SignalStrength = -43,
-            //            SignalToNoiseRatio = 0
-            //        },
-            //        new WifiAccessPoint
-            //        {
-            //            MacAddress =  "00:25:9c:cf:1c:ad",
-            //            SignalStrength = -55,
-            //            SignalToNoiseRatio = 0
-            //        }
-            //    } 
-            //};
+            var _result = GoogleMaps.Geolocation.Query(_request);
 
-            //var _result = GoogleMaps.Geolocation.Query(_request);
-
-            //Assert.AreEqual(Status.OK, _result.Status);
+            Assert.AreEqual(Status.OK, _result.Status);
         }
         [Test]
         public void GeolocationAsyncTest()
         {
-            Assert.Inconclusive();
+            var _request = new GeolocationRequest
+            {
+                Key = this._apiKey,
+                ConsiderIp = false,
+                WifiAccessPoints = new[]
+                {
+                    new WifiAccessPoint
+                    {
+                        MacAddress =  "00:25:9c:cf:1c:ac",
+                        SignalStrength = -43,
+                        SignalToNoiseRatio = 0
+                    },
+                    new WifiAccessPoint
+                    {
+                        MacAddress =  "00:25:9c:cf:1c:ad",
+                        SignalStrength = -55,
+                        SignalToNoiseRatio = 0
+                    }
+                }
+            };
+
+            var _result = GoogleMaps.Geolocation.QueryAsync(_request).Result;
+
+            Assert.AreEqual(Status.OK, _result.Status);
         }
 
         [Test]
