@@ -116,8 +116,8 @@
     <Compile Include="Entities\Common\Enums\Component.cs" />
     <Compile Include="Entities\Places\Common\BasePlacesResponse.cs" />
     <Compile Include="Entities\Places\Common\Prediction.cs" />
-    <Compile Include="Entities\Places\Delete\Request\PlacesAddRequest.cs" />
-    <Compile Include="Entities\Places\Delete\Response\PlacesAddResponse.cs" />
+    <Compile Include="Entities\Places\Delete\Request\PlacesDeleteRequest.cs" />
+    <Compile Include="Entities\Places\Delete\Response\PlacesDeleteResponse.cs" />
     <Compile Include="Entities\Places\Details\Request\Enums\Extensions.cs" />
     <Compile Include="Entities\Places\Details\Request\PlacesDetailsRequest.cs" />
     <Compile Include="Entities\Places\Details\Response\AspectRating.cs" />

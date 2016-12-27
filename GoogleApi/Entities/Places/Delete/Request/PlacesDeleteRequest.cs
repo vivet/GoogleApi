@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using GoogleApi.Engine;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Helpers;
 
@@ -9,7 +10,7 @@ namespace GoogleApi.Entities.Places.Delete.Request
     /// Places Delete Request.
     /// </summary>
     [DataContract]
-    public class PlacesDeleteRequest : BasePlacesRequest
+    public class PlacesDeleteRequest : BasePlacesRequest, IJsonRequest
     {
         /// <summary>
         /// A textual identifier that uniquely identifies a place. To retrieve information about the place, pass this identifier in the placeid field of a Place request. 
@@ -24,21 +25,6 @@ namespace GoogleApi.Entities.Places.Delete.Request
         /// </summary>
         [DataMember(Name = "reference")]
         public virtual string Reference { get; set; }
-
-        /// <summary>
-        /// True to use use the https protocol; false to use http. The default is false.
-        /// </summary>
-        public override bool IsJson
-        {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                throw new NotSupportedException("This operation is not supported, Request must use SSL");
-            }
-        }
 
         /// <summary>
         /// BaseUrl property overridden.
