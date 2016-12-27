@@ -22,7 +22,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         {
             get
             {
-                return base.BaseUrl + "textsearch/";
+                return base.BaseUrl + "textsearch/json";
             }
         }
 

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 
@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     /// Geolocation Request.
     /// </summary>
     [DataContract]
-    public class GeolocationRequest : BaseMapsRequest
+    public class GeolocationRequest : BaseMapsRequest, IJsonRequest
 	{
         private const string BASE_URL = "www.googleapis.com/geolocation/v1/geolocate";
 
@@ -56,21 +56,6 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// </summary>
         [DataMember(Name = "wifiAccessPoints")]
         public virtual IEnumerable<WifiAccessPoint> WifiAccessPoints { get; set; }
-
-        /// <summary>
-        /// Always true. Setter is not supported.
-        /// </summary>
-        public override bool IsJson
-        {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                throw new NotSupportedException("This operation is not supported, Geolocation Request must use Json.");
-            }
-        }
 
         /// <summary>
         /// BaseUrl property overridden.

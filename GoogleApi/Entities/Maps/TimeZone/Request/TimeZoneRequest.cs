@@ -1,5 +1,6 @@
 ﻿using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Extensions;
 using GoogleApi.Helpers;
@@ -9,9 +10,9 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
     /// <summary>
     /// TimeZone Request.
     /// </summary>
-    public class TimeZoneRequest : BaseMapsRequest
+    public class TimeZoneRequest : BaseMapsRequest, IQueryStringRequest
     {
-        private const string BASE_URL = "maps.googleapis.com/maps/api/timezone/";
+        private const string BASE_URL = "maps.googleapis.com/maps/api/timezone/json";
 
         /// <summary>
         /// A comma-separated lat,lng tuple (eg. location=-33.86,151.20), representing the location to look up

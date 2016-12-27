@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
 using GoogleApi.Helpers;
 
@@ -10,7 +11,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
     /// <summary>
     /// Translate Request.
     /// </summary>
-    public class TranslateRequest : BaseRequest
+    public class TranslateRequest : BaseRequest, IQueryStringRequest
     {
         private const string BASE_URL = "www.googleapis.com/language/translate/v2";
 

@@ -42,7 +42,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         {
             get
             {
-                return base.BaseUrl + "nearbysearch/";
+                return base.BaseUrl + "nearbysearch/json";
             }
         }
 

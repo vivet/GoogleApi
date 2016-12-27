@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using GoogleApi.Engine;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Helpers;
 

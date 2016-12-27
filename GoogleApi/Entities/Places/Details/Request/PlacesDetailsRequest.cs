@@ -1,4 +1,5 @@
 ﻿using System;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Helpers;
 
@@ -7,7 +8,7 @@ namespace GoogleApi.Entities.Places.Details.Request
     /// <summary>
     /// Places Details Request.
     /// </summary>
-    public class PlacesDetailsRequest : BasePlacesRequest
+    public class PlacesDetailsRequest : BasePlacesRequest, IQueryStringRequest
     {
         /// <summary>
         /// A textual identifier that uniquely identifies a place, returned from a Place Search.
@@ -37,7 +38,7 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// </summary>
         protected internal override string BaseUrl
         {
-            get { return base.BaseUrl + "details/"; }
+            get { return base.BaseUrl + "details/json"; }
         }
 
         /// <summary>

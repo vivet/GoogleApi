@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
@@ -13,7 +14,7 @@ namespace GoogleApi.Entities.Places.Search.Common
     /// PlacesBaseSearch Request.
     /// Base abstract class for places search.
     /// </summary>
-    public abstract class BasePlacesSearchRequest : BasePlacesRequest
+    public abstract class BasePlacesSearchRequest : BasePlacesRequest, IQueryStringRequest
     {
         /// <summary>
         /// The point around which you wish to retrieve Place information (required). Must be specified as latitude,longitude.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Helpers;
 
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
     /// <summary>
     /// Geocoding Request.
     /// </summary>
-    public class GeocodingRequest : BaseMapsRequest
+    public class GeocodingRequest : BaseMapsRequest, IQueryStringRequest
 	{
 		/// <summary>
         /// address (required) — The address that you want to geocode. Required or Location.
@@ -54,7 +55,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         {
             get
             {
-                return base.BaseUrl + "geocode/";
+                return base.BaseUrl + "geocode/json";
             }
         }
 

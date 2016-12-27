@@ -71,8 +71,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Engine\GenericEngine.cs" />
+    <Compile Include="Entities\Common\Interfaces\IJsonRequest.cs" />
     <Compile Include="Entities\Common\AddressLocation.cs" />
     <Compile Include="Entities\Common\Interfaces\ILocationString.cs" />
+    <Compile Include="Entities\Common\Interfaces\IQueryStringRequest.cs" />
     <Compile Include="Entities\Common\SignableRequest.cs" />
     <Compile Include="Entities\Common\BaseRequest.cs" />
     <Compile Include="Entities\Common\Interfaces\IResponseFor.cs">

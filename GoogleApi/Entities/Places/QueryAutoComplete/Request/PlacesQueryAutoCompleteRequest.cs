@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Helpers;
 
@@ -9,7 +10,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
 	/// <summary>
     /// Places QueryAutoComplete Request.
 	/// </summary>
-	public class PlacesQueryAutoCompleteRequest : BasePlacesRequest
+    public class PlacesQueryAutoCompleteRequest : BasePlacesRequest, IQueryStringRequest
 	{
         /// <summary>
         /// The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
@@ -43,7 +44,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         {
             get
             {
-                return base.BaseUrl + "queryautocomplete/";
+                return base.BaseUrl + "queryautocomplete/json";
             }
         }
 

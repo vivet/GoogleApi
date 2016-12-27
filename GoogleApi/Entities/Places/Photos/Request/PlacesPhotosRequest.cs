@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Helpers;
 
@@ -8,7 +9,7 @@ namespace GoogleApi.Entities.Places.Photos.Request
     /// <summary>
     /// Places Photos Request.
     /// </summary>
-    public class PlacesPhotosRequest : BasePlacesRequest
+    public class PlacesPhotosRequest : BasePlacesRequest, IQueryStringRequest
     {
         /// <summary>
         /// photoreference (required) — A string identifier that uniquely identifies a photo. Photo references are returned from either a Place Search or Place Details request.

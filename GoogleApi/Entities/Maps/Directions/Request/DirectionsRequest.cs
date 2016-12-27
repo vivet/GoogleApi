@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Extensions;
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
     /// <summary>
     /// Directions Request.
     /// </summary>
-    public class DirectionsRequest : BaseMapsRequest
+    public class DirectionsRequest : BaseMapsRequest, IQueryStringRequest
 	{
 		/// <summary>
 		/// origin (required) — The address or textual latitude/longitude value from which you wish to calculate directions. *
@@ -125,7 +126,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         {
             get
             {
-                return base.BaseUrl + "directions/";
+                return base.BaseUrl + "directions/json";
             }
         }
 

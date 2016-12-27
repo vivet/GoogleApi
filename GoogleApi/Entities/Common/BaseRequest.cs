@@ -1,5 +1,4 @@
 ﻿using System;
-using GoogleApi.Entities.Places.Photos.Request;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
@@ -44,11 +43,6 @@ namespace GoogleApi.Entities.Common
         /// True to use use the https protocol; false to use http. The default is false.
         /// </summary>
         public virtual bool IsSsl { get; set; }
-
-        /// <summary>
-        /// Indicates whether the request parses a object serialized as json. The default is false.
-        /// </summary>
-        public virtual bool IsJson { get; set; }
         
         /// <summary>
         /// Returns the Uri.
@@ -58,9 +52,8 @@ namespace GoogleApi.Entities.Common
         {
             var _scheme = this.IsSsl ? "https://" : "http://";
             var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
-            var _qeryStringJson = this.IsJson || this is PlacesPhotosRequest ? string.Empty : "json";
 
-            return new Uri(_scheme + this.BaseUrl + _qeryStringJson + "?" + _queryString);
+            return new Uri(_scheme + this.BaseUrl + "?" + _queryString);
         }
 
         /// <summary>

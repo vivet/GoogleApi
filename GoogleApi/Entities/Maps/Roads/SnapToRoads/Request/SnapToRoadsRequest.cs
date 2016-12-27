@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Helpers;
 
@@ -10,7 +11,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
     /// <summary>
     /// SnapToRoads Request.
     /// </summary>
-    public class SnapToRoadsRequest : BaseMapsRequest
+    public class SnapToRoadsRequest : BaseMapsRequest, IQueryStringRequest
 	{
 		/// <summary>
         /// path — The path to be snapped (required). The path parameter accepts a list of latitude/longitude pairs. Latitude and longitude values should be separated by commas. 
@@ -30,7 +31,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// </summary>
         protected internal override string BaseUrl
         {
-            get { return "roads.googleapis.com/v1/snapToRoads/"; }
+            get { return "roads.googleapis.com/v1/snapToRoads/json"; }
         }
 
         /// <summary>

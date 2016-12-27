@@ -32,7 +32,7 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
         {
             get
             {
-                return base.BaseUrl + "radarsearch/";
+                return base.BaseUrl + "radarsearch/json";
             }
         }
 

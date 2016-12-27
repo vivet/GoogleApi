@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
 using GoogleApi.Helpers;
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
     /// <summary>
     /// SpeedLimits Request.
     /// </summary>
-    public class SpeedLimitsRequest : BaseMapsRequest
+    public class SpeedLimitsRequest : BaseMapsRequest, IQueryStringRequest
 	{
         /// <summary>
         /// path — The path to be snapped (required or PlaceIds). The path parameter accepts a list of latitude/longitude pairs. Latitude and longitude values should be separated by commas. Coordinates should be separated by the pipe character: "|". For example: path=60.170880,24.942795|60.170879,24.942796|60.170877,24.942796.
@@ -35,7 +36,7 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
         {
             get
             {
-                return "roads.googleapis.com/v1/speedLimits/";
+                return "roads.googleapis.com/v1/speedLimits/json";
             }
         }
 

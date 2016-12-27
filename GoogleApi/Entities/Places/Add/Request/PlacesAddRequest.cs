@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Helpers;
@@ -15,7 +16,7 @@ namespace GoogleApi.Entities.Places.Add.Request
     /// Places Add Request.
     /// </summary>
     [DataContract]
-    public class PlacesAddRequest : BasePlacesRequest
+    public class PlacesAddRequest : BasePlacesRequest, IJsonRequest
     {
         /// <summary>
         /// Required. The full text name of the place. Limited to 255 characters.
@@ -77,21 +78,6 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// </summary>
         [DataMember(Name = "website")]
         public virtual string Website { get; set; }
-
-        /// <summary>
-        /// True to use use the https protocol; false to use http. The default is false.
-        /// </summary>
-        public override bool IsJson
-        {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                throw new NotSupportedException("This operation is not supported, Request must use Json");
-            }
-        }
 
         /// <summary>
         /// BaseUrl property overridden.
