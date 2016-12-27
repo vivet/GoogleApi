@@ -49,14 +49,18 @@ namespace GoogleApi
 
             foreach (var _location in _locations)
             {
-                var _lat = (int)Math.Round(_location.Latitude * 1E5);
-                var _lng = (int)Math.Round(_location.Longitude * 1E5);
+                if (_location != null)
+                {
+                    var _lat = (int)Math.Round(_location.Latitude * 1E5);
+                    var _lng = (int)Math.Round(_location.Longitude * 1E5);
 
-                _encodeDiff(_lat - _lastLat);
-                _encodeDiff(_lng - _lastLng);
+                    _encodeDiff(_lat - _lastLat);
+                    _encodeDiff(_lng - _lastLng);
 
-                _lastLat = _lat;
-                _lastLng = _lng;
+                    _lastLat = _lat;
+                    _lastLng = _lng;                    
+                }
+
             }
 
             return _encodedString.ToString();
@@ -75,7 +79,7 @@ namespace GoogleApi
             var _length = _encdodedLocations.Length;
             var _locations = new Location[_length];
 
-            _locations = _encdodedLocations.Where(_x => !string.IsNullOrEmpty(_x)).Aggregate(_locations, (_current, _encdodedLocation) => _current.Concat(GoogleApi.GoogleFunctions.DecodePolyLine(_encdodedLocation)).ToArray());
+            _locations = _encdodedLocations.Where(_x => !string.IsNullOrEmpty(_x)).Aggregate(_locations, (_current, _encdodedLocation) => _current.Concat(GoogleFunctions.DecodePolyLine(_encdodedLocation)).ToArray());
 
             return GoogleFunctions.EncodePolyLine(_locations);
         }
