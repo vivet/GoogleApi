@@ -84,12 +84,12 @@ namespace GoogleApi.Engine
             var _uri = _request.GetUri();
             var _webClientEx = new WebClientTimeout(_timeout);
 
-            if (_request.IsJson)
+            if (_request is IJsonRequest)
             {
                 _webClientEx.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
                 var _json = JsonConvert.SerializeObject(_request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                var _uploadString = _webClientEx.UploadString(_uri, "POST", _json);
+                var _uploadString = _webClientEx.UploadString(_uri, WebRequestMethods.Http.Post, _json);
 
                 return GenericEngine<TRequest, TResponse>.Deserialize(_uploadString);
             }
@@ -123,7 +123,7 @@ namespace GoogleApi.Engine
             if (_request == null)
                 throw new ArgumentNullException("_request");
 
-            if (_request.IsJson)
+            if (_request is IJsonRequest)
             {
                 throw new NotImplementedException();
             }
