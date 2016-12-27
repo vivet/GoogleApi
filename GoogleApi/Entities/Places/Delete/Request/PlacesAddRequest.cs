@@ -45,7 +45,7 @@ namespace GoogleApi.Entities.Places.Delete.Request
         /// </summary>
         protected internal override string BaseUrl
         {
-            get { return base.BaseUrl + "delete/"; }
+            get { return base.BaseUrl + "delete/json"; }
         }
 
         /// <summary>

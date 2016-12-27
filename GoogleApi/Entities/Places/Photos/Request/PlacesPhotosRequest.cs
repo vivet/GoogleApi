@@ -38,7 +38,7 @@ namespace GoogleApi.Entities.Places.Photos.Request
         {
             get
             {
-                return base.BaseUrl + "photo/";
+                return base.BaseUrl + "photo";
             }
         }
 

@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common;
+using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Helpers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Places.Add.Request
 {
     /// <summary>
     /// Places Add Request.
     /// </summary>
+    [DataContract]
     public class PlacesAddRequest : BasePlacesRequest
     {
         /// <summary>
@@ -30,7 +35,8 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// If none of the supported types are a match for this place, you may specify other.
         /// </summary>
         [DataMember(Name = "types")]
-        public virtual LocationType[] Types { get; set; }
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>
         /// The accuracy of the location signal on which this request is based, expressed in meters.
@@ -83,7 +89,7 @@ namespace GoogleApi.Entities.Places.Add.Request
             }
             set
             {
-                throw new NotSupportedException("This operation is not supported, Request must use SSL");
+                throw new NotSupportedException("This operation is not supported, Request must use Json");
             }
         }
 
@@ -92,7 +98,7 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// </summary>
         protected internal override string BaseUrl
         {
-            get { return base.BaseUrl + "add/"; }
+            get { return base.BaseUrl + "add/json"; }
         }
 
         /// <summary>
@@ -107,8 +113,11 @@ namespace GoogleApi.Entities.Places.Add.Request
                 throw new ArgumentException("Name must be provided.");
 
             if (this.Location == null)
-                throw new ArgumentException("Name must be provided.");
+                throw new ArgumentException("Location must be provided.");
 
+            if (this.Types == null || !this.Types.Any())
+                throw new ArgumentException("Types must be provided.");
+            
             return _parameters;
         }
     }

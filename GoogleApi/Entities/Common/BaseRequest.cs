@@ -1,4 +1,5 @@
 ﻿using System;
+using GoogleApi.Entities.Places.Photos.Request;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
@@ -57,7 +58,7 @@ namespace GoogleApi.Entities.Common
         {
             var _scheme = this.IsSsl ? "https://" : "http://";
             var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
-            var _qeryStringJson = this.IsJson ? string.Empty : "json";
+            var _qeryStringJson = this.IsJson || this is PlacesPhotosRequest ? string.Empty : "json";
 
             return new Uri(_scheme + this.BaseUrl + _qeryStringJson + "?" + _queryString);
         }
