@@ -140,7 +140,7 @@ namespace GoogleApi.Test
             {
                 try
                 {
-                    GoogleMaps.Geocode.Query(_request, TimeSpan.FromMilliseconds(1));
+                    GoogleMaps.Geocode.Query(_request);
                 }
                 catch (AggregateException _ex)
                 {

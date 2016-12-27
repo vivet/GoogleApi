@@ -1,7 +1,11 @@
 ﻿using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request;
+using GoogleApi.Entities.Places.Common.Enums;
+using GoogleApi.Entities.Places.Delete.Request;
 using GoogleApi.Entities.Places.Details.Request;
+using GoogleApi.Entities.Places.Photos.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
@@ -101,23 +105,97 @@ namespace GoogleApi.Test
         [Test]
         public void PlacesAddTest()
         {
-            Assert.Inconclusive();
+            var _request = new PlacesAddRequest
+            {
+                Key = this._apiKey,
+                Name = "Home",
+                Types = new[] { PlaceLocationType.STREET_ADDRESS },
+                Location = new Location(55.664425, 12.502264),
+                Accuracy = 50,
+                PhoneNumber = "+45 00000000",
+                Address = "J. P. E. Hartmanns Allé 35 2500 Valby, Denmark",
+                Website = "http://www.google.com",
+                Language = "en-US"
+            };
+            var _response = GooglePlaces.Add.Query(_request);
+
+            Assert.IsNotNull(_response);
+            Assert.IsNotNull(_response.Id);
+            Assert.IsNotNull(_response.PlaceId);
+            Assert.IsNotNull(_response.Reference);
+            Assert.AreEqual(_response.Scope, Scope.APP);
+            Assert.AreEqual(_response.Status, Status.OK);
         }
         [Test]
         public void PlacesAddAsyncTest()
         {
-            Assert.Inconclusive();
+            var _request = new PlacesAddRequest
+            {
+                Key = this._apiKey,
+                Name = "Home",
+                Types = new[] { PlaceLocationType.STREET_ADDRESS },
+                Location = new Location(55.664425, 12.502264),
+                Accuracy = 50,
+                PhoneNumber = "+45 00000000",
+                Address = "J. P. E. Hartmanns Allé 35 2500 Valby, Denmark",
+                Website = "http://www.google.com",
+                Language = "en-US"
+            };
+            var _response = GooglePlaces.Add.QueryAsync(_request).Result;
+
+            Assert.IsNotNull(_response);
+            Assert.IsNotNull(_response.Id);
+            Assert.IsNotNull(_response.PlaceId);
+            Assert.IsNotNull(_response.Reference);
+            Assert.AreEqual(_response.Scope, Scope.APP);
+            Assert.AreEqual(_response.Status, Status.OK);
         }
 
         [Test]
         public void PlacesDeleteTest()
         {
-            Assert.Inconclusive();
+            var _response = GooglePlaces.Add.Query(new PlacesAddRequest
+            {
+                Key = this._apiKey,
+                Name = "Home",
+                Types = new[] { PlaceLocationType.STREET_ADDRESS },
+                Location = new Location(55.664425, 12.502264)
+            });
+
+            Assert.IsNotNull(_response);
+            Assert.IsNotNull(_response.PlaceId);
+
+            var _response2 = GooglePlaces.Delete.Query(new PlacesDeleteRequest
+            {
+                Key = this._apiKey,
+                PlaceId = _response.PlaceId
+            });
+
+            Assert.IsNotNull(_response2);
+            Assert.AreEqual(_response2.Status, Status.OK);
         }
         [Test]
         public void PlacesDeleteAsyncTest()
         {
-            Assert.Inconclusive();
+            var _response = GooglePlaces.Add.Query(new PlacesAddRequest
+            {
+                Key = this._apiKey,
+                Name = "Home",
+                Types = new[] { PlaceLocationType.STREET_ADDRESS },
+                Location = new Location(55.664425, 12.502264)
+            });
+
+            Assert.IsNotNull(_response);
+            Assert.IsNotNull(_response.PlaceId);
+
+            var _response2 = GooglePlaces.Delete.QueryAsync(new PlacesDeleteRequest
+            {
+                Key = this._apiKey,
+                PlaceId = _response.PlaceId
+            }).Result;
+
+            Assert.IsNotNull(_response2);
+            Assert.AreEqual(_response2.Status, Status.OK);
         }
         
         [Test]
@@ -281,51 +359,54 @@ namespace GoogleApi.Test
         [Test]
         public void PlacesPhotosTest()
         {
-            Assert.Inconclusive();
+            var _response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
+            {
+                Key = _apiKey,
+                Input = "det kongelige teater",
+            });
 
-            //var _request = new PlacesAutoCompleteRequest
-            //{
-            //    Key = _apiKey,
-            //    Input = "det kongelige teater",
-            //    Sensor = true,
-            //    Language = "en",
-            //};
+            var _response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
+            {
+                Key = _apiKey,
+                PlaceId = _response.Predictions.Select(_x => _x.PlaceId).FirstOrDefault(),
+            });
 
-            //var _response = GooglePlaces.AutoComplete.Query(_request);
-            //var _results = _response.Predictions.ToList();
-            //var _result = _results.First();
+            var _response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
+            {
+                Key = _apiKey,
+                PhotoReference = _response2.Result.Photos.Select(_x => _x.PhotoReference).FirstOrDefault(),
+                MaxWidth = 1600
+            });
 
-            //var _request2 = new PlacesDetailsRequest
-            //{
-            //    Key = _apiKey,
-            //    PlaceId = _result.PlaceId,
-            //    Sensor = true,
-            //};
-
-            //var _response2 = GooglePlaces.Details.Query(_request2);
-            //Assert.AreEqual(Status.OK, _response2.Status);
-
-            //var _photo = _response2.Result.Photos.FirstOrDefault();
-            //Assert.IsNotNull(_photo);
-
-            //var _request3 = new PlacesPhotosRequest
-            //{
-            //    Key = _apiKey,
-            //    Sensor = true,
-            //    PhotoReference = _photo.PhotoReference,
-            //    MaxWidth = 1600
-            //};
-
-            //var _response3 = GooglePlaces.Photos.Query(_request3);
-
-            //Assert.IsNotNull(_response3);
-            //Assert.IsNotNull(_response3.Photo);
-            //Assert.AreEqual(Status.OK, _response3.Status);
+            Assert.IsNotNull(_response3);
+            Assert.IsNotNull(_response3.Photo);
+            Assert.AreEqual(Status.OK, _response3.Status);
         }
         [Test]
         public void PlacesPhotosAsyncTest()
         {
-            Assert.Inconclusive();
+            var _response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
+            {
+                Key = _apiKey,
+                Input = "det kongelige teater",
+            });
+
+            var _response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
+            {
+                Key = _apiKey,
+                PlaceId = _response.Predictions.Select(_x => _x.PlaceId).FirstOrDefault(),
+            });
+
+            var _response3 = GooglePlaces.Photos.QueryAsync(new PlacesPhotosRequest
+            {
+                Key = _apiKey,
+                PhotoReference = _response2.Result.Photos.Select(_x => _x.PhotoReference).FirstOrDefault(),
+                MaxWidth = 1600
+            }).Result;
+
+            Assert.IsNotNull(_response3);
+            Assert.IsNotNull(_response3.Photo);
+            Assert.AreEqual(Status.OK, _response3.Status);
         }
     }
 }
