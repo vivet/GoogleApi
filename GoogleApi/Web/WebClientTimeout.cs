@@ -11,7 +11,7 @@ namespace GoogleApi.Web
         /// <summary>
         /// 
         /// </summary>
-        public virtual TimeSpan? Timeout { get; set; }
+        public TimeSpan? Timeout { get; set; }
 
         /// <summary>
         /// Constructor, setting custom timeout.
@@ -19,7 +19,6 @@ namespace GoogleApi.Web
         /// <param name="_timeout"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public WebClientTimeout(TimeSpan _timeout)
-            : base()
         {
             this.Timeout = _timeout;
         }
@@ -34,7 +33,7 @@ namespace GoogleApi.Web
         protected override WebRequest GetWebRequest(Uri _uri)
         {
             if (_uri == null) 
-                throw new ArgumentNullException("_uri");
+                throw new ArgumentNullException(nameof(_uri));
             
             var _request = base.GetWebRequest(_uri);
             

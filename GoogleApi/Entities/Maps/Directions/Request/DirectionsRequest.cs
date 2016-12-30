@@ -122,15 +122,9 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get
-            {
-                return base.BaseUrl + "directions/json";
-            }
-        }
+        protected internal override string BaseUrl => base.BaseUrl + "directions/json";
 
-        /// <summary>
+	    /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>

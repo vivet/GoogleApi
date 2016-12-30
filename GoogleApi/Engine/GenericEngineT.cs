@@ -78,7 +78,7 @@ namespace GoogleApi.Engine
 		protected internal static TResponse QueryGoogleApi(TRequest _request, TimeSpan _timeout)
 		{
 			if (_request == null)
-				throw new ArgumentNullException("_request");
+				throw new ArgumentNullException(nameof(_request));
 
             if (_request is IJsonRequest)
                 return GenericEngine<TRequest, TResponse>.JsonRequest(_request, _timeout);
@@ -99,7 +99,7 @@ namespace GoogleApi.Engine
         protected internal static Task<TResponse> QueryGoogleApiAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token = default(CancellationToken))
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
    
             var _uri = _request.GetUri();
             var _webClient = new WebClientTimeout(_timeout);
@@ -131,7 +131,7 @@ namespace GoogleApi.Engine
         private static TResponse JsonRequest(TRequest _request, TimeSpan _timeout)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
 
             var _webClient = new WebClientTimeout(_timeout);
             _webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -146,7 +146,7 @@ namespace GoogleApi.Engine
         private static TResponse QuerystringRequest(TRequest _request, TimeSpan _timeout)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
 
             var _uri = _request.GetUri();
             var _webClient = new WebClientTimeout(_timeout);
@@ -158,10 +158,10 @@ namespace GoogleApi.Engine
         private static TaskCompletionSource<TResponse> JsonRequestAsync(Task<string> _task, TaskCompletionSource<TResponse> _taskCompletionSource)
         {
             if (_task == null)
-                throw new ArgumentNullException("_task");
+                throw new ArgumentNullException(nameof(_task));
 
             if (_taskCompletionSource == null)
-                throw new ArgumentNullException("_taskCompletionSource");
+                throw new ArgumentNullException(nameof(_taskCompletionSource));
 
             if (_task.IsCanceled)
             {
@@ -183,10 +183,10 @@ namespace GoogleApi.Engine
         private static TaskCompletionSource<TResponse> QuerystringRequestAsync(Task<byte[]> _task, TaskCompletionSource<TResponse> _taskCompletionSource)
         {
             if (_task == null)
-                throw new ArgumentNullException("_task");
+                throw new ArgumentNullException(nameof(_task));
 
             if (_taskCompletionSource == null)
-                throw new ArgumentNullException("_taskCompletionSource");
+                throw new ArgumentNullException(nameof(_taskCompletionSource));
 
             if (_task.IsCanceled)
             {
@@ -209,7 +209,7 @@ namespace GoogleApi.Engine
         private static TResponse Deserialize(byte[] _serializedObject)
         {
             if (_serializedObject == null)
-                throw new ArgumentNullException("_serializedObject");
+                throw new ArgumentNullException(nameof(_serializedObject));
 
             // TODO: Hack (PlacesPhotosResponse).
             if (typeof (TResponse) == typeof (PlacesPhotosResponse))
@@ -223,7 +223,7 @@ namespace GoogleApi.Engine
         private static TResponse Deserialize(string _serializedObject)
         {
             if (_serializedObject == null)
-                throw new ArgumentNullException("_serializedObject");
+                throw new ArgumentNullException(nameof(_serializedObject));
 
             return JsonConvert.DeserializeObject<TResponse>(_serializedObject);
         }

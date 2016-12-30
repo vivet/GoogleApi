@@ -37,15 +37,9 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get
-            {
-                return base.BaseUrl + "elevation/json";
-            }
-        }
+        protected internal override string BaseUrl => base.BaseUrl + "elevation/json";
 
-        /// <summary>
+	    /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>

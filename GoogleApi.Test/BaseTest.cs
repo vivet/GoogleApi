@@ -12,10 +12,7 @@ namespace GoogleApi.Test
         // Nested classes
         public class TestRequest : BaseRequest
         {
-            protected override string BaseUrl
-            {
-                get { return "www.test.com"; }
-            }
+            protected override string BaseUrl => "www.test.com";
         }
 
         public class TestResponse : IResponseFor

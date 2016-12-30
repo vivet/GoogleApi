@@ -51,15 +51,9 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get
-            {
-                return base.BaseUrl + "geocode/json";
-            }
-        }
+        protected internal override string BaseUrl => base.BaseUrl + "geocode/json";
 
-        /// <summary>
+	    /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
@@ -85,7 +79,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
                 _parameters.Add("language", this.Language);
 
             if (this.Components != null && this.Components.Any())
-                _parameters.Add("components", string.Join("|", this.Components.Select(_x => string.Format("{0}:{1}", _x.Key.ToString().ToLower(), _x.Value))));
+                _parameters.Add("components", string.Join("|", this.Components.Select(_x => $"{_x.Key.ToString().ToLower()}:{_x.Value}")));
 
 			return _parameters;
 		}

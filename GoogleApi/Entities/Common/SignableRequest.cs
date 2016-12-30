@@ -38,7 +38,7 @@ namespace GoogleApi.Entities.Common
         protected virtual Uri Sign(Uri _uri)
         {
             if (_uri == null)
-                throw new ArgumentNullException("_uri");
+                throw new ArgumentNullException(nameof(_uri));
 
             if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("Invalid signing key.");
@@ -79,14 +79,14 @@ namespace GoogleApi.Entities.Common
         private static string ToBase64UrlString(byte[] _data)
         {
             if (_data == null) 
-                throw new ArgumentNullException("_data");
+                throw new ArgumentNullException(nameof(_data));
 
             return Convert.ToBase64String(_data).Replace("+", "-").Replace("/", "_");
         }
         private static byte[] FromBase64UrlString(string _base64UrlString)
         {
             if (_base64UrlString == null) 
-                throw new ArgumentNullException("_base64UrlString");
+                throw new ArgumentNullException(nameof(_base64UrlString));
             
             return Convert.FromBase64String(_base64UrlString.Replace("-", "+").Replace("_", "/"));
         }

@@ -7,12 +7,12 @@ namespace GoogleApi.Helpers
     /// <summary>
     /// Helper class to build querystrings for Google Requests.
     /// </summary>
-	public class QueryStringParametersList
+	public sealed class QueryStringParametersList
 	{
         /// <summary>
         /// Dictionary containing all query string parameters for a request.
         /// </summary>
-        public virtual Dictionary<string, string> List { get; protected set; }
+        public Dictionary<string, string> List { get; }
 
         /// <summary>
         /// Default Constructor.
@@ -27,13 +27,13 @@ namespace GoogleApi.Helpers
         /// </summary>
         /// <param name="_key"></param>
         /// <param name="_value"></param>
-		public virtual void Add(string _key, string _value)
+		public void Add(string _key, string _value)
         {
             if (_key == null) 
-                throw new ArgumentNullException("_key");
+                throw new ArgumentNullException(nameof(_key));
             
             if (_value == null) 
-                throw new ArgumentNullException("_value");
+                throw new ArgumentNullException(nameof(_value));
 
             if (this.List.ContainsKey(_key))
             {
@@ -44,14 +44,15 @@ namespace GoogleApi.Helpers
                 this.List.Add(_key, _value);
             }
         }
+
         /// <summary>
         /// Remove a parameter.
         /// </summary>
         /// <param name="_key"></param>
-        public virtual void Remove(string _key)
+        public void Remove(string _key)
         {
             if (_key == null)
-                throw new ArgumentNullException("_key");
+                throw new ArgumentNullException(nameof(_key));
 
             this.List.Remove(_key);
         }
@@ -60,7 +61,7 @@ namespace GoogleApi.Helpers
         /// returns the query string collection as url paremer string.
         ///  </summary>
         /// <returns></returns>
-		public  virtual string GetQueryStringPostfix()
+		public string GetQueryStringPostfix()
 		{
 			return string.Join("&", this.List.Select(_x => Uri.EscapeDataString(_x.Key) + "=" + Uri.EscapeDataString(_x.Value)));
 		}

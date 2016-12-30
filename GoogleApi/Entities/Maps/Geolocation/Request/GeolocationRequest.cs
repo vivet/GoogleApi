@@ -60,12 +60,6 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get
-            {
-                return GeolocationRequest.BASE_URL;
-            }
-        }
+        protected internal override string BaseUrl => GeolocationRequest.BASE_URL;
 	}
 }

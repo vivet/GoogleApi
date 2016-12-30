@@ -29,12 +29,9 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get { return "roads.googleapis.com/v1/snapToRoads/json"; }
-        }
+        protected internal override string BaseUrl => "roads.googleapis.com/v1/snapToRoads/json";
 
-        /// <summary>
+	    /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>

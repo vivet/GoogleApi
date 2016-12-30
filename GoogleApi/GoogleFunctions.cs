@@ -23,7 +23,7 @@ namespace GoogleApi
         public static string EncodePolyLine(IEnumerable<Location> _locations)
         {
             if (_locations == null) 
-                throw new ArgumentNullException("_locations");
+                throw new ArgumentNullException(nameof(_locations));
             
             var _encodedString = new StringBuilder();
 
@@ -74,7 +74,7 @@ namespace GoogleApi
         public static string MergePolyLine(params string[] _encdodedLocations)
         {
             if (_encdodedLocations == null)
-                throw new ArgumentNullException("_encdodedLocations");
+                throw new ArgumentNullException(nameof(_encdodedLocations));
 
             var _length = _encdodedLocations.Length;
             var _locations = new Location[_length];
@@ -92,7 +92,7 @@ namespace GoogleApi
         public static IEnumerable<Location> DecodePolyLine(string _encdodedLocations)
         {
             if (string.IsNullOrEmpty(_encdodedLocations))
-                throw new ArgumentNullException("_encdodedLocations");
+                throw new ArgumentNullException(nameof(_encdodedLocations));
 
             var _polylineChars = _encdodedLocations.ToCharArray();
             var _index = 0;

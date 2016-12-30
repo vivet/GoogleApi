@@ -82,10 +82,7 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get { return base.BaseUrl + "add/json"; }
-        }
+        protected internal override string BaseUrl => base.BaseUrl + "add/json";
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.

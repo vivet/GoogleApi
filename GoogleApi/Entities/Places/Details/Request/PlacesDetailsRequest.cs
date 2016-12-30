@@ -26,20 +26,9 @@ namespace GoogleApi.Entities.Places.Details.Request
         public virtual Enums.Extensions Extensions { get; set; }
 
         /// <summary>
-        /// Default constructor.
-        /// </summary>
-        public PlacesDetailsRequest()
-        {
-            this.Extensions = Enums.Extensions.NONE;
-        }
-
-        /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get { return base.BaseUrl + "details/json"; }
-        }
+        protected internal override string BaseUrl => base.BaseUrl + "details/json";
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.

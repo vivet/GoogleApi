@@ -19,7 +19,7 @@ namespace GoogleApi.Extensions
             where T : struct, IConvertible
         {
             if (_str == null) 
-                throw new ArgumentNullException("_str");
+                throw new ArgumentNullException(nameof(_str));
             
             var _enumType = typeof(T);
 

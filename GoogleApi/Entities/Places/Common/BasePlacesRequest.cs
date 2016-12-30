@@ -29,13 +29,7 @@ namespace GoogleApi.Entities.Places.Common
         /// <summary>
         /// BaseUrl property overriden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get
-            {
-                return BasePlacesRequest.BASE_URL;
-            }
-        }
+        protected internal override string BaseUrl => BasePlacesRequest.BASE_URL;
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.

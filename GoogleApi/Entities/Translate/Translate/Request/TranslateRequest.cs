@@ -66,10 +66,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get { return TranslateRequest.BASE_URL; }
-        }
+        protected internal override string BaseUrl => TranslateRequest.BASE_URL;
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.

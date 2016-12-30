@@ -32,53 +32,29 @@ namespace GoogleApi
         /// photo references will be returned for relevant photographic content. The Nearby Search and Text Search requests also return a single photo reference per place, when relevant. 
         /// Using the Photo service you can then access the referenced photos and resize the image to the optimal size for your application.
         /// </summary>
-        public static EngineFacade<PlacesPhotosRequest, PlacesPhotosResponse> Photos
-        {
-            get
-            {
-                return EngineFacade<PlacesPhotosRequest, PlacesPhotosResponse>._instance;
-            }
-        }
-        
+        public static EngineFacade<PlacesPhotosRequest, PlacesPhotosResponse> Photos => EngineFacade<PlacesPhotosRequest, PlacesPhotosResponse>._instance;
+
         /// <summary>
         /// The Google Places API Text Search Service is a web service that returns information about a set of places based on a string — for example "pizza in New York" or "shoe stores near Ottawa". 
         /// The service responds with a list of places matching the text string and any location bias that has been set. 
         /// The search response will include a list of places, you can send a Place Details request for more information about any of the places in the response.
         /// https://developers.google.com/places/web-service/search
         /// </summary>
-        public static EngineFacade<PlacesTextSearchRequest, PlacesTextSearchResponse> TextSearch
-        {
-            get
-            {
-                return EngineFacade<PlacesTextSearchRequest, PlacesTextSearchResponse>._instance;
-            }
-        }
-        
+        public static EngineFacade<PlacesTextSearchRequest, PlacesTextSearchResponse> TextSearch => EngineFacade<PlacesTextSearchRequest, PlacesTextSearchResponse>._instance;
+
         /// <summary>
         /// The Google Places API Radar Search Service allows you to search for up to 200 places at once, but with less detail than is typically returned from a Text Search or Nearby Search request. 
         /// With Radar Search, you can create applications that help users identify specific areas of interest within a geographic area.
         /// https://developers.google.com/places/web-service/search
         /// </summary>
-        public static EngineFacade<PlacesRadarSearchRequest, PlacesRadarSearchResponse> RadarSearch
-        {
-            get
-            {
-                return EngineFacade<PlacesRadarSearchRequest, PlacesRadarSearchResponse>._instance;
-            }
-        }
-        
+        public static EngineFacade<PlacesRadarSearchRequest, PlacesRadarSearchResponse> RadarSearch => EngineFacade<PlacesRadarSearchRequest, PlacesRadarSearchResponse>._instance;
+
         /// <summary>
         /// A Nearby Search lets you search for places within a specified area. 
         /// You can refine your search request by supplying keywords or specifying the type of place you are searching for
         /// https://developers.google.com/places/web-service/search
         /// </summary>
-        public static EngineFacade<PlacesNearBySearchRequest, PlacesNearbySearchResponse> NearBySearch
-        {
-            get
-            {
-                return EngineFacade<PlacesNearBySearchRequest, PlacesNearbySearchResponse>._instance;
-            }
-        }
+        public static EngineFacade<PlacesNearBySearchRequest, PlacesNearbySearchResponse> NearBySearch => EngineFacade<PlacesNearBySearchRequest, PlacesNearbySearchResponse>._instance;
 
         /// <summary>
         /// By adding a place, you can supplement the data in the Google Maps database with data from your application. This allows you to:
@@ -89,13 +65,7 @@ namespace GoogleApi
         /// Influence the results of a Places Search issued from your application.
         /// https://developers.google.com/places/web-service/add-place
         /// </summary>
-        public static EngineFacade<PlacesAddRequest, PlacesAddResponse> Add
-        {
-            get
-            {
-                return EngineFacade<PlacesAddRequest, PlacesAddResponse>._instance;
-            }
-        }
+        public static EngineFacade<PlacesAddRequest, PlacesAddResponse> Add => EngineFacade<PlacesAddRequest, PlacesAddResponse>._instance;
 
         /// <summary>
         /// A place can only be deleted if:
@@ -104,51 +74,27 @@ namespace GoogleApi
         /// If you try to delete a place that does not meet these criteria, the API will return a REQUEST_DENIED status code.
         /// https://developers.google.com/places/web-service/add-place
         /// </summary>
-        public static EngineFacade<PlacesDeleteRequest, PlacesDeleteResponse> Delete
-        {
-            get
-            {
-                return EngineFacade<PlacesDeleteRequest, PlacesDeleteResponse>._instance;
-            }
-        }
+        public static EngineFacade<PlacesDeleteRequest, PlacesDeleteResponse> Delete => EngineFacade<PlacesDeleteRequest, PlacesDeleteResponse>._instance;
 
         /// <summary>
         /// Once you have a place_id or a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. 
         /// A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
         /// https://developers.google.com/places/web-service/details
         /// </summary>
-        public static EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse> Details
-        {
-            get
-            {
-                return EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse>._instance;
-            }
-        }
-        
+        public static EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse> Details => EngineFacade<PlacesDetailsRequest, PlacesDetailsResponse>._instance;
+
         /// <summary>
         /// The Query Autocomplete service can be used to provide a query prediction for text-based geographic searches, by returning suggested queries as you type.
         /// https://developers.google.com/places/web-service/query
         /// </summary>
-        public static EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse> AutoComplete
-        {
-            get
-            {
-                return EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>._instance;
-            }
-        }
-        
+        public static EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse> AutoComplete => EngineFacade<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>._instance;
+
         /// <summary>
         /// The Place Autocomplete service is a web service that returns place predictions in response to an HTTP request. 
         /// The request specifies a textual search string and optional geographic bounds. The service can be used to provide autocomplete functionality for text-based geographic searches, 
         /// by returning places such as businesses, addresses and points of interest as a user types.
         /// https://developers.google.com/places/web-service/autocomplete
         /// </summary>
-        public static EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse> QueryAutoComplete
-        {
-            get
-            {
-                return EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>._instance;
-            }
-        }
+        public static EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse> QueryAutoComplete => EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>._instance;
     }
 }

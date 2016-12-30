@@ -107,15 +107,9 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected  internal override string BaseUrl
-        {
-            get
-            {
-                return base.BaseUrl + "distancematrix/json";
-            }
-        }
+        protected  internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
 
-        /// <summary>
+	    /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>

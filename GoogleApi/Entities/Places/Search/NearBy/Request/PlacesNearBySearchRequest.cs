@@ -38,13 +38,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get
-            {
-                return base.BaseUrl + "nearbysearch/json";
-            }
-        }
+        protected internal override string BaseUrl => base.BaseUrl + "nearbysearch/json";
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.

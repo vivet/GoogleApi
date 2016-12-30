@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -37,10 +38,10 @@ namespace GoogleApi.Extensions
             where T : struct, IConvertible
         {
             if (_enum.GetType().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
-                return Convert.ToString(_enum).ToLower();
+                return Convert.ToString(_enum, CultureInfo.InvariantCulture).ToLower();
 
             var _stringBuilder = new StringBuilder();
-            var _binaryCharArray = Convert.ToString(_enum).Reverse().ToArray();
+            var _binaryCharArray = Convert.ToString(_enum, CultureInfo.InvariantCulture).Reverse().ToArray();
 
             for (var _i = 0; _i < _binaryCharArray.Length; _i++)
             {

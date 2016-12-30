@@ -10,16 +10,13 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// Address.
         /// </summary>
-        public virtual string Address { get; private set; }
+        public string Address { get; protected set; }
         /// <summary>
         /// Address expressed as Google compatible string.
         /// </summary>
-        public string LocationString
-        {
-            get { return this.Address; }
-        }
+        public virtual string LocationString => this.Address;
 
-        /// <summary>
+	    /// <summary>
         /// Constructor initializing a valid AddressLocation
         /// </summary>
         /// <param name="_address"></param>

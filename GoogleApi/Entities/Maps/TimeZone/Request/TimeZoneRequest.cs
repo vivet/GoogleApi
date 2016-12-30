@@ -41,10 +41,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get { return TimeZoneRequest.BASE_URL; }
-        }
+        protected internal override string BaseUrl => TimeZoneRequest.BASE_URL;
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.

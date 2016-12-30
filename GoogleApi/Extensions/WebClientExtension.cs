@@ -20,7 +20,7 @@ namespace GoogleApi.Extensions
         /// <summary>
         /// Constant. Specified an infinite timeout duration. This is a TimeSpan of negative one (-1) milliseconds.
         /// </summary>
-        public static TimeSpan DefaultTimeout { get { return TimeSpan.FromMilliseconds(-1); } }
+        public static TimeSpan DefaultTimeout => TimeSpan.FromMilliseconds(-1);
 
         /// <summary>
         /// Static constructor. 
@@ -47,10 +47,10 @@ namespace GoogleApi.Extensions
         public static Task<byte[]> DownloadDataTaskAsync(this WebClient _webClient, Uri _uri, TimeSpan _timeout)
         {
             if (_webClient == null) 
-                throw new ArgumentNullException("_webClient");
+                throw new ArgumentNullException(nameof(_webClient));
           
             if (_uri == null) 
-                throw new ArgumentNullException("_uri");
+                throw new ArgumentNullException(nameof(_uri));
 
             return _webClient.DownloadDataTaskAsync(_uri, _timeout, CancellationToken.None);
         }
@@ -67,10 +67,10 @@ namespace GoogleApi.Extensions
         public static Task<byte[]> DownloadDataTaskAsync(this WebClient _webClient, Uri _uri, CancellationToken _token)
         {
             if (_webClient == null) 
-                throw new ArgumentNullException("_webClient");
+                throw new ArgumentNullException(nameof(_webClient));
            
             if (_uri == null) 
-                throw new ArgumentNullException("_uri");
+                throw new ArgumentNullException(nameof(_uri));
 
             return _webClient.DownloadDataTaskAsync(_uri, DefaultTimeout, _token);
         }
@@ -90,13 +90,13 @@ namespace GoogleApi.Extensions
         public static Task<byte[]> DownloadDataTaskAsync(this WebClient _webClient, Uri _uri, TimeSpan _timeout, CancellationToken _token)
         {
             if (_webClient == null) 
-                throw new ArgumentNullException("_webClient");
+                throw new ArgumentNullException(nameof(_webClient));
            
             if (_uri == null) 
-                throw new ArgumentNullException("_uri");
+                throw new ArgumentNullException(nameof(_uri));
            
             if (_timeout.TotalMilliseconds < 0 && _timeout != DefaultTimeout)
-                throw new ArgumentOutOfRangeException("_uri", _timeout, "The timeout value must be a positive or equal to InfiniteTimeout.");
+                throw new ArgumentOutOfRangeException(nameof(_uri), _timeout, "The timeout value must be a positive or equal to InfiniteTimeout.");
 
             if (_token.IsCancellationRequested)
                 return _preCancelledTask;
@@ -108,7 +108,7 @@ namespace GoogleApi.Extensions
             {
                 Task.Delay(_timeout, _cancellationTokenSource.Token).ContinueWith(_x =>
                     {
-                        _taskCompletionSource.TrySetException(new TimeoutException(string.Format("The request has exceeded the timeout limit of {0} and has been aborted.", _timeout)));
+                        _taskCompletionSource.TrySetException(new TimeoutException($"The request has exceeded the timeout limit of {_timeout} and has been aborted."));
                         _webClient.CancelAsync();
                     }, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.NotOnCanceled);
             }

@@ -14,13 +14,13 @@ namespace GoogleApi.Entities.Common
         /// Latitude.
         /// </summary>
 		[DataMember(Name = "lat")]
-        public virtual double Latitude { get; set; }
+        public double Latitude { get; set; }
 
         /// <summary>
         /// Longitude
         /// </summary>
 		[DataMember(Name = "lng")]
-        public virtual double Longitude { get; set; }
+        public double Longitude { get; set; }
 
         /// <summary>
         /// Contructor intializing a valid Location
@@ -36,15 +36,9 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// Location expressed as Google compatible string.
         /// </summary>
-		public virtual string LocationString
-		{
-			get
-			{
-				return this.Latitude.ToString(CultureInfo.InvariantCulture) + "," + this.Longitude.ToString(CultureInfo.InvariantCulture);
-			}
-		}
+		public virtual string LocationString => this.Latitude.ToString(CultureInfo.InvariantCulture) + "," + this.Longitude.ToString(CultureInfo.InvariantCulture);
 
-        /// <summary>
+	    /// <summary>
         /// Overrdden ToString method for default conversion to Google compatible string.
         /// </summary>
         /// <returns></returns>

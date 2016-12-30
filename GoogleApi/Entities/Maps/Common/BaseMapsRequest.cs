@@ -28,12 +28,6 @@ namespace GoogleApi.Entities.Maps.Common
         /// <summary>
         /// BaseUrl property overriden.
         /// </summary>
-        protected internal override string BaseUrl
-        {
-            get
-            {
-                return BaseMapsRequest.BASE_URL;
-            }
-        }
+        protected internal override string BaseUrl => BaseMapsRequest.BASE_URL;
     }
 }

@@ -77,7 +77,7 @@ namespace GoogleApi.Engine
         public virtual TResponse Query(TRequest _request)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
 
             return this.Query(_request, this._defaultTimeout);
         }
@@ -97,7 +97,7 @@ namespace GoogleApi.Engine
         public virtual TResponse Query(TRequest _request, TimeSpan _timeout)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
 
             return GenericEngine<TRequest, TResponse>.QueryGoogleApi(_request, _timeout);
         }
@@ -111,7 +111,7 @@ namespace GoogleApi.Engine
         public virtual Task<TResponse> QueryAsync(TRequest _request)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
 
             return this.QueryAsync(_request, CancellationToken.None);
         }
@@ -129,7 +129,7 @@ namespace GoogleApi.Engine
         public virtual Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
 
             return this.QueryAsync(_request, _timeout, CancellationToken.None);
         }
@@ -144,7 +144,7 @@ namespace GoogleApi.Engine
         public virtual Task<TResponse> QueryAsync(TRequest _request, CancellationToken _token)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
             
             return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(_request, TimeSpan.FromMilliseconds(Timeout.Infinite), _token);
         }
@@ -163,7 +163,7 @@ namespace GoogleApi.Engine
         public virtual Task<TResponse> QueryAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token)
         {
             if (_request == null)
-                throw new ArgumentNullException("_request");
+                throw new ArgumentNullException(nameof(_request));
          
             return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(_request, _timeout, _token);
         }
