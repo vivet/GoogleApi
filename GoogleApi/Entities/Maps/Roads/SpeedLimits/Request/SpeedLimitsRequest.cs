@@ -43,23 +43,23 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
             if ((this.Path == null || !this.Path.Any()) && (this.PlaceIds == null || !this.PlaceIds.Any()))
                 throw new ArgumentException("Path OR PlaceIds is required");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
             if (this.Path != null && this.Path.Any())
-                _parameters.Add("path", string.Join("|", this.Path));
+                parameters.Add("path", string.Join("|", this.Path));
 
             if (this.PlaceIds != null && this.PlaceIds.Any())
             {
                 if (this.PlaceIds.Count() > 100)
                     throw new ArgumentException("Max 100 PlaceIds is allowed");
 
-                foreach (var _placeId in this.PlaceIds)
+                foreach (var placeId in this.PlaceIds)
                 {
-                    _parameters.Add("placeId", _placeId);
+                    parameters.Add("placeId", placeId);
                 }
             }
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

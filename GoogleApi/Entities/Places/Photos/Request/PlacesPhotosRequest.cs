@@ -43,7 +43,7 @@ namespace GoogleApi.Entities.Places.Photos.Request
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.PhotoReference))
                 throw new ArgumentException("Must specify a PhotoReference");
@@ -57,15 +57,15 @@ namespace GoogleApi.Entities.Places.Photos.Request
             if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
                 throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
 
-            _parameters.Add("photoreference", this.PhotoReference);
+            parameters.Add("photoreference", this.PhotoReference);
 
             if (this.MaxHeight != null)
-                _parameters.Add("maxheight", this.MaxHeight.Value.ToString(CultureInfo.InvariantCulture));
+                parameters.Add("maxheight", this.MaxHeight.Value.ToString(CultureInfo.InvariantCulture));
 
             if (this.MaxWidth != null)
-                _parameters.Add("maxwidth", this.MaxWidth.Value.ToString(CultureInfo.InvariantCulture));
+                parameters.Add("maxwidth", this.MaxWidth.Value.ToString(CultureInfo.InvariantCulture));
 
-            return _parameters;
+            return parameters;
         }
     }
 }

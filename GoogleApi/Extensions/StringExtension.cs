@@ -13,22 +13,22 @@ namespace GoogleApi.Extensions
         /// Convert a string to enum.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="_str"></param>
+        /// <param name="str"></param>
         /// <returns></returns>
-        public static T ToEnum<T>(this string _str) 
+        public static T ToEnum<T>(this string str) 
             where T : struct, IConvertible
         {
-            if (_str == null) 
-                throw new ArgumentNullException(nameof(_str));
+            if (str == null) 
+                throw new ArgumentNullException(nameof(str));
             
-            var _enumType = typeof(T);
+            var enumType = typeof(T);
 
-            foreach (var _name in Enum.GetNames(_enumType))
+            foreach (var name in Enum.GetNames(enumType))
             {
-                var _enumMemberAttribute = ((EnumMemberAttribute[])_enumType.GetField(_name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+                var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
       
-                if (_enumMemberAttribute.Value == _str) 
-                    return (T)Enum.Parse(_enumType, _name);
+                if (enumMemberAttribute.Value == str) 
+                    return (T)Enum.Parse(enumType, name);
             }
 
             return default(T);

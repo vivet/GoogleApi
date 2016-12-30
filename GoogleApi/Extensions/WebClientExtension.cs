@@ -15,7 +15,7 @@ namespace GoogleApi.Extensions
     /// </remarks>
     public static class WebClientExtension
     {
-        private static readonly Task<byte[]> _preCancelledTask;
+        private static readonly Task<byte[]> PreCancelledTask;
 
         /// <summary>
         /// Constant. Specified an infinite timeout duration. This is a TimeSpan of negative one (-1) milliseconds.
@@ -27,131 +27,131 @@ namespace GoogleApi.Extensions
         /// </summary>
         static WebClientExtension()
         {
-            var _taskCompletionSource = new TaskCompletionSource<byte[]>();
-            _taskCompletionSource.SetCanceled();
+            var taskCompletionSource = new TaskCompletionSource<byte[]>();
+            taskCompletionSource.SetCanceled();
 
-            WebClientExtension._preCancelledTask = _taskCompletionSource.Task;
+            WebClientExtension.PreCancelledTask = taskCompletionSource.Task;
         }
 
         /// <summary>
         /// Asynchronously downloads the resource with the specified URI as a Byte array limited by the specified timeout.
         /// </summary>
-        /// <param name="_webClient">The client with which to download the specified resource.</param>
-        /// <param name="_uri">The address of the resource to download.</param>
-        /// <param name="_timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
+        /// <param name="webClient">The client with which to download the specified resource.</param>
+        /// <param name="uri">The address of the resource to download.</param>
+        /// <param name="timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
         /// The specify an infinite timeout, pass a TimeSpan with a TotalMillisecond value of Timeout.Infinite.
         /// When a request is aborted due to a timeout the returned task will transition to the Faulted state with a TimeoutException.</param>
         /// <returns>A Task with the future value of the downloaded string.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the client or address parameters.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public static Task<byte[]> DownloadDataTaskAsync(this WebClient _webClient, Uri _uri, TimeSpan _timeout)
+        public static Task<byte[]> DownloadDataTaskAsync(this WebClient webClient, Uri uri, TimeSpan timeout)
         {
-            if (_webClient == null) 
-                throw new ArgumentNullException(nameof(_webClient));
+            if (webClient == null) 
+                throw new ArgumentNullException(nameof(webClient));
           
-            if (_uri == null) 
-                throw new ArgumentNullException(nameof(_uri));
+            if (uri == null) 
+                throw new ArgumentNullException(nameof(uri));
 
-            return _webClient.DownloadDataTaskAsync(_uri, _timeout, CancellationToken.None);
+            return webClient.DownloadDataTaskAsync(uri, timeout, CancellationToken.None);
         }
         
         /// <summary>
         /// Asynchronously downloads the resource with the specified URI as a Byte array and allows cancelling the operation. 
         /// Note that this overload specifies an infinite timeout.
         /// </summary>
-        /// <param name="_webClient">The client with which to download the specified resource.</param>
-        /// <param name="_uri">The address of the resource to download.</param>
-        /// <param name="_token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
+        /// <param name="webClient">The client with which to download the specified resource.</param>
+        /// <param name="uri">The address of the resource to download.</param>
+        /// <param name="token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
         /// <returns>A Task with the future value of the downloaded string.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the client or address parameters.</exception>
-        public static Task<byte[]> DownloadDataTaskAsync(this WebClient _webClient, Uri _uri, CancellationToken _token)
+        public static Task<byte[]> DownloadDataTaskAsync(this WebClient webClient, Uri uri, CancellationToken token)
         {
-            if (_webClient == null) 
-                throw new ArgumentNullException(nameof(_webClient));
+            if (webClient == null) 
+                throw new ArgumentNullException(nameof(webClient));
            
-            if (_uri == null) 
-                throw new ArgumentNullException(nameof(_uri));
+            if (uri == null) 
+                throw new ArgumentNullException(nameof(uri));
 
-            return _webClient.DownloadDataTaskAsync(_uri, DefaultTimeout, _token);
+            return webClient.DownloadDataTaskAsync(uri, DefaultTimeout, token);
         }
         
         /// <summary>
         /// Asynchronously downloads the resource with the specified URI as a Byte array limited by the specified timeout and allows cancelling the operation.
         /// </summary>
-        /// <param name="_webClient">The client with which to download the specified resource.</param>
-        /// <param name="_uri">The address of the resource to download.</param>
-        /// <param name="_timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
+        /// <param name="webClient">The client with which to download the specified resource.</param>
+        /// <param name="uri">The address of the resource to download.</param>
+        /// <param name="timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
         /// The specify an infinite timeout, pass a TimeSpan with a TotalMillisecond value of Timeout.Infinite.
         /// When a request is aborted due to a timeout the returned task will transition to the Faulted state with a TimeoutException.</param>
-        /// <param name="_token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
+        /// <param name="token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
         /// <returns>A Task with the future value of the downloaded string.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the client or address parameters.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public static Task<byte[]> DownloadDataTaskAsync(this WebClient _webClient, Uri _uri, TimeSpan _timeout, CancellationToken _token)
+        public static Task<byte[]> DownloadDataTaskAsync(this WebClient webClient, Uri uri, TimeSpan timeout, CancellationToken token)
         {
-            if (_webClient == null) 
-                throw new ArgumentNullException(nameof(_webClient));
+            if (webClient == null) 
+                throw new ArgumentNullException(nameof(webClient));
            
-            if (_uri == null) 
-                throw new ArgumentNullException(nameof(_uri));
+            if (uri == null) 
+                throw new ArgumentNullException(nameof(uri));
            
-            if (_timeout.TotalMilliseconds < 0 && _timeout != DefaultTimeout)
-                throw new ArgumentOutOfRangeException(nameof(_uri), _timeout, "The timeout value must be a positive or equal to InfiniteTimeout.");
+            if (timeout.TotalMilliseconds < 0 && timeout != DefaultTimeout)
+                throw new ArgumentOutOfRangeException(nameof(uri), timeout, "The timeout value must be a positive or equal to InfiniteTimeout.");
 
-            if (_token.IsCancellationRequested)
-                return _preCancelledTask;
+            if (token.IsCancellationRequested)
+                return PreCancelledTask;
 
-            var _taskCompletionSource = new TaskCompletionSource<byte[]>();
-            var _cancellationTokenSource = new CancellationTokenSource();
+            var taskCompletionSource = new TaskCompletionSource<byte[]>();
+            var cancellationTokenSource = new CancellationTokenSource();
 
-            if (_timeout != DefaultTimeout)
+            if (timeout != DefaultTimeout)
             {
-                Task.Delay(_timeout, _cancellationTokenSource.Token).ContinueWith(_x =>
+                Task.Delay(timeout, cancellationTokenSource.Token).ContinueWith(x =>
                     {
-                        _taskCompletionSource.TrySetException(new TimeoutException($"The request has exceeded the timeout limit of {_timeout} and has been aborted."));
-                        _webClient.CancelAsync();
+                        taskCompletionSource.TrySetException(new TimeoutException($"The request has exceeded the timeout limit of {timeout} and has been aborted."));
+                        webClient.CancelAsync();
                     }, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.NotOnCanceled);
             }
 
-            DownloadDataCompletedEventHandler _completedHandler = null;
-            _completedHandler = (_sender, _args) =>
+            DownloadDataCompletedEventHandler completedHandler = null;
+            completedHandler = (sender, args) =>
              {
-                 _webClient.DownloadDataCompleted -= _completedHandler;
-                 _cancellationTokenSource.Cancel();
+                 webClient.DownloadDataCompleted -= completedHandler;
+                 cancellationTokenSource.Cancel();
 
-                 if (_args.Cancelled)
+                 if (args.Cancelled)
                  {
-                     _taskCompletionSource.TrySetCanceled();
+                     taskCompletionSource.TrySetCanceled();
                  }
-                 else if (_args.Error != null)
+                 else if (args.Error != null)
                  {
-                     _taskCompletionSource.TrySetException(_args.Error);
+                     taskCompletionSource.TrySetException(args.Error);
                  }
                  else
                  {
-                     _taskCompletionSource.TrySetResult(_args.Result);
+                     taskCompletionSource.TrySetResult(args.Result);
                  }
              };
 
-            _webClient.DownloadDataCompleted += _completedHandler;
+            webClient.DownloadDataCompleted += completedHandler;
 
             try
             {
-                _webClient.DownloadDataAsync(_uri);
+                webClient.DownloadDataAsync(uri);
             }
             catch
             {
-                _webClient.DownloadDataCompleted -= _completedHandler;
+                webClient.DownloadDataCompleted -= completedHandler;
                 throw;
             }
 
-            _token.Register(() =>
+            token.Register(() =>
             {
-                _cancellationTokenSource.Cancel();
-                _webClient.CancelAsync();
+                cancellationTokenSource.Cancel();
+                webClient.CancelAsync();
             });
 
-            return _taskCompletionSource.Task;
+            return taskCompletionSource.Task;
         }
     }
 }

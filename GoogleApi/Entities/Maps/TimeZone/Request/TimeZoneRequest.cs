@@ -55,15 +55,15 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
             if (this.TimeStamp == null)
                 throw new ArgumentException("TimeStamp is required");
 
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("location", this.Location.LocationString);
-            _parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
+            parameters.Add("location", this.Location.LocationString);
+            parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
 
             if (!string.IsNullOrWhiteSpace(this.Language)) 
-                _parameters.Add("language", this.Language);
+                parameters.Add("language", this.Language);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

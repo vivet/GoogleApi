@@ -63,28 +63,28 @@ namespace GoogleApi.Engine
         /// </summary>
         static GenericEngine()
         {
-            var _baseUrl = new TRequest().BaseUrl;
+            var baseUrl = new TRequest().BaseUrl;
 
-            GenericEngine.HttpServicePoint = ServicePointManager.FindServicePoint(new Uri("http://" + _baseUrl));
-            GenericEngine.HttpsServicePoint = ServicePointManager.FindServicePoint(new Uri("https://" + _baseUrl));
+            GenericEngine.HttpServicePoint = ServicePointManager.FindServicePoint(new Uri("http://" + baseUrl));
+            GenericEngine.HttpsServicePoint = ServicePointManager.FindServicePoint(new Uri("https://" + baseUrl));
         }
 
         /// <summary>
         /// Query Google.
         /// </summary>
-        /// <param name="_request"></param>
-        /// <param name="_timeout"></param>
+        /// <param name="request"></param>
+        /// <param name="timeout"></param>
         /// <returns>TResponse</returns>
-		protected internal static TResponse QueryGoogleApi(TRequest _request, TimeSpan _timeout)
+		protected internal static TResponse QueryGoogleApi(TRequest request, TimeSpan timeout)
 		{
-			if (_request == null)
-				throw new ArgumentNullException(nameof(_request));
+			if (request == null)
+				throw new ArgumentNullException(nameof(request));
 
-            if (_request is IJsonRequest)
-                return GenericEngine<TRequest, TResponse>.JsonRequest(_request, _timeout);
+            if (request is IJsonRequest)
+                return GenericEngine<TRequest, TResponse>.JsonRequest(request, timeout);
 
-            if (_request is IQueryStringRequest)
-                return GenericEngine<TRequest, TResponse>.QuerystringRequest(_request, _timeout);
+            if (request is IQueryStringRequest)
+                return GenericEngine<TRequest, TResponse>.QuerystringRequest(request, timeout);
 
             throw new InvalidOperationException("Invalid Request. Request class missing Request interface implementation.");
 		}
@@ -92,140 +92,140 @@ namespace GoogleApi.Engine
         /// <summary>
         /// Query Google Async.
         /// </summary>
-        /// <param name="_request"></param>
-        /// <param name="_timeout"></param>
-        /// <param name="_token"></param>
+        /// <param name="request"></param>
+        /// <param name="timeout"></param>
+        /// <param name="token"></param>
         /// <returns>Task[TResponse]</returns>
-        protected internal static Task<TResponse> QueryGoogleApiAsync(TRequest _request, TimeSpan _timeout, CancellationToken _token = default(CancellationToken))
+        protected internal static Task<TResponse> QueryGoogleApiAsync(TRequest request, TimeSpan timeout, CancellationToken token = default(CancellationToken))
         {
-            if (_request == null)
-                throw new ArgumentNullException(nameof(_request));
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
    
-            var _uri = _request.GetUri();
-            var _webClient = new WebClientTimeout(_timeout);
-            var _taskCompletionSource = new TaskCompletionSource<TResponse>();
+            var uri = request.GetUri();
+            var webClient = new WebClientTimeout(timeout);
+            var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
-            if (_request is IJsonRequest)
+            if (request is IJsonRequest)
             {
-                _webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-                var _jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-                var _jsonString = JsonConvert.SerializeObject(_request, _jsonSerializerSettings);
+                var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                var jsonString = JsonConvert.SerializeObject(request, jsonSerializerSettings);
 
-                _webClient.UploadStringTaskAsync(_uri, WebRequestMethods.Http.Post, _jsonString)
-                    .ContinueWith(_x => GenericEngine<TRequest, TResponse>.JsonRequestAsync(_x, _taskCompletionSource), TaskContinuationOptions.ExecuteSynchronously);
+                webClient.UploadStringTaskAsync(uri, WebRequestMethods.Http.Post, jsonString)
+                    .ContinueWith(x => GenericEngine<TRequest, TResponse>.JsonRequestAsync(x, taskCompletionSource), TaskContinuationOptions.ExecuteSynchronously);
 
-                return _taskCompletionSource.Task;
+                return taskCompletionSource.Task;
             }
-            if (_request is IQueryStringRequest)
+            if (request is IQueryStringRequest)
             {
-                _webClient.DownloadDataTaskAsync(_uri, _timeout, _token)
-                    .ContinueWith(_x => GenericEngine<TRequest, TResponse>.QuerystringRequestAsync(_x, _taskCompletionSource), TaskContinuationOptions.ExecuteSynchronously);
+                webClient.DownloadDataTaskAsync(uri, timeout, token)
+                    .ContinueWith(x => GenericEngine<TRequest, TResponse>.QuerystringRequestAsync(x, taskCompletionSource), TaskContinuationOptions.ExecuteSynchronously);
 
-                return _taskCompletionSource.Task;
+                return taskCompletionSource.Task;
             }
 
             throw new InvalidOperationException("Invalid Request. Request class missing Request interface implementation.");
         }
 
-        private static TResponse JsonRequest(TRequest _request, TimeSpan _timeout)
+        private static TResponse JsonRequest(TRequest request, TimeSpan timeout)
         {
-            if (_request == null)
-                throw new ArgumentNullException(nameof(_request));
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
 
-            var _webClient = new WebClientTimeout(_timeout);
-            _webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            var webClient = new WebClientTimeout(timeout);
+            webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 
-            var _uri = _request.GetUri();
-            var _jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-            var _jsonString = JsonConvert.SerializeObject(_request, _jsonSerializerSettings);
-            var _uploadString = _webClient.UploadString(_uri, WebRequestMethods.Http.Post, _jsonString);
+            var uri = request.GetUri();
+            var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+            var jsonString = JsonConvert.SerializeObject(request, jsonSerializerSettings);
+            var uploadString = webClient.UploadString(uri, WebRequestMethods.Http.Post, jsonString);
             
-            return GenericEngine<TRequest, TResponse>.Deserialize(_uploadString);
+            return GenericEngine<TRequest, TResponse>.Deserialize(uploadString);
         }
-        private static TResponse QuerystringRequest(TRequest _request, TimeSpan _timeout)
+        private static TResponse QuerystringRequest(TRequest request, TimeSpan timeout)
         {
-            if (_request == null)
-                throw new ArgumentNullException(nameof(_request));
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
 
-            var _uri = _request.GetUri();
-            var _webClient = new WebClientTimeout(_timeout);
-            var _downloadData = _webClient.DownloadData(_uri);
+            var uri = request.GetUri();
+            var webClient = new WebClientTimeout(timeout);
+            var downloadData = webClient.DownloadData(uri);
 
-            return GenericEngine<TRequest, TResponse>.Deserialize(_downloadData);
+            return GenericEngine<TRequest, TResponse>.Deserialize(downloadData);
         }  
 
-        private static TaskCompletionSource<TResponse> JsonRequestAsync(Task<string> _task, TaskCompletionSource<TResponse> _taskCompletionSource)
+        private static TaskCompletionSource<TResponse> JsonRequestAsync(Task<string> task, TaskCompletionSource<TResponse> taskCompletionSource)
         {
-            if (_task == null)
-                throw new ArgumentNullException(nameof(_task));
+            if (task == null)
+                throw new ArgumentNullException(nameof(task));
 
-            if (_taskCompletionSource == null)
-                throw new ArgumentNullException(nameof(_taskCompletionSource));
+            if (taskCompletionSource == null)
+                throw new ArgumentNullException(nameof(taskCompletionSource));
 
-            if (_task.IsCanceled)
+            if (task.IsCanceled)
             {
-                _taskCompletionSource.SetCanceled();
+                taskCompletionSource.SetCanceled();
             }
-            else if (_task.IsFaulted)
+            else if (task.IsFaulted)
             {
-                var _exception = _task.Exception == null ? new NullReferenceException("_task.Exception") : _task.Exception.InnerException ?? _task.Exception;
-                _taskCompletionSource.SetException(_exception);
+                var exception = task.Exception == null ? new NullReferenceException("_task.Exception") : task.Exception.InnerException ?? task.Exception;
+                taskCompletionSource.SetException(exception);
             }
             else
             {
-                var _deserialize = GenericEngine<TRequest, TResponse>.Deserialize(_task.Result);
-                _taskCompletionSource.SetResult(_deserialize);
+                var deserialize = GenericEngine<TRequest, TResponse>.Deserialize(task.Result);
+                taskCompletionSource.SetResult(deserialize);
             }
 
-            return _taskCompletionSource;
+            return taskCompletionSource;
         }
-        private static TaskCompletionSource<TResponse> QuerystringRequestAsync(Task<byte[]> _task, TaskCompletionSource<TResponse> _taskCompletionSource)
+        private static TaskCompletionSource<TResponse> QuerystringRequestAsync(Task<byte[]> task, TaskCompletionSource<TResponse> taskCompletionSource)
         {
-            if (_task == null)
-                throw new ArgumentNullException(nameof(_task));
+            if (task == null)
+                throw new ArgumentNullException(nameof(task));
 
-            if (_taskCompletionSource == null)
-                throw new ArgumentNullException(nameof(_taskCompletionSource));
+            if (taskCompletionSource == null)
+                throw new ArgumentNullException(nameof(taskCompletionSource));
 
-            if (_task.IsCanceled)
+            if (task.IsCanceled)
             {
-                _taskCompletionSource.SetCanceled();
+                taskCompletionSource.SetCanceled();
             }
-            else if (_task.IsFaulted)
+            else if (task.IsFaulted)
             {
-                var _exception = _task.Exception == null ? new NullReferenceException("_task.Exception") : _task.Exception.InnerException ?? _task.Exception;
-                _taskCompletionSource.SetException(_exception);
+                var exception = task.Exception == null ? new NullReferenceException("_task.Exception") : task.Exception.InnerException ?? task.Exception;
+                taskCompletionSource.SetException(exception);
             }
             else
             {
-                var _deserialize = GenericEngine<TRequest, TResponse>.Deserialize(_task.Result);
-                _taskCompletionSource.SetResult(_deserialize);
+                var deserialize = GenericEngine<TRequest, TResponse>.Deserialize(task.Result);
+                taskCompletionSource.SetResult(deserialize);
             }
 
-            return _taskCompletionSource;
+            return taskCompletionSource;
         }
 
-        private static TResponse Deserialize(byte[] _serializedObject)
+        private static TResponse Deserialize(byte[] serializedObject)
         {
-            if (_serializedObject == null)
-                throw new ArgumentNullException(nameof(_serializedObject));
+            if (serializedObject == null)
+                throw new ArgumentNullException(nameof(serializedObject));
 
             // TODO: Hack (PlacesPhotosResponse).
             if (typeof (TResponse) == typeof (PlacesPhotosResponse))
-                return GenericEngine<TRequest, TResponse>.Deserialize("{\"photo\":\"" + Convert.ToBase64String(_serializedObject) + "\"}");
+                return GenericEngine<TRequest, TResponse>.Deserialize("{\"photo\":\"" + Convert.ToBase64String(serializedObject) + "\"}");
 
-            var _serializer = new DataContractJsonSerializer(typeof(TResponse));
-            var _memoryStream = new MemoryStream(_serializedObject, false);
+            var serializer = new DataContractJsonSerializer(typeof(TResponse));
+            var memoryStream = new MemoryStream(serializedObject, false);
 
-            return (TResponse)_serializer.ReadObject(_memoryStream);
+            return (TResponse)serializer.ReadObject(memoryStream);
         }
-        private static TResponse Deserialize(string _serializedObject)
+        private static TResponse Deserialize(string serializedObject)
         {
-            if (_serializedObject == null)
-                throw new ArgumentNullException(nameof(_serializedObject));
+            if (serializedObject == null)
+                throw new ArgumentNullException(nameof(serializedObject));
 
-            return JsonConvert.DeserializeObject<TResponse>(_serializedObject);
+            return JsonConvert.DeserializeObject<TResponse>(serializedObject);
         }
     }
 }

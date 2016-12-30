@@ -20,35 +20,35 @@ namespace GoogleApi.Test.Engine
         [Test]
         public void GetHttpConnectionLimitTest()
         {
-            var _httpConnectionLimit = GenericEngine<TestRequest, TestResponse>.HttpConnectionLimit;
-            var _connectionLimit = GenericEngine.HttpServicePoint.ConnectionLimit;
+            var httpConnectionLimit = GenericEngine<TestRequest, TestResponse>.HttpConnectionLimit;
+            var connectionLimit = GenericEngine.HttpServicePoint.ConnectionLimit;
 
-            Assert.AreEqual(_connectionLimit, _httpConnectionLimit);
+            Assert.AreEqual(connectionLimit, httpConnectionLimit);
         }
         [Test]
         public void SetHttpConnectionLimitTest()
         {
-            const int HTTP_CONNECTION_LIMIT = 10;
-            GenericEngine<TestRequest, TestResponse>.HttpConnectionLimit = HTTP_CONNECTION_LIMIT;
+            const int httpConnectionLimit = 10;
+            GenericEngine<TestRequest, TestResponse>.HttpConnectionLimit = httpConnectionLimit;
 
-            Assert.AreEqual(HTTP_CONNECTION_LIMIT, GenericEngine.HttpServicePoint.ConnectionLimit);
+            Assert.AreEqual(httpConnectionLimit, GenericEngine.HttpServicePoint.ConnectionLimit);
         }
 
         [Test]
         public void GetHttpsConnectionLimitTest()
         {
-            var _httpsConnectionLimit = GenericEngine<TestRequest, TestResponse>.HttpsConnectionLimit;
-            var _connectionLimit = GenericEngine.HttpsServicePoint.ConnectionLimit;
+            var httpsConnectionLimit = GenericEngine<TestRequest, TestResponse>.HttpsConnectionLimit;
+            var connectionLimit = GenericEngine.HttpsServicePoint.ConnectionLimit;
 
-            Assert.AreEqual(_connectionLimit, _httpsConnectionLimit);
+            Assert.AreEqual(connectionLimit, httpsConnectionLimit);
         }
         [Test]
         public void SetHttpsConnectionLimitTest()
         {
-            const int HTTPS_CONNECTION_LIMIT = 10;
-            GenericEngine<TestRequest, TestResponse>.HttpsConnectionLimit = HTTPS_CONNECTION_LIMIT;
+            const int httpsConnectionLimit = 10;
+            GenericEngine<TestRequest, TestResponse>.HttpsConnectionLimit = httpsConnectionLimit;
 
-            Assert.AreEqual(HTTPS_CONNECTION_LIMIT, GenericEngine.HttpsServicePoint.ConnectionLimit);
+            Assert.AreEqual(httpsConnectionLimit, GenericEngine.HttpsServicePoint.ConnectionLimit);
         }
     }
 }

@@ -9,382 +9,382 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// 
         /// </summary>
-        ACCOUNTING,
+        Accounting,
         /// <summary>
         /// 
         /// </summary>
-        AIRPORT,
+        Airport,
         /// <summary>
         /// 
         /// </summary>
-        AMUSEMENT_PARK,
+        AmusementPark,
         /// <summary>
         /// 
         /// </summary>
-        AQUARIUM,
+        Aquarium,
         /// <summary>
         /// 
         /// </summary>
-        ART_GALLERY,
+        ArtGallery,
         /// <summary>
         /// 
         /// </summary>
-        ATM,
+        Atm,
         /// <summary>
         /// 
         /// </summary>
-        BAKERY,
+        Bakery,
         /// <summary>
         /// 
         /// </summary>
-        BANK,
+        Bank,
         /// <summary>
         /// 
         /// </summary>
-        BAR,
+        Bar,
         /// <summary>
         /// 
         /// </summary>
-        BEAUTY_SALON,
+        BeautySalon,
         /// <summary>
         /// 
         /// </summary>
-        BICYCLE_STORE,
+        BicycleStore,
         /// <summary>
         /// 
         /// </summary>
-        BOOK_STORE,
+        BookStore,
         /// <summary>
         /// 
         /// </summary>
-        BOWLING_ALLEY,
+        BowlingAlley,
         /// <summary>
         /// 
         /// </summary>
-        BUS_STATION,
+        BusStation,
         /// <summary>
         /// 
         /// </summary>
-        CAFE,
+        Cafe,
         /// <summary>
         /// 
         /// </summary>
-        CAMPGROUND,
+        Campground,
         /// <summary>
         /// 
         /// </summary>
-        CAR_DEALER,
+        CarDealer,
         /// <summary>
         /// 
         /// </summary>
-        CAR_RENTAL,
+        CarRental,
         /// <summary>
         /// 
         /// </summary>
-        CAR_REPAIR,
+        CarRepair,
         /// <summary>
         /// 
         /// </summary>
-        CAR_WASH,
+        CarWash,
         /// <summary>
         /// 
         /// </summary>
-        CASINO,
+        Casino,
         /// <summary>
         /// 
         /// </summary>
-        CEMETERY,
+        Cemetery,
         /// <summary>
         /// 
         /// </summary>
-        CHURCH,
+        Church,
         /// <summary>
         /// 
         /// </summary>
-        CITY_HALL,
+        CityHall,
         /// <summary>
         /// 
         /// </summary>
-        CLOTHING_STORE,
+        ClothingStore,
         /// <summary>
         /// 
         /// </summary>
-        CONVENIENCE_STORE,
+        ConvenienceStore,
         /// <summary>
         /// 
         /// </summary>
-        COURTHOUSE,
+        Courthouse,
         /// <summary>
         /// 
         /// </summary>
-        DENTIST,
+        Dentist,
         /// <summary>
         /// 
         /// </summary>
-        DEPARTMENT_STORE,
+        DepartmentStore,
         /// <summary>
         /// 
         /// </summary>
-        DOCTOR,
+        Doctor,
         /// <summary>
         /// 
         /// </summary>
-        ELECTRICIAN,
+        Electrician,
         /// <summary>
         /// 
         /// </summary>
-        ELECTRONICS_STORE,
+        ElectronicsStore,
         /// <summary>
         /// 
         /// </summary>
-        ESTABLISHMENT,
+        Establishment,
         /// <summary>
         /// 
         /// </summary>
-        FINANCE,
+        Finance,
         /// <summary>
         /// 
         /// </summary>
-        FIRE_STATION,
+        FireStation,
         /// <summary>
         /// 
         /// </summary>
-        FLORIST,
+        Florist,
         /// <summary>
         /// 
         /// </summary>
-        FOOD,
+        Food,
         /// <summary>
         /// 
         /// </summary>
-        FUNERAL_HOME,
+        FuneralHome,
         /// <summary>
         /// 
         /// </summary>
-        FURNITURE_STORE,
+        FurnitureStore,
         /// <summary>
         /// 
         /// </summary>
-        GAS_STATION,
+        GasStation,
         /// <summary>
         /// 
         /// </summary>
-        GENERAL_CONTRACTOR,
+        GeneralContractor,
         /// <summary>
         /// 
         /// </summary>
-        GROCERY_OR_SUPERMARKET,
+        GroceryOrSupermarket,
         /// <summary>
         /// 
         /// </summary>
-        GYM,
+        Gym,
         /// <summary>
         /// 
         /// </summary>
-        HAIR_CARE,
+        HairCare,
         /// <summary>
         /// 
         /// </summary>
-        HARDWARE_STORE,
+        HardwareStore,
         /// <summary>
         /// 
         /// </summary>
-        HEALTH,
+        Health,
         /// <summary>
         /// 
         /// </summary>
-        HINDU_TEMPLE,
+        HinduTemple,
         /// <summary>
         /// 
         /// </summary>
-        HOME_GOODS_STORE,
+        HomeGoodsStore,
         /// <summary>
         /// 
         /// </summary>
-        HOSPITAL,
+        Hospital,
         /// <summary>
         /// 
         /// </summary>
-        INSURANCE_AGENCY,
+        InsuranceAgency,
         /// <summary>
         /// 
         /// </summary>
-        JEWELRY_STORE,
+        JewelryStore,
         /// <summary>
         /// 
         /// </summary>
-        LAUNDRY,
+        Laundry,
         /// <summary>
         /// 
         /// </summary>
-        LAWYER,
+        Lawyer,
         /// <summary>
         /// 
         /// </summary>
-        LIBRARY,
+        Library,
         /// <summary>
         /// 
         /// </summary>
-        LIQUOR_STORE,
+        LiquorStore,
         /// <summary>
         /// 
         /// </summary>
-        LOCAL_GOVERNMENT_OFFICE,
+        LocalGovernmentOffice,
         /// <summary>
         /// 
         /// </summary>
-        LOCKSMITH,
+        Locksmith,
         /// <summary>
         /// 
         /// </summary>
-        LODGING,
+        Lodging,
         /// <summary>
         /// 
         /// </summary>
-        MEAL_DELIVERY,
+        MealDelivery,
         /// <summary>
         /// 
         /// </summary>
-        MEAL_TAKEAWAY,
+        MealTakeaway,
         /// <summary>
         /// 
         /// </summary>
-        MOSQUE,
+        Mosque,
         /// <summary>
         /// 
         /// </summary>
-        MOVIE_RENTAL,
+        MovieRental,
         /// <summary>
         /// 
         /// </summary>
-        MOVIE_THEATER,
+        MovieTheater,
         /// <summary>
         /// 
         /// </summary>
-        MOVING_COMPANY,
+        MovingCompany,
         /// <summary>
         /// 
         /// </summary>
-        MUSEUM,
+        Museum,
         /// <summary>
         /// 
         /// </summary>
-        NIGHT_CLUB,
+        NightClub,
         /// <summary>
         /// 
         /// </summary>
-        PAINTER,
+        Painter,
         /// <summary>
         /// 
         /// </summary>
-        PARK,
+        Park,
         /// <summary>
         /// 
         /// </summary>
-        PARKING,
+        Parking,
         /// <summary>
         /// 
         /// </summary>
-        PET_STORE,
+        PetStore,
         /// <summary>
         /// 
         /// </summary>
-        PHARMACY,
+        Pharmacy,
         /// <summary>
         /// 
         /// </summary>
-        PHYSIOTHERAPIST,
+        Physiotherapist,
         /// <summary>
         /// 
         /// </summary>
-        PLACE_OF_WORSHIP,
+        PlaceOfWorship,
         /// <summary>
         /// 
         /// </summary>
-        PLUMBER,
+        Plumber,
         /// <summary>
         /// 
         /// </summary>
-        POLICE,
+        Police,
         /// <summary>
         /// 
         /// </summary>
-        POST_OFFICE,
+        PostOffice,
         /// <summary>
         /// 
         /// </summary>
-        REAL_ESTATE_AGENCY,
+        RealEstateAgency,
         /// <summary>
         /// 
         /// </summary>
-        RESTAURANT,
+        Restaurant,
         /// <summary>
         /// 
         /// </summary>
-        ROOFING_CONTRACTOR,
+        RoofingContractor,
         /// <summary>
         /// 
         /// </summary>
-        RV_PARK,
+        RvPark,
         /// <summary>
         /// 
         /// </summary>
-        SCHOOL,
+        School,
         /// <summary>
         /// 
         /// </summary>
-        SHOE_STORE,
+        ShoeStore,
         /// <summary>
         /// 
         /// </summary>
-        SHOPPING_MALL,
+        ShoppingMall,
         /// <summary>
         /// 
         /// </summary>
-        SPA,
+        Spa,
         /// <summary>
         /// 
         /// </summary>
-        STADIUM,
+        Stadium,
         /// <summary>
         /// 
         /// </summary>
-        STORAGE,
+        Storage,
         /// <summary>
         /// 
         /// </summary>
-        STORE,
+        Store,
         /// <summary>
         /// 
         /// </summary>
-        SUBWAY_STATION,
+        SubwayStation,
         /// <summary>
         /// 
         /// </summary>
-        SYNAGOGUE,
+        Synagogue,
         /// <summary>
         /// 
         /// </summary>
-        TAXI_STAND,
+        TaxiStand,
         /// <summary>
         /// 
         /// </summary>
-        TRAIN_STATION,
+        TrainStation,
         /// <summary>
         /// 
         /// </summary>
-        TRAVEL_AGENCY,
+        TravelAgency,
         /// <summary>
         /// 
         /// </summary>
-        UNIVERSITY,
+        University,
         /// <summary>
         /// 
         /// </summary>
-        VETERINARY_CARE,
+        VeterinaryCare,
         /// <summary>
         /// 
         /// </summary>
-        ZOO
+        Zoo
     }
 }

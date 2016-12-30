@@ -36,7 +36,7 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (this.Location == null)
                 throw new ArgumentException("Location must not be null");
@@ -51,12 +51,12 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
                 throw new ArgumentException("Request must include at least one of keyword, name, or types");
 
             if (!string.IsNullOrWhiteSpace(this.Name))
-                _parameters.Add("name", this.Name);
+                parameters.Add("name", this.Name);
 
             if (!string.IsNullOrWhiteSpace(this.Keyword))
-                _parameters.Add("keyword", this.Keyword);
+                parameters.Add("keyword", this.Keyword);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

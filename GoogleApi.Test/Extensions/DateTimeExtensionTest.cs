@@ -10,11 +10,11 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void DateTimeToUnixTimestampTest()
         {
-            var _dateTime = DateTime.UtcNow;
-            var _expected = (int)(_dateTime - DateTimeExtension._epoch).TotalSeconds;
-            var _actual = _dateTime.DateTimeToUnixTimestamp();
+            var dateTime = DateTime.UtcNow;
+            var expected = (int)(dateTime - DateTimeExtension.Epoch).TotalSeconds;
+            var actual = dateTime.DateTimeToUnixTimestamp();
 
-            Assert.AreEqual(_expected, _actual);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

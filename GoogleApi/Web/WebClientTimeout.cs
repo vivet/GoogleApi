@@ -16,11 +16,11 @@ namespace GoogleApi.Web
         /// <summary>
         /// Constructor, setting custom timeout.
         /// </summary>
-        /// <param name="_timeout"></param>
+        /// <param name="timeout"></param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public WebClientTimeout(TimeSpan _timeout)
+        public WebClientTimeout(TimeSpan timeout)
         {
-            this.Timeout = _timeout;
+            this.Timeout = timeout;
         }
 
         /// <summary>
@@ -29,20 +29,20 @@ namespace GoogleApi.Web
         /// <returns>
         /// A new <see cref="T:System.Net.WebRequest"/> object for the specified resource.
         /// </returns>
-        /// <param name="_uri">A <see cref="T:System.Uri"/> that identifies the resource to request.</param>
-        protected override WebRequest GetWebRequest(Uri _uri)
+        /// <param name="uri">A <see cref="T:System.Uri"/> that identifies the resource to request.</param>
+        protected override WebRequest GetWebRequest(Uri uri)
         {
-            if (_uri == null) 
-                throw new ArgumentNullException(nameof(_uri));
+            if (uri == null) 
+                throw new ArgumentNullException(nameof(uri));
             
-            var _request = base.GetWebRequest(_uri);
+            var request = base.GetWebRequest(uri);
             
-            if (_request == null)
+            if (request == null)
                 return null;
 
-            _request.Timeout = this.Timeout == null ? _request.Timeout : (int)this.Timeout.Value.TotalMilliseconds;
+            request.Timeout = this.Timeout == null ? request.Timeout : (int)this.Timeout.Value.TotalMilliseconds;
 
-            return _request;
+            return request;
         }
     }
 }

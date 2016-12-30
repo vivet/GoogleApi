@@ -12,21 +12,21 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request.Enums
         /// Radio type lete
         /// </summary>
         [EnumMember(Value = "lte")]
-        LTE,
+        Lte,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "gsm")]
-        GSM,
+        Gsm,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "cdma")]
-        CDMA,
+        Cdma,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "wcdma")]
-        WCDMA
+        Wcdma
     }
 }

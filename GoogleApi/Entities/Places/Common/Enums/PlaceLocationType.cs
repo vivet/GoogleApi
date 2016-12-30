@@ -15,641 +15,641 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// rather than business results. Generally, you use this request to disambiguate results where the location specified may be indeterminate.
         /// </summary>
         [EnumMember(Value = "geocode")]
-        GEOCODE,
+        Geocode,
         /// <summary>
         /// Indicates a precise street address.
         /// </summary>
         [EnumMember(Value = "street_address")]
-        STREET_ADDRESS,
+        StreetAddress,
         /// <summary>
         /// Indicates a named route (such as "US 101").
         /// </summary>
         [EnumMember(Value = "route")]
-        ROUTE,
+        Route,
         /// <summary>
         /// Indicates a major intersection, usually of two major roads.
         /// </summary>
         [EnumMember(Value = "intersection")]
-        INTERSECTION,
+        Intersection,
         /// <summary>
         /// Indicates a political entity. Usually, this type indicates a polygon of some civil administration.
         /// </summary>
         [EnumMember(Value = "political")]
-        POLITICAL,
+        Political,
         /// <summary>
         /// Indicates the national political entity, and is typically the highest order type returned by the Geocoder.
         /// </summary>
         [EnumMember(Value = "country")]
-        COUNTRY,
+        Country,
         /// <summary>
         /// Indicates a first-order civil entity below the country level. Within the United States, these administrative levels are states. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_1")]
-        ADMINISTRATIVE_AREA_LEVEL_1,
+        AdministrativeAreaLevel1,
         /// <summary>
         /// Indicates a second-order civil entity below the country level. Within the United States, these administrative levels are counties. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_2")]
-        ADMINISTRATIVE_AEA_LVEL_2,
+        AdministrativeAeaLvel2,
         /// <summary>
         /// Indicates a third-order civil entity below the country level. This type indicates a minor civil division. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_3")]
-        ADMINISTRATIVE_AEA_LEVEL_3,
+        AdministrativeAeaLevel3,
         /// <summary>
         /// Indicates a fourth-order civil entity below the country level. This type indicates a minor civil division. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_4")]
-        ADMINISTRATIVE_AEA_LEVEL_4,
+        AdministrativeAeaLevel4,
         /// <summary>
         /// Indicates a fifth-order civil entity below the country level. This type indicates a minor civil division. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_5")]
-        ADMINISTRATIVE_AEA_LEVEL_5,
+        AdministrativeAeaLevel5,
         /// <summary>
         /// Indicates a commonly-used alternative name for the entity.
         /// </summary>
         [EnumMember(Value = "colloquial_area")]
-        COLLOQUIAL_AREA,
+        ColloquialArea,
         /// <summary>
         /// Indicates an incorporated city or town political entity.
         /// </summary>
         [EnumMember(Value = "locality")]
-        LOCALITY,
+        Locality,
         /// <summary>
         /// locality
         /// </summary>
         [EnumMember(Value = "sublocality")]
-        SUBLOCALITY,
+        Sublocality,
         /// <summary>
         /// indicates an first-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_1")]
-        SUBLOCALITY_LEVEL_1,
+        SublocalityLevel1,
         /// <summary>
         /// indicates an second-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_2")]
-        SUBLOCALITY_LEVEL_2,
+        SublocalityLevel2,
         /// <summary>
         /// indicates an third-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_3")]
-        SUBLOCALITY_LEVEL_3,
+        SublocalityLevel3,
         /// <summary>
         /// indicates an first-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_4")]
-        SUBLOCALITY_LEVEL_4,
+        SublocalityLevel4,
         /// <summary>
         /// indicates an first-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_5")]
-        SUBLOCALITY_LEVEL_5,
+        SublocalityLevel5,
         /// <summary>
         /// Indicates a named neighborhood
         /// </summary>
         [EnumMember(Value = "neighborhood")]
-        NEIGHBORHOOD,
+        Neighborhood,
         /// <summary>
         /// Indicates a named location, usually a building or collection of buildings with a common name
         /// </summary>
         [EnumMember(Value = "premise")]
-        PREMISE,
+        Premise,
         /// <summary>
         /// Indicates a first-order entity below a named location, usually a singular building within a collection of buildings with a common name
         /// </summary>
         [EnumMember(Value = "subpremise")]
-        SUBPREMISE,
+        Subpremise,
         /// <summary>
         /// Indicates a postal code as used to address postal mail within the country.
         /// </summary>
         [EnumMember(Value = "postal_code")]
-        POSTAL_CODE,
+        PostalCode,
         /// <summary>
         /// Indicates a postal code prefix.
         /// </summary>
         [EnumMember(Value = "postal_code_prefix")]
-        POSTAL_CODE_PREFIX,
+        PostalCodePrefix,
         /// <summary>
         /// Indicates a postal code suffix.
         /// </summary>
         [EnumMember(Value = "postal_code_suffix")]
-        POSTAL_CODE_SUFFIX,
+        PostalCodeSuffix,
         /// <summary>
         /// Indicates a prominent natural feature.
         /// </summary>
         [EnumMember(Value = "natural_feature")]
-        NATURAL_FEATURE,
+        NaturalFeature,
         /// <summary>
         /// Indicates a named point of interest. Typically, these "POI"s are prominent local entities that don't easily fit in another category such as "Empire State Building" or "Statue of Liberty."
         /// </summary>
         [EnumMember(Value = "point_of_interest")]
-        POINT_OF_INTEREST,
+        PointOfInterest,
         /// <summary>
         /// Indicates the floor of a building address.
         /// </summary>
         [EnumMember(Value = "floor")]
-        FLOOR,
+        Floor,
         /// <summary>
         /// post_box indicates a specific postal box.
         /// </summary>
         [EnumMember(Value = "post_box")]
-        POST_BOX,
+        PostBox,
         /// <summary>
         /// postal_town indicates a grouping of geographic areas, such as locality and sublocality, used for mailing addresses in some countries.
         /// </summary>
         [EnumMember(Value = "postal_town")]
-        POSTAL_TOWN,
+        PostalTown,
         /// <summary>
         /// room indicates the room of a building address.
         /// </summary>
         [EnumMember(Value = "room")]
-        ROOM,
+        Room,
         /// <summary>
         /// street_number indicates the precise street number.
         /// </summary>
         [EnumMember(Value = "street_number")]
-        STREET_NUMBER,
+        StreetNumber,
         /// <summary>
         /// Indicate the location of a public transit stop.
         /// </summary>
         [EnumMember(Value = "transit_station")]
-        TRANSIT_STATION,
+        TransitStation,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "accounting")]
-        ACCOUNTING,
+        Accounting,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "airport")]
-        AIRPORT,
+        Airport,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "amusement_park")]
-        AMUSEMENT_PARK,
+        AmusementPark,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "aquarium")]
-        AQUARIUM,
+        Aquarium,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "art_gallery")]
-        ART_GALLERY,
+        ArtGallery,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "atm")]
-        ATM,
+        Atm,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "bakery")]
-        BAKERY,
+        Bakery,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "bank")]
-        BANK,
+        Bank,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "bar")]
-        BAR,
+        Bar,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "beauty_salon")]
-        BEAUTY_SALON,
+        BeautySalon,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "bicycle_store")]
-        BICYCLE_STORE,
+        BicycleStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "book_store")]
-        BOOK_STORE,
+        BookStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "bowling_alley")]
-        BOWLING_ALLEY,
+        BowlingAlley,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "bus_station")]
-        BUS_STATION,
+        BusStation,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "cafe")]
-        CAFE,
+        Cafe,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "campground")]
-        CAMPGROUND,
+        Campground,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "car_dealer")]
-        CAR_DEALER,
+        CarDealer,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "car_rental")]
-        CAR_RENTAL,
+        CarRental,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "car_repair")]
-        CAR_REPAIR,
+        CarRepair,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "car_wash")]
-        CAR_WASH,
+        CarWash,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "casino")]
-        CASINO,
+        Casino,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "cemetery")]
-        CEMETERY,
+        Cemetery,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "church")]
-        CHURCH,
+        Church,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "city_hall")]
-        CITY_HALL,
+        CityHall,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "clothing_store")]
-        CLOTHING_STORE,
+        ClothingStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "convenience_store")]
-        CONVENIENCE_STORE,
+        ConvenienceStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "courthouse")]
-        COURTHOUSE,
+        Courthouse,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "dentist")]
-        DENTIST,
+        Dentist,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "department_store")]
-        DEPARTMENT_STORE,
+        DepartmentStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "doctor")]
-        DOCTOR,
+        Doctor,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "electrician")]
-        ELECTRICIAN,
+        Electrician,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "electronics_store")]
-        ELECTRONICS_STORE,
+        ElectronicsStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "establishment")]
-        ESTABLISHMENT,
+        Establishment,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "finance")]
-        FINANCE,
+        Finance,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "fire_station")]
-        FIRE_STATION,
+        FireStation,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "florist")]
-        FLORIST,
+        Florist,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "food")]
-        FOOD,
+        Food,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "funeral_home")]
-        FUNERAL_HOME,
+        FuneralHome,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "furniture_store")]
-        FURNITURE_STORE,
+        FurnitureStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "gas_station")]
-        GAS_STATION,
+        GasStation,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "general_contractor")]
-        GENERAL_CONTRACTOR,
+        GeneralContractor,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "grocery_or_supermarket")]
-        GROCERY_OR_SUPERMARKET,
+        GroceryOrSupermarket,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "gym")]
-        GYM,
+        Gym,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "hair_care")]
-        HAIR_CARE,
+        HairCare,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "hardware_store")]
-        HARDWARE_STORE,
+        HardwareStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "health")]
-        HEALTH,
+        Health,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "hindu_temple")]
-        HINDU_TEMPLE,
+        HinduTemple,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "home_goods_store")]
-        HOME_GOODS_STORE,
+        HomeGoodsStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "hospital")]
-        HOSPITAL,
+        Hospital,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "insurance_agency")]
-        INSURANCE_AGENCY,
+        InsuranceAgency,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "jewelry_store")]
-        JEWELRY_STORE,
+        JewelryStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "laundry")]
-        LAUNDRY,
+        Laundry,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "lawyer")]
-        LAWYER,
+        Lawyer,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "library")]
-        LIBRARY,
+        Library,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "liquor_store")]
-        LIQUOR_STORE,
+        LiquorStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "local_government_office")]
-        LOCAL_GOVERNMENT_OFFICE,
+        LocalGovernmentOffice,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "locksmith")]
-        LOCKSMITH,
+        Locksmith,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "lodging")]
-        LODGING,
+        Lodging,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "meal_delivery")]
-        MEAL_DELIVERY,
+        MealDelivery,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "meal_takeaway")]
-        MEAL_TAKEAWAY,
+        MealTakeaway,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "mosque")]
-        MOSQUE,
+        Mosque,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "movie_rental")]
-        MOVIE_RENTAL,
+        MovieRental,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "movie_theater")]
-        MOVIE_THEATER,
+        MovieTheater,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "moving_company")]
-        MOVING_COMPANY,
+        MovingCompany,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "museum")]
-        MUSEUM,
+        Museum,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "night_club")]
-        NIGHT_CLUB,
+        NightClub,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "painter")]
-        PAINTER,
+        Painter,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "park")]
-        PARK,
+        Park,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "parking")]
-        PARKING,
+        Parking,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "pet_store")]
-        PET_STORE,
+        PetStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "pharmacy")]
-        PHARMACY,
+        Pharmacy,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "physiotherapist")]
-        PHYSIOTHERAPIST,
+        Physiotherapist,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "place_of_worship")]
-        PLACE_OF_WORSHIP,
+        PlaceOfWorship,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "plumber")]
-        PLUMBER,
+        Plumber,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "police")]
-        POLICE,
+        Police,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "post_office")]
-        POST_OFFICE,
+        PostOffice,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "real_estate_agency")]
-        REAL_ESTATE_AGENCY,
+        RealEstateAgency,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "restaurant")]
-        RESTAURANT,
+        Restaurant,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "roofing_contractor")]
-        ROOFING_CONTRACTOR,
+        RoofingContractor,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "rv_park")]
-        RV_PARK,
+        RvPark,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "school")]
-        SCHOOL,
+        School,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "shoe_store")]
-        SHOE_STORE,
+        ShoeStore,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "shopping_mall")]
-        SHOPPING_MALL,
+        ShoppingMall,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "spa")]
-        SPA,
+        Spa,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "stadium")]
-        STADIUM,
+        Stadium,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "storage")]
-        STORAGE,
+        Storage,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "store")]
-        STORE,
+        Store,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "subway_station")]
-        SUBWAY_STATION,
+        SubwayStation,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "synagogue")]
-        SYNAGOGUE,
+        Synagogue,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "taxi_stand")]
-        TAXI_STAND,
+        TaxiStand,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "train_station")]
-        TRAIN_STATION,
+        TrainStation,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "travel_agency")]
-        TRAVEL_AGENCY,
+        TravelAgency,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "university")]
-        UNIVERSITY,
+        University,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "veterinary_care")]
-        VETERINARY_CARE,
+        VeterinaryCare,
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "zoo")]
-        ZOO,
+        Zoo,
     }
 }

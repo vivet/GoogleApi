@@ -57,10 +57,10 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// <returns>Uri</returns>
         public override Uri GetUri()
         {
-            var _scheme = this.IsSsl ? "https://" : "http://";
-            var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
+            var scheme = this.IsSsl ? "https://" : "http://";
+            var queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
 
-            return new Uri(_scheme + this.BaseUrl + "?" + _queryString);
+            return new Uri(scheme + this.BaseUrl + "?" + queryString);
         }
 
         /// <summary>
@@ -83,21 +83,21 @@ namespace GoogleApi.Entities.Translate.Translate.Request
             if (this.Qs == null || !this.Qs.Any())
                 throw new ArgumentException("Qs is required");
 
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("target", this.Target);
+            parameters.Add("target", this.Target);
 
-            foreach (var _q in this.Qs)
+            foreach (var q in this.Qs)
             {
-                _parameters.Add("q", _q);
+                parameters.Add("q", q);
             }
 
-            _parameters.Add("prettyprint", this.PrettyPrint.ToString().ToLower());
+            parameters.Add("prettyprint", this.PrettyPrint.ToString().ToLower());
             
             if (!string.IsNullOrWhiteSpace(this.Source))
-                _parameters.Add("source", this.Source);
+                parameters.Add("source", this.Source);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

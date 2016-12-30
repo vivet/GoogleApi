@@ -75,24 +75,24 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (Location != null)
-                _parameters.Add("location", Location.ToString());
+                parameters.Add("location", Location.ToString());
 
             if (this.Radius.HasValue)
-                _parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
             if (this.Types != null && this.Types.Any())
-                _parameters.Add("types", string.Join("|", this.Types.Select(_x => _x.ToString().ToLower())));
+                parameters.Add("types", string.Join("|", this.Types.Select(x => x.ToString().ToLower())));
 
             if (!string.IsNullOrEmpty(Language))
-                _parameters.Add("language", Language);
+                parameters.Add("language", Language);
 
             if (!string.IsNullOrWhiteSpace(this.PageToken))
-                _parameters.Add("pagetoken", this.PageToken);
+                parameters.Add("pagetoken", this.PageToken);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

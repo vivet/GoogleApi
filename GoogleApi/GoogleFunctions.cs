@@ -18,123 +18,123 @@ namespace GoogleApi
         /// <summary>
         /// Encode a list of locations into a polyline string. 
         /// </summary>
-        /// <param name="_locations"></param>
+        /// <param name="locations"></param>
         /// <returns></returns>
-        public static string EncodePolyLine(IEnumerable<Location> _locations)
+        public static string EncodePolyLine(IEnumerable<Location> locations)
         {
-            if (_locations == null) 
-                throw new ArgumentNullException(nameof(_locations));
+            if (locations == null) 
+                throw new ArgumentNullException(nameof(locations));
             
-            var _encodedString = new StringBuilder();
+            var encodedString = new StringBuilder();
 
-            var _encodeDiff = (Action<int>)(_diff =>
+            var encodeDiff = (Action<int>)(diff =>
             {
-                var _shifted = _diff << 1;
-                if (_diff < 0)
-                    _shifted = ~_shifted;
+                var shifted = diff << 1;
+                if (diff < 0)
+                    shifted = ~shifted;
 
-                var _rem = _shifted;
+                var rem = shifted;
 
-                while (_rem >= 0x20)
+                while (rem >= 0x20)
                 {
-                    _encodedString.Append((char)((0x20 | (_rem & 0x1f)) + 63));
-                    _rem >>= 5;
+                    encodedString.Append((char)((0x20 | (rem & 0x1f)) + 63));
+                    rem >>= 5;
                 }
 
-                _encodedString.Append((char)(_rem + 63));
+                encodedString.Append((char)(rem + 63));
             });
 
-            var _lastLat = 0;
-            var _lastLng = 0;
+            var lastLat = 0;
+            var lastLng = 0;
 
-            foreach (var _location in _locations)
+            foreach (var location in locations)
             {
-                if (_location != null)
+                if (location != null)
                 {
-                    var _lat = (int)Math.Round(_location.Latitude * 1E5);
-                    var _lng = (int)Math.Round(_location.Longitude * 1E5);
+                    var lat = (int)Math.Round(location.Latitude * 1E5);
+                    var lng = (int)Math.Round(location.Longitude * 1E5);
 
-                    _encodeDiff(_lat - _lastLat);
-                    _encodeDiff(_lng - _lastLng);
+                    encodeDiff(lat - lastLat);
+                    encodeDiff(lng - lastLng);
 
-                    _lastLat = _lat;
-                    _lastLng = _lng;                    
+                    lastLat = lat;
+                    lastLng = lng;                    
                 }
 
             }
 
-            return _encodedString.ToString();
+            return encodedString.ToString();
         }
 
         /// <summary>
         /// Merge polylines into one encoded polyline string.
         /// </summary>
-        /// <param name="_encdodedLocations"></param>
+        /// <param name="encdodedLocations"></param>
         /// <returns></returns>
-        public static string MergePolyLine(params string[] _encdodedLocations)
+        public static string MergePolyLine(params string[] encdodedLocations)
         {
-            if (_encdodedLocations == null)
-                throw new ArgumentNullException(nameof(_encdodedLocations));
+            if (encdodedLocations == null)
+                throw new ArgumentNullException(nameof(encdodedLocations));
 
-            var _length = _encdodedLocations.Length;
-            var _locations = new Location[_length];
+            var length = encdodedLocations.Length;
+            var locations = new Location[length];
 
-            _locations = _encdodedLocations.Where(_x => !string.IsNullOrEmpty(_x)).Aggregate(_locations, (_current, _encdodedLocation) => _current.Concat(GoogleFunctions.DecodePolyLine(_encdodedLocation)).ToArray());
+            locations = encdodedLocations.Where(x => !string.IsNullOrEmpty(x)).Aggregate(locations, (current, encdodedLocation) => current.Concat(GoogleFunctions.DecodePolyLine(encdodedLocation)).ToArray());
 
-            return GoogleFunctions.EncodePolyLine(_locations);
+            return GoogleFunctions.EncodePolyLine(locations);
         }
         
         /// <summary>
         /// Decode a polyline string into locations.
         /// </summary>
-        /// <param name="_encdodedLocations"></param>
+        /// <param name="encdodedLocations"></param>
         /// <returns></returns>
-        public static IEnumerable<Location> DecodePolyLine(string _encdodedLocations)
+        public static IEnumerable<Location> DecodePolyLine(string encdodedLocations)
         {
-            if (string.IsNullOrEmpty(_encdodedLocations))
-                throw new ArgumentNullException(nameof(_encdodedLocations));
+            if (string.IsNullOrEmpty(encdodedLocations))
+                throw new ArgumentNullException(nameof(encdodedLocations));
 
-            var _polylineChars = _encdodedLocations.ToCharArray();
-            var _index = 0;
+            var polylineChars = encdodedLocations.ToCharArray();
+            var index = 0;
 
-            var _currentLat = 0;
-            var _currentLng = 0;
+            var currentLat = 0;
+            var currentLng = 0;
 
-            while (_index < _polylineChars.Length)
+            while (index < polylineChars.Length)
             {
                 // Calculate next latitude
-                var _sum = 0;
-                var _shifter = 0;
-                int _next5Bits;
+                var sum = 0;
+                var shifter = 0;
+                int next5Bits;
                 
                 do
                 {
-                    _next5Bits = _polylineChars[_index++] - 63;
-                    _sum |= (_next5Bits & 31) << _shifter;
-                    _shifter += 5;
-                } while (_next5Bits >= 32 && _index < _polylineChars.Length);
+                    next5Bits = polylineChars[index++] - 63;
+                    sum |= (next5Bits & 31) << shifter;
+                    shifter += 5;
+                } while (next5Bits >= 32 && index < polylineChars.Length);
 
-                if (_index >= _polylineChars.Length)
+                if (index >= polylineChars.Length)
                     break;
 
-                _currentLat += (_sum & 1) == 1 ? ~(_sum >> 1) : _sum >> 1;
+                currentLat += (sum & 1) == 1 ? ~(sum >> 1) : sum >> 1;
 
                 // Calculate next longitude
-                _sum = 0;
-                _shifter = 0;
+                sum = 0;
+                shifter = 0;
                 
                 do
                 {
-                    _next5Bits = _polylineChars[_index++] - 63;
-                    _sum |= (_next5Bits & 31) << _shifter;
-                    _shifter += 5;
-                } while (_next5Bits >= 32 && _index < _polylineChars.Length);
+                    next5Bits = polylineChars[index++] - 63;
+                    sum |= (next5Bits & 31) << shifter;
+                    shifter += 5;
+                } while (next5Bits >= 32 && index < polylineChars.Length);
 
-                if (_index >= _polylineChars.Length && _next5Bits >= 32)
+                if (index >= polylineChars.Length && next5Bits >= 32)
                     break;
 
-                _currentLng += (_sum & 1) == 1 ? ~(_sum >> 1) : _sum >> 1;
-                yield return new Location(Convert.ToDouble(_currentLat) / 1E5, Convert.ToDouble(_currentLng) / 1E5);
+                currentLng += (sum & 1) == 1 ? ~(sum >> 1) : sum >> 1;
+                yield return new Location(Convert.ToDouble(currentLat) / 1E5, Convert.ToDouble(currentLng) / 1E5);
             }
         }
     }

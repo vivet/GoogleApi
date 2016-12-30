@@ -14,12 +14,12 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void StaticConstructorInitializesPreCancelledTaskTest()
         {
-            var _type = typeof(WebClientExtension);
-            var _fieldInfo = _type.GetField("_preCancelledTask", BindingFlags.NonPublic | BindingFlags.Static);
-            var _value = _fieldInfo == null ? null : (Task<byte[]>)_fieldInfo.GetValue(null);
+            var type = typeof(WebClientExtension);
+            var fieldInfo = type.GetField("PreCancelledTask", BindingFlags.NonPublic | BindingFlags.Static);
+            var value = fieldInfo == null ? null : (Task<byte[]>)fieldInfo.GetValue(null);
         
-            Assert.IsNotNull(_value);
-            Assert.IsTrue(_value.IsCanceled);
+            Assert.IsNotNull(value);
+            Assert.IsTrue(value.IsCanceled);
         }
 
         [Test]
@@ -31,88 +31,88 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void DownloadDataTaskAsyncTest()
         {
-            var _uri = new Uri("https://www.google.com");
-            var _timout = new TimeSpan(0, 0, 30);
-            var _webClient = new WebClient();
-            var _result = _webClient.DownloadDataTaskAsync(_uri, _timout).Result;
+            var uri = new Uri("https://www.google.com");
+            var timout = new TimeSpan(0, 0, 30);
+            var webClient = new WebClient();
+            var result = webClient.DownloadDataTaskAsync(uri, timout).Result;
 
-            Assert.IsNotNull(_result);
-            Assert.AreEqual(typeof(byte[]), _result.GetType());
+            Assert.IsNotNull(result);
+            Assert.AreEqual(typeof(byte[]), result.GetType());
         }
         [Test]
         public void DownloadDataTaskAsyncWhenWebClientIsNullTest()
         {
-            var _uri = new Uri("https://test.com");
-            var _exception = Assert.Throws<ArgumentNullException>(() => ((WebClient)null).DownloadDataTaskAsync(_uri, new TimeSpan(0, 0, 0, 30)));
+            var uri = new Uri("https://test.com");
+            var exception = Assert.Throws<ArgumentNullException>(() => ((WebClient)null).DownloadDataTaskAsync(uri, new TimeSpan(0, 0, 0, 30)));
     
-            Assert.AreEqual("_webClient", _exception.ParamName);
+            Assert.AreEqual("webClient", exception.ParamName);
         }
         [Test]
         public void DownloadDataTaskAsyncWhenUriIsNullTest()
         {
-            var _webClient = new WebClient();
-            var _exception = Assert.Throws<ArgumentNullException>(() => _webClient.DownloadDataTaskAsync(null, new TimeSpan(0, 0, 0, 30)));
+            var webClient = new WebClient();
+            var exception = Assert.Throws<ArgumentNullException>(() => webClient.DownloadDataTaskAsync(null, new TimeSpan(0, 0, 0, 30)));
          
-            Assert.AreEqual("_uri", _exception.ParamName);
+            Assert.AreEqual("uri", exception.ParamName);
         }
 
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenTest()
         {
-            var _uri = new Uri("https://www.google.com");
-            var _cancellationToken = new CancellationToken();
-            var _webClient = new WebClient();
+            var uri = new Uri("https://www.google.com");
+            var cancellationToken = new CancellationToken();
+            var webClient = new WebClient();
 
-            var _result = _webClient.DownloadDataTaskAsync(_uri, _cancellationToken).Result;
+            var result = webClient.DownloadDataTaskAsync(uri, cancellationToken).Result;
 
-            Assert.IsNotNull(_result);
-            Assert.AreEqual(typeof(byte[]), _result.GetType());
+            Assert.IsNotNull(result);
+            Assert.AreEqual(typeof(byte[]), result.GetType());
         }
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndWebClientIsNullTest()
         {
-            var _uri = new Uri("https://test.com");
-            var _exception = Assert.Throws<ArgumentNullException>(() => ((WebClient)null).DownloadDataTaskAsync(_uri, new CancellationToken()));
+            var uri = new Uri("https://test.com");
+            var exception = Assert.Throws<ArgumentNullException>(() => ((WebClient)null).DownloadDataTaskAsync(uri, new CancellationToken()));
 
-            Assert.AreEqual("_webClient", _exception.ParamName);
+            Assert.AreEqual("webClient", exception.ParamName);
         }
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndUriIsNullTest()
         {
-            var _webClient = new WebClient();
-            var _exception = Assert.Throws<ArgumentNullException>(() => _webClient.DownloadDataTaskAsync(null, new CancellationToken()));
+            var webClient = new WebClient();
+            var exception = Assert.Throws<ArgumentNullException>(() => webClient.DownloadDataTaskAsync(null, new CancellationToken()));
 
-            Assert.AreEqual("_uri", _exception.ParamName);
+            Assert.AreEqual("uri", exception.ParamName);
         }
 
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndTimeoutTest()
         {
-            var _uri = new Uri("https://www.google.com");
-            var _timout = new TimeSpan(0, 0, 30);
-            var _cancellationToken = new CancellationToken();
-            var _webClient = new WebClient();
+            var uri = new Uri("https://www.google.com");
+            var timout = new TimeSpan(0, 0, 30);
+            var cancellationToken = new CancellationToken();
+            var webClient = new WebClient();
 
-            var _result = _webClient.DownloadDataTaskAsync(_uri, _timout, _cancellationToken).Result;
+            var result = webClient.DownloadDataTaskAsync(uri, timout, cancellationToken).Result;
 
-            Assert.IsNotNull(_result);
-            Assert.AreEqual(typeof(byte[]), _result.GetType());
+            Assert.IsNotNull(result);
+            Assert.AreEqual(typeof(byte[]), result.GetType());
         }
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndTimeoutAndWebClientIsNullTest()
         {
-            var _uri = new Uri("https://test.com");
-            var _exception = Assert.Throws<ArgumentNullException>(() => ((WebClient)null).DownloadDataTaskAsync(_uri, new TimeSpan(0, 0, 0, 30), new CancellationToken()));
+            var uri = new Uri("https://test.com");
+            var exception = Assert.Throws<ArgumentNullException>(() => ((WebClient)null).DownloadDataTaskAsync(uri, new TimeSpan(0, 0, 0, 30), new CancellationToken()));
 
-            Assert.AreEqual("_webClient", _exception.ParamName);
+            Assert.AreEqual("webClient", exception.ParamName);
         }  
         [Test]
         public void DownloadDataTaskAsyncWhenCancellationTokenAndTimeoutAndUriIsNullTest()
         {
-            var _webClient = new WebClient();
-            var _exception = Assert.Throws<ArgumentNullException>(() => _webClient.DownloadDataTaskAsync(null, new TimeSpan(0, 0, 0, 30), new CancellationToken()));
+            var webClient = new WebClient();
+            var exception = Assert.Throws<ArgumentNullException>(() => webClient.DownloadDataTaskAsync(null, new TimeSpan(0, 0, 0, 30), new CancellationToken()));
 
-            Assert.AreEqual("_uri", _exception.ParamName);
+            Assert.AreEqual("uri", exception.ParamName);
         }  
     }
 }

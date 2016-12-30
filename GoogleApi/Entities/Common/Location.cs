@@ -25,12 +25,12 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// Contructor intializing a valid Location
         /// </summary>
-        /// <param name="_latitude"></param>
-        /// <param name="_longitude"></param>
-        public Location(double _latitude, double _longitude)
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        public Location(double latitude, double longitude)
 		{
-            this.Latitude = _latitude;
-            this.Longitude = _longitude;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
 		}
 
         /// <summary>

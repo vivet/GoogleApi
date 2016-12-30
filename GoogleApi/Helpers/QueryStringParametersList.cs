@@ -25,36 +25,36 @@ namespace GoogleApi.Helpers
         /// <summary>
         /// Adds a parameter.
         /// </summary>
-        /// <param name="_key"></param>
-        /// <param name="_value"></param>
-		public void Add(string _key, string _value)
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+		public void Add(string key, string value)
         {
-            if (_key == null) 
-                throw new ArgumentNullException(nameof(_key));
+            if (key == null) 
+                throw new ArgumentNullException(nameof(key));
             
-            if (_value == null) 
-                throw new ArgumentNullException(nameof(_value));
+            if (value == null) 
+                throw new ArgumentNullException(nameof(value));
 
-            if (this.List.ContainsKey(_key))
+            if (this.List.ContainsKey(key))
             {
-                this.List[_key] = _value;
+                this.List[key] = value;
             }
             else
             {
-                this.List.Add(_key, _value);
+                this.List.Add(key, value);
             }
         }
 
         /// <summary>
         /// Remove a parameter.
         /// </summary>
-        /// <param name="_key"></param>
-        public void Remove(string _key)
+        /// <param name="key"></param>
+        public void Remove(string key)
         {
-            if (_key == null)
-                throw new ArgumentNullException(nameof(_key));
+            if (key == null)
+                throw new ArgumentNullException(nameof(key));
 
-            this.List.Remove(_key);
+            this.List.Remove(key);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace GoogleApi.Helpers
         /// <returns></returns>
 		public string GetQueryStringPostfix()
 		{
-			return string.Join("&", this.List.Select(_x => Uri.EscapeDataString(_x.Key) + "=" + Uri.EscapeDataString(_x.Value)));
+			return string.Join("&", this.List.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
 		}
 	}
 }

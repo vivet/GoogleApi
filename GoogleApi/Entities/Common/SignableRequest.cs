@@ -25,20 +25,20 @@ namespace GoogleApi.Entities.Common
         /// <returns></returns>
         public override Uri GetUri()
         {
-            var _uri = base.GetUri();
+            var uri = base.GetUri();
 
-            return this.ClientId == null ? _uri : this.Sign(_uri);
+            return this.ClientId == null ? uri : this.Sign(uri);
         }
 
         /// <summary>
         /// Signs the request using premium subscription.
         /// </summary>
-        /// <param name="_uri"></param>
+        /// <param name="uri"></param>
         /// <returns></returns>
-        protected virtual Uri Sign(Uri _uri)
+        protected virtual Uri Sign(Uri uri)
         {
-            if (_uri == null)
-                throw new ArgumentNullException(nameof(_uri));
+            if (uri == null)
+                throw new ArgumentNullException(nameof(uri));
 
             if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("Invalid signing key.");
@@ -49,16 +49,16 @@ namespace GoogleApi.Entities.Common
             if (!this.ClientId.StartsWith("gme-"))
                 throw new ArgumentException("A clientId must start with 'gme-'.");
 
-            var _urlSegmentToSign = _uri.LocalPath + _uri.Query + "&client=" + this.ClientId;
-            var _privateKey = SignableRequest.FromBase64UrlString(this.Key);
-            byte[] _signature;
+            var urlSegmentToSign = uri.LocalPath + uri.Query + "&client=" + this.ClientId;
+            var privateKey = SignableRequest.FromBase64UrlString(this.Key);
+            byte[] signature;
             
-            using (var _algorithm = new HMACSHA1(_privateKey))
+            using (var algorithm = new HMACSHA1(privateKey))
             {
-                _signature = _algorithm.ComputeHash(Encoding.ASCII.GetBytes(_urlSegmentToSign));
+                signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(urlSegmentToSign));
             }
 
-            return new Uri(_uri.Scheme + "://" + _uri.Host + _urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(_signature));
+            return new Uri(uri.Scheme + "://" + uri.Host + urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(signature));
         }
 
         /// <summary>
@@ -70,25 +70,25 @@ namespace GoogleApi.Entities.Common
             if (string.IsNullOrEmpty(this.ClientId))
                 return base.GetQueryStringParameters();
 
-            var _parameters = new QueryStringParametersList();
-            _parameters.Add("sensor", Sensor.ToString().ToLower());
+            var parameters = new QueryStringParametersList();
+            parameters.Add("sensor", Sensor.ToString().ToLower());
 
-            return _parameters;
+            return parameters;
         }
 
-        private static string ToBase64UrlString(byte[] _data)
+        private static string ToBase64UrlString(byte[] data)
         {
-            if (_data == null) 
-                throw new ArgumentNullException(nameof(_data));
+            if (data == null) 
+                throw new ArgumentNullException(nameof(data));
 
-            return Convert.ToBase64String(_data).Replace("+", "-").Replace("/", "_");
+            return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_");
         }
-        private static byte[] FromBase64UrlString(string _base64UrlString)
+        private static byte[] FromBase64UrlString(string base64UrlString)
         {
-            if (_base64UrlString == null) 
-                throw new ArgumentNullException(nameof(_base64UrlString));
+            if (base64UrlString == null) 
+                throw new ArgumentNullException(nameof(base64UrlString));
             
-            return Convert.FromBase64String(_base64UrlString.Replace("-", "+").Replace("_", "/"));
+            return Convert.FromBase64String(base64UrlString.Replace("-", "+").Replace("_", "/"));
         }
     }
 }

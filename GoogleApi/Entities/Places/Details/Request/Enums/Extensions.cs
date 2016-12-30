@@ -8,10 +8,10 @@
         /// <summary>
         /// None.
         /// </summary>
-        NONE = 0,
+        None = 0,
         /// <summary>
         /// Includes a rich and concise review curated by Google's editorial staff.
         /// </summary>
-        REVIEW_SUMMARY,
+        ReviewSummary,
     }
 }

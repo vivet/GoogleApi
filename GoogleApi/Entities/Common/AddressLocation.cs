@@ -19,10 +19,10 @@ namespace GoogleApi.Entities.Common
 	    /// <summary>
         /// Constructor initializing a valid AddressLocation
         /// </summary>
-        /// <param name="_address"></param>
-		public AddressLocation(string _address)
+        /// <param name="address"></param>
+		public AddressLocation(string address)
 		{
-            this.Address = _address;
+            this.Address = address;
 		}
 
         /// <summary>

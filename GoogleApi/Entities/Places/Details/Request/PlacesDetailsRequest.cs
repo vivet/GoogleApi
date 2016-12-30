@@ -36,20 +36,20 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.PlaceId))
                 throw new ArgumentException("PlaceId must be provided.");
 
-            _parameters.Add("placeid", this.PlaceId);
+            parameters.Add("placeid", this.PlaceId);
 
-            if (this.Extensions != Enums.Extensions.NONE)
-                _parameters.Add("extensions", this.Extensions.ToString().ToLower());
+            if (this.Extensions != Enums.Extensions.None)
+                parameters.Add("extensions", this.Extensions.ToString().ToLower());
 
             if (!string.IsNullOrWhiteSpace(this.Language)) 
-                _parameters.Add("language", this.Language);
+                parameters.Add("language", this.Language);
             
-            return _parameters;
+            return parameters;
         }
     }
 }

@@ -12,26 +12,26 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Free 
         /// </summary>
         [EnumMember(Value = "0")]
-        FREE = 0,
+        Free = 0,
         /// <summary>
         /// Inexpensive 
         /// </summary>
         [EnumMember(Value = "1")]
-        INEXPENSIVE = 1,
+        Inexpensive = 1,
         /// <summary>
         /// Moderate 
         /// </summary>
         [EnumMember(Value = "2")]
-        MODERATE = 2,
+        Moderate = 2,
         /// <summary>
         /// Expensive 
         /// </summary>
         [EnumMember(Value = "3")]
-        EXPENSIVE = 3,
+        Expensive = 3,
         /// <summary>
         /// Very Expensive 
         /// </summary>
         [EnumMember(Value = "4")]
-        VERY_EXPENSIVE = 4,
+        VeryExpensive = 4,
     }
 }

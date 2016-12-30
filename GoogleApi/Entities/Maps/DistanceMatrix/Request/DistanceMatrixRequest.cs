@@ -97,11 +97,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// </summary>
         public DistanceMatrixRequest()
         {
-            this.Units = Units.METRIC;
-            this.Avoid = AvoidWay.NOTHING;
-            this.TravelMode = TravelMode.DRIVING;
-            this.TransitMode = TransitMode.BUS | TransitMode.TRAIN | TransitMode.SUBWAY | TransitMode.TRAM;
-            this.TransitRoutingPreference = TransitRoutingPreference.NOTHING;
+            this.Units = Units.Metric;
+            this.Avoid = AvoidWay.Nothing;
+            this.TravelMode = TravelMode.Driving;
+            this.TransitMode = TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram;
+            this.TransitRoutingPreference = TransitRoutingPreference.Nothing;
         }
 
         /// <summary>
@@ -127,37 +127,37 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
 				throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
 
-            if (this.TravelMode == TravelMode.TRANSIT && this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime))
+            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime))
                 throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("origins", string.Join("|", this.Origins));
-            _parameters.Add("destinations", string.Join("|", this.Destinations));
-            _parameters.Add("mode", this.TravelMode.ToString().ToLower());
-            _parameters.Add("units", this.Units.ToString().ToLower());
+            parameters.Add("origins", string.Join("|", this.Origins));
+            parameters.Add("destinations", string.Join("|", this.Destinations));
+            parameters.Add("mode", this.TravelMode.ToString().ToLower());
+            parameters.Add("units", this.Units.ToString().ToLower());
 
             if (!string.IsNullOrWhiteSpace(this.Language))
-                _parameters.Add("language", this.Language);
+                parameters.Add("language", this.Language);
 
-            if (this.Avoid != AvoidWay.NOTHING)
-                _parameters.Add("avoid", this.Avoid.ToEnumString('|'));
+            if (this.Avoid != AvoidWay.Nothing)
+                parameters.Add("avoid", this.Avoid.ToEnumString('|'));
 
-            if (this.TravelMode == TravelMode.TRANSIT)
+            if (this.TravelMode == TravelMode.Transit)
             {
-                _parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
-                if (this.TransitRoutingPreference != TransitRoutingPreference.NOTHING)
-                    _parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
 
                 if (this.ArrivalTime != default(DateTime))
-                    _parameters.Add("arrival_time", this.ArrivalTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    parameters.Add("arrival_time", this.ArrivalTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
                 if (this.DepartureTime != default(DateTime))
-                    _parameters.Add("departure_time", this.DepartureTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    parameters.Add("departure_time", this.DepartureTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
             }
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

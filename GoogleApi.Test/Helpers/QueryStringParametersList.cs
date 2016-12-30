@@ -11,85 +11,85 @@ namespace GoogleApi.Test.Helpers
         [Test]
         public void ConstructorInitializesParametersCollectionTest()
 		{
-            var _queryStringParametersList = new QueryStringParametersList();
-            Assert.IsNotNull(_queryStringParametersList.List);
+            var queryStringParametersList = new QueryStringParametersList();
+            Assert.IsNotNull(queryStringParametersList.List);
 		}
 
         [Test]
         public void AddTest()
         {
-            const string KEY = "key";
-            const string VALUE = "value";
+            const string key = "key";
+            const string value = "value";
 
-            var _queryStringParametersList = new QueryStringParametersList();
-            _queryStringParametersList.Add(KEY, VALUE);
+            var queryStringParametersList = new QueryStringParametersList();
+            queryStringParametersList.Add(key, value);
 
-            Assert.IsNotNull(_queryStringParametersList.List);
-            Assert.Contains(KEY, _queryStringParametersList.List.Keys);
-            Assert.AreEqual(VALUE, _queryStringParametersList.List[KEY]);
+            Assert.IsNotNull(queryStringParametersList.List);
+            Assert.Contains(key, queryStringParametersList.List.Keys);
+            Assert.AreEqual(value, queryStringParametersList.List[key]);
         }
         [Test]
         public void AddwhenKeyExistsTest()
         {
-            const string KEY = "key";
-            const string VALUE = "value";
-            const string VALUE_NEW = "value_new";
+            const string key = "key";
+            const string value = "value";
+            const string valueNew = "value_new";
 
-            var _queryStringParametersList = new QueryStringParametersList();
-            _queryStringParametersList.Add(KEY, VALUE);
-            _queryStringParametersList.Add(KEY, VALUE_NEW);
+            var queryStringParametersList = new QueryStringParametersList();
+            queryStringParametersList.Add(key, value);
+            queryStringParametersList.Add(key, valueNew);
 
-            Assert.IsNotNull(_queryStringParametersList.List);
-            Assert.Contains(KEY, _queryStringParametersList.List.Keys);
-            Assert.AreEqual(VALUE_NEW, _queryStringParametersList.List[KEY]);
-            Assert.AreEqual(1, _queryStringParametersList.List.Count);
+            Assert.IsNotNull(queryStringParametersList.List);
+            Assert.Contains(key, queryStringParametersList.List.Keys);
+            Assert.AreEqual(valueNew, queryStringParametersList.List[key]);
+            Assert.AreEqual(1, queryStringParametersList.List.Count);
         }
         [Test]
         public void AddWhenKeyIsNullTest()
         {
-            var _exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Add(null, "value"));
-            Assert.AreEqual("_key", _exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Add(null, "value"));
+            Assert.AreEqual("key", exception.ParamName);
         }
         [Test]
         public void AddWhenValueIsNullTest()
         {
-            var _exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Add("key", null));
-            Assert.AreEqual("_value", _exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Add("key", null));
+            Assert.AreEqual("value", exception.ParamName);
         }
 
         [Test]
         public void RemoveTest()
         {
-            const string KEY = "key";
-            const string VALUE = "value";
+            const string key = "key";
+            const string value = "value";
 
-            var _queryStringParametersList = new QueryStringParametersList();
-            _queryStringParametersList.Add(KEY, VALUE);
-            _queryStringParametersList.Remove(KEY);
+            var queryStringParametersList = new QueryStringParametersList();
+            queryStringParametersList.Add(key, value);
+            queryStringParametersList.Remove(key);
 
-            Assert.IsNotNull(_queryStringParametersList.List);
-            Assert.AreEqual(0, _queryStringParametersList.List.Count);
+            Assert.IsNotNull(queryStringParametersList.List);
+            Assert.AreEqual(0, queryStringParametersList.List.Count);
         }
         [Test]
         public void RemoveWhenKeyIsNullTest()
         {
-            var _exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Remove(null));
-            Assert.AreEqual("_key", _exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Remove(null));
+            Assert.AreEqual("key", exception.ParamName);
         }
 
         [Test]
         public void GetQueryStringPostfixTest()
 		{
-            var _queryStringParametersList = new QueryStringParametersList();
-            _queryStringParametersList.Add("1", "1");
-            _queryStringParametersList.Add("2", "2");
-            _queryStringParametersList.Add("3", "3");
+            var queryStringParametersList = new QueryStringParametersList();
+            queryStringParametersList.Add("1", "1");
+            queryStringParametersList.Add("2", "2");
+            queryStringParametersList.Add("3", "3");
 
-            var _actual = _queryStringParametersList.GetQueryStringPostfix();
-            var _expected = string.Join("&", _queryStringParametersList.List.Select(_x => Uri.EscapeDataString(_x.Key) + "=" + Uri.EscapeDataString(_x.Value)));
+            var actual = queryStringParametersList.GetQueryStringPostfix();
+            var expected = string.Join("&", queryStringParametersList.List.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
 
-            Assert.IsNotNull(_actual);
-            Assert.AreEqual(_expected, _actual);
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected, actual);
 		}
 	}
 }

@@ -37,12 +37,12 @@ namespace GoogleApi.Entities.Places.Delete.Request
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.PlaceId) && string.IsNullOrWhiteSpace(this.Reference))
                 throw new ArgumentException("PlaceId or Reference must be provided.");
 
-            return _parameters;
+            return parameters;
         }
     }
 }

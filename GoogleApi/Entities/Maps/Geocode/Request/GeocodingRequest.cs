@@ -62,26 +62,26 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
             if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
 				throw new ArgumentException("Location OR Address is required");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
             if (this.Location != null)
-                _parameters.Add("latlng", this.Location.ToString());
+                parameters.Add("latlng", this.Location.ToString());
 			else
-                _parameters.Add("address", this.Address);
+                parameters.Add("address", this.Address);
 
             if (this.Bounds != null && this.Bounds.Any())
-                _parameters.Add("bounds", string.Join("|", this.Bounds.AsEnumerable()));
+                parameters.Add("bounds", string.Join("|", this.Bounds.AsEnumerable()));
 
             if (!string.IsNullOrWhiteSpace(this.Region))
-                _parameters.Add("region", this.Region);
+                parameters.Add("region", this.Region);
 
             if (!string.IsNullOrWhiteSpace(this.Language))
-                _parameters.Add("language", this.Language);
+                parameters.Add("language", this.Language);
 
             if (this.Components != null && this.Components.Any())
-                _parameters.Add("components", string.Join("|", this.Components.Select(_x => $"{_x.Key.ToString().ToLower()}:{_x.Value}")));
+                parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

@@ -47,11 +47,11 @@ namespace GoogleApi.Entities.Places.Common
         {
             get
             {
-                return this.Types.Select(_x => _x.ToEnumString());
+                return this.Types.Select(x => x.ToEnumString());
             }
             set
             {
-                this.Types = value.Select(_x => _x.ToEnum<PlaceLocationType>());
+                this.Types = value.Select(x => x.ToEnum<PlaceLocationType>());
             }
         }
     }

@@ -26,14 +26,14 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.Query))
                 throw new ArgumentException("Query must not be null");
 
-            _parameters.Add("query", this.Query);
+            parameters.Add("query", this.Query);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

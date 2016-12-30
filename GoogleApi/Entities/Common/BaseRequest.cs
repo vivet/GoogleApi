@@ -50,10 +50,10 @@ namespace GoogleApi.Entities.Common
         /// <returns>Uri</returns>
         public virtual Uri GetUri()
         {
-            var _scheme = this.IsSsl ? "https://" : "http://";
-            var _queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
+            var scheme = this.IsSsl ? "https://" : "http://";
+            var queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
 
-            return new Uri(_scheme + this.BaseUrl + "?" + _queryString);
+            return new Uri(scheme + this.BaseUrl + "?" + queryString);
         }
 
         /// <summary>
@@ -67,14 +67,14 @@ namespace GoogleApi.Entities.Common
         /// <returns></returns>
         protected virtual QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = new QueryStringParametersList();
+            var parameters = new QueryStringParametersList();
 
             if (!string.IsNullOrWhiteSpace(this.Key))
-                _parameters.Add("key", this.Key);
+                parameters.Add("key", this.Key);
 
-            _parameters.Add("sensor", Sensor.ToString().ToLower());
+            parameters.Add("sensor", Sensor.ToString().ToLower());
 
-            return _parameters;
+            return parameters;
         }
     }
 }

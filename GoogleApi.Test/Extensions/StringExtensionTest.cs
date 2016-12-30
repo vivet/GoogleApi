@@ -11,11 +11,11 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void ToEnumTest()
         {
-            var _enumString = "floor";
-            var _result = _enumString.ToEnum<LocationType>();
+            var enumString = "floor";
+            var result = enumString.ToEnum<LocationType>();
 
-            Assert.IsNotNull(_result);
-            Assert.AreEqual(LocationType.FLOOR, _result);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(LocationType.Floor, result);
         }        
         [Test]
         public void ToEnumWhenStringIsNullTests()

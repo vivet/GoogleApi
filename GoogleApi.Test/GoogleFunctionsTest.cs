@@ -21,67 +21,67 @@ namespace GoogleApi.Test
         [Test]
         public void EncodePolyLineTest()
         {
-            var _locations = new[] { new Location(1.0101, 1.0101), new Location(2.20202, 2.20202), new Location(3.30303, 3.30303) };
-            var _encodePolyLine = GoogleFunctions.EncodePolyLine(_locations);
+            var locations = new[] { new Location(1.0101, 1.0101), new Location(2.20202, 2.20202), new Location(3.30303, 3.30303) };
+            var encodePolyLine = GoogleFunctions.EncodePolyLine(locations);
 
-            Assert.IsNotEmpty(_encodePolyLine);
-            Assert.AreEqual(GoogleFunctionsTest.POLY_LINE, _encodePolyLine);
+            Assert.IsNotEmpty(encodePolyLine);
+            Assert.AreEqual(GoogleFunctionsTest.POLY_LINE, encodePolyLine);
         }
         [Test]
         public void EncodePolyLineWhenLocationsIsNullTest()
         {
-            var _exception = Assert.Throws<ArgumentNullException>(() => GoogleFunctions.EncodePolyLine(null));
-            Assert.AreEqual("_locations", _exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => GoogleFunctions.EncodePolyLine(null));
+            Assert.AreEqual("locations", exception.ParamName);
         }
 
         [Test]
         public void MergePolyLineTest()
         {
-            var _mergePolyLine = GoogleFunctions.MergePolyLine(GoogleFunctionsTest.POLY_LINE, GoogleFunctionsTest.POLY_LINE_2);
+            var mergePolyLine = GoogleFunctions.MergePolyLine(GoogleFunctionsTest.POLY_LINE, GoogleFunctionsTest.POLY_LINE_2);
 
-            Assert.IsNotNull(_mergePolyLine);
-            Assert.AreEqual("chdEchdEoxgFoxgFi`vEi`vEe~|g@e~|g@ore}@ore}@izs|@izs|@", _mergePolyLine);
+            Assert.IsNotNull(mergePolyLine);
+            Assert.AreEqual("chdEchdEoxgFoxgFi`vEi`vEe~|g@e~|g@ore}@ore}@izs|@izs|@", mergePolyLine);
 
-            var _decodePolyLine = GoogleFunctions.DecodePolyLine(_mergePolyLine).ToArray();
+            var decodePolyLine = GoogleFunctions.DecodePolyLine(mergePolyLine).ToArray();
 
-            Assert.IsNotEmpty(_decodePolyLine);
-            Assert.AreEqual(6, _decodePolyLine.Length);
-            Assert.AreEqual(_decodePolyLine[0].LocationString, _location1.LocationString);
-            Assert.AreEqual(_decodePolyLine[1].LocationString, _location2.LocationString);
-            Assert.AreEqual(_decodePolyLine[2].LocationString, _location3.LocationString);
-            Assert.AreEqual(_decodePolyLine[3].LocationString, _location4.LocationString);
-            Assert.AreEqual(_decodePolyLine[4].LocationString, _location5.LocationString);
-            Assert.AreEqual(_decodePolyLine[5].LocationString, _location6.LocationString);
+            Assert.IsNotEmpty(decodePolyLine);
+            Assert.AreEqual(6, decodePolyLine.Length);
+            Assert.AreEqual(decodePolyLine[0].LocationString, _location1.LocationString);
+            Assert.AreEqual(decodePolyLine[1].LocationString, _location2.LocationString);
+            Assert.AreEqual(decodePolyLine[2].LocationString, _location3.LocationString);
+            Assert.AreEqual(decodePolyLine[3].LocationString, _location4.LocationString);
+            Assert.AreEqual(decodePolyLine[4].LocationString, _location5.LocationString);
+            Assert.AreEqual(decodePolyLine[5].LocationString, _location6.LocationString);
         }
         [Test]
         public void MergePolyLineWhenEncdodedLocationsIsNullTest()
         {
-            var _exception = Assert.Throws<ArgumentNullException>(() => GoogleFunctions.MergePolyLine(null));
-            Assert.AreEqual("_encdodedLocations", _exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => GoogleFunctions.MergePolyLine(null));
+            Assert.AreEqual("encdodedLocations", exception.ParamName);
         }
 
         [Test]
         public void DecodePolyLineTest()
         {
-            var _decodePolyLine = GoogleFunctions.DecodePolyLine(GoogleFunctionsTest.POLY_LINE).ToArray();
+            var decodePolyLine = GoogleFunctions.DecodePolyLine(GoogleFunctionsTest.POLY_LINE).ToArray();
 
-            Assert.IsNotEmpty(_decodePolyLine);
-            Assert.AreEqual(3, _decodePolyLine.Length);
-            Assert.AreEqual(_decodePolyLine[0].LocationString, _location1.LocationString);
-            Assert.AreEqual(_decodePolyLine[1].LocationString, _location2.LocationString);
-            Assert.AreEqual(_decodePolyLine[2].LocationString, _location3.LocationString);
+            Assert.IsNotEmpty(decodePolyLine);
+            Assert.AreEqual(3, decodePolyLine.Length);
+            Assert.AreEqual(decodePolyLine[0].LocationString, _location1.LocationString);
+            Assert.AreEqual(decodePolyLine[1].LocationString, _location2.LocationString);
+            Assert.AreEqual(decodePolyLine[2].LocationString, _location3.LocationString);
 
 
         }
         [Test]
         public void DecodePolyLineWhenEncdodedLocationsIsNullTest()
         {
-            var _exception = Assert.Throws<ArgumentNullException>(() =>
+            var exception = Assert.Throws<ArgumentNullException>(() =>
             {
-                var _decodePolyLine = GoogleFunctions.DecodePolyLine(null);
-                Assert.IsNull(_decodePolyLine);
+                var decodePolyLine = GoogleFunctions.DecodePolyLine(null);
+                Assert.IsNull(decodePolyLine);
             });
-            Assert.AreEqual("_encdodedLocations", _exception.ParamName);
+            Assert.AreEqual("encdodedLocations", exception.ParamName);
         }
     }
 }

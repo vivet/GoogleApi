@@ -11,25 +11,25 @@ namespace GoogleApi.Test
         [Test]
         public void TranslateDanishTest()
         {
-            var _request = new TranslateRequest
+            var request = new TranslateRequest
             {
                 Target = "da",
                 Qs = new[] { "Hello World" },
-                Key = this._apiKey
+                Key = this.ApiKey
             };
-            var _result = GoogleTranslate.Translate.Query(_request);
+            var result = GoogleTranslate.Translate.Query(request);
 
-            Assert.AreEqual("Hej Verden", _result.Data.Translations.First().TranslatedText);
-            Assert.AreEqual("en", _result.Data.Translations.First().DetectedSourceLanguage);
+            Assert.AreEqual("Hej Verden", result.Data.Translations.First().TranslatedText);
+            Assert.AreEqual("en", result.Data.Translations.First().DetectedSourceLanguage);
         }
         [Test]
         public void TranslateGermanTest()
         {
-            var _request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this._apiKey, Format = Format.TEXT };
-            var _result = GoogleTranslate.Translate.Query(_request);
+            var request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this.ApiKey, Format = Format.Text };
+            var result = GoogleTranslate.Translate.Query(request);
 
-            Assert.AreEqual("Hallo Welt", _result.Data.Translations.First().TranslatedText);
-            Assert.AreEqual("en", _result.Data.Translations.First().DetectedSourceLanguage);
+            Assert.AreEqual("Hallo Welt", result.Data.Translations.First().TranslatedText);
+            Assert.AreEqual("en", result.Data.Translations.First().DetectedSourceLanguage);
         }
     }
 }

@@ -90,7 +90,7 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.Name))
                 throw new ArgumentException("Name must be provided.");
@@ -101,7 +101,7 @@ namespace GoogleApi.Entities.Places.Add.Request
             if (this.Types == null || !this.Types.Any())
                 throw new ArgumentException("Types must be provided. At least one type must be specified.");
             
-            return _parameters;
+            return parameters;
         }
     }
 }

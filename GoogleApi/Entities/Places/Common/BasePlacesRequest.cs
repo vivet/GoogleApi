@@ -37,14 +37,14 @@ namespace GoogleApi.Entities.Places.Common
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
         {
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("ApiKey must be provided");
 
-            _parameters.Add("key", this.Key);
+            parameters.Add("key", this.Key);
 
-            return _parameters;
+            return parameters;
         }
     }
 }

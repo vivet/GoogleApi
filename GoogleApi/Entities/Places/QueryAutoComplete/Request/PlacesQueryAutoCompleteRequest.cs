@@ -48,7 +48,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
 		{
-            var _parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrEmpty(this.Input))
                 throw new ArgumentException("_input must not null or empty"); 
@@ -56,21 +56,21 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
 				throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50000.");
 
-            _parameters.Add("input", this.Input);
+            parameters.Add("input", this.Input);
 
             if (!string.IsNullOrEmpty(this.Offset))
-                _parameters.Add("offset", this.Offset);
+                parameters.Add("offset", this.Offset);
 
             if (this.Location != null)
-                _parameters.Add("location", this.Location.ToString());
+                parameters.Add("location", this.Location.ToString());
 	
             if (this.Radius.HasValue)
-				_parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+				parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
             if (!string.IsNullOrEmpty(this.Language))
-                _parameters.Add("language", this.Language);
+                parameters.Add("language", this.Language);
 
-            return _parameters;
+            return parameters;
 		}
 	}
 }

@@ -40,12 +40,12 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
             if (this.Path == null || !this.Path.Any())
 				throw new ArgumentException("Path is required");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("path", string.Join("|", this.Path));
-            _parameters.Add("interpolate", this.Interpolate.ToString());
+            parameters.Add("path", string.Join("|", this.Path));
+            parameters.Add("interpolate", this.Interpolate.ToString());
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

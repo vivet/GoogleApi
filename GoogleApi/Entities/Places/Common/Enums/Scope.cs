@@ -12,11 +12,11 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// The place ID is recognised by your application only. This is because your application added the place, and the place has not yet passed the moderation process.
         /// </summary>
         [EnumMember(Value = "APP")]
-        APP,
+        App,
         /// <summary>
         /// The place ID is available to other applications and on Google Maps
         /// </summary>
         [EnumMember(Value = "GOOGLE")]
-        GOOGLE,
+        Google,
     }
 }

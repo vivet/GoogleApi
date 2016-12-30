@@ -56,11 +56,11 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         {
             get
             {
-                return this.Types.Select(_x => _x.ToEnumString());
+                return this.Types.Select(x => x.ToEnumString());
             }
             set
             {
-                this.Types = value.Select(_x => _x.ToEnum<RestrictPlaceType>());
+                this.Types = value.Select(x => x.ToEnum<RestrictPlaceType>());
             }
         }
 
@@ -89,30 +89,30 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
 				throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50000.");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
-            _parameters.Add("key", this.Key);
-            _parameters.Add("input", this.Input);
+            parameters.Add("key", this.Key);
+            parameters.Add("input", this.Input);
 
             if (!string.IsNullOrEmpty(this.Offset))
-                _parameters.Add("offset", this.Offset);
+                parameters.Add("offset", this.Offset);
 
             if (this.Location != null)
-                _parameters.Add("location", this.Location.ToString());
+                parameters.Add("location", this.Location.ToString());
 	
             if (this.Radius.HasValue)
-				_parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+				parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
             if (!string.IsNullOrEmpty(this.Language))
-                _parameters.Add("language", this.Language);
+                parameters.Add("language", this.Language);
 
             if (this.Types != null && this.Types.Any())
-                _parameters.Add("types", string.Join("|", this.Types.Select(_x => $"{_x.ToString().ToLower()}")));
+                parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));
 
             if (this.Components != null && this.Components.Any())
-                _parameters.Add("components", string.Join("|", this.Components.Select(_x => $"{_x.Key.ToString().ToLower()}:{_x.Value}")));
+                parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
             
-            return _parameters;
+            return parameters;
 		}
 	}
 }

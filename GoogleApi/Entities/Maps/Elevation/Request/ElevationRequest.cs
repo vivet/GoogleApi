@@ -48,20 +48,20 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
             if (this.Locations == null == (this.Path == null))
 				throw new ArgumentException("Either Locations or Path must be specified, and both cannot be specified.");
 
-			var _parameters = base.GetQueryStringParameters();
+			var parameters = base.GetQueryStringParameters();
 
 		    if (this.Locations == null)
 		    {
                 if (this.Samples == null)
                     throw new ArgumentException("Samples is required when using the Path.");
 
-                _parameters.Add("path", string.Join("|", this.Path ?? new[] { new Location(0, 0) }));
-                _parameters.Add("samples", this.Samples.ToString());
+                parameters.Add("path", string.Join("|", this.Path ?? new[] { new Location(0, 0) }));
+                parameters.Add("samples", this.Samples.ToString());
 		    }
 		    else
-                _parameters.Add("locations", string.Join("|", this.Locations));
+                parameters.Add("locations", string.Join("|", this.Locations));
 
-			return _parameters;
+			return parameters;
 		}
 	}
 }

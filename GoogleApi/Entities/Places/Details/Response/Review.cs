@@ -61,7 +61,7 @@ namespace GoogleApi.Entities.Places.Details.Response
             }
             set
             {
-                this.Time = DateTimeExtension._epoch.AddSeconds(value);
+                this.Time = DateTimeExtension.Epoch.AddSeconds(value);
             }
         }
     }

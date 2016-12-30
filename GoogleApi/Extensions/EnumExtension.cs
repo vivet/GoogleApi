@@ -20,11 +20,11 @@ namespace GoogleApi.Extensions
         public static string ToEnumString<T>(this T _enum) 
             where T : struct, IConvertible
         {
-            var _enumType = typeof(T);
-            var _name = Enum.GetName(_enumType, _enum);
-            var _enumMemberAttribute = ((EnumMemberAttribute[])_enumType.GetField(_name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+            var enumType = typeof(T);
+            var name = Enum.GetName(enumType, _enum);
+            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
 
-            return _enumMemberAttribute.Value;
+            return enumMemberAttribute.Value;
         }
 
         /// <summary>
@@ -32,29 +32,29 @@ namespace GoogleApi.Extensions
         /// If Flags enum then the delimeter will separate the values.
         /// </summary>
         /// <param name="_enum"></param>
-        /// <param name="_delimeter"></param>
+        /// <param name="delimeter"></param>
         /// <returns></returns>
-        public static string ToEnumString<T>(this T _enum, char _delimeter) 
+        public static string ToEnumString<T>(this T _enum, char delimeter) 
             where T : struct, IConvertible
         {
             if (_enum.GetType().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
                 return Convert.ToString(_enum, CultureInfo.InvariantCulture).ToLower();
 
-            var _stringBuilder = new StringBuilder();
-            var _binaryCharArray = Convert.ToString(_enum, CultureInfo.InvariantCulture).Reverse().ToArray();
+            var stringBuilder = new StringBuilder();
+            var binaryCharArray = Convert.ToString(_enum, CultureInfo.InvariantCulture).Reverse().ToArray();
 
-            for (var _i = 0; _i < _binaryCharArray.Length; _i++)
+            for (var i = 0; i < binaryCharArray.Length; i++)
             {
-                if (_binaryCharArray[_i] != '1')
+                if (binaryCharArray[i] != '1')
                     continue;
 
-                _stringBuilder.AppendFormat("{0}", 1 << _i);
+                stringBuilder.AppendFormat("{0}", 1 << i);
 
-                if (_i != _binaryCharArray.Length - 1)
-                    _stringBuilder.Append(_delimeter);
+                if (i != binaryCharArray.Length - 1)
+                    stringBuilder.Append(delimeter);
             }
 
-            return _stringBuilder.ToString().ToLower();
+            return stringBuilder.ToString().ToLower();
         }
     }
 }
