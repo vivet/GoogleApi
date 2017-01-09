@@ -66,6 +66,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
             if (!string.IsNullOrWhiteSpace(this.Keyword))
                 parameters.Add("keyword", this.Keyword);
 
+            parameters.Add("type", this.Type.ToString().ToLower());
             parameters.Add("rankby", this.Rankby.ToString().ToLower());
 
             return parameters;

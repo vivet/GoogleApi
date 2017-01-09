@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common;
@@ -28,9 +29,11 @@ namespace GoogleApi.Entities.Places.Search.Common
         public virtual double? Radius { get; set; }
 
         /// <summary>
+        /// DEPRECATED.
         /// zagatselected — Add this parameter (just the parameter name, with no associated value) to restrict your search to locations that are Zagat selected businesses. 
         /// This parameter must not include a true or false value. The zagatselected parameter is experimental, and is only available to Google Places API for Work customers.
         /// </summary>
+        [Obsolete("May 2, 2017")]
         public virtual bool Zagatselected { get; set; }
 
         /// <summary>
@@ -40,10 +43,18 @@ namespace GoogleApi.Entities.Places.Search.Common
         public virtual bool OpenNow { get; set; }
 
         /// <summary>
+        /// Restricts the results to places matching the specified type. 
+        /// Only one type may be specified (if more than one type is provided, all types following the first entry are ignored). 
+        /// </summary>
+        public virtual SearchPlaceType Type { get; set; }
+
+        /// <summary>
+        /// DEPRECATED.
         /// types — Restricts the results to places matching at least one of the specified types. 
         /// Types should be separated with a pipe symbol (type1|type2|etc). See the list of supported types.
         /// https://developers.google.com/places/supported_types
         /// </summary>
+        [Obsolete("February 16, 2017")]
         public virtual IEnumerable<SearchPlaceType> Types { get; set; }
 
         /// <summary>

@@ -20,13 +20,6 @@ namespace GoogleApi.Entities.Places.Delete.Request
         public virtual string PlaceId { get; set; }
 
         /// <summary>
-        /// A unique token that you can use to retrieve additional information about this place. 
-        /// Note: Alternatively, you can specify a reference to identify the place. Note that the reference is deprecated in favor of place_id. See the deprecation notice on this page.
-        /// </summary>
-        [DataMember(Name = "reference")]
-        public virtual string Reference { get; set; }
-
-        /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "delete/json";
@@ -39,8 +32,8 @@ namespace GoogleApi.Entities.Places.Delete.Request
         {
             var parameters = base.GetQueryStringParameters();
 
-            if (string.IsNullOrWhiteSpace(this.PlaceId) && string.IsNullOrWhiteSpace(this.Reference))
-                throw new ArgumentException("PlaceId or Reference must be provided.");
+            if (string.IsNullOrWhiteSpace(this.PlaceId))
+                throw new ArgumentException("PlaceId must be provided.");
 
             return parameters;
         }

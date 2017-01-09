@@ -120,9 +120,7 @@ namespace GoogleApi.Test
             var response = GooglePlaces.Add.Query(request);
 
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Id);
             Assert.IsNotNull(response.PlaceId);
-            Assert.IsNotNull(response.Reference);
             Assert.AreEqual(response.Scope, Scope.App);
             Assert.AreEqual(response.Status, Status.Ok);
         }
@@ -144,9 +142,7 @@ namespace GoogleApi.Test
             var response = GooglePlaces.Add.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Id);
             Assert.IsNotNull(response.PlaceId);
-            Assert.IsNotNull(response.Reference);
             Assert.AreEqual(response.Scope, Scope.App);
             Assert.AreEqual(response.Status, Status.Ok);
         }
@@ -259,7 +255,7 @@ namespace GoogleApi.Test
                 Sensor = true,
                 Language = "en",
                 Radius = 500,
-                Types = new[] { SearchPlaceType.School, SearchPlaceType.Police }
+                Type = SearchPlaceType.School
             };
 
             var response = GooglePlaces.NearBySearch.Query(request);
