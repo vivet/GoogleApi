@@ -63,7 +63,7 @@ namespace GoogleApi.Test
                 Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
 
             Assert.AreEqual(Status.Ok, result.Status);
-            Assert.AreEqual(156084, result.Routes.First().Legs.First().Steps.Sum(s => s.Distance.Value), 500);
+            Assert.AreEqual(156084, result.Routes.First().Legs.First().Steps.Sum(s => s.Distance.Value), 15000);
 
             StringAssert.Contains("Philadelphia", result.Routes.First().Legs.First().EndAddress);
         }
