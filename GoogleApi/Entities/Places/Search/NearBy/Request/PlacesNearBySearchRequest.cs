@@ -52,6 +52,9 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
 
             if (this.Rankby == Ranking.Distance)
             {
+                if (this.Radius.HasValue)
+                    throw new ArgumentException("Radius must not have value when RankBy=distance");
+
                 if (string.IsNullOrWhiteSpace(this.Name) && string.IsNullOrWhiteSpace(this.Keyword) && !this.Type.HasValue)
                     throw new ArgumentException("If rankby=distance is specified, then one or more of keyword, name or type is required.");
             }

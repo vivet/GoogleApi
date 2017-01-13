@@ -48,7 +48,7 @@ namespace GoogleApi.Entities.Places.Photos.Request
             if (string.IsNullOrWhiteSpace(this.PhotoReference))
                 throw new ArgumentException("Must specify a PhotoReference");
       
-            if (this.MaxHeight == null && this.MaxWidth == null)
+            if (!this.MaxHeight.HasValue && !this.MaxWidth.HasValue)
                 throw new ArgumentException("Must specify a either MaxHeight or MaxWidth.");
 
             if (this.MaxHeight.HasValue && (this.MaxHeight > 1600 || this.MaxHeight < 1))
@@ -59,10 +59,10 @@ namespace GoogleApi.Entities.Places.Photos.Request
 
             parameters.Add("photoreference", this.PhotoReference);
 
-            if (this.MaxHeight != null)
+            if (this.MaxHeight.HasValue)
                 parameters.Add("maxheight", this.MaxHeight.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (this.MaxWidth != null)
+            if (this.MaxWidth.HasValue)
                 parameters.Add("maxwidth", this.MaxWidth.Value.ToString(CultureInfo.InvariantCulture));
 
             return parameters;

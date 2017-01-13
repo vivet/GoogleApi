@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request;
@@ -9,6 +11,7 @@ using GoogleApi.Entities.Places.Photos.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
+using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
 using GoogleApi.Entities.Places.Search.Radar.Request;
 using GoogleApi.Entities.Places.Search.Text.Request;
 using NUnit.Framework;
@@ -60,7 +63,79 @@ namespace GoogleApi.Test
             Assert.AreEqual(results[4].Description, "Jagtvej 2200, Hillerød, Denmark");
             Assert.AreEqual(5, results.Length);
         }
+        [Test]
+        public void PlacesAutoCompleteWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = null
+            };
 
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesAutoCompleteWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesAutoCompleteWhenInputIsNullTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Input must not null or empty");
+        }
+        [Test]
+        public void PlacesAutoCompleteWhenInputIsStringEmptyTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Input must not null or empty");
+        }
+        [Test]
+        public void PlacesAutoCompleteWhenRadiusIsLessThanOneTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "abc",
+                Radius = 0
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+        }
+        [Test]
+        public void PlacesAutoCompleteWhenRadiusIsGereaterThanFiftyThousandTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "abc",
+                Radius = 50001
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+        }
+        
         [Test]
         public void PlacesQueryAutoCompleteTest()
         {
@@ -100,6 +175,78 @@ namespace GoogleApi.Test
             Assert.AreEqual(results[3].Description, "Jagtvej 2200, Næstved, Denmark");
             Assert.AreEqual(results[4].Description, "Jagtvej 2200, Fredensborg, Denmark");
             Assert.AreEqual(5, results.Length);
+        }
+        [Test]
+        public void PlacesQueryAutoCompleteWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesQueryAutoCompleteWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesQueryAutoCompleteWhenInputIsNullTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Input must not null or empty");
+        }
+        [Test]
+        public void PlacesQueryAutoCompleteWhenInputIsStringEmptyTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Input must not null or empty");
+        }
+        [Test]
+        public void PlacesQueryAutoCompleteWhenRadiusIsLessThanOneTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "abc",
+                Radius = 0
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+        }
+        [Test]
+        public void PlacesQueryAutoCompleteWhenRadiusIsGereaterThanFiftyThousandTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "abc",
+                Radius = 50001
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
         }
 
         [Test]
@@ -145,6 +292,93 @@ namespace GoogleApi.Test
             Assert.IsNotNull(response.PlaceId);
             Assert.AreEqual(response.Scope, Scope.App);
             Assert.AreEqual(response.Status, Status.Ok);
+        }
+        [Test]
+        public void PlacesAddWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesAddWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesAddWhenNameIsNullTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
+            Assert.AreEqual(_exception.Message, "Name must be provided.");
+        }
+        [Test]
+        public void PlacesAddWhenNameIsStringEmptyTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
+            Assert.AreEqual(_exception.Message, "Name must be provided.");
+        }
+        [Test]
+        public void PlacesAddWhenLocationIsNullTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = "Home",
+                Location = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
+            Assert.AreEqual(_exception.Message, "Location must be provided.");
+        }
+        [Test]
+        public void PlacesAddWhenTypesIsNullTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = "Home",
+                Location = new Location(55.664425, 12.502264),
+                Types = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
+            Assert.AreEqual(_exception.Message, "Types must be provided. At least one type must be specified.");
+        }
+        [Test]
+        public void PlacesAddWhenTypesIsEmotyTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = "Home",
+                Location = new Location(55.664425, 12.502264),
+                Types = new PlaceLocationType[0]
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
+            Assert.AreEqual(_exception.Message, "Types must be provided. At least one type must be specified.");
         }
 
         [Test]
@@ -193,7 +427,53 @@ namespace GoogleApi.Test
             Assert.IsNotNull(response2);
             Assert.AreEqual(response2.Status, Status.Ok);
         }
-        
+        [Test]
+        public void PlacesDeleteWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesDeleteRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesDeleteWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesDeleteRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesDeleteWhenPlaceIdIsNullTest()
+        {
+            var request = new PlacesDeleteRequest
+            {
+                Key = this.ApiKey,
+                PlaceId = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
+            Assert.AreEqual(_exception.Message, "PlaceId must be provided.");
+        }
+        [Test]
+        public void PlacesDeleteWhenPlaceIdIsStringEmptyTest()
+        {
+            var request = new PlacesDeleteRequest
+            {
+                Key = this.ApiKey,
+                PlaceId = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
+            Assert.AreEqual(_exception.Message, "PlaceId must be provided.");
+        }
+
         [Test]
         public void PlacesDetailsTest()
         {
@@ -244,6 +524,52 @@ namespace GoogleApi.Test
             var response2 = GooglePlaces.Details.Query(request2);
             Assert.AreEqual(Status.Ok, response2.Status);
         }
+        [Test]
+        public void PlacesDetailsWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesDetailsWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesDetailsWhenPlaceIdIsNullTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = ApiKey,
+                PlaceId = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
+            Assert.AreEqual(_exception.Message, "PlaceId must be provided.");
+        }
+        [Test]
+        public void PlacesDetailsWhenPlaceIdIsStringEmptyTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = ApiKey,
+                PlaceId = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
+            Assert.AreEqual(_exception.Message, "PlaceId must be provided.");
+        }
 
         [Test]
         public void PlacesNearBySearchTest()
@@ -281,6 +607,106 @@ namespace GoogleApi.Test
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
+        [Test]
+        public void PlacesNearBySearchWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesNearBySearchWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesNearBySearchWhenLocationIsNullTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Location must not be null");
+        }
+        [Test]
+        public void PlacesNearBySearchWhenRadiusIsNullTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must not be null when RankBy is not Distance");
+        }
+        [Test]
+        public void PlacesNearBySearchWhenRadiusIsLessThanOneTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 0
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+        }
+        [Test]
+        public void PlacesNearBySearchWhenRadiusIsGereaterThanFiftyThousandTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 50001
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+        }
+        [Test]
+        public void PlacesNearBySearchWhenRankByDistanceAndRadiusIsNotNullTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 50001,
+                Rankby = Ranking.Distance
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must not have value when RankBy=distance");
+        }
+        [Test]
+        public void PlacesNearBySearchWhenRankByDistanceAndNameIsNullAndKeywordIsNullAndTypeIsNullTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Rankby = Ranking.Distance
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
+            Assert.AreEqual(_exception.Message, "If rankby=distance is specified, then one or more of keyword, name or type is required.");
+        }
         
         [Test]
         public void PlacesTextSearchTest()
@@ -313,6 +739,52 @@ namespace GoogleApi.Test
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
+        }
+        [Test]
+        public void PlacesTextSearchWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesTextSearchRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesTextSearchWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesTextSearchRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesTextSearchWhenQueryIsNullTest()
+        {
+            var request = new PlacesTextSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Query must not be null");
+        }
+        [Test]
+        public void PlacesTextSearchWhenQueryIsStringEmptyTest()
+        {
+            var request = new PlacesTextSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Query must not be null");
         }
 
         [Test]
@@ -350,6 +822,92 @@ namespace GoogleApi.Test
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
+        }
+        [Test]
+        public void PlacesRadarSearchWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesRadarSearchWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesRadarSearchWhenLocationIsNullTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = this.ApiKey,
+                Location = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Location must not be null");
+        }
+        [Test]
+        public void PlacesRadarSearchWhenRadiusIsNullTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(55.673323, 12.527438),
+                Radius = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must not be null");
+        }
+        [Test]
+        public void PlacesRadarSearchWhenRadiusIsLessThanOneTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 0
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+        }
+        [Test]
+        public void PlacesRadarSearchWhenRadiusIsGereaterThanFiftyThousandTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 50001
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+        }
+        [Test]
+        public void PlacesRadarSearchWhenRankByDistanceAndNameIsNullAndKeywordIsNullAndTypeIsNullTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 1
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.AreEqual(_exception.Message, "Request must include at least one of keyword, name or type");
         }
 
         [Test]
@@ -403,6 +961,116 @@ namespace GoogleApi.Test
             Assert.IsNotNull(response3);
             Assert.IsNotNull(response3.Photo);
             Assert.AreEqual(Status.Ok, response3.Status);
+        }
+        [Test]
+        public void PlacesPhotosWhenApiKeyIsNullTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesPhotosWhenApiKeyIsStringEmptyTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "ApiKey must be provided");
+        }
+        [Test]
+        public void PlacesPhotosWhenPhotoReferenceIsNullTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = null
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "Must specify a PhotoReference");
+        }
+        [Test]
+        public void PlacesPhotosWhenPhotoReferenceIsStringEmptyTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = string.Empty
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "Must specify a PhotoReference");
+        }
+        [Test]
+        public void PlacesPhotosWhenMaxHeightIsNullAndMaxWidthIsNullTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = "abc"
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "Must specify a either MaxHeight or MaxWidth.");
+        }
+        [Test]
+        public void PlacesPhotosWhenMaxHeightIsLessThanOneTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = "abc",
+                MaxHeight = 0
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
+        }
+        [Test]
+        public void PlacesPhotosWhenMaxHeightIsGreaterThanSexteenHundredthsTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = "abc",
+                MaxHeight = 1601
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
+        }
+        [Test]
+        public void PlacesPhotosWhenMaxWidthIsLessThanOneTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = "abc",
+                MaxWidth = 0
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
+        }
+        [Test]
+        public void PlacesPhotosWhenMaxWidthIsGreaterThanSexteenHundredthsTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = "abc",
+                MaxWidth = 1601
+            };
+
+            var _exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
+            Assert.AreEqual(_exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
         }
     }
 }

@@ -51,10 +51,10 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
             var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrEmpty(this.Input))
-                throw new ArgumentException("_input must not null or empty"); 
+                throw new ArgumentException("Input must not null or empty"); 
             
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-				throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50000.");
+				throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
 
             parameters.Add("input", this.Input);
 
