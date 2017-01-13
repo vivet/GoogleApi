@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using GoogleApi.Entities.Places.Search.Common;
 using GoogleApi.Helpers;
 
@@ -47,8 +46,8 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
                 throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
 
-            if (string.IsNullOrWhiteSpace(this.Keyword) && string.IsNullOrWhiteSpace(this.Name) && !this.Types.Any())
-                throw new ArgumentException("Request must include at least one of keyword, name, or types");
+            if (string.IsNullOrWhiteSpace(this.Keyword) && string.IsNullOrWhiteSpace(this.Name) && !this.Type.HasValue)
+                throw new ArgumentException("Request must include at least one of keyword, name or type");
 
             if (!string.IsNullOrWhiteSpace(this.Name))
                 parameters.Add("name", this.Name);

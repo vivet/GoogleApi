@@ -46,7 +46,7 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// Restricts the results to places matching the specified type. 
         /// Only one type may be specified (if more than one type is provided, all types following the first entry are ignored). 
         /// </summary>
-        public virtual SearchPlaceType Type { get; set; }
+        public virtual SearchPlaceType? Type { get; set; }
 
         /// <summary>
         /// DEPRECATED.
@@ -61,13 +61,13 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// minprice and maxprice (optional) — Restricts results to only those places within the specified range. 
         /// Valid values range between 0 (most affordable) to 4 (most expensive), inclusive. The exact amount indicated by a specific value will vary from region to region.
         /// </summary>
-        public virtual PriceLevel Minprice { get; set; }
+        public virtual PriceLevel? Minprice { get; set; }
 
         /// <summary>
         /// minprice and maxprice (optional) — Restricts results to only those places within the specified range. 
         /// Valid values range between 0 (most affordable) to 4 (most expensive), inclusive. The exact amount indicated by a specific value will vary from region to region.
         /// </summary>
-        public virtual PriceLevel Maxprice { get; set; }
+        public virtual PriceLevel? Maxprice { get; set; }
 
         /// <summary>
         /// The language in which to return results. See the supported list of domain languages. Note that we often update supported languages so this list may not be exhaustive. If language is not supplied, the Place service will attempt to use the native language of the domain from which the request is sent.
@@ -102,6 +102,21 @@ namespace GoogleApi.Entities.Places.Search.Common
 
             if (!string.IsNullOrWhiteSpace(this.PageToken))
                 parameters.Add("pagetoken", this.PageToken);
+
+            if (this.Type.HasValue)
+                parameters.Add("type", this.Type.Value.ToString().ToLower());
+
+            if (this.Minprice.HasValue)
+                parameters.Add("minprice", this.Minprice.Value.ToString().ToLower());
+
+            if (this.Maxprice.HasValue)
+                parameters.Add("maxprice", this.Maxprice.Value.ToString().ToLower());
+
+            if (this.OpenNow)
+                parameters.Add("opennow", "");
+
+            if (this.Zagatselected)
+                parameters.Add("zagatselected", "");
 
             return parameters;
         }

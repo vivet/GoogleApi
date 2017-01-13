@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using GoogleApi.Entities.Places.Search.Common;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
 using GoogleApi.Helpers;
@@ -24,7 +23,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// as well as customer reviews and other third-party content.
         /// </summary>
         public virtual string Keyword { get; set; }
-        
+
         /// <summary>
         /// rankby — Specifies the order in which results are listed. Possible values are:
         /// - prominence (default). 
@@ -51,14 +50,19 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
             if (this.Location == null)
                 throw new ArgumentException("Location must not be null");
 
-            if (!this.Radius.HasValue)
-                throw new ArgumentException("Radius must not be null");
+            if (this.Rankby == Ranking.Distance)
+            {
+                if (string.IsNullOrWhiteSpace(this.Name) && string.IsNullOrWhiteSpace(this.Keyword) && !this.Type.HasValue)
+                    throw new ArgumentException("If rankby=distance is specified, then one or more of keyword, name or type is required.");
+            }
+            else
+            {
+                if (!this.Radius.HasValue)
+                    throw new ArgumentException("Radius must not be null when RankBy is not Distance");
 
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
-
-            if (this.Rankby == Ranking.Distance && string.IsNullOrWhiteSpace(this.Name) && !this.Types.Any())
-                throw new ArgumentException("If rankby=distance is specified, then one or more of keyword, name, or types is required.");
+                if (this.Radius > 50000 || this.Radius < 1)
+                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+            }
 
             if (!string.IsNullOrWhiteSpace(this.Name))
                 parameters.Add("name", this.Name);
@@ -66,7 +70,6 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
             if (!string.IsNullOrWhiteSpace(this.Keyword))
                 parameters.Add("keyword", this.Keyword);
 
-            parameters.Add("type", this.Type.ToString().ToLower());
             parameters.Add("rankby", this.Rankby.ToString().ToLower());
 
             return parameters;
