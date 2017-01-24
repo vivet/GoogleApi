@@ -212,7 +212,7 @@ namespace GoogleApi.Engine
                 throw new ArgumentNullException(nameof(serializedObject));
 
             // TODO: Hack (PlacesPhotosResponse).
-            if (typeof (TResponse) == typeof (PlacesPhotosResponse))
+            if (typeof(TResponse) == typeof(PlacesPhotosResponse))
                 return GenericEngine<TRequest, TResponse>.Deserialize("{\"photo\":\"" + Convert.ToBase64String(serializedObject) + "\"}");
 
             var serializer = new DataContractJsonSerializer(typeof(TResponse));

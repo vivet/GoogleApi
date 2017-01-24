@@ -3,7 +3,7 @@ using System.Net;
 namespace GoogleApi.Engine
 {
     /// <summary>
-    /// Base class for facade engine.
+    /// Base class for generic engine.
     /// </summary>
     public abstract class GenericEngine
     {

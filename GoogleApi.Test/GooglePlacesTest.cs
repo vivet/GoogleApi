@@ -39,7 +39,7 @@ namespace GoogleApi.Test
             Assert.AreEqual(results[1].Description, "Jagtvej, 2200 Copenhagen, Denmark");
             Assert.AreEqual(results[2].Description, "Jagtvej 2200, Lemvig, Denmark");
             Assert.AreEqual(results[3].Description, "Jagtvej 2200, Denmark");
-            Assert.AreEqual(results[4].Description, "Jagtvej 2200, Hillerød, Denmark");
+            Assert.AreEqual(results[4].Description, "Jagtvej 2200, Næstved, Denmark");
             Assert.AreEqual(5, results.Length);
         }
         [Test]
@@ -60,7 +60,7 @@ namespace GoogleApi.Test
             Assert.AreEqual(results[1].Description, "Jagtvej, 2200 Copenhagen, Denmark");
             Assert.AreEqual(results[2].Description, "Jagtvej 2200, Lemvig, Denmark");
             Assert.AreEqual(results[3].Description, "Jagtvej 2200, Denmark");
-            Assert.AreEqual(results[4].Description, "Jagtvej 2200, Hillerød, Denmark");
+            Assert.AreEqual(results[4].Description, "Jagtvej 2200, Næstved, Denmark");
             Assert.AreEqual(5, results.Length);
         }
         [Test]
@@ -151,8 +151,8 @@ namespace GoogleApi.Test
 
             Assert.AreEqual(results[0].Description, "Jagtvej 2200, Denmark");
             Assert.AreEqual(results[1].Description, "Jagtvej 2200, Lemvig, Denmark");
-            Assert.AreEqual(results[2].Description, "Jagtvej 2200, Hillerød, Denmark");
-            Assert.AreEqual(results[3].Description, "Jagtvej 2200, Næstved, Denmark");
+            Assert.AreEqual(results[2].Description, "Jagtvej 2200, Næstved, Denmark");
+            Assert.AreEqual(results[3].Description, "Jagtvej 2200, Hillerød, Denmark");
             Assert.AreEqual(results[4].Description, "Jagtvej 2200, Fredensborg, Denmark");
             Assert.AreEqual(5, results.Length);
         }
@@ -171,8 +171,8 @@ namespace GoogleApi.Test
 
             Assert.AreEqual(results[0].Description, "Jagtvej 2200, Denmark");
             Assert.AreEqual(results[1].Description, "Jagtvej 2200, Lemvig, Denmark");
-            Assert.AreEqual(results[2].Description, "Jagtvej 2200, Hillerød, Denmark");
-            Assert.AreEqual(results[3].Description, "Jagtvej 2200, Næstved, Denmark");
+            Assert.AreEqual(results[2].Description, "Jagtvej 2200, Næstved, Denmark");
+            Assert.AreEqual(results[3].Description, "Jagtvej 2200, Hillerød, Denmark");
             Assert.AreEqual(results[4].Description, "Jagtvej 2200, Fredensborg, Denmark");
             Assert.AreEqual(5, results.Length);
         }
