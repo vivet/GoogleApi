@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Places.Search.Common
     /// </summary>
     [DataContract]
     public class OpeningHours
-    {        
+    {
         /// <summary>
         /// OpenNow is a boolean value indicating if the place is open at the current time.
         /// </summary>

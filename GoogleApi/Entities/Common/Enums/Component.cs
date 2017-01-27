@@ -9,18 +9,22 @@
         /// route matches long or short name of a route.
         /// </summary>
         Route,
+
         /// <summary>
         /// locality matches against both locality and sublocality types. 
         /// </summary>
         Locality,
+
         /// <summary>
         /// administrative_area matches all the administrative_area levels. 
         /// </summary>
         AdministrativeArea,
+
         /// <summary>
         /// postal_code matches postal_code and postal_code_prefix.
         /// </summary>
         PostalCode,
+
         /// <summary>
         /// country matches a country name or a two letter ISO 3166-1 country code.
         /// </summary>

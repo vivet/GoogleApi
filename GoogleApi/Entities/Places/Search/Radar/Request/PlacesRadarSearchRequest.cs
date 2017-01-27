@@ -44,7 +44,8 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
                 throw new ArgumentException("Radius must not be null");
 
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+                throw new ArgumentException(
+                    "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
 
             if (string.IsNullOrWhiteSpace(this.Keyword) && string.IsNullOrWhiteSpace(this.Name) && !this.Type.HasValue)
                 throw new ArgumentException("Request must include at least one of keyword, name or type");

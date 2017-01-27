@@ -9,9 +9,9 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
     /// <summary>
     /// SpeedLimits Response.
     /// </summary>
-	[DataContract]
+    [DataContract]
     public class SpeedLimitsResponse : BaseResponse, IResponseFor
-	{
+    {
         /// <summary>
         /// An array of snapped points
         /// </summary>

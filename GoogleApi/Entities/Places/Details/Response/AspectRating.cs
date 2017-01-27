@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// </summary>
     [DataContract]
     public class AspectRating
-    {        
+    {
         /// <summary>
         /// Type the name of the aspect that is being rated. eg. atmosphere, service, food, overall, etc.
         /// </summary>

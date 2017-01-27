@@ -8,19 +8,19 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Directions Response.
     /// </summary>
-	[DataContract(Name = "DirectionsResponse")]
-	public class DirectionsResponse : BaseResponse, IResponseFor
-	{
-		/// <summary>
-		/// "routes" contains an array of routes from the origin to the destination. See Routes below.
-		/// </summary>
-		[DataMember(Name = "routes")]
+    [DataContract(Name = "DirectionsResponse")]
+    public class DirectionsResponse : BaseResponse, IResponseFor
+    {
+        /// <summary>
+        /// "routes" contains an array of routes from the origin to the destination. See Routes below.
+        /// </summary>
+        [DataMember(Name = "routes")]
         public virtual IEnumerable<Route> Routes { get; set; }
 
-		/// <summary>
-		/// "routes" contains an array of routes from the origin to the destination. See Routes below.
-		/// </summary>
+        /// <summary>
+        /// "routes" contains an array of routes from the origin to the destination. See Routes below.
+        /// </summary>
         [DataMember(Name = "geocoded_waypoints")]
         public virtual IEnumerable<Route> WayPoints { get; set; }
-	}
+    }
 }

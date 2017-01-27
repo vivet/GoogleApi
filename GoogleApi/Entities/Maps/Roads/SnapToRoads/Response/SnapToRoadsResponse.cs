@@ -9,13 +9,13 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Response
     /// <summary>
     /// SnapToRoads Response.
     /// </summary>
-	[DataContract]
-	public class SnapToRoadsResponse : BaseResponse, IResponseFor
-	{
+    [DataContract]
+    public class SnapToRoadsResponse : BaseResponse, IResponseFor
+    {
         /// <summary>
         /// An array of snapped points
         /// </summary>
-		[DataMember(Name = "snappedPoints")]
+        [DataMember(Name = "snappedPoints")]
         public virtual IEnumerable<SnappedPoint> SnappedPoints { get; set; }
-	}
+    }
 }

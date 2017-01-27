@@ -9,11 +9,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
     /// DistanceMatrix Response.
     /// </summary>
     [DataContract(Name = "DistanceMatrixResponse")]
-	public class DistanceMatrixResponse : BaseResponse, IResponseFor
-	{
-		/// <summary>
+    public class DistanceMatrixResponse : BaseResponse, IResponseFor
+    {
+        /// <summary>
         /// OriginAddresses contains an array of addresses as returned by the API from your original request. These are formatted by the geocoder and localized according to the language parameter passed with the request.
-		/// </summary>
+        /// </summary>
         [DataMember(Name = "origin_addresses")]
         public virtual IEnumerable<string> OriginAddresses { get; set; }
 

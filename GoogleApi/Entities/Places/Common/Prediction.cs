@@ -43,16 +43,10 @@ namespace GoogleApi.Entities.Places.Common
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        private IEnumerable<string> TypesStr
+        protected IEnumerable<string> TypesStr
         {
-            get
-            {
-                return this.Types.Select(x => x.ToEnumString());
-            }
-            set
-            {
-                this.Types = value.Select(x => x.ToEnum<PlaceLocationType>());
-            }
+            get { return this.Types.Select(x => x.ToEnumString()); }
+            set { this.Types = value.Select(x => x.ToEnum<PlaceLocationType>()); }
         }
     }
 }

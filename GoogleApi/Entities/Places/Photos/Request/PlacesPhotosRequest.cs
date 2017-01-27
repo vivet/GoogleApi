@@ -23,7 +23,7 @@ namespace GoogleApi.Entities.Places.Photos.Request
         /// Both the maxheight properties accept an integer between 1 and 1600.
         /// </summary>
         public virtual int? MaxHeight { get; set; }
-        
+
         /// <summary>
         /// maxwidth — Specifies the maximum desired width, in pixels, of the image returned by the Place Photos service.
         ///  If the image is smaller than the values specified, the original image will be returned. If the image is larger in either dimension, 
@@ -47,15 +47,17 @@ namespace GoogleApi.Entities.Places.Photos.Request
 
             if (string.IsNullOrWhiteSpace(this.PhotoReference))
                 throw new ArgumentException("Must specify a PhotoReference");
-      
+
             if (!this.MaxHeight.HasValue && !this.MaxWidth.HasValue)
                 throw new ArgumentException("Must specify a either MaxHeight or MaxWidth.");
 
             if (this.MaxHeight.HasValue && (this.MaxHeight > 1600 || this.MaxHeight < 1))
-                throw new ArgumentException("MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
+                throw new ArgumentException(
+                    "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
 
             if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
-                throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
+                throw new ArgumentException(
+                    "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
 
             parameters.Add("photoreference", this.PhotoReference);
 

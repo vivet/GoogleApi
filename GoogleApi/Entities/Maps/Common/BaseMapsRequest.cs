@@ -15,14 +15,8 @@ namespace GoogleApi.Entities.Maps.Common
         /// </summary>
         public override bool IsSsl
         {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                throw new NotSupportedException("This operation is not supported, Request must use SSL");
-            }
+            get { return true; }
+            set { throw new NotSupportedException("This operation is not supported, Request must use SSL"); }
         }
 
         /// <summary>

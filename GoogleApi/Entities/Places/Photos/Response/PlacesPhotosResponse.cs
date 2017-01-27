@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Places.Photos.Response
     /// </summary>
     [DataContract]
     public class PlacesPhotosResponse : BasePlacesResponse, IQueryStringRequest
-    {       
+    {
         /// <summary>
         /// A stream containing the downloded photo.
         /// </summary>
@@ -22,14 +22,8 @@ namespace GoogleApi.Entities.Places.Photos.Response
         [DataMember(Name = "photo")]
         protected virtual byte[] PhotoStr
         {
-            get
-            {
-                return this.Photo.ToArray();
-            }
-            set
-            {
-                this.Photo = new MemoryStream(value);
-            }
+            get { return this.Photo.ToArray(); }
+            set { this.Photo = new MemoryStream(value); }
         }
     }
 }

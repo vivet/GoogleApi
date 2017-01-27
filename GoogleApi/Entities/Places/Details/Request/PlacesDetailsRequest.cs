@@ -46,9 +46,9 @@ namespace GoogleApi.Entities.Places.Details.Request
             if (this.Extensions != Enums.Extensions.None)
                 parameters.Add("extensions", this.Extensions.ToString().ToLower());
 
-            if (!string.IsNullOrWhiteSpace(this.Language)) 
+            if (!string.IsNullOrWhiteSpace(this.Language))
                 parameters.Add("language", this.Language);
-            
+
             return parameters;
         }
     }

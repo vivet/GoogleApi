@@ -598,7 +598,7 @@ namespace GoogleApi.Test
                 Sensor = true,
                 Language = "en",
                 Radius = 500,
-                Types = new[] { SearchPlaceType.School, SearchPlaceType.Police }
+                Type = SearchPlaceType.School
             };
 
             var response = GooglePlaces.NearBySearch.QueryAsync(request).Result;

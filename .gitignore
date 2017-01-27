@@ -6,4 +6,4 @@ _ReSharper*
 **/obj
 *.DotSettings
 packages
-./vs
+.vs

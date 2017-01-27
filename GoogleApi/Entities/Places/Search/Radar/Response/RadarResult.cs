@@ -9,6 +9,5 @@ namespace GoogleApi.Entities.Places.Search.Radar.Response
     [DataContract]
     public class RadarResult : BaseResult
     {
-
     }
 }

@@ -1,8 +1,6 @@
 using System;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,28 +14,30 @@ namespace GoogleApi.Engine
     internal abstract class GenericEngine<TRequest, TResponse>
         where TRequest : BaseRequest, new()
         where TResponse : IResponseFor
-	{        
-		internal static TResponse Query(TRequest request, TimeSpan timeout)
-		{
-			if (request == null)
-				throw new ArgumentNullException(nameof(request));
+    {
+        internal static TResponse Query(TRequest request, TimeSpan timeout)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
 
             return GenericEngine<TRequest, TResponse>.QueryAsync(request, timeout).Result;
-		}
-        internal static Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken cancellationToken = default(CancellationToken))
+        }
+
+        internal static Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
             var uri = request.GetUri();
-            var httpClient = new HttpClient { Timeout = timeout };
+            var httpClient = new HttpClient {Timeout = timeout};
 
             Task<HttpResponseMessage> task = null;
             if (request is IJsonRequest)
             {
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                var jsonSerializerSettings = new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore};
                 var jsonString = JsonConvert.SerializeObject(request, jsonSerializerSettings);
 
                 task = httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
@@ -48,14 +48,20 @@ namespace GoogleApi.Engine
             }
 
             if (task == null)
-                throw new InvalidOperationException("Invalid Request. Request class missing Request interface implementation.");
+                throw new InvalidOperationException(
+                    "Invalid Request. Request class missing Request interface implementation.");
 
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
-            task.ContinueWith(x => GenericEngine<TRequest, TResponse>.ReadResponseAsync(x, taskCompletionSource, request is IJsonRequest), TaskContinuationOptions.ExecuteSynchronously);
+            task.ContinueWith(
+                x =>
+                    GenericEngine<TRequest, TResponse>.ReadResponseAsync(x, taskCompletionSource,
+                        request is IJsonRequest), TaskContinuationOptions.ExecuteSynchronously);
 
             return taskCompletionSource.Task;
         }
-        internal static TaskCompletionSource<TResponse> ReadResponseAsync(Task<HttpResponseMessage> task, TaskCompletionSource<TResponse> taskCompletionSource, bool isJson)
+
+        internal static TaskCompletionSource<TResponse> ReadResponseAsync(Task<HttpResponseMessage> task,
+            TaskCompletionSource<TResponse> taskCompletionSource, bool isJson)
         {
             if (task == null)
                 throw new ArgumentNullException(nameof(task));
@@ -69,7 +75,9 @@ namespace GoogleApi.Engine
             }
             else if (task.IsFaulted)
             {
-                var exception = task.Exception == null ? new NullReferenceException("task.Exception") : task.Exception.InnerException ?? task.Exception;
+                var exception = task.Exception == null
+                    ? new NullReferenceException("task.Exception")
+                    : task.Exception.InnerException ?? task.Exception;
                 taskCompletionSource.SetException(exception);
             }
             else
@@ -103,6 +111,7 @@ namespace GoogleApi.Engine
 
             return JsonConvert.DeserializeObject<TResponse>(serializedObject);
         }
+
         private static TResponse Deserialize(byte[] serializedObject)
         {
             if (serializedObject == null)
@@ -110,12 +119,11 @@ namespace GoogleApi.Engine
 
             // TODO: Hack (PlacesPhotosResponse).
             if (typeof(TResponse) == typeof(PlacesPhotosResponse))
-                return JsonConvert.DeserializeObject<TResponse>("{\"photo\":\"" + Convert.ToBase64String(serializedObject) + "\"}");
+                return
+                    JsonConvert.DeserializeObject<TResponse>("{\"photo\":\"" + Convert.ToBase64String(serializedObject) +
+                                                             "\"}");
 
-            var serializer = new DataContractJsonSerializer(typeof(TResponse));
-            var memoryStream = new MemoryStream(serializedObject, false);
-
-            return (TResponse)serializer.ReadObject(memoryStream);
+            return JsonConvert.DeserializeObject<TResponse>(Convert.ToBase64String(serializedObject));
         }
     }
 }

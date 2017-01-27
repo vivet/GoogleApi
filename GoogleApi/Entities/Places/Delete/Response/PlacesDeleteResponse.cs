@@ -9,6 +9,5 @@ namespace GoogleApi.Entities.Places.Delete.Response
     [DataContract]
     public class PlacesDeleteResponse : BasePlacesResponse
     {
-
     }
 }

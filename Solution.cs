@@ -6,9 +6,8 @@ using System.Reflection;
 [assembly: AssemblyProduct("GoogleApi")]
 [assembly: AssemblyCompany("Michael Vivet")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: AssemblyDescription("Google Places, Maps and Translate Web Service API wrapper for C#.NET")]
+[assembly: AssemblyCulture("en-US")]
+[assembly: AssemblyDescription("Google Maps, Places and Translate Web Service API wrapper for C#.NET")]
 
 // assembly version should NOT be set here -- it should be set in each assembly 
 // and will then be updated by our build server

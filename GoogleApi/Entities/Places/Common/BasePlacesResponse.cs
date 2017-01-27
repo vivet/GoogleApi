@@ -10,6 +10,5 @@ namespace GoogleApi.Entities.Places.Common
     [DataContract]
     public abstract class BasePlacesResponse : BaseResponse, IResponseFor
     {
-        
     }
 }

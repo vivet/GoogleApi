@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
@@ -13,8 +11,8 @@ namespace GoogleApi.Engine
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public class FacadeEngine<TRequest, TResponse> 
-        where TRequest : BaseRequest, new() 
+    public class FacadeEngine<TRequest, TResponse>
+        where TRequest : BaseRequest, new()
         where TResponse : IResponseFor
     {
         internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
@@ -26,9 +24,7 @@ namespace GoogleApi.Engine
         /// <param name="request">The request that will be sent.</param>
         /// <returns>The response that was received.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        /// <exception cref="AuthenticationException">Thrown when the provided Google client ID or signing key are invalid.</exception>
-        /// <exception cref="TimeoutException">Thrown when the operation has exceeded the allotted time.</exception>
-        /// <exception cref="WebException">Thrown when an error occurred while downloading data.</exception>
+        /// <exception cref="TaskCanceledException">Thrown when the provided Google client ID or signing key are invalid.</exception>
         public virtual TResponse Query(TRequest request)
         {
             if (request == null)
@@ -46,9 +42,7 @@ namespace GoogleApi.Engine
         /// When a request is aborted due to a timeout an AggregateException will be thrown with an InnerException of type TimeoutException.</param>
         /// <returns>The response that was received.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        /// <exception cref="AuthenticationException">Thrown when the provided Google client ID or signing key are invalid.</exception>
-        /// <exception cref="TimeoutException">Thrown when the operation has exceeded the allotted time.</exception>
-        /// <exception cref="WebException">Thrown when an error occurred while downloading data.</exception>
+        /// <exception cref="TaskCanceledException">Thrown when the provided Google client ID or signing key are invalid.</exception>
         public virtual TResponse Query(TRequest request, TimeSpan timeout)
         {
             if (request == null)
@@ -100,8 +94,9 @@ namespace GoogleApi.Engine
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
-            
-            return GenericEngine<TRequest, TResponse>.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
+
+            return GenericEngine<TRequest, TResponse>.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite),
+                token);
         }
 
         /// <summary>
@@ -119,7 +114,7 @@ namespace GoogleApi.Engine
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
-         
+
             return GenericEngine<TRequest, TResponse>.QueryAsync(request, timeout, token);
         }
     }

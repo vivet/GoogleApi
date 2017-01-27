@@ -13,7 +13,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// </summary>
         [DataMember(Name = "open")]
         public virtual DayTime Open { get; set; }
-        
+
         /// <summary>
         /// Open contains a pair of day and time objects describing when the Place closes.
         /// </summary>

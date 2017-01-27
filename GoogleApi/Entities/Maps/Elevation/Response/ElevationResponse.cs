@@ -8,13 +8,13 @@ namespace GoogleApi.Entities.Maps.Elevation.Response
     /// <summary>
     /// Elevation Response.
     /// </summary>
-	[DataContract]
-	public class ElevationResponse : BaseResponse, IResponseFor
-	{
+    [DataContract]
+    public class ElevationResponse : BaseResponse, IResponseFor
+    {
         /// <summary>
         /// Results.
         /// </summary>
-		[DataMember(Name = "results")]
+        [DataMember(Name = "results")]
         public virtual IEnumerable<ElevationResult> Results { get; set; }
-	}
+    }
 }

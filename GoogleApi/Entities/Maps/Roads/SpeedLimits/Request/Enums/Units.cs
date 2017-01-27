@@ -11,12 +11,11 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums
         /// <summary>
         /// Miles per hour.
         /// </summary>
-        [EnumMember(Value = "MPH")]
-        Mph,
+        [EnumMember(Value = "MPH")] Mph,
+
         /// <summary>
         /// Kilometers per hour.
         /// </summary>
-        [EnumMember(Value = "KPH")]
-        Kph,
+        [EnumMember(Value = "KPH")] Kph,
     }
 }

@@ -19,7 +19,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// </summary>
         [DataMember(Name = "icon")]
         public virtual string IconUrl { get; set; }
-        
+
         /// <summary>
         /// Name contains the human-readable name for the returned result. For establishment results, this is usually the business name.
         /// </summary>
@@ -58,16 +58,10 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        private IEnumerable<string> TypesStr
+        protected IEnumerable<string> TypesStr
         {
-            get
-            {
-                return this.Types.Select(x => x.ToEnumString());
-            }
-            set
-            {
-                this.Types = value.Select(x => x.ToEnum<PlaceLocationType>());
-            }
+            get { return this.Types.Select(x => x.ToEnumString()); }
+            set { this.Types = value.Select(x => x.ToEnum<PlaceLocationType>()); }
         }
 
         /// <summary>
@@ -84,16 +78,10 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         public virtual Scope Scope { get; set; }
 
         [DataMember(Name = "scope")]
-        private string ScopeStr
+        protected string ScopeStr
         {
-            get
-            {
-                return this.Scope.ToEnumString();
-            }
-            set
-            {
-                this.Scope = value.ToEnum<Scope>();
-            }
+            get { return this.Scope.ToEnumString(); }
+            set { this.Scope = value.ToEnum<Scope>(); }
         }
 
         /// <summary>
@@ -102,16 +90,10 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         public virtual PriceLevel PriceLevel { get; set; }
 
         [DataMember(Name = "price_level")]
-        private string PriceLevelStr
+        protected string PriceLevelStr
         {
-            get
-            {
-                return this.PriceLevel.ToEnumString();
-            }
-            set
-            {
-                this.PriceLevel = value.ToEnum<PriceLevel>();
-            }
+            get { return this.PriceLevel.ToEnumString(); }
+            set { this.PriceLevel = value.ToEnum<PriceLevel>(); }
         }
     }
 }

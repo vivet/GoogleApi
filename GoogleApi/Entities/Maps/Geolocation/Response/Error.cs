@@ -32,6 +32,3 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
         public virtual string Message { get; set; }
     }
 }
-
-
-

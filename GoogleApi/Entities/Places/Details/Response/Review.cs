@@ -40,7 +40,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// </summary>
         [DataMember(Name = "rating")]
         public virtual double Rating { get; set; }
-        
+
         /// <summary>
         /// Text contains the user's review. When reviewing a location with Google Places, text reviews are considered optional; therefore, this field may by empty.
         /// </summary>
@@ -53,16 +53,10 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual DateTime Time { get; set; }
 
         [DataMember(Name = "time")]
-        private int TimeInt
+        protected int TimeInt
         {
-            get
-            {
-                return this.Time.DateTimeToUnixTimestamp();
-            }
-            set
-            {
-                this.Time = DateTimeExtension.epoch.AddSeconds(value);
-            }
+            get { return this.Time.DateTimeToUnixTimestamp(); }
+            set { this.Time = DateTimeExtension.epoch.AddSeconds(value); }
         }
     }
 }

@@ -20,6 +20,5 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// </summary>
         [DataMember(Name = "geometry")]
         public virtual Geometry Geometry { get; set; }
-
     }
 }

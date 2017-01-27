@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Translate.Translate.Response
     /// </summary>
     [DataContract]
     public class TranslateResponse : BaseResponse, IResponseFor
-    {        
+    {
         /// <summary>
         /// Data container returned by google translate.
         /// </summary>
@@ -17,6 +17,3 @@ namespace GoogleApi.Entities.Translate.Translate.Response
         public virtual Data Data { get; set; }
     }
 }
- 
- 
-

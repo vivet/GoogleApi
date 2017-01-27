@@ -100,7 +100,7 @@ namespace GoogleApi.Entities.Places.Add.Request
 
             if (this.Types == null || !this.Types.Any())
                 throw new ArgumentException("Types must be provided. At least one type must be specified.");
-            
+
             return parameters;
         }
     }

@@ -16,14 +16,8 @@ namespace GoogleApi.Entities.Places.Common
         /// </summary>
         public override bool IsSsl
         {
-            get
-            {
-                return true;
-            }
-            set
-            {
-                throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL");
-            }
+            get { return true; }
+            set { throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL"); }
         }
 
         /// <summary>

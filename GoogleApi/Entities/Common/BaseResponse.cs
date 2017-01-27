@@ -15,7 +15,7 @@ namespace GoogleApi.Entities.Common
         /// "status" contains metadata on the request.
         /// </summary>
         public virtual Status Status { get; set; }
-     
+
         /// <summary>
         /// When the status code is other than OK, there may be an additional error_message field within the Directions response object. 
         /// This field contains more detailed information about the reasons behind the given status code.
@@ -26,27 +26,15 @@ namespace GoogleApi.Entities.Common
         [DataMember(Name = "status")]
         internal virtual string StatusStr
         {
-            get
-            {
-                return this.Status.ToEnumString();
-            }
-            set
-            {
-                this.Status = value.ToEnum<Status>();
-            }
+            get { return this.Status.ToEnumString(); }
+            set { this.Status = value.ToEnum<Status>(); }
         }
 
         [DataMember(Name = "error_message")]
         internal virtual string ErrorMsg
         {
-            get
-            {
-                return this.Status.ToString();
-            }
-            set
-            {
-                this.Status = (Status)Enum.Parse(typeof(Status), value);
-            }
+            get { return this.Status.ToString(); }
+            set { this.Status = (Status) Enum.Parse(typeof(Status), value); }
         }
     }
 }

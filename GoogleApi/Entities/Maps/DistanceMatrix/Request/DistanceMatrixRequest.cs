@@ -13,19 +13,19 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
     /// DistanceMatrix Request.
     /// </summary>
     public class DistanceMatrixRequest : BaseMapsRequest, IQueryStringRequest
-	{
-		/// <summary>
+    {
+        /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. If you pass an address as a string, 
         /// the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values.
-		/// </summary>
+        /// </summary>
         public virtual IEnumerable<ILocationString> Origins { get; set; }
 
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, to which to calculate distance and time. 
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values
-		/// </summary>
+        /// </summary>
         public virtual IEnumerable<ILocationString> Destinations { get; set; }
-        
+
         /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
         /// Units=metric (default) returns distances in kilometers and meters.
@@ -33,7 +33,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
         /// </summary>
         public Units Units { get; set; }
-        
+
         /// <summary>
         /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
         /// tolls indicates that the calculated route should avoid toll roads/bridges.
@@ -46,19 +46,19 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// The following estrictions are supported <see cref="GoogleApi.Entities.Maps.Common.Enums.AvoidWay"/>
         /// </summary>
         public AvoidWay Avoid { get; set; }
-        
+
         /// <summary>
         /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
         /// </summary>
         public TravelMode TravelMode { get; set; }
-        
+
         /// <summary>
         /// Specifies one or more preferred modes of transit. 
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments <see cref="Common.Enums.TransitMode"/>
         /// </summary>
         public TransitMode TransitMode { get; set; }
-        
+
         /// <summary>
         /// Specifies preferences for transit requests. 
         /// Using this parameter, you can bias the options returned, rather than accepting the default best route chosen by the API. 
@@ -66,7 +66,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// The parameter supports the following arguments: <see cref="Common.Enums.TransitRoutingPreference"/>
         /// </summary>
         public TransitRoutingPreference TransitRoutingPreference { get; set; }
-        
+
         /// <summary>
         /// The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. Alternatively, you can specify a value of now, which sets the departure time to the current time (correct to the nearest second). 
         /// The departure time may be specified in two cases:
@@ -76,13 +76,13 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Note: You can specify either DepartureTime or ArrivalTime, but not both
         /// </summary>
         public virtual DateTime DepartureTime { get; set; }
-        
+
         /// <summary>
         /// Specifies the desired time of arrival for transit requests, in seconds since midnight, January 1, 1970 UTC. 
         /// Note: You can specify either DepartureTime or ArrivalTime, but not both
         /// </summary>
         public virtual DateTime ArrivalTime { get; set; }
-        
+
         /// <summary>
         /// language (optional) — The language in which to return results. See the supported list of domain languages. 
         /// Note that we often update supported languages so this list may not be exhaustive. 
@@ -107,30 +107,31 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected  internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
+        protected internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
 
-	    /// <summary>
+        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
         protected override QueryStringParametersList GetQueryStringParameters()
-		{
-			if (this.Origins == null)
-				throw new ArgumentException("Must specify an Origins");
+        {
+            if (this.Origins == null)
+                throw new ArgumentException("Must specify an Origins");
 
             if (this.Destinations == null)
-				throw new ArgumentException("Must specify a Destinations");
-            
+                throw new ArgumentException("Must specify a Destinations");
+
             if (!Enum.IsDefined(typeof(AvoidWay), this.Avoid))
-				throw new ArgumentException("Invalid enumeration value for 'Avoid'");
+                throw new ArgumentException("Invalid enumeration value for 'Avoid'");
 
             if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
-				throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
+                throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
 
-            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == default(DateTime) && this.ArrivalTime == default(DateTime))
+            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == default(DateTime) &&
+                this.ArrivalTime == default(DateTime))
                 throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
 
-			var parameters = base.GetQueryStringParameters();
+            var parameters = base.GetQueryStringParameters();
 
             parameters.Add("origins", string.Join("|", this.Origins));
             parameters.Add("destinations", string.Join("|", this.Destinations));
@@ -151,13 +152,15 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                     parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
 
                 if (this.ArrivalTime != default(DateTime))
-                    parameters.Add("arrival_time", this.ArrivalTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    parameters.Add("arrival_time",
+                        this.ArrivalTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
                 if (this.DepartureTime != default(DateTime))
-                    parameters.Add("departure_time", this.DepartureTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    parameters.Add("departure_time",
+                        this.DepartureTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
             }
 
-			return parameters;
-		}
-	}
+            return parameters;
+        }
+    }
 }
