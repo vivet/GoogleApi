@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GoogleApi</RootNamespace>
     <AssemblyName>GoogleApi</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -22,14 +22,14 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG; </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\debug\GoogleApi.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>612, 618</NoWarn>
+    <NoWarn>612, 618, 1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,6 +56,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -66,11 +67,10 @@
     <Compile Include="..\Solution.cs">
       <Link>Properties\Solution.cs</Link>
     </Compile>
-    <Compile Include="Engine\EngineFacade.cs" />
-    <Compile Include="Engine\GenericEngineT.cs">
+    <Compile Include="Engine\FacadeEngine.cs" />
+    <Compile Include="Engine\GenericEngine.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Engine\GenericEngine.cs" />
     <Compile Include="Entities\Common\Interfaces\IJsonRequest.cs" />
     <Compile Include="Entities\Common\AddressLocation.cs" />
     <Compile Include="Entities\Common\Interfaces\ILocationString.cs" />
@@ -253,10 +253,6 @@
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Entities\Translate\Translate\Request\TranslateRequest.cs" />
     <Compile Include="Entities\Translate\Translate\Response\TranslateResponse.cs" />
-    <Compile Include="Extensions\WebClientExtension.cs" />
-    <Compile Include="Web\WebClientTimeout.cs">
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

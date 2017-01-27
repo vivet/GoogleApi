@@ -13,57 +13,12 @@ namespace GoogleApi.Engine
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public class EngineFacade<TRequest, TResponse> 
+    public class FacadeEngine<TRequest, TResponse> 
         where TRequest : BaseRequest, new() 
         where TResponse : IResponseFor
     {
-        internal readonly TimeSpan DefaultTimeout;
-        internal static readonly EngineFacade<TRequest, TResponse> Instance = new EngineFacade<TRequest, TResponse>();
-
-        /// <summary>
-        /// Default constructor.
-        /// Initializes Timeout.
-        /// </summary>
-        public EngineFacade()
-        {
-            this.DefaultTimeout = TimeSpan.FromSeconds(100);
-        }
-
-        /// <summary>
-        /// Determines the maximum number of concurrent HTTP connections to open to this engine's host address. The default value is 2 connections.
-        /// </summary>
-        /// <remarks>
-        /// This value is determined by the ServicePointManager and is shared across other engines that use the same host address.
-        /// </remarks>
-        public int HttpConnectionLimit
-        {
-            get
-            {
-                return GenericEngine<TRequest, TResponse>.HttpConnectionLimit;
-            }
-            set
-            {
-                GenericEngine<TRequest, TResponse>.HttpConnectionLimit = value;
-            }
-        }
-
-	    /// <summary>
-        /// Determines the maximum number of concurrent HTTPS connections to open to this engine's host address. The default value is 2 connections.
-        /// </summary>
-        /// <remarks>
-        /// This value is determined by the ServicePointManager and is shared across other engines that use the same host address.
-        /// </remarks>
-        public int HttpsConnectionLimit
-        {
-            get
-            {
-                return GenericEngine<TRequest, TResponse>.HttpsConnectionLimit;
-            }
-            set
-            {
-                GenericEngine<TRequest, TResponse>.HttpsConnectionLimit = value;
-            }
-        }
+        internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
+        internal static readonly FacadeEngine<TRequest, TResponse> instance = new FacadeEngine<TRequest, TResponse>();
 
         /// <summary>
         /// Query the Google Maps API using the provided request with the default timeout of 100,000 milliseconds (100 seconds).
@@ -79,7 +34,7 @@ namespace GoogleApi.Engine
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return this.Query(request, this.DefaultTimeout);
+            return this.Query(request, this.defaultTimeout);
         }
 
         /// <summary>
@@ -99,7 +54,7 @@ namespace GoogleApi.Engine
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return GenericEngine<TRequest, TResponse>.QueryGoogleApi(request, timeout);
+            return GenericEngine<TRequest, TResponse>.Query(request, timeout);
         }
 
         /// <summary>
@@ -146,7 +101,7 @@ namespace GoogleApi.Engine
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
             
-            return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
+            return GenericEngine<TRequest, TResponse>.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
         }
 
         /// <summary>
@@ -165,7 +120,7 @@ namespace GoogleApi.Engine
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
          
-            return GenericEngine<TRequest, TResponse>.QueryGoogleApiAsync(request, timeout, token);
+            return GenericEngine<TRequest, TResponse>.QueryAsync(request, timeout, token);
         }
     }
 }

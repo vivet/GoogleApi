@@ -16,7 +16,7 @@ namespace GoogleApi.Test
             {
                 Target = "da",
                 Qs = new[] { "Hello World" },
-                Key = this.ApiKey
+                Key = this.apiKey
             };
             var result = GoogleTranslate.Translate.Query(request);
 
@@ -26,7 +26,7 @@ namespace GoogleApi.Test
         [Test]
         public void TranslateWhenTargetIsGermanTest()
         {
-            var request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this.ApiKey, Format = Format.Text };
+            var request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this.apiKey, Format = Format.Text };
             var result = GoogleTranslate.Translate.Query(request);
 
             Assert.AreEqual("Hallo Welt", result.Data.Translations.First().TranslatedText);
@@ -40,8 +40,8 @@ namespace GoogleApi.Test
                 Key = null
             };
 
-            var _exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(_exception.Message, "ApiKey is required");
+            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
+            Assert.AreEqual(exception.Message, "ApiKey is required");
         }
         [Test]
         public void TranslateWhenApiKeyIsStringEmptyTest()
@@ -51,58 +51,58 @@ namespace GoogleApi.Test
                 Key = string.Empty
             };
 
-            var _exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(_exception.Message, "ApiKey is required");
+            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
+            Assert.AreEqual(exception.Message, "ApiKey is required");
         }
         [Test]
         public void TranslateWhenTargetIsNullTest()
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.apiKey,
                 Target = null
             };
 
-            var _exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(_exception.Message, "Target is required");
+            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
+            Assert.AreEqual(exception.Message, "Target is required");
         }
         [Test]
         public void TranslateWhenTargetIsStringEmptyTest()
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.apiKey,
                 Target = string.Empty
             };
 
-            var _exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(_exception.Message, "Target is required");
+            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
+            Assert.AreEqual(exception.Message, "Target is required");
         }
         [Test]
         public void TranslateWhenQsIsNullTest()
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.apiKey,
                 Target = "da",
                 Qs = null
             };
 
-            var _exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(_exception.Message, "Qs is required");
+            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
+            Assert.AreEqual(exception.Message, "Qs is required");
         }
         [Test]
         public void TranslateWhenQsIsEmptyTest()
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.apiKey,
                 Target = "da",
                 Qs = new string[0]
             };
 
-            var _exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(_exception.Message, "Qs is required");
+            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
+            Assert.AreEqual(exception.Message, "Qs is required");
         }          
     }
 }

@@ -7,7 +7,7 @@ namespace GoogleApi.Test
     [TestFixture]
     public abstract class BaseTest
     {
-        public string ApiKey = ""; // your API key...
+        public string apiKey = ""; // your API key...
 
         // Nested classes
         public class TestRequest : BaseRequest

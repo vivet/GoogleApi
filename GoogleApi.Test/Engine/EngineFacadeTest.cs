@@ -13,38 +13,38 @@ namespace GoogleApi.Test.Engine
         [Test]
         public void QueryWhenRequestIsNullTest()
         {
-            var engine = new EngineFacade<TestRequest, TestResponse>();
+            var engine = new FacadeEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.Query(null));
         }
         [Test]
         public void QueryWhenTimeoutAndRequestIsNullTest()
         {
-            var engine = new EngineFacade<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>();
+            var engine = new FacadeEngine<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.Query(null, new TimeSpan()));
         }
 
         [Test]
         public void QueryAsyncWhenRequestIsNullTest()
         {
-            var engine = new EngineFacade<TestRequest, TestResponse>();
+            var engine = new FacadeEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null));
         }
         [Test]
         public void QueryAsyncWhenRequestIsNullAndTimeoutTest()
         {
-            var engine = new EngineFacade<TestRequest, TestResponse>();
+            var engine = new FacadeEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan()));
         }    
         [Test]
         public void QueryAsyncWhenRequestIsNullAndCancellationTokenTest()
         {
-            var engine = new EngineFacade<TestRequest, TestResponse>();
+            var engine = new FacadeEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new CancellationToken()));
         }
         [Test]
         public void QueryAsyncWhenRequestIsNullAndTimeoutAndCancellationTokenTest()
         {
-            var engine = new EngineFacade<TestRequest, TestResponse>();
+            var engine = new FacadeEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
         }
     }

@@ -70,8 +70,7 @@ namespace GoogleApi.Entities.Common
             if (string.IsNullOrEmpty(this.ClientId))
                 return base.GetQueryStringParameters();
 
-            var parameters = new QueryStringParametersList();
-            parameters.Add("sensor", Sensor.ToString().ToLower());
+            var parameters = new QueryStringParametersList { { "sensor", Sensor.ToString().ToLower() } };
 
             return parameters;
         }

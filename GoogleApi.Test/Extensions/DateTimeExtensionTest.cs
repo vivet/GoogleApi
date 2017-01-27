@@ -11,7 +11,7 @@ namespace GoogleApi.Test.Extensions
         public void DateTimeToUnixTimestampTest()
         {
             var dateTime = DateTime.UtcNow;
-            var expected = (int)(dateTime - DateTimeExtension.Epoch).TotalSeconds;
+            var expected = (int)(dateTime - DateTimeExtension.epoch).TotalSeconds;
             var actual = dateTime.DateTimeToUnixTimestamp();
 
             Assert.AreEqual(expected, actual);

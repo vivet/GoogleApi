@@ -40,7 +40,7 @@ namespace GoogleApi
         /// The Google Maps Geocoding API provides a direct way to access these services via an HTTP request.
         /// https://developers.google.com/maps/documentation/geocoding/intro
 		/// </summary>
-		public static EngineFacade<GeocodingRequest, GeocodingResponse> Geocode => EngineFacade<GeocodingRequest, GeocodingResponse>.Instance;
+		public static FacadeEngine<GeocodingRequest, GeocodingResponse> Geocode => FacadeEngine<GeocodingRequest, GeocodingResponse>.instance;
 
 	    /// <summary>
         /// The Google Maps Geolocation API returns a location and accuracy radius based on information about cell towers and WiFi nodes that the mobile client can detect. 
@@ -49,14 +49,14 @@ namespace GoogleApi
         /// Before you start developing with the Geolocation API, review the authentication requirements (you need an API key) and the API usage limits.
         /// https://developers.google.com/maps/documentation/geolocation/intro
         /// </summary>
-        public static EngineFacade<GeolocationRequest, GeolocationResponse> Geolocation => EngineFacade<GeolocationRequest, GeolocationResponse>.Instance;
+        public static FacadeEngine<GeolocationRequest, GeolocationResponse> Geolocation => FacadeEngine<GeolocationRequest, GeolocationResponse>.instance;
 
 	    /// <summary>
         /// The Google Maps Elevation API provides you a simple interface to query locations on the earth for elevation data. Additionally, 
         /// you may request sampled elevation data along paths, allowing you to calculate elevation changes along routes.
         /// https://developers.google.com/maps/documentation/elevation/intro
         /// </summary>
-        public static EngineFacade<ElevationRequest, ElevationResponse> Elevation => EngineFacade<ElevationRequest, ElevationResponse>.Instance;
+        public static FacadeEngine<ElevationRequest, ElevationResponse> Elevation => FacadeEngine<ElevationRequest, ElevationResponse>.instance;
 
 	    /// <summary>
         /// Google Maps Directions API is a service that calculates directions between locations using an HTTP request.
@@ -70,7 +70,7 @@ namespace GoogleApi
         /// and store your results in a temporary cache of your own design.
         /// https://developers.google.com/maps/documentation/directions/intro
         /// </summary>
-		public static EngineFacade<DirectionsRequest, DirectionsResponse> Directions => EngineFacade<DirectionsRequest, DirectionsResponse>.Instance;
+		public static FacadeEngine<DirectionsRequest, DirectionsResponse> Directions => FacadeEngine<DirectionsRequest, DirectionsResponse>.instance;
 
 	    /// <summary>
         /// The Google Maps Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. 
@@ -78,7 +78,7 @@ namespace GoogleApi
         /// and consists of rows containing duration and distance values for each pair.
         /// https://developers.google.com/maps/documentation/distance-matrix/intro
         /// </summary>
-        public static EngineFacade<DistanceMatrixRequest, DistanceMatrixResponse> DistanceMatrix => EngineFacade<DistanceMatrixRequest, DistanceMatrixResponse>.Instance;
+        public static FacadeEngine<DistanceMatrixRequest, DistanceMatrixResponse> DistanceMatrix => FacadeEngine<DistanceMatrixRequest, DistanceMatrixResponse>.instance;
 
 	    /// <summary>
         /// The Google Maps Time Zone API provides a simple interface to request the time zone for a location on the earth, as well as that location's time offset from UTC.
@@ -86,7 +86,7 @@ namespace GoogleApi
         /// Requesting the time zone information for a specific Latitude/Longitude pair will return the name of that time zone, the time offset from UTC, and the Daylight Savings offset.
         /// https://developers.google.com/maps/documentation/timezone/intro
         /// </summary>
-        public static EngineFacade<TimeZoneRequest, TimeZoneResponse> TimeZone => EngineFacade<TimeZoneRequest, TimeZoneResponse>.Instance;
+        public static FacadeEngine<TimeZoneRequest, TimeZoneResponse> TimeZone => FacadeEngine<TimeZoneRequest, TimeZoneResponse>.instance;
 
 	    /// <summary>
         /// The snapToRoads method takes up to 100 GPS points collected along a route, and returns a similar set of data, 
@@ -94,7 +94,7 @@ namespace GoogleApi
         /// resulting in a path that smoothly follows the geometry of the road.
         /// https://developers.google.com/maps/documentation/roads/snap
         /// </summary>
-        public static EngineFacade<SnapToRoadsRequest, SnapToRoadsResponse> SnapToRoad => EngineFacade<SnapToRoadsRequest, SnapToRoadsResponse>.Instance;
+        public static FacadeEngine<SnapToRoadsRequest, SnapToRoadsResponse> SnapToRoad => FacadeEngine<SnapToRoadsRequest, SnapToRoadsResponse>.instance;
 
 	    /// <summary>
         /// The speedLimits method returns the posted speed limit for a given road segment. 
@@ -103,6 +103,6 @@ namespace GoogleApi
         /// and may be estimated, inaccurate, incomplete, and/or outdated. Inaccuracies in our data may be reported through the Google Map Maker service.
         /// https://developers.google.com/maps/documentation/roads/speed-limits
         /// </summary>
-        public static EngineFacade<SpeedLimitsRequest, SpeedLimitsResponse> SpeedLimits => EngineFacade<SpeedLimitsRequest, SpeedLimitsResponse>.Instance;
+        public static FacadeEngine<SpeedLimitsRequest, SpeedLimitsResponse> SpeedLimits => FacadeEngine<SpeedLimitsRequest, SpeedLimitsResponse>.instance;
 	}
 }

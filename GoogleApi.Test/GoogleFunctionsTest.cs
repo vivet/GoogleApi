@@ -11,12 +11,12 @@ namespace GoogleApi.Test
         private const string POLY_LINE = "chdEchdEoxgFoxgFi`vEi`vE";
         private const string POLY_LINE_2 = "cbb|@cbb|@ore}@ore}@izs|@izs|@";
 
-        private readonly Location _location1 = new Location(1.0101, 1.0101);
-        private readonly Location _location2 = new Location(2.20202, 2.20202);
-        private readonly Location _location3 = new Location(3.30303, 3.30303);
-        private readonly Location _location4 = new Location(10.0101, 10.0101);
-        private readonly Location _location5 = new Location(20.20202, 20.20202);
-        private readonly Location _location6 = new Location(30.30303, 30.30303);
+        private readonly Location location1 = new Location(1.0101, 1.0101);
+        private readonly Location location2 = new Location(2.20202, 2.20202);
+        private readonly Location location3 = new Location(3.30303, 3.30303);
+        private readonly Location location4 = new Location(10.0101, 10.0101);
+        private readonly Location location5 = new Location(20.20202, 20.20202);
+        private readonly Location location6 = new Location(30.30303, 30.30303);
 
         [Test]
         public void EncodePolyLineTest()
@@ -46,12 +46,12 @@ namespace GoogleApi.Test
 
             Assert.IsNotEmpty(decodePolyLine);
             Assert.AreEqual(6, decodePolyLine.Length);
-            Assert.AreEqual(decodePolyLine[0].LocationString, _location1.LocationString);
-            Assert.AreEqual(decodePolyLine[1].LocationString, _location2.LocationString);
-            Assert.AreEqual(decodePolyLine[2].LocationString, _location3.LocationString);
-            Assert.AreEqual(decodePolyLine[3].LocationString, _location4.LocationString);
-            Assert.AreEqual(decodePolyLine[4].LocationString, _location5.LocationString);
-            Assert.AreEqual(decodePolyLine[5].LocationString, _location6.LocationString);
+            Assert.AreEqual(decodePolyLine[0].LocationString, location1.LocationString);
+            Assert.AreEqual(decodePolyLine[1].LocationString, location2.LocationString);
+            Assert.AreEqual(decodePolyLine[2].LocationString, location3.LocationString);
+            Assert.AreEqual(decodePolyLine[3].LocationString, location4.LocationString);
+            Assert.AreEqual(decodePolyLine[4].LocationString, location5.LocationString);
+            Assert.AreEqual(decodePolyLine[5].LocationString, location6.LocationString);
         }
         [Test]
         public void MergePolyLineWhenEncdodedLocationsIsNullTest()
@@ -67,9 +67,9 @@ namespace GoogleApi.Test
 
             Assert.IsNotEmpty(decodePolyLine);
             Assert.AreEqual(3, decodePolyLine.Length);
-            Assert.AreEqual(decodePolyLine[0].LocationString, _location1.LocationString);
-            Assert.AreEqual(decodePolyLine[1].LocationString, _location2.LocationString);
-            Assert.AreEqual(decodePolyLine[2].LocationString, _location3.LocationString);
+            Assert.AreEqual(decodePolyLine[0].LocationString, location1.LocationString);
+            Assert.AreEqual(decodePolyLine[1].LocationString, location2.LocationString);
+            Assert.AreEqual(decodePolyLine[2].LocationString, location3.LocationString);
 
 
         }
