@@ -68,17 +68,17 @@ namespace GoogleApi
         /// <summary>
         /// Merge polylines into one encoded polyline string.
         /// </summary>
-        /// <param name="encdodedLocations"></param>
+        /// <param name="encodedLocations"></param>
         /// <returns></returns>
-        public static string MergePolyLine(params string[] encdodedLocations)
+        public static string MergePolyLine(params string[] encodedLocations)
         {
-            if (encdodedLocations == null)
-                throw new ArgumentNullException(nameof(encdodedLocations));
+            if (encodedLocations == null)
+                throw new ArgumentNullException(nameof(encodedLocations));
 
-            var length = encdodedLocations.Length;
+            var length = encodedLocations.Length;
             var locations = new Location[length];
 
-            locations = encdodedLocations.Where(x => !string.IsNullOrEmpty(x))
+            locations = encodedLocations.Where(x => !string.IsNullOrEmpty(x))
                 .Aggregate(locations,
                     (current, encdodedLocation) =>
                         current.Concat(GoogleFunctions.DecodePolyLine(encdodedLocation)).ToArray());
@@ -89,14 +89,14 @@ namespace GoogleApi
         /// <summary>
         /// Decode a polyline string into locations.
         /// </summary>
-        /// <param name="encdodedLocations"></param>
+        /// <param name="encodedLocations"></param>
         /// <returns></returns>
-        public static IEnumerable<Location> DecodePolyLine(string encdodedLocations)
+        public static IEnumerable<Location> DecodePolyLine(string encodedLocations)
         {
-            if (string.IsNullOrEmpty(encdodedLocations))
-                throw new ArgumentNullException(nameof(encdodedLocations));
+            if (string.IsNullOrEmpty(encodedLocations))
+                throw new ArgumentNullException(nameof(encodedLocations));
 
-            var polylineChars = encdodedLocations.ToCharArray();
+            var polylineChars = encodedLocations.ToCharArray();
             var index = 0;
 
             var currentLat = 0;

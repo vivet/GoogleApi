@@ -24,7 +24,7 @@ namespace GoogleApi.Test
             var locations = new[] { new Location(1.0101, 1.0101), new Location(2.20202, 2.20202), new Location(3.30303, 3.30303) };
             var encodePolyLine = GoogleFunctions.EncodePolyLine(locations);
 
-            Assert.IsNotEmpty(encodePolyLine);
+            Assert.IsNotNull(encodePolyLine.FirstOrDefault());
             Assert.AreEqual(GoogleFunctionsTest.POLY_LINE, encodePolyLine);
         }
         [Test]
@@ -44,7 +44,7 @@ namespace GoogleApi.Test
 
             var decodePolyLine = GoogleFunctions.DecodePolyLine(mergePolyLine).ToArray();
 
-            Assert.IsNotEmpty(decodePolyLine);
+            Assert.IsNotNull(decodePolyLine.FirstOrDefault());
             Assert.AreEqual(6, decodePolyLine.Length);
             Assert.AreEqual(decodePolyLine[0].LocationString, location1.LocationString);
             Assert.AreEqual(decodePolyLine[1].LocationString, location2.LocationString);
@@ -57,7 +57,7 @@ namespace GoogleApi.Test
         public void MergePolyLineWhenEncdodedLocationsIsNullTest()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => GoogleFunctions.MergePolyLine(null));
-            Assert.AreEqual("encdodedLocations", exception.ParamName);
+            Assert.AreEqual("encodedLocations", exception.ParamName);
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace GoogleApi.Test
         {
             var decodePolyLine = GoogleFunctions.DecodePolyLine(GoogleFunctionsTest.POLY_LINE).ToArray();
 
-            Assert.IsNotEmpty(decodePolyLine);
+            Assert.IsNotNull(decodePolyLine.FirstOrDefault());
             Assert.AreEqual(3, decodePolyLine.Length);
             Assert.AreEqual(decodePolyLine[0].LocationString, location1.LocationString);
             Assert.AreEqual(decodePolyLine[1].LocationString, location2.LocationString);
@@ -81,7 +81,7 @@ namespace GoogleApi.Test
                 var decodePolyLine = GoogleFunctions.DecodePolyLine(null);
                 Assert.IsNull(decodePolyLine);
             });
-            Assert.AreEqual("encdodedLocations", exception.ParamName);
+            Assert.AreEqual("encodedLocations", exception.ParamName);
         }
     }
 }
