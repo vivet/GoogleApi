@@ -60,7 +60,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         [DataMember(Name = "types")]
         protected IEnumerable<string> TypesStr
         {
-            get { return this.Types.Select(x => x.ToEnumString()); }
+            get { return this.Types == null ? new string[0] : this.Types.Select(x => x.ToEnumString()); }
             set { this.Types = value.Select(x => x.ToEnum<PlaceLocationType>()); }
         }
 

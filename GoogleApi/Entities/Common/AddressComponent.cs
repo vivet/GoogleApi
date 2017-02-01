@@ -13,18 +13,6 @@ namespace GoogleApi.Entities.Common
     public class AddressComponent
     {
         /// <summary>
-        /// types[] is an array indicating the type of the address component.
-        /// </summary>
-        public virtual IEnumerable<LocationType> Types { get; set; }
-
-        [DataMember(Name = "types")]
-        internal virtual IEnumerable<string> TypesStr
-        {
-            get { return this.Types.Select(x => x.ToEnumString()); }
-            set { this.Types = value.Select(x => x.ToEnum<LocationType>()); }
-        }
-
-        /// <summary>
         /// short_name is an abbreviated textual name for the address component, if available. For example, an address component for the state of Alaska may have a long_name of "Alaska" and a short_name of "AK" using the 2-letter postal abbreviation.
         /// </summary>
         [DataMember(Name = "short_name")]
@@ -35,5 +23,17 @@ namespace GoogleApi.Entities.Common
         /// </summary>
         [DataMember(Name = "long_name")]
         public virtual string LongName { get; set; }
+
+        /// <summary>
+        /// types[] is an array indicating the type of the address component.
+        /// </summary>
+        public virtual IEnumerable<LocationType> Types { get; set; }
+
+        [DataMember(Name = "types")]
+        protected virtual string[] TypesStr
+        {
+            get { return this.Types == null ? new string[0] : this.Types.Select(x => x.ToEnumString()).ToArray(); }
+            set { this.Types = value.Select(x => x.ToEnum<LocationType>()); }
+        }
     }
 }
