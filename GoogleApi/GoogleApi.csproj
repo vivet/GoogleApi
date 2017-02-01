@@ -4,7 +4,8 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Optimize>True</Optimize>
     <NoWarn>618;1591</NoWarn>
-    <DefineConstants />
+    <DefineConstants>
+    </DefineConstants>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>bin\Debug\GoogleApi.XML</DocumentationFile>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -50,6 +51,7 @@ V2.1.0
     <PackageProjectUrl>https://github.com/vivet/GoogleApi</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <PackageIconUrl>https://github.com/vivet/GoogleApi/blob/master/icon.ico</PackageIconUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
