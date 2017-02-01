@@ -58,6 +58,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// Bounds contains the viewport bounding box of the overview_polyline.
         /// </summary>
         [DataMember(Name = "bounds")]
-        public virtual Location[] Bounds { get; set; }
+        public virtual Bounds Bounds { get; set; }
     }
 }
