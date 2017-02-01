@@ -1,10 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
     /// <summary>
-    /// SnapToRoads Response.
+    /// An array of snapped points.
     /// </summary>
     [DataContract]
     public class SnappedPoint

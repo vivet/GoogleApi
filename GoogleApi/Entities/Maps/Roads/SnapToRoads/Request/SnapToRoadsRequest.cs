@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
@@ -29,7 +29,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
-        protected internal override string BaseUrl => "roads.googleapis.com/v1/snapToRoads/json";
+        protected internal override string BaseUrl => "roads.googleapis.com/v1/snapToRoads";
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.
