@@ -1,5 +1,3 @@
-using System;
-using GoogleApi.Extensions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Extensions
