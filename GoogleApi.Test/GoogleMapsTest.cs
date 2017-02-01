@@ -302,5 +302,39 @@ namespace GoogleApi.Test
             Assert.AreEqual(0.00, response.OffSet);
             Assert.AreEqual(-18000.00, response.RawOffSet);
         }
-	}
+
+        [Test]
+        public void SnapToRoadsTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void SnapToRoadsAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void NearestRoadsTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void NearestRoadsAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void SpeedLimitsTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void SpeedLimitsAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+
+    }
 }

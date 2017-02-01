@@ -9,6 +9,8 @@ using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geocode.Response;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.Geolocation.Response;
+using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
+using GoogleApi.Entities.Maps.Roads.NearestRoads.Response;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Response;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
@@ -41,8 +43,7 @@ namespace GoogleApi
         /// The Google Maps Geocoding API provides a direct way to access these services via an HTTP request.
         /// https://developers.google.com/maps/documentation/geocoding/intro
         /// </summary>
-        public static FacadeEngine<GeocodingRequest, GeocodingResponse> Geocode
-            => FacadeEngine<GeocodingRequest, GeocodingResponse>.instance;
+        public static FacadeEngine<GeocodingRequest, GeocodingResponse> Geocode => FacadeEngine<GeocodingRequest, GeocodingResponse>.instance;
 
         /// <summary>
         /// The Google Maps Geolocation API returns a location and accuracy radius based on information about cell towers and WiFi nodes that the mobile client can detect. 
@@ -51,16 +52,14 @@ namespace GoogleApi
         /// Before you start developing with the Geolocation API, review the authentication requirements (you need an API key) and the API usage limits.
         /// https://developers.google.com/maps/documentation/geolocation/intro
         /// </summary>
-        public static FacadeEngine<GeolocationRequest, GeolocationResponse> Geolocation
-            => FacadeEngine<GeolocationRequest, GeolocationResponse>.instance;
+        public static FacadeEngine<GeolocationRequest, GeolocationResponse> Geolocation => FacadeEngine<GeolocationRequest, GeolocationResponse>.instance;
 
         /// <summary>
         /// The Google Maps Elevation API provides you a simple interface to query locations on the earth for elevation data. Additionally, 
         /// you may request sampled elevation data along paths, allowing you to calculate elevation changes along routes.
         /// https://developers.google.com/maps/documentation/elevation/intro
         /// </summary>
-        public static FacadeEngine<ElevationRequest, ElevationResponse> Elevation
-            => FacadeEngine<ElevationRequest, ElevationResponse>.instance;
+        public static FacadeEngine<ElevationRequest, ElevationResponse> Elevation => FacadeEngine<ElevationRequest, ElevationResponse>.instance;
 
         /// <summary>
         /// Google Maps Directions API is a service that calculates directions between locations using an HTTP request.
@@ -74,8 +73,7 @@ namespace GoogleApi
         /// and store your results in a temporary cache of your own design.
         /// https://developers.google.com/maps/documentation/directions/intro
         /// </summary>
-        public static FacadeEngine<DirectionsRequest, DirectionsResponse> Directions
-            => FacadeEngine<DirectionsRequest, DirectionsResponse>.instance;
+        public static FacadeEngine<DirectionsRequest, DirectionsResponse> Directions => FacadeEngine<DirectionsRequest, DirectionsResponse>.instance;
 
         /// <summary>
         /// The Google Maps Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. 
@@ -83,8 +81,7 @@ namespace GoogleApi
         /// and consists of rows containing duration and distance values for each pair.
         /// https://developers.google.com/maps/documentation/distance-matrix/intro
         /// </summary>
-        public static FacadeEngine<DistanceMatrixRequest, DistanceMatrixResponse> DistanceMatrix
-            => FacadeEngine<DistanceMatrixRequest, DistanceMatrixResponse>.instance;
+        public static FacadeEngine<DistanceMatrixRequest, DistanceMatrixResponse> DistanceMatrix => FacadeEngine<DistanceMatrixRequest, DistanceMatrixResponse>.instance;
 
         /// <summary>
         /// The Google Maps Time Zone API provides a simple interface to request the time zone for a location on the earth, as well as that location's time offset from UTC.
@@ -92,8 +89,7 @@ namespace GoogleApi
         /// Requesting the time zone information for a specific Latitude/Longitude pair will return the name of that time zone, the time offset from UTC, and the Daylight Savings offset.
         /// https://developers.google.com/maps/documentation/timezone/intro
         /// </summary>
-        public static FacadeEngine<TimeZoneRequest, TimeZoneResponse> TimeZone
-            => FacadeEngine<TimeZoneRequest, TimeZoneResponse>.instance;
+        public static FacadeEngine<TimeZoneRequest, TimeZoneResponse> TimeZone => FacadeEngine<TimeZoneRequest, TimeZoneResponse>.instance;
 
         /// <summary>
         /// The snapToRoads method takes up to 100 GPS points collected along a route, and returns a similar set of data, 
@@ -101,8 +97,15 @@ namespace GoogleApi
         /// resulting in a path that smoothly follows the geometry of the road.
         /// https://developers.google.com/maps/documentation/roads/snap
         /// </summary>
-        public static FacadeEngine<SnapToRoadsRequest, SnapToRoadsResponse> SnapToRoad
-            => FacadeEngine<SnapToRoadsRequest, SnapToRoadsResponse>.instance;
+        public static FacadeEngine<SnapToRoadsRequest, SnapToRoadsResponse> SnapToRoad => FacadeEngine<SnapToRoadsRequest, SnapToRoadsResponse>.instance;
+
+        /// <summary>
+        /// The Google Maps Roads API takes takes up to 100 independent coordinates, and returns the closest road segment for each point. 
+        /// The points passed do not need to be part of a continuous path.
+        /// NOTE: If you are working with sequential GPS points, use Snap to Roads.
+        /// https://developers.google.com/maps/documentation/roads/nearest
+        /// </summary>
+        public static FacadeEngine<NearestRoadsRequest, NearestRoadsResponse> NearestRoads => FacadeEngine<NearestRoadsRequest, NearestRoadsResponse>.instance;
 
         /// <summary>
         /// The speedLimits method returns the posted speed limit for a given road segment. 
@@ -111,7 +114,6 @@ namespace GoogleApi
         /// and may be estimated, inaccurate, incomplete, and/or outdated. Inaccuracies in our data may be reported through the Google Map Maker service.
         /// https://developers.google.com/maps/documentation/roads/speed-limits
         /// </summary>
-        public static FacadeEngine<SpeedLimitsRequest, SpeedLimitsResponse> SpeedLimits
-            => FacadeEngine<SpeedLimitsRequest, SpeedLimitsResponse>.instance;
+        public static FacadeEngine<SpeedLimitsRequest, SpeedLimitsResponse> SpeedLimits => FacadeEngine<SpeedLimitsRequest, SpeedLimitsResponse>.instance;
     }
 }
