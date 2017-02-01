@@ -1,4 +1,4 @@
-GoogleApi v2.4.0 (Release date 6th February, .NETStandard)
+GoogleApi v2.4.0-beta1 (Available)
 =================================
 
 C# .NET Google Web Services Api. (https://www.nuget.org/packages/GoogleApi/)
@@ -13,6 +13,7 @@ Google Maps
   * Reverse Geocoding
   * Geolocation
   * Roads 
+    * Nearest Roads
     * Snap To Roads
     * Speed Limits
   * Time Zone
