@@ -16,7 +16,7 @@ namespace GoogleApi.Test.Helpers
 
             var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE } };
 
-            Assert.Contains(KEY, queryStringParametersList.Keys);
+            Assert.IsTrue(queryStringParametersList.Keys.Contains(KEY));
             Assert.AreEqual(VALUE, queryStringParametersList[KEY]);
         }
         [Test]
@@ -28,7 +28,7 @@ namespace GoogleApi.Test.Helpers
 
             var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE }, { KEY, VALUE_NEW } };
 
-            Assert.Contains(KEY, queryStringParametersList.Keys);
+            Assert.IsTrue(queryStringParametersList.Keys.Contains(KEY));
             Assert.AreEqual(VALUE_NEW, queryStringParametersList[KEY]);
             Assert.AreEqual(1, queryStringParametersList.Count);
         }
