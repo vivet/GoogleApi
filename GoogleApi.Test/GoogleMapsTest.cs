@@ -10,6 +10,7 @@ using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using NUnit.Framework;
+using System.Net.Http;
 
 namespace GoogleApi.Test
 {
@@ -136,7 +137,7 @@ namespace GoogleApi.Test
         public void GeocodingWhenInvalidClientCredentialsTest()
         {
             var request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", Key = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
-            Assert.Throws<TaskCanceledException> (() =>
+            Assert.Throws<HttpRequestException> (() =>
             {
                 try
                 {
