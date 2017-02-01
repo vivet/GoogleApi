@@ -1,4 +1,4 @@
-GoogleApi v2.4.0-beta1 (Available)
+GoogleApi v2.4.1-beta1 (Available)
 =================================
 
 C# .NET Google Web Services Api. (https://www.nuget.org/packages/GoogleApi/)
