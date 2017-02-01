@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Response
 {
@@ -8,7 +7,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Response
     /// TimeZone Response.
     /// </summary>
     [DataContract]
-    public class TimeZoneResponse : BaseResponse, IResponseFor
+    public class TimeZoneResponse : BaseResponse
     {
         /// <summary>
         /// DstOffset: the offset for daylight-savings time in seconds. This will be zero if the time zone is not in Daylight Savings Time during the specified timestamp.

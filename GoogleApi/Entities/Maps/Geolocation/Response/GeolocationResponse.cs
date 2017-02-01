@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
@@ -8,7 +7,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
     /// Geocoding Response.
     /// </summary>
     [DataContract]
-    public class GeolocationResponse : BaseResponse, IResponseFor
+    public class GeolocationResponse : BaseResponse
     {
         /// <summary>
         /// The user’s estimated latitude and longitude, in degrees. Contains one lat and one lng subfield.

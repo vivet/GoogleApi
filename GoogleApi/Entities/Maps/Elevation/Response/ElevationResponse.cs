@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Elevation.Response
 {
@@ -9,7 +8,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Response
     /// Elevation Response.
     /// </summary>
     [DataContract]
-    public class ElevationResponse : BaseResponse, IResponseFor
+    public class ElevationResponse : BaseResponse
     {
         /// <summary>
         /// Results.

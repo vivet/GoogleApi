@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Common
@@ -9,7 +10,7 @@ namespace GoogleApi.Entities.Common
     /// Base abstract class for Google responses.
     /// </summary>
     [DataContract]
-    public abstract class BaseResponse
+    public abstract class BaseResponse : IResponseFor
     {
         /// <summary>
         /// "status" contains metadata on the request.

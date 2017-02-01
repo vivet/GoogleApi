@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
@@ -9,7 +8,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
     /// DistanceMatrix Response.
     /// </summary>
     [DataContract(Name = "DistanceMatrixResponse")]
-    public class DistanceMatrixResponse : BaseResponse, IResponseFor
+    public class DistanceMatrixResponse : BaseResponse
     {
         /// <summary>
         /// OriginAddresses contains an array of addresses as returned by the API from your original request. These are formatted by the geocoder and localized according to the language parameter passed with the request.

@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
@@ -10,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
     /// The response contains an object with a single error object with the following keys:
     /// </summary>
     [DataContract]
-    public class Error : BaseResponse, IResponseFor
+    public class Error : BaseResponse
     {
         /// <summary>
         /// A list of errors which occurred. 
