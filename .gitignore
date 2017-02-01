@@ -7,3 +7,5 @@ _ReSharper*
 *.DotSettings
 packages
 .vs
+project.lock.json
+TestResults*

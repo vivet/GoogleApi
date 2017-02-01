@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {},
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1",
+    "NETStandard.Library": "1.6.1.*",
+    //  "System.Security.Cryptography": "4.1.0",
+    "NUnit": "3.6.0",
+    "NUnit3TestAdapter": "3.7.0",
+    "System.Diagnostics.DiagnosticSource": "4.0.0",
+    "System.Runtime.Serialization.Primitives": "4.1.1",
+    "System.Security.Cryptography.Algorithms": "4.3.0" 
+  },
+  "frameworks": {
+    "net462": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}
