@@ -9,40 +9,28 @@ namespace GoogleApi.Test.Helpers
     public class QueryStringParametersListTest
 	{
         [Test]
-        public void ConstructorInitializesParametersCollectionTest()
-		{
-            var queryStringParametersList = new QueryStringParametersList();
-            Assert.IsNotNull(queryStringParametersList.List);
-		}
-
-        [Test]
         public void AddTest()
         {
-            const string key = "key";
-            const string value = "value";
+            const string KEY = "key";
+            const string VALUE = "value";
 
-            var queryStringParametersList = new QueryStringParametersList();
-            queryStringParametersList.Add(key, value);
+            var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE } };
 
-            Assert.IsNotNull(queryStringParametersList.List);
-            Assert.Contains(key, queryStringParametersList.List.Keys);
-            Assert.AreEqual(value, queryStringParametersList.List[key]);
+            Assert.IsTrue(queryStringParametersList.Keys.Contains(KEY));
+            Assert.AreEqual(VALUE, queryStringParametersList[KEY]);
         }
         [Test]
         public void AddwhenKeyExistsTest()
         {
-            const string key = "key";
-            const string value = "value";
-            const string valueNew = "value_new";
+            const string KEY = "key";
+            const string VALUE = "value";
+            const string VALUE_NEW = "value_new";
 
-            var queryStringParametersList = new QueryStringParametersList();
-            queryStringParametersList.Add(key, value);
-            queryStringParametersList.Add(key, valueNew);
+            var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE }, { KEY, VALUE_NEW } };
 
-            Assert.IsNotNull(queryStringParametersList.List);
-            Assert.Contains(key, queryStringParametersList.List.Keys);
-            Assert.AreEqual(valueNew, queryStringParametersList.List[key]);
-            Assert.AreEqual(1, queryStringParametersList.List.Count);
+            Assert.IsTrue(queryStringParametersList.Keys.Contains(KEY));
+            Assert.AreEqual(VALUE_NEW, queryStringParametersList[KEY]);
+            Assert.AreEqual(1, queryStringParametersList.Count);
         }
         [Test]
         public void AddWhenKeyIsNullTest()
@@ -60,15 +48,13 @@ namespace GoogleApi.Test.Helpers
         [Test]
         public void RemoveTest()
         {
-            const string key = "key";
-            const string value = "value";
+            const string KEY = "key";
+            const string VALUE = "value";
 
-            var queryStringParametersList = new QueryStringParametersList();
-            queryStringParametersList.Add(key, value);
-            queryStringParametersList.Remove(key);
+            var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE } };
+            queryStringParametersList.Remove(KEY);
 
-            Assert.IsNotNull(queryStringParametersList.List);
-            Assert.AreEqual(0, queryStringParametersList.List.Count);
+            Assert.AreEqual(0, queryStringParametersList.Count);
         }
         [Test]
         public void RemoveWhenKeyIsNullTest()
@@ -80,13 +66,15 @@ namespace GoogleApi.Test.Helpers
         [Test]
         public void GetQueryStringPostfixTest()
 		{
-            var queryStringParametersList = new QueryStringParametersList();
-            queryStringParametersList.Add("1", "1");
-            queryStringParametersList.Add("2", "2");
-            queryStringParametersList.Add("3", "3");
+		    var queryStringParametersList = new QueryStringParametersList
+		    {
+		        { "1", "1" },
+                { "2", "2" },
+                { "3", "3" }
+		    };
 
-            var actual = queryStringParametersList.GetQueryStringPostfix();
-            var expected = string.Join("&", queryStringParametersList.List.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
+		    var actual = queryStringParametersList.GetQueryStringPostfix();
+            var expected = string.Join("&", queryStringParametersList.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
 
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected, actual);

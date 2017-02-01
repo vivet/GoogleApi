@@ -9,6 +9,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request.Enums
         /// Html format
         /// </summary>
         Html,
+
         /// <summary>
         /// Plain text format
         /// </summary>

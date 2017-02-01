@@ -14,6 +14,6 @@ namespace GoogleApi
         /// <summary>
         /// This document details the background knowledge that you need to use the Google Translate API v2.
         /// </summary>
-        public static EngineFacade<TranslateRequest, TranslateResponse> Translate => EngineFacade<TranslateRequest, TranslateResponse>.Instance;
+        public static FacadeEngine<TranslateRequest, TranslateResponse> Translate => FacadeEngine<TranslateRequest, TranslateResponse>.instance;
     }
 }

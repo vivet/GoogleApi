@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
@@ -8,7 +7,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
     /// Errors.
     /// </summary>
     [DataContract]
-    public class Errors : BaseResponse, IResponseFor
+    public class Errors : BaseResponse
     {
         /// <summary>
         /// This is the same as the HTTP status of the response.

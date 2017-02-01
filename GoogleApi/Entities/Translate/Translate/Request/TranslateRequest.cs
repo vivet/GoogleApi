@@ -23,18 +23,18 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// <summary>
         /// Use the target query parameter to specify the language you want to translate into.
         /// </summary>
-        public virtual string Target { get; set; } 
+        public virtual string Target { get; set; }
 
         /// <summary>
         /// Use the q query parameter to identify the string to translate
         /// </summary>
-        public virtual IEnumerable<string> Qs { get; set; } 
+        public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
         /// If prettyprint=true, the results returned by the server will be human readable (pretty printed).
         /// Default: prettyprint=true.
         /// </summary>
-        public virtual bool PrettyPrint { get; set; } 
+        public virtual bool PrettyPrint { get; set; }
 
         /// <summary>
         /// This optional parameter allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates HTML and a value of text indicates plain-text.
@@ -93,7 +93,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
             }
 
             parameters.Add("prettyprint", this.PrettyPrint.ToString().ToLower());
-            
+
             if (!string.IsNullOrWhiteSpace(this.Source))
                 parameters.Add("source", this.Source);
 

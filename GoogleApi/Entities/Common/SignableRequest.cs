@@ -52,7 +52,7 @@ namespace GoogleApi.Entities.Common
             var urlSegmentToSign = uri.LocalPath + uri.Query + "&client=" + this.ClientId;
             var privateKey = SignableRequest.FromBase64UrlString(this.Key);
             byte[] signature;
-            
+
             using (var algorithm = new HMACSHA1(privateKey))
             {
                 signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(urlSegmentToSign));
@@ -70,24 +70,23 @@ namespace GoogleApi.Entities.Common
             if (string.IsNullOrEmpty(this.ClientId))
                 return base.GetQueryStringParameters();
 
-            var parameters = new QueryStringParametersList();
-            parameters.Add("sensor", Sensor.ToString().ToLower());
+            var parameters = new QueryStringParametersList {{"sensor", Sensor.ToString().ToLower()}};
 
             return parameters;
         }
 
         private static string ToBase64UrlString(byte[] data)
         {
-            if (data == null) 
+            if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
             return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_");
         }
         private static byte[] FromBase64UrlString(string base64UrlString)
         {
-            if (base64UrlString == null) 
+            if (base64UrlString == null)
                 throw new ArgumentNullException(nameof(base64UrlString));
-            
+
             return Convert.FromBase64String(base64UrlString.Replace("-", "+").Replace("_", "/"));
         }
     }

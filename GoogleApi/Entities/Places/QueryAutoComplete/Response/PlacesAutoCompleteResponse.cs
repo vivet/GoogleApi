@@ -9,11 +9,11 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Response
     /// </summary>
     [DataContract]
     public class PlacesQueryAutoCompleteResponse : BasePlacesResponse
-	{
-		/// <summary>
+    {
+        /// <summary>
         /// Contains an array of predictions, with information about the prediction.
-		/// </summary>
-		[DataMember(Name = "predictions")]
+        /// </summary>
+        [DataMember(Name = "predictions")]
         public virtual IEnumerable<Prediction> Predictions { get; set; }
-	}
+    }
 }

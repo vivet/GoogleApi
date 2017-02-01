@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Common
     /// <summary>
     /// Base abstract class for requests.
     /// </summary>
-	public abstract class BaseRequest
+    public abstract class BaseRequest
     {
         /// <summary>
         /// True to indicate that request comes from a device with a location sensor, otherwise false. 
@@ -38,12 +38,12 @@ namespace GoogleApi.Entities.Common
         /// Visit the APIs Console to create an API Project and obtain your key.
         /// </summary>
         public virtual string Key { get; set; }
-        
+
         /// <summary>
         /// True to use use the https protocol; false to use http. The default is false.
         /// </summary>
         public virtual bool IsSsl { get; set; }
-        
+
         /// <summary>
         /// Returns the Uri.
         /// </summary>

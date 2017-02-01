@@ -1,38 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26127.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi", "GoogleApi\GoogleApi.csproj", "{61E9FC82-47B0-43C3-8749-95D3A9967060}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi", "GoogleApi\GoogleApi.csproj", "{BF3AA421-D754-4762-AD20-A99123455E99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.Test", "GoogleApi.Test\GoogleApi.Test.csproj", "{AD9AD8E9-0E2C-470E-9004-373679F9D954}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F3372C91-F634-491B-9253-38E887A9B879}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{15291FDD-57EE-480D-BFDB-92FDDCDB1B96}"
-	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
-		Solution.cs = Solution.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.Test", "GoogleApi.Test\GoogleApi.Test.csproj", "{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{61E9FC82-47B0-43C3-8749-95D3A9967060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61E9FC82-47B0-43C3-8749-95D3A9967060}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61E9FC82-47B0-43C3-8749-95D3A9967060}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61E9FC82-47B0-43C3-8749-95D3A9967060}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD9AD8E9-0E2C-470E-9004-373679F9D954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD9AD8E9-0E2C-470E-9004-373679F9D954}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD9AD8E9-0E2C-470E-9004-373679F9D954}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD9AD8E9-0E2C-470E-9004-373679F9D954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF3AA421-D754-4762-AD20-A99123455E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3AA421-D754-4762-AD20-A99123455E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3AA421-D754-4762-AD20-A99123455E99}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BF3AA421-D754-4762-AD20-A99123455E99}.Debug|x64.ActiveCfg = Debug|x64
+		{BF3AA421-D754-4762-AD20-A99123455E99}.Debug|x64.Build.0 = Debug|x64
+		{BF3AA421-D754-4762-AD20-A99123455E99}.Debug|x86.ActiveCfg = Debug|x86
+		{BF3AA421-D754-4762-AD20-A99123455E99}.Debug|x86.Build.0 = Debug|x86
+		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|x64.ActiveCfg = Debug|x64
+		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|x64.Build.0 = Debug|x64
+		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|x86.ActiveCfg = Debug|x86
+		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

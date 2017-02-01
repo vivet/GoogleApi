@@ -6,16 +6,18 @@ namespace GoogleApi.Entities.Maps.Common.Enums
     /// Transit Routing Preference.
     /// </summary>
     [Flags]
-    public enum TransitRoutingPreference 
+    public enum TransitRoutingPreference
     {
         /// <summary>
         /// No TransitRoutingPreference.
         /// </summary>
         Nothing = 0x0,
+
         /// <summary>
         /// Indicates that the calculated route should prefer limited amounts of walking.
         /// </summary>
         LessWalking = 0x1,
+
         /// <summary>
         /// Indicates that the calculated route should prefer a limited number of transfers.
         /// </summary>

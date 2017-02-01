@@ -22,12 +22,12 @@ namespace GoogleApi
         /// <returns></returns>
         public static string EncodePolyLine(IEnumerable<Location> locations)
         {
-            if (locations == null) 
+            if (locations == null)
                 throw new ArgumentNullException(nameof(locations));
-            
+
             var encodedString = new StringBuilder();
 
-            var encodeDiff = (Action<int>)(diff =>
+            var encodeDiff = (Action<int>) (diff =>
             {
                 var shifted = diff << 1;
                 if (diff < 0)
@@ -37,11 +37,11 @@ namespace GoogleApi
 
                 while (rem >= 0x20)
                 {
-                    encodedString.Append((char)((0x20 | (rem & 0x1f)) + 63));
+                    encodedString.Append((char) ((0x20 | (rem & 0x1f)) + 63));
                     rem >>= 5;
                 }
 
-                encodedString.Append((char)(rem + 63));
+                encodedString.Append((char) (rem + 63));
             });
 
             var lastLat = 0;
@@ -51,16 +51,15 @@ namespace GoogleApi
             {
                 if (location != null)
                 {
-                    var lat = (int)Math.Round(location.Latitude * 1E5);
-                    var lng = (int)Math.Round(location.Longitude * 1E5);
+                    var lat = (int) Math.Round(location.Latitude * 1E5);
+                    var lng = (int) Math.Round(location.Longitude * 1E5);
 
                     encodeDiff(lat - lastLat);
                     encodeDiff(lng - lastLng);
 
                     lastLat = lat;
-                    lastLng = lng;                    
+                    lastLng = lng;
                 }
-
             }
 
             return encodedString.ToString();
@@ -69,32 +68,35 @@ namespace GoogleApi
         /// <summary>
         /// Merge polylines into one encoded polyline string.
         /// </summary>
-        /// <param name="encdodedLocations"></param>
+        /// <param name="encodedLocations"></param>
         /// <returns></returns>
-        public static string MergePolyLine(params string[] encdodedLocations)
+        public static string MergePolyLine(params string[] encodedLocations)
         {
-            if (encdodedLocations == null)
-                throw new ArgumentNullException(nameof(encdodedLocations));
+            if (encodedLocations == null)
+                throw new ArgumentNullException(nameof(encodedLocations));
 
-            var length = encdodedLocations.Length;
+            var length = encodedLocations.Length;
             var locations = new Location[length];
 
-            locations = encdodedLocations.Where(x => !string.IsNullOrEmpty(x)).Aggregate(locations, (current, encdodedLocation) => current.Concat(GoogleFunctions.DecodePolyLine(encdodedLocation)).ToArray());
+            locations = encodedLocations.Where(x => !string.IsNullOrEmpty(x))
+                .Aggregate(locations,
+                    (current, encdodedLocation) =>
+                        current.Concat(GoogleFunctions.DecodePolyLine(encdodedLocation)).ToArray());
 
             return GoogleFunctions.EncodePolyLine(locations);
         }
-        
+
         /// <summary>
         /// Decode a polyline string into locations.
         /// </summary>
-        /// <param name="encdodedLocations"></param>
+        /// <param name="encodedLocations"></param>
         /// <returns></returns>
-        public static IEnumerable<Location> DecodePolyLine(string encdodedLocations)
+        public static IEnumerable<Location> DecodePolyLine(string encodedLocations)
         {
-            if (string.IsNullOrEmpty(encdodedLocations))
-                throw new ArgumentNullException(nameof(encdodedLocations));
+            if (string.IsNullOrEmpty(encodedLocations))
+                throw new ArgumentNullException(nameof(encodedLocations));
 
-            var polylineChars = encdodedLocations.ToCharArray();
+            var polylineChars = encodedLocations.ToCharArray();
             var index = 0;
 
             var currentLat = 0;
@@ -106,7 +108,7 @@ namespace GoogleApi
                 var sum = 0;
                 var shifter = 0;
                 int next5Bits;
-                
+
                 do
                 {
                     next5Bits = polylineChars[index++] - 63;
@@ -122,7 +124,7 @@ namespace GoogleApi
                 // Calculate next longitude
                 sum = 0;
                 shifter = 0;
-                
+
                 do
                 {
                     next5Bits = polylineChars[index++] - 63;

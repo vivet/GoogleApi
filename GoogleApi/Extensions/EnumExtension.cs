@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -17,12 +18,12 @@ namespace GoogleApi.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="_enum"></param>
         /// <returns></returns>
-        public static string ToEnumString<T>(this T _enum) 
+        public static string ToEnumString<T>(this T _enum)
             where T : struct, IConvertible
         {
             var enumType = typeof(T);
             var name = Enum.GetName(enumType, _enum);
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetRuntimeField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
 
             return enumMemberAttribute.Value;
         }
@@ -34,10 +35,10 @@ namespace GoogleApi.Extensions
         /// <param name="_enum"></param>
         /// <param name="delimeter"></param>
         /// <returns></returns>
-        public static string ToEnumString<T>(this T _enum, char delimeter) 
+        public static string ToEnumString<T>(this T _enum, char delimeter)
             where T : struct, IConvertible
         {
-            if (_enum.GetType().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
+            if (_enum.GetType().GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
                 return Convert.ToString(_enum, CultureInfo.InvariantCulture).ToLower();
 
             var stringBuilder = new StringBuilder();

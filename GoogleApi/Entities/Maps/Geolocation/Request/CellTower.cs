@@ -22,32 +22,32 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// </summary>
         [DataMember(Name = "locationAreaCode")]
         public virtual string LocationAreaCode { get; set; }
-        
+
         /// <summary>
         /// Required. The cell tower's Mobile Country Code (MCC).
         /// </summary>
         [DataMember(Name = "mobileCountryCode")]
         public virtual string MobileCountryCode { get; set; }
-        
+
         /// <summary>
         /// Required. The cell tower's Mobile Network Code. 
         /// This is the MNC for GSM and WCDMA; CDMA uses the System ID (SID).
         /// </summary>
         [DataMember(Name = "mobileNetworkCode")]
         public virtual string MobileNetworkCode { get; set; }
-        
+
         /// <summary>
         /// The number of milliseconds since this cell was primary. If age is 0, the cellId represents a current measurement.
         /// </summary>
         [DataMember(Name = "age")]
         public virtual int? Age { get; set; }
-        
+
         /// <summary>
         /// Radio signal strength measured in dBm.
         /// </summary>
         [DataMember(Name = "signalStrength")]
         public virtual int? SignalStrength { get; set; }
-        
+
         /// <summary>
         /// The timing advance value.
         /// </summary>

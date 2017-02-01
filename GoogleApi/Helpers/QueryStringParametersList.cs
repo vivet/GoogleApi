@@ -7,41 +7,28 @@ namespace GoogleApi.Helpers
     /// <summary>
     /// Helper class to build querystrings for Google Requests.
     /// </summary>
-	public sealed class QueryStringParametersList
-	{
-        /// <summary>
-        /// Dictionary containing all query string parameters for a request.
-        /// </summary>
-        public Dictionary<string, string> List { get; }
-
-        /// <summary>
-        /// Default Constructor.
-        /// </summary>
-		public QueryStringParametersList()
-		{
-            this.List = new Dictionary<string, string>();
-		}
-
+    public sealed class QueryStringParametersList : Dictionary<string, string>, IDictionary<string, string>
+    {
         /// <summary>
         /// Adds a parameter.
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-		public void Add(string key, string value)
+        public new void Add(string key, string value)
         {
-            if (key == null) 
+            if (key == null)
                 throw new ArgumentNullException(nameof(key));
-            
-            if (value == null) 
+
+            if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            if (this.List.ContainsKey(key))
+            if (base.ContainsKey(key))
             {
-                this.List[key] = value;
+                base[key] = value;
             }
             else
             {
-                this.List.Add(key, value);
+                base.Add(key, value);
             }
         }
 
@@ -49,21 +36,23 @@ namespace GoogleApi.Helpers
         /// Remove a parameter.
         /// </summary>
         /// <param name="key"></param>
-        public void Remove(string key)
+        public new bool Remove(string key)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
-            this.List.Remove(key);
+            base.Remove(key);
+
+            return true;
         }
 
         /// <summary>
         /// returns the query string collection as url paremer string.
         ///  </summary>
         /// <returns></returns>
-		public string GetQueryStringPostfix()
-		{
-			return string.Join("&", this.List.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
-		}
-	}
+        public string GetQueryStringPostfix()
+        {
+            return string.Join("&", this.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
+        }
+    }
 }

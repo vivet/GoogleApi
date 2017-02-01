@@ -5,6 +5,5 @@ namespace GoogleApi.Entities.Common.Interfaces
     /// </summary>
     public interface IJsonRequest
     {
-
     }
 }

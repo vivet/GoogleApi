@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
@@ -10,6 +10,7 @@ using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using NUnit.Framework;
+using System.Net.Http;
 
 namespace GoogleApi.Test
 {
@@ -39,7 +40,7 @@ namespace GoogleApi.Test
         {
             var request = new DirectionsRequest { Origin = "285 Bedford Ave, Brooklyn, NY, USA", Destination = "185 Broadway Ave, Manhattan, NY, USA" };
 
-            var result = GoogleMaps.Directions.QueryAsync(request).Result;
+            var result = GoogleMaps.Directions.QueryAsync(request, new TimeSpan(0, 0, 5)).Result;
             var overviewPath = result.Routes.First().OverviewPath;
             var polyline = result.Routes.First().Legs.First().Steps.First().PolyLine;
 
@@ -120,7 +121,7 @@ namespace GoogleApi.Test
         public void GeocodingWhenTimeoutTest()
         {
             var request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA" };
-            Assert.Throws<WebException>(() =>
+            Assert.Throws<TaskCanceledException> (() =>
             {
                 try
                 {
@@ -136,7 +137,7 @@ namespace GoogleApi.Test
         public void GeocodingWhenInvalidClientCredentialsTest()
         {
             var request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", Key = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
-            Assert.Throws<WebException>(() =>
+            Assert.Throws<HttpRequestException> (() =>
             {
                 try
                 {
@@ -154,7 +155,7 @@ namespace GoogleApi.Test
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey,
+                Key = this.apiKey,
                 ConsiderIp = false,
                 WifiAccessPoints = new[]
                 {
@@ -182,7 +183,7 @@ namespace GoogleApi.Test
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey,
+                Key = this.apiKey,
                 ConsiderIp = false,
                 WifiAccessPoints = new[]
                 {
@@ -301,5 +302,39 @@ namespace GoogleApi.Test
             Assert.AreEqual(0.00, response.OffSet);
             Assert.AreEqual(-18000.00, response.RawOffSet);
         }
-	}
+
+        [Test]
+        public void SnapToRoadsTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void SnapToRoadsAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void NearestRoadsTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void NearestRoadsAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void SpeedLimitsTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
+        public void SpeedLimitsAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+
+    }
 }
