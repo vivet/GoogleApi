@@ -36,10 +36,7 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// Location expressed as Google compatible string.
         /// </summary>
-        public virtual string LocationString
-            =>
-                this.Latitude.ToString(CultureInfo.InvariantCulture) + "," +
-                this.Longitude.ToString(CultureInfo.InvariantCulture);
+        public virtual string LocationString => this.Latitude.ToString(CultureInfo.InvariantCulture) + "," + this.Longitude.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         /// Overrdden ToString method for default conversion to Google compatible string.

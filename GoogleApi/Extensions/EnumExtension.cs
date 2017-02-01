@@ -23,9 +23,7 @@ namespace GoogleApi.Extensions
         {
             var enumType = typeof(T);
             var name = Enum.GetName(enumType, _enum);
-            var enumMemberAttribute =
-            ((EnumMemberAttribute[])
-                enumType.GetRuntimeField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetRuntimeField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
 
             return enumMemberAttribute.Value;
         }

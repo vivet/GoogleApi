@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
@@ -137,7 +136,7 @@ namespace GoogleApi.Test
         public void GeocodingWhenInvalidClientCredentialsTest()
         {
             var request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA", ClientId = "gme-ThisIsAUnitTest", Key = "AAECAwQFBgcICQoLDA0ODxAREhM=" };
-            Assert.Throws<HttpRequestException> (() =>
+            Assert.Throws<TaskCanceledException> (() =>
             {
                 try
                 {

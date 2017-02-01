@@ -58,9 +58,7 @@ namespace GoogleApi.Entities.Common
                 signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(urlSegmentToSign));
             }
 
-            return
-                new Uri(uri.Scheme + "://" + uri.Host + urlSegmentToSign + "&signature=" +
-                        SignableRequest.ToBase64UrlString(signature));
+            return new Uri(uri.Scheme + "://" + uri.Host + urlSegmentToSign + "&signature=" + SignableRequest.ToBase64UrlString(signature));
         }
 
         /// <summary>
@@ -84,7 +82,6 @@ namespace GoogleApi.Entities.Common
 
             return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_");
         }
-
         private static byte[] FromBase64UrlString(string base64UrlString)
         {
             if (base64UrlString == null)
