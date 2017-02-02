@@ -32,7 +32,7 @@ namespace GoogleApi.Entities.Common
         [DataMember(Name = "types")]
         protected virtual string[] TypesStr
         {
-            get { return this.Types == null ? new string[0] : this.Types.Select(x => x.ToEnumString()).ToArray(); }
+            get { return Types?.Select(x => x.ToEnumString()).ToArray() ?? new string[0]; }
             set { this.Types = value.Select(x => x.ToEnum<LocationType>()); }
         }
     }

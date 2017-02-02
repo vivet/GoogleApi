@@ -47,7 +47,7 @@ namespace GoogleApi.Entities.Places.Common
         {
             get
             {
-                return this.Types == null ? new string[0] : this.Types.Select(x => x.ToEnumString()).ToArray();
+                return Types?.Select(x => x.ToEnumString()).ToArray() ?? new string[0];
             }
             set
             {
