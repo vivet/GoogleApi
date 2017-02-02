@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6588C2CD-D597-4A70-B84B-6E1709D224AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoogleApi</RootNamespace>
+    <AssemblyName>GoogleApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\GoogleApi\bin\Debug\net45\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>618;1591</NoWarn>
+    <DocumentationFile>..\GoogleApi\bin\Debug\net45\GoogleApi.xml</DocumentationFile>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GoogleApi\Engine\FacadeEngine.cs" />
+    <Compile Include="..\GoogleApi\Engine\GenericEngine.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\AddressComponent.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\AddressLocation.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\BaseRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\BaseResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\Component.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\LocationType.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IJsonRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\ILocationString.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IQueryStringRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IResponseFor.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Location.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\SignableRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Common\Status.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Distance.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Duration.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\AvoidWay.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\TransitMode.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\TransitRoutingPreference.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\TravelMode.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\Units.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Fare.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Request\DirectionsRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Bounds.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\DirectionsResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Enums\VehicleType.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Leg.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Line.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\OverviewPolyline.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Route.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Step.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Stop.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\TransitAgency.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\TransitDetails.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Vehicle.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\DistanceMatrix\Response\DistanceMatrixResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\DistanceMatrix\Response\Element.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\DistanceMatrix\Response\Row.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Request\ElevationRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\ElevationResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\ElevationResult.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Request\GeocodingRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\GeocodeResult.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\GeocodingResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Geometry.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\ViewPort.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\CellTower.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\Enums\RadioType.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\GeolocationRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\WifiAccessPoint.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\Error.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\Errors.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\GeolocationResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Location.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\SnappedPoint.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\NearestRoads\Request\NearestRoadsRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\NearestRoads\Response\NearestRoadsResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SnapToRoads\Request\SnapToRoadsRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Request\Enums\Units.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Response\SpeedLimit.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Response\SpeedLimitsResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\TimeZone\Request\TimeZoneRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Maps\TimeZone\Response\TimeZoneResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Add\Request\PlacesAddRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Add\Response\PlacesAddResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\AutoComplete\Request\Enums\RestrictPlaceType.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\AutoComplete\Request\PlacesAutoCompleteRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\AutoComplete\Response\PlacesAutoCompleteResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\AlternativePlace.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\BasePlacesRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\BasePlacesResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\Enums\PlaceLocationType.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\Enums\PriceLevel.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\Enums\Scope.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\Geometry.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\MatchedSubstring.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\Photo.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\Prediction.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Common\Term.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Delete\Request\PlacesDeleteRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Delete\Response\PlacesDeleteResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Request\Enums\Extensions.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Request\PlacesDetailsRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\Aspect.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\AspectRating.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\DayTime.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\DetailsResult.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\OpeningHours.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\Period.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\PlacesDetailsResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\Review.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Photos\Request\PlacesPhotosRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Photos\Response\PlacesPhotosResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Request\PlacesQueryAutoCompleteRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Response\PlacesAutoCompleteResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BasePlacesSearchRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BasePlacesSearchResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BaseResult.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\Enums\SearchPlaceType.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\OpeningHours.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\NearBy\Request\Enums\Ranking.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\NearBy\Request\PlacesNearBySearchRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\NearBy\Response\NearByResult.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\NearBy\Response\PlacesNearbySearchResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Radar\Request\PlacesRadarSearchRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Radar\Response\PlacesRadarSearchResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Radar\Response\RadarResult.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Text\Request\PlacesTextSearchRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Text\Response\PlacesTextSearchResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Places\Search\Text\Response\TextResult.cs" />
+    <Compile Include="..\GoogleApi\Entities\Translate\Translate\Request\Enums\Format.cs" />
+    <Compile Include="..\GoogleApi\Entities\Translate\Translate\Request\TranslateRequest.cs" />
+    <Compile Include="..\GoogleApi\Entities\Translate\Translate\Response\Data.cs" />
+    <Compile Include="..\GoogleApi\Entities\Translate\Translate\Response\TranslateResponse.cs" />
+    <Compile Include="..\GoogleApi\Entities\Translate\Translate\Response\Translation.cs" />
+    <Compile Include="..\GoogleApi\Extensions\DateTimeExtension.cs" />
+    <Compile Include="..\GoogleApi\Extensions\EnumExtension.cs" />
+    <Compile Include="..\GoogleApi\Extensions\StreamExtension.cs" />
+    <Compile Include="..\GoogleApi\Extensions\StringExtension.cs" />
+    <Compile Include="..\GoogleApi\GoogleFunctions.cs" />
+    <Compile Include="..\GoogleApi\GoogleMaps.cs" />
+    <Compile Include="..\GoogleApi\GooglePlaces.cs" />
+    <Compile Include="..\GoogleApi\GoogleTranslate.cs" />
+    <Compile Include="..\GoogleApi\Helpers\QueryStringParametersList.cs" />
+    <Compile Include="..\GoogleApi\obj\Debug\netstandard1.3\GoogleApi.AssemblyInfo.cs" />
+    <Compile Include="..\GoogleApi\obj\Debug\netstandard1.3\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="..\GoogleApi\obj\Debug\netstandard1.3\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="..\GoogleApi\obj\Debug\netstandard1.3\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="..\GoogleApi\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="..\GoogleApi\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="..\GoogleApi\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>9.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi", "GoogleApi\Goog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.Test", "GoogleApi.Test\GoogleApi.Test.csproj", "{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.net45", "GoogleApi.net45\GoogleApi.net45.csproj", "{6588C2CD-D597-4A70-B84B-6E1709D224AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|x64.Build.0 = Debug|x64
 		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|x86.ActiveCfg = Debug|x86
 		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}.Debug|x86.Build.0 = Debug|x86
+		{6588C2CD-D597-4A70-B84B-6E1709D224AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6588C2CD-D597-4A70-B84B-6E1709D224AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6588C2CD-D597-4A70-B84B-6E1709D224AC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6588C2CD-D597-4A70-B84B-6E1709D224AC}.Debug|x64.Build.0 = Debug|Any CPU
+		{6588C2CD-D597-4A70-B84B-6E1709D224AC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6588C2CD-D597-4A70-B84B-6E1709D224AC}.Debug|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
