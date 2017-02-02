@@ -31,67 +31,48 @@ namespace GoogleApi.Engine
 
             var uri = request.GetUri();
             var httpClient = new HttpClient {Timeout = timeout};
-
-            Task<HttpResponseMessage> task = null;
-            if (request is IJsonRequest)
-            {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var jsonString = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-
-                task = httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
-            }
-            else if (request is IQueryStringRequest)
-            {
-                task = httpClient.GetAsync(uri, cancellationToken);
-            }
-
-            if (task == null)
-                throw new InvalidOperationException("Invalid Request. Request class missing Request interface implementation.");
-
+            var jsonString = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
-            task.ContinueWith( x => GenericEngine<TRequest, TResponse>.ReadResponseAsync(x, taskCompletionSource), TaskContinuationOptions.ExecuteSynchronously);
+
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var task = request is IQueryStringRequest
+                    ? httpClient.GetAsync(uri, cancellationToken)
+                    : httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
+
+            task.ContinueWith(x =>
+            {
+                if (x.IsCanceled)
+                {
+                    taskCompletionSource.SetCanceled();
+                }
+                else if (x.IsFaulted)
+                {
+                    var exception = x.Exception == null ? new NullReferenceException("task.Exception") : task.Exception?.InnerException ?? task.Exception ?? new Exception("error");
+                    taskCompletionSource.SetException(exception);
+                }
+                else
+                {
+                    try
+                    {
+                        x.Result.EnsureSuccessStatusCode();
+
+                        var result = x.Result;
+                        var content = result.Content;
+                        var data = content.ReadAsByteArrayAsync().Result;
+                        var stream = new MemoryStream(data, false);
+                        var response = typeof(TResponse) == typeof(PlacesPhotosResponse) ? (TResponse)(IResponseFor)new PlacesPhotosResponse { Photo = stream } : stream.JsonDeserialize<TResponse>();
+
+                        taskCompletionSource.SetResult(response);
+                    }
+                    catch (Exception ex)
+                    {
+                        taskCompletionSource.SetException(ex);
+                    }
+                }
+            }, TaskContinuationOptions.ExecuteSynchronously);
 
             return taskCompletionSource.Task;
-        }
-        internal static TaskCompletionSource<TResponse> ReadResponseAsync(Task<HttpResponseMessage> task, TaskCompletionSource<TResponse> taskCompletionSource)
-        {
-            if (task == null)
-                throw new ArgumentNullException(nameof(task));
-
-            if (taskCompletionSource == null)
-                throw new ArgumentNullException(nameof(taskCompletionSource));
-
-            if (task.IsCanceled)
-            {
-                taskCompletionSource.SetCanceled();
-            }
-            else if (task.IsFaulted)
-            {
-                var exception = task.Exception == null ? new NullReferenceException("task.Exception") : task.Exception.InnerException ?? task.Exception;
-                taskCompletionSource.SetException(exception);
-            }
-            else
-            {
-                try
-                {
-                    task.Result.EnsureSuccessStatusCode();
-
-                    var result = task.Result;
-                    var content = result.Content;
-                    var data = content.ReadAsByteArrayAsync().Result;
-                    var stream = new MemoryStream(data, false);
-                    var response = typeof(TResponse) == typeof(PlacesPhotosResponse) ? (TResponse)(IResponseFor)new PlacesPhotosResponse { Photo = stream } : stream.JsonDeserialize<TResponse>();
-
-                    taskCompletionSource.SetResult(response);
-                }
-                catch (Exception ex)
-                {
-                    taskCompletionSource.SetException(ex);
-                }
-            }
-
-            return taskCompletionSource;
         }
     }
 }
