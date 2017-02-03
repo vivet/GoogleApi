@@ -33,20 +33,6 @@ namespace GoogleApi.Helpers
         }
 
         /// <summary>
-        /// Remove a parameter.
-        /// </summary>
-        /// <param name="key"></param>
-        public new bool Remove(string key)
-        {
-            if (key == null)
-                throw new ArgumentNullException(nameof(key));
-
-            base.Remove(key);
-
-            return true;
-        }
-
-        /// <summary>
         /// returns the query string collection as url paremer string.
         ///  </summary>
         /// <returns></returns>
