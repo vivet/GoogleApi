@@ -3,6 +3,7 @@ GoogleApi v2.4.1 (net4.5, netstandard1.3)
 
 C# .NET Google Web Services Api. (https://www.nuget.org/packages/GoogleApi/)
 
+Upcoming: Google Search Api.
 
 
 Google Maps
