@@ -7,8 +7,8 @@
     "NUnit": "3.6.0",
     "NUnit3TestAdapter": "3.7.0",
     "System.Diagnostics.DiagnosticSource": "4.0.0",
-    "System.Security.Cryptography.Primitives": "4.0.0",
-    "System.Runtime.Serialization.Primitives": "4.1.1"
+    "System.Runtime.Serialization.Primitives": "4.1.1",
+    "System.Security.Cryptography.Primitives": "4.0.0"
   },
   "frameworks": {
     "net460": {}

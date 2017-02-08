@@ -53,6 +53,7 @@
     <Compile Include="GoogleFunctionsTest.cs" />
     <Compile Include="GoogleMapsTest.cs" />
     <Compile Include="GooglePlacesTest.cs" />
+    <Compile Include="GoogleSearchTest.cs" />
     <Compile Include="GoogleTranslateTest.cs" />
     <Compile Include="Helpers\QueryStringParametersList.cs" />
   </ItemGroup>
@@ -64,6 +65,9 @@
       <Project>{bf3aa421-d754-4762-ad20-a99123455e99}</Project>
       <Name>GoogleApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

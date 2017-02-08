@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,7 +68,9 @@
       <Version>8.0.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="icon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\GoogleApi\Engine\FacadeEngine.cs">
       <Link>Engine\FacadeEngine.cs</Link>
@@ -87,6 +92,12 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\Extensions\LanguageExtension.cs">
+      <Link>Entities\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\Language.cs">
+      <Link>Entities\Common\Enums\Language.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\LocationType.cs">
       <Link>Entities\Common\Enums\LocationType.cs</Link>
