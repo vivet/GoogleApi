@@ -30,7 +30,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// Units=imperial returns distances in miles and feet.
         /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
         /// </summary>
-        public Units Units { get; set; }
+        public virtual Units Units { get; set; }
 
         /// <summary>
         /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
@@ -38,19 +38,19 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// highways indicates that the calculated route should avoid highways.
         /// (For more information see Route Restrictions below.)
         /// </summary>
-        public AvoidWay Avoid { get; set; }
+        public virtual AvoidWay Avoid { get; set; }
 
         /// <summary>
         /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
         /// </summary>
-        public TravelMode TravelMode { get; set; }
+        public virtual TravelMode TravelMode { get; set; }
 
         /// <summary>
         /// Specifies one or more preferred modes of transit. 
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments <see cref="Common.Enums.TransitMode"/>
         /// </summary>
-        public TransitMode TransitMode { get; set; }
+        public virtual TransitMode TransitMode { get; set; }
 
         /// <summary>
         /// Specifies preferences for transit requests. 
@@ -58,7 +58,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments: <see cref="Common.Enums.TransitRoutingPreference"/>
         /// </summary>
-        public TransitRoutingPreference TransitRoutingPreference { get; set; }
+        public virtual TransitRoutingPreference TransitRoutingPreference { get; set; }
 
         /// <summary>
         /// The time of departure.
@@ -166,8 +166,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
                 parameters.Add("language", this.Language);
 
             if (this.Waypoints != null && this.Waypoints.Any())
-                parameters.Add("waypoints",
-                    string.Join("|", this.OptimizeWaypoints ? new[] {"optimize:true"}.Concat(Waypoints) : this.Waypoints));
+                parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] {"optimize:true"}.Concat(Waypoints) : this.Waypoints));
 
             if (this.TravelMode == TravelMode.Transit)
             {

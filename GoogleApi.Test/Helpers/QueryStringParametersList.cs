@@ -46,24 +46,6 @@ namespace GoogleApi.Test.Helpers
         }
 
         [Test]
-        public void RemoveTest()
-        {
-            const string KEY = "key";
-            const string VALUE = "value";
-
-            var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE } };
-            queryStringParametersList.Remove(KEY);
-
-            Assert.AreEqual(0, queryStringParametersList.Count);
-        }
-        [Test]
-        public void RemoveWhenKeyIsNullTest()
-        {
-            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Remove(null));
-            Assert.AreEqual("key", exception.ParamName);
-        }
-
-        [Test]
         public void GetQueryStringPostfixTest()
 		{
 		    var queryStringParametersList = new QueryStringParametersList

@@ -52,18 +52,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         }
 
         /// <summary>
-        /// Returns the Uri.
-        /// </summary>
-        /// <returns>Uri</returns>
-        public override Uri GetUri()
-        {
-            var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
-
-            return new Uri(scheme + this.BaseUrl + "?" + queryString);
-        }
-
-        /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
         protected internal override string BaseUrl => TranslateRequest.BASE_URL;
