@@ -46,7 +46,7 @@ namespace GoogleApi.Test.Helpers
         }
 
         [Test]
-        public void GetQueryStringPostfixTest()
+        public void ToStringTest()
 		{
 		    var queryStringParametersList = new QueryStringParametersList
 		    {
@@ -55,7 +55,7 @@ namespace GoogleApi.Test.Helpers
                 { "3", "3" }
 		    };
 
-		    var actual = queryStringParametersList.GetQueryStringPostfix();
+		    var actual = queryStringParametersList.ToString();
             var expected = string.Join("&", queryStringParametersList.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
 
             Assert.IsNotNull(actual);

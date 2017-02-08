@@ -34,9 +34,9 @@ namespace GoogleApi.Helpers
 
         /// <summary>
         /// returns the query string collection as url paremer string.
-        ///  </summary>
+        /// </summary>
         /// <returns></returns>
-        public string GetQueryStringPostfix()
+        public override string ToString()
         {
             return string.Join("&", this.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
         }

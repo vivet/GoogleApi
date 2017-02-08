@@ -51,7 +51,7 @@ namespace GoogleApi.Entities.Common
         public virtual Uri GetUri()
         {
             var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
+            var queryString = this.GetQueryStringParameters().ToString();
 
             return new Uri(scheme + this.BaseUrl + "?" + queryString);
         }

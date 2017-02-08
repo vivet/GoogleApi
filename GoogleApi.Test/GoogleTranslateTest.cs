@@ -32,6 +32,7 @@ namespace GoogleApi.Test
             Assert.AreEqual("Hallo Welt", result.Data.Translations.First().TranslatedText);
             Assert.AreEqual("en", result.Data.Translations.First().DetectedSourceLanguage);
         }
+
         [Test]
         public void TranslateWhenApiKeyIsNullTest()
         {

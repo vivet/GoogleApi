@@ -17,7 +17,7 @@ namespace GoogleApi.Extensions
         /// </summary>
         public static int DateTimeToUnixTimestamp(this DateTime dateTime)
         {
-            return (int) (dateTime - epoch).TotalSeconds;
+            return (int)(dateTime - epoch).TotalSeconds;
         }
     }
 }
