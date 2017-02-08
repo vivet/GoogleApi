@@ -16,7 +16,7 @@ namespace GoogleApi.Test.Extensions
         [Test]
         public void JsonDeserializeWhenStreamIsNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => ((MemoryStream)(null)).JsonDeserialize<object>());
+            Assert.Throws<ArgumentNullException>(() => ((MemoryStream)null).JsonDeserialize<object>());
         }
     }
 }

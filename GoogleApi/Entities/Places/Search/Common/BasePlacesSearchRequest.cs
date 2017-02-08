@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
@@ -29,14 +26,6 @@ namespace GoogleApi.Entities.Places.Search.Common
         public virtual double? Radius { get; set; }
 
         /// <summary>
-        /// DEPRECATED.
-        /// zagatselected — Add this parameter (just the parameter name, with no associated value) to restrict your search to locations that are Zagat selected businesses. 
-        /// This parameter must not include a true or false value. The zagatselected parameter is experimental, and is only available to Google Places API for Work customers.
-        /// </summary>
-        [Obsolete("May 2, 2017")]
-        public virtual bool Zagatselected { get; set; }
-
-        /// <summary>
         /// opennow — Returns only those places that are open for business at the time the query is sent. 
         /// Places that do not specify opening hours in the Google Places database will not be returned if you include this parameter in your query.
         /// </summary>
@@ -47,15 +36,6 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// Only one type may be specified (if more than one type is provided, all types following the first entry are ignored). 
         /// </summary>
         public virtual SearchPlaceType? Type { get; set; }
-
-        /// <summary>
-        /// DEPRECATED.
-        /// types — Restricts the results to places matching at least one of the specified types. 
-        /// Types should be separated with a pipe symbol (type1|type2|etc). See the list of supported types.
-        /// https://developers.google.com/places/supported_types
-        /// </summary>
-        [Obsolete("February 16, 2017")]
-        public virtual IEnumerable<SearchPlaceType> Types { get; set; }
 
         /// <summary>
         /// minprice and maxprice (optional) — Restricts results to only those places within the specified range. 
@@ -94,9 +74,6 @@ namespace GoogleApi.Entities.Places.Search.Common
             if (this.Radius.HasValue)
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (this.Types != null && this.Types.Any())
-                parameters.Add("types", string.Join("|", this.Types.Select(x => x.ToString().ToLower())));
-
             if (!string.IsNullOrEmpty(Language))
                 parameters.Add("language", Language);
 
@@ -114,9 +91,6 @@ namespace GoogleApi.Entities.Places.Search.Common
 
             if (this.OpenNow)
                 parameters.Add("opennow", "");
-
-            if (this.Zagatselected)
-                parameters.Add("zagatselected", "");
 
             return parameters;
         }
