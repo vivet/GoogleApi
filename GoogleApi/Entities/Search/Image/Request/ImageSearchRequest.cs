@@ -1,5 +1,5 @@
 using GoogleApi.Entities.Search.Common.Enums;
-using GoogleApi.Entities.Search.Common.Request;
+using GoogleApi.Entities.Search.Web.Request;
 using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Search.Image.Request
@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Search.Image.Request
     /// <summary>
         /// Image Search Request.
         /// </summary>
-    public class ImageSearchRequest : BaseSearchRequest
+    public class ImageSearchRequest : WebSearchRequest
     {
         /// <summary>
         /// Type - Returns images of a type. 
@@ -27,12 +27,15 @@ namespace GoogleApi.Entities.Search.Image.Request
         /// <summary>
         /// DominantColor - Returns images of a specific dominant color. 
         /// </summary>
-        public virtual DominantColorType? ImageDominantColor { get; set; }      
+        public virtual DominantColorType? ImageDominantColor { get; set; }
 
         /// <summary>
-        /// Overridden search type property, defaulting to Image. 
+        /// Default Constructor.
         /// </summary>
-        public override SearchType SearchType { get; set; } = Common.Enums.SearchType.Image;
+        public ImageSearchRequest()
+        {
+            this.ApiSpecific.SearchType = SearchType.Image;
+        }
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.
@@ -41,7 +44,7 @@ namespace GoogleApi.Entities.Search.Image.Request
         protected override QueryStringParametersList GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
-            
+
             if (this.ImageType != null)
                 parameters.Add("imgType", this.ImageType.ToString().ToLower());
 

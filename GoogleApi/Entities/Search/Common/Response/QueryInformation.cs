@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums;
+using GoogleApi.Entities.Search.Common.Request;
 using GoogleApi.Entities.Search.Common.Response.Enums;
 
 namespace GoogleApi.Entities.Search.Common.Response
@@ -9,7 +11,7 @@ namespace GoogleApi.Entities.Search.Common.Response
     /// <summary>
     /// Query Information.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "request")]
     public class QueryInformation
     {
         /// <summary>
@@ -61,28 +63,6 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual long TotalResults { get; set; }
 
         /// <summary>
-        /// The character encoding supported for search requests.
-        /// </summary>
-        [DataMember(Name = "inputEncoding")]
-        public virtual EncodingType InputEncoding { get; set; }
-
-        /// <summary>
-        /// The character encoding supported for search results.
-        /// </summary>
-        [DataMember(Name = "outputEncoding")]
-        public virtual EncodingType OutputEncoding { get; set; }
-
-        /// <summary>
-        /// Language - Sets the user interface language. 
-        /// Explicitly setting this parameter improves the performance and the quality of your search results.
-        /// See the Interface Languages section of Internationalizing Queries and Results Presentation for more information, 
-        /// and Supported Interface Languages for a list of supported languages.
-        /// https://developers.google.com/custom-search/docs/xml_results#interfaceLanguages
-        /// </summary>
-        [DataMember(Name = "hl")]
-        public virtual Language InterfaceLanguage { get; set; } = Language.English;
-
-        /// <summary>
         /// Geolocation of end user.
         /// The geolocation parameter value is a two-letter country code.The gl parameter boosts search results whose country of origin matches the parameter value.
         /// See the Country Codes page for a list of valid values. https://developers.google.com/custom-search/docs/xml_results#countryCodes
@@ -102,23 +82,6 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// </summary>
         [DataMember(Name = "cr")]
         public virtual Country? CountryRestriction { get; set; }
-
-        /// <summary>
-        /// Filter - Controls turning on or off the duplicate content filter.
-        /// See Automatic Filtering for more information about Google's search results filters. 
-        /// Note that host crowding filtering applies only to multi-site searches.
-        /// By default, Google applies filtering to all search results to improve the quality of those results.
-        /// https://developers.google.com/custom-search/docs/xml_results#automaticFiltering.
-        /// </summary>
-        [DataMember(Name = "filter")]
-        public virtual bool Filter { get; set; } = true;
-
-        /// <summary>
-        /// Enables or disables the Simplified and Traditional Chinese Search feature.
-        /// The default value for this parameter is true, meaning that the feature is enabled.
-        /// </summary>
-        [DataMember(Name = "disableCnTwTranslation")]
-        public virtual bool DisableCnTwTranslation { get; set; } = true;
 
         /// <summary>
         /// Googlehost - The local Google domain (for example, google.com, google.de, or google.fr) to use to perform the search.
@@ -179,12 +142,6 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual string RelatedSite { get; set; }
 
         /// <summary>
-        /// Sort - The sort expression to apply to the results.
-        /// </summary>
-        [DataMember(Name = "sort")]
-        public virtual SortOrder Sort { get; set; } = SortOrder.Asc;
-
-        /// <summary>
         /// Start - The index of the first result to return.
         /// </summary>
         [DataMember(Name = "startIndex")]
@@ -213,18 +170,6 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// </summary>
         [DataMember(Name = "fileType")]
         public virtual IEnumerable<FileType> FileTypes { get; set; }
-
-        /// <summary>
-        /// DateRestrict - Restricts results to URLs based on date.
-        /// </summary>
-        [DataMember(Name = "dateRestrict")]
-        public virtual DateRestrictType? DateRestrictType { get; set; }
-
-        /// <summary>
-        /// DateRestrictNumber - Requests results from the specified number of past days, weeks, months or years.
-        /// </summary>
-        [DataMember(Name = "dateRestrict")]
-        public virtual int? DateRestrictNumber { get; set; }
 
         /// <summary>
         /// Allowed values are web or image. If unspecified, results are limited to webpages.
@@ -269,5 +214,91 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// </summary>
         [DataMember(Name = "imgDominantColor")]
         public virtual DominantColorType? ImageDominantColor { get; set; }
+
+        [DataMember(Name = "inputEncoding")]
+        protected virtual string InputEncodingStr { get; set; }
+
+        /// <summary>
+        /// The character encoding supported for search request.
+        /// </summary>
+        public virtual EncodingType InputEncoding => (EncodingType)Enum.Parse(typeof(EncodingType), this.InputEncodingStr);
+
+        [DataMember(Name = "outputEncoding")]
+        protected virtual string OutputEncodingStr { get; set; }
+
+        /// <summary>
+        /// The character encoding supported for search results.
+        /// </summary>
+        public virtual EncodingType OutputEncoding => (EncodingType)Enum.Parse(typeof(EncodingType), this.OutputEncodingStr);
+
+        [DataMember(Name = "hl")]
+        protected virtual string InterfaceLanguageStr { get; set; }
+
+        /// <summary>
+        /// Language - Sets the user interface language. 
+        /// Explicitly setting this parameter improves the performance and the quality of your search results.
+        /// See the Interface Languages section of Internationalizing Queries and Results Presentation for more information, 
+        /// and Supported Interface Languages for a list of supported languages.
+        /// https://developers.google.com/custom-search/docs/xml_results#interfaceLanguages
+        /// </summary>
+        public virtual Language InterfaceLanguage => (Language)Enum.Parse(typeof(Language), this.InterfaceLanguageStr);
+
+        [DataMember(Name = "filter")]
+        protected virtual string FilterStr { get; set; }
+        
+        /// <summary>
+        /// Filter - Controls turning on or off the duplicate content filter.
+        /// See Automatic Filtering for more information about Google's search results filters. 
+        /// Note that host crowding filtering applies only to multi-site searches.
+        /// By default, Google applies filtering to all search results to improve the quality of those results.
+        /// https://developers.google.com/custom-search/docs/xml_results#automaticFiltering.
+        /// </summary>
+        public virtual bool Filter => bool.Parse(this.FilterStr);
+
+        [DataMember(Name = "disableCnTwTranslation")]
+        protected virtual string DisableCnTwTranslationStr { get; set; }
+
+        /// <summary>
+        /// Enables or disables the Simplified and Traditional Chinese Search feature.
+        /// The default value for this parameter is true, meaning that the feature is enabled.
+        /// </summary>
+        public virtual bool DisableCnTwTranslation => bool.Parse(this.DisableCnTwTranslationStr);
+
+        [DataMember(Name = "sort")]
+        protected virtual string SortStr { get; set; }
+
+        /// <summary>
+        /// Sort - The sort expression to apply to the results.
+        /// </summary>
+        public virtual SortExpression SortExpression => new SortExpression().FromString(this.SortStr);
+
+        [DataMember(Name = "dateRestrict")]
+        protected virtual string DateRestrictStr { get; set; }
+
+        /// <summary>
+        /// DateRestrict - Restricts results to URLs based on date.
+        /// </summary>
+        public virtual DateRestrictType? DateRestrictType
+        {
+            get
+            {
+                var indexOf = this.DateRestrictStr.IndexOf('[');
+                return indexOf == -1 ? (DateRestrictType?)null : (DateRestrictType)Enum.Parse(typeof(DateRestrictType), this.DateRestrictStr.Substring(0, indexOf - 1));
+            }
+        }
+
+        /// <summary>
+        /// DateRestrictNumber - Requests results from the specified number of past days, weeks, months or years.
+        /// </summary>
+        public virtual int? DateRestrictNumber
+        {
+            get
+            {
+                var startIndex = this.DateRestrictStr.IndexOf('[');
+                var endIndex = this.DateRestrictStr.IndexOf(']');
+
+                return startIndex == -1 || endIndex == -1 ? (int?)null : int.Parse(this.DateRestrictStr.Substring(startIndex, endIndex - startIndex));
+            }
+        }
     }
 }

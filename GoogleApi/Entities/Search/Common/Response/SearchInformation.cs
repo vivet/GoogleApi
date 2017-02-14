@@ -12,7 +12,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// The time taken for the server to return search results.
         /// </summary>
         [DataMember(Name = "searchTime")]
-        public virtual string SearchTime { get; set; }
+        public virtual double SearchTime { get; set; }
 
         /// <summary>
         /// The time taken for the server to return search results, formatted according to locale style.
@@ -24,7 +24,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// The total number of search results returned by the query.
         /// </summary>
         [DataMember(Name = "totalResults")]
-        public virtual string TotalResults { get; set; }
+        public virtual long TotalResults { get; set; }
 
         /// <summary>
         /// The total number of search results, formatted according to locale style.
