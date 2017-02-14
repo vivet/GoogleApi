@@ -1,5 +1,4 @@
-﻿using System;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Common
 {
@@ -9,15 +8,6 @@ namespace GoogleApi.Entities.Maps.Common
     public abstract class BaseMapsRequest : SignableRequest
     {
         private const string BASE_URL = "maps.google.com/maps/api/";
-
-        /// <summary>
-        /// Always true. Setter is not supported.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get { return true; }
-            set { throw new NotSupportedException("This operation is not supported, Request must use SSL"); }
-        }
 
         /// <summary>
         /// BaseUrl property overriden.

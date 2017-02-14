@@ -20,6 +20,15 @@ namespace GoogleApi.Entities.Common
         public string ClientId { get; set; }
 
         /// <summary>
+        /// Always true. Setter is not supported.
+        /// </summary>
+        public override bool IsSsl
+        {
+            get { return true; }
+            set { throw new NotSupportedException("This operation is not supported, Request must use SSL"); }
+        }
+
+        /// <summary>
         /// Gets Uri of Signed Request with signature paramter.
         /// </summary>
         /// <returns></returns>

@@ -12,15 +12,6 @@ namespace GoogleApi.Entities.Places.Common
         private const string BASE_URL = "maps.googleapis.com/maps/api/place/";
 
         /// <summary>
-        /// True to use use the https protocol; false to use http. The default is false.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get { return true; }
-            set { throw new NotSupportedException("This operation is not supported, PlacesRequest must use SSL"); }
-        }
-
-        /// <summary>
         /// BaseUrl property overriden.
         /// </summary>
         protected internal override string BaseUrl => BasePlacesRequest.BASE_URL;
