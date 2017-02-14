@@ -8,31 +8,30 @@ using NUnit.Framework;
 namespace GoogleApi.Test
 {
     // TODO: Implement: New Forward Geocoder FAQ (https://developers.google.com/maps/documentation/geocoding/faq)
-    // TODO: Implement: Search Request Fields (https://developers.google.com/custom-search/json-api/v1/performance)
 
     [TestFixture]
     public abstract class BaseTest
     {
-        public string apiKey; // your API key...
+        // BUG: Create config file for ApiKey and also Search engine id / url.
+        protected virtual string ApiKey { get; set; }
+        protected virtual string KeyFile { get; set; } = "keyfile.txt";
 
         [OneTimeSetUp]
-        public void Setup()
+        public virtual void Setup()
         {
             try
             {
-                const string FILENAME = "keyfile.txt";
-
                 var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
-                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == FILENAME);
+                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == this.KeyFile);
 
-                using (var streamReader = new StreamReader(fileInfo?.FullName ?? FILENAME))
+                using (var streamReader = new StreamReader(fileInfo?.FullName ?? this.KeyFile))
                 {
-                    this.apiKey = streamReader.ReadToEnd();
+                    this.ApiKey = streamReader.ReadToEnd();
                 }
             }
             catch
             {
-                this.apiKey = string.Empty;
+                this.ApiKey = string.Empty;
             }
         }
 

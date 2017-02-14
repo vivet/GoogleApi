@@ -155,7 +155,7 @@ namespace GoogleApi.Test
         {
             var request = new GeolocationRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 ConsiderIp = false,
                 WifiAccessPoints = new[]
                 {
@@ -183,7 +183,7 @@ namespace GoogleApi.Test
         {
             var request = new GeolocationRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 ConsiderIp = false,
                 WifiAccessPoints = new[]
                 {

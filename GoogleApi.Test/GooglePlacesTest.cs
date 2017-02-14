@@ -25,7 +25,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -46,7 +46,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -89,7 +89,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = null
             };
 
@@ -101,7 +101,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = string.Empty
             };
 
@@ -113,7 +113,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "abc",
                 Radius = 0
             };
@@ -126,7 +126,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "abc",
                 Radius = 50001
             };
@@ -140,7 +140,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -160,7 +160,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -202,7 +202,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = null
             };
 
@@ -214,7 +214,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = string.Empty
             };
 
@@ -226,7 +226,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "abc",
                 Radius = 0
             };
@@ -239,7 +239,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Input = "abc",
                 Radius = 50001
             };
@@ -253,7 +253,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = "Home",
                 Types = new[] { PlaceLocationType.StreetAddress },
                 Location = new Location(55.664425, 12.502264),
@@ -275,7 +275,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = "Home",
                 Types = new[] { PlaceLocationType.StreetAddress },
                 Location = new Location(55.664425, 12.502264),
@@ -319,7 +319,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = null
             };
 
@@ -331,7 +331,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = string.Empty
             };
 
@@ -343,7 +343,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = "Home",
                 Location = null
             };
@@ -356,7 +356,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = "Home",
                 Location = new Location(55.664425, 12.502264),
                 Types = null
@@ -370,7 +370,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = "Home",
                 Location = new Location(55.664425, 12.502264),
                 Types = new PlaceLocationType[0]
@@ -385,7 +385,7 @@ namespace GoogleApi.Test
         {
             var response = GooglePlaces.Add.Query(new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = "Home",
                 Types = new[] { PlaceLocationType.StreetAddress },
                 Location = new Location(55.664425, 12.502264)
@@ -396,7 +396,7 @@ namespace GoogleApi.Test
 
             var response2 = GooglePlaces.Delete.Query(new PlacesDeleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PlaceId = response.PlaceId
             });
 
@@ -408,7 +408,7 @@ namespace GoogleApi.Test
         {
             var response = GooglePlaces.Add.Query(new PlacesAddRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Name = "Home",
                 Types = new[] { PlaceLocationType.StreetAddress },
                 Location = new Location(55.664425, 12.502264)
@@ -419,7 +419,7 @@ namespace GoogleApi.Test
 
             var response2 = GooglePlaces.Delete.QueryAsync(new PlacesDeleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PlaceId = response.PlaceId
             }).Result;
 
@@ -453,7 +453,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesDeleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PlaceId = null
             };
 
@@ -465,7 +465,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesDeleteRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PlaceId = string.Empty
             };
 
@@ -478,7 +478,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -490,7 +490,7 @@ namespace GoogleApi.Test
             
             var request2 = new PlacesDetailsRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PlaceId = result.PlaceId,
                 Sensor = true,
             };
@@ -503,7 +503,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 Input = "jagtvej 2200",
                 Sensor = true,
                 Language = "en",
@@ -515,7 +515,7 @@ namespace GoogleApi.Test
 
             var request2 = new PlacesDetailsRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PlaceId = result.PlaceId,
                 Sensor = true,
             };
@@ -550,7 +550,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesDetailsRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PlaceId = null
             };
 
@@ -562,7 +562,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesDetailsRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PlaceId = string.Empty
             };
 
@@ -575,7 +575,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Sensor = true,
                 Language = "en",
@@ -593,7 +593,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Sensor = true,
                 Language = "en",
@@ -633,7 +633,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = null
             };
 
@@ -645,7 +645,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = null
             };
@@ -658,7 +658,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = 0
             };
@@ -671,7 +671,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = 50001
             };
@@ -684,7 +684,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = 50001,
                 Rankby = Ranking.Distance
@@ -698,7 +698,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Rankby = Ranking.Distance
             };
@@ -712,7 +712,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Sensor = true,
                 Language = "en",
                 Query = "picadelly circus"
@@ -728,7 +728,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Sensor = true,
                 Language = "en",
                 Query = "picadelly circus"
@@ -766,7 +766,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Query = null
             };
 
@@ -778,7 +778,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Query = string.Empty
             };
 
@@ -791,7 +791,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesRadarSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(55.673323, 12.527438),
                 Radius = 500,
                 Sensor = true,
@@ -809,7 +809,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesRadarSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(55.673323, 12.527438),
                 Radius = 500,
                 Sensor = true,
@@ -849,7 +849,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesRadarSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = null
             };
 
@@ -861,7 +861,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesRadarSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(55.673323, 12.527438),
                 Radius = null
             };
@@ -874,7 +874,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesRadarSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = 0
             };
@@ -887,7 +887,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesRadarSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = 50001
             };
@@ -900,7 +900,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesRadarSearchRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Radius = 1
             };
@@ -914,19 +914,19 @@ namespace GoogleApi.Test
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 Input = "det kongelige teater",
             });
 
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
             });
 
             var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PhotoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault(),
                 MaxWidth = 1600
             });
@@ -940,19 +940,19 @@ namespace GoogleApi.Test
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 Input = "det kongelige teater",
             });
 
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
             });
 
             var response3 = GooglePlaces.Photos.QueryAsync(new PlacesPhotosRequest
             {
-                Key = apiKey,
+                Key = ApiKey,
                 PhotoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault(),
                 MaxWidth = 1600
             }).Result;
@@ -988,7 +988,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PhotoReference = null
             };
 
@@ -1000,7 +1000,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PhotoReference = string.Empty
             };
 
@@ -1012,7 +1012,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PhotoReference = "abc"
             };
 
@@ -1024,7 +1024,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PhotoReference = "abc",
                 MaxHeight = 0
             };
@@ -1037,7 +1037,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PhotoReference = "abc",
                 MaxHeight = 1601
             };
@@ -1050,7 +1050,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PhotoReference = "abc",
                 MaxWidth = 0
             };
@@ -1063,7 +1063,7 @@ namespace GoogleApi.Test
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 PhotoReference = "abc",
                 MaxWidth = 1601
             };
