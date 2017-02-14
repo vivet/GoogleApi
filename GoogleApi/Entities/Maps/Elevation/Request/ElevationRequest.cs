@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Elevation.Request
 {
@@ -43,7 +42,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (this.Locations == null == (this.Path == null))
                 throw new ArgumentException("Either Locations or Path must be specified, and both cannot be specified.");

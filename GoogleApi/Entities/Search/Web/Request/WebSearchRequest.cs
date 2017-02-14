@@ -1,6 +1,5 @@
 ﻿using System;
 using GoogleApi.Entities.Search.Common.Request;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Search.Web.Request
 {
@@ -30,7 +29,7 @@ namespace GoogleApi.Entities.Search.Web.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
 {
@@ -65,9 +64,9 @@ namespace GoogleApi.Entities.Common
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected virtual QueryStringParametersList GetQueryStringParameters()
+        protected virtual QueryStringParameters GetQueryStringParameters()
         {
-            var parameters = new QueryStringParametersList();
+            var parameters = new QueryStringParameters();
 
             if (!string.IsNullOrWhiteSpace(this.Key))
                 parameters.Add("key", this.Key);

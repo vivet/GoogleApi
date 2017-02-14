@@ -17,7 +17,7 @@ namespace GoogleApi.Test.Extensions
         public void ToEnumStringWhenDelimieterTest()
         {
             var result = LocationType.PostalCode.ToEnumString(',');
-            Assert.AreEqual("postal_code,", result);
+            Assert.AreEqual("postal_code", result);
         }
     }
 }

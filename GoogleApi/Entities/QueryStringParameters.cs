@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GoogleApi.Helpers
+namespace GoogleApi.Entities
 {
     /// <summary>
     /// Helper class to build querystrings for Google Requests.
     /// </summary>
-    public sealed class QueryStringParametersList : Dictionary<string, string>, IDictionary<string, string>
+    public sealed class QueryStringParameters : Dictionary<string, string>, IDictionary<string, string>
     {
         /// <summary>
         /// Adds a parameter.

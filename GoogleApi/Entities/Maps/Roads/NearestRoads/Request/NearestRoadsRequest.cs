@@ -4,7 +4,6 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
 {
@@ -29,7 +28,7 @@ namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (this.Points == null || !this.Points.Any())
                 throw new ArgumentException("Points is required");

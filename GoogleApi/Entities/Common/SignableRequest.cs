@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
 {
@@ -74,12 +73,12 @@ namespace GoogleApi.Entities.Common
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (string.IsNullOrEmpty(this.ClientId))
                 return base.GetQueryStringParameters();
 
-            var parameters = new QueryStringParametersList {{"sensor", Sensor.ToString().ToLower()}};
+            var parameters = new QueryStringParameters {{"sensor", Sensor.ToString().ToLower()}};
 
             return parameters;
         }

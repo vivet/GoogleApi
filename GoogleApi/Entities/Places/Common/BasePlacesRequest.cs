@@ -1,6 +1,5 @@
 ﻿using System;
 using GoogleApi.Entities.Common;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -20,14 +19,12 @@ namespace GoogleApi.Entities.Places.Common
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("ApiKey must be provided");
-
-            parameters.Add("key", this.Key);
 
             return parameters;
         }

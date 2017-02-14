@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using GoogleApi.Engine;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
 using NUnit.Framework;

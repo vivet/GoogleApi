@@ -5,7 +5,6 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Geocode.Request
 {
@@ -57,7 +56,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
                 throw new ArgumentException("Location OR Address is required");

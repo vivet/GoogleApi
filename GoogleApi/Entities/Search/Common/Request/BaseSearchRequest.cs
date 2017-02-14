@@ -3,7 +3,6 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Search.Common.Request
 {
@@ -47,7 +46,7 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 

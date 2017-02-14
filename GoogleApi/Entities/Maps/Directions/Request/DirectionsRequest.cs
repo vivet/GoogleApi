@@ -5,7 +5,6 @@ using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Extensions;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
@@ -128,7 +127,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Origin))
                 throw new ArgumentException("Must specify an Origin");

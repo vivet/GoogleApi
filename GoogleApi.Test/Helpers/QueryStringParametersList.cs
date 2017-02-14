@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using GoogleApi.Helpers;
+using GoogleApi.Entities;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Helpers
@@ -14,7 +14,7 @@ namespace GoogleApi.Test.Helpers
             const string KEY = "key";
             const string VALUE = "value";
 
-            var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE } };
+            var queryStringParametersList = new QueryStringParameters { { KEY, VALUE } };
 
             Assert.IsTrue(queryStringParametersList.Keys.Contains(KEY));
             Assert.AreEqual(VALUE, queryStringParametersList[KEY]);
@@ -26,7 +26,7 @@ namespace GoogleApi.Test.Helpers
             const string VALUE = "value";
             const string VALUE_NEW = "value_new";
 
-            var queryStringParametersList = new QueryStringParametersList { { KEY, VALUE }, { KEY, VALUE_NEW } };
+            var queryStringParametersList = new QueryStringParameters { { KEY, VALUE }, { KEY, VALUE_NEW } };
 
             Assert.IsTrue(queryStringParametersList.Keys.Contains(KEY));
             Assert.AreEqual(VALUE_NEW, queryStringParametersList[KEY]);
@@ -35,20 +35,20 @@ namespace GoogleApi.Test.Helpers
         [Test]
         public void AddWhenKeyIsNullTest()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Add(null, "value"));
+            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParameters().Add(null, "value"));
             Assert.AreEqual("key", exception.ParamName);
         }
         [Test]
         public void AddWhenValueIsNullTest()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParametersList().Add("key", null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new QueryStringParameters().Add("key", null));
             Assert.AreEqual("value", exception.ParamName);
         }
 
         [Test]
         public void ToStringTest()
 		{
-		    var queryStringParametersList = new QueryStringParametersList
+		    var queryStringParametersList = new QueryStringParameters
 		    {
 		        { "1", "1" },
                 { "2", "2" },
