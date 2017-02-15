@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Photos.Response;
-using GoogleApi.Extensions;
 using Newtonsoft.Json;
 
 namespace GoogleApi
@@ -160,9 +159,25 @@ namespace GoogleApi
 
                         var result = x.Result;
                         var content = result.Content;
+                        var json = content.ReadAsStringAsync().Result;
                         var data = content.ReadAsByteArrayAsync().Result;
                         var stream = new MemoryStream(data, false);
-                        var response = typeof(TResponse) == typeof(PlacesPhotosResponse) ? (TResponse)(IResponseFor)new PlacesPhotosResponse { Photo = stream } : stream.JsonDeserialize<TResponse>();
+
+                        TResponse response;
+                        if (typeof(TResponse) == typeof(PlacesPhotosResponse))
+                        {
+                            response = (TResponse)(IResponseFor)new PlacesPhotosResponse { Photo = stream };
+                        }
+                        else
+                        {
+                            var jsonSerializer = new JsonSerializer();
+                             
+                            using (var streamReader = new StreamReader(stream))
+                            {
+                                response = jsonSerializer.Deserialize<TResponse>(new JsonTextReader(streamReader));
+                                response.RawJson = json;
+                            }
+                        }
 
                         taskCompletionSource.SetResult(response);
                     }

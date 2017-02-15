@@ -444,9 +444,6 @@
     <Compile Include="..\GoogleApi\Extensions\EnumExtension.cs">
       <Link>Extensions\EnumExtension.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Extensions\StreamExtension.cs">
-      <Link>Extensions\StreamExtension.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Extensions\StringExtension.cs">
       <Link>Extensions\StringExtension.cs</Link>
     </Compile>
