@@ -22,7 +22,7 @@ namespace GoogleApi.Extensions
             where T : struct, IConvertible
         {
             var enumType = typeof(T);
-            var name = Enum.GetName(enumType, @enum);
+            var name = Enum.GetName(enumType, @enum); 
             var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetRuntimeField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
 
             return enumMemberAttribute.Value;
@@ -38,7 +38,6 @@ namespace GoogleApi.Extensions
         public static string ToEnumString<T>(this T @enum, char delimeter)
             where T : struct, IConvertible
         {
-            // BUG: Doesn't use the DataMember attribute but the enum name.
             if (@enum.GetType().GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
                 return Convert.ToString(@enum, CultureInfo.InvariantCulture).ToLower();
 

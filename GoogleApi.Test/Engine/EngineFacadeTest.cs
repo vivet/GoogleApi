@@ -12,8 +12,7 @@ namespace GoogleApi.Test.Engine
         [Test]
         public void QueryTest()
         {
-            var engine = new FacadeEngine<TestRequest, TestResponse>();
-            Assert.DoesNotThrow(() => engine.Query(new TestRequest()));
+            Assert.Inconclusive();
         }
         [Test]
         public void QueryWhenRequestIsNullTest()
@@ -31,12 +30,7 @@ namespace GoogleApi.Test.Engine
         [Test]
         public void QueryAsyncTest()
         {
-            var engine = new FacadeEngine<TestRequest, TestResponse>();
-            Assert.DoesNotThrow(() =>
-            {
-                var result = engine.QueryAsync(new TestRequest()).Result;
-                Assert.IsNull(result);
-            });
+            Assert.Inconclusive();
         }
         [Test]
         public void QueryAsyncWhenRequestIsNullTest()

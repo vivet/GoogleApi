@@ -66,7 +66,6 @@ namespace GoogleApi.Entities.Search.Common.Request
             if (this.Standard.Fields != null)
                 parameters.Add("fields", this.Standard.Fields);
 
-            parameters.Add("num", this.ApiSpecific.Number.ToString());
             parameters.Add("hl", this.ApiSpecific.InterfaceLanguage.ToHl());
             parameters.Add("gl", this.ApiSpecific.GeoLocation?.ToCr() ?? string.Empty);
             parameters.Add("cr", this.ApiSpecific.CountryRestriction?.ToCr() ?? string.Empty);
@@ -78,6 +77,9 @@ namespace GoogleApi.Entities.Search.Common.Request
             parameters.Add("rights", string.Join(",", this.ApiSpecific.Rights));
             parameters.Add("fileType", string.Join(",", this.ApiSpecific.FileTypes));
             parameters.Add("dateRestrict", this.ApiSpecific.DateRestrictType == null ? string.Empty : this.ApiSpecific.DateRestrictType.ToString().ToLower()[0] + "[" + this.ApiSpecific.DateRestrictNumber.GetValueOrDefault() + "]");
+
+            if (this.ApiSpecific.Number != null)
+                parameters.Add("num", this.ApiSpecific.Number.ToString());
 
             if (this.ApiSpecific.Googlehost != null)
                 parameters.Add("googleHost", this.ApiSpecific.Googlehost);

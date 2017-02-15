@@ -18,7 +18,7 @@ namespace GoogleApi.Test
     public class GoogleMapsTest : BaseTest
 	{
         [Test]
-        public void DirectionsTestTest()
+        public void DirectionsTest()
         {
             var request = new DirectionsRequest { Origin = "285 Bedford Ave, Brooklyn, NY, USA", Destination = "185 Broadway Ave, Manhattan, NY, USA" };
 
@@ -26,9 +26,7 @@ namespace GoogleApi.Test
             var overviewPath = result.Routes.First().OverviewPath;
             var polyline = result.Routes.First().Legs.First().Steps.First().PolyLine;
 
-            if (result.Status == Status.OverQueryLimit)
-                Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
+            Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
             Assert.AreEqual(133, overviewPath.Points.Count(), 5);
             Assert.AreEqual(5, polyline.Points.Count());
@@ -36,7 +34,7 @@ namespace GoogleApi.Test
             Assert.AreEqual(355, result.Routes.First().Legs.First().Steps.Sum(s => s.Duration.Value.Seconds), 50);
         }
         [Test]
-        public void DirectionsTestAsyncTest()
+        public void DirectionsAsyncTest()
         {
             var request = new DirectionsRequest { Origin = "285 Bedford Ave, Brooklyn, NY, USA", Destination = "185 Broadway Ave, Manhattan, NY, USA" };
 
@@ -44,9 +42,7 @@ namespace GoogleApi.Test
             var overviewPath = result.Routes.First().OverviewPath;
             var polyline = result.Routes.First().Legs.First().Steps.First().PolyLine;
 
-            if (result.Status == Status.OverQueryLimit)
-                Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
+            Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
             Assert.AreEqual(133, overviewPath.Points.Count(), 5);
             Assert.AreEqual(5, polyline.Points.Count());
@@ -57,12 +53,9 @@ namespace GoogleApi.Test
         public void DirectionsWhenhWayPointsTest()
         {
             var request = new DirectionsRequest { Origin = "NYC, USA", Destination = "Miami, USA", Waypoints = new[] { "Philadelphia, USA" }, OptimizeWaypoints = true };
-
             var result = GoogleMaps.Directions.Query(request);
 
-            if (result.Status == Status.OverQueryLimit)
-                Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
+            Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
             Assert.AreEqual(156084, result.Routes.First().Legs.First().Steps.Sum(s => s.Distance.Value), 15000);
 
@@ -75,9 +68,7 @@ namespace GoogleApi.Test
             var request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA" };
             var result = GoogleMaps.Geocode.Query(request);
 
-            if (result.Status == Status.OverQueryLimit)
-                Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
+            Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
             Assert.AreEqual(40.7140415, result.Results.First().Geometry.Location.Latitude, 0.001);
             Assert.AreEqual(-73.9613119, result.Results.First().Geometry.Location.Longitude, 0.001);
@@ -86,12 +77,9 @@ namespace GoogleApi.Test
         public void GeocodingAsyncTest()
         {
             var request = new GeocodingRequest { Address = "285 Bedford Ave, Brooklyn, NY 11211, USA" };
-
             var result = GoogleMaps.Geocode.QueryAsync(request).Result;
 
-            if (result.Status == Status.OverQueryLimit)
-                Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
+            Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
             Assert.AreEqual(40.7140415, result.Results.First().Geometry.Location.Latitude, 0.001);
             Assert.AreEqual(-73.9613119, result.Results.First().Geometry.Location.Longitude, 0.001);
@@ -213,10 +201,8 @@ namespace GoogleApi.Test
 			var request = new GeocodingRequest { Location = new Location(40.7141289, -73.9614074) };
 			var response = GoogleMaps.Geocode.Query(request);
 
-			if (response.Status == Status.OverQueryLimit)
-				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
-			Assert.AreEqual(Status.Ok, response.Status);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", response.Results.First().FormattedAddress);
 		}
 		[Test]
@@ -225,10 +211,8 @@ namespace GoogleApi.Test
 			var request = new GeocodingRequest { Location = new Location(40.7141289, -73.9614074) };
 			var response = GoogleMaps.Geocode.QueryAsync(request).Result;
 
-			if (response.Status == Status.OverQueryLimit)
-				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
-			Assert.AreEqual(Status.Ok, response.Status);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", response.Results.First().FormattedAddress);
 		}
 		
@@ -238,9 +222,7 @@ namespace GoogleApi.Test
 			var request = new ElevationRequest { Locations = new[] { new Location(40.7141289, -73.9614074) } };
             var response = GoogleMaps.Elevation.Query(request);
 
-            if (response.Status == Status.OverQueryLimit)
-				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
+            Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
 			Assert.AreEqual(14.782454490661619, response.Results.First().Elevation, 0.10);
 		}
@@ -250,10 +232,8 @@ namespace GoogleApi.Test
 			var request = new ElevationRequest { Locations = new[] { new Location(40.7141289, -73.9614074) } };
             var response = GoogleMaps.Elevation.QueryAsync(request).Result;
 
-			if (response.Status == Status.OverQueryLimit)
-				Assert.Inconclusive("Cannot run test since you have exceeded your Google API query limit.");
-
-			Assert.AreEqual(Status.Ok, response.Status);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
 			Assert.AreEqual(14.782454490661619, response.Results.First().Elevation, 0.10);
 		}
 

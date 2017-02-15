@@ -13,7 +13,7 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// Number of search results to return.
         /// Valid values are integers between 1 and 10, inclusive.
         /// </summary>
-        public virtual int Number { get; set; }
+        public virtual int? Number { get; set; }
 
         /// <summary>
         /// Language - Sets the user interface language. 

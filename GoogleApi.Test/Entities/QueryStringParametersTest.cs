@@ -3,10 +3,10 @@ using System.Linq;
 using GoogleApi.Entities;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Helpers
+namespace GoogleApi.Test.Entities
 {
     [TestFixture]
-    public class QueryStringParametersListTest
+    public class QueryStringParametersTest
 	{
         [Test]
         public void AddTest()

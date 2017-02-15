@@ -12,38 +12,45 @@ namespace GoogleApi.Test
     [TestFixture]
     public abstract class BaseTest
     {
-        // BUG: Create config file for ApiKey and also Search engine id / url.
         protected virtual string ApiKey { get; set; }
         protected virtual string KeyFile { get; set; } = "keyfile.txt";
 
         [OneTimeSetUp]
         public virtual void Setup()
         {
+            this.ApiKey = this.GetFileInfo(this.KeyFile).ToString();
+        }
+
+        protected virtual object GetFileInfo(string filename)
+        {
             try
             {
                 var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
-                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == this.KeyFile);
+                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == filename);
 
-                using (var streamReader = new StreamReader(fileInfo?.FullName ?? this.KeyFile))
+                if (fileInfo == null)
+                    throw new NullReferenceException("fileinfo");
+
+                using (var streamReader = new StreamReader(fileInfo.FullName))
                 {
-                    this.ApiKey = streamReader.ReadToEnd();
+                    return streamReader.ReadToEnd();
                 }
             }
             catch
             {
-                this.ApiKey = string.Empty;
+                return string.Empty;
             }
         }
 
         // Nested classes
-        public class TestRequest : BaseRequest
+        public class TestRequest : BaseRequest, IQueryStringRequest
         {
             protected override string BaseUrl => "www.test.com";
         }
 
         public class TestResponse : IResponseFor
         {
-
-        }   
+            public virtual string RawJson { get; set; }
+        }
     }
 }

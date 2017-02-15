@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Search.Enterprise.Request;
@@ -19,39 +18,10 @@ namespace GoogleApi.Test
         [OneTimeSetUp]
         public override void Setup()
         {
-            try
-            {
-                base.Setup();
+            base.Setup();
 
-                var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
-                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "search_engine_id.txt");
-
-                using (var streamReader = new StreamReader(fileInfo?.FullName ?? this.KeyFile))
-                {
-                    this.SearchEngineId = streamReader.ReadToEnd();
-                }
-            }
-            catch
-            {
-                this.SearchEngineId = string.Empty;
-            }
-
-            try
-            {
-                base.Setup();
-
-                var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
-                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "search_engine_url.txt");
-
-                using (var streamReader = new StreamReader(fileInfo?.FullName ?? this.KeyFile))
-                {
-                    this.SearchEngineUrl = streamReader.ReadToEnd();
-                }
-            }
-            catch
-            {
-                this.SearchEngineUrl = string.Empty;
-            }
+            this.SearchEngineId = this.GetFileInfo("search_engine_id.txt").ToString();
+            this.SearchEngineUrl = this.GetFileInfo("search_engine_url.txt").ToString();
         }
 
         // Web Search.
