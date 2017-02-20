@@ -5,7 +5,6 @@ using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Extensions;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 {
@@ -32,7 +31,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Units=imperial returns distances in miles and feet.
         /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
         /// </summary>
-        public Units Units { get; set; }
+        public virtual Units Units { get; set; }
 
         /// <summary>
         /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
@@ -45,19 +44,19 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. 
         /// The following estrictions are supported <see cref="GoogleApi.Entities.Maps.Common.Enums.AvoidWay"/>
         /// </summary>
-        public AvoidWay Avoid { get; set; }
+        public virtual AvoidWay Avoid { get; set; }
 
         /// <summary>
         /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
         /// </summary>
-        public TravelMode TravelMode { get; set; }
+        public virtual TravelMode TravelMode { get; set; }
 
         /// <summary>
         /// Specifies one or more preferred modes of transit. 
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments <see cref="Common.Enums.TransitMode"/>
         /// </summary>
-        public TransitMode TransitMode { get; set; }
+        public virtual TransitMode TransitMode { get; set; }
 
         /// <summary>
         /// Specifies preferences for transit requests. 
@@ -65,7 +64,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments: <see cref="Common.Enums.TransitRoutingPreference"/>
         /// </summary>
-        public TransitRoutingPreference TransitRoutingPreference { get; set; }
+        public virtual TransitRoutingPreference TransitRoutingPreference { get; set; }
 
         /// <summary>
         /// The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. Alternatively, you can specify a value of now, which sets the departure time to the current time (correct to the nearest second). 
@@ -113,7 +112,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (this.Origins == null)
                 throw new ArgumentException("Must specify an Origins");

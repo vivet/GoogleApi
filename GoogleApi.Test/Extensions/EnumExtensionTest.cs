@@ -13,5 +13,11 @@ namespace GoogleApi.Test.Extensions
             var result = LocationType.PostalCode.ToEnumString();
             Assert.AreEqual("postal_code", result);
         }
+        [Test]
+        public void ToEnumStringWhenDelimieterTest()
+        {
+            var result = LocationType.PostalCode.ToEnumString(',');
+            Assert.AreEqual("postalcode", result);
+        }
     }
 }

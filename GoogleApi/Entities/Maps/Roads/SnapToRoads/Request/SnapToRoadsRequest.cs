@@ -4,7 +4,6 @@ using System.Linq;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
 {
@@ -35,7 +34,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (this.Path == null || !this.Path.Any())
                 throw new ArgumentException("Path is required");

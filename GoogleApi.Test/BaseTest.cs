@@ -7,41 +7,50 @@ using NUnit.Framework;
 
 namespace GoogleApi.Test
 {
+    // TODO: Implement: New Forward Geocoder FAQ (https://developers.google.com/maps/documentation/geocoding/faq)
+
     [TestFixture]
     public abstract class BaseTest
     {
-        public string apiKey; // your API key...
+        protected virtual string ApiKey { get; set; }
+        protected virtual string KeyFile { get; set; } = "keyfile.txt";
 
         [OneTimeSetUp]
-        public void Setup()
+        public virtual void Setup()
+        {
+            this.ApiKey = this.GetFileInfo(this.KeyFile).ToString();
+        }
+
+        protected virtual object GetFileInfo(string filename)
         {
             try
             {
-                const string FILENAME = "keyfile.txt";
-
                 var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
-                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == FILENAME);
+                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == filename);
 
-                using (var streamReader = new StreamReader(fileInfo?.FullName ?? FILENAME))
+                if (fileInfo == null)
+                    throw new NullReferenceException("fileinfo");
+
+                using (var streamReader = new StreamReader(fileInfo.FullName))
                 {
-                    this.apiKey = streamReader.ReadToEnd();
+                    return streamReader.ReadToEnd();
                 }
             }
             catch
             {
-                this.apiKey = string.Empty;
+                return string.Empty;
             }
         }
 
         // Nested classes
-        public class TestRequest : BaseRequest
+        public class TestRequest : BaseRequest, IQueryStringRequest
         {
             protected override string BaseUrl => "www.test.com";
         }
 
         public class TestResponse : IResponseFor
         {
-
-        }   
+            public virtual string RawJson { get; set; }
+        }
     }
 }

@@ -3,7 +3,6 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Extensions;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Request
 {
@@ -47,7 +46,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (this.Location == null)
                 throw new ArgumentException("Location is required");

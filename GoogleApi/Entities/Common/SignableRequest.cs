@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
 {
@@ -18,6 +17,15 @@ namespace GoogleApi.Entities.Common
         /// All client IDs begin with a "gme-" prefix.
         /// </summary>
         public string ClientId { get; set; }
+
+        /// <summary>
+        /// Always true. Setter is not supported.
+        /// </summary>
+        public override bool IsSsl
+        {
+            get { return true; }
+            set { throw new NotSupportedException("This operation is not supported, Request must use SSL"); }
+        }
 
         /// <summary>
         /// Gets Uri of Signed Request with signature paramter.
@@ -65,12 +73,12 @@ namespace GoogleApi.Entities.Common
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (string.IsNullOrEmpty(this.ClientId))
                 return base.GetQueryStringParameters();
 
-            var parameters = new QueryStringParametersList {{"sensor", Sensor.ToString().ToLower()}};
+            var parameters = new QueryStringParameters {{"sensor", Sensor.ToString().ToLower()}};
 
             return parameters;
         }

@@ -1,5 +1,4 @@
-﻿using GoogleApi.Engine;
-using GoogleApi.Entities.Maps.Directions.Request;
+﻿using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Directions.Response;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Response;
@@ -17,8 +16,6 @@ using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Response;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using GoogleApi.Entities.Maps.TimeZone.Response;
-
-// TODO: Implement: New Forward Geocoder FAQ (https://developers.google.com/maps/documentation/geocoding/faq)
 
 namespace GoogleApi
 {

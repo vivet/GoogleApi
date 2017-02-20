@@ -5,7 +5,6 @@ using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
 {
@@ -38,7 +37,7 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if ((this.Path == null || !this.Path.Any()) && (this.PlaceIds == null || !this.PlaceIds.Any()))
                 throw new ArgumentException("Path OR PlaceIds is required");

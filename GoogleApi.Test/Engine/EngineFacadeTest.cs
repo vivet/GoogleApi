@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using GoogleApi.Engine;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
 using NUnit.Framework;
@@ -10,6 +9,11 @@ namespace GoogleApi.Test.Engine
     [TestFixture]
     public class EngineFacadeTest : BaseTest
     {
+        [Test]
+        public void QueryTest()
+        {
+            Assert.Inconclusive();
+        }
         [Test]
         public void QueryWhenRequestIsNullTest()
         {
@@ -24,6 +28,11 @@ namespace GoogleApi.Test.Engine
         }
 
         [Test]
+        public void QueryAsyncTest()
+        {
+            Assert.Inconclusive();
+        }
+        [Test]
         public void QueryAsyncWhenRequestIsNullTest()
         {
             var engine = new FacadeEngine<TestRequest, TestResponse>();
@@ -34,7 +43,7 @@ namespace GoogleApi.Test.Engine
         {
             var engine = new FacadeEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan()));
-        }    
+        }
         [Test]
         public void QueryAsyncWhenRequestIsNullAndCancellationTokenTest()
         {

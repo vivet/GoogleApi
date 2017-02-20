@@ -1,12 +1,7 @@
-## GoogleApi v2.4.1 (net4.5, netstandard1.3)
+## GoogleApi v2.5.0 (net4.5, netstandard1.3)
 C# .NET Google Web Services Api. (https://www.nuget.org/packages/GoogleApi/)
 
 Google Places, Maps, Roads, Search and Translate Api integrations.
-
-#### GoogleApi v2.5.0 (17-02-2017):
-* Remove Obsoletes (deprected fields by Google)
-* Add Google search implementation.
-* Test coverage (all cases).
 
 #### Google Api Integrations:
 ##### Google Maps
@@ -33,6 +28,11 @@ Google Places, Maps, Roads, Search and Translate Api integrations.
   * Place Photos
   * Place Autocomplete
   * Query Autocomplete
+
+##### Google Search
+  * Web
+  * Image
+  * Enterprise (Paid)
 
 ##### Google Translate 
   * Translate

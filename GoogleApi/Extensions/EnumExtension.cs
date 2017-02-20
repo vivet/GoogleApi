@@ -16,13 +16,13 @@ namespace GoogleApi.Extensions
         /// Convert enum to string.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="_enum"></param>
+        /// <param name="enum"></param>
         /// <returns></returns>
-        public static string ToEnumString<T>(this T _enum)
+        public static string ToEnumString<T>(this T @enum)
             where T : struct, IConvertible
         {
             var enumType = typeof(T);
-            var name = Enum.GetName(enumType, _enum);
+            var name = Enum.GetName(enumType, @enum); 
             var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetRuntimeField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
 
             return enumMemberAttribute.Value;
@@ -32,17 +32,17 @@ namespace GoogleApi.Extensions
         /// Converts a enum value to string. 
         /// If Flags enum then the delimeter will separate the values.
         /// </summary>
-        /// <param name="_enum"></param>
+        /// <param name="enum"></param>
         /// <param name="delimeter"></param>
         /// <returns></returns>
-        public static string ToEnumString<T>(this T _enum, char delimeter)
+        public static string ToEnumString<T>(this T @enum, char delimeter)
             where T : struct, IConvertible
         {
-            if (_enum.GetType().GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
-                return Convert.ToString(_enum, CultureInfo.InvariantCulture).ToLower();
+            if (@enum.GetType().GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
+                return Convert.ToString(@enum, CultureInfo.InvariantCulture).ToLower();
 
             var stringBuilder = new StringBuilder();
-            var binaryCharArray = Convert.ToString(_enum, CultureInfo.InvariantCulture).Reverse().ToArray();
+            var binaryCharArray = Convert.ToString(@enum, CultureInfo.InvariantCulture).Reverse().ToArray();
 
             for (var i = 0; i < binaryCharArray.Length; i++)
             {

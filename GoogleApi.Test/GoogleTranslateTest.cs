@@ -16,7 +16,7 @@ namespace GoogleApi.Test
             {
                 Target = "da",
                 Qs = new[] { "Hello World" },
-                Key = this.apiKey
+                Key = this.ApiKey
             };
             var result = GoogleTranslate.Translate.Query(request);
 
@@ -26,12 +26,13 @@ namespace GoogleApi.Test
         [Test]
         public void TranslateWhenTargetIsGermanTest()
         {
-            var request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this.apiKey, Format = Format.Text };
+            var request = new TranslateRequest { Target = "de", Qs = new[] { "Hello World" }, Key = this.ApiKey, Format = Format.Text };
             var result = GoogleTranslate.Translate.Query(request);
 
             Assert.AreEqual("Hallo Welt", result.Data.Translations.First().TranslatedText);
             Assert.AreEqual("en", result.Data.Translations.First().DetectedSourceLanguage);
         }
+
         [Test]
         public void TranslateWhenApiKeyIsNullTest()
         {
@@ -59,7 +60,7 @@ namespace GoogleApi.Test
         {
             var request = new TranslateRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Target = null
             };
 
@@ -71,7 +72,7 @@ namespace GoogleApi.Test
         {
             var request = new TranslateRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Target = string.Empty
             };
 
@@ -83,7 +84,7 @@ namespace GoogleApi.Test
         {
             var request = new TranslateRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Target = "da",
                 Qs = null
             };
@@ -96,7 +97,7 @@ namespace GoogleApi.Test
         {
             var request = new TranslateRequest
             {
-                Key = this.apiKey,
+                Key = this.ApiKey,
                 Target = "da",
                 Qs = new string[0]
             };

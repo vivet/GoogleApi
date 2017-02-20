@@ -1,10 +1,16 @@
 ﻿using System;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Places.Photos.Response;
+using Newtonsoft.Json;
 
-namespace GoogleApi.Engine
+namespace GoogleApi
 {
     /// <summary>
     /// A public-surface API that exposes the Google Maps API functionality.
@@ -48,7 +54,7 @@ namespace GoogleApi.Engine
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return GenericEngine<TRequest, TResponse>.Query(request, timeout);
+            return FacadeEngine<TRequest, TResponse>.HttpRequest(request, timeout).Result;
         }
 
         /// <summary>
@@ -95,8 +101,7 @@ namespace GoogleApi.Engine
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return GenericEngine<TRequest, TResponse>.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite),
-                token);
+            return FacadeEngine<TRequest, TResponse>.HttpRequest(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
         }
 
         /// <summary>
@@ -115,7 +120,75 @@ namespace GoogleApi.Engine
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return GenericEngine<TRequest, TResponse>.QueryAsync(request, timeout, token);
+            return FacadeEngine<TRequest, TResponse>.HttpRequest(request, timeout, token);
+        }
+
+        // Private methods.
+        private static Task<TResponse> HttpRequest(TRequest request, TimeSpan timeout, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var uri = request.GetUri();
+            var httpClient = new HttpClient { Timeout = timeout };
+            var jsonString = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var taskCompletionSource = new TaskCompletionSource<TResponse>();
+
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var task = request is IQueryStringRequest
+                    ? httpClient.GetAsync(uri, cancellationToken)
+                    : httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
+
+            task.ContinueWith(x =>
+            {
+                if (x.IsCanceled)
+                {
+                    taskCompletionSource.SetCanceled();
+                }
+                else if (x.IsFaulted)
+                {
+                    var exception = x.Exception == null ? new NullReferenceException("task.Exception") : task.Exception?.InnerException ?? task.Exception ?? new Exception("error");
+                    taskCompletionSource.SetException(exception);
+                }
+                else
+                {
+                    try
+                    {
+                        x.Result.EnsureSuccessStatusCode();
+
+                        var result = x.Result;
+                        var content = result.Content;
+                        var json = content.ReadAsStringAsync().Result;
+                        var data = content.ReadAsByteArrayAsync().Result;
+                        var stream = new MemoryStream(data, false);
+
+                        TResponse response;
+                        if (typeof(TResponse) == typeof(PlacesPhotosResponse))
+                        {
+                            response = (TResponse)(IResponseFor)new PlacesPhotosResponse { Photo = stream };
+                        }
+                        else
+                        {
+                            var jsonSerializer = new JsonSerializer();
+                             
+                            using (var streamReader = new StreamReader(stream))
+                            {
+                                response = jsonSerializer.Deserialize<TResponse>(new JsonTextReader(streamReader));
+                                response.RawJson = json;
+                            }
+                        }
+
+                        taskCompletionSource.SetResult(response);
+                    }
+                    catch (Exception ex)
+                    {
+                        taskCompletionSource.SetException(ex);
+                    }
+                }
+            }, TaskContinuationOptions.ExecuteSynchronously);
+
+            return taskCompletionSource.Task;
         }
     }
 }

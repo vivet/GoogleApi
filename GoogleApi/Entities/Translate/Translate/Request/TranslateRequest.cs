@@ -4,7 +4,6 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Translate.Translate.Request
 {
@@ -52,18 +51,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         }
 
         /// <summary>
-        /// Returns the Uri.
-        /// </summary>
-        /// <returns>Uri</returns>
-        public override Uri GetUri()
-        {
-            var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
-
-            return new Uri(scheme + this.BaseUrl + "?" + queryString);
-        }
-
-        /// <summary>
         /// BaseUrl property overridden.
         /// </summary>
         protected internal override string BaseUrl => TranslateRequest.BASE_URL;
@@ -72,7 +59,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParametersList GetQueryStringParameters()
+        protected override QueryStringParameters GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("ApiKey is required");

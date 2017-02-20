@@ -1,5 +1,4 @@
 ﻿using System;
-using GoogleApi.Helpers;
 
 namespace GoogleApi.Entities.Common
 {
@@ -51,7 +50,7 @@ namespace GoogleApi.Entities.Common
         public virtual Uri GetUri()
         {
             var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = this.GetQueryStringParameters().GetQueryStringPostfix();
+            var queryString = this.GetQueryStringParameters().ToString();
 
             return new Uri(scheme + this.BaseUrl + "?" + queryString);
         }
@@ -65,9 +64,9 @@ namespace GoogleApi.Entities.Common
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected virtual QueryStringParametersList GetQueryStringParameters()
+        protected virtual QueryStringParameters GetQueryStringParameters()
         {
-            var parameters = new QueryStringParametersList();
+            var parameters = new QueryStringParameters();
 
             if (!string.IsNullOrWhiteSpace(this.Key))
                 parameters.Add("key", this.Key);
