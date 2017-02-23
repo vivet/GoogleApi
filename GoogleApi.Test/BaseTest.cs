@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace GoogleApi.Test
@@ -11,34 +13,42 @@ namespace GoogleApi.Test
     [TestFixture]
     public abstract class BaseTest
     {
-        protected virtual string ApiKey { get; set; }
-        protected virtual string KeyFile { get; set; } = "keyfile.txt";
+        protected virtual AppSettings Settings { get; private set; }
+
+        protected virtual string ApiKey => this.Settings.ApiKey;
+        protected virtual string SearchEngineId => this.Settings.SearchEngineId;
+        protected virtual string SearchEngineUrl => this.Settings.SearchEngineUrl;
 
         [OneTimeSetUp]
         public virtual void Setup()
         {
-            this.ApiKey = this.GetFileInfo(this.KeyFile).ToString();
-        }
+            var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent;
+            var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.json") ?? directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.default.json");
 
-        protected virtual object GetFileInfo(string filename)
-        {
-            try
+            if (fileInfo == null)
+                throw new NullReferenceException("fileinfo");
+
+            using (var file = File.OpenText(fileInfo.FullName))
             {
-                var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
-                var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == filename);
-
-                if (fileInfo == null)
-                    throw new NullReferenceException("fileinfo");
-
-                using (var streamReader = new StreamReader(fileInfo.FullName))
+                using (var reader = new JsonTextReader(file))
                 {
-                    return streamReader.ReadToEnd();
+                    var jsonSerializer = new JsonSerializer();
+                    this.Settings = jsonSerializer.Deserialize<AppSettings>(reader);
                 }
             }
-            catch
-            {
-                return string.Empty;
-            }
+        }
+
+        [DataContract]
+        public class AppSettings
+        {
+            [DataMember(Name = "ApiKey")]
+            public string ApiKey { get; set; }
+
+            [DataMember(Name = "SearchEngineId")]
+            public string SearchEngineId { get; set; }
+
+            [DataMember(Name = "SearchEngineUrl")]
+            public string SearchEngineUrl { get; set; }
         }
     }
 }

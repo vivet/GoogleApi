@@ -74,6 +74,8 @@
     <Compile Include="Maps\TimeZoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="application.default.json" />
+    <None Include="application.json" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

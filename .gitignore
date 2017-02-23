@@ -9,7 +9,4 @@ packages
 .vs
 project.lock.json
 TestResults*
-keyfile.txt
-keyfile_search.txt
-search_engine_id.txt
-search_engine_url.txt
+application.json

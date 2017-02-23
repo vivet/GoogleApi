@@ -7,17 +7,6 @@ namespace GoogleApi.Test.Search
     [TestFixture]
     public class EnterpriseSearchTests : BaseTest
     {
-        protected virtual string SearchEngineUrl { get; set; }
-        protected override string KeyFile { get; set; } = "keyfile_search.txt";
-
-        [OneTimeSetUp]
-        public override void Setup()
-        {
-            base.Setup();
-
-            this.SearchEngineUrl = this.GetFileInfo("search_engine_url.txt").ToString();
-        }
-
         [Test]
         public void EnterpriseSearchTest()
         {
