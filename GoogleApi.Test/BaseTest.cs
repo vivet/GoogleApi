@@ -1,14 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
-using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
 using NUnit.Framework;
 
 namespace GoogleApi.Test
 {
     // TODO: Implement: New Forward Geocoder FAQ (https://developers.google.com/maps/documentation/geocoding/faq)
-    // TODO: go through string Language and used common language, check support in different Api's
+    // TODO: Implement: Search response (opensearch spec, Search Request Fields (https://developers.google.com/custom-search/json-api/v1/performance))
 
     [TestFixture]
     public abstract class BaseTest
@@ -20,10 +18,6 @@ namespace GoogleApi.Test
         public virtual void Setup()
         {
             this.ApiKey = this.GetFileInfo(this.KeyFile).ToString();
-
-            //this.SearchEngineId = this.GetFileInfo("search_engine_id.txt").ToString();
-            //this.SearchEngineUrl = this.GetFileInfo("search_engine_url.txt").ToString();
-
         }
 
         protected virtual object GetFileInfo(string filename)
@@ -45,18 +39,6 @@ namespace GoogleApi.Test
             {
                 return string.Empty;
             }
-        }
-
-        // Nested classes
-        public class TestRequest : BaseRequest, IQueryStringRequest
-        {
-            protected override string BaseUrl => "www.test.com";
-        }
-
-        public class TestResponse : IResponseFor
-        {
-            public virtual string RawJson { get; set; }
-            public virtual string RawQueryString { get; set; }
         }
     }
 }

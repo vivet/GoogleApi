@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
 {
@@ -40,13 +42,13 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         /// <summary>
         /// The language in which to return results. See the supported list of domain languages. Note that we often update supported languages so this list may not be exhaustive. If language is not supplied, the Place service will attempt to use the native language of the domain from which the request is sent.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -59,6 +61,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
                 var parameters = base.QueryStringParameters;
 
                 parameters.Add("input", this.Input);
+                parameters.Add("language", this.Language.ToCode());
 
                 if (!string.IsNullOrEmpty(this.Offset))
                     parameters.Add("offset", this.Offset);
@@ -68,9 +71,6 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
 
                 if (this.Radius.HasValue)
                     parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
-
-                if (!string.IsNullOrEmpty(this.Language))
-                    parameters.Add("language", this.Language);
 
                 return parameters;
             }

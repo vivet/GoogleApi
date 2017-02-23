@@ -17,7 +17,6 @@ namespace GoogleApi.Test.Places.Search
                 Location = new Location(55.673323, 12.527438),
                 Radius = 500,
                 Sensor = true,
-                Language = "en",
                 Keyword = "abc"
             };
 
@@ -35,7 +34,6 @@ namespace GoogleApi.Test.Places.Search
                 Location = new Location(55.673323, 12.527438),
                 Radius = 500,
                 Sensor = true,
-                Language = "en",
                 Keyword = "abc"
             };
 

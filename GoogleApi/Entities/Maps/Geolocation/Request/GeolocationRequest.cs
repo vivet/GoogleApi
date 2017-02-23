@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request
 {
@@ -65,7 +66,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {

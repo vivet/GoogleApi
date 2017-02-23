@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using GoogleApi.Entities.Search.Common.Request;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Search.Web.Request
 {
@@ -30,7 +30,7 @@ namespace GoogleApi.Entities.Search.Web.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {

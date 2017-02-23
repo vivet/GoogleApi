@@ -132,7 +132,7 @@ namespace GoogleApi
                 throw new ArgumentNullException(nameof(request));
 
             var scheme = request.IsSsl ? "https://" : "http://";
-            var queryString = string.Join("&", request.QueryStringParameters.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
+            var queryString = string.Join("&", request.QueryStringParameters.Select(x => Uri.EscapeDataString(x.Name) + "=" + Uri.EscapeDataString(x.Value)));
             var uri = new Uri(scheme + request.BaseUrl + "?" + queryString);
 
             return request.ClientId == null ? uri : this.SignUri(request, uri);

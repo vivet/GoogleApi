@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocode.Request
 {
@@ -47,7 +49,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         /// See the supported list of domain languages. Note that we often update supported languages so this list may not be exhaustive. 
         /// If language is not supplied, the geocoder will attempt to use the native language of the domain from which the request is sent wherever possible.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// The component filters, separated by a pipe (|). Each component filter consists of a component:value pair and will fully restrict the results from the geocoder. For more information see Component Filtering.
@@ -58,7 +60,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -66,6 +68,8 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
                     throw new ArgumentException("Location or Address is required.");
 
                 var parameters = base.QueryStringParameters;
+
+                parameters.Add("language", this.Language.ToCode());
 
                 if (this.Location != null)
                     parameters.Add("latlng", this.Location.ToString());
@@ -77,9 +81,6 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
 
                 if (!string.IsNullOrWhiteSpace(this.Region))
                     parameters.Add("region", this.Region);
-
-                if (!string.IsNullOrWhiteSpace(this.Language))
-                    parameters.Add("language", this.Language);
 
                 if (this.Components != null && this.Components.Any())
                     parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));

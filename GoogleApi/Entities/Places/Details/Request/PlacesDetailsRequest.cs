@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Details.Request
 {
@@ -23,7 +25,7 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// <summary>
         /// Language (optional) — The language code, indicating in which language the results should be returned, if possible. See the list of supported languages and their codes. Note that we often update supported languages so this list may not be exhaustive.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// Extensions (optional) — Indicates if the Place Details response should include additional fields. Additional fields may include Premium data, requiring an additional license, or values that are not commonly requested. Supported values for the extensions parameter are: ◦review_summary includes a rich and concise review curated by Google's editorial staff.
@@ -34,7 +36,7 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -44,12 +46,10 @@ namespace GoogleApi.Entities.Places.Details.Request
                 var parameters = base.QueryStringParameters;
 
                 parameters.Add("placeid", this.PlaceId);
+                parameters.Add("language", this.Language.ToCode());
 
                 if (this.Extensions != Enums.Extensions.None)
                     parameters.Add("extensions", this.Extensions.ToString().ToLower());
-
-                if (!string.IsNullOrWhiteSpace(this.Language))
-                    parameters.Add("language", this.Language);
 
                 return parameters;
             }

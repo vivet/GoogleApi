@@ -16,7 +16,12 @@ namespace GoogleApi.Test.Maps.Roads
             var request = new SpeedLimitsRequest
             {
                 Key = this.ApiKey,
-                Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+                Path = new[]
+                {
+                    new Entities.Maps.Roads.Common.Location(60.170880, 24.942795),
+                    new Entities.Maps.Roads.Common.Location(60.170879, 24.942796),
+                    new Entities.Maps.Roads.Common.Location(60.170877, 24.942796)
+                }
             };
             var result = GoogleMaps.SpeedLimits.Query(request);
 

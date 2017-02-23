@@ -17,8 +17,7 @@ namespace GoogleApi.Test.Places
             {
                 Key = ApiKey,
                 Input = "jagtvej 2200",
-                Sensor = true,
-                Language = "en",
+                Sensor = true
             };
 
             var response = GooglePlaces.AutoComplete.Query(request);
@@ -42,8 +41,7 @@ namespace GoogleApi.Test.Places
             {
                 Key = ApiKey,
                 Input = "jagtvej 2200",
-                Sensor = true,
-                Language = "en",
+                Sensor = true
             };
 
             var response = GooglePlaces.AutoComplete.QueryAsync(request).Result;

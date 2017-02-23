@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums;
+using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
 namespace GoogleApi.Entities.Search.Common.Request
 {

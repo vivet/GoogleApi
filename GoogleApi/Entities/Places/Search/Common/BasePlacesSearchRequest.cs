@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.Common
 {
@@ -52,7 +54,7 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// <summary>
         /// The language in which to return results. See the supported list of domain languages. Note that we often update supported languages so this list may not be exhaustive. If language is not supplied, the Place service will attempt to use the native language of the domain from which the request is sent.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// pagetoken — Returns the next 20 results from a previously run search. 
@@ -64,21 +66,20 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 {
                     var parameters = base.QueryStringParameters;
 
+                    parameters.Add("language", Language.ToCode());
+
                     if (Location != null)
                         parameters.Add("location", Location.ToString());
 
                     if (this.Radius.HasValue)
                         parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
-
-                    if (!string.IsNullOrEmpty(Language))
-                        parameters.Add("language", Language);
 
                     if (!string.IsNullOrWhiteSpace(this.PageToken))
                         parameters.Add("pagetoken", this.PageToken);

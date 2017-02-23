@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading;
+using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
 using NUnit.Framework;
@@ -55,6 +57,18 @@ namespace GoogleApi.Test
         {
             var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
+        }
+
+        // Nested classes
+        public class TestRequest : BaseRequest, IQueryStringRequest
+        {
+            protected override string BaseUrl => "www.test.com";
+        }
+
+        public class TestResponse : IResponseFor
+        {
+            public virtual string RawJson { get; set; }
+            public virtual string RawQueryString { get; set; }
         }
     }
 }

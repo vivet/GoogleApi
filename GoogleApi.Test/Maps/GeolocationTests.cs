@@ -51,29 +51,31 @@ namespace GoogleApi.Test.Maps
         [Test]
         public void GeolocationWhenWifiAccessPointsTest()
         {
-            var request = new GeolocationRequest
-            {
-                Key = this.ApiKey,
-                WifiAccessPoints = new[]
-                {
-                    new WifiAccessPoint
-                    {
-                        MacAddress = "00:25:9c:cf:1c:ac",
-                        SignalStrength = -43,
-                        SignalToNoiseRatio = 0
-                    },
-                    new WifiAccessPoint
-                    {
-                        MacAddress = "00:25:9c:cf:1c:ad",
-                        SignalStrength = -55,
-                        SignalToNoiseRatio = 0
-                    }
-                }
-            };
-            var result = GoogleMaps.Geolocation.Query(request);
+            Assert.Inconclusive();
+            
+            //var request = new GeolocationRequest
+            //{
+            //    Key = this.ApiKey,
+            //    WifiAccessPoints = new[]
+            //    {
+            //        new WifiAccessPoint
+            //        {
+            //            MacAddress = "00:25:9c:cf:1c:ac",
+            //            SignalStrength = -43,
+            //            SignalToNoiseRatio = 0
+            //        },
+            //        new WifiAccessPoint
+            //        {
+            //            MacAddress = "00:25:9c:cf:1c:ad",
+            //            SignalStrength = -55,
+            //            SignalToNoiseRatio = 0
+            //        }
+            //    }
+            //};
+            //var result = GoogleMaps.Geolocation.Query(request);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
+            //Assert.IsNotNull(result);
+            //Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]

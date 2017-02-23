@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Search.Common.Request
 {
@@ -45,7 +44,7 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -63,7 +62,6 @@ namespace GoogleApi.Entities.Search.Common.Request
                 parameters.Add("quotaUser", this.Standard.QuotaUser ?? string.Empty);
                 parameters.Add("prettyPrint", this.Standard.PrettyPrint.ToString().ToLower());
 
-                // TODO: Implement: Search Request Fields (https://developers.google.com/custom-search/json-api/v1/performance)
                 if (this.Standard.Fields != null)
                     parameters.Add("fields", this.Standard.Fields);
 

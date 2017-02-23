@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Extensions;
@@ -29,7 +30,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// The language in which to return results. See the list of supported domain languages. 
         /// Note that we often update supported languages so this list may not be exhaustive. Defaults to en.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// BaseUrl property overridden.
@@ -40,7 +41,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -54,9 +55,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
 
                 parameters.Add("location", this.Location.LocationString);
                 parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
-
-                if (!string.IsNullOrWhiteSpace(this.Language))
-                    parameters.Add("language", this.Language);
+                parameters.Add("language", this.Language.ToCode());
 
                 return parameters;
             }

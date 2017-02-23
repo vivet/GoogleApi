@@ -1,74 +1,29 @@
 namespace GoogleApi.Entities.Common.Enums
 {
     /// <summary>
-    /// Supported Interface Languages.
-    /// Google supports more than 80 languages.
-    /// The default interface language is English. 
-    /// The following list identifies all of the interface languages that Google supports.
-    /// https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages
+    /// Supported Languages.
+    /// By default the API will attempt to load the most appropriate language based on the users location or browser settings. 
+    /// Some APIs allow you to explicitly set a language when you make a request. 
+    /// https://developers.google.com/maps/faq#languagesupport
     /// </summary>
     public enum Language
     {
-        /// <summary>
-        /// Afrikaans
-        /// </summary>
-        Afrikaans,
-        /// <summary>
-        /// Albanian
-        /// </summary>
-        Albanian,
-        /// <summary>
-        /// Amharic
-        /// </summary>
-        Amharic,
         /// <summary>
         /// Arabic
         /// </summary>
         Arabic,
         /// <summary>
-        /// Azerbaijani
+        /// Bulgarian
         /// </summary>
-        Azerbaijani,
-        /// <summary>
-        /// Basque
-        /// </summary>
-        Basque,
-        /// <summary>
-        /// Belarusian
-        /// </summary>
-        Belarusian,
+        Bulgarian,
         /// <summary>
         /// Bengali
         /// </summary>
         Bengali,
         /// <summary>
-        /// Bihari
-        /// </summary>
-        Bihari,
-        /// <summary>
-        /// Bosnian
-        /// </summary>
-        Bosnian,
-        /// <summary>
-        /// Bulgarian
-        /// </summary>
-        Bulgarian,
-        /// <summary>
         /// Catalan
         /// </summary>
         Catalan,
-        /// <summary>
-        /// Chinese (Simplified)
-        /// </summary>
-        ChineseSimplified,
-        /// <summary>
-        /// Chinese (Traditional)
-        /// </summary>
-        ChineseTraditional,
-        /// <summary>
-        /// Croatian
-        /// </summary>
-        Croatian,
         /// <summary>
         /// Czech
         /// </summary>
@@ -80,95 +35,83 @@ namespace GoogleApi.Entities.Common.Enums
         /// <summary>
         /// Dutch
         /// </summary>
-        Dutch,
-        /// <summary>
-        /// English
-        /// </summary>
-        English,
-        /// <summary>
-        /// Esperanto
-        /// </summary>
-        Esperanto,
-        /// <summary>
-        /// Estonian
-        /// </summary>
-        Estonian,
-        /// <summary>
-        /// Faroese
-        /// </summary>
-        Faroese,
-        /// <summary>
-        /// Finnish
-        /// </summary>
-        Finnish,
-        /// <summary>
-        /// French
-        /// </summary>
-        French,
-        /// <summary>
-        /// Frisian
-        /// </summary>
-        Frisian,
-        /// <summary>
-        /// Galician
-        /// </summary>
-        Galician,
-        /// <summary>
-        /// Georgian
-        /// </summary>
-        Georgian,
-        /// <summary>
-        /// German
-        /// </summary>
         German,
         /// <summary>
         /// Greek
         /// </summary>
         Greek,
         /// <summary>
+        /// English
+        /// </summary>
+        English,
+        /// <summary>
+        /// English (Australian)
+        /// </summary>
+        EnglishAustralian,
+        /// <summary>
+        /// English (Great Britain)
+        /// </summary>
+        EnglishGreatBritain,
+        /// <summary>
+        /// Spanish
+        /// </summary>
+        Spanish,
+        /// <summary>
+        /// Basque
+        /// </summary>
+        Basque,
+        /// <summary>
+        /// Farsi
+        /// </summary>
+        Farsi,
+        /// <summary>
+        /// Finnish
+        /// </summary>
+        Finnish,
+        /// <summary>
+        /// Filipino
+        /// </summary>
+        Filipino,
+        /// <summary>
+        /// French
+        /// </summary>
+        French,
+        /// <summary>
+        /// Galician
+        /// </summary>
+        Galician,
+        /// <summary>
         /// Gujarati
         /// </summary>
         Gujarati,
-        /// <summary>
-        /// Hebrew
-        /// </summary>
-        Hebrew,
         /// <summary>
         /// Hindi
         /// </summary>
         Hindi,
         /// <summary>
+        /// Croatian
+        /// </summary>
+        Croatian,
+        /// <summary>
         /// Hungarian
         /// </summary>
         Hungarian,
-        /// <summary>
-        /// Icelandic
-        /// </summary>
-        Icelandic,
         /// <summary>
         /// Indonesian
         /// </summary>
         Indonesian,
         /// <summary>
-        /// Interlingua
-        /// </summary>
-        Interlingua,
-        /// <summary>
-        /// Irish
-        /// </summary>
-        Irish,
-        /// <summary>
         /// Italian
         /// </summary>
         Italian,
         /// <summary>
+        /// Hebrew
+        /// </summary>
+        Hebrew,
+        /// <summary>
         /// Japanese
         /// </summary>
         Japanese,
-        /// <summary>
-        /// Javanese
-        /// </summary>
-        Javanese,
         /// <summary>
         /// Kannada
         /// </summary>
@@ -178,61 +121,37 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         Korean,
         /// <summary>
-        /// Latin
+        /// Lithuanian
         /// </summary>
-        Latin,
+        Lithuanian,
         /// <summary>
         /// Latvian
         /// </summary>
         Latvian,
         /// <summary>
-        /// Lithuanian
+        /// Malayalam
         /// </summary>
-        Lithuanian,
-        /// <summary>
-        /// Macedonian
-        /// </summary>
-        Macedonian,
-        /// <summary>
-        /// Malay
-        /// </summary>
-        Malay,
-        /// <summary>
-        /// Malayam
-        /// </summary>
-        Malayam,
-        /// <summary>
-        /// Maltese
-        /// </summary>
-        Maltese,
+        Malayalam,
         /// <summary>
         /// Marathi
         /// </summary>
         Marathi,
         /// <summary>
-        /// Nepali
+        /// Dutch
         /// </summary>
-        Nepali,
+        Dutch,
         /// <summary>
         /// Norwegian
         /// </summary>
         Norwegian,
         /// <summary>
-        /// Norwegian (Nynorsk)
-        /// </summary>
-        NorwegianNynorsk,
-        /// <summary>
-        /// Occitan
-        /// </summary>
-        Occitan,
-        /// <summary>
-        /// Persian
-        /// </summary>
-        Persian,
-        /// <summary>
         /// Polish
         /// </summary>
         Polish,
+        /// <summary>
+        /// Portuguese
+        /// </summary>
+        Portuguese,
         /// <summary>
         /// Portuguese (Brazil)
         /// </summary>
@@ -242,10 +161,6 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         PortuguesePortugal,
         /// <summary>
-        /// Punjabi
-        /// </summary>
-        Punjabi,
-        /// <summary>
         /// Romanian
         /// </summary>
         Romanian,
@@ -253,18 +168,6 @@ namespace GoogleApi.Entities.Common.Enums
         /// Russian
         /// </summary>
         Russian,
-        /// <summary>
-        /// Scots Gaelic
-        /// </summary>
-        ScotsGaelic,
-        /// <summary>
-        /// Serbian
-        /// </summary>
-        Serbian,
-        /// <summary>
-        /// Sinhalese
-        /// </summary>
-        Sinhalese,
         /// <summary>
         /// Slovak
         /// </summary>
@@ -274,25 +177,13 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         Slovenian,
         /// <summary>
-        /// Spanish
+        /// Serbian
         /// </summary>
-        Spanish,
-        /// <summary>
-        /// Sudanese
-        /// </summary>
-        Sudanese,
-        /// <summary>
-        /// Swahili
-        /// </summary>
-        Swahili,
+        Serbian,
         /// <summary>
         /// Swedish
         /// </summary>
         Swedish,
-        /// <summary>
-        /// Tagalog
-        /// </summary>
-        Tagalog,
         /// <summary>
         /// Tamil
         /// </summary>
@@ -306,9 +197,9 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         Thai,
         /// <summary>
-        /// Tigrinya
+        /// Tagalog
         /// </summary>
-        Tigrinya,
+        Tagalog,
         /// <summary>
         /// Turkish
         /// </summary>
@@ -318,28 +209,16 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         Ukrainian,
         /// <summary>
-        /// Urdu
-        /// </summary>
-        Urdu,
-        /// <summary>
-        /// Uzbek
-        /// </summary>
-        Uzbek,
-        /// <summary>
         /// Vietnamese
         /// </summary>
         Vietnamese,
         /// <summary>
-        /// Welsh
+        /// Chinese (Simplified)
         /// </summary>
-        Welsh,
+        ChineseSimplified,
         /// <summary>
-        /// Xhosa
+        /// Chinese (Traditional)
         /// </summary>
-        Xhosa,
-        /// <summary>
-        /// Zulu
-        /// </summary>
-        Zulu
+        ChineseTraditional
     }
 }

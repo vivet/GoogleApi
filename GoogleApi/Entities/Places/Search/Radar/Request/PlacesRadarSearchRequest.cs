@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using GoogleApi.Entities.Places.Search.Common;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.Radar.Request
 {
@@ -33,7 +33,7 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {

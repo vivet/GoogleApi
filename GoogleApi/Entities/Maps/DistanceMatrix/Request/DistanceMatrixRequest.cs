@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
@@ -95,13 +97,13 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// You may also explicitly bias the results by using localized domains of http://map.google.com. 
         /// See Region Biasing for more information.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -116,13 +118,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
                 var parameters = base.QueryStringParameters;
 
-                if (!string.IsNullOrWhiteSpace(this.Language))
-                    parameters.Add("language", this.Language);
-
                 parameters.Add("origins", string.Join("|", this.Origins));
                 parameters.Add("destinations", string.Join("|", this.Destinations));
                 parameters.Add("mode", this.TravelMode.ToString().ToLower());
                 parameters.Add("units", this.Units.ToString().ToLower());
+                parameters.Add("language", this.Language.ToCode());
 
                 if (this.Avoid != AvoidWay.Nothing)
                     parameters.Add("avoid", this.Avoid.ToEnumString('|'));

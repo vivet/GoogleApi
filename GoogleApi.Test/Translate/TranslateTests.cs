@@ -39,7 +39,7 @@ namespace GoogleApi.Test.Translate
             var request = new TranslateRequest
             {
                 Target = "da",
-                Qs = new[] { "Hello World", "Der var engang" },
+                Qs = new[] { "Hello World", "Once upon a time" },
                 Key = this.ApiKey
             };
 
@@ -59,7 +59,7 @@ namespace GoogleApi.Test.Translate
 
             var translation2 = translations[1];
             Assert.IsNotNull(translation2);
-            Assert.AreEqual("Once upon a time", translation2.TranslatedText);
+            Assert.AreEqual("Der var engang", translation2.TranslatedText);
             Assert.AreEqual("en", translation2.DetectedSourceLanguage);
         }
         [Test]

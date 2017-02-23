@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
@@ -110,13 +111,13 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// You may also explicitly bias the results by using localized domains of http://map.google.com. 
         /// See Region Biasing for more information.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -135,6 +136,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
                 parameters.Add("destination", this.Destination);
                 parameters.Add("units", this.Units.ToString().ToLower());
                 parameters.Add("mode", this.TransitMode.ToString().ToLower());
+                parameters.Add("language", this.Language.ToCode());
 
                 if (this.Region != null)
                     parameters.Add("region", this.Region);
@@ -145,8 +147,6 @@ namespace GoogleApi.Entities.Maps.Directions.Request
                 if (this.Avoid != AvoidWay.Nothing)
                     parameters.Add("avoid", this.Avoid.ToEnumString('|'));
 
-                if (!string.IsNullOrWhiteSpace(this.Language))
-                    parameters.Add("language", this.Language);
 
                 if (this.Waypoints != null && this.Waypoints.Any())
                     parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(Waypoints) : this.Waypoints));

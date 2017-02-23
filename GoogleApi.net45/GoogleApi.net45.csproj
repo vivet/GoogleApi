@@ -441,8 +441,14 @@
     <Compile Include="..\GoogleApi\Extensions\DateTimeExtension.cs">
       <Link>Extensions\DateTimeExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Extensions\Entities\QueryStringParameter.cs">
+      <Link>Extensions\Entities\QueryStringParameter.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Extensions\EnumExtension.cs">
       <Link>Extensions\EnumExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Extensions\QueryStringParameters.cs">
+      <Link>Extensions\QueryStringParameters.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Extensions\StringExtension.cs">
       <Link>Extensions\StringExtension.cs</Link>

@@ -18,7 +18,6 @@ namespace GoogleApi.Test.Places.Search
                 Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Sensor = true,
-                Language = "en",
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
@@ -36,7 +35,6 @@ namespace GoogleApi.Test.Places.Search
                 Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
                 Sensor = true,
-                Language = "en",
                 Radius = 500,
                 Type = SearchPlaceType.School
             };

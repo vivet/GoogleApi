@@ -4,9 +4,11 @@ using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
 using GoogleApi.Entities.Places.Common;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.AutoComplete.Request
 {
@@ -45,7 +47,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// <summary>
         /// The language in which to return results. See the supported list of domain languages. Note that we often update supported languages so this list may not be exhaustive. If language is not supplied, the Place service will attempt to use the native language of the domain from which the request is sent.
         /// </summary>
-        public virtual string Language { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// The types of Place results to return. See Place Types below. If no type is specified, all types will be returned.
@@ -62,7 +64,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {
@@ -75,6 +77,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
                     throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
 
                 parameters.Add("input", this.Input);
+                parameters.Add("language", this.Language.ToCode());
 
                 if (!string.IsNullOrEmpty(this.Offset))
                     parameters.Add("offset", this.Offset);
@@ -84,9 +87,6 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
 
                 if (this.Radius.HasValue)
                     parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
-
-                if (!string.IsNullOrEmpty(this.Language))
-                    parameters.Add("language", this.Language);
 
                 if (this.Types != null && this.Types.Any())
                     parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));

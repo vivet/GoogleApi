@@ -15,7 +15,6 @@ namespace GoogleApi.Test.Places.Search
             {
                 Key = this.ApiKey,
                 Sensor = true,
-                Language = "en",
                 Query = "picadelly circus"
             };
 
@@ -31,7 +30,6 @@ namespace GoogleApi.Test.Places.Search
             {
                 Key = this.ApiKey,
                 Sensor = true,
-                Language = "en",
                 Query = "picadelly circus"
             };
 

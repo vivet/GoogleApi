@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Elevation.Request
 {
@@ -42,7 +43,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        public override IDictionary<string, string> QueryStringParameters
+        public override QueryStringParameters QueryStringParameters
         {
             get
             {

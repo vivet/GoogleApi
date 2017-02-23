@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Request;
 using GoogleApi.Entities.Search.Common.Response.Enums;
+using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
