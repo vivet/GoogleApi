@@ -1,18 +1,15 @@
 using System;
 using System.Linq;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Search.Enterprise.Request;
-using GoogleApi.Entities.Search.Image.Request;
 using GoogleApi.Entities.Search.Web.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test
+namespace GoogleApi.Test.Search
 {
     [TestFixture]
-    public class GoogleSearchTest : BaseTest
+    public class WebSearchTests : BaseTest
     {
         protected virtual string SearchEngineId { get; set; }
-        protected virtual string SearchEngineUrl { get; set; }
         protected override string KeyFile { get; set; } = "keyfile_search.txt";
 
         [OneTimeSetUp]
@@ -21,10 +18,8 @@ namespace GoogleApi.Test
             base.Setup();
 
             this.SearchEngineId = this.GetFileInfo("search_engine_id.txt").ToString();
-            this.SearchEngineUrl = this.GetFileInfo("search_engine_url.txt").ToString();
         }
 
-        // Web Search.
         [Test]
         public void WebSearchTest()
         {
@@ -65,45 +60,6 @@ namespace GoogleApi.Test
             Assert.AreEqual(item.Title, "Google");
             Assert.AreEqual(item.DisplayLink, "www.google.com");
 
-        }
-        [Test]
-        public void WebSearchWhenKeyIsNullTest()
-        {
-            var request = new WebSearchRequest
-            {
-                Key = null,
-                SearchEngineId = this.SearchEngineId,
-                Query = "google"
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
-        }
-        [Test]
-        public void WebSearchWhenSearchEngineIdIsNullTest()
-        {
-            var request = new WebSearchRequest
-            {
-                Key = this.ApiKey,
-                SearchEngineId = null,
-                Query = "google"
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "SearchEngineId is required.");
-        }
-        [Test]
-        public void WebSearchWhenQueryIsNullTest()
-        {
-            var request = new WebSearchRequest
-            {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
-                Query = null
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required.");
         }
         [Test]
         public void WebSearchWhenFieldsTest()
@@ -226,116 +182,50 @@ namespace GoogleApi.Test
             Assert.Inconclusive();
         }
 
-        // Image Search.
         [Test]
-        public void ImageSearchTest()
+        public void WebSearchWhenKeyIsNullTest()
         {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void ImageSearchWhenKeyIsNullTest()
-        {
-            var request = new ImageSearchRequest
+            var request = new WebSearchRequest
             {
                 Key = null,
                 SearchEngineId = this.SearchEngineId,
                 Query = "google"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.ImageSearch.Query(request));
+            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
             Assert.AreEqual(exception.Message, "Key is required.");
         }
         [Test]
-        public void ImageSearchWhenSearchEngineIdIsNullTest()
+        public void WebSearchWhenSearchEngineIdIsNullTest()
         {
-            var request = new ImageSearchRequest
+            var request = new WebSearchRequest
             {
                 Key = this.ApiKey,
                 SearchEngineId = null,
                 Query = "google"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.ImageSearch.Query(request));
+            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
             Assert.AreEqual(exception.Message, "SearchEngineId is required.");
         }
         [Test]
-        public void ImageSearchWhenQueryIsNullTest()
+        public void WebSearchWhenQueryIsNullTest()
         {
-            var request = new ImageSearchRequest
+            var request = new WebSearchRequest
             {
                 Key = this.ApiKey,
                 SearchEngineId = this.SearchEngineId,
                 Query = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.ImageSearch.Query(request));
+            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
             Assert.AreEqual(exception.Message, "Query is required.");
         }
-        [Test]
-        public void ImageSearchWhenImageTypeTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void ImageSearchWhenImageSizeTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void ImageSearchWhenImageColorTypeTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void ImageSearchWhenImageDominantColorTest()
-        {
-            Assert.Inconclusive();
-        }
 
-        // Enterprise Search.
         [Test]
-        public void EnterpriseSearchTest()
+        public void WebSearchAsyncTest()
         {
             Assert.Inconclusive();
-        }
-        [Test]
-        public void EnterpriseSearchWhenKeyIsNullTest()
-        {
-            var request = new EnterpriseSearchRequest
-            {
-                Key = null,
-                SearchEngineUrl = this.SearchEngineUrl,
-                Query = "google"
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.EnterpriseSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
-        }
-        [Test]
-        public void EnterpriseSearchWhenSearchEngineIdIsNullTest()
-        {
-            var request = new EnterpriseSearchRequest
-            {
-                Key = this.ApiKey,
-                SearchEngineUrl = null,
-                Query = "google"
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.EnterpriseSearch.Query(request));
-            Assert.AreEqual(exception.Message, "SearchEngineUrl is required.");
-        }
-        [Test]
-        public void EnterpriseSearchWhenQueryIsNullTest()
-        {
-            var request = new EnterpriseSearchRequest
-            {
-                Key = this.ApiKey,
-                SearchEngineUrl = this.SearchEngineUrl,
-                Query = null
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.EnterpriseSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required.");
         }
     }
 }

@@ -9,8 +9,6 @@ namespace GoogleApi.Test
 {
     // TODO: Implement: New Forward Geocoder FAQ (https://developers.google.com/maps/documentation/geocoding/faq)
     // TODO: go through string Language and used common language, check support in different Api's
-    
-    // TODO: Make better settings file for test kets and search parameters (Id, Url)
 
     [TestFixture]
     public abstract class BaseTest
@@ -22,6 +20,10 @@ namespace GoogleApi.Test
         public virtual void Setup()
         {
             this.ApiKey = this.GetFileInfo(this.KeyFile).ToString();
+
+            //this.SearchEngineId = this.GetFileInfo("search_engine_id.txt").ToString();
+            //this.SearchEngineUrl = this.GetFileInfo("search_engine_url.txt").ToString();
+
         }
 
         protected virtual object GetFileInfo(string filename)

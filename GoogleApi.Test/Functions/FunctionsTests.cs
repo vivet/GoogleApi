@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using NUnit.Framework;
 
-namespace GoogleApi.Test
+namespace GoogleApi.Test.Functions
 {
     [TestFixture]
-    public class GoogleFunctionsTest : BaseTest
+    public class FunctionsTests : BaseTest
 	{
         private const string POLY_LINE = "chdEchdEoxgFoxgFi`vEi`vE";
         private const string POLY_LINE_2 = "cbb|@cbb|@ore}@ore}@izs|@izs|@";
@@ -25,7 +25,7 @@ namespace GoogleApi.Test
             var encodePolyLine = GoogleFunctions.EncodePolyLine(locations);
 
             Assert.IsNotNull(encodePolyLine.FirstOrDefault());
-            Assert.AreEqual(GoogleFunctionsTest.POLY_LINE, encodePolyLine);
+            Assert.AreEqual(FunctionsTests.POLY_LINE, encodePolyLine);
         }
         [Test]
         public void EncodePolyLineWhenLocationsIsNullTest()
@@ -37,7 +37,7 @@ namespace GoogleApi.Test
         [Test]
         public void MergePolyLineTest()
         {
-            var mergePolyLine = GoogleFunctions.MergePolyLine(GoogleFunctionsTest.POLY_LINE, GoogleFunctionsTest.POLY_LINE_2);
+            var mergePolyLine = GoogleFunctions.MergePolyLine(FunctionsTests.POLY_LINE, FunctionsTests.POLY_LINE_2);
 
             Assert.IsNotNull(mergePolyLine);
             Assert.AreEqual("chdEchdEoxgFoxgFi`vEi`vEe~|g@e~|g@ore}@ore}@izs|@izs|@", mergePolyLine);
@@ -63,7 +63,7 @@ namespace GoogleApi.Test
         [Test]
         public void DecodePolyLineTest()
         {
-            var decodePolyLine = GoogleFunctions.DecodePolyLine(GoogleFunctionsTest.POLY_LINE).ToArray();
+            var decodePolyLine = GoogleFunctions.DecodePolyLine(FunctionsTests.POLY_LINE).ToArray();
 
             Assert.IsNotNull(decodePolyLine.FirstOrDefault());
             Assert.AreEqual(3, decodePolyLine.Length);

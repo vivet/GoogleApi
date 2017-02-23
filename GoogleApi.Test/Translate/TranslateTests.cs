@@ -5,10 +5,10 @@ using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
 using NUnit.Framework;
 
-namespace GoogleApi.Test
+namespace GoogleApi.Test.Translate
 {
     [TestFixture]
-    public class GoogleTranslateTest : BaseTest
+    public class TranslateTests : BaseTest
     {
         [Test]
         public void TranslateTest()

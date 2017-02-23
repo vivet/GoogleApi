@@ -45,15 +45,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="Maps\DirectionsTests.cs" />
+    <Compile Include="Maps\DistanceMatrixTests.cs" />
+    <Compile Include="Maps\ElevationTests.cs" />
+    <Compile Include="Maps\GeolocationTests.cs" />
+    <Compile Include="Maps\GeocodingTests.cs" />
     <Compile Include="HttpEngineTest.cs" />
     <Compile Include="Extensions\DateTimeExtensionTest.cs" />
     <Compile Include="Extensions\EnumExtensionTest.cs" />
     <Compile Include="Extensions\StringExtensionTest.cs" />
-    <Compile Include="GoogleFunctionsTest.cs" />
-    <Compile Include="GoogleMapsTest.cs" />
-    <Compile Include="GooglePlacesTest.cs" />
-    <Compile Include="GoogleSearchTest.cs" />
-    <Compile Include="GoogleTranslateTest.cs" />
+    <Compile Include="Functions\FunctionsTests.cs" />
+    <Compile Include="Maps\Roads\SpeedLimitsTests.cs" />
+    <Compile Include="Places\AddTests.cs" />
+    <Compile Include="Places\AutoCompleteTests.cs" />
+    <Compile Include="Places\DeleteTests.cs" />
+    <Compile Include="Places\DetailsTests.cs" />
+    <Compile Include="Places\PhotosTests.cs" />
+    <Compile Include="Places\Search\NearBySearchTests.cs" />
+    <Compile Include="Places\QueryAutoCompleteTests.cs" />
+    <Compile Include="Places\Search\RadarSearchTests.cs" />
+    <Compile Include="Places\Search\TextSearchTests.cs" />
+    <Compile Include="Search\EnterpriseSearchTests.cs" />
+    <Compile Include="Search\ImageSearchTests.cs" />
+    <Compile Include="Search\WebSearchTests.cs" />
+    <Compile Include="Translate\TranslateTests.cs" />
+    <Compile Include="Maps\Roads\NearestRoadsTests.cs" />
+    <Compile Include="Maps\Roads\SnapToRoadTests.cs" />
+    <Compile Include="Maps\TimeZoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
