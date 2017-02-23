@@ -7,9 +7,6 @@ using NUnit.Framework;
 
 namespace GoogleApi.Test
 {
-    // TODO: Implement: New Forward Geocoder FAQ (https://developers.google.com/maps/documentation/geocoding/faq)
-    // TODO: Implement: Search response (opensearch spec, Search Request Fields (https://developers.google.com/custom-search/json-api/v1/performance))
-
     [TestFixture]
     public abstract class BaseTest
     {
