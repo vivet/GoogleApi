@@ -13,6 +13,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request.Enums
         /// <summary>
         /// Plain text format
         /// </summary>
-        Text,
+        Text
     }
 }

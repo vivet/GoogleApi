@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Places.Search.Common;
 
 namespace GoogleApi.Entities.Places.Search.Text.Request
@@ -9,30 +10,33 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
     public class PlacesTextSearchRequest : BasePlacesSearchRequest
     {
         /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "textsearch/json";
+
+        /// <summary>
         /// Query — The text string on which to search, for example: "restaurant". 
         /// The Google Places service will return candidate matches based on this string and order the results based on their perceived relevance.
         /// </summary>
         public string Query { get; set; }
 
         /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "textsearch/json";
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this.Query))
+                    throw new ArgumentException("Query is required.");
 
-            if (string.IsNullOrWhiteSpace(this.Query))
-                throw new ArgumentException("Query must not be null");
+                var parameters = base.QueryStringParameters;
 
-            parameters.Add("query", this.Query);
+                parameters.Add("query", this.Query);
 
-            return parameters;
+                return parameters;
+            }
         }
     }
 }

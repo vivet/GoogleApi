@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common.Interfaces;
@@ -13,6 +14,11 @@ namespace GoogleApi.Entities.Maps.Directions.Request
     /// </summary>
     public class DirectionsRequest : BaseMapsRequest, IQueryStringRequest
     {
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "directions/json";
+
         /// <summary>
         /// origin (required) — The address or textual latitude/longitude value from which you wish to calculate directions. *
         /// </summary>
@@ -29,7 +35,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// Units=imperial returns distances in miles and feet.
         /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
         /// </summary>
-        public virtual Units Units { get; set; }
+        public virtual Units Units { get; set; } = Units.Metric;
 
         /// <summary>
         /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
@@ -37,19 +43,19 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// highways indicates that the calculated route should avoid highways.
         /// (For more information see Route Restrictions below.)
         /// </summary>
-        public virtual AvoidWay Avoid { get; set; }
+        public virtual AvoidWay Avoid { get; set; } = AvoidWay.Nothing;
 
         /// <summary>
         /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
         /// </summary>
-        public virtual TravelMode TravelMode { get; set; }
+        public virtual TravelMode TravelMode { get; set; } = TravelMode.Driving;
 
         /// <summary>
         /// Specifies one or more preferred modes of transit. 
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments <see cref="Common.Enums.TransitMode"/>
         /// </summary>
-        public virtual TransitMode TransitMode { get; set; }
+        public virtual TransitMode TransitMode { get; set; } = TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram;
 
         /// <summary>
         /// Specifies preferences for transit requests. 
@@ -57,20 +63,20 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments: <see cref="Common.Enums.TransitRoutingPreference"/>
         /// </summary>
-        public virtual TransitRoutingPreference TransitRoutingPreference { get; set; }
-
-        /// <summary>
-        /// The time of departure.
-        /// Required when TravelMode = Transit
-        /// </summary>
-        public virtual DateTime DepartureTime { get; set; }
+        public virtual TransitRoutingPreference TransitRoutingPreference { get; set; } = TransitRoutingPreference.Nothing;
 
         /// <summary>
         /// The time of arrival.
         /// Required when TravelMode = Transit
         /// </summary>
-        public virtual DateTime ArrivalTime { get; set; }
+        public virtual DateTime? ArrivalTime { get; set; }
 
+        /// <summary>
+        /// The time of departure.
+        /// Required when TravelMode = Transit
+        /// </summary>
+        public virtual DateTime? DepartureTime { get; set; }
+  
         /// <summary>
         /// waypoints (optional) specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). 
         /// A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded. (For more information on waypoints, see Using Waypoints in Routes below.)
@@ -107,83 +113,60 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         public virtual string Language { get; set; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public DirectionsRequest()
-        {
-            this.Units = Units.Metric;
-            this.Avoid = AvoidWay.Nothing;
-            this.TravelMode = TravelMode.Driving;
-            this.TransitMode = TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram;
-            this.TransitRoutingPreference = TransitRoutingPreference.Nothing;
-        }
-
-        /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "directions/json";
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            if (string.IsNullOrWhiteSpace(this.Origin))
-                throw new ArgumentException("Must specify an Origin");
-
-            if (string.IsNullOrWhiteSpace(this.Destination))
-                throw new ArgumentException("Must specify a Destination");
-
-            if (!Enum.IsDefined(typeof(AvoidWay), this.Avoid))
-                throw new ArgumentException("Invalid enumeration value for 'Avoid'");
-
-            if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
-                throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
-
-            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == default(DateTime) &&
-                this.ArrivalTime == default(DateTime))
-                throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
-
-            var parameters = base.GetQueryStringParameters();
-
-            parameters.Add("origin", this.Origin);
-            parameters.Add("destination", this.Destination);
-            parameters.Add("units", this.Units.ToString().ToLower());
-            parameters.Add("mode", this.TransitMode.ToString().ToLower());
-
-            if (this.Region != null)
-                parameters.Add("region", this.Region);
-
-            if (this.Alternatives)
-                parameters.Add("alternatives", "true");
-
-            if (this.Avoid != AvoidWay.Nothing)
-                parameters.Add("avoid", this.Avoid.ToEnumString('|'));
-
-            if (!string.IsNullOrWhiteSpace(this.Language))
-                parameters.Add("language", this.Language);
-
-            if (this.Waypoints != null && this.Waypoints.Any())
-                parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] {"optimize:true"}.Concat(Waypoints) : this.Waypoints));
-
-            if (this.TravelMode == TravelMode.Transit)
+            get
             {
-                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+                if (string.IsNullOrWhiteSpace(this.Origin))
+                    throw new ArgumentException("Origin is required.");
 
-                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+                if (string.IsNullOrWhiteSpace(this.Destination))
+                    throw new ArgumentException("Destination is required.");
 
-                if (this.ArrivalTime != default(DateTime))
-                    parameters.Add("arrival_time",
-                        this.ArrivalTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
+                    throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
 
-                if (this.DepartureTime != default(DateTime))
-                    parameters.Add("departure_time",
-                        this.DepartureTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-            }
+                var parameters = base.QueryStringParameters;
 
-            return parameters;
+                parameters.Add("origin", this.Origin);
+                parameters.Add("destination", this.Destination);
+                parameters.Add("units", this.Units.ToString().ToLower());
+                parameters.Add("mode", this.TransitMode.ToString().ToLower());
+
+                if (this.Region != null)
+                    parameters.Add("region", this.Region);
+
+                if (this.Alternatives)
+                    parameters.Add("alternatives", "true");
+
+                if (this.Avoid != AvoidWay.Nothing)
+                    parameters.Add("avoid", this.Avoid.ToEnumString('|'));
+
+                if (!string.IsNullOrWhiteSpace(this.Language))
+                    parameters.Add("language", this.Language);
+
+                if (this.Waypoints != null && this.Waypoints.Any())
+                    parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(Waypoints) : this.Waypoints));
+
+                if (this.TravelMode == TravelMode.Transit)
+                {
+                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+
+                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+
+                    if (this.ArrivalTime != null)
+                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+
+                    if (this.DepartureTime != null)
+                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                }
+
+                return parameters;
+            }          
         }
     }
 }

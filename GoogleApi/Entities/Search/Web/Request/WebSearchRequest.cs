@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Search.Common.Request;
 
 namespace GoogleApi.Entities.Search.Web.Request
@@ -29,16 +30,19 @@ namespace GoogleApi.Entities.Search.Web.Request
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
+            get
+            {
+                if (string.IsNullOrEmpty(this.SearchEngineId))
+                    throw new ArgumentException("SearchEngineId is required.");
 
-            if (string.IsNullOrEmpty(this.SearchEngineId))
-                throw new ArgumentException("SearchEngineId must not null.");
+                var parameters = base.QueryStringParameters;
 
-            parameters.Add("cx", this.SearchEngineId);
-            
-            return parameters;
+                parameters.Add("cx", this.SearchEngineId);
+
+                return parameters;
+            }
         }
     }
 }

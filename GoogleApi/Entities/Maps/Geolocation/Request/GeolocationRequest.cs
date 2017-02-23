@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
@@ -12,7 +13,10 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     [DataContract]
     public class GeolocationRequest : BaseMapsRequest, IJsonRequest
     {
-        private const string BASE_URL = "www.googleapis.com/geolocation/v1/geolocate";
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => "www.googleapis.com/geolocation/v1/geolocate";
 
         /// <summary>
         /// The carrier name.
@@ -58,8 +62,20 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         public virtual IEnumerable<WifiAccessPoint> WifiAccessPoints { get; set; }
 
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Get the query string collection of added parameters for the request.
         /// </summary>
-        protected internal override string BaseUrl => GeolocationRequest.BASE_URL;
+        /// <returns></returns>
+        public override IDictionary<string, string> QueryStringParameters
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this.Key))
+                    throw new ArgumentException("Key is required.");
+
+                var parameters = base.QueryStringParameters;
+
+                return parameters;
+            }
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace GoogleApi.Entities.Places.Add.Request
     public class PlacesAddRequest : BasePlacesRequest, IJsonRequest
     {
         /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "add/json";
+
+        /// <summary>
         /// Required. The full text name of the place. Limited to 255 characters.
         /// </summary>
         [DataMember(Name = "name")]
@@ -79,28 +84,26 @@ namespace GoogleApi.Entities.Places.Add.Request
         public virtual string Website { get; set; }
 
         /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "add/json";
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this.Name))
+                    throw new ArgumentException("Name must be provided.");
 
-            if (string.IsNullOrWhiteSpace(this.Name))
-                throw new ArgumentException("Name must be provided.");
+                if (this.Location == null)
+                    throw new ArgumentException("Location must be provided.");
 
-            if (this.Location == null)
-                throw new ArgumentException("Location must be provided.");
+                if (this.Types == null || !this.Types.Any())
+                    throw new ArgumentException("Types must be provided. At least one type must be specified.");
 
-            if (this.Types == null || !this.Types.Any())
-                throw new ArgumentException("Types must be provided. At least one type must be specified.");
+                var parameters = base.QueryStringParameters;
 
-            return parameters;
+                return parameters;
+            }
         }
     }
 }

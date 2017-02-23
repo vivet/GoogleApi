@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
@@ -9,14 +8,8 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
     /// SpeedLimits Response.
     /// </summary>
     [DataContract]
-    public class SpeedLimitsResponse : BaseResponse
+    public class SpeedLimitsResponse : BaseRoadsResponse
     {
-        /// <summary>
-        /// An array of snapped points
-        /// </summary>
-        [DataMember(Name = "snappedPoints")]
-        public virtual IEnumerable<SnappedPoint> SnappedPoints { get; set; }
-
         /// <summary>
         /// SpeedLimits — An array of road metadata. Each element consists of the following fields:
         /// </summary>

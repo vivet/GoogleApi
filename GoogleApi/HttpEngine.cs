@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,21 +19,21 @@ namespace GoogleApi
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public class FacadeEngine<TRequest, TResponse>
+    public sealed class HttpEngine<TRequest, TResponse>
         where TRequest : BaseRequest, new()
         where TResponse : IResponseFor
     {
         internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
-        internal static readonly FacadeEngine<TRequest, TResponse> instance = new FacadeEngine<TRequest, TResponse>();
+        internal static readonly HttpEngine<TRequest, TResponse> instance = new HttpEngine<TRequest, TResponse>();
 
         /// <summary>
-        /// Query the Google Maps API using the provided request with the default timeout of 100,000 milliseconds (100 seconds).
+        /// Query the Google Maps API using the provided request with the default timeout of 30 seconds.
         /// </summary>
         /// <param name="request">The request that will be sent.</param>
         /// <returns>The response that was received.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="TaskCanceledException">Thrown when the provided Google client ID or signing key are invalid.</exception>
-        public virtual TResponse Query(TRequest request)
+        public TResponse Query(TRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -49,12 +51,12 @@ namespace GoogleApi
         /// <returns>The response that was received.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="TaskCanceledException">Thrown when the provided Google client ID or signing key are invalid.</exception>
-        public virtual TResponse Query(TRequest request, TimeSpan timeout)
+        public TResponse Query(TRequest request, TimeSpan timeout)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return FacadeEngine<TRequest, TResponse>.HttpRequest(request, timeout).Result;
+            return this.HttpRequest(request, timeout).Result;
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace GoogleApi
         /// <param name="request">The request that will be sent.</param>
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        public virtual Task<TResponse> QueryAsync(TRequest request)
+        public Task<TResponse> QueryAsync(TRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -81,7 +83,7 @@ namespace GoogleApi
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public virtual Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout)
+        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -96,12 +98,12 @@ namespace GoogleApi
         /// <param name="token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        public virtual Task<TResponse> QueryAsync(TRequest request, CancellationToken token)
+        public Task<TResponse> QueryAsync(TRequest request, CancellationToken token)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return FacadeEngine<TRequest, TResponse>.HttpRequest(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
+            return this.HttpRequest(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
         }
 
         /// <summary>
@@ -115,21 +117,65 @@ namespace GoogleApi
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public virtual Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken token)
+        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken token)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return FacadeEngine<TRequest, TResponse>.HttpRequest(request, timeout, token);
+            return this.HttpRequest(request, timeout, token);
         }
 
         // Private methods.
-        private static Task<TResponse> HttpRequest(TRequest request, TimeSpan timeout, CancellationToken cancellationToken = default(CancellationToken))
+        private Uri GetUri(TRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            var uri = request.GetUri();
+            var scheme = request.IsSsl ? "https://" : "http://";
+            var queryString = string.Join("&", request.QueryStringParameters.Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
+            var uri = new Uri(scheme + request.BaseUrl + "?" + queryString);
+
+            return request.ClientId == null ? uri : this.SignUri(request, uri);
+        }
+        private Uri SignUri(TRequest request, Uri uri)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            if (uri == null)
+                throw new ArgumentNullException(nameof(uri));
+
+            var urlSegmentToSign = uri.LocalPath + uri.Query + "&client=" + request.ClientId;
+            var privateKey = this.FromBase64UrlString(request.Key);
+            byte[] signature;
+
+            using (var algorithm = new HMACSHA1(privateKey))
+            {
+                signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(urlSegmentToSign));
+            }
+
+            return new Uri(uri.Scheme + "://" + uri.Host + urlSegmentToSign + "&signature=" + this.ToBase64UrlString(signature));
+        }
+        private string ToBase64UrlString(byte[] data)
+        {
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+
+            return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_");
+        }
+        private byte[] FromBase64UrlString(string base64UrlString)
+        {
+            if (base64UrlString == null)
+                throw new ArgumentNullException(nameof(base64UrlString));
+
+            return Convert.FromBase64String(base64UrlString.Replace("-", "+").Replace("_", "/"));
+        }
+        private Task<TResponse> HttpRequest(TRequest request, TimeSpan timeout, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var uri = this.GetUri(request);
             var httpClient = new HttpClient { Timeout = timeout };
             var jsonString = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
@@ -137,8 +183,8 @@ namespace GoogleApi
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var task = request is IQueryStringRequest
-                    ? httpClient.GetAsync(uri, cancellationToken)
-                    : httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
+                ? httpClient.GetAsync(uri, cancellationToken)
+                : httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
 
             task.ContinueWith(x =>
             {
@@ -171,12 +217,14 @@ namespace GoogleApi
                         else
                         {
                             var jsonSerializer = new JsonSerializer();
-                             
+
                             using (var streamReader = new StreamReader(stream))
                             {
                                 response = jsonSerializer.Deserialize<TResponse>(new JsonTextReader(streamReader));
-                                response.RawJson = json;
                             }
+
+                            response.RawJson = json;
+                            response.RawQueryString = uri.PathAndQuery;
                         }
 
                         taskCompletionSource.SetResult(response);

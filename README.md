@@ -29,7 +29,7 @@ Google Places, Maps, Roads, Search and Translate Api integrations.
   * Place Autocomplete
   * Query Autocomplete
 
-##### Google Search (Beta*)
+##### Google Search (*Alpha*)
   * Web
   * Image
   * Enterprise (Paid)

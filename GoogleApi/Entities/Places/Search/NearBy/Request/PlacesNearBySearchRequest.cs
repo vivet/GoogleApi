@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Places.Search.Common;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
 
@@ -9,6 +10,11 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
     /// </summary>
     public class PlacesNearBySearchRequest : BasePlacesSearchRequest
     {
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "nearbysearch/json";
+
         /// <summary>
         /// name — One or more terms to be matched against the names of places, separated with a space character. 
         /// Results will be restricted to those containing the passed name values. Note that a place may have additional names associated with it, beyond its listed name. 
@@ -31,53 +37,48 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// - Distance. This option biases search results in ascending order by their distance from the specified location. When distance is specified, one or more of keyword, name, or types is required.
         /// If rankby=distance is specified, then one or more of keyword, name, or types is required.
         /// </summary>
-        public virtual Ranking Rankby { get; set; }
-
-        /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "nearbysearch/json";
+        public virtual Ranking Rankby { get; set; } = Ranking.Prominence;
 
         /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
-
-            if (this.Location == null)
-                throw new ArgumentException("Location must not be null");
-
-            if (this.Rankby == Ranking.Distance)
+            get
             {
-                if (this.Radius.HasValue)
-                    throw new ArgumentException("Radius must not have value when RankBy=distance");
+                if (this.Location == null)
+                    throw new ArgumentException("Location is required.");
 
-                if (string.IsNullOrWhiteSpace(this.Name) && string.IsNullOrWhiteSpace(this.Keyword) &&
-                    !this.Type.HasValue)
-                    throw new ArgumentException(
-                        "If rankby=distance is specified, then one or more of keyword, name or type is required.");
+                if (this.Rankby == Ranking.Distance)
+                {
+                    if (this.Radius.HasValue)
+                        throw new ArgumentException("Radius cannot be specified, when using RankBy distance");
+
+                    if (string.IsNullOrWhiteSpace(this.Name) && string.IsNullOrWhiteSpace(this.Keyword) && !this.Type.HasValue)
+                        throw new ArgumentException("Keyword or Name or Type is required, If rank by distance.");
+                }
+                else
+                {
+                    if (!this.Radius.HasValue)
+                        throw new ArgumentException("Radius is required, when RankBy is not Distance");
+
+                    if (this.Radius > 50000 || this.Radius < 1)
+                        throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+                }
+
+                var parameters = base.QueryStringParameters;
+
+                if (!string.IsNullOrWhiteSpace(this.Name))
+                    parameters.Add("name", this.Name);
+
+                if (!string.IsNullOrWhiteSpace(this.Keyword))
+                    parameters.Add("keyword", this.Keyword);
+
+                parameters.Add("rankby", this.Rankby.ToString().ToLower());
+
+                return parameters;
             }
-            else
-            {
-                if (!this.Radius.HasValue)
-                    throw new ArgumentException("Radius must not be null when RankBy is not Distance");
-
-                if (this.Radius > 50000 || this.Radius < 1)
-                    throw new ArgumentException(
-                        "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
-            }
-
-            if (!string.IsNullOrWhiteSpace(this.Name))
-                parameters.Add("name", this.Name);
-
-            if (!string.IsNullOrWhiteSpace(this.Keyword))
-                parameters.Add("keyword", this.Keyword);
-
-            parameters.Add("rankby", this.Rankby.ToString().ToLower());
-
-            return parameters;
         }
     }
 }

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
 using GoogleApi.Entities.Places.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.AutoComplete.Request
 {
@@ -19,6 +17,11 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
     /// </summary>
     public class PlacesAutoCompleteRequest : BasePlacesRequest, IQueryStringRequest
     {
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "autocomplete/json";
+
         /// <summary>
         /// The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
         /// </summary>
@@ -50,60 +53,49 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// </summary>
         public virtual IEnumerable<RestrictPlaceType> Types { get; set; }
 
-        [DataMember(Name = "types")]
-        protected IEnumerable<string> TypesStr
-        {
-            get { return Types?.Select(x => x.ToEnumString()) ?? new string[0]; }
-            set { this.Types = value.Select(x => x.ToEnum<RestrictPlaceType>()); }
-        }
-
         /// <summary>
         /// The component filters, separated by a pipe (|). Each component filter consists of a component:value pair and will fully restrict the results from the geocoder. For more information see Component Filtering.
         /// </summary>
         public virtual Dictionary<Component, string> Components { get; set; }
 
         /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "autocomplete/json";
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
+            get
+            {
+                var parameters = base.QueryStringParameters;
 
-            if (string.IsNullOrEmpty(this.Input))
-                throw new ArgumentException("Input must not null or empty");
+                if (string.IsNullOrEmpty(this.Input))
+                    throw new ArgumentException("Input is required.");
 
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException(
-                    "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+                if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
 
-            parameters.Add("input", this.Input);
+                parameters.Add("input", this.Input);
 
-            if (!string.IsNullOrEmpty(this.Offset))
-                parameters.Add("offset", this.Offset);
+                if (!string.IsNullOrEmpty(this.Offset))
+                    parameters.Add("offset", this.Offset);
 
-            if (this.Location != null)
-                parameters.Add("location", this.Location.ToString());
+                if (this.Location != null)
+                    parameters.Add("location", this.Location.ToString());
 
-            if (this.Radius.HasValue)
-                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+                if (this.Radius.HasValue)
+                    parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (!string.IsNullOrEmpty(this.Language))
-                parameters.Add("language", this.Language);
+                if (!string.IsNullOrEmpty(this.Language))
+                    parameters.Add("language", this.Language);
 
-            if (this.Types != null && this.Types.Any())
-                parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));
+                if (this.Types != null && this.Types.Any())
+                    parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));
 
-            if (this.Components != null && this.Components.Any())
-                parameters.Add("components",
-                    string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
+                if (this.Components != null && this.Components.Any())
+                    parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
 
-            return parameters;
+                return parameters;
+            }
         }
     }
 }

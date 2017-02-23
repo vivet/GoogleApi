@@ -12,7 +12,10 @@ namespace GoogleApi.Entities.Translate.Translate.Request
     /// </summary>
     public class TranslateRequest : BaseRequest, IQueryStringRequest
     {
-        private const string BASE_URL = "www.googleapis.com/language/translate/v2";
+        /// <summary>
+        /// BaseUrl property overriden.
+        /// </summary>
+        protected internal override string BaseUrl => "www.googleapis.com/language/translate/v2";
 
         /// <summary>
         /// Use the Source query parameter to specify the language you want to translate from. (optional)
@@ -25,9 +28,11 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         public virtual string Target { get; set; }
 
         /// <summary>
-        /// Use the q query parameter to identify the string to translate
+        /// This optional parameter allows you to indicate that the text to be translated is either plain-text or HTML. 
+        /// A value of html indicates HTML and a value of text indicates plain-text.
+        /// Default: format=html.
         /// </summary>
-        public virtual IEnumerable<string> Qs { get; set; }
+        public virtual Format Format { get; set; } = Format.Html;
 
         /// <summary>
         /// If prettyprint=true, the results returned by the server will be human readable (pretty printed).
@@ -36,10 +41,9 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         public virtual bool PrettyPrint { get; set; }
 
         /// <summary>
-        /// This optional parameter allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates HTML and a value of text indicates plain-text.
-        /// Default: format=html.
+        /// Use the q query parameter to identify the string to translate
         /// </summary>
-        public virtual Format Format { get; set; }
+        public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
         /// Always true. Setter is not supported.
@@ -51,40 +55,38 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         }
 
         /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => TranslateRequest.BASE_URL;
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            if (string.IsNullOrWhiteSpace(this.Key))
-                throw new ArgumentException("ApiKey is required");
-
-            if (string.IsNullOrWhiteSpace(this.Target))
-                throw new ArgumentException("Target is required");
-
-            if (this.Qs == null || !this.Qs.Any())
-                throw new ArgumentException("Qs is required");
-
-            var parameters = base.GetQueryStringParameters();
-
-            parameters.Add("target", this.Target);
-
-            foreach (var q in this.Qs)
+            get
             {
-                parameters.Add("q", q);
+                if (string.IsNullOrWhiteSpace(this.Key))
+                    throw new ArgumentException("Key is required.");
+
+                if (string.IsNullOrWhiteSpace(this.Target))
+                    throw new ArgumentException("Target is required");
+
+                if (this.Qs == null || !this.Qs.Any())
+                    throw new ArgumentException("Qs is required");
+
+                var parameters = base.QueryStringParameters;
+
+                parameters.Add("target", this.Target);
+                parameters.Add("format", this.Format.ToString().ToLower());
+                parameters.Add("prettyprint", this.PrettyPrint.ToString().ToLower());
+
+                if (!string.IsNullOrWhiteSpace(this.Source))
+                    parameters.Add("source", this.Source);
+
+                foreach (var q in this.Qs)
+                {
+                    parameters.Add("q", q);
+                }
+
+                return parameters;
             }
-
-            parameters.Add("prettyprint", this.PrettyPrint.ToString().ToLower());
-
-            if (!string.IsNullOrWhiteSpace(this.Source))
-                parameters.Add("source", this.Source);
-
-            return parameters;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
@@ -63,35 +64,40 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
+            get
+            {
+                {
+                    var parameters = base.QueryStringParameters;
 
-            if (Location != null)
-                parameters.Add("location", Location.ToString());
+                    if (Location != null)
+                        parameters.Add("location", Location.ToString());
 
-            if (this.Radius.HasValue)
-                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+                    if (this.Radius.HasValue)
+                        parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (!string.IsNullOrEmpty(Language))
-                parameters.Add("language", Language);
+                    if (!string.IsNullOrEmpty(Language))
+                        parameters.Add("language", Language);
 
-            if (!string.IsNullOrWhiteSpace(this.PageToken))
-                parameters.Add("pagetoken", this.PageToken);
+                    if (!string.IsNullOrWhiteSpace(this.PageToken))
+                        parameters.Add("pagetoken", this.PageToken);
 
-            if (this.Type.HasValue)
-                parameters.Add("type", this.Type.Value.ToString().ToLower());
+                    if (this.Type.HasValue)
+                        parameters.Add("type", this.Type.Value.ToString().ToLower());
 
-            if (this.Minprice.HasValue)
-                parameters.Add("minprice", this.Minprice.Value.ToString().ToLower());
+                    if (this.Minprice.HasValue)
+                        parameters.Add("minprice", this.Minprice.Value.ToString().ToLower());
 
-            if (this.Maxprice.HasValue)
-                parameters.Add("maxprice", this.Maxprice.Value.ToString().ToLower());
+                    if (this.Maxprice.HasValue)
+                        parameters.Add("maxprice", this.Maxprice.Value.ToString().ToLower());
 
-            if (this.OpenNow)
-                parameters.Add("opennow", "");
+                    if (this.OpenNow)
+                        parameters.Add("opennow", "");
 
-            return parameters;
+                    return parameters;
+                }
+            }
         }
     }
 }

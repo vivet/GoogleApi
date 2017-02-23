@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Roads.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Response
@@ -9,12 +7,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Response
     /// SnapToRoads Response.
     /// </summary>
     [DataContract]
-    public class SnapToRoadsResponse : BaseResponse
+    public class SnapToRoadsResponse : BaseRoadsResponse
     {
-        /// <summary>
-        /// An array of snapped points
-        /// </summary>
-        [DataMember(Name = "snappedPoints")]
-        public virtual IEnumerable<SnappedPoint> SnappedPoints { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
@@ -12,6 +13,11 @@ namespace GoogleApi.Entities.Places.Delete.Request
     public class PlacesDeleteRequest : BasePlacesRequest, IJsonRequest
     {
         /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "delete/json";
+
+        /// <summary>
         /// A textual identifier that uniquely identifies a place. To retrieve information about the place, pass this identifier in the placeid field of a Place request. 
         /// For more information about place IDs, see the place ID overview.
         /// </summary>
@@ -19,22 +25,20 @@ namespace GoogleApi.Entities.Places.Delete.Request
         public virtual string PlaceId { get; set; }
 
         /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "delete/json";
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this.PlaceId))
+                    throw new ArgumentException("PlaceId is required.");
 
-            if (string.IsNullOrWhiteSpace(this.PlaceId))
-                throw new ArgumentException("PlaceId must be provided.");
+                var parameters = base.QueryStringParameters;
 
-            return parameters;
+                return parameters;
+            }
         }
     }
 }

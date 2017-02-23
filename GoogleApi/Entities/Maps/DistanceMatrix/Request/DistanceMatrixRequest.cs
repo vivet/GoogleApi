@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
@@ -13,6 +14,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
     /// </summary>
     public class DistanceMatrixRequest : BaseMapsRequest, IQueryStringRequest
     {
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
+
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. If you pass an address as a string, 
         /// the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values.
@@ -31,7 +37,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Units=imperial returns distances in miles and feet.
         /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
         /// </summary>
-        public virtual Units Units { get; set; }
+        public virtual Units Units { get; set; } = Units.Metric;
 
         /// <summary>
         /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
@@ -44,19 +50,19 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Restrictions are indicated by use of the avoid parameter, and an argument to that parameter indicating the restriction to avoid. 
         /// The following estrictions are supported <see cref="GoogleApi.Entities.Maps.Common.Enums.AvoidWay"/>
         /// </summary>
-        public virtual AvoidWay Avoid { get; set; }
+        public virtual AvoidWay Avoid { get; set; } = AvoidWay.Nothing;
 
         /// <summary>
         /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
         /// </summary>
-        public virtual TravelMode TravelMode { get; set; }
+        public virtual TravelMode TravelMode { get; set; } = TravelMode.Driving;
 
         /// <summary>
         /// Specifies one or more preferred modes of transit. 
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments <see cref="Common.Enums.TransitMode"/>
         /// </summary>
-        public virtual TransitMode TransitMode { get; set; }
+        public virtual TransitMode TransitMode { get; set; } = TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram;
 
         /// <summary>
         /// Specifies preferences for transit requests. 
@@ -64,7 +70,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments: <see cref="Common.Enums.TransitRoutingPreference"/>
         /// </summary>
-        public virtual TransitRoutingPreference TransitRoutingPreference { get; set; }
+        public virtual TransitRoutingPreference TransitRoutingPreference { get; set; } = TransitRoutingPreference.Nothing;
 
         /// <summary>
         /// The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. Alternatively, you can specify a value of now, which sets the departure time to the current time (correct to the nearest second). 
@@ -74,13 +80,13 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Note: Requests that include the departure_time parameter are limited to 100 elements
         /// Note: You can specify either DepartureTime or ArrivalTime, but not both
         /// </summary>
-        public virtual DateTime DepartureTime { get; set; }
+        public virtual DateTime? DepartureTime { get; set; }
 
         /// <summary>
         /// Specifies the desired time of arrival for transit requests, in seconds since midnight, January 1, 1970 UTC. 
         /// Note: You can specify either DepartureTime or ArrivalTime, but not both
         /// </summary>
-        public virtual DateTime ArrivalTime { get; set; }
+        public virtual DateTime? ArrivalTime { get; set; }
 
         /// <summary>
         /// language (optional) — The language in which to return results. See the supported list of domain languages. 
@@ -92,74 +98,51 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual string Language { get; set; }
 
         /// <summary>
-        /// Defatult Constructor
-        /// </summary>
-        public DistanceMatrixRequest()
-        {
-            this.Units = Units.Metric;
-            this.Avoid = AvoidWay.Nothing;
-            this.TravelMode = TravelMode.Driving;
-            this.TransitMode = TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram;
-            this.TransitRoutingPreference = TransitRoutingPreference.Nothing;
-        }
-
-        /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            if (this.Origins == null)
-                throw new ArgumentException("Must specify an Origins");
-
-            if (this.Destinations == null)
-                throw new ArgumentException("Must specify a Destinations");
-
-            if (!Enum.IsDefined(typeof(AvoidWay), this.Avoid))
-                throw new ArgumentException("Invalid enumeration value for 'Avoid'");
-
-            if (!Enum.IsDefined(typeof(TravelMode), this.TravelMode))
-                throw new ArgumentException("Invalid enumeration value for 'TravelMode'");
-
-            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == default(DateTime) &&
-                this.ArrivalTime == default(DateTime))
-                throw new ArgumentException("You must set either DepatureTime or ArrivalTime when TravelMode = Transit");
-
-            var parameters = base.GetQueryStringParameters();
-
-            parameters.Add("origins", string.Join("|", this.Origins));
-            parameters.Add("destinations", string.Join("|", this.Destinations));
-            parameters.Add("mode", this.TravelMode.ToString().ToLower());
-            parameters.Add("units", this.Units.ToString().ToLower());
-
-            if (!string.IsNullOrWhiteSpace(this.Language))
-                parameters.Add("language", this.Language);
-
-            if (this.Avoid != AvoidWay.Nothing)
-                parameters.Add("avoid", this.Avoid.ToEnumString('|'));
-
-            if (this.TravelMode == TravelMode.Transit)
+            get
             {
-                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+                if (this.Origins == null || !this.Origins.Any())
+                    throw new ArgumentException("Origins is required.");
 
-                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+                if (this.Destinations == null || !this.Destinations.Any())
+                    throw new ArgumentException("Destinations is required.");
 
-                if (this.ArrivalTime != default(DateTime))
-                    parameters.Add("arrival_time",
-                        this.ArrivalTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
+                    throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit.");
 
-                if (this.DepartureTime != default(DateTime))
-                    parameters.Add("departure_time",
-                        this.DepartureTime.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                var parameters = base.QueryStringParameters;
+
+                if (!string.IsNullOrWhiteSpace(this.Language))
+                    parameters.Add("language", this.Language);
+
+                parameters.Add("origins", string.Join("|", this.Origins));
+                parameters.Add("destinations", string.Join("|", this.Destinations));
+                parameters.Add("mode", this.TravelMode.ToString().ToLower());
+                parameters.Add("units", this.Units.ToString().ToLower());
+
+                if (this.Avoid != AvoidWay.Nothing)
+                    parameters.Add("avoid", this.Avoid.ToEnumString('|'));
+
+                if (this.TravelMode == TravelMode.Transit)
+                {
+                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+
+                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+
+                    if (this.ArrivalTime != null)
+                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+
+                    if (this.DepartureTime != null)
+                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                }
+
+                return parameters;
             }
-
-            return parameters;
         }
     }
 }

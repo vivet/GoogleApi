@@ -45,7 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Engine\EngineFacadeTest.cs" />
+    <Compile Include="HttpEngineTest.cs" />
     <Compile Include="Extensions\DateTimeExtensionTest.cs" />
     <Compile Include="Extensions\EnumExtensionTest.cs" />
     <Compile Include="Extensions\StringExtensionTest.cs" />
@@ -54,7 +54,6 @@
     <Compile Include="GooglePlacesTest.cs" />
     <Compile Include="GoogleSearchTest.cs" />
     <Compile Include="GoogleTranslateTest.cs" />
-    <Compile Include="Entities\QueryStringParametersTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

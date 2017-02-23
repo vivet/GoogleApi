@@ -13,9 +13,14 @@ namespace GoogleApi.Entities.Common
     public abstract class BaseResponse : IResponseFor
     {
         /// <summary>
-        /// The raw json returned, if any.
+        /// The raw json of the response.
         /// </summary>
         public virtual string RawJson { get; set; }
+
+        /// <summary>
+        /// The raw querystring of the request.
+        /// </summary>
+        public virtual string RawQueryString { get; set; }
 
         /// <summary>
         /// "status" contains metadata on the request.

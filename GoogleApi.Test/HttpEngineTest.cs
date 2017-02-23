@@ -4,10 +4,10 @@ using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Engine
+namespace GoogleApi.Test
 {
     [TestFixture]
-    public class EngineFacadeTest : BaseTest
+    public class HttpEngineTest : BaseTest
     {
         [Test]
         public void QueryTest()
@@ -17,13 +17,13 @@ namespace GoogleApi.Test.Engine
         [Test]
         public void QueryWhenRequestIsNullTest()
         {
-            var engine = new FacadeEngine<TestRequest, TestResponse>();
+            var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.Query(null));
         }
         [Test]
         public void QueryWhenTimeoutAndRequestIsNullTest()
         {
-            var engine = new FacadeEngine<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>();
+            var engine = new HttpEngine<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.Query(null, new TimeSpan()));
         }
 
@@ -35,25 +35,25 @@ namespace GoogleApi.Test.Engine
         [Test]
         public void QueryAsyncWhenRequestIsNullTest()
         {
-            var engine = new FacadeEngine<TestRequest, TestResponse>();
+            var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null));
         }
         [Test]
         public void QueryAsyncWhenRequestIsNullAndTimeoutTest()
         {
-            var engine = new FacadeEngine<TestRequest, TestResponse>();
+            var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan()));
         }
         [Test]
         public void QueryAsyncWhenRequestIsNullAndCancellationTokenTest()
         {
-            var engine = new FacadeEngine<TestRequest, TestResponse>();
+            var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new CancellationToken()));
         }
         [Test]
         public void QueryAsyncWhenRequestIsNullAndTimeoutAndCancellationTokenTest()
         {
-            var engine = new FacadeEngine<TestRequest, TestResponse>();
+            var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
         }
     }

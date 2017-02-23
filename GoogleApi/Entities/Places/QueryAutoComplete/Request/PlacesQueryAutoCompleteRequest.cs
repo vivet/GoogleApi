@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
@@ -11,6 +12,11 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
     /// </summary>
     public class PlacesQueryAutoCompleteRequest : BasePlacesRequest, IQueryStringRequest
     {
+        /// <summary>
+        /// BaseUrl property overridden.
+        /// </summary>
+        protected internal override string BaseUrl => base.BaseUrl + "queryautocomplete/json";
+
         /// <summary>
         /// The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
         /// </summary>
@@ -37,40 +43,37 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         public virtual string Language { get; set; }
 
         /// <summary>
-        /// BaseUrl property overridden.
-        /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "queryautocomplete/json";
-
-        /// <summary>
         /// Get the query string collection of added parameters for the request.
         /// </summary>
         /// <returns></returns>
-        protected override QueryStringParameters GetQueryStringParameters()
+        public override IDictionary<string, string> QueryStringParameters
         {
-            var parameters = base.GetQueryStringParameters();
+            get
+            {
+                if (string.IsNullOrEmpty(this.Input))
+                    throw new ArgumentException("Input is required.");
 
-            if (string.IsNullOrEmpty(this.Input))
-                throw new ArgumentException("Input must not null or empty");
+                if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
 
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException(
-                    "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+                var parameters = base.QueryStringParameters;
 
-            parameters.Add("input", this.Input);
+                parameters.Add("input", this.Input);
 
-            if (!string.IsNullOrEmpty(this.Offset))
-                parameters.Add("offset", this.Offset);
+                if (!string.IsNullOrEmpty(this.Offset))
+                    parameters.Add("offset", this.Offset);
 
-            if (this.Location != null)
-                parameters.Add("location", this.Location.ToString());
+                if (this.Location != null)
+                    parameters.Add("location", this.Location.ToString());
 
-            if (this.Radius.HasValue)
-                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+                if (this.Radius.HasValue)
+                    parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (!string.IsNullOrEmpty(this.Language))
-                parameters.Add("language", this.Language);
+                if (!string.IsNullOrEmpty(this.Language))
+                    parameters.Add("language", this.Language);
 
-            return parameters;
+                return parameters;
+            }
         }
     }
 }
