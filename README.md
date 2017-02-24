@@ -4,11 +4,6 @@ Supports Maps, Places, Roads, Custom Search and Translate.
 
 https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.3)
 
-###### Coming next (v2.6):
-  * Add new Forward Geocoder (https://developers.google.com/maps/documentation/geocoding/faq)
-  * Finalizing search implementation (opensearch spec, Search Request Fields (https://developers.google.com/custom-search/json-api/v1/performance))
-  * Improving test suite, implement inconclusive tests.  
-
 ### Google Api Integrations:
 ##### Google Maps
   * Directions
