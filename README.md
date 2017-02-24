@@ -1,12 +1,11 @@
-## GoogleApi v2.5.0 (net4.5, netstandard1.3)
-C# .NET Google Web Services Api. (https://www.nuget.org/packages/GoogleApi/)  
-Google Places, Maps, Roads, Search and Translate Api integrations.  
+## GoogleApi v2.5.0
+https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.3)
 
-### Coming next (v2.6):
+###### Coming next (v2.6):
   * Add new Forward Geocoder (https://developers.google.com/maps/documentation/geocoding/faq)
   * Finalizing search implementation (opensearch spec, Search Request Fields (https://developers.google.com/custom-search/json-api/v1/performance))
   * Improving test suite, implement inconclusive tests.  
-  
+
 ### Google Api Integrations:
 ##### Google Maps
   * Directions
