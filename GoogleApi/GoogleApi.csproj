@@ -9,7 +9,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>bin\Debug\GoogleApi.XML</DocumentationFile>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <Description>Google Places, Maps, Roads Search and Translate integrations. Requsts and Reponses are complete with Google Api documentation</Description>
+    <Description>Google Places, Maps, Roads, Search and Translate integrations. Requests and Responses are complete with Google Api documentation.</Description>
     <Product>GoogleApi</Product>
     <Company />
     <Authors>Michael Vivet</Authors>
