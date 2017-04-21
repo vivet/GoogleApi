@@ -126,6 +126,9 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\AvoidWay.cs">
       <Link>Entities\Maps\Common\Enums\AvoidWay.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\TrafficModel.cs">
+      <Link>Entities\Maps\Common\Enums\TrafficModel.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Common\Enums\TransitMode.cs">
       <Link>Entities\Maps\Common\Enums\TransitMode.cs</Link>
     </Compile>
