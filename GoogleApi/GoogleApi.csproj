@@ -13,9 +13,9 @@
     <Product>GoogleApi</Product>
     <Company />
     <Authors>Michael Vivet</Authors>
-    <Version>2.5.0</Version>
+    <Version>2.5.1</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geocode geocoder geocoding search text nearby radar translate translation geolocation nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete</PackageTags>
+    <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geocode geocoder geocoding search text nearby radar translate translation geolocation nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic</PackageTags>
     <PackageReleaseNotes>
     </PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/vivet/GoogleApi/blob/master/UNLICENSE.txt</PackageLicenseUrl>
