@@ -1,4 +1,4 @@
-## GoogleApi v2.5.0
+## GoogleApi v2.5.1
 Simple and easy Google Api integrations.  
 Supports Maps, Places, Roads, Custom Search and Translate.
 
