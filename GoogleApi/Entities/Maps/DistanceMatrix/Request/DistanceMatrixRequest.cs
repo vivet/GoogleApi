@@ -60,6 +60,15 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual TravelMode TravelMode { get; set; } = TravelMode.Driving;
 
         /// <summary>
+        /// Traffic mdel (defaults to best_guess).
+        /// Specifies the assumptions to use when calculating time in traffic. This setting affects the value returned 
+        /// in the duration_in_traffic field in the response, which contains the predicted time in traffic based on historical averages.
+        /// The traffic_model parameter may only be specified for requests where the travel mode is driving, and where the request includes a departure_time, 
+        /// and only if the request includes an API key or a Google Maps APIs Premium Plan client ID.The available values for this parameter are:
+        /// </summary>
+        public virtual TrafficModel TrafficModel { get; set; } = TrafficModel.Best_Guess;
+
+        /// <summary>
         /// Specifies one or more preferred modes of transit. 
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments <see cref="Common.Enums.TransitMode"/>
@@ -141,6 +150,17 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                         parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
                 }
 
+                if (this.TravelMode == TravelMode.Driving)
+                {
+                    if (this.DepartureTime != null)
+                    {
+                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+
+                        if (this.Key != null || this.ClientId != null)
+                            parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                    }
+                }
+    
                 return parameters;
             }
         }
