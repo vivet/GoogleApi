@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
     /// <summary>
     /// Elevation Request.
     /// </summary>
-    public class ElevationRequest : BaseMapsRequest, IQueryStringRequest
+    public class ElevationRequest : BaseMapsChannelRequest, IQueryStringRequest
     {
         /// <summary>
         /// BaseUrl property overridden.

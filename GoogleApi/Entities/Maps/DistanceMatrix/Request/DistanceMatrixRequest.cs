@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
     /// <summary>
     /// DistanceMatrix Request.
     /// </summary>
-    public class DistanceMatrixRequest : BaseMapsRequest, IQueryStringRequest
+    public class DistanceMatrixRequest : BaseMapsChannelRequest, IQueryStringRequest
     {
         /// <summary>
         /// BaseUrl property overridden.

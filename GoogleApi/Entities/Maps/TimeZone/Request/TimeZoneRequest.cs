@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
     /// <summary>
     /// TimeZone Request.
     /// </summary>
-    public class TimeZoneRequest : BaseMapsRequest, IQueryStringRequest
+    public class TimeZoneRequest : BaseMapsChannelRequest, IQueryStringRequest
     {
         private const string BASE_URL = "maps.googleapis.com/maps/api/timezone/json";
 

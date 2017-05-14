@@ -12,10 +12,10 @@ namespace GoogleApi.Entities.Maps.Common
         /// BaseUrl property overriden.
         /// </summary>
         protected internal override string BaseUrl => "maps.google.com/maps/api/";
-
+     
         /// <summary>
-                                                                                          /// Always true. Setter is not supported.
-                                                                                          /// </summary>
+        /// Always true. Setter is not supported.
+        /// </summary>
         public override bool IsSsl
         {
             get { return true; }

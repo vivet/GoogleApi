@@ -13,7 +13,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
     /// <summary>
     /// Directions Request.
     /// </summary>
-    public class DirectionsRequest : BaseMapsRequest, IQueryStringRequest
+    public class DirectionsRequest : BaseMapsChannelRequest, IQueryStringRequest
     {
         /// <summary>
         /// BaseUrl property overridden.

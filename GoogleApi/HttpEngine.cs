@@ -145,16 +145,16 @@ namespace GoogleApi
             if (uri == null)
                 throw new ArgumentNullException(nameof(uri));
 
-            var urlSegmentToSign = uri.LocalPath + uri.Query + "&client=" + request.ClientId;
+            var url = uri.LocalPath + uri.Query + "&client=" + request.ClientId;
             var privateKey = this.FromBase64UrlString(request.Key);
-            byte[] signature;
 
+            byte[] signature;
             using (var algorithm = new HMACSHA1(privateKey))
             {
-                signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(urlSegmentToSign));
+                signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(url));
             }
 
-            return new Uri(uri.Scheme + "://" + uri.Host + urlSegmentToSign + "&signature=" + this.ToBase64UrlString(signature));
+            return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + this.ToBase64UrlString(signature));
         }
         private string ToBase64UrlString(byte[] data)
         {
