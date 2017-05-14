@@ -5,7 +5,7 @@ https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.3)
 
 
 NOTE: Feel free to report any issues, as well as create a PR for suggested changes / fixes.  
-
+UPCOMING: Version 3.0 (July / August 2017).
 
 ### Google Api Integrations:
 ##### Google Maps
