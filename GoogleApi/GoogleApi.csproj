@@ -13,7 +13,7 @@
     <Product>GoogleApi</Product>
     <Company />
     <Authors>Michael Vivet</Authors>
-    <Version>2.5.1</Version>
+    <Version>2.5.2</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geocode geocoder geocoding search text nearby radar translate translation geolocation nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic</PackageTags>
     <PackageReleaseNotes>
@@ -25,6 +25,8 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <PackageIconUrl>https://github.com/vivet/GoogleApi/blob/master/icon.ico</PackageIconUrl>
+    <AssemblyVersion>2.5.2.0</AssemblyVersion>
+    <FileVersion>2.5.2.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
