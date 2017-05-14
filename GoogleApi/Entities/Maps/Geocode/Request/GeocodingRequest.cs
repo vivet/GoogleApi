@@ -13,7 +13,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
     /// <summary>
     /// Geocoding Request.
     /// </summary>
-    public class GeocodingRequest : BaseMapsRequest, IQueryStringRequest
+    public class GeocodingRequest : BaseMapsChannelRequest, IQueryStringRequest
     {
         /// <summary>
         /// BaseUrl property overridden.

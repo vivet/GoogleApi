@@ -114,6 +114,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Status.cs">
       <Link>Entities\Common\Status.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsChannelRequest.cs">
+      <Link>Entities\Maps\Common\BaseMapsChannelRequest.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsRequest.cs">
       <Link>Entities\Maps\Common\BaseMapsRequest.cs</Link>
     </Compile>
