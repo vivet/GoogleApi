@@ -1,4 +1,4 @@
-## GoogleApi v2.5.1
+## GoogleApi v2.5.2
 Simple and easy Google Api integrations.  
 Supports Maps, Places, Roads, Custom Search and Translate.  
 https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.3)
