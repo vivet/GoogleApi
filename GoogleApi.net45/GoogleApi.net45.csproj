@@ -52,6 +52,12 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -69,6 +75,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="GoogleApi.snk" />
     <None Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
