@@ -21,12 +21,23 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         protected internal override string BaseUrl => base.BaseUrl + "directions/json";
 
         /// <summary>
-        /// origin (required) — The address or textual latitude/longitude value from which you wish to calculate directions. *
+        /// origins — The starting point for calculating travel distance and time. 
+        /// You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, or a placeID.
+        /// If you pass an address, the service geocodes the string and converts it to a latitude/longitude coordinate to calculate distance.
+        /// This coordinate may be different from that returned by the Google Maps Geocoding API, for example a building entrance rather than its center. 
+        /// Example: "origins=Bobcaygeon+ON|24+Sussex+Drive+Ottawa+ON".
+        /// If you pass latitude/longitude coordinates, they are used unchanged to calculate distance.
+        /// Ensure that no space exists between the latitude and longitude values. If you supply a place ID, you must prefix it with place_id. 
+        /// Example: "origins= 41.43206,-81.38992|-33.86748,151.20699".
+        /// You can only specify a placeID if the request includes an API key or a Google Maps APIs Premium Plan client ID.
+        /// You can retrieve place IDs from the Google Maps Geocoding API and the Google Places API (including Place Autocomplete). 
+        /// For an example using place IDs from Place Autocomplete, see Place Autocomplete and Directions.For more about place IDs, see the place ID overview. "origins= place_id:ChIJ3S-JXmauEmsRUcIaWtf4MzE".
         /// </summary>
         public virtual string Origin { get; set; }
 
         /// <summary>
-        /// destination (required) — The address or textual latitude/longitude value from which you wish to calculate directions.*
+        /// The address, textual latitude/longitude value, or place ID to which you wish to calculate directions. 
+        /// The options for the destination parameter are the same as for the <see cref="Origin"/> parameter, described above.
         /// </summary>
         public virtual string Destination { get; set; }
 

@@ -22,16 +22,44 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         protected internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
 
         /// <summary>
-        /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. If you pass an address as a string, 
-        /// the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values.
+        /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. 
+        /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
+        /// If you pass coordinates, ensure that no space exists between the latitude and longitude values.
         /// </summary>
         public virtual IEnumerable<ILocationString> Origins { get; set; }
 
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, to which to calculate distance and time. 
-        /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. If you pass coordinates, ensure that no space exists between the latitude and longitude values
+        /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
+        /// If you pass coordinates, ensure that no space exists between the latitude and longitude values
         /// </summary>
         public virtual IEnumerable<ILocationString> Destinations { get; set; }
+
+        /// <summary>
+        /// origins — The starting point for calculating travel distance and time. 
+        /// You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, or a placeID.
+        /// If you pass an address, the service geocodes the string and converts it to a latitude/longitude coordinate to calculate distance.
+        /// This coordinate may be different from that returned by the Google Maps Geocoding API, for example a building entrance rather than its center. 
+        /// Example: "origins=Bobcaygeon+ON|24+Sussex+Drive+Ottawa+ON".
+        /// If you pass latitude/longitude coordinates, they are used unchanged to calculate distance.
+        /// Ensure that no space exists between the latitude and longitude values. If you supply a place ID, you must prefix it with place_id. 
+        /// Example: "origins= 41.43206,-81.38992|-33.86748,151.20699".
+        /// You can only specify a placeID if the request includes an API key or a Google Maps APIs Premium Plan client ID.
+        /// You can retrieve place IDs from the Google Maps Geocoding API and the Google Places API (including Place Autocomplete). 
+        /// For an example using place IDs from Place Autocomplete, see Place Autocomplete and Directions.For more about place IDs, see the place ID overview. "origins= place_id:ChIJ3S-JXmauEmsRUcIaWtf4MzE".
+        /// Alternatively, you can supply an encoded set of coordinates using the Encoded Polyline Algorithm.
+        /// This is particularly useful if you have a large number of origin points, because the URL is significantly shorter when using an encoded polyline. 
+        /// Example: Encoded polylines must be prefixed with enc: and followed by a colon (:). Example: "origins=enc:gfo}EtohhU:".
+        /// You can also include multiple encoded polylines, separated by the pipe character(|). 
+        /// Example: "origins=enc:wc ~oAwquwMdlTxiKtqLyiK:|enc:c ~vnAamswMvlTor@tjGi}L:|enc:udymA{~bxM:".
+        /// </summary>
+        public virtual string OriginsRaw { get; set; }
+
+        /// <summary>
+        /// destinations — One or more locations to use as the finishing point for calculating travel distance and time. 
+        /// The options for the destinations parameter are the same as for the <see cref="OriginsFormatted"/> parameter, described above.
+        /// </summary>
+        public virtual string DestinationsRaw { get; set; }
 
         /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
@@ -116,10 +144,10 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         {
             get
             {
-                if (this.Origins == null || !this.Origins.Any())
+                if (string.IsNullOrEmpty(this.OriginsFormatted) ||  this.Origins == null || !this.Origins.Any())
                     throw new ArgumentException("Origins is required.");
 
-                if (this.Destinations == null || !this.Destinations.Any())
+                if (string.IsNullOrEmpty(this.DestinationsFormatted) || this.Destinations == null || !this.Destinations.Any())
                     throw new ArgumentException("Destinations is required.");
 
                 if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
@@ -127,8 +155,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
                 var parameters = base.QueryStringParameters;
 
-                parameters.Add("origins", string.Join("|", this.Origins));
-                parameters.Add("destinations", string.Join("|", this.Destinations));
+                parameters.Add("origins", string.IsNullOrEmpty(this.OriginsFormatted) ? string.Join("|", this.Origins) : this.OriginsFormatted);
+                parameters.Add("destinations", string.IsNullOrEmpty(this.DestinationsFormatted) ? string.Join("|", this.Destinations) : this.DestinationsFormatted);
                 parameters.Add("mode", this.TravelMode.ToString().ToLower());
                 parameters.Add("units", this.Units.ToString().ToLower());
                 parameters.Add("language", this.Language.ToCode());
