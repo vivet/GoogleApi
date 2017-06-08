@@ -57,7 +57,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
         /// <summary>
         /// destinations — One or more locations to use as the finishing point for calculating travel distance and time. 
-        /// The options for the destinations parameter are the same as for the <see cref="OriginsFormatted"/> parameter, described above.
+        /// The options for the destinations parameter are the same as for the <see cref="OriginsRaw"/> parameter, described above.
         /// </summary>
         public virtual string DestinationsRaw { get; set; }
 
@@ -144,10 +144,10 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         {
             get
             {
-                if (string.IsNullOrEmpty(this.OriginsFormatted) ||  this.Origins == null || !this.Origins.Any())
+                if (string.IsNullOrEmpty(this.OriginsRaw) ||  this.Origins == null || !this.Origins.Any())
                     throw new ArgumentException("Origins is required.");
 
-                if (string.IsNullOrEmpty(this.DestinationsFormatted) || this.Destinations == null || !this.Destinations.Any())
+                if (string.IsNullOrEmpty(this.DestinationsRaw) || this.Destinations == null || !this.Destinations.Any())
                     throw new ArgumentException("Destinations is required.");
 
                 if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
@@ -155,8 +155,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
                 var parameters = base.QueryStringParameters;
 
-                parameters.Add("origins", string.IsNullOrEmpty(this.OriginsFormatted) ? string.Join("|", this.Origins) : this.OriginsFormatted);
-                parameters.Add("destinations", string.IsNullOrEmpty(this.DestinationsFormatted) ? string.Join("|", this.Destinations) : this.DestinationsFormatted);
+                parameters.Add("origins", string.IsNullOrEmpty(this.OriginsRaw) ? string.Join("|", this.Origins) : this.OriginsRaw);
+                parameters.Add("destinations", string.IsNullOrEmpty(this.DestinationsRaw) ? string.Join("|", this.Destinations) : this.DestinationsRaw);
                 parameters.Add("mode", this.TravelMode.ToString().ToLower());
                 parameters.Add("units", this.Units.ToString().ToLower());
                 parameters.Add("language", this.Language.ToCode());
