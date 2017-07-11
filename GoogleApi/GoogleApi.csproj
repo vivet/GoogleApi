@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard1.2</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Optimize>True</Optimize>
     <NoWarn>618;1591</NoWarn>
@@ -32,5 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.2" />
   </ItemGroup>
 </Project>

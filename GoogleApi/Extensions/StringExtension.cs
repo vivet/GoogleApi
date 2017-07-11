@@ -17,7 +17,7 @@ namespace GoogleApi.Extensions
         /// <param name="str"></param>
         /// <returns></returns>
         public static T ToEnum<T>(this string str)
-            where T : struct, IConvertible
+            where T : struct
         {
             if (str == null)
                 throw new ArgumentNullException(nameof(str));

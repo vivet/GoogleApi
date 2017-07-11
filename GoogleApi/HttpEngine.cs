@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +10,9 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Photos.Response;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Crypto.Macs;
+using Org.BouncyCastle.Crypto.Parameters;
 
 namespace GoogleApi
 {
@@ -146,13 +148,16 @@ namespace GoogleApi
                 throw new ArgumentNullException(nameof(uri));
 
             var url = uri.LocalPath + uri.Query + "&client=" + request.ClientId;
+            var bytes = Encoding.UTF8.GetBytes(url);
             var privateKey = this.FromBase64UrlString(request.Key);
 
-            byte[] signature;
-            using (var algorithm = new HMACSHA1(privateKey))
-            {
-                signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(url));
-            }
+            var hmac = new HMac(new Sha256Digest());
+            hmac.Init(new KeyParameter(privateKey));
+
+            var signature = new byte[hmac.GetMacSize()];
+
+            hmac.BlockUpdate(bytes, 0, bytes.Length);
+            hmac.DoFinal(signature, 0);
 
             return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + this.ToBase64UrlString(signature));
         }
