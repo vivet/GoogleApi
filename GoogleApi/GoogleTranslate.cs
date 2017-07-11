@@ -1,18 +1,35 @@
-﻿using GoogleApi.Entities.Translate.Translate.Request;
+﻿using GoogleApi.Entities.Translate.Detect.Request;
+using GoogleApi.Entities.Translate.Detect.Response;
+using GoogleApi.Entities.Translate.Languages.Request;
+using GoogleApi.Entities.Translate.Languages.Response;
+using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Response;
 
 namespace GoogleApi
 {
     /// <summary>
-    /// With Google Translate, you can dynamically translate text between thousands of language pairs.
-    /// The Google Translate API lets websites and programs integrate with Google Translate programmatically
-    /// Documentation: https://cloud.google.com/translate/v2/getting_started
+    /// Google Translate dynamically translates text between thousands of language pairs.
+    /// https://cloud.google.com/translate/docs/reference/rest
+    /// Supported Languages: https://cloud.google.com/translate/docs/languages
     /// </summary>
     public class GoogleTranslate
     {
         /// <summary>
-        /// This document details the background knowledge that you need to use the Google Translate API v2.
+        /// Translates input text, returning translated text.
+        /// https://cloud.google.com/translate/docs/reference/translate
         /// </summary>
         public static HttpEngine<TranslateRequest, TranslateResponse> Translate => HttpEngine<TranslateRequest, TranslateResponse>.instance;
+
+        /// <summary>
+        /// Detects the language of text within a request.
+        /// https://cloud.google.com/translate/docs/reference/detect
+        /// </summary>
+        public static HttpEngine<DetectRequest, DetectResponse> Detect => HttpEngine<DetectRequest, DetectResponse>.instance;
+
+        /// <summary>
+        /// Returns a list of supported languages for translation.
+        /// https://cloud.google.com/translate/docs/reference/languages
+        /// </summary>
+        public static HttpEngine<LanguagesRequest, LanguagesResponse> Languages => HttpEngine<LanguagesRequest, LanguagesResponse>.instance;
     }
 }

@@ -1,16 +1,16 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 
-namespace GoogleApi.Entities.Translate.Translate.Response
+namespace GoogleApi.Entities.Translate.Languages.Response
 {
     /// <summary>
-    /// Translate Response.
+    /// Languages Response.
     /// </summary>
     [DataContract]
-    public class TranslateResponse : BaseResponse
+    public class LanguagesResponse : BaseResponse
     {
         /// <summary>
-        /// Container for the translated results.
+        /// Container for the languages results.
         /// </summary>
         [DataMember(Name = "data")]
         public virtual Data Data { get; set; }

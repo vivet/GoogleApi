@@ -556,6 +556,39 @@
     <Compile Include="..\GoogleApi\Entities\Search\Web\Request\WebSearchRequest.cs">
       <Link>Entities\Search\Web\Request\WebSearchRequest.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs">
+      <Link>Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Language.cs">
+      <Link>Entities\Translate\Common\Enums\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Model.cs">
+      <Link>Entities\Translate\Common\Enums\Model.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Request\DetectRequest.cs">
+      <Link>Entities\Translate\Detect\Request\DetectRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Response\Data.cs">
+      <Link>Entities\Translate\Detect\Response\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Response\Detection.cs">
+      <Link>Entities\Translate\Detect\Response\Detection.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Response\DetectResponse.cs">
+      <Link>Entities\Translate\Detect\Response\DetectResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Request\LanguagesRequest.cs">
+      <Link>Entities\Translate\Languages\Request\LanguagesRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Response\Data.cs">
+      <Link>Entities\Translate\Languages\Response\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Response\LanguagesResponse.cs">
+      <Link>Entities\Translate\Languages\Response\LanguagesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Response\SupportedLanguage.cs">
+      <Link>Entities\Translate\Languages\Response\SupportedLanguage.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Translate\Translate\Request\Enums\Format.cs">
       <Link>Entities\Translate\Translate\Request\Enums\Format.cs</Link>
     </Compile>
@@ -606,5 +639,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

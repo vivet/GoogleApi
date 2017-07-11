@@ -4,13 +4,14 @@ using System.Runtime.Serialization;
 namespace GoogleApi.Entities.Translate.Translate.Response
 {
     /// <summary>
-    /// Data.
+    /// The list of language translation responses.
+    /// This list contains a language translation response for each query (q) sent in the language translation request.
     /// </summary>
-    [DataContract(Name = "data")]
+    [DataContract(Name = "Data")]
     public class Data
     {
         /// <summary>
-        /// The translations returned by the queries. Same order.
+        /// Contains list of translation results of the supplied text.
         /// </summary>
         [DataMember(Name = "translations")]
         public virtual IEnumerable<Translation> Translations { get; set; }
