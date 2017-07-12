@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Common
         /// To track usage across different applications using the same client ID, you can use the channel parameter with your API requests. 
         /// By specifying different channel values for different aspects of your application, you can determine precisely how your application is used.
         /// For example, your external website might access an API using a channel set to customer, while your internal marketing department might 
-        /// use a channel set to mkting.Your reports will break down usage of the API by those channel values.
+        /// use a channel set to mkting. Your reports will break down usage of the API by those channel values.
         /// Make sure the channel value in your requests meets the following requirements:
         /// Must be an ASCII alphanumeric string.
         /// Can include a period(.), underscore(_) and hyphen(-) character.

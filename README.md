@@ -29,7 +29,7 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
     * Nearest Roads
     * Snap To Roads
     * Speed Limits
-  * Time Zone
+  * Time Zone (3.0)
 
 ##### Google Places
   * Place Search
