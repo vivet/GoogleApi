@@ -574,11 +574,11 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// <summary>
         /// Micronesia, Federated States of
         /// </summary>
-        Micronesia, FederatedStatesof,
+        Micronesia,
         /// <summary>
         /// Moldova, Republic of
         /// </summary>
-        Moldova, Republicof,
+        Moldova,
         /// <summary>
         /// Monaco
         /// </summary>
@@ -850,7 +850,7 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// <summary>
         /// Taiwan, Province of China
         /// </summary>
-        Taiwan, ProvinceofChina,
+        Taiwan,
         /// <summary>
         /// Tajikistan
         /// </summary>
@@ -858,7 +858,7 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// <summary>
         /// Tanzania, United Republic of
         /// </summary>
-        Tanzania, UnitedRepublicof,
+        Tanzania,
         /// <summary>
         /// Thailand
         /// </summary>
