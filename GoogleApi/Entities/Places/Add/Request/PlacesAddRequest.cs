@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
-using GoogleApi.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -16,7 +15,7 @@ namespace GoogleApi.Entities.Places.Add.Request
     /// Places Add Request.
     /// </summary>
     [DataContract]
-    public class PlacesAddRequest : BasePlacesRequest, IJsonRequest
+    public class PlacesAddRequest : BasePlacesRequest, IRequestJson
     {
         /// <summary>
         /// BaseUrl property overridden.

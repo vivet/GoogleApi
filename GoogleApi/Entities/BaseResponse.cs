@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities
@@ -11,25 +11,25 @@ namespace GoogleApi.Entities
     /// Base abstract class for Google responses.
     /// </summary>
     [DataContract]
-    public abstract class BaseResponse : IResponseFor
+    public abstract class BaseResponse : IResponse
     {
         /// <summary>
-        /// The raw json of the response.
+        /// See <see cref="IResponse.RawJson"/>
         /// </summary>
         public virtual string RawJson { get; set; }
 
         /// <summary>
-        /// The raw querystring of the request.
+        /// See <see cref="IResponse.RawQueryString"/>
         /// </summary>
         public virtual string RawQueryString { get; set; }
 
         /// <summary>
-        /// "status" contains metadata on the request.
+        /// Success status of the request.
         /// </summary>
         public virtual Status Status { get; set; }
 
         /// <summary>
-        /// When the status code is other than OK, there may be an additional error_message field within the Directions response object. 
+        /// When the status code is other than 'Ok', there may be an additional error_message field within the Directions response object. 
         /// This field contains more detailed information about the reasons behind the given status code.
         /// Note: This field is not guaranteed to be always present, and its content is subject to change.
         /// </summary>

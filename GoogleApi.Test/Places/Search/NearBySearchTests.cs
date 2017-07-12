@@ -1,5 +1,6 @@
 using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;

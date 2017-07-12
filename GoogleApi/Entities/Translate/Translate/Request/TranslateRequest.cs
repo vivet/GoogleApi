@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Translate.Translate.Request
 {
     /// <summary>
     /// Translate Request.
     /// </summary>
-    public class TranslateRequest : BaseRequest, IQueryStringRequest
+    public class TranslateRequest : BaseRequest, IRequestQueryString
     {
         /// <summary>
         /// Base url.

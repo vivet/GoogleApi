@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Delete.Request
 {
@@ -10,7 +9,7 @@ namespace GoogleApi.Entities.Places.Delete.Request
     /// Places Delete Request.
     /// </summary>
     [DataContract]
-    public class PlacesDeleteRequest : BasePlacesRequest, IJsonRequest
+    public class PlacesDeleteRequest : BasePlacesRequest, IRequestJson
     {
         /// <summary>
         /// BaseUrl property overridden.

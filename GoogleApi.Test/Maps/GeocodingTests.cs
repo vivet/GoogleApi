@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using NUnit.Framework;
 

@@ -5,6 +5,7 @@ using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Extensions;
@@ -14,7 +15,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
     /// <summary>
     /// DistanceMatrix Request.
     /// </summary>
-    public class DistanceMatrixRequest : BaseMapsChannelRequest, IQueryStringRequest
+    public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overridden.

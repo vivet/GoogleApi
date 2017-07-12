@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Extensions;
@@ -13,7 +13,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
     /// <summary>
     /// Directions Request.
     /// </summary>
-    public class DirectionsRequest : BaseMapsChannelRequest, IQueryStringRequest
+    public class DirectionsRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overridden.

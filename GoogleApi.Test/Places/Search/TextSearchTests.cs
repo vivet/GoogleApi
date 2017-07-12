@@ -1,5 +1,5 @@
 using System;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
 using NUnit.Framework;
 

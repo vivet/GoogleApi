@@ -1,15 +1,14 @@
 ﻿using System;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Translate.Languages.Request
 {
     /// <summary>
     /// Languages Request.
     /// </summary>
-    public class LanguagesRequest : BaseRequest, IQueryStringRequest
+    public class LanguagesRequest : BaseRequest, IRequestQueryString
     {
         /// <summary>
         /// Base url.

@@ -6,16 +6,16 @@ using System.Runtime.Serialization;
 namespace GoogleApi.Extensions
 {
     /// <summary>
-    /// Helper methods to convert enums to strings for query string parameters.
+    /// String extensions.
     /// </summary>
     public static class StringExtension
     {
         /// <summary>
         /// Convert a string to enum.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="str"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The <see cref="Enum"/> type of the conversion.</typeparam>
+        /// <param name="str">The <see cref="string"/> to convert to an <see cref="Enum"/> value.</param>
+        /// <returns>A <see cref="Enum"/> value of type <typeparamref name="T"/>.</returns>
         public static T ToEnum<T>(this string str)
             where T : struct
         {

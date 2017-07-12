@@ -2,7 +2,7 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Extensions;
 
@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
     /// <summary>
     /// TimeZone Request.
     /// </summary>
-    public class TimeZoneRequest : BaseMapsChannelRequest, IQueryStringRequest
+    public class TimeZoneRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         private const string BASE_URL = "maps.googleapis.com/maps/api/timezone/json";
 

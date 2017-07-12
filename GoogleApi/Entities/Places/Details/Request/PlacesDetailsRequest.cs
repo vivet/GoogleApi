@@ -1,16 +1,15 @@
 ﻿using System;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Details.Request
 {
     /// <summary>
     /// Places Details Request.
     /// </summary>
-    public class PlacesDetailsRequest : BasePlacesRequest, IQueryStringRequest
+    public class PlacesDetailsRequest : BasePlacesRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overridden.

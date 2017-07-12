@@ -1,5 +1,6 @@
 using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Radar.Request;
 using NUnit.Framework;
 

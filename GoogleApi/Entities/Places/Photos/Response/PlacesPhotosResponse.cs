@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.Photos.Response
@@ -9,7 +8,7 @@ namespace GoogleApi.Entities.Places.Photos.Response
     /// Places Photos Response.
     /// </summary>
     [DataContract]
-    public class PlacesPhotosResponse : BasePlacesResponse, IQueryStringRequest
+    public class PlacesPhotosResponse : BasePlacesResponse
     {
         /// <summary>
         /// A stream containing the downloded photo.

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Elevation.Request
 {
     /// <summary>
     /// Elevation Request.
     /// </summary>
-    public class ElevationRequest : BaseMapsChannelRequest, IQueryStringRequest
+    public class ElevationRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overridden.

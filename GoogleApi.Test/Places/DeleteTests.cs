@@ -1,5 +1,6 @@
 using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Delete.Request;

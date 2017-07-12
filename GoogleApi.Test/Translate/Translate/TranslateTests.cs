@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Translate.Request;
 using NUnit.Framework;
+using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi.Test.Translate.Translate
 {

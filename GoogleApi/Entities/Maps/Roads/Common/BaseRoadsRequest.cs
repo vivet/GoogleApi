@@ -1,14 +1,13 @@
 ﻿using System;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
     /// <summary>
     /// 
     /// </summary>
-    public class BaseRoadsRequest : BaseMapsRequest, IQueryStringRequest
+    public class BaseRoadsRequest : BaseMapsRequest, IRequestQueryString
     {
         /// <summary>
         /// Get the query string collection of added parameters for the request.

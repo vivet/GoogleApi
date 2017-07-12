@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Photos.Response;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Digests;
@@ -23,7 +23,7 @@ namespace GoogleApi
     /// <typeparam name="TResponse"></typeparam>
     public sealed class HttpEngine<TRequest, TResponse>
         where TRequest : BaseRequest, new()
-        where TResponse : IResponseFor
+        where TResponse : IResponse
     {
         internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
         internal static readonly HttpEngine<TRequest, TResponse> instance = new HttpEngine<TRequest, TResponse>();
@@ -127,7 +127,6 @@ namespace GoogleApi
             return this.HttpRequest(request, timeout, token);
         }
 
-        // Private methods.
         private Uri GetUri(TRequest request)
         {
             if (request == null)
@@ -187,7 +186,7 @@ namespace GoogleApi
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var task = request is IQueryStringRequest
+            var task = request is IRequestQueryString
                 ? httpClient.GetAsync(uri, cancellationToken)
                 : httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
 
@@ -217,7 +216,7 @@ namespace GoogleApi
                         TResponse response;
                         if (typeof(TResponse) == typeof(PlacesPhotosResponse))
                         {
-                            response = (TResponse)(IResponseFor)new PlacesPhotosResponse { Photo = stream };
+                            response = (TResponse)(IResponse)new PlacesPhotosResponse { Photo = stream };
                         }
                         else
                         {

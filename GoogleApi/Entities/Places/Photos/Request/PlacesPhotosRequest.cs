@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Globalization;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Photos.Request
 {
     /// <summary>
     /// Places Photos Request.
     /// </summary>
-    public class PlacesPhotosRequest : BasePlacesRequest, IQueryStringRequest
+    public class PlacesPhotosRequest : BasePlacesRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overridden.

@@ -1,7 +1,7 @@
 ﻿namespace GoogleApi.Entities
 {
     /// <summary>
-    /// QueryString Parameter.
+    /// QueryString parameter in a request.
     /// </summary>
     public struct QueryStringParameter
     {

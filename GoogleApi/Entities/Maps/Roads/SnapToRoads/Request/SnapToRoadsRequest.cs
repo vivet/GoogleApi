@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Maps.Roads.Common;
-using GoogleApi.Extensions;
 using Location = GoogleApi.Entities.Maps.Roads.Common.Location;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request

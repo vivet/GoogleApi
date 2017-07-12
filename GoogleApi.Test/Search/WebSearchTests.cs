@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Web.Request;
 using NUnit.Framework;
 

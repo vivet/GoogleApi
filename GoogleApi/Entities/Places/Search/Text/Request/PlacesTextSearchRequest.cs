@@ -1,6 +1,5 @@
 ﻿using System;
 using GoogleApi.Entities.Places.Search.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.Text.Request
 {

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using NUnit.Framework;

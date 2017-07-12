@@ -4,16 +4,15 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocode.Request
 {
     /// <summary>
     /// Geocoding Request.
     /// </summary>
-    public class GeocodingRequest : BaseMapsChannelRequest, IQueryStringRequest
+    public class GeocodingRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overridden.

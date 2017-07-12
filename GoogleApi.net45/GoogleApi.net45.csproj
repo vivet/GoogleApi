@@ -107,23 +107,26 @@
     <Compile Include="..\GoogleApi\Entities\Common\Enums\LocationType.cs">
       <Link>Entities\Common\Enums\LocationType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IJsonRequest.cs">
-      <Link>Entities\Common\Interfaces\IJsonRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\Status.cs">
+      <Link>Entities\Common\Enums\Status.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Interfaces\ILocationString.cs">
       <Link>Entities\Common\Interfaces\ILocationString.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IQueryStringRequest.cs">
-      <Link>Entities\Common\Interfaces\IQueryStringRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IResponseFor.cs">
-      <Link>Entities\Common\Interfaces\IResponseFor.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Status.cs">
-      <Link>Entities\Common\Status.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IRequest.cs">
+      <Link>Entities\Interfaces\IRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IRequestJson.cs">
+      <Link>Entities\Interfaces\IRequestJson.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IRequestQueryString.cs">
+      <Link>Entities\Interfaces\IRequestQueryString.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IResponse.cs">
+      <Link>Entities\Interfaces\IResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsChannelRequest.cs">
       <Link>Entities\Maps\Common\BaseMapsChannelRequest.cs</Link>
@@ -443,6 +446,9 @@
     <Compile Include="..\GoogleApi\Entities\QueryStringParameter.cs">
       <Link>Entities\QueryStringParameter.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\QueryStringParameters.cs">
+      <Link>Entities\QueryStringParameters.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\AltType.cs">
       <Link>Entities\Search\Common\AltType.cs</Link>
     </Compile>
@@ -616,9 +622,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Extensions\EnumExtension.cs">
       <Link>Extensions\EnumExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Extensions\QueryStringParameters.cs">
-      <Link>Extensions\QueryStringParameters.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Extensions\StringExtension.cs">
       <Link>Extensions\StringExtension.cs</Link>

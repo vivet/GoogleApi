@@ -1,5 +1,3 @@
-using GoogleApi.Extensions;
-
 namespace GoogleApi.Entities.Maps.Common
 {
     /// <summary>

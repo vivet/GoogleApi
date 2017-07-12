@@ -1,17 +1,17 @@
-namespace GoogleApi.Entities.Common.Interfaces
+namespace GoogleApi.Entities.Interfaces
 {
     /// <summary>
-    /// Interface used by http engine responses.
+    /// Base interface for responses.
     /// </summary>
-    public interface IResponseFor
+    public interface IResponse
     {
         /// <summary>
-        /// The raw json of the response.
+        /// Raw json of the response.
         /// </summary>
         string RawJson { get; set; }
 
         /// <summary>
-        /// The raw querystring of the request.
+        /// Raw querystring of the request.
         /// </summary>
         string RawQueryString { get; set; }
     }

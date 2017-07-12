@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request
 {
@@ -12,7 +11,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     /// Geolocation Request.
     /// </summary>
     [DataContract]
-    public class GeolocationRequest : BaseMapsRequest, IJsonRequest
+    public class GeolocationRequest : BaseMapsRequest, IRequestJson
     {
         /// <summary>
         /// BaseUrl property overridden.

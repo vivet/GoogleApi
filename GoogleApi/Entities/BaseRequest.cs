@@ -1,39 +1,35 @@
 ﻿using System;
-using GoogleApi.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities
 {
     /// <summary>
     /// Base abstract class for requests.
     /// </summary>
-    public abstract class BaseRequest
+    public abstract class BaseRequest : IRequest
     {
         /// <summary>
-        /// Base Url for the request.
+        /// Base Url (abstract).
         /// </summary>
         protected internal abstract string BaseUrl { get; }
 
         /// <summary>
-        /// Your application's API key (required). 
-        /// This key identifies your application for purposes of quota management and so that Places added from your application are made immediately available to your app. 
-        /// Visit the APIs Console to create an API Project and obtain your key.
+        /// See <see cref="IRequest.Key"/>.
         /// </summary>
         public virtual string Key { get; set; }
 
         /// <summary>
-        /// The client ID provided to you by Google Enterprise Support, or null to disable URL signing. 
-        /// All client IDs begin with a "gme-" prefix.
+        /// See <see cref="IRequest.ClientId"/>.
         /// </summary>
         public virtual string ClientId { get; set; }
 
         /// <summary>
-        /// True to use use the https protocol; false to use http. 
-        /// The default is false.
+        /// See <see cref="IRequest.IsSsl"/>.
         /// </summary>
         public virtual bool IsSsl { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="IRequest.QueryStringParameters"/>.
         /// </summary>
         public virtual QueryStringParameters QueryStringParameters
         {

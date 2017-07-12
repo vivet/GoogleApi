@@ -3,16 +3,15 @@ using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
 {
     /// <summary>
     /// Places QueryAutoComplete Request.
     /// </summary>
-    public class PlacesQueryAutoCompleteRequest : BasePlacesRequest, IQueryStringRequest
+    public class PlacesQueryAutoCompleteRequest : BasePlacesRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overridden.

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Translate.Detect.Request
 {
     /// <summary>
     /// Detect Request.
     /// </summary>
-    public class DetectRequest : BaseRequest, IQueryStringRequest
+    public class DetectRequest : BaseRequest, IRequestQueryString
     {
         /// <summary>
         /// Base url.

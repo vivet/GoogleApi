@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using GoogleApi.Entities;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
 using NUnit.Framework;
@@ -65,13 +65,13 @@ namespace GoogleApi.Test
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
         }
 
-        public class TestResponse : IResponseFor
+        public class TestResponse : IResponse
         {
             public virtual string RawJson { get; set; }
             public virtual string RawQueryString { get; set; }
         }
 
-        public class TestRequest : BaseRequest, IQueryStringRequest
+        public class TestRequest : BaseRequest
         {
             protected override string BaseUrl => "www.test.com";
         }
