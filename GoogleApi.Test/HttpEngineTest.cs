@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using GoogleApi.Entities;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
@@ -17,12 +16,14 @@ namespace GoogleApi.Test
         {
             Assert.Inconclusive();
         }
+
         [Test]
         public void QueryWhenRequestIsNullTest()
         {
             var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.Query(null));
         }
+
         [Test]
         public void QueryWhenTimeoutAndRequestIsNullTest()
         {
@@ -35,24 +36,28 @@ namespace GoogleApi.Test
         {
             Assert.Inconclusive();
         }
+
         [Test]
         public void QueryAsyncWhenRequestIsNullTest()
         {
             var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null));
         }
+
         [Test]
         public void QueryAsyncWhenRequestIsNullAndTimeoutTest()
         {
             var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan()));
         }
+
         [Test]
         public void QueryAsyncWhenRequestIsNullAndCancellationTokenTest()
         {
             var engine = new HttpEngine<TestRequest, TestResponse>();
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new CancellationToken()));
         }
+
         [Test]
         public void QueryAsyncWhenRequestIsNullAndTimeoutAndCancellationTokenTest()
         {
@@ -60,16 +65,15 @@ namespace GoogleApi.Test
             Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
         }
 
-        // Nested classes
-        public class TestRequest : BaseRequest, IQueryStringRequest
-        {
-            protected override string BaseUrl => "www.test.com";
-        }
-
         public class TestResponse : IResponseFor
         {
             public virtual string RawJson { get; set; }
             public virtual string RawQueryString { get; set; }
+        }
+
+        public class TestRequest : BaseRequest, IQueryStringRequest
+        {
+            protected override string BaseUrl => "www.test.com";
         }
     }
 }

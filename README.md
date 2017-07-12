@@ -6,19 +6,6 @@ https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.2)
 
 NOTE: Feel free to report any issues, as well as create a PR for suggested changes / fixes.  
 
---------------------------------------------------------------------------------------------------------------------------------------------
-TODO:
-- Rename IResponseFor to IResponse?
-- Add solution folder for tests.
-- ALl project 'warn as error' for docs doesn't seems to work.
-- Figure out language handling with all google Api's
-  - and PBMT and NMT for translate? how does it work?
-- Refactor all 'QueryStringParameters' to 'Build'? or something
-  - Create the new method and call that from the base 'QueryStringParameters' and mark it obsolete, for backward compatibility
-  - Create Base Translate Request / (Response)
---------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
 ### Google Api Integrations:
 ##### Google Maps
@@ -52,9 +39,9 @@ TODO:
   * Enterprise (Paid)
 
 ##### Google Translate 
-  * Detect
-  * Languages
-  * Translate
+  * Detect (Done)
+  * Languages (Done)
+  * Translate (Done)
 
 ##### Google Functions 
   * MergePolyLine

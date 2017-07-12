@@ -68,6 +68,8 @@
     <Compile Include="Search\EnterpriseSearchTests.cs" />
     <Compile Include="Search\ImageSearchTests.cs" />
     <Compile Include="Search\WebSearchTests.cs" />
+    <Compile Include="Translate\Common\Extensions\LanguagesExtensionTests.cs" />
+    <Compile Include="Translate\Common\Extensions\StringExtensionTests.cs" />
     <Compile Include="Translate\Detect\DetectTests.cs" />
     <Compile Include="Translate\Detect\DetectRequestTests.cs" />
     <Compile Include="Translate\Languages\LanguagesTests.cs" />
