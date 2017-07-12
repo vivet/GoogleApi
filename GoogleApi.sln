@@ -1,20 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi", "GoogleApi\GoogleApi.csproj", "{BF3AA421-D754-4762-AD20-A99123455E99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleApi", "GoogleApi\GoogleApi.csproj", "{BF3AA421-D754-4762-AD20-A99123455E99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.Test", "GoogleApi.Test\GoogleApi.Test.csproj", "{E4CE6985-8A7F-4C37-9BA5-24061D89E16C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.net45", "GoogleApi.net45\GoogleApi.net45.csproj", "{6588C2CD-D597-4A70-B84B-6E1709D224AC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DAFE10B3-8A42-419B-9146-47BB9E9436E9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution", ".Solution", "{DAFE10B3-8A42-419B-9146-47BB9E9436E9}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		README.md = README.md
 		UNLICENSE.txt = UNLICENSE.txt
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Tests", ".Tests", "{37152381-2B7E-4C14-A6F3-D60EC1612060}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,5 +47,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C} = {37152381-2B7E-4C14-A6F3-D60EC1612060}
 	EndGlobalSection
 EndGlobal
