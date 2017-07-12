@@ -563,6 +563,9 @@
     <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs">
       <Link>Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Extensions\StringExtension.cs">
+      <Link>Entities\Translate\Common\Enums\Extensions\StringExtension.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Language.cs">
       <Link>Entities\Translate\Common\Enums\Language.cs</Link>
     </Compile>

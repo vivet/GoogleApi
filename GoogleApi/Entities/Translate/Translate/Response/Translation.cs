@@ -41,7 +41,7 @@ namespace GoogleApi.Entities.Translate.Translate.Response
         internal virtual string LanguageStr
         {
             get => this.DetectedSourceLanguage?.ToCode();
-            set => this.DetectedSourceLanguage = value?.FromCode();
+            set => this.DetectedSourceLanguage = value.FromCode();
         }
     }
 }
