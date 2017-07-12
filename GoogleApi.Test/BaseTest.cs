@@ -11,8 +11,8 @@ namespace GoogleApi.Test
     public abstract class BaseTest
     {
         protected virtual AppSettings Settings { get; private set; }
-
         protected virtual string ApiKey => this.Settings.ApiKey;
+        protected virtual string ClientId => this.Settings.ClientId;
         protected virtual string SearchEngineId => this.Settings.SearchEngineId;
         protected virtual string SearchEngineUrl => this.Settings.SearchEngineUrl;
 
@@ -40,6 +40,9 @@ namespace GoogleApi.Test
         {
             [DataMember(Name = "ApiKey")]
             public string ApiKey { get; set; }
+
+            [DataMember(Name = "ClientId")]
+            public string ClientId { get; set; }
 
             [DataMember(Name = "SearchEngineId")]
             public string SearchEngineId { get; set; }

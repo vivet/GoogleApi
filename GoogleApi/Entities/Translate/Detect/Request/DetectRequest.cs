@@ -21,9 +21,9 @@ namespace GoogleApi.Entities.Translate.Detect.Request
         public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseTranslateRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

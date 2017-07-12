@@ -45,6 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="Common\Enums\Extensions\LanguagesExtensionTests.cs" />
     <Compile Include="Maps\DirectionsTests.cs" />
     <Compile Include="Maps\DistanceMatrixTests.cs" />
     <Compile Include="Maps\ElevationTests.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Extensions\StringExtensionTest.cs" />
     <Compile Include="Functions\FunctionsTests.cs" />
     <Compile Include="Maps\Roads\SpeedLimitsTests.cs" />
+    <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
     <Compile Include="Places\AddTests.cs" />
     <Compile Include="Places\AutoCompleteTests.cs" />
     <Compile Include="Places\DeleteTests.cs" />
@@ -78,7 +80,7 @@
     <Compile Include="Translate\Translate\TranslateTests.cs" />
     <Compile Include="Maps\Roads\NearestRoadsTests.cs" />
     <Compile Include="Maps\Roads\SnapToRoadTests.cs" />
-    <Compile Include="Maps\TimeZoneTests.cs" />
+    <Compile Include="Maps\TimeZone\TimeZoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="application.default.json" />
