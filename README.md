@@ -1,11 +1,18 @@
 ## GoogleApi v3.0.0
-Simple and easy Google Api integrations.  
+Seamless Google Api integrations.
 Supports Maps, Places, Roads, Custom Search and Translate.  
-https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.2)
+Feel free to contribute, ask questions or report issues. I usually reply within 24 hours.
 
+##### Nuget: https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.2)
 
-NOTE: Feel free to report any issues, as well as create a PR for suggested changes / fixes.  
-
+##### Version 3.0.0 Highlights: 
+* Downgrade to netstandard1.2 (more portable platforms support, i think) 
+* Walk-through of all endpoints aligned with Google Api Documentation
+* Request validation improved for all endpoints.
+* Added missing endpoints. All Api's are now complete again.
+* Search fully implemented and supported (possibly postponed to v3.1)
+* Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints)
+* and much more.
 
 ### Google Api Integrations:
 ##### Google Maps
