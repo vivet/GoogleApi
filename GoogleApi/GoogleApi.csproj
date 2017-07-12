@@ -13,7 +13,7 @@
     <Product>GoogleApi</Product>
     <Company />
     <Authors>Michael Vivet</Authors>
-    <Version>2.5.4</Version>
+    <Version>3.0.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geocode geocoder geocoding search text nearby radar translate translation geolocation nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic</PackageTags>
     <PackageReleaseNotes>
