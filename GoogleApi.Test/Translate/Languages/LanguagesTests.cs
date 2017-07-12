@@ -38,7 +38,8 @@ namespace GoogleApi.Test.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = null
+                Key = null,
+                Target = Language.English
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Languages.Query(request));
@@ -50,7 +51,8 @@ namespace GoogleApi.Test.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = string.Empty
+                Key = string.Empty,
+                Target = Language.English
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Languages.Query(request));

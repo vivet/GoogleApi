@@ -566,6 +566,9 @@
     <Compile Include="..\GoogleApi\Entities\Search\Web\Request\WebSearchRequest.cs">
       <Link>Entities\Search\Web\Request\WebSearchRequest.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\BaseTranslateRequest.cs">
+      <Link>Entities\Translate\BaseTranslateRequest.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs">
       <Link>Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs</Link>
     </Compile>

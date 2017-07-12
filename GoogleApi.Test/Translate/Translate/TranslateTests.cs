@@ -225,11 +225,13 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = null
+                Key = null,
+                Qs = new[] { "Hej Verden" },
+                Target = Language.Afrikaans
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
 
         [Test]
@@ -237,11 +239,13 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = string.Empty
+                Key = string.Empty,
+                Qs = new[] { "Hej Verden" },
+                Target = Language.Afrikaans
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Translate.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
 
         [Test]

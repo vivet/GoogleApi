@@ -1,5 +1,4 @@
 ﻿using System;
-using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 
@@ -8,7 +7,7 @@ namespace GoogleApi.Entities.Translate.Languages.Request
     /// <summary>
     /// Languages Request.
     /// </summary>
-    public class LanguagesRequest : BaseRequest, IRequestQueryString
+    public class LanguagesRequest : BaseTranslateRequest
     {
         /// <summary>
         /// Base url.
@@ -31,16 +30,6 @@ namespace GoogleApi.Entities.Translate.Languages.Request
         public virtual Model Model { get; set; } = Model.Base;
 
         /// <summary>
-        /// Always true. 
-        /// Setter is not supported.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get => true;
-            set => throw new NotSupportedException("This operation is not supported, SSL is required.");
-        }
-
-        /// <summary>
         /// See <see cref="BaseRequest.QueryStringParameters"/>.
         /// </summary>
         /// <returns></returns>
@@ -48,9 +37,6 @@ namespace GoogleApi.Entities.Translate.Languages.Request
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required");
-
                 if (this.Target == null)
                     throw new ArgumentException("Target is required");
 

@@ -21,7 +21,8 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = null
+                Key = null,
+                Qs = new[] { "Hej Verden" }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -29,7 +30,7 @@ namespace GoogleApi.Test.Translate.Detect
                 var parameters = request.QueryStringParameters;
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
 
         [Test]
@@ -37,7 +38,8 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = string.Empty
+                Key = string.Empty,
+                Qs = new[] { "Hej Verden" }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -45,7 +47,7 @@ namespace GoogleApi.Test.Translate.Detect
                 var parameters = request.QueryStringParameters;
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
 
         [Test]

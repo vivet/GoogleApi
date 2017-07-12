@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
@@ -11,7 +10,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
     /// <summary>
     /// Translate Request.
     /// </summary>
-    public class TranslateRequest : BaseRequest, IRequestQueryString
+    public class TranslateRequest : BaseTranslateRequest
     {
         /// <summary>
         /// Base url.
@@ -55,16 +54,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
-        /// Always true. 
-        /// Setter is not supported.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get => true;
-            set => throw new NotSupportedException("This operation is not supported, SSL is required.");
-        }
-
-        /// <summary>
         /// See <see cref="BaseRequest.QueryStringParameters"/>.
         /// </summary>
         /// <returns></returns>
@@ -72,9 +61,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required.");
-
                 if (this.Target == null)
                     throw new ArgumentException("Target is required");
 
