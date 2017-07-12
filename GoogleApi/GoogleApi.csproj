@@ -3,7 +3,7 @@
     <TargetFramework>netstandard1.2</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Optimize>True</Optimize>
-    <NoWarn>618;1591</NoWarn>
+    <NoWarn></NoWarn>
     <DefineConstants>
     </DefineConstants>
     <OutputPath>bin\Debug\</OutputPath>

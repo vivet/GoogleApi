@@ -31,14 +31,14 @@ namespace GoogleApi.Entities.Translate.Translate.Response
         public virtual Language? DetectedSourceLanguage { get; set; }
 
         [DataMember(Name = "model")]
-        protected virtual string ModelStr
+        internal virtual string ModelStr
         {
             get => this.Model.ToString();
             set => this.Model = value?.ToEnum<Model>() ?? Model.Base;
         }
 
         [DataMember(Name = "detectedSourceLanguage")]
-        protected virtual string LanguageStr
+        internal virtual string LanguageStr
         {
             get => this.DetectedSourceLanguage?.ToCode();
             set => this.DetectedSourceLanguage = value?.FromCode();

@@ -29,7 +29,7 @@ namespace GoogleApi.Entities.Translate.Detect.Response
         public virtual Language Language { get; set; }
 
         [DataMember(Name = "language")]
-        protected virtual string LanguageStr
+        internal virtual string LanguageStr
         {
             get => this.Language.ToCode();
             set => this.Language = value.ToEnum<Language>();

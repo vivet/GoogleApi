@@ -5,6 +5,9 @@ using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BaseRoadsRequest : BaseMapsRequest, IQueryStringRequest
     {
         /// <summary>

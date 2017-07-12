@@ -32,6 +32,12 @@ namespace GoogleApi.Entities.Search.Common.Request
         {
             return string.Format("{0}, {1}, {2}", this.By.ToString().ToLower(), this.Order.ToString().ToLower(), this.DefaultValue?.ToString());
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sortStr"></param>
+        /// <returns></returns>
         public virtual SortExpression FromString(string sortStr)
         {
             var strings = sortStr.Split(',');

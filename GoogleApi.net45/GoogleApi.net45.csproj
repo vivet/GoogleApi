@@ -21,7 +21,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>618;1591</NoWarn>
+    <NoWarn>
+    </NoWarn>
     <DocumentationFile>..\GoogleApi\bin\Debug\net45\GoogleApi.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>

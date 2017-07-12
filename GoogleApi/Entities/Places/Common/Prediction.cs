@@ -43,7 +43,7 @@ namespace GoogleApi.Entities.Places.Common
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        protected string[] TypesStr
+        internal string[] TypesStr
         {
             get
             {

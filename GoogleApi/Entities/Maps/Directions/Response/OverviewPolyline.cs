@@ -42,7 +42,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         }
 
         [OnDeserializing]
-        protected void InitLazyPoints(StreamingContext contex)
+        internal void InitLazyPoints(StreamingContext contex)
         {
             this.pointsLazy = new Lazy<IEnumerable<Location>>(DecodePoints);
         }

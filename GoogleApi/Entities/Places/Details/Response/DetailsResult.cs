@@ -94,7 +94,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual Scope Scope { get; set; }
 
         [DataMember(Name = "scope")]
-        protected string ScopeStr
+        internal string ScopeStr
         {
             get { return this.Scope.ToEnumString(); }
             set { this.Scope = value.ToEnum<Scope>(); }
@@ -113,7 +113,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual PriceLevel PriceLevel { get; set; }
 
         [DataMember(Name = "price_level")]
-        protected string PriceLevelStr
+        internal string PriceLevelStr
         {
             get { return this.PriceLevel.ToEnumString(); }
             set { this.PriceLevel = value.ToEnum<PriceLevel>(); }
@@ -139,7 +139,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        protected IEnumerable<string> TypesStr
+        internal IEnumerable<string> TypesStr
         {
             get { return Types?.Select(x => x.ToEnumString()) ?? new string[0]; }
             set { this.Types = value.Select(x => x.ToEnum<PlaceLocationType>()); }

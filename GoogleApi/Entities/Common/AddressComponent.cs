@@ -30,7 +30,7 @@ namespace GoogleApi.Entities.Common
         public virtual IEnumerable<LocationType> Types { get; set; }
 
         [DataMember(Name = "types")]
-        protected virtual string[] TypesStr
+        internal virtual string[] TypesStr
         {
             get { return Types?.Select(x => x.ToEnumString()).ToArray() ?? new string[0]; }
             set { this.Types = value.Select(x => x.ToEnum<LocationType>()); }

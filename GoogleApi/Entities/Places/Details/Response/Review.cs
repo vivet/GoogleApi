@@ -53,7 +53,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual DateTime Time { get; set; }
 
         [DataMember(Name = "time")]
-        protected int TimeInt
+        internal int TimeInt
         {
             get { return this.Time.DateTimeToUnixTimestamp(); }
             set { this.Time = DateTimeExtension.epoch.AddSeconds(value); }

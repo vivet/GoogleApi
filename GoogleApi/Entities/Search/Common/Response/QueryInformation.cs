@@ -216,7 +216,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual DominantColorType? ImageDominantColor { get; set; }
 
         [DataMember(Name = "inputEncoding")]
-        protected virtual string InputEncodingStr { get; set; }
+        internal virtual string InputEncodingStr { get; set; }
 
         /// <summary>
         /// The character encoding supported for search request.
@@ -224,7 +224,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual EncodingType InputEncoding => (EncodingType)Enum.Parse(typeof(EncodingType), this.InputEncodingStr);
 
         [DataMember(Name = "outputEncoding")]
-        protected virtual string OutputEncodingStr { get; set; }
+        internal virtual string OutputEncodingStr { get; set; }
 
         /// <summary>
         /// The character encoding supported for search results.
@@ -232,7 +232,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual EncodingType OutputEncoding => (EncodingType)Enum.Parse(typeof(EncodingType), this.OutputEncodingStr);
 
         [DataMember(Name = "hl")]
-        protected virtual string InterfaceLanguageStr { get; set; }
+        internal virtual string InterfaceLanguageStr { get; set; }
 
         /// <summary>
         /// Language - Sets the user interface language. 
@@ -244,7 +244,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual Language InterfaceLanguage => (Language)Enum.Parse(typeof(Language), this.InterfaceLanguageStr);
 
         [DataMember(Name = "filter")]
-        protected virtual string FilterStr { get; set; }
+        internal virtual string FilterStr { get; set; }
         
         /// <summary>
         /// Filter - Controls turning on or off the duplicate content filter.
@@ -256,7 +256,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual bool Filter => bool.Parse(this.FilterStr);
 
         [DataMember(Name = "disableCnTwTranslation")]
-        protected virtual string DisableCnTwTranslationStr { get; set; }
+        internal virtual string DisableCnTwTranslationStr { get; set; }
 
         /// <summary>
         /// Enables or disables the Simplified and Traditional Chinese Search feature.
@@ -265,7 +265,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual bool DisableCnTwTranslation => bool.Parse(this.DisableCnTwTranslationStr);
 
         [DataMember(Name = "sort")]
-        protected virtual string SortStr { get; set; }
+        internal virtual string SortStr { get; set; }
 
         /// <summary>
         /// Sort - The sort expression to apply to the results.
@@ -273,7 +273,7 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual SortExpression SortExpression => new SortExpression().FromString(this.SortStr);
 
         [DataMember(Name = "dateRestrict")]
-        protected virtual string DateRestrictStr { get; set; }
+        internal virtual string DateRestrictStr { get; set; }
 
         /// <summary>
         /// DateRestrict - Restricts results to URLs based on date.

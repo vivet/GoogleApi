@@ -28,7 +28,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         public virtual VehicleType VehicleType { get; set; }
 
         [DataMember(Name = "type")]
-        protected string VehicleTypeStr
+        internal string VehicleTypeStr
         {
             get { return this.VehicleType.ToEnumString(); }
             set { this.VehicleType = value.ToEnum<VehicleType>(); }
