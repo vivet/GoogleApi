@@ -1,13 +1,13 @@
 ## GoogleApi v2.5.4
-Simple and easy Google Api integrations.  
+Seamless Google Api integrations.
 Supports Maps, Places, Roads, Custom Search and Translate.  
-https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.3)
+Feel free to contribute, ask questions or report issues. I usually reply within 24 hours.
 
+##### Nuget: https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.3)
 
-NOTE: Feel free to report any issues, as well as create a PR for suggested changes / fixes.  
-UPCOMING: Version 3.0 (July / August 2017).
+##### Version 3.0: https://github.com/vivet/GoogleApi/tree/V3 (follow here, expected end of July)
 
-### Google Api Integrations:
+### Google Api Endpoints:
 ##### Google Maps
   * Directions
   * Distance Matrix
