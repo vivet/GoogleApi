@@ -8,8 +8,7 @@ NOTE: Feel free to report any issues, as well as create a PR for suggested chang
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 TODO:
-- LazyLoad Response.RawJson (if not already) so it doesn't waste ressources.
-- Move QueryStringParameter to GoogleApi.Entities.Common
+- Rename IResponseFor to IResponse?
 - Add solution folder for tests.
 - ALl project 'warn as error' for docs doesn't seems to work.
 - Figure out language handling with all google Api's

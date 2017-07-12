@@ -1,7 +1,7 @@
 ﻿using System;
 using GoogleApi.Extensions;
 
-namespace GoogleApi.Entities.Common
+namespace GoogleApi.Entities
 {
     /// <summary>
     /// Base abstract class for requests.

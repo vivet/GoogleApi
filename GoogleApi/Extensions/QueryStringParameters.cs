@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GoogleApi.Extensions.Entities;
+using GoogleApi.Entities;
 
 namespace GoogleApi.Extensions
 {

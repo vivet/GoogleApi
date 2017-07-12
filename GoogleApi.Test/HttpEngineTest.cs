@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using GoogleApi.Entities;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;

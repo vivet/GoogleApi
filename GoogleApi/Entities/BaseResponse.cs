@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Extensions;
 
-namespace GoogleApi.Entities.Common
+namespace GoogleApi.Entities
 {
     /// <summary>
     /// MapsBase Response.

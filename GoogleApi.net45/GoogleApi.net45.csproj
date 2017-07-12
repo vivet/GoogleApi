@@ -82,17 +82,17 @@
     <None Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GoogleApi\Entities\BaseRequest.cs">
+      <Link>Entities\BaseRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\BaseResponse.cs">
+      <Link>Entities\BaseResponse.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\AddressComponent.cs">
       <Link>Entities\Common\AddressComponent.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\AddressLocation.cs">
       <Link>Entities\Common\AddressLocation.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\BaseRequest.cs">
-      <Link>Entities\Common\BaseRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\BaseResponse.cs">
-      <Link>Entities\Common\BaseResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
@@ -439,6 +439,9 @@
     <Compile Include="..\GoogleApi\Entities\Places\Search\Text\Response\TextResult.cs">
       <Link>Entities\Places\Search\Text\Response\TextResult.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\QueryStringParameter.cs">
+      <Link>Entities\QueryStringParameter.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\AltType.cs">
       <Link>Entities\Search\Common\AltType.cs</Link>
     </Compile>
@@ -606,9 +609,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Extensions\DateTimeExtension.cs">
       <Link>Extensions\DateTimeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Extensions\Entities\QueryStringParameter.cs">
-      <Link>Extensions\Entities\QueryStringParameter.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Extensions\EnumExtension.cs">
       <Link>Extensions\EnumExtension.cs</Link>

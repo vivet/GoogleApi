@@ -1,4 +1,4 @@
-﻿namespace GoogleApi.Extensions.Entities
+﻿namespace GoogleApi.Entities
 {
     /// <summary>
     /// QueryString Parameter.
