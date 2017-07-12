@@ -50,7 +50,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
                 var parameters = base.QueryStringParameters;
 
                 parameters.Add("language", this.Language.ToCode());
-                parameters.Add("location", this.Location.LocationString);
+                parameters.Add("location", this.Location.ToString());
                 parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
 
                 return parameters;

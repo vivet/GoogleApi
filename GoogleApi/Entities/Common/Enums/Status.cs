@@ -60,6 +60,6 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates a directions request could not be processed due to a server error. The request may succeed if you try again
         /// </summary>
         [EnumMember(Value = "UNKNOWN_ERROR")]
-        UnknownError,
+        UnknownError
     }
 }

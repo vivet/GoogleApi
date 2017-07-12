@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
@@ -27,14 +27,14 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
         /// If you pass coordinates, ensure that no space exists between the latitude and longitude values.
         /// </summary>
-        public virtual IEnumerable<ILocationString> Origins { get; set; }
+        public virtual IEnumerable<Location> Origins { get; set; }
 
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, to which to calculate distance and time. 
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
         /// If you pass coordinates, ensure that no space exists between the latitude and longitude values
         /// </summary>
-        public virtual IEnumerable<ILocationString> Destinations { get; set; }
+        public virtual IEnumerable<Location> Destinations { get; set; }
 
         /// <summary>
         /// origins — The starting point for calculating travel distance and time. 

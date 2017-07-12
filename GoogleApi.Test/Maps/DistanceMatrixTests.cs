@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using NUnit.Framework;
@@ -20,7 +19,7 @@ namespace GoogleApi.Test.Maps
             var request = new DistanceMatrixRequest
             {
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") }
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
             var response = GoogleMaps.DistanceMatrix.Query(request);
 
@@ -86,7 +85,7 @@ namespace GoogleApi.Test.Maps
         {
             var request = new DistanceMatrixRequest
             {
-                Destinations = new[] { new AddressLocation("test") }
+                Destinations = new[] { new Location("test") }
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
@@ -98,7 +97,7 @@ namespace GoogleApi.Test.Maps
         {
             var request = new DistanceMatrixRequest
             {
-                Origins = new ILocationString[0],
+                Origins = new Location[0],
                 Destinations = new[] { new Location(0, 0) }
             };
 
@@ -124,7 +123,7 @@ namespace GoogleApi.Test.Maps
             var request = new DistanceMatrixRequest
             {
                 Origins = new[] { new Location(0, 0) },
-                Destinations = new ILocationString[0]
+                Destinations = new Location[0]
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
@@ -137,7 +136,7 @@ namespace GoogleApi.Test.Maps
             var request = new DistanceMatrixRequest
             {
                 Origins = new[] { new Location(0, 0) },
-                Destinations = new[] { new AddressLocation("test") },
+                Destinations = new[] { new Location("test") },
                 TravelMode = TravelMode.Transit,
                 DepartureTime = null,
                 ArrivalTime = null
@@ -154,7 +153,7 @@ namespace GoogleApi.Test.Maps
             var request = new DistanceMatrixRequest
             {
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") }
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
             var response = GoogleMaps.DistanceMatrix.QueryAsync(request).Result;
 
@@ -167,7 +166,7 @@ namespace GoogleApi.Test.Maps
             var request = new DistanceMatrixRequest
             {
                 Origins = new[] { new Location(0, 0) },
-                Destinations = new[] { new AddressLocation("185 Broadway Ave, Manhattan, NY, USA") }
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
             var exception = Assert.Throws<AggregateException>(() =>
             {
@@ -189,7 +188,7 @@ namespace GoogleApi.Test.Maps
             var request = new DistanceMatrixRequest
             {
                 Origins = new[] { new Location(0, 0), },
-                Destinations = new[] { new AddressLocation("test") }
+                Destinations = new[] { new Location("test") }
             };
             var cancellationTokenSource = new CancellationTokenSource();
             var task = GoogleMaps.DistanceMatrix.QueryAsync(request, cancellationTokenSource.Token);

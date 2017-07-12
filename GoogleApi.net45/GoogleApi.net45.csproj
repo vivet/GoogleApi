@@ -92,9 +92,6 @@
     <Compile Include="..\GoogleApi\Entities\Common\AddressComponent.cs">
       <Link>Entities\Common\AddressComponent.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\AddressLocation.cs">
-      <Link>Entities\Common\AddressLocation.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
     </Compile>
@@ -109,9 +106,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Status.cs">
       <Link>Entities\Common\Enums\Status.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\ILocationString.cs">
-      <Link>Entities\Common\Interfaces\ILocationString.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
