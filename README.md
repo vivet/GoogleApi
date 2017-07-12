@@ -7,7 +7,7 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 
 ##### Version 3.0: https://github.com/vivet/GoogleApi/tree/V3 (follow here, expected end of July)
 
-### Google Api Integrations:
+### Google Api Endpoints:
 ##### Google Maps
   * Directions
   * Distance Matrix
