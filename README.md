@@ -13,6 +13,7 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 * Added missing endpoints. All Api's are now complete again.
 * Search fully implemented and supported (possibly postponed to v3.1).
 * Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
+* Test Suite expanded greatly. 90%+ coverage overall
 * and much more.
 
 ### Google Api Integrations:
