@@ -6,12 +6,13 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 ##### Nuget: https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.2)
 
 ##### Version 3.0.0 Highlights: 
-* Downgrade to netstandard1.2 (more portable platforms support, i think) 
-* Walk-through of all endpoints aligned with Google Api Documentation
+* Follow the progress for endpoints upgrade below.
+* Downgrade to netstandard1.2 (more portable platforms support, i think).
+* Walk-through of all endpoints aligned with Google Api Documentation.
 * Request validation improved for all endpoints.
 * Added missing endpoints. All Api's are now complete again.
-* Search fully implemented and supported (possibly postponed to v3.1)
-* Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints)
+* Search fully implemented and supported (possibly postponed to v3.1).
+* Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
 * and much more.
 
 ### Google Api Integrations:
@@ -46,9 +47,9 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Enterprise (Paid)
 
 ##### Google Translate 
-  * Detect (Done)
-  * Languages (Done)
-  * Translate (Done)
+  * Detect (3.0)
+  * Languages (3.0)
+  * Translate (3.0)
 
 ##### Google Functions 
   * MergePolyLine
