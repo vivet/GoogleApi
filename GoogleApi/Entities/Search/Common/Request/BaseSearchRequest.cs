@@ -1,5 +1,4 @@
 ﻿using System;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Interfaces;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
 using GoogleApi.Extensions;
@@ -36,8 +35,8 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// </summary>
         public override bool IsSsl
         {
-            get { return true; }
-            set { throw new NotSupportedException("This operation is not supported, SearchRequest must use SSL"); }
+            get => true;
+            set => throw new NotSupportedException("This operation is not supported, SearchRequest must use SSL");
         }
 
         /// <summary>

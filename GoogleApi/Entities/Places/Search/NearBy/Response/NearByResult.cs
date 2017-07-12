@@ -80,8 +80,8 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         [DataMember(Name = "scope")]
         internal string ScopeStr
         {
-            get { return this.Scope.ToEnumString(); }
-            set { this.Scope = value.ToEnum<Scope>(); }
+            get => this.Scope.ToEnumString();
+            set => this.Scope = value.ToEnum<Scope>();
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         [DataMember(Name = "price_level")]
         internal string PriceLevelStr
         {
-            get { return this.PriceLevel.ToEnumString(); }
-            set { this.PriceLevel = value.ToEnum<PriceLevel>(); }
+            get => this.PriceLevel.ToEnumString();
+            set => this.PriceLevel = value.ToEnum<PriceLevel>();
         }
     }
 }

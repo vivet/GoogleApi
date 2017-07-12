@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -9,5 +8,6 @@ namespace GoogleApi.Entities.Places.Common
     [DataContract]
     public abstract class BasePlacesResponse : BaseResponse
     {
+
     }
 }

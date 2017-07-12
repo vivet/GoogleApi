@@ -30,8 +30,8 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         [DataMember(Name = "type")]
         internal string VehicleTypeStr
         {
-            get { return this.VehicleType.ToEnumString(); }
-            set { this.VehicleType = value.ToEnum<VehicleType>(); }
+            get => this.VehicleType.ToEnumString();
+            set => this.VehicleType = value.ToEnum<VehicleType>();
         }
     }
 }

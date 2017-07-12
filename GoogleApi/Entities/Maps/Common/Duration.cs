@@ -13,8 +13,8 @@ namespace GoogleApi.Entities.Maps.Common
         [DataMember(Name = "value")]
         internal virtual int ValueInSec
         {
-            get { return (int) Math.Round(Value.TotalSeconds); }
-            set { Value = TimeSpan.FromSeconds(value); }
+            get => (int) Math.Round(Value.TotalSeconds);
+            set => Value = TimeSpan.FromSeconds(value);
         }
 
         /// <summary>

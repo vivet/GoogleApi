@@ -1,5 +1,4 @@
 ﻿using System;
-using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Common
 {
@@ -18,8 +17,8 @@ namespace GoogleApi.Entities.Maps.Common
         /// </summary>
         public override bool IsSsl
         {
-            get { return true; }
-            set { throw new NotSupportedException("This operation is not supported, Request must use SSL"); }
+            get => true;
+            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
         }
     }
 }

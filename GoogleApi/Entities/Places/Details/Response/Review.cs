@@ -55,8 +55,8 @@ namespace GoogleApi.Entities.Places.Details.Response
         [DataMember(Name = "time")]
         internal int TimeInt
         {
-            get { return this.Time.DateTimeToUnixTimestamp(); }
-            set { this.Time = DateTimeExtension.epoch.AddSeconds(value); }
+            get => this.Time.DateTimeToUnixTimestamp();
+            set => this.Time = DateTimeExtension.epoch.AddSeconds(value);
         }
     }
 }

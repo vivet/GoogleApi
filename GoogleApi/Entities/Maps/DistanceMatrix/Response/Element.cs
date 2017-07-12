@@ -19,8 +19,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
         [DataMember(Name = "status")]
         internal virtual string StatusStr
         {
-            get { return this.Status.ToEnumString(); }
-            set { this.Status = value.ToEnum<Status>(); }
+            get => this.Status.ToEnumString();
+            set => this.Status = value.ToEnum<Status>();
         }
 
         /// <summary>

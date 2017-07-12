@@ -1,5 +1,4 @@
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {

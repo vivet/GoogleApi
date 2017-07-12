@@ -38,15 +38,15 @@ namespace GoogleApi.Entities
         [DataMember(Name = "status")]
         internal virtual string StatusStr
         {
-            get { return this.Status.ToEnumString(); }
-            set { this.Status = value.ToEnum<Status>(); }
+            get => this.Status.ToEnumString();
+            set => this.Status = value.ToEnum<Status>();
         }
 
         [DataMember(Name = "error_message")]
         internal virtual string ErrorMsg
         {
-            get { return this.Status.ToString(); }
-            set { this.Status = (Status) Enum.Parse(typeof(Status), value); }
+            get => this.Status.ToString();
+            set => this.Status = (Status) Enum.Parse(typeof(Status), value);
         }
     }
 }

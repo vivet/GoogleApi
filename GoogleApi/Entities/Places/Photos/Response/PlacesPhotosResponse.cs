@@ -22,8 +22,8 @@ namespace GoogleApi.Entities.Places.Photos.Response
         [DataMember(Name = "photo")]
         protected virtual byte[] PhotoStr
         {
-            get { return this.Photo.ToArray(); }
-            set { this.Photo = new MemoryStream(value); }
+            get => this.Photo.ToArray();
+            set => this.Photo = new MemoryStream(value);
         }
     }
 }

@@ -16,12 +16,12 @@
         /// Pessimistic, indicates that the returned duration_in_traffic should be longer than the actual travel time on most days,
         /// though occasional days with particularly bad traffic conditions may exceed this value.
         /// </summary>
-        pessimistic,
+        Pessimistic,
 
         /// <summary>
         /// Optimistic, indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days, 
         /// though occasional days with particularly good traffic conditions may be faster than this value.
         /// </summary>
-        optimistic
+        Optimistic
     }
 }

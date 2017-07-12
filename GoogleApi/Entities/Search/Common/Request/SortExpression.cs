@@ -30,7 +30,7 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("{0}, {1}, {2}", this.By.ToString().ToLower(), this.Order.ToString().ToLower(), this.DefaultValue?.ToString());
+            return $"{this.By.ToString().ToLower()}, {this.Order.ToString().ToLower()}, {this.DefaultValue}";
         }
 
         /// <summary>
