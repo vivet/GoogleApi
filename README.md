@@ -25,10 +25,10 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Geocoding 
   * Reverse Geocoding
   * Geolocation
-  * Roads 
-    * Nearest Roads
-    * Snap To Roads
-    * Speed Limits
+  * Roads (3.0)
+    * Nearest Roads (3.0)
+    * Snap To Roads (3.0)
+    * Speed Limits (3.0)
   * Time Zone (3.0)
 
 ##### Google Places
@@ -48,7 +48,7 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Image
   * Enterprise (Paid)
 
-##### Google Translate 
+##### Google Translate (3.0)
   * Detect (3.0)
   * Languages (3.0)
   * Translate (3.0)

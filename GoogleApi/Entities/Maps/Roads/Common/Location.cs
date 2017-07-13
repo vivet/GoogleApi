@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
+    // TODO: Refactor into Common Location entity (differs in DataMember name)
     /// <summary>
     /// Location (Roads only). 
     /// </summary>

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Maps.Roads.Common;
-using Location = GoogleApi.Entities.Maps.Roads.Common.Location;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
 {
     /// <summary>
-    /// NearestRoads Request.
+    /// NearestRoads request.
     /// </summary>
     public class NearestRoadsRequest : BaseRoadsRequest
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => "roads.googleapis.com/v1/nearestRoads";
 
@@ -24,18 +23,17 @@ namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
         public virtual IEnumerable<Location> Points { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (this.Points == null || !this.Points.Any())
-                    throw new ArgumentException("Points is required.");
+                    throw new ArgumentException("Points is required");
 
                 var parameters = base.QueryStringParameters;
-
                 parameters.Add("points", string.Join("|", this.Points));
 
                 return parameters;

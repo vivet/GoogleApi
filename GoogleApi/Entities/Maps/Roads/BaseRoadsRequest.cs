@@ -2,15 +2,15 @@
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 
-namespace GoogleApi.Entities.Maps.Roads.Common
+namespace GoogleApi.Entities.Maps.Roads
 {
     /// <summary>
-    /// 
+    /// Base abstract roads request.
     /// </summary>
-    public class BaseRoadsRequest : BaseMapsRequest, IRequestQueryString
+    public abstract class BaseRoadsRequest : BaseMapsRequest, IRequestQueryString
     {
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRequest.QueryStringParameters"/>
         /// </summary>
         /// <returns></returns>
         public override QueryStringParameters QueryStringParameters
@@ -18,7 +18,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
             get
             {
                 if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required.");
+                    throw new ArgumentException("Key is required");
 
                 var parameters = base.QueryStringParameters;
 

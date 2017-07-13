@@ -3,19 +3,21 @@
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums
 {
     /// <summary>
-    /// Speed Units
+    /// Speed Units.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "units")]
     public enum Units
     {
         /// <summary>
         /// Miles per hour.
         /// </summary>
-        [EnumMember(Value = "MPH")] Mph,
+        [EnumMember(Value = "MPH")]
+        Mph,
 
         /// <summary>
         /// Kilometers per hour.
         /// </summary>
-        [EnumMember(Value = "KPH")] Kph,
+        [EnumMember(Value = "KPH")]
+        Kph
     }
 }

@@ -254,11 +254,11 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\GeolocationResponse.cs">
       <Link>Entities\Maps\Geolocation\Response\GeolocationResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\BaseRoadsRequest.cs">
-      <Link>Entities\Maps\Roads\Common\BaseRoadsRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\BaseRoadsRequest.cs">
+      <Link>Entities\Maps\Roads\BaseRoadsRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\BaseRoadsResponse.cs">
-      <Link>Entities\Maps\Roads\Common\BaseRoadsResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\BaseRoadsResponse.cs">
+      <Link>Entities\Maps\Roads\BaseRoadsResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Location.cs">
       <Link>Entities\Maps\Roads\Common\Location.cs</Link>

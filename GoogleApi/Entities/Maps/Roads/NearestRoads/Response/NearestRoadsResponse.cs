@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Roads.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Response
 {

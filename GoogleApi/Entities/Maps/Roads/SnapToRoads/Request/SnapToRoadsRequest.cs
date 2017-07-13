@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Maps.Roads.Common;
-using Location = GoogleApi.Entities.Maps.Roads.Common.Location;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
 {
     /// <summary>
-    /// SnapToRoads Request.
+    /// SnapToRoads request.
     /// </summary>
     public class SnapToRoadsRequest : BaseRoadsRequest
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => "roads.googleapis.com/v1/snapToRoads";
 
@@ -27,18 +26,18 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// When true, additional interpolated points will also be returned, resulting in a path that smoothly follows the geometry of the road, even around corners and through tunnels. 
         /// Interpolated paths will most likely contain more points than the original path. Defaults to false.
         /// </summary>
-        public virtual bool Interpolate { get; set; }
+        public virtual bool Interpolate { get; set; } = false;
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (this.Path == null || !this.Path.Any())
-                    throw new ArgumentException("Path is required.");
+                    throw new ArgumentException("Path is required");
 
                 var parameters = base.QueryStringParameters;
 
