@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace GoogleApi.Entities.Places.Common
 {
     /// <summary>
-    /// Place Photo.
+    /// Photo.
     /// </summary>
     [DataContract]
     public class Photo
@@ -28,7 +28,8 @@ namespace GoogleApi.Entities.Places.Common
         public virtual int Width { get; set; }
 
         /// <summary>
-        /// HtmlAttributions — contains any required attributions. This field will always be present, but may be empty.
+        /// HtmlAttributions — contains any required attributions. 
+        /// This field will always be present, but may be empty.
         /// </summary>
         [DataMember(Name = "html_attributions")]
         public virtual IEnumerable<string> HtmlAttributions { get; set; }

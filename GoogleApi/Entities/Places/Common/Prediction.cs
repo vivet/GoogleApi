@@ -13,7 +13,8 @@ namespace GoogleApi.Entities.Places.Common
     public class Prediction
     {
         /// <summary>
-        /// Description contains the human-readable name for the returned result. For establishment results, this is usually the business name.
+        /// Description contains the human-readable name for the returned result. 
+        /// For establishment results, this is usually the business name.
         /// </summary>
         [DataMember(Name = "description")]
         public virtual string Description { get; set; }
@@ -26,13 +27,16 @@ namespace GoogleApi.Entities.Places.Common
         public virtual string PlaceId { get; set; }
 
         /// <summary>
-        /// Terms contains an array of terms identifying each section of the returned description (a section of the description is generally terminated with a comma). Each entry in the array has a value field, containing the text of the term, and an offset field, defining the start position of this term in the description, measured in Unicode characters.
+        /// Terms contains an array of terms identifying each section of the returned description (a section of the description is generally terminated with a comma). 
+        /// Each entry in the array has a value field, containing the text of the term, and an offset field, defining the start position of this term in the description, 
+        /// measured in Unicode characters.
         /// </summary>
         [DataMember(Name = "terms")]
         public virtual IEnumerable<Term> Terms { get; set; }
 
         /// <summary>
-        /// MatchedSubstring contains an offset value and a length. These describe the location of the entered term in the prediction result text, so that the term can be highlighted if desired.
+        /// MatchedSubstring contains an offset value and a length. 
+        /// These describe the location of the entered term in the prediction result text, so that the term can be highlighted if desired.
         /// </summary>
         [DataMember(Name = "matched_substring")]
         public virtual IEnumerable<MatchedSubstring> MatchedSubstrings { get; set; }
@@ -45,17 +49,8 @@ namespace GoogleApi.Entities.Places.Common
         [DataMember(Name = "types")]
         internal string[] TypesStr
         {
-            get
-            {
-                return Types?.Select(x => x.ToEnumString()).ToArray() ?? new string[0];
-            }
-            set
-            {
-                if (value == null)
-                    return;
-
-                this.Types = value.Select(x => x.ToEnum<PlaceLocationType>());
-            }
+            get => this.Types?.Select(x => x.ToEnumString()).ToArray() ?? new string[0];
+            set => this.Types = value?.Select(x => x.ToEnum<PlaceLocationType>());
         }
     }
 }

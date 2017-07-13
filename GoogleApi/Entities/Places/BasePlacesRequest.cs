@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoogleApi.Entities.Places.Common
+namespace GoogleApi.Entities.Places
 {
     /// <summary>
     /// Base abstract class for Places requests.
@@ -8,7 +8,7 @@ namespace GoogleApi.Entities.Places.Common
     public abstract class BasePlacesRequest : BaseRequest
     {
         /// <summary>
-        /// BaseUrl property overriden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => "maps.googleapis.com/maps/api/place/";
 
@@ -46,8 +46,9 @@ namespace GoogleApi.Entities.Places.Common
         }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRequest.QueryStringParameters"/>.
         /// </summary>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         /// <returns></returns>
         public override QueryStringParameters QueryStringParameters
         {

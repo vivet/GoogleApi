@@ -21,7 +21,7 @@ namespace GoogleApi.Entities.Translate
         /// <summary>
         /// See <see cref="BaseRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

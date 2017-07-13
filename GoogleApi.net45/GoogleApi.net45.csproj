@@ -320,14 +320,14 @@
     <Compile Include="..\GoogleApi\Entities\Places\AutoComplete\Response\PlacesAutoCompleteResponse.cs">
       <Link>Entities\Places\AutoComplete\Response\PlacesAutoCompleteResponse.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\BasePlacesRequest.cs">
+      <Link>Entities\Places\BasePlacesRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\BasePlacesResponse.cs">
+      <Link>Entities\Places\BasePlacesResponse.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\AlternativePlace.cs">
       <Link>Entities\Places\Common\AlternativePlace.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Common\BasePlacesRequest.cs">
-      <Link>Entities\Places\Common\BasePlacesRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Common\BasePlacesResponse.cs">
-      <Link>Entities\Places\Common\BasePlacesResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\Enums\PlaceLocationType.cs">
       <Link>Entities\Places\Common\Enums\PlaceLocationType.cs</Link>

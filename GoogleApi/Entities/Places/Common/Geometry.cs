@@ -4,13 +4,13 @@ using GoogleApi.Entities.Common;
 namespace GoogleApi.Entities.Places.Common
 {
     /// <summary>
-    /// Geometry
+    /// Geometry.
     /// </summary>
     [DataContract]
     public class Geometry
     {
         /// <summary>
-        /// location contains the geocoded latitude,longitude value for this place.
+        /// Location contains the geocoded latitude,longitude value for this place.
         /// </summary>
         [DataMember(Name = "location")]
         public virtual Location Location { get; set; }

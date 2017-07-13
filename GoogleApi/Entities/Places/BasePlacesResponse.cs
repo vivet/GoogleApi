@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Places.Common
+namespace GoogleApi.Entities.Places
 {
     /// <summary>
-    /// Base abstract class for Places responses.
+    /// Base abstract class for places responses.
     /// </summary>
     [DataContract]
     public abstract class BasePlacesResponse : BaseResponse
