@@ -10,9 +10,11 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
     public class GeocodingResponse : BaseResponse
     {
         /// <summary>
-        /// Results array.
+        /// Results.
+        /// When the geocoder returns results, it places them within a (JSON) results array. 
+        /// Even if the geocoder returns no results (such as if the address doesn't exist) it still returns an empty results array.
         /// </summary>
         [DataMember(Name = "results")]
-        public virtual IEnumerable<GeocodeResult> Results { get; set; }
+        public virtual IEnumerable<Result> Results { get; set; }
     }
 }

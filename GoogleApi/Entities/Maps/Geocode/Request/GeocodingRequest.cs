@@ -5,7 +5,6 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Geocode.Request
 {
@@ -15,7 +14,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
     public class GeocodingRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "geocode/json";
 
@@ -56,15 +55,16 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         public virtual Dictionary<Component, string> Components { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseMapsChannelRequest.QueryStringParameters"/>.
         /// </summary>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         /// <returns></returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
-                    throw new ArgumentException("Location or Address is required.");
+                    throw new ArgumentException("Location or Address is required");
 
                 var parameters = base.QueryStringParameters;
 
