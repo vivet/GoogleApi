@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 
 namespace GoogleApi.Entities.Places.Add.Response

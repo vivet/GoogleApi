@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.Photos.Request
 {

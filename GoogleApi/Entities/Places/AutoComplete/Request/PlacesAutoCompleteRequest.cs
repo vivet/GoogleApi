@@ -7,7 +7,6 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
-using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.AutoComplete.Request
 {

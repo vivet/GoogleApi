@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.Delete.Request
 {

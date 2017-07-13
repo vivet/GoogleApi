@@ -4,7 +4,6 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
 {
