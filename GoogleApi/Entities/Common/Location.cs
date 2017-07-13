@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Common
     /// <summary>
     /// Location.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "location")]
     public class Location
     {
         /// <summary>
@@ -27,10 +27,19 @@ namespace GoogleApi.Entities.Common
         public string Address { get; set; }
 
         /// <summary>
+        /// Default Constructor.
+        /// </summary>
+        protected Location()
+        {
+
+        }
+
+        /// <summary>
         /// Constructor initializing a location by an address string.
         /// </summary>
         /// <param name="address"></param>
         public Location(string address)
+            : this()
         {
             this.Address = address;
         }
@@ -41,6 +50,7 @@ namespace GoogleApi.Entities.Common
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         public Location(double latitude, double longitude)
+            : this()
         {
             this.Latitude = latitude;
             this.Longitude = longitude;

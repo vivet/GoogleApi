@@ -122,11 +122,11 @@
     <Compile Include="..\GoogleApi\Entities\Interfaces\IResponse.cs">
       <Link>Entities\Interfaces\IResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsChannelRequest.cs">
-      <Link>Entities\Maps\Common\BaseMapsChannelRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\BaseMapsChannelRequest.cs">
+      <Link>Entities\Maps\BaseMapsChannelRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsRequest.cs">
-      <Link>Entities\Maps\Common\BaseMapsRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\BaseMapsRequest.cs">
+      <Link>Entities\Maps\BaseMapsRequest.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Common\Distance.cs">
       <Link>Entities\Maps\Common\Distance.cs</Link>
@@ -212,8 +212,8 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\ElevationResponse.cs">
       <Link>Entities\Maps\Elevation\Response\ElevationResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\ElevationResult.cs">
-      <Link>Entities\Maps\Elevation\Response\ElevationResult.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\Result.cs">
+      <Link>Entities\Maps\Elevation\Response\Result.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Request\GeocodingRequest.cs">
       <Link>Entities\Maps\Geocode\Request\GeocodingRequest.cs</Link>
@@ -221,14 +221,14 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs">
       <Link>Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\GeocodeResult.cs">
-      <Link>Entities\Maps\Geocode\Response\GeocodeResult.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\GeocodingResponse.cs">
       <Link>Entities\Maps\Geocode\Response\GeocodingResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Geometry.cs">
       <Link>Entities\Maps\Geocode\Response\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Result.cs">
+      <Link>Entities\Maps\Geocode\Response\Result.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\ViewPort.cs">
       <Link>Entities\Maps\Geocode\Response\ViewPort.cs</Link>
@@ -248,8 +248,8 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\Error.cs">
       <Link>Entities\Maps\Geolocation\Response\Error.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\Errors.cs">
-      <Link>Entities\Maps\Geolocation\Response\Errors.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\ErrorResponse.cs">
+      <Link>Entities\Maps\Geolocation\Response\ErrorResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\GeolocationResponse.cs">
       <Link>Entities\Maps\Geolocation\Response\GeolocationResponse.cs</Link>

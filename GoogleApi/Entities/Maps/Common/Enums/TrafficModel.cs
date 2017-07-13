@@ -1,7 +1,7 @@
 ﻿namespace GoogleApi.Entities.Maps.Common.Enums
 {
     /// <summary>
-    /// Traffic Model
+    /// Traffic Model.
     /// </summary>
     public enum TrafficModel
     {

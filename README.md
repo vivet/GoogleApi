@@ -13,23 +13,24 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 * Added missing endpoints. All Api's are now complete again.
 * Search fully implemented and supported (possibly postponed to v3.1).
 * Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
-* Test Suite expanded greatly. 90%+ coverage overall.
 * Type and Namespace cleanup. Base / Common entities refactored.
+* Test Suite expanded greatly. 90%+ coverage overall.
 * and much more.
 
+
 ### Google Api Integrations:
-##### Google Maps
+##### Google Maps 3.0
   * Directions
   * Distance Matrix
   * Elevation
-  * Geocoding 
+  * Geocoding
   * Reverse Geocoding
   * Geolocation
-  * Roads (3.0)
-    * Nearest Roads (3.0)
-    * Snap To Roads (3.0)
-    * Speed Limits (3.0)
-  * Time Zone (3.0)
+  * Roads
+    * Nearest Roads
+    * Snap To Roads
+    * Speed Limits
+  * Time Zone
 
 ##### Google Places
   * Place Search
@@ -48,12 +49,12 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Image
   * Enterprise (Paid)
 
-##### Google Translate (3.0)
-  * Detect (3.0)
-  * Languages (3.0)
-  * Translate (3.0)
+##### Google Translate 3.0
+  * Detect
+  * Languages
+  * Translate
 
-##### Google Functions 
+##### Google Functions 3.0
   * MergePolyLine
   * EncodePolyLine
   * DecodePolyLine

@@ -1,7 +1,7 @@
-namespace GoogleApi.Entities.Maps.Common
+namespace GoogleApi.Entities.Maps
 {
     /// <summary>
-    /// Base abstract class for Maps requests.
+    /// Base abstract class for maps requests with channel property.
     /// </summary>
     public abstract class BaseMapsChannelRequest : BaseMapsRequest
     {
@@ -21,9 +21,9 @@ namespace GoogleApi.Entities.Maps.Common
         public virtual string Channel { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
