@@ -12,6 +12,7 @@ namespace GoogleApi.Test
     {
         protected virtual AppSettings Settings { get; private set; }
         protected virtual string ApiKey => this.Settings.ApiKey;
+        protected virtual string CryptoKey => this.Settings.CryptoKey;
         protected virtual string ClientId => this.Settings.ClientId;
         protected virtual string SearchEngineId => this.Settings.SearchEngineId;
         protected virtual string SearchEngineUrl => this.Settings.SearchEngineUrl;
@@ -40,6 +41,9 @@ namespace GoogleApi.Test
         {
             [DataMember(Name = "ApiKey")]
             public string ApiKey { get; set; }
+
+            [DataMember(Name = "CryptoKey")]
+            public string CryptoKey { get; set; }
 
             [DataMember(Name = "ClientId")]
             public string ClientId { get; set; }
