@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Translate.Request;
@@ -35,6 +37,78 @@ namespace GoogleApi.Test.Translate.Translate
             Assert.AreEqual("Hej Verden", translation.TranslatedText);
             Assert.AreEqual(Model.Base, translation.Model);
             Assert.IsNull(translation.DetectedSourceLanguage);
+        }
+
+        [Test]
+        public void TranslateWhenAsyncTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = this.ApiKey,
+                Source = Language.English,
+                Target = Language.Danish,
+                Qs = new[] { "Hello World" }
+            };
+
+            var result = GoogleTranslate.Translate.QueryAsync(request).Result;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+
+            var translations = result.Data.Translations?.ToArray();
+            Assert.IsNotNull(translations);
+            Assert.IsNotEmpty(translations);
+
+            var translation = translations.FirstOrDefault();
+            Assert.IsNotNull(translation);
+            Assert.AreEqual("Hej Verden", translation.TranslatedText);
+            Assert.AreEqual(Model.Base, translation.Model);
+            Assert.IsNull(translation.DetectedSourceLanguage);
+        }
+
+        [Test]
+        public void TranslateWhenAsyncAndTimeoutTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = this.ApiKey,
+                Source = Language.English,
+                Target = Language.Danish,
+                Qs = new[] { "Hello World" }
+            };
+
+            var exception = Assert.Throws<AggregateException>(() =>
+            {
+                var result = GoogleTranslate.Translate.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
+                Assert.IsNull(result);
+            });
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "One or more errors occurred.");
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
+            Assert.AreEqual(innerException.Message, "A task was canceled.");
+        }
+
+        [Test]
+        public void TranslateWhenAsyncAndCancelledTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = this.ApiKey,
+                Source = Language.English,
+                Target = Language.Danish,
+                Qs = new[] { "Hello World" }
+            };
+
+            var cancellationTokenSource = new CancellationTokenSource();
+            var task = GoogleTranslate.Translate.QueryAsync(request, cancellationTokenSource.Token);
+            cancellationTokenSource.Cancel();
+
+            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "The operation was canceled.");
         }
 
         [Test]

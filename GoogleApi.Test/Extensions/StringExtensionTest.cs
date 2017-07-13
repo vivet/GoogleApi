@@ -16,7 +16,8 @@ namespace GoogleApi.Test.Extensions
 
             Assert.IsNotNull(result);
             Assert.AreEqual(LocationType.Floor, result);
-        }        
+        }     
+        
         [Test]
         public void ToEnumWhenStringIsNullTests()
         {

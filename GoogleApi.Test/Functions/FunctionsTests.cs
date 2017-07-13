@@ -27,6 +27,7 @@ namespace GoogleApi.Test.Functions
             Assert.IsNotNull(encodePolyLine.FirstOrDefault());
             Assert.AreEqual(FunctionsTests.POLY_LINE, encodePolyLine);
         }
+
         [Test]
         public void EncodePolyLineWhenLocationsIsNullTest()
         {
@@ -53,6 +54,7 @@ namespace GoogleApi.Test.Functions
             Assert.AreEqual(decodePolyLine[4].ToString(), location5.ToString());
             Assert.AreEqual(decodePolyLine[5].ToString(), location6.ToString());
         }
+
         [Test]
         public void MergePolyLineWhenEncdodedLocationsIsNullTest()
         {
@@ -73,6 +75,7 @@ namespace GoogleApi.Test.Functions
 
 
         }
+
         [Test]
         public void DecodePolyLineWhenEncdodedLocationsIsNullTest()
         {

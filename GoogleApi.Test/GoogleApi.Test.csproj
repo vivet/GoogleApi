@@ -56,7 +56,10 @@
     <Compile Include="Extensions\EnumExtensionTest.cs" />
     <Compile Include="Extensions\StringExtensionTest.cs" />
     <Compile Include="Functions\FunctionsTests.cs" />
-    <Compile Include="Maps\Roads\SpeedLimitsTests.cs" />
+    <Compile Include="Maps\Roads\NearestRoads\NearestRoadsRequestTests.cs" />
+    <Compile Include="Maps\Roads\SnapToRoad\SnapToRoadRequestTests.cs" />
+    <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsRequestTests.cs" />
+    <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsTests.cs" />
     <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
     <Compile Include="Places\AddTests.cs" />
     <Compile Include="Places\AutoCompleteTests.cs" />
@@ -78,8 +81,8 @@
     <Compile Include="Translate\Languages\LanguagesRequestTests.cs" />
     <Compile Include="Translate\Translate\TranslateRequestTests.cs" />
     <Compile Include="Translate\Translate\TranslateTests.cs" />
-    <Compile Include="Maps\Roads\NearestRoadsTests.cs" />
-    <Compile Include="Maps\Roads\SnapToRoadTests.cs" />
+    <Compile Include="Maps\Roads\NearestRoads\NearestRoadsTests.cs" />
+    <Compile Include="Maps\Roads\SnapToRoad\SnapToRoadTests.cs" />
     <Compile Include="Maps\TimeZone\TimeZoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
