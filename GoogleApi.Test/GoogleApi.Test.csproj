@@ -46,11 +46,16 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Common\Enums\Extensions\LanguagesExtensionTests.cs" />
-    <Compile Include="Maps\DirectionsTests.cs" />
-    <Compile Include="Maps\DistanceMatrixTests.cs" />
-    <Compile Include="Maps\ElevationTests.cs" />
-    <Compile Include="Maps\GeolocationTests.cs" />
-    <Compile Include="Maps\GeocodingTests.cs" />
+    <Compile Include="Maps\Directions\DirectionsRequestTests.cs" />
+    <Compile Include="Maps\Directions\DirectionsTests.cs" />
+    <Compile Include="Maps\DistanceMatrix\DistanceMatrixRequestTests.cs" />
+    <Compile Include="Maps\DistanceMatrix\DistanceMatrixTests.cs" />
+    <Compile Include="Maps\Elevation\ElevationRequestTests.cs" />
+    <Compile Include="Maps\Elevation\ElevationTests.cs" />
+    <Compile Include="Maps\Geocode\GeocodingRequestTests.cs" />
+    <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
+    <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
+    <Compile Include="Maps\Geocode\GeocodingTests.cs" />
     <Compile Include="HttpEngineTest.cs" />
     <Compile Include="Extensions\DateTimeExtensionTest.cs" />
     <Compile Include="Extensions\EnumExtensionTest.cs" />

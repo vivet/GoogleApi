@@ -1,6 +1,5 @@
 ﻿using System;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Roads
 {
