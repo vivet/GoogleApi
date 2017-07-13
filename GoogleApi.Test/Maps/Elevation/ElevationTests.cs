@@ -7,7 +7,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Maps
+namespace GoogleApi.Test.Maps.Elevation
 {
     [TestFixture]
     public class ElevationTests : BaseTest
@@ -19,43 +19,16 @@ namespace GoogleApi.Test.Maps
             {
                 Locations = new[] { new Location(40.7141289, -73.9614074) }
             };
+
             var response = GoogleMaps.Elevation.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual(14.782454490661619, response.Results.First().Elevation, 0.10);
         }
-        [Test]
-        public void ElevationWhenPathAndSamplesTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void ElevationWhenPathAndSimplesIsNullTest()
-        {
-            var request = new ElevationRequest
-            {
-                Path = new[] { new Location(40.7141289, -73.9614074) },
-                Samples = null
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Samples is required, when using the Path.");
-        }
 
         [Test]
-        public void ElevationWhenLocationIsNullAndPathIsNullTest()
-        {
-            var request = new ElevationRequest();
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Locations or Path is required.");
-        }
-
-        [Test]
-        public void ElevationAsyncTest()
+        public void ElevationWhenAsyncTest()
         {
             var request = new ElevationRequest
             {
@@ -66,8 +39,9 @@ namespace GoogleApi.Test.Maps
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
+
         [Test]
-        public void ElevationWhenAsyncWhenTimeoutTest()
+        public void ElevationWhenAsyncAndTimeoutTest()
         {
             var request = new ElevationRequest
             {
@@ -87,8 +61,9 @@ namespace GoogleApi.Test.Maps
             Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
             Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
+
         [Test]
-        public void ElevationWhenAsyncCancelledTest()
+        public void ElevationWhenAsyncAndCancelledTest()
         {
             var request = new ElevationRequest
             {
@@ -103,5 +78,48 @@ namespace GoogleApi.Test.Maps
             Assert.AreEqual(exception.Message, "The operation was canceled.");
         }
 
+        [Test]
+        public void ElevationWhenPathAndSamplesTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void ElevationWhenPathAndSamplesIsNullTest()
+        {
+            var request = new ElevationRequest
+            {
+                Path = new[] { new Location(40.7141289, -73.9614074) },
+                Samples = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Samples is required, when using Path");
+        }
+
+        [Test]
+        public void ElevationWhenPathAndLocationTest()
+        {
+            var request = new ElevationRequest
+            {
+                Path = new[] { new Location(40.7141289, -73.9614074) },
+                Locations = new[] { new Location(40.7141289, -73.9614074) }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Path and Locations cannot both be specified");
+        }
+
+        [Test]
+        public void ElevationWhenPathAndLocationIsNullTest()
+        {
+            var request = new ElevationRequest();
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Locations or Path is required");
+        }
     }
 }

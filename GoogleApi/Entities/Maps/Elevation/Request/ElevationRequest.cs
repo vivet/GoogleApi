@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Elevation.Request
 {
@@ -12,12 +11,15 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
     public class ElevationRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "elevation/json";
 
         /// <summary>
-        /// Sampled path requests are indicated through use of the path and samples parameters, indicating a request for elevation data along a path at specified intervals. As with positional requests using the locations parameter, the path parameter specifies a set of latitude and longitude values. Unlike a positional request, however, the path specifies an ordered set of vertices. Rather than return elevation data only at the vertices, path requests are sampled along the length of the path, based on the number of samples specified (inclusive of the endpoints).
+        /// Sampled path requests are indicated through use of the path and samples parameters, indicating a request for elevation data along a path at specified intervals. 
+        /// As with positional requests using the locations parameter, the path parameter specifies a set of latitude and longitude values. Unlike a positional request, however, 
+        /// the path specifies an ordered set of vertices. Rather than return elevation data only at the vertices, path requests are sampled along the length of the path, 
+        /// based on the number of samples specified (inclusive of the endpoints).
         /// The path parameter may take either of the following arguments:
         /// An array of two or more comma-separated coordinate text strings separated using the pipe ('|') character: path=40.714728,-73.998672|-34.397,150.644
         /// Encoded coordinates using the Encoded Polyline Algorithm: path=enc:gfo}EtohhUxD@bAxJmGF
@@ -28,36 +30,38 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
 
         /// <summary>
         /// Locations defines the location(s) on the earth from which to return elevation data. 
-        /// This parameter takes either a single location as a comma-separated {latitude,longitude} pair (e.g. "40.714728,-73.998672") or multiple latitude/longitude pairs passed as an array or as an encoded polyline. For more information.
+        /// This parameter takes either a single location as a comma-separated {latitude,longitude} pair (e.g. "40.714728,-73.998672") or multiple latitude/longitude pairs 
+        /// passed as an array or as an encoded polyline. For more information.
         /// Note: Either this or Path property must be set, this overrides the Path.
         /// </summary>
         public virtual IEnumerable<Location> Locations { get; set; }
 
         /// <summary>
-        /// Required when using the Path, and specifies the number of sample points along a path for which to return elevation data. The samples parameter divides the given path into an ordered set of equidistant points along the path.
+        /// Required when using the Path, and specifies the number of sample points along a path for which to return elevation data. 
+        /// The samples parameter divides the given path into an ordered set of equidistant points along the path.
         /// </summary>
         public virtual int? Samples { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseMapsChannelRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (this.Locations == null && this.Path == null)
-                    throw new ArgumentException("Locations or Path is required.");
+                    throw new ArgumentException("Locations or Path is required");
 
                 if (this.Locations != null && this.Path != null)
-                    throw new ArgumentException("Locations and Path cannot both be specified.");
+                    throw new ArgumentException("Path and Locations cannot both be specified");
 
                 var parameters = base.QueryStringParameters;
 
                 if (this.Locations == null)
                 {
                     if (this.Samples == null)
-                        throw new ArgumentException("Samples is required, when using the Path.");
+                        throw new ArgumentException("Samples is required, when using Path");
 
                     parameters.Add("path", string.Join("|", this.Path ?? new[] { new Location(0, 0) }));
                     parameters.Add("samples", this.Samples.ToString());

@@ -6,8 +6,8 @@ namespace GoogleApi.Entities.Maps.Elevation.Response
     /// <summary>
     /// Result.
     /// </summary>
-    [DataContract]
-    public class ElevationResult
+    [DataContract(Name = "result")]
+    public class Result
     {
         /// <summary>
         /// A location element (containing lat and lng elements) of the position for which elevation data is being computed. Note that for path requests, the set of location elements will contain the sampled points along the path.
