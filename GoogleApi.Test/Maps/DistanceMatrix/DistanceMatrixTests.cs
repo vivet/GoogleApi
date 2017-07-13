@@ -8,7 +8,7 @@ using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Maps
+namespace GoogleApi.Test.Maps.DistanceMatrix
 {
     [TestFixture]
     public class DistanceMatrixTests : BaseTest
@@ -35,120 +35,13 @@ namespace GoogleApi.Test.Maps
             Assert.IsNotNull(element);
             Assert.AreEqual(Status.Ok, element.Status);
             Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(8247, element.Distance.Value, 250);
+            Assert.AreEqual(706.00, element.Distance.Value, 100.00);
             Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1095, element.Duration.Value.TotalSeconds, 50);
-        }
-        [Test]
-        public void DistanceMatrixWhenLanguageTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void DistanceMatrixWhenUnitsTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void DistanceMatrixWhenAvoidWayTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void DistanceMatrixWhenTravelModeTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void DistanceMatrixWhenTransitModeTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void DistanceMatrixWhenTransitRoutingPreferenceTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void DistanceMatrixWhenArrivalTimeTest()
-        {
-            Assert.Inconclusive();
-        }
-        [Test]
-        public void DistanceMatrixWhenDepartureTimeTest()
-        {
-            Assert.Inconclusive();
+            Assert.AreEqual(208.00, element.Duration.Value.TotalSeconds, 30.00);
         }
 
         [Test]
-        public void DistanceMatrixWhenOriginsIsNullTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Destinations = new[] { new Location("test") }
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Origins is required.");
-        }
-        [Test]
-        public void DistanceMatrixWhenOriginsIsEmptyTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Origins = new Location[0],
-                Destinations = new[] { new Location(0, 0) }
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Origins is required.");
-        }
-        [Test]
-        public void DistanceMatrixWhenDestinationsIsNullTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Origins = new[] { new Location(0, 0) }
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Destinations is required.");
-        }
-        [Test]
-        public void DistanceMatrixWhenDestinationsIsEmptyTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Origins = new[] { new Location(0, 0) },
-                Destinations = new Location[0]
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Destinations is required.");
-        }
-        [Test]
-        public void DistanceMatrixWhenWhenTravelModeIsTransitAndDepartureTimeIsNullAndArrivalTimeIsNullTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Origins = new[] { new Location(0, 0) },
-                Destinations = new[] { new Location("test") },
-                TravelMode = TravelMode.Transit,
-                DepartureTime = null,
-                ArrivalTime = null
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit.");
-        }
-
-        [Test]
-        public void DistanceMatrixAsyncTest()
+        public void DistanceMatrixWHenAsyncTest()
         {
             var request = new DistanceMatrixRequest
             {
@@ -160,8 +53,9 @@ namespace GoogleApi.Test.Maps
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
+
         [Test]
-        public void DistanceMatrixAsyncWhenTimeoutTest()
+        public void DistanceMatrixAsyncAndTimeoutTest()
         {
             var request = new DistanceMatrixRequest
             {
@@ -182,8 +76,9 @@ namespace GoogleApi.Test.Maps
             Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
             Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
+
         [Test]
-        public void DistanceMatrixAsyncCancelledTest()
+        public void DistanceMatrixAsyncAndCancelledTest()
         {
             var request = new DistanceMatrixRequest
             {
@@ -197,6 +92,125 @@ namespace GoogleApi.Test.Maps
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void DistanceMatrixWhenLanguageTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenUnitsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenAvoidWayTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenTravelModeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenTransitModeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenTransitRoutingPreferenceTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenArrivalTimeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenDepartureTimeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void DistanceMatrixWhenOriginsIsNullTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Destinations = new[] { new Location("test") }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Origins is required");
+        }
+
+        [Test]
+        public void DistanceMatrixWhenOriginsIsEmptyTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Origins = new Location[0],
+                Destinations = new[] { new Location(0, 0) }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Origins is required");
+        }
+
+        [Test]
+        public void DistanceMatrixWhenDestinationsIsNullTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Origins = new[] { new Location(0, 0) }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Destinations is required");
+        }
+
+        [Test]
+        public void DistanceMatrixWhenDestinationsIsEmptyTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Origins = new[] { new Location(0, 0) },
+                Destinations = new Location[0]
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Destinations is required");
+        }
+
+        [Test]
+        public void DistanceMatrixWhenWhenTravelModeIsTransitAndDepartureTimeIsNullAndArrivalTimeIsNullTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Origins = new[] { new Location(0, 0) },
+                Destinations = new[] { new Location("test") },
+                TravelMode = TravelMode.Transit,
+                DepartureTime = null,
+                ArrivalTime = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
         }
     }
 }

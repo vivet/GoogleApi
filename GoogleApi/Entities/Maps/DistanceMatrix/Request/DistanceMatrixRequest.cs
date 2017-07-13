@@ -6,7 +6,6 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Extensions;
 
@@ -18,9 +17,36 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
     public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
+
+        /// <summary>
+        /// origins — The starting point for calculating travel distance and time. 
+        /// You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, or a placeID.
+        /// If you pass an address, the service geocodes the string and converts it to a latitude/longitude coordinate to calculate distance.
+        /// This coordinate may be different from that returned by the Google Maps Geocoding API, for example a building entrance rather than its center. 
+        /// Example: "origins=Bobcaygeon+ON|24+Sussex+Drive+Ottawa+ON".
+        /// If you pass latitude/longitude coordinates, they are used unchanged to calculate distance.
+        /// Ensure that no space exists between the latitude and longitude values. If you supply a place ID, you must prefix it with place_id. 
+        /// Example: "origins= 41.43206,-81.38992|-33.86748,151.20699".
+        /// You can only specify a placeID if the request includes an API key or a Google Maps APIs Premium Plan client ID.
+        /// You can retrieve place IDs from the Google Maps Geocoding API and the Google Places API (including Place Autocomplete). 
+        /// For an example using place IDs from Place Autocomplete, see Place Autocomplete and Directions.For more about place IDs, see the place ID overview. 
+        /// "origins= place_id:ChIJ3S-JXmauEmsRUcIaWtf4MzE".
+        /// Alternatively, you can supply an encoded set of coordinates using the Encoded Polyline Algorithm.
+        /// This is particularly useful if you have a large number of origin points, because the URL is significantly shorter when using an encoded polyline. 
+        /// Example: Encoded polylines must be prefixed with enc: and followed by a colon (:). Example: "origins=enc:gfo}EtohhU:".
+        /// You can also include multiple encoded polylines, separated by the pipe character(|). 
+        /// Example: "origins=enc:wc ~oAwquwMdlTxiKtqLyiK:|enc:c ~vnAamswMvlTor@tjGi}L:|enc:udymA{~bxM:".
+        /// </summary>
+        public virtual string OriginsRaw { get; set; }
+
+        /// <summary>
+        /// destinations — One or more locations to use as the finishing point for calculating travel distance and time. 
+        /// The options for the destinations parameter are the same as for the <see cref="OriginsRaw"/> parameter, described above.
+        /// </summary>
+        public virtual string DestinationsRaw { get; set; }
 
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. 
@@ -37,41 +63,17 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual IEnumerable<Location> Destinations { get; set; }
 
         /// <summary>
-        /// origins — The starting point for calculating travel distance and time. 
-        /// You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, or a placeID.
-        /// If you pass an address, the service geocodes the string and converts it to a latitude/longitude coordinate to calculate distance.
-        /// This coordinate may be different from that returned by the Google Maps Geocoding API, for example a building entrance rather than its center. 
-        /// Example: "origins=Bobcaygeon+ON|24+Sussex+Drive+Ottawa+ON".
-        /// If you pass latitude/longitude coordinates, they are used unchanged to calculate distance.
-        /// Ensure that no space exists between the latitude and longitude values. If you supply a place ID, you must prefix it with place_id. 
-        /// Example: "origins= 41.43206,-81.38992|-33.86748,151.20699".
-        /// You can only specify a placeID if the request includes an API key or a Google Maps APIs Premium Plan client ID.
-        /// You can retrieve place IDs from the Google Maps Geocoding API and the Google Places API (including Place Autocomplete). 
-        /// For an example using place IDs from Place Autocomplete, see Place Autocomplete and Directions.For more about place IDs, see the place ID overview. "origins= place_id:ChIJ3S-JXmauEmsRUcIaWtf4MzE".
-        /// Alternatively, you can supply an encoded set of coordinates using the Encoded Polyline Algorithm.
-        /// This is particularly useful if you have a large number of origin points, because the URL is significantly shorter when using an encoded polyline. 
-        /// Example: Encoded polylines must be prefixed with enc: and followed by a colon (:). Example: "origins=enc:gfo}EtohhU:".
-        /// You can also include multiple encoded polylines, separated by the pipe character(|). 
-        /// Example: "origins=enc:wc ~oAwquwMdlTxiKtqLyiK:|enc:c ~vnAamswMvlTor@tjGi}L:|enc:udymA{~bxM:".
-        /// </summary>
-        public virtual string OriginsRaw { get; set; }
-
-        /// <summary>
-        /// destinations — One or more locations to use as the finishing point for calculating travel distance and time. 
-        /// The options for the destinations parameter are the same as for the <see cref="OriginsRaw"/> parameter, described above.
-        /// </summary>
-        public virtual string DestinationsRaw { get; set; }
-
-        /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
         /// Units=metric (default) returns distances in kilometers and meters.
         /// Units=imperial returns distances in miles and feet.
-        /// * Note: this unit system setting only affects the text displayed within distance fields. The distance fields also contain values which are always expressed in meters
+        /// * Note: this unit system setting only affects the text displayed within distance fields. 
+        /// The distance fields also contain values which are always expressed in meters
         /// </summary>
         public virtual Units Units { get; set; } = Units.Metric;
 
         /// <summary>
-        /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. Currently, this parameter supports the following two arguments:
+        /// avoid (optional) indicates that the calculated route(s) should avoid the indicated features. 
+        /// Currently, this parameter supports the following two arguments: 
         /// tolls indicates that the calculated route should avoid toll roads/bridges.
         /// highways indicates that the calculated route should avoid highways.
         /// (For more information see Route Restrictions below.)
@@ -113,10 +115,13 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual TransitRoutingPreference TransitRoutingPreference { get; set; } = TransitRoutingPreference.Nothing;
 
         /// <summary>
-        /// The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. Alternatively, you can specify a value of now, which sets the departure time to the current time (correct to the nearest second). 
+        /// The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. Alternatively, you can specify a value of now, 
+        /// which sets the departure time to the current time (correct to the nearest second). 
         /// The departure time may be specified in two cases:
-        /// - For requests where the travel mode is transit: You can optionally specify one of departure_time or arrival_time. If neither time is specified, the departure_time defaults to now (that is, the departure time defaults to the current time).
-        /// - For requests where the travel mode is driving: Google Maps API for Work customers can specify the departure_time to receive trip duration considering current traffic conditions. The departure_time must be set to within a few minutes of the current time.
+        /// - For requests where the travel mode is transit: You can optionally specify one of departure_time or arrival_time. If neither time is specified, 
+        ///   the departure_time defaults to now (that is, the departure time defaults to the current time).
+        /// - For requests where the travel mode is driving: Google Maps API for Work customers can specify the departure_time to receive trip duration considering 
+        ///   current traffic conditions. The departure_time must be set to within a few minutes of the current time.
         /// Note: Requests that include the departure_time parameter are limited to 100 elements
         /// Note: You can specify either DepartureTime or ArrivalTime, but not both
         /// </summary>
@@ -138,21 +143,21 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// <see cref="BaseMapsChannelRequest.QueryStringParameters"/>
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
-                if (string.IsNullOrEmpty(this.OriginsRaw) ||  this.Origins == null || !this.Origins.Any())
-                    throw new ArgumentException("Origins is required.");
+                if (string.IsNullOrEmpty(this.OriginsRaw) && (this.Origins == null || !this.Origins.Any()))
+                    throw new ArgumentException("Origins is required");
 
-                if (string.IsNullOrEmpty(this.DestinationsRaw) || this.Destinations == null || !this.Destinations.Any())
-                    throw new ArgumentException("Destinations is required.");
+                if (string.IsNullOrEmpty(this.DestinationsRaw) && (this.Destinations == null || !this.Destinations.Any()))
+                    throw new ArgumentException("Destinations is required");
 
                 if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
-                    throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit.");
+                    throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
 
                 var parameters = base.QueryStringParameters;
 
