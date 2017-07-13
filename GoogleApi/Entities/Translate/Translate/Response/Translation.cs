@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
 {

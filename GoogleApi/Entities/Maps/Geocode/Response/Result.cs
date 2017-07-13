@@ -3,7 +3,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Extensions;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {

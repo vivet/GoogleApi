@@ -1,9 +1,9 @@
 using System;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Extensions;
+using GoogleApi.Entities.Common.Extensions;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Extensions
+namespace GoogleApi.Test.Common.Extensions
 {
     [TestFixture]
     public class StringExtensionTest

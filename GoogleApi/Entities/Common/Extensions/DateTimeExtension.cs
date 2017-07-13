@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoogleApi.Extensions
+namespace GoogleApi.Entities.Common.Extensions
 {
     /// <summary>
     /// DateTime extensions.

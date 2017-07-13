@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Geocode.Response.Enums;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {

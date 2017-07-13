@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace GoogleApi.Extensions
+namespace GoogleApi.Entities.Common.Extensions
 {
     /// <summary>
     /// Enum extensions.

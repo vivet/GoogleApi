@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Response
 {

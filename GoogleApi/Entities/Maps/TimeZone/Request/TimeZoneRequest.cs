@@ -2,8 +2,8 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
+using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Request
 {

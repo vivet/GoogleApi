@@ -18,7 +18,7 @@ namespace GoogleApi.Test.Search
             var request = new EnterpriseSearchRequest
             {
                 Key = null,
-                SearchEngineUrl = this.SearchEngineUrl,
+                SearchEngineUrl = "abc",
                 Query = "google"
             };
 
@@ -44,7 +44,7 @@ namespace GoogleApi.Test.Search
             var request = new EnterpriseSearchRequest
             {
                 Key = this.ApiKey,
-                SearchEngineUrl = this.SearchEngineUrl,
+                SearchEngineUrl = "abc",
                 Query = null
             };
 

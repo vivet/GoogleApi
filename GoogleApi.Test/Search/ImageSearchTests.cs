@@ -39,7 +39,7 @@ namespace GoogleApi.Test.Search
             var request = new ImageSearchRequest
             {
                 Key = null,
-                SearchEngineId = this.SearchEngineId,
+                SearchEngineId = "abc",
                 Query = "google"
             };
 
@@ -65,7 +65,7 @@ namespace GoogleApi.Test.Search
             var request = new ImageSearchRequest
             {
                 Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                SearchEngineId = "abc",
                 Query = null
             };
 

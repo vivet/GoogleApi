@@ -25,11 +25,6 @@ namespace GoogleApi.Test.Places
 
             var results = response.Predictions.ToArray();
             Assert.IsNotNull(results);
-            Assert.AreEqual(results[0].Description, "Jagtvej, 2200 København N, Denmark");
-            Assert.AreEqual(results[1].Description, "Jagtvej, 2200 Copenhagen, Denmark");
-            Assert.AreEqual(results[2].Description, "Jagtvej 2200, Lemvig, Denmark");
-            Assert.AreEqual(results[3].Description, "Jagtvej 2200, Odense C, Denmark");
-            Assert.AreEqual(results[4].Description, "Jagtvej 2200, Næstved, Denmark");
             Assert.AreEqual(5, results.Length);
         }
 

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace GoogleApi.Extensions
+namespace GoogleApi.Entities.Common.Extensions
 {
     /// <summary>
     /// String extensions.

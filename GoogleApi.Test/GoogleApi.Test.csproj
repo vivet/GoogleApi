@@ -57,9 +57,9 @@
     <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
     <Compile Include="Maps\Geocode\GeocodingTests.cs" />
     <Compile Include="HttpEngineTest.cs" />
-    <Compile Include="Extensions\DateTimeExtensionTest.cs" />
-    <Compile Include="Extensions\EnumExtensionTest.cs" />
-    <Compile Include="Extensions\StringExtensionTest.cs" />
+    <Compile Include="Common\Extensions\DateTimeExtensionTest.cs" />
+    <Compile Include="Common\Extensions\EnumExtensionTest.cs" />
+    <Compile Include="Common\Extensions\StringExtensionTest.cs" />
     <Compile Include="Functions\FunctionsTests.cs" />
     <Compile Include="Maps\Roads\NearestRoads\NearestRoadsRequestTests.cs" />
     <Compile Include="Maps\Roads\SnapToRoad\SnapToRoadRequestTests.cs" />

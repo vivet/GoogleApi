@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
-using GoogleApi.Extensions;
 using Geometry = GoogleApi.Entities.Places.Common.Geometry;
 
 namespace GoogleApi.Entities.Places.Details.Response
