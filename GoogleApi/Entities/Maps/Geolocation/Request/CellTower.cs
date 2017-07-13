@@ -5,7 +5,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     /// <summary>
     /// The request body's cellTowers array contains zero or more cell tower objects.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "cellTower")]
     public class CellTower
     {
         /// <summary>

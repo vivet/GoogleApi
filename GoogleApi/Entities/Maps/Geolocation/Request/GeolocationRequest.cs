@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request
@@ -14,7 +13,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     public class GeolocationRequest : BaseMapsRequest, IRequestJson
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => "www.googleapis.com/geolocation/v1/geolocate";
 
@@ -27,7 +26,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// <summary>
         /// The mobile country code (MCC) for the device's home network.
         /// </summary>
-        [DataMember(Name = "hmeMobileCountryCode")]
+        [DataMember(Name = "homeMobileCountryCode")]
         public virtual string HomeMobileCountryCode { get; set; }
 
         /// <summary>
@@ -62,17 +61,19 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         public virtual IEnumerable<WifiAccessPoint> WifiAccessPoints { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required.");
+                    throw new ArgumentException("Key is required");
 
                 var parameters = base.QueryStringParameters;
+
+                // TODO: Valudate JSon Body.
 
                 return parameters;
             }

@@ -3,9 +3,11 @@ using System.Runtime.Serialization;
 namespace GoogleApi.Entities.Maps.Geolocation.Request
 {
     /// <summary>
-    /// The request body's wifiAccessPoints array must contain two or more WiFi access point objects. macAddress is required; all other fields are optional.
+    /// The request body's wifiAccessPoints array must contain two or more WiFi access point objects. 
+    /// MacAddress is required.
+    /// All other fields are optional.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "wifiAccessPoint")]
     public class WifiAccessPoint
     {
         /// <summary>
