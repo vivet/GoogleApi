@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Search.Image.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Search
+namespace GoogleApi.Test.Search.Image
 {
     [TestFixture]
     public class ImageSearchTests : BaseTest

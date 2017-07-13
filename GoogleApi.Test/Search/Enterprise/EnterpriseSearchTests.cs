@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Search.Enterprise.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Search
+namespace GoogleApi.Test.Search.Enterprise
 {
     [TestFixture]
     public class EnterpriseSearchTests : BaseTest

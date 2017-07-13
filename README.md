@@ -19,7 +19,7 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 
 
 ### Google Api Integrations:
-##### Google Maps 3.0
+##### Google Maps
   * Directions
   * Distance Matrix
   * Elevation
@@ -49,12 +49,12 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Image
   * Enterprise (Paid)
 
-##### Google Translate 3.0
+##### Google Translate
   * Detect
   * Languages
   * Translate
 
-##### Google Functions 3.0
+##### Google Functions
   * MergePolyLine
   * EncodePolyLine
   * DecodePolyLine

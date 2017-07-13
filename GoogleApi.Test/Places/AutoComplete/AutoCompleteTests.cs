@@ -4,7 +4,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places
+namespace GoogleApi.Test.Places.AutoComplete
 {
     [TestFixture]
     public class AutoCompleteTests : BaseTest

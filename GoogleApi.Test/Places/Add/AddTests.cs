@@ -5,7 +5,7 @@ using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.Common.Enums;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places
+namespace GoogleApi.Test.Places.Add
 {
     [TestFixture]
     public class AddTests : BaseTest

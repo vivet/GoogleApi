@@ -6,7 +6,7 @@ using GoogleApi.Entities.Places.Search.NearBy.Request;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places.Search
+namespace GoogleApi.Test.Places.Search.NearBySearch
 {
     [TestFixture]
     public class NearBySearchTests : BaseTest

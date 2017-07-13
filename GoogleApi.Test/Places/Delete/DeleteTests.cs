@@ -6,7 +6,7 @@ using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Delete.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places
+namespace GoogleApi.Test.Places.Delete
 {
     [TestFixture]
     public class DeleteTests : BaseTest

@@ -6,7 +6,7 @@ using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Photos.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places
+namespace GoogleApi.Test.Places.Photos
 {
     [TestFixture]
     public class PhotosTests : BaseTest
