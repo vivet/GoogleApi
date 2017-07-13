@@ -7,11 +7,12 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// <summary>
     /// Review.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "review")]
     public class Review
     {
         /// <summary>
-        /// aspects contains a collection of AspectRating objects, each of which provides a rating of a single attribute of the establishment. The first object in the collection is considered the primary aspect.
+        /// aspects contains a collection of AspectRating objects, each of which provides a rating of a single attribute of the establishment. 
+        /// The first object in the collection is considered the primary aspect.
         /// </summary>
         [DataMember(Name = "aspect")]
         public virtual Aspect Aspect { get; set; }
@@ -42,7 +43,8 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual double Rating { get; set; }
 
         /// <summary>
-        /// Text contains the user's review. When reviewing a location with Google Places, text reviews are considered optional; therefore, this field may by empty.
+        /// Text contains the user's review. When reviewing a location with Google Places, 
+        /// text reviews are considered optional; therefore, this field may by empty.
         /// </summary>
         [DataMember(Name = "text")]
         public virtual string Text { get; set; }

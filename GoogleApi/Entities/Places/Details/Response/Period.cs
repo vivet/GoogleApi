@@ -5,7 +5,7 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// <summary>
     /// Period.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "period")]
     public class Period
     {
         /// <summary>

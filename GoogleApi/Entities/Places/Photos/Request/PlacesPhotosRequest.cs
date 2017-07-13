@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Places.Photos.Request
     public class PlacesPhotosRequest : BasePlacesRequest, IRequestQueryString
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "photo";
 
@@ -31,14 +31,15 @@ namespace GoogleApi.Entities.Places.Photos.Request
         public virtual int? MaxHeight { get; set; }
 
         /// <summary>
-        /// photoreference (required) — A string identifier that uniquely identifies a photo. Photo references are returned from either a Place Search or Place Details request.
+        /// photoreference (required) — A string identifier that uniquely identifies a photo. 
+        /// Photo references are returned from either a Place Search or Place Details request.
         /// </summary>
         public virtual string PhotoReference { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

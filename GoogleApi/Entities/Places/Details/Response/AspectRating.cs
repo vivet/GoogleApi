@@ -5,11 +5,12 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// <summary>
     /// Aspect Rating.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "aspectRating")]
     public class AspectRating
     {
         /// <summary>
-        /// Type the name of the aspect that is being rated. eg. atmosphere, service, food, overall, etc.
+        /// Type the name of the aspect that is being rated. 
+        /// E.g. atmosphere, service, food, overall, etc.
         /// </summary>
         [DataMember(Name = "type")]
         public virtual string Type { get; set; }

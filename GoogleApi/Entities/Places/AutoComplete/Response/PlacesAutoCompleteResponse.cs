@@ -5,7 +5,8 @@ using GoogleApi.Entities.Places.Common;
 namespace GoogleApi.Entities.Places.AutoComplete.Response
 {
     /// <summary>
-    /// When the Places service returns JSON results from a search, it places them within a predictions array.
+    /// When the Places service returns JSON results from a search, 
+    /// it places them within a predictions array.
     /// </summary>
     [DataContract]
     public class PlacesAutoCompleteResponse : BasePlacesResponse

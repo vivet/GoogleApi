@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
     public class PlacesTextSearchRequest : BasePlacesSearchRequest
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "textsearch/json";
 
@@ -20,9 +20,9 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         public string Query { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BasePlacesSearchRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

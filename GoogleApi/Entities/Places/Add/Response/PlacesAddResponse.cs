@@ -10,7 +10,8 @@ namespace GoogleApi.Entities.Places.Add.Response
     public class PlacesAddResponse : BasePlacesResponse
     {
         /// <summary>
-        /// A textual identifier that uniquely identifies a place. To retrieve information about the place, pass this identifier in the placeid field of a Place Details request. 
+        /// A textual identifier that uniquely identifies a place. To retrieve information about the place, 
+        /// pass this identifier in the placeid field of a Place Details request. 
         /// For more information about place IDs, see the place ID overview.
         /// </summary>
         [DataMember(Name = "place_id")]

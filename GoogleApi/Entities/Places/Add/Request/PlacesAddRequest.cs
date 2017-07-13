@@ -17,7 +17,7 @@ namespace GoogleApi.Entities.Places.Add.Request
     public class PlacesAddRequest : BasePlacesRequest, IRequestJson
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "add/json";
 
@@ -83,9 +83,9 @@ namespace GoogleApi.Entities.Places.Add.Request
         public virtual string Website { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

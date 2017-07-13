@@ -5,27 +5,28 @@ using GoogleApi.Entities.Interfaces;
 namespace GoogleApi.Entities.Places.Delete.Request
 {
     /// <summary>
-    /// Places Delete Request.
+    /// Places delete Request.
     /// </summary>
     [DataContract]
     public class PlacesDeleteRequest : BasePlacesRequest, IRequestJson
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "delete/json";
 
         /// <summary>
-        /// A textual identifier that uniquely identifies a place. To retrieve information about the place, pass this identifier in the placeid field of a Place request. 
+        /// A textual identifier that uniquely identifies a place. 
+        /// To retrieve information about the place, pass this identifier in the placeid field of a Place request. 
         /// For more information about place IDs, see the place ID overview.
         /// </summary>
         [DataMember(Name = "place_id")]
         public virtual string PlaceId { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

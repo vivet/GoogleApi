@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// <summary>
     /// Opening Hours.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "openingHours")]
     public class OpeningHours
     {
         /// <summary>

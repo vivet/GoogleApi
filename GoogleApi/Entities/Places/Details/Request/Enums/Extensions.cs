@@ -13,6 +13,6 @@
         /// <summary>
         /// Includes a rich and concise review curated by Google's editorial staff.
         /// </summary>
-        ReviewSummary,
+        ReviewSummary
     }
 }

@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
     public class PlacesNearBySearchRequest : BasePlacesSearchRequest
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "nearbysearch/json";
 
@@ -39,9 +39,9 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         public virtual Ranking Rankby { get; set; } = Ranking.Prominence;
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BasePlacesSearchRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

@@ -49,7 +49,8 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual string Icon { get; set; }
 
         /// <summary>
-        /// international_phone_number contains the Place's phone number in international format. International format includes the country code, and is prefixed with the plus (+) sign. 
+        /// international_phone_number contains the Place's phone number in international format. International format includes the country code, 
+        /// and is prefixed with the plus (+) sign. 
         /// For example, the formatted_phone_number for Google's Sydney, Australia office is +61 2 9374 4000. 
         /// </summary>
         [DataMember(Name = "international_phone_number")]
@@ -88,46 +89,38 @@ namespace GoogleApi.Entities.Places.Details.Response
 
         /// <summary>
         /// Scope — Indicates the scope of the placeId.
-        /// Note: The scope field is included only in Nearby Search results and Place Details results. You can only retrieve app-scoped places via the Nearby Search and the Place Details requests. 
+        /// Note: The scope field is included only in Nearby Search results and Place Details results. 
+        /// You can only retrieve app-scoped places via the Nearby Search and the Place Details requests. 
         /// If the scope field is not present in a response, it is safe to assume the scope is GOOGLE
         /// </summary>
         public virtual Scope Scope { get; set; }
 
-        [DataMember(Name = "scope")]
-        internal string ScopeStr
-        {
-            get => this.Scope.ToEnumString();
-            set => this.Scope = value.ToEnum<Scope>();
-        }
-
         /// <summary>
-        /// AlternativePlaceIds — An array of zero, one or more alternative place IDs for the place, with a scope related to each alternative ID. Note: This array may be empty or not present. 
+        /// AlternativePlaceIds — An array of zero, one or more alternative place IDs for the place, 
+        /// with a scope related to each alternative ID. Note: This array may be empty or not present. 
         /// If present, it contains the following fields:
         /// </summary>
         [DataMember(Name = "alt_ids")]
         public virtual IEnumerable<AlternativePlace> AlternativePlaceIds { get; set; }
 
         /// <summary>
-        /// price_level — The price level of the place, on a scale of 0 to 4. The exact amount indicated by a specific value will vary from region to region. Price levels are interpreted as follows:
+        /// price_level — The price level of the place, on a scale of 0 to 4. 
+        /// The exact amount indicated by a specific value will vary from region to region. 
+        /// Price levels are interpreted as follows:
         /// </summary>
         public virtual PriceLevel PriceLevel { get; set; }
 
-        [DataMember(Name = "price_level")]
-        internal string PriceLevelStr
-        {
-            get => this.PriceLevel.ToEnumString();
-            set => this.PriceLevel = value.ToEnum<PriceLevel>();
-        }
-
         /// <summary>
-        /// rating contains the Place's rating, from 0.0 to 5.0, based on user reviews. For more granular ratings, inspect the contents of the aspects collection.
+        /// rating contains the Place's rating, from 0.0 to 5.0, based on user reviews. 
+        /// For more granular ratings, inspect the contents of the aspects collection.
         /// </summary>
         [DataMember(Name = "rating")]
         public virtual double Rating { get; set; }
 
         /// <summary>
         /// Reviews, array of up to five reviews. 
-        /// If a language parameter was specified in the Place Details request, the Places Service will bias the results to prefer reviews written in that language. 
+        /// If a language parameter was specified in the Place Details request, 
+        /// the Places Service will bias the results to prefer reviews written in that language. 
         /// </summary>
         [DataMember(Name = "reviews")]
         public virtual IEnumerable<Review> Review { get; set; }
@@ -137,13 +130,6 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// XML responses include multiple type elements if more than one type is assigned to the result.
         /// </summary>
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
-
-        [DataMember(Name = "types")]
-        internal IEnumerable<string> TypesStr
-        {
-            get { return Types?.Select(x => x.ToEnumString()) ?? new string[0]; }
-            set { this.Types = value.Select(x => x.ToEnum<PlaceLocationType>()); }
-        }
 
         /// <summary>
         /// Url contains the official Google Place Page URL of this establishment. 
@@ -161,7 +147,8 @@ namespace GoogleApi.Entities.Places.Details.Response
 
         /// <summary>
         /// UtcOffset contains the number of minutes this Place’s current timezone is offset from UTC. For example, for Places in Sydney, 
-        /// Australia during daylight saving time this would be 660 (+11 hours from UTC), and for Places in California outside of daylight saving time this would be -480 (-8 hours from UTC).
+        /// Australia during daylight saving time this would be 660 (+11 hours from UTC), and for Places in California outside of daylight saving time this 
+        /// would be -480 (-8 hours from UTC).
         /// </summary>
         [DataMember(Name = "utc_offset")]
         public virtual int UtcOffset { get; set; }
@@ -171,5 +158,26 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// </summary>
         [DataMember(Name = "website")]
         public virtual string Website { get; set; }
+
+        [DataMember(Name = "scope")]
+        internal string ScopeStr
+        {
+            get => this.Scope.ToEnumString();
+            set => this.Scope = value.ToEnum<Scope>();
+        }
+
+        [DataMember(Name = "price_level")]
+        internal string PriceLevelStr
+        {
+            get => this.PriceLevel.ToEnumString();
+            set => this.PriceLevel = value.ToEnum<PriceLevel>();
+        }
+
+        [DataMember(Name = "types")]
+        internal IEnumerable<string> TypesStr
+        {
+            get { return Types?.Select(x => x.ToEnumString()) ?? new string[0]; }
+            set { this.Types = value.Select(x => x.ToEnum<PlaceLocationType>()); }
+        }
     }
 }
