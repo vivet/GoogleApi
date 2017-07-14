@@ -1,8 +1,12 @@
 using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.Common.Enums;
+using GoogleApi.Entities.Places.Details.Request;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Add
@@ -21,9 +25,9 @@ namespace GoogleApi.Test.Places.Add
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
                 PhoneNumber = "+45 00000000",
-                Address = "J. P. E. Hartmanns Allé 35 2500 Valby, Denmark",
+                Address = Guid.NewGuid().ToString("N"),
                 Website = "http://www.google.com",
-                Language = "en-US"
+                Language = Language.English
             };
             var response = GooglePlaces.Add.Query(request);
 
@@ -31,7 +35,29 @@ namespace GoogleApi.Test.Places.Add
             Assert.IsNotNull(response.PlaceId);
             Assert.AreEqual(response.Scope, Scope.App);
             Assert.AreEqual(response.Status, Status.Ok);
+
+            var request2 = new PlacesDetailsRequest
+            {
+                Key = this.ApiKey,
+                PlaceId= response.PlaceId
+            };
+
+            var response2 = GooglePlaces.Details.Query(request2);
+
+            Assert.IsNotNull(response2);
+            Assert.AreEqual(Status.Ok, response2.Status);
+            Assert.AreEqual(response2.Result.Name, request.Name);
+            Assert.AreEqual(response2.Result.Website, request.Website);
+            Assert.AreEqual(response2.Result.FormattedAddress, request.Address);
+            Assert.AreEqual(response2.Result.FormattedPhoneNumber, request.PhoneNumber);
+            Assert.AreEqual(response2.Result.Geometry.Location.Latitude, request.Location.Latitude);
+            Assert.AreEqual(response2.Result.Geometry.Location.Longitude, request.Location.Longitude);
+
+            Assert.AreEqual(Scope.App, response2.Result.Scope);
+            Assert.AreEqual(response2.Result.PlaceId, response.PlaceId);
+            Assert.AreEqual(PlaceLocationType.StreetAddress, response2.Result.Types.FirstOrDefault());
         }
+
         [Test]
         public void PlacesAddAsyncTest()
         {
@@ -43,9 +69,9 @@ namespace GoogleApi.Test.Places.Add
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
                 PhoneNumber = "+45 00000000",
-                Address = "J. P. E. Hartmanns Allé 35 2500 Valby, Denmark",
+                Address = "MyAddress",
                 Website = "http://www.google.com",
-                Language = "en-US"
+                Language = Language.English
             };
             var response = GooglePlaces.Add.QueryAsync(request).Result;
 
@@ -54,6 +80,107 @@ namespace GoogleApi.Test.Places.Add
             Assert.AreEqual(response.Scope, Scope.App);
             Assert.AreEqual(response.Status, Status.Ok);
         }
+
+        [Test]
+        public void TranslateWhenAsyncAndTimeoutTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = "Home",
+                Types = new[] { PlaceLocationType.StreetAddress },
+                Location = new Location(55.664425, 12.502264),
+                Accuracy = 50,
+                PhoneNumber = "+45 00000000",
+                Address = "MyAddress",
+                Website = "http://www.google.com",
+                Language = Language.English
+            };
+
+            var exception = Assert.Throws<AggregateException>(() =>
+            {
+                var result = GooglePlaces.Add.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
+                Assert.IsNull(result);
+            });
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "One or more errors occurred.");
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
+            Assert.AreEqual(innerException.Message, "A task was canceled.");
+        }
+
+        [Test]
+        public void TranslateWhenAsyncAndCancelledTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = "Home",
+                Types = new[] { PlaceLocationType.StreetAddress },
+                Location = new Location(55.664425, 12.502264),
+                Accuracy = 50,
+                PhoneNumber = "+45 00000000",
+                Address = "MyAddress",
+                Website = "http://www.google.com",
+                Language = Language.English
+            };
+
+            var cancellationTokenSource = new CancellationTokenSource();
+            var task = GooglePlaces.Add.QueryAsync(request, cancellationTokenSource.Token);
+            cancellationTokenSource.Cancel();
+
+            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesAddWhenLanguageTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = this.ApiKey,
+                Name = "Home",
+                Types = new[] { PlaceLocationType.StreetAddress },
+                Location = new Location(55.664425, 12.502264),
+                Accuracy = 50,
+                PhoneNumber = "+45 00000000",
+                Address = Guid.NewGuid().ToString("N"),
+                Website = "http://www.google.com",
+                Language = Language.Arabic
+            };
+            var response = GooglePlaces.Add.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.IsNotNull(response.PlaceId);
+            Assert.AreEqual(response.Scope, Scope.App);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var request2 = new PlacesDetailsRequest
+            {
+                Key = this.ApiKey,
+                PlaceId = response.PlaceId
+            };
+
+            var response2 = GooglePlaces.Details.Query(request2);
+            Console.WriteLine(response2.RawJson);
+            Assert.IsNotNull(response2);
+            Assert.AreEqual(Status.Ok, response2.Status);
+            Assert.AreEqual(response2.Result.Name, request.Name);
+            Assert.AreEqual(response2.Result.Website, request.Website);
+            Assert.AreEqual(response2.Result.FormattedAddress, request.Address);
+            Assert.AreEqual(response2.Result.FormattedPhoneNumber, request.PhoneNumber);
+            Assert.AreEqual(response2.Result.Geometry.Location.Latitude, request.Location.Latitude);
+            Assert.AreEqual(response2.Result.Geometry.Location.Longitude, request.Location.Longitude);
+
+            Assert.AreEqual(Scope.App, response2.Result.Scope);
+            Assert.AreEqual(response2.Result.PlaceId, response.PlaceId);
+            Assert.AreEqual(PlaceLocationType.StreetAddress, response2.Result.Types.FirstOrDefault());
+        }
+
         [Test]
         public void PlacesAddWhenKeyIsNullTest()
         {
@@ -68,8 +195,9 @@ namespace GoogleApi.Test.Places.Add
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
             Assert.AreEqual(exception.Message, "Key is required");
         }
+
         [Test]
-        public void PlacesAddWhenKeyIsStringEmptyTest()
+        public void PlacesAddWhenKeyIsEmptyTest()
         {
             var request = new PlacesAddRequest
             {
@@ -82,6 +210,7 @@ namespace GoogleApi.Test.Places.Add
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
             Assert.AreEqual(exception.Message, "Key is required");
         }
+
         [Test]
         public void PlacesAddWhenNameIsNullTest()
         {
@@ -94,8 +223,9 @@ namespace GoogleApi.Test.Places.Add
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
             Assert.AreEqual(exception.Message, "Name must be provided");
         }
+
         [Test]
-        public void PlacesAddWhenNameIsStringEmptyTest()
+        public void PlacesAddWhenNameIsEmptyTest()
         {
             var request = new PlacesAddRequest
             {
@@ -106,6 +236,7 @@ namespace GoogleApi.Test.Places.Add
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
             Assert.AreEqual(exception.Message, "Name must be provided");
         }
+
         [Test]
         public void PlacesAddWhenLocationIsNullTest()
         {
@@ -119,6 +250,7 @@ namespace GoogleApi.Test.Places.Add
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
             Assert.AreEqual(exception.Message, "Location must be provided");
         }
+
         [Test]
         public void PlacesAddWhenTypesIsNullTest()
         {
@@ -133,8 +265,9 @@ namespace GoogleApi.Test.Places.Add
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
             Assert.AreEqual(exception.Message, "Types must be provided. At least one type must be specified");
         }
+
         [Test]
-        public void PlacesAddWhenTypesIsEmotyTest()
+        public void PlacesAddWhenTypesIsEmptyTest()
         {
             var request = new PlacesAddRequest
             {

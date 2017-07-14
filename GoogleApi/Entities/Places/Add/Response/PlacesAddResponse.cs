@@ -4,7 +4,7 @@ using GoogleApi.Entities.Places.Common.Enums;
 namespace GoogleApi.Entities.Places.Add.Response
 {
     /// <summary>
-    /// Places Add Response.
+    /// Places add response.
     /// </summary>
     [DataContract]
     public class PlacesAddResponse : BasePlacesResponse

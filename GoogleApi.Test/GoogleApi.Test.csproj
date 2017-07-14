@@ -66,6 +66,7 @@
     <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsRequestTests.cs" />
     <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsTests.cs" />
     <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
+    <Compile Include="Places\Add\AddRequestTests.cs" />
     <Compile Include="Places\Add\AddTests.cs" />
     <Compile Include="Places\AutoComplete\AutoCompleteTests.cs" />
     <Compile Include="Places\Delete\DeleteTests.cs" />
