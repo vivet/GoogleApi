@@ -3,6 +3,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Common.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -44,13 +46,8 @@ namespace GoogleApi.Entities.Places.Common
         /// <summary>
         /// Types is an array indicating the type of the prediction.
         /// </summary>
-        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
-
         [DataMember(Name = "types")]
-        internal string[] TypesStr
-        {
-            get => this.Types?.Select(x => x.ToEnumString()).ToArray() ?? new string[0];
-            set => this.Types = value?.Select(x => x.ToEnum<PlaceLocationType>());
-        }
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
     }
 }

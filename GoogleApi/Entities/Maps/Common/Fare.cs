@@ -12,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Common
         ///  An ISO 4217 currency code indicating the currency that the amount is expressed in.
         /// </summary>
         [DataMember(Name = "currency")]
-        internal virtual string Currency { get; set; }
+        public virtual string Currency { get; set; }
 
         /// <summary>
         /// The total fare amount, in the currency.

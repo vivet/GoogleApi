@@ -12,7 +12,7 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates a precise street address.
         /// </summary>
         [EnumMember(Value = "street_address")]
-        StreetAddress,
+        Street_Address,
 
         /// <summary>
         /// Indicates a named route (such as "US 101").
@@ -43,41 +43,41 @@ namespace GoogleApi.Entities.Common.Enums
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_1")]
-        AdministrativeAreaLevel1,
+        Administrative_Area_Level_1,
 
         /// <summary>
         /// Indicates a second-order civil entity below the country level. Within the United States, these administrative levels are counties. 
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_2")]
-        AdministrativeAreaLevel2,
+        Administrative_Area_Level_2,
 
         /// <summary>
         /// Indicates a third-order civil entity below the country level. This type indicates a minor civil division. 
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_3")]
-        AdministrativeAreaLevel3,
+        Administrative_Area_Level_3,
 
         /// <summary>
         /// Indicates a fourth-order civil entity below the country level. This type indicates a minor civil division. 
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_4")]
-        AdministrativeAreaLevel4,
+        Administrative_Area_Level_4,
 
         /// <summary>
         /// Indicates a fifth-order civil entity below the country level. This type indicates a minor civil division. 
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_5")]
-        AdministrativeAreaLevel5,
+        Administrative_Area_Level_5,
 
         /// <summary>
         /// Indicates a commonly-used alternative name for the entity.
         /// </summary>
         [EnumMember(Value = "colloquial_area")]
-        ColloquialArea,
+        Colloquial_Area,
 
         /// <summary>
         /// Ward indicates a specific type of Japanese locality, to facilitate distinction between multiple locality components within a Japanese address.
@@ -101,7 +101,7 @@ namespace GoogleApi.Entities.Common.Enums
         /// indicates an first-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_1")]
-        SublocalityLevel1,
+        Sublocality_Level_1,
 
         /// <summary>
         /// indicates an second-order civil entity below a locality
@@ -113,19 +113,19 @@ namespace GoogleApi.Entities.Common.Enums
         /// indicates an third-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_3")]
-        SublocalityLevel3,
+        Sublocality_Level_3,
 
         /// <summary>
         /// indicates an first-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_4")]
-        SublocalityLevel4,
+        Sublocality_Level_4,
 
         /// <summary>
         /// indicates an first-order civil entity below a locality
         /// </summary>
         [EnumMember(Value = "sublocality_level_5")]
-        SublocalityLevel5,
+        Sublocality_Level_5,
 
         /// <summary>
         /// Indicates a named neighborhood
@@ -155,7 +155,7 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates a prominent natural feature.
         /// </summary>
         [EnumMember(Value = "natural_feature")]
-        NaturalFeature,
+        Natural_Feature,
 
         /// <summary>
         /// Indicates an airport.
@@ -171,7 +171,7 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates a named point of interest. Typically, these "POI"s are prominent local entities that don't easily fit in another category such as "Empire State Building" or "Statue of Liberty."
         /// </summary>
         [EnumMember(Value = "point_of_interest")]
-        PointOfInterest,
+        Point_Of_Interest,
 
         /// <summary>
         /// Indicates the floor of a building address.
@@ -195,13 +195,13 @@ namespace GoogleApi.Entities.Common.Enums
         /// post_box indicates a specific postal box.
         /// </summary>
         [EnumMember(Value = "post_box")]
-        PostBox,
+        Post_Box,
 
         /// <summary>
         /// postal_town indicates a grouping of geographic areas, such as locality and sublocality, used for mailing addresses in some countries.
         /// </summary>
         [EnumMember(Value = "postal_town")]
-        PostalTown,
+        Postal_Town,
 
         /// <summary>
         /// room indicates the room of a building address.
@@ -213,24 +213,30 @@ namespace GoogleApi.Entities.Common.Enums
         /// street_number indicates the precise street number.
         /// </summary>
         [EnumMember(Value = "street_number")]
-        StreetNumber,
+        Street_Number,
 
         /// <summary>
         /// Indicate the location of a bus stop.
         /// </summary>
         [EnumMember(Value = "bus_station")]
-        BusStation,
+        Bus_Station,
 
         /// <summary>
         /// Indicate the location of a train stop.
         /// </summary>
         [EnumMember(Value = "train_station")]
-        TrainStation,
+        Train_Station,
 
         /// <summary>
         /// Indicate the location of a public transit stop.
         /// </summary>
         [EnumMember(Value = "transit_station")]
-        TransitStation
+        Transit_Station,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [EnumMember(Value = "postal_code_suffix")]
+        Postal_Code_Suffix
     }
 }

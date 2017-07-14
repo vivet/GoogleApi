@@ -19,14 +19,14 @@ namespace GoogleApi.Entities.Maps.Geocode.Response.Enums
         /// Interpolated results are generally returned when rooftop geocodes are unavailable for a street address.
         /// </summary>
         [EnumMember(Value = "RANGE_INTERPOLATED")]
-        RangeInterpolated,
+        Range_Interpolated,
 
         /// <summary>
         /// Indicates that the returned result is the geometric center of a result such as a polyline 
         /// (for example, a street) or polygon (region).
         /// </summary>
         [EnumMember(Value = "GEOMETRIC_CENTER")]
-        GeometricCenter,
+        Geometric_Center,
 
         /// <summary>
         /// Indicates that the returned result is approximate.

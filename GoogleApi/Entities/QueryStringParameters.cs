@@ -7,8 +7,20 @@ namespace GoogleApi.Entities
     /// List of <see cref="QueryStringParameter"/>'s.
     /// Resembles a <see cref="Dictionary{TKey,TValue}"/>, but allow duplicate values.
     /// </summary>
-    public class QueryStringParameters : List<QueryStringParameter>
+    public sealed class QueryStringParameters : List<QueryStringParameter>
     {
+        /// <summary>
+        /// Adds a parameter to the collecton with <see cref="string.Empty"/> value.
+        /// </summary>
+        /// <param name="name">The name of the parameter.</param>
+        public void Add(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+
+            this.Add(name, string.Empty);
+        }
+
         /// <summary>
         /// Adds a parameter to the collecton.
         /// </summary>

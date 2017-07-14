@@ -4,6 +4,8 @@ using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {
@@ -63,6 +65,8 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// For example, a geocode of "Chicago" returns "locality" which indicates that "Chicago" is a city, 
         /// and also returns "political" which indicates it is a political entity.
         /// </summary>
+        [DataMember(Name = "types")]
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
         public virtual IEnumerable<LocationType> Types { get; set; }
 
         /// <summary>
@@ -70,14 +74,5 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// </summary>
         [DataMember(Name = "address_components")]
         public virtual IEnumerable<AddressComponent> AddressComponents { get; set; }
-
-
-        [DataMember(Name = "types")]
-        internal virtual IEnumerable<string> TypesStr
-        {
-            get { return Types?.Select(x => x.ToEnumString()) ?? new string[0]; }
-            set { this.Types = value.Select(x => x.ToEnum<LocationType>()); }
-        }
-
     }
 }

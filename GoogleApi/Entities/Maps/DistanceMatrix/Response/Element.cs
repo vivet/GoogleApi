@@ -1,7 +1,8 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Common;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
@@ -14,14 +15,9 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
         /// <summary>
         /// Status: See Status Codes for a list of possible status codes.
         /// </summary>
-        public virtual Status Status { get; set; }
-
         [DataMember(Name = "status")]
-        internal virtual string StatusStr
-        {
-            get => this.Status.ToEnumString();
-            set => this.Status = value.ToEnum<Status>();
-        }
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        public virtual Status Status { get; set; }
 
         /// <summary>
         /// Duration: The duration of this route, expressed in seconds (the value field) and as text. The textual representation is localized according to the query's language parameter.

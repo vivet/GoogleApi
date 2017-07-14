@@ -11,9 +11,19 @@ namespace GoogleApi.Entities.Maps.Common
     public class Duration
     {
         /// <summary>
-        /// Value indicates the duration in seconds.
+        /// Value as timespan.
         /// </summary>
         public virtual TimeSpan Value { get; set; }
+
+        /// <summary>
+        /// Value in seconds.
+        /// </summary>
+        [DataMember(Name = "value")]
+        public virtual int ValueInSec
+        {
+            get => (int)Math.Round(Value.TotalSeconds);
+            set => Value = TimeSpan.FromSeconds(value);
+        }
 
         /// <summary>
         /// Text contains a human-readable representation of the duration.
@@ -27,12 +37,5 @@ namespace GoogleApi.Entities.Maps.Common
         /// </summary>
         [DataMember(Name = "time_zone")]
         public virtual string TimeZone { get; set; }
-
-        [DataMember(Name = "value")]
-        internal virtual int ValueInSec
-        {
-            get => (int)Math.Round(Value.TotalSeconds);
-            set => Value = TimeSpan.FromSeconds(value);
-        }
     }
 }

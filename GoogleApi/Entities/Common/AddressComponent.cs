@@ -3,6 +3,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Common
 {
@@ -27,13 +29,8 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// types[] is an array indicating the type of the address component.
         /// </summary>
-        public virtual IEnumerable<LocationType> Types { get; set; }
-
         [DataMember(Name = "types")]
-        internal virtual string[] TypesStr
-        {
-            get { return Types?.Select(x => x.ToEnumString()).ToArray() ?? new string[0]; }
-            set { this.Types = value.Select(x => x.ToEnum<LocationType>()); }
-        }
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        public virtual IEnumerable<LocationType> Types { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
 {
@@ -31,13 +32,8 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
         /// <summary>
         /// units — Returns either KPH or MPH.
         /// </summary>
-        public virtual Units Units { get; set; }
-
         [DataMember(Name = "units")]
-        internal virtual string UnitsStr
-        {
-            get => this.Units.ToString().ToUpper();
-            set => this.Units = value.ToEnum<Units>();
-        }
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        public virtual Units Units { get; set; }
     }
 }

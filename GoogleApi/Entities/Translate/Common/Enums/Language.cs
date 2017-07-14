@@ -95,13 +95,19 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         Chichewa,
 
         /// <summary>
-        /// Chinese_Simplified. (BCP-47)
+        /// Chinese.
+        /// </summary>
+        [EnumMember(Value = "zh")]
+        Chinese,
+
+        /// <summary>
+        /// Chinese simplified. (BCP-47)
         /// </summary>
         [EnumMember(Value = "zh-CN")]
         Chinese_Simplified,
 
         /// <summary>
-        /// Chinese_Traditional. (BCP-47)
+        /// Chinese traditional. (BCP-47)
         /// </summary>
         [EnumMember(Value = "zh-TW")]
         Chinese_Traditional,
@@ -451,7 +457,7 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         /// <summary>
         /// Punjabi.
         /// </summary>
-        [EnumMember(Value = "ma")]
+        [EnumMember(Value = "pa")]
         Punjabi,
 
         /// <summary>

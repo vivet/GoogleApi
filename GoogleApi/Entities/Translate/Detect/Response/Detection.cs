@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Translate.Common.Enums;
-using GoogleApi.Entities.Translate.Common.Enums.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Translate.Detect.Response
 {
@@ -26,13 +26,8 @@ namespace GoogleApi.Entities.Translate.Detect.Response
         /// <summary>
         /// The detected language.
         /// </summary>
+        [JsonProperty("language")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Language Language { get; set; }
-
-        [DataMember(Name = "language")]
-        internal virtual string LanguageStr
-        {
-            get => this.Language.ToCode();
-            set => this.Language = value.ToEnum<Language>();
-        }
     }
 }

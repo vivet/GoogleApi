@@ -1,8 +1,8 @@
-using System;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities
 {
@@ -26,6 +26,8 @@ namespace GoogleApi.Entities
         /// <summary>
         /// Success status of the request.
         /// </summary>
+        [DataMember(Name = "status")]
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
         public virtual Status Status { get; set; }
 
         /// <summary>
@@ -33,20 +35,8 @@ namespace GoogleApi.Entities
         /// This field contains more detailed information about the reasons behind the given status code.
         /// Note: This field is not guaranteed to be always present, and its content is subject to change.
         /// </summary>
-        public virtual string ErrorMessage { get; set; }
-
-        [DataMember(Name = "status")]
-        internal virtual string StatusStr
-        {
-            get => this.Status.ToEnumString();
-            set => this.Status = value.ToEnum<Status>();
-        }
-
         [DataMember(Name = "error_message")]
-        internal virtual string ErrorMsg
-        {
-            get => this.Status.ToString();
-            set => this.Status = (Status) Enum.Parse(typeof(Status), value);
-        }
+        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        public virtual string ErrorMessage { get; set; }
     }
 }
