@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace GoogleApi.Test
 {
     [TestFixture]
-    public class HttpEngineTest : BaseTest
+    public class HttpEngineTests : BaseTest
     {
         [Test]
         public void QueryTest()

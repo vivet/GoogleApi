@@ -56,7 +56,7 @@
     <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
     <Compile Include="Maps\Geocode\GeocodingTests.cs" />
-    <Compile Include="HttpEngineTest.cs" />
+    <Compile Include="HttpEngineTests.cs" />
     <Compile Include="Common\Extensions\DateTimeExtensionTest.cs" />
     <Compile Include="Common\Extensions\EnumExtensionTest.cs" />
     <Compile Include="Common\Extensions\StringExtensionTest.cs" />
@@ -68,6 +68,7 @@
     <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
     <Compile Include="Places\Add\AddRequestTests.cs" />
     <Compile Include="Places\Add\AddTests.cs" />
+    <Compile Include="Places\AutoComplete\AutoCompleteRequstTests.cs" />
     <Compile Include="Places\AutoComplete\AutoCompleteTests.cs" />
     <Compile Include="Places\Delete\DeleteTests.cs" />
     <Compile Include="Places\Details\DetailsTests.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteTests.cs" />
     <Compile Include="Places\Search\RadarSearch\RadarSearchTests.cs" />
     <Compile Include="Places\Search\TextSearch\TextSearchTests.cs" />
+    <Compile Include="QueryStringParametersTests.cs" />
     <Compile Include="Search\Enterprise\EnterpriseSearchTests.cs" />
     <Compile Include="Search\Image\ImageSearchTests.cs" />
     <Compile Include="Search\Web\WebSearchTests.cs" />
