@@ -49,6 +49,13 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         public virtual double? Radius { get; set; }
 
         /// <summary>
+        /// Strictbounds.
+        /// Returns only those places that are strictly within the region defined by location and radius. 
+        /// This is a restriction, rather than a bias, meaning that results outside this region will not be returned even if they match the user input.
+        /// </summary>
+        public virtual bool Strictbounds { get; set; }
+
+        /// <summary>
         /// The language in which to return results. See the supported list of domain languages. 
         /// Note that we often update supported languages so this list may not be exhaustive. 
         /// If language is not supplied, the Place service will attempt to use the native language of the domain from which the request is sent.
@@ -96,6 +103,9 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
                 if (this.Radius.HasValue)
                     parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
+                if (this.Strictbounds)
+                    parameters.Add("strictbounds","");
+                
                 if (this.Types != null && this.Types.Any())
                     parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));
 
