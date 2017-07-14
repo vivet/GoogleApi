@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;

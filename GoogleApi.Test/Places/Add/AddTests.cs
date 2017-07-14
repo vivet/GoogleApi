@@ -20,7 +20,7 @@ namespace GoogleApi.Test.Places.Add
             var request = new PlacesAddRequest
             {
                 Key = this.ApiKey,
-                Name = "Home",
+                Name = Guid.NewGuid().ToString("N"),
                 Types = new[] { PlaceLocationType.StreetAddress },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,

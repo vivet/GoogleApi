@@ -1,8 +1,5 @@
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Extensions;
-using GoogleApi.Entities.Maps.Geolocation.Response;
 using GoogleApi.Entities.Translate.Common.Enums;
-using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
