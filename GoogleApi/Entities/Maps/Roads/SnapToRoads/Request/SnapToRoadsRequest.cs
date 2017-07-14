@@ -31,7 +31,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// <summary>
         /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

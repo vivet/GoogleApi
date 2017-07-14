@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using NUnit.Framework;
@@ -18,9 +19,9 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
                 Key = this.ApiKey,
                 Path = new[]
                 {
-                    new Entities.Maps.Roads.Common.Location(60.170880, 24.942795),
-                    new Entities.Maps.Roads.Common.Location(60.170879, 24.942796),
-                    new Entities.Maps.Roads.Common.Location(60.170877, 24.942796)
+                    new Location(60.170880, 24.942795),
+                    new Location(60.170879, 24.942796),
+                    new Location(60.170877, 24.942796)
                 }
             };
 
@@ -35,7 +36,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 	        var request = new SpeedLimitsRequest
 	        {
 	            Key = this.ApiKey,
-	            Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+	            Path = new[] { new Location(0, 0) }
 	        };
 	        var result = GoogleMaps.SpeedLimits.QueryAsync(request).Result;
 
@@ -49,7 +50,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 	        var request = new SpeedLimitsRequest
 	        {
 	            Key = this.ApiKey,
-	            Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+	            Path = new[] { new Location(0, 0) }
 	        };
 	        var exception = Assert.Throws<AggregateException>(() =>
 	        {
@@ -72,7 +73,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 	        var request = new SpeedLimitsRequest
 	        {
 	            Key = this.ApiKey,
-	            Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+	            Path = new[] { new Location(0, 0) }
 	        };
 	        var cancellationTokenSource = new CancellationTokenSource();
 	        var task = GoogleMaps.SpeedLimits.QueryAsync(request, cancellationTokenSource.Token);
@@ -103,7 +104,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = null,
-                Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+                Path = new[] { new Location(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.SpeedLimits.Query(request));
@@ -117,7 +118,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = string.Empty,
-                Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+                Path = new[] { new Location(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.SpeedLimits.Query(request));
@@ -144,7 +145,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest()
             {
                 Key = this.ApiKey,
-                Path = new Entities.Maps.Roads.Common.Location[0],
+                Path = new Location[0],
                 PlaceIds = new string[0]
             };
 

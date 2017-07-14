@@ -39,7 +39,7 @@ namespace GoogleApi.Test.Places.Add
         }
 
         [Test]
-        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+        public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
         {
             var request = new PlacesAddRequest
             {
@@ -75,7 +75,7 @@ namespace GoogleApi.Test.Places.Add
         }
 
         [Test]
-        public void GetQueryStringParametersWhenNameIsEmptyTest()
+        public void GetQueryStringParametersWhenNameIsStringEmptyTest()
         {
             var request = new PlacesAddRequest
             {

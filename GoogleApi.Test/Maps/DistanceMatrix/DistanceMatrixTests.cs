@@ -41,7 +41,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         }
 
         [Test]
-        public void DistanceMatrixWHenAsyncTest()
+        public void DistanceMatrixWhenAsyncTest()
         {
             var request = new DistanceMatrixRequest
             {
@@ -55,7 +55,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         }
 
         [Test]
-        public void DistanceMatrixAsyncAndTimeoutTest()
+        public void DistanceMatrixWhenAsyncAndTimeoutTest()
         {
             var request = new DistanceMatrixRequest
             {
@@ -78,7 +78,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         }
 
         [Test]
-        public void DistanceMatrixAsyncAndCancelledTest()
+        public void DistanceMatrixWhenAsyncAndCancelledTest()
         {
             var request = new DistanceMatrixRequest
             {

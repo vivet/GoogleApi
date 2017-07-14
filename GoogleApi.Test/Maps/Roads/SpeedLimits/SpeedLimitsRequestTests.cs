@@ -1,4 +1,5 @@
 using System;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
 using NUnit.Framework;
@@ -23,7 +24,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = null,
-                Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+                Path = new[] { new Location(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -41,7 +42,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = string.Empty,
-                Path = new[] { new Entities.Maps.Roads.Common.Location(0, 0) }
+                Path = new[] { new Location(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -73,10 +74,10 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
         [Test]
         public void GetQueryStringParametersWhenPathIsEmptyAndPlaceIdsIsEmptyTest()
         {
-            var request = new SpeedLimitsRequest()
+            var request = new SpeedLimitsRequest
             {
                 Key = this.ApiKey,
-                Path = new Entities.Maps.Roads.Common.Location[0],
+                Path = new Location[0],
                 PlaceIds = new string[0]
             };
 

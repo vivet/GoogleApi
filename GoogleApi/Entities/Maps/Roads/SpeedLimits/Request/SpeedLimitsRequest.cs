@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
-using Location = GoogleApi.Entities.Maps.Roads.Common.Location;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
 {
@@ -38,7 +38,7 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
         /// <summary>
         /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

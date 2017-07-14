@@ -45,7 +45,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
         /// <summary>
         /// See <see cref="BaseMapsChannelRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

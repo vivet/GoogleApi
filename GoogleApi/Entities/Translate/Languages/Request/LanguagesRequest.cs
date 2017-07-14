@@ -32,7 +32,7 @@ namespace GoogleApi.Entities.Translate.Languages.Request
         /// <summary>
         /// See <see cref="BaseTranslateRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

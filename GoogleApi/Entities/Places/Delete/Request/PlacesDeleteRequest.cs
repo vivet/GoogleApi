@@ -26,7 +26,7 @@ namespace GoogleApi.Entities.Places.Delete.Request
         /// <summary>
         /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> colletion.</returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get

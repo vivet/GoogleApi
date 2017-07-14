@@ -197,7 +197,7 @@ namespace GoogleApi.Test.Places.Add
         }
 
         [Test]
-        public void PlacesAddWhenKeyIsEmptyTest()
+        public void PlacesAddWhenKeyIsStringEmptyTest()
         {
             var request = new PlacesAddRequest
             {
@@ -225,7 +225,7 @@ namespace GoogleApi.Test.Places.Add
         }
 
         [Test]
-        public void PlacesAddWhenNameIsEmptyTest()
+        public void PlacesAddWhenNameIsStringEmptyTest()
         {
             var request = new PlacesAddRequest
             {
