@@ -67,7 +67,7 @@ namespace GoogleApi.Test.Places.Delete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesDeleteWhenKeyIsStringEmptyTest()
@@ -79,7 +79,7 @@ namespace GoogleApi.Test.Places.Delete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesDeleteWhenPlaceIdIsNullTest()
@@ -91,7 +91,7 @@ namespace GoogleApi.Test.Places.Delete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
-            Assert.AreEqual(exception.Message, "PlaceId is required.");
+            Assert.AreEqual(exception.Message, "PlaceId is required");
         }
         [Test]
         public void PlacesDeleteWhenPlaceIdIsStringEmptyTest()
@@ -103,8 +103,7 @@ namespace GoogleApi.Test.Places.Delete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Delete.Query(request));
-            Assert.AreEqual(exception.Message, "PlaceId is required.");
+            Assert.AreEqual(exception.Message, "PlaceId is required");
         }
-
     }
 }

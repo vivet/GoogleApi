@@ -45,16 +45,16 @@ namespace GoogleApi.Entities.Places.Photos.Request
             get
             {
                 if (string.IsNullOrWhiteSpace(this.PhotoReference))
-                    throw new ArgumentException("PhotoReference is required.");
+                    throw new ArgumentException("PhotoReference is required");
 
                 if (!this.MaxHeight.HasValue && !this.MaxWidth.HasValue)
-                    throw new ArgumentException("MaxHeight or MaxWidth is required.");
+                    throw new ArgumentException("MaxHeight or MaxWidth is required");
 
                 if (this.MaxHeight.HasValue && (this.MaxHeight > 1600 || this.MaxHeight < 1))
-                    throw new ArgumentException("MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
+                    throw new ArgumentException("MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
 
                 if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
-                    throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
+                    throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
 
                 var parameters = base.QueryStringParameters;
 

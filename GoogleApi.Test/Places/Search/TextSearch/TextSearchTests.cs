@@ -48,7 +48,7 @@ namespace GoogleApi.Test.Places.Search.TextSearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesTextSearchWhenKeyIsStringEmptyTest()
@@ -60,7 +60,7 @@ namespace GoogleApi.Test.Places.Search.TextSearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesTextSearchWhenQueryIsNullTest()
@@ -72,7 +72,7 @@ namespace GoogleApi.Test.Places.Search.TextSearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required.");
+            Assert.AreEqual(exception.Message, "Query is required");
         }
         [Test]
         public void PlacesTextSearchWhenQueryIsStringEmptyTest()
@@ -84,7 +84,7 @@ namespace GoogleApi.Test.Places.Search.TextSearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required.");
+            Assert.AreEqual(exception.Message, "Query is required");
         }
 
     }

@@ -37,7 +37,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesAutoCompleteWhenKeyIsStringEmptyTest()
@@ -48,7 +48,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesAutoCompleteWhenInputIsNullTest()
@@ -60,7 +60,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Input is required.");
+            Assert.AreEqual(exception.Message, "Input is required");
         }
         [Test]
         public void PlacesAutoCompleteWhenInputIsStringEmptyTest()
@@ -72,7 +72,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Input is required.");
+            Assert.AreEqual(exception.Message, "Input is required");
         }
         [Test]
         public void PlacesAutoCompleteWhenRadiusIsLessThanOneTest()
@@ -85,7 +85,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
         [Test]
         public void PlacesAutoCompleteWhenRadiusIsGereaterThanFiftyThousandTest()
@@ -98,7 +98,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.AutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
         [Test]

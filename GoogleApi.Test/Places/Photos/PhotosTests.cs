@@ -74,7 +74,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesPhotosWhenKeyIsStringEmptyTest()
@@ -87,7 +87,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesPhotosWhenPhotoReferenceIsNullTest()
@@ -99,7 +99,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "PhotoReference is required.");
+            Assert.AreEqual(exception.Message, "PhotoReference is required");
         }
         [Test]
         public void PlacesPhotosWhenPhotoReferenceIsStringEmptyTest()
@@ -111,7 +111,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "PhotoReference is required.");
+            Assert.AreEqual(exception.Message, "PhotoReference is required");
         }
         [Test]
         public void PlacesPhotosWhenMaxHeightIsNullAndMaxWidthIsNullTest()
@@ -123,7 +123,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxHeight or MaxWidth is required.");
+            Assert.AreEqual(exception.Message, "MaxHeight or MaxWidth is required");
         }
         [Test]
         public void PlacesPhotosWhenMaxHeightIsLessThanOneTest()
@@ -136,7 +136,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
+            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
         }
         [Test]
         public void PlacesPhotosWhenMaxHeightIsGreaterThanSexteenHundredthsTest()
@@ -149,7 +149,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
+            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
         }
         [Test]
         public void PlacesPhotosWhenMaxWidthIsLessThanOneTest()
@@ -162,7 +162,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
+            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
         }
         [Test]
         public void PlacesPhotosWhenMaxWidthIsGreaterThanSexteenHundredthsTest()
@@ -175,7 +175,7 @@ namespace GoogleApi.Test.Places.Photos
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
+            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
         }
     }
 }

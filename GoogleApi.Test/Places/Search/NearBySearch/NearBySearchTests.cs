@@ -56,7 +56,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesNearBySearchWhenKeyIsStringEmptyTest()
@@ -69,7 +69,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesNearBySearchWhenLocationIsNullTest()
@@ -81,7 +81,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
-            Assert.AreEqual(exception.Message, "Location is required.");
+            Assert.AreEqual(exception.Message, "Location is required");
         }
         [Test]
         public void PlacesNearBySearchWhenRadiusIsNullTest()
@@ -107,7 +107,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
         [Test]
         public void PlacesNearBySearchWhenRadiusIsGereaterThanFiftyThousandTest()
@@ -120,7 +120,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
         [Test]
         public void PlacesNearBySearchWhenRankByDistanceAndRadiusIsNotNullTest()
@@ -147,7 +147,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
-            Assert.AreEqual(exception.Message, "Keyword or Name or Type is required, If rank by distance.");
+            Assert.AreEqual(exception.Message, "Keyword or Name or Type is required, If rank by distance");
         }
 
     }

@@ -37,16 +37,16 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
             get
             {
                 if (this.Location == null)
-                    throw new ArgumentException("Location is required.");
+                    throw new ArgumentException("Location is required");
 
                 if (!this.Radius.HasValue)
-                    throw new ArgumentException("Radius is required.");
+                    throw new ArgumentException("Radius is required");
 
                 if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
 
                 if (string.IsNullOrWhiteSpace(this.Keyword) && string.IsNullOrWhiteSpace(this.Name) && !this.Type.HasValue)
-                    throw new ArgumentException("Keyword or Name or Type must is required.");
+                    throw new ArgumentException("Keyword or Name or Type must is required");
 
                 var parameters = base.QueryStringParameters;
 

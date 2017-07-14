@@ -28,7 +28,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
             get
             {
                 if (string.IsNullOrWhiteSpace(this.Query))
-                    throw new ArgumentException("Query is required.");
+                    throw new ArgumentException("Query is required");
 
                 var parameters = base.QueryStringParameters;
 

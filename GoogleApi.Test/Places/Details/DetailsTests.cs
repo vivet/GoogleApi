@@ -68,7 +68,7 @@ namespace GoogleApi.Test.Places.Details
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesDetailsWhenKeyIsStringEmptyTest()
@@ -80,7 +80,7 @@ namespace GoogleApi.Test.Places.Details
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual(exception.Message, "Key is required");
         }
         [Test]
         public void PlacesDetailsWhenPlaceIdIsNullTest()
@@ -92,7 +92,7 @@ namespace GoogleApi.Test.Places.Details
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "PlaceId must be provided.");
+            Assert.AreEqual(exception.Message, "PlaceId must be provided");
         }
         [Test]
         public void PlacesDetailsWhenPlaceIdIsStringEmptyTest()
@@ -104,7 +104,7 @@ namespace GoogleApi.Test.Places.Details
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "PlaceId must be provided.");
+            Assert.AreEqual(exception.Message, "PlaceId must be provided");
         }
 
 

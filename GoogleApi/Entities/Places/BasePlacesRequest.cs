@@ -55,7 +55,7 @@ namespace GoogleApi.Entities.Places
             get
             {
                 if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required.");
+                    throw new ArgumentException("Key is required");
 
                 var parameters = base.QueryStringParameters;
 

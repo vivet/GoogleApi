@@ -47,7 +47,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
             get
             {
                 if (this.Location == null)
-                    throw new ArgumentException("Location is required.");
+                    throw new ArgumentException("Location is required");
 
                 if (this.Rankby == Ranking.Distance)
                 {
@@ -55,7 +55,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
                         throw new ArgumentException("Radius cannot be specified, when using RankBy distance");
 
                     if (string.IsNullOrWhiteSpace(this.Name) && string.IsNullOrWhiteSpace(this.Keyword) && !this.Type.HasValue)
-                        throw new ArgumentException("Keyword or Name or Type is required, If rank by distance.");
+                        throw new ArgumentException("Keyword or Name or Type is required, If rank by distance");
                 }
                 else
                 {
@@ -63,7 +63,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
                         throw new ArgumentException("Radius is required, when RankBy is not Distance");
 
                     if (this.Radius > 50000 || this.Radius < 1)
-                        throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+                        throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
                 }
 
                 var parameters = base.QueryStringParameters;

@@ -32,7 +32,7 @@ namespace GoogleApi.Entities.Places.Delete.Request
             get
             {
                 if (string.IsNullOrWhiteSpace(this.PlaceId))
-                    throw new ArgumentException("PlaceId is required.");
+                    throw new ArgumentException("PlaceId is required");
 
                 var parameters = base.QueryStringParameters;
 

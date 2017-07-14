@@ -79,10 +79,10 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
                 var parameters = base.QueryStringParameters;
 
                 if (string.IsNullOrEmpty(this.Input))
-                    throw new ArgumentException("Input is required.");
+                    throw new ArgumentException("Input is required");
 
                 if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000.");
+                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
 
                 parameters.Add("input", this.Input);
                 parameters.Add("language", this.Language.ToCode());

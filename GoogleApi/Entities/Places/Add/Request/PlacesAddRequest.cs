@@ -91,13 +91,13 @@ namespace GoogleApi.Entities.Places.Add.Request
             get
             {
                 if (string.IsNullOrWhiteSpace(this.Name))
-                    throw new ArgumentException("Name must be provided.");
+                    throw new ArgumentException("Name must be provided");
 
                 if (this.Location == null)
-                    throw new ArgumentException("Location must be provided.");
+                    throw new ArgumentException("Location must be provided");
 
                 if (this.Types == null || !this.Types.Any())
-                    throw new ArgumentException("Types must be provided. At least one type must be specified.");
+                    throw new ArgumentException("Types must be provided. At least one type must be specified");
 
                 var parameters = base.QueryStringParameters;
 
