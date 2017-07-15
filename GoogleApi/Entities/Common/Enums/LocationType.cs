@@ -149,7 +149,7 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates a postal code as used to address postal mail within the country.
         /// </summary>
         [EnumMember(Value = "postal_code")]
-        PostalCode,
+        Postal_Code,
 
         /// <summary>
         /// Indicates a prominent natural feature.

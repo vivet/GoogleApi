@@ -350,6 +350,9 @@
     <Compile Include="..\GoogleApi\Entities\Places\Common\Prediction.cs">
       <Link>Entities\Places\Common\Prediction.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\Common\StructuredFormatting.cs">
+      <Link>Entities\Places\Common\StructuredFormatting.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\Term.cs">
       <Link>Entities\Places\Common\Term.cs</Link>
     </Compile>
@@ -398,8 +401,8 @@
     <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Request\PlacesQueryAutoCompleteRequest.cs">
       <Link>Entities\Places\QueryAutoComplete\Request\PlacesQueryAutoCompleteRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Response\PlacesAutoCompleteResponse.cs">
-      <Link>Entities\Places\QueryAutoComplete\Response\PlacesAutoCompleteResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs">
+      <Link>Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BasePlacesSearchRequest.cs">
       <Link>Entities\Places\Search\Common\Enums\BasePlacesSearchRequest.cs</Link>

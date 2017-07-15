@@ -9,9 +9,16 @@ namespace GoogleApi.Entities.Places.Common
     /// <summary>
     /// Prediction.
     /// </summary>
-    [DataContract]
+    [DataContract(Name = "prediction")]
     public class Prediction
     {
+        /// <summary>
+        /// PlaceId is a textual identifier that uniquely identifies a place. 
+        /// To retrieve information about the place, pass this identifier in the placeId field of a Google Places API Web Service request
+        /// </summary>
+        [JsonProperty("place_id")]
+        public virtual string PlaceId { get; set; }
+
         /// <summary>
         /// Description contains the human-readable name for the returned result. 
         /// For establishment results, this is usually the business name.
@@ -20,11 +27,10 @@ namespace GoogleApi.Entities.Places.Common
         public virtual string Description { get; set; }
 
         /// <summary>
-        /// PlaceId is a textual identifier that uniquely identifies a place. 
-        /// To retrieve information about the place, pass this identifier in the placeId field of a Google Places API Web Service request
+        /// Structured formatting.
         /// </summary>
-        [JsonProperty("place_id")]
-        public virtual string PlaceId { get; set; }
+        [JsonProperty("structured_formatting")]
+        public virtual StructuredFormatting StructuredFormatting { get; set; }
 
         /// <summary>
         /// Terms contains an array of terms identifying each section of the returned description (a section of the description is generally terminated with a comma). 
@@ -44,7 +50,7 @@ namespace GoogleApi.Entities.Places.Common
         /// MatchedSubstring contains an offset value and a length. 
         /// These describe the location of the entered term in the prediction result text, so that the term can be highlighted if desired.
         /// </summary>
-        [JsonProperty("matched_substring")]
+        [JsonProperty("matched_substrings")]
         public virtual IEnumerable<MatchedSubstring> MatchedSubstrings { get; set; }
     }
 }
