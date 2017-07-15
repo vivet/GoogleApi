@@ -42,7 +42,7 @@ namespace GoogleApi.Entities.Places.Details.Request
             get
             {
                 if (string.IsNullOrWhiteSpace(this.PlaceId))
-                    throw new ArgumentException("PlaceId must be provided");
+                    throw new ArgumentException("PlaceId is required");
 
                 var parameters = base.QueryStringParameters;
 

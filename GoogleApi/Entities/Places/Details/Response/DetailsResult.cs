@@ -17,24 +17,34 @@ namespace GoogleApi.Entities.Places.Details.Response
     {
         /// <summary>
         /// address_components[] is an array of separate address components used to compose a given address. For example, 
-        /// the address "111 8th Avenue, New York, NY" contains separate address components for "111" (the street number, "8th Avenue" (the route), "New York" (the city) and "NY" (the US state). 
+        /// the address "111 8th Avenue, New York, NY" contains separate address components for "111" (the street number, "8th Avenue" (the route), 
+        /// "New York" (the city) and "NY" (the US state). 
         /// Each address_component typically contains: ◦types[] is an array indicating the type of the address component.
         /// </summary>
         [JsonProperty("address_components")]
         public virtual IEnumerable<AddressComponent> AddressComponents { get; set; }
 
         /// <summary>
-        /// Formatted_address is a string containing the human-readable address of this place. Often this address is equivalent to the "postal address," which sometimes differs from country to country. 
+        /// Formatted_address is a string containing the human-readable address of this place. Often this address is equivalent to the "postal address," 
+        /// which sometimes differs from country to country. 
         /// This address is generally composed of one or more address_component fields.
         /// </summary>
         [JsonProperty("formatted_address")]
         public virtual string FormattedAddress { get; set; }
 
         /// <summary>
-        /// formatted_phone_number contains the Place's phone number in its local format. For example, the formatted_phone_number for Google's Sydney, Australia office is (02) 9374 4000.
+        /// formatted_phone_number contains the Place's phone number in its local format. 
+        /// For example, the formatted_phone_number for Google's Sydney, Australia office is (02) 9374 4000.
         /// </summary>
         [JsonProperty("formatted_phone_number")]
         public virtual string FormattedPhoneNumber { get; set; }
+
+        /// <summary>
+        /// adr_address is a representation of the place's address in the adr microformat.
+        /// http://microformats.org/wiki/adr
+        /// </summary>
+        [JsonProperty("adr_address")]
+        public virtual string AdrAddress { get; set; }
 
         /// <summary>
         /// Geometry contains a location.
@@ -76,7 +86,8 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual bool PermanentlyClosed { get; set; }
 
         /// <summary>
-        /// A textual identifier that uniquely identifies a place. To retrieve information about the place, pass this identifier in the placeId field of a Places API request
+        /// A textual identifier that uniquely identifies a place. To retrieve information about the place, 
+        /// pass this identifier in the placeId field of a Places API request
         /// </summary>
         [JsonProperty("place_id")]
         public virtual string PlaceId { get; set; }
