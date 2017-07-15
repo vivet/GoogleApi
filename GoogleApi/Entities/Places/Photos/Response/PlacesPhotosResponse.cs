@@ -15,11 +15,9 @@ namespace GoogleApi.Entities.Places.Photos.Response
         /// </summary>
         public virtual MemoryStream Photo { get; set; }
 
-        /// <summary>
-        /// A string containing the downloded photo.
-        /// </summary>
+        // TODO: Remove, Internal
         [JsonProperty("photo")]
-        protected virtual byte[] PhotoStr
+        internal virtual byte[] PhotoStr
         {
             get => this.Photo.ToArray();
             set => this.Photo = new MemoryStream(value);

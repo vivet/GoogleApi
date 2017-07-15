@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
@@ -16,19 +18,19 @@ namespace GoogleApi.Test.Places.Photos
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = ApiKey,
-                Input = "det kongelige teater",
+                Key = this.ApiKey,
+                Input = "det kongelige teater"
             });
 
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = ApiKey,
-                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
+                Key = this.ApiKey,
+                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault()
             });
 
             var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
             {
-                Key = ApiKey,
+                Key = this.ApiKey,
                 PhotoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault(),
                 MaxWidth = 1600
             });
@@ -37,24 +39,25 @@ namespace GoogleApi.Test.Places.Photos
             Assert.IsNotNull(response3.Photo);
             Assert.AreEqual(Status.Ok, response3.Status);
         }
+
         [Test]
         public void PlacesPhotosAsyncTest()
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = ApiKey,
-                Input = "det kongelige teater",
+                Key = this.ApiKey,
+                Input = "det kongelige teater"
             });
 
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = ApiKey,
-                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
+                Key = this.ApiKey,
+                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault()
             });
 
             var response3 = GooglePlaces.Photos.QueryAsync(new PlacesPhotosRequest
             {
-                Key = ApiKey,
+                Key = this.ApiKey,
                 PhotoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault(),
                 MaxWidth = 1600
             }).Result;
@@ -63,6 +66,61 @@ namespace GoogleApi.Test.Places.Photos
             Assert.IsNotNull(response3.Photo);
             Assert.AreEqual(Status.Ok, response3.Status);
         }
+
+        [Test]
+        public void PlacesPhotosWhenAsyncAndTimeoutTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = Guid.NewGuid().ToString("N"),
+                MaxWidth = 1600
+            };
+            var exception = Assert.Throws<AggregateException>(() =>
+            {
+                var result = GooglePlaces.Photos.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
+                Assert.IsNull(result);
+            });
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "One or more errors occurred.");
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
+            Assert.AreEqual(innerException.Message, "A task was canceled.");
+        }
+
+        [Test]
+        public void PlacesPhotosWhenAsyncAndCancelledTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = this.ApiKey,
+                PhotoReference = Guid.NewGuid().ToString("N"),
+                MaxWidth = 1600
+            };
+            var cancellationTokenSource = new CancellationTokenSource();
+            var task = GooglePlaces.Photos.QueryAsync(request, cancellationTokenSource.Token);
+            cancellationTokenSource.Cancel();
+
+            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesPhotosWhenMaxWidthTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesPhotosWhenMaxHeightTest()
+        {
+            Assert.Inconclusive();
+        }
+
         [Test]
         public void PlacesPhotosWhenKeyIsNullTest()
         {
@@ -76,6 +134,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "Key is required");
         }
+
         [Test]
         public void PlacesPhotosWhenKeyIsStringEmptyTest()
         {
@@ -89,6 +148,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "Key is required");
         }
+
         [Test]
         public void PlacesPhotosWhenPhotoReferenceIsNullTest()
         {
@@ -101,6 +161,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "PhotoReference is required");
         }
+
         [Test]
         public void PlacesPhotosWhenPhotoReferenceIsStringEmptyTest()
         {
@@ -113,6 +174,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "PhotoReference is required");
         }
+
         [Test]
         public void PlacesPhotosWhenMaxHeightIsNullAndMaxWidthIsNullTest()
         {
@@ -125,6 +187,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "MaxHeight or MaxWidth is required");
         }
+
         [Test]
         public void PlacesPhotosWhenMaxHeightIsLessThanOneTest()
         {
@@ -138,6 +201,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
         }
+
         [Test]
         public void PlacesPhotosWhenMaxHeightIsGreaterThanSexteenHundredthsTest()
         {
@@ -151,6 +215,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
         }
+
         [Test]
         public void PlacesPhotosWhenMaxWidthIsLessThanOneTest()
         {
@@ -164,6 +229,7 @@ namespace GoogleApi.Test.Places.Photos
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
             Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
         }
+
         [Test]
         public void PlacesPhotosWhenMaxWidthIsGreaterThanSexteenHundredthsTest()
         {
