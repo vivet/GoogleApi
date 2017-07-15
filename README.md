@@ -36,7 +36,7 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Place Search
     * Near By
 	* Text
-	* Radar
+	* Radar (*deprecated June 30, 2018*)
   * Place Details
   * Place Add
   * Place Delete
