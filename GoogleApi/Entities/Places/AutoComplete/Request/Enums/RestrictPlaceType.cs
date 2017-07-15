@@ -27,8 +27,8 @@
         Establishment,
 
         /// <summary>
-        /// The (regions) type collection instructs the Places service to return any result matching the following types: locality, sublocality, postal_code, country, 
-        /// administrative_area_level_1, administrative_area_level_2
+        /// The (regions) type collection instructs the Places service to return any result matching the following types: 
+        /// locality, sublocality, postal_code, country, administrative_area_level_1, administrative_area_level_2
         /// </summary>
         Regions,
 

@@ -14,6 +14,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             var request = new PlacesAutoCompleteRequest();
 
             Assert.IsTrue(request.IsSsl);
+            Assert.IsNull(request.Offset);
             Assert.IsNull(request.Radius);
             Assert.IsNull(request.Location);
             Assert.AreEqual(Language.English, request.Language);

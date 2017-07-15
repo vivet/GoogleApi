@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
+using GoogleApi.Entities.Places.Common.Enums;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.AutoComplete
@@ -17,8 +18,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             var request = new PlacesAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = "jagtvej 2200",
-                Sensor = true
+                Input = "jagtvej 2200 København"
             };
 
             var response = GooglePlaces.AutoComplete.Query(request);
@@ -27,17 +27,37 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var results = response.Predictions.ToArray();
             Assert.IsNotNull(results);
-            Assert.AreEqual(5, results.Length);
+            Assert.IsNotEmpty(results);
+            Assert.AreEqual(3, results.Length);
+
+            var result = results.FirstOrDefault();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Terms);
+            Assert.IsNotNull(result.PlaceId);
+            Assert.IsNotNull(result.StructuredFormatting);
+
+            var description = result.Description.ToLower();
+            Assert.IsTrue(description.Contains("2200"), "1");
+            Assert.IsTrue(description.Contains("jagtvej"), "2");
+            Assert.IsTrue(description.Contains("copenhagen"), "3");
+
+            var matchedSubstrings = result.MatchedSubstrings.ToArray();
+            Assert.IsNotNull(matchedSubstrings);
+            Assert.AreEqual(3, matchedSubstrings.Length);
+
+            var types = result.Types.ToArray();
+            Assert.IsNotNull(types);
+            Assert.Contains(PlaceLocationType.Route, types);
+            Assert.Contains(PlaceLocationType.Geocode, types);
         }
 
         [Test]
-        public void PlacesAutoCompleteAsyncTest()
+        public void PlacesAutoCompleteWhhenAsyncTest()
         {
             var request = new PlacesAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = "jagtvej 2200",
-                Sensor = true
+                Input = "jagtvej 2200"
             };
 
             var response = GooglePlaces.AutoComplete.QueryAsync(request).Result;
@@ -46,13 +66,12 @@ namespace GoogleApi.Test.Places.AutoComplete
         }
 
         [Test]
-        public void TranslateWhenAsyncAndTimeoutTest()
+        public void PlacesAutoCompleteWhenAsyncAndTimeoutTest()
         {
             var request = new PlacesAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = "jagtvej 2200",
-                Sensor = true
+                Input = "jagtvej 2200"
             };
 
             var exception = Assert.Throws<AggregateException>(() =>
@@ -71,13 +90,12 @@ namespace GoogleApi.Test.Places.AutoComplete
         }
 
         [Test]
-        public void TranslateWhenAsyncAndCancelledTest()
+        public void PlacesAutoCompleteWhenAsyncAndCancelledTest()
         {
             var request = new PlacesAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = "jagtvej 2200",
-                Sensor = true
+                Input = "jagtvej 2200"
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
@@ -87,6 +105,70 @@ namespace GoogleApi.Test.Places.AutoComplete
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenLanguageTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "jagtvej 2200 København",
+                Language = Language.Danish
+            };
+
+            var response = GooglePlaces.AutoComplete.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
+
+            var results = response.Predictions.ToArray();
+            Assert.IsNotNull(results);
+            Assert.IsNotEmpty(results);
+            Assert.AreEqual(3, results.Length);
+
+            var result = results.FirstOrDefault();
+            Assert.IsNotNull(result);
+
+            var description = result.Description.ToLower();
+            Assert.IsTrue(description.Contains("2200"), "1");
+            Assert.IsTrue(description.Contains("jagtvej"), "2");
+            Assert.IsTrue(description.Contains("københavn"), "3");
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenOffsetTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenLocationTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenLocationAndRadiusTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenLocationAndRadiusAndStrictBoundsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenTypesTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenComponentsTest()
+        {
+            Assert.Inconclusive();
         }
 
         [Test]
