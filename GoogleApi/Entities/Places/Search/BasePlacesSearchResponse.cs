@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Places.Search.Common
+namespace GoogleApi.Entities.Places.Search
 {
     /// <summary>
     /// PlacesBaseSearch Request.

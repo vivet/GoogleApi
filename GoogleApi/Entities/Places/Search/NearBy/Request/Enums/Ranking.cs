@@ -14,6 +14,6 @@
         /// <summary>
         /// This option biases search results in ascending order by their distance from the specified location. When distance is specified, one or more of keyword, name, or types is required
         /// </summary>
-        Distance,
+        Distance
     }
 }

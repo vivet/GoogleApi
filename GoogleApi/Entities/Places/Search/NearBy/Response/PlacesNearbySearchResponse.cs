@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Places.Search.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Response
@@ -11,7 +10,8 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
     {
         /// <summary>
         /// Contains an array of places, with information about each. See Search Results for information about these results. 
-        /// The Places API returns up to 20 establishment results per query. Additionally, political results may be returned which serve to identify the area of the request.
+        /// The Places API returns up to 20 establishment results per query. Additionally, political results may be returned 
+        /// which serve to identify the area of the request.
         /// </summary>
         [JsonProperty("results")]
         public virtual IEnumerable<NearByResult> Results { get; set; }

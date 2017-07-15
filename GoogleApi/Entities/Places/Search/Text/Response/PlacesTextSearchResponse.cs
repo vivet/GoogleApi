@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Places.Search.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Text.Response
@@ -10,7 +9,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Response
     public class PlacesTextSearchResponse : BasePlacesSearchResponse
     {
         /// <summary>
-        /// Results
+        /// Results.
         /// </summary>
         [JsonProperty("results")]
         public virtual IEnumerable<TextResult> Results { get; set; }

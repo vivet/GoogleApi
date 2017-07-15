@@ -401,20 +401,20 @@
     <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs">
       <Link>Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BasePlacesSearchRequest.cs">
-      <Link>Entities\Places\Search\Common\Enums\BasePlacesSearchRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Places\Search\BasePlacesSearchRequest.cs">
+      <Link>Entities\Places\Search\BasePlacesSearchRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BasePlacesSearchResponse.cs">
-      <Link>Entities\Places\Search\Common\Enums\BasePlacesSearchResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Places\Search\BasePlacesSearchResponse.cs">
+      <Link>Entities\Places\Search\BasePlacesSearchResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BaseResult.cs">
-      <Link>Entities\Places\Search\Common\Enums\BaseResult.cs</Link>
+      <Link>Entities\Places\Search\Common\BaseResult.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\Enums\SearchPlaceType.cs">
       <Link>Entities\Places\Search\Common\Enums\SearchPlaceType.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\OpeningHours.cs">
-      <Link>Entities\Places\Search\Common\Enums\OpeningHours.cs</Link>
+      <Link>Entities\Places\Search\Common\OpeningHours.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\NearBy\Request\Enums\Ranking.cs">
       <Link>Entities\Places\Search\NearBy\Request\Enums\Ranking.cs</Link>

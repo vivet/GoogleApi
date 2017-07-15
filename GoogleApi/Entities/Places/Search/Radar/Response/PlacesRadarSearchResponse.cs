@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using GoogleApi.Entities.Places.Search.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Radar.Response
@@ -10,7 +9,7 @@ namespace GoogleApi.Entities.Places.Search.Radar.Response
     public class PlacesRadarSearchResponse : BasePlacesSearchResponse
     {
         /// <summary>
-        /// 
+        /// Results.
         /// </summary>
         [JsonProperty("results")]
         public virtual IEnumerable<RadarResult> Results { get; set; }

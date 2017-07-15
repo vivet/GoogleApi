@@ -7,5 +7,6 @@ namespace GoogleApi.Entities.Places.Search.Radar.Response
     /// </summary>
     public class RadarResult : BaseResult
     {
+
     }
 }

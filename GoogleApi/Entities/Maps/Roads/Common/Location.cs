@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
-    // TODO: Refactor into Common Location entity (differs in DataMember name)
     /// <summary>
     /// Location (Roads only). 
     /// </summary>
@@ -22,7 +21,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         public double Longitude { get; set; }
 
         /// <summary>
-        /// Contructor intializing a valid Location
+        /// Contructor intializing a valid Location.
         /// </summary>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>

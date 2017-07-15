@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
@@ -18,24 +21,24 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             {
                 Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
-                Sensor = true,
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
 
             var response = GooglePlaces.NearBySearch.Query(request);
-
             Assert.IsNotNull(response);
+            Assert.IsEmpty(response.HtmlAttributions);
             Assert.AreEqual(Status.Ok, response.Status);
+            Assert.GreaterOrEqual(response.Results.Count(), 5);
         }
+
         [Test]
-        public void PlacesNearBySearchAsyncTest()
+        public void PlacesNearBySearchWhenAsyncTest()
         {
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
-                Sensor = true,
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
@@ -45,6 +48,71 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
+
+        [Test]
+        public void PlacesTextSearchWhenAsyncAndTimeoutTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 500,
+                Type = SearchPlaceType.School
+            };
+
+            var exception = Assert.Throws<AggregateException>(() =>
+            {
+                var result = GooglePlaces.NearBySearch.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
+                Assert.IsNull(result);
+            });
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "One or more errors occurred.");
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
+            Assert.AreEqual(innerException.Message, "A task was canceled.");
+        }
+
+        [Test]
+        public void PlacesTextSearchWhenAsyncAndCancelledTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 500,
+                Type = SearchPlaceType.School
+            };
+
+            var cancellationTokenSource = new CancellationTokenSource();
+            var task = GooglePlaces.NearBySearch.QueryAsync(request, cancellationTokenSource.Token);
+            cancellationTokenSource.Cancel();
+
+            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesTextSearchWhenTypeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesNearBySearchWhenPageTokenTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesNearBySearchWhenPriceLevelTest()
+        {
+            Assert.Inconclusive();
+        }
+
         [Test]
         public void PlacesNearBySearchWhenKeyIsNullTest()
         {
@@ -58,6 +126,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
             Assert.AreEqual(exception.Message, "Key is required");
         }
+
         [Test]
         public void PlacesNearBySearchWhenKeyIsStringEmptyTest()
         {
@@ -71,6 +140,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
             Assert.AreEqual(exception.Message, "Key is required");
         }
+
         [Test]
         public void PlacesNearBySearchWhenLocationIsNullTest()
         {
@@ -83,6 +153,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
             Assert.AreEqual(exception.Message, "Location is required");
         }
+
         [Test]
         public void PlacesNearBySearchWhenRadiusIsNullTest()
         {
@@ -96,6 +167,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
             Assert.AreEqual(exception.Message, "Radius is required, when RankBy is not Distance");
         }
+
         [Test]
         public void PlacesNearBySearchWhenRadiusIsLessThanOneTest()
         {
@@ -109,6 +181,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
             Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
+
         [Test]
         public void PlacesNearBySearchWhenRadiusIsGereaterThanFiftyThousandTest()
         {
@@ -122,6 +195,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
             Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
+
         [Test]
         public void PlacesNearBySearchWhenRankByDistanceAndRadiusIsNotNullTest()
         {
@@ -136,6 +210,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
             Assert.AreEqual(exception.Message, "Radius cannot be specified, when using RankBy distance");
         }
+
         [Test]
         public void PlacesNearBySearchWhenRankByDistanceAndNameIsNullAndKeywordIsNullAndTypeIsNullTest()
         {
@@ -147,8 +222,7 @@ namespace GoogleApi.Test.Places.Search.NearBySearch
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.NearBySearch.Query(request));
-            Assert.AreEqual(exception.Message, "Keyword or Name or Type is required, If rank by distance");
+            Assert.AreEqual(exception.Message, "Keyword, Name or Type is required, If rank by distance");
         }
-
     }
 }

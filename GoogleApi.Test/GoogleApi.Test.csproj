@@ -76,9 +76,12 @@
     <Compile Include="Places\Photos\PhotosRequestTests.cs" />
     <Compile Include="Places\Photos\PhotosTests.cs" />
     <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteRequstTests.cs" />
+    <Compile Include="Places\Search\NearBySearch\NearBySearchRequestTests.cs" />
     <Compile Include="Places\Search\NearBySearch\NearBySearchTests.cs" />
     <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteTests.cs" />
+    <Compile Include="Places\Search\RadarSearch\RadarSearchRequestTests.cs" />
     <Compile Include="Places\Search\RadarSearch\RadarSearchTests.cs" />
+    <Compile Include="Places\Search\TextSearch\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\TextSearch\TextSearchTests.cs" />
     <Compile Include="QueryStringParametersTests.cs" />
     <Compile Include="Search\Enterprise\EnterpriseSearchTests.cs" />
