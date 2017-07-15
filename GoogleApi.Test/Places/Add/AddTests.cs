@@ -59,12 +59,12 @@ namespace GoogleApi.Test.Places.Add
         }
 
         [Test]
-        public void PlacesAddAsyncTest()
+        public void PlacesAddWhenAsyncTest()
         {
             var request = new PlacesAddRequest
             {
                 Key = this.ApiKey,
-                Name = "Home",
+                Name = Guid.NewGuid().ToString("N"),
                 Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
@@ -82,12 +82,12 @@ namespace GoogleApi.Test.Places.Add
         }
 
         [Test]
-        public void TranslateWhenAsyncAndTimeoutTest()
+        public void PlacesAddWhenAsyncAndTimeoutTest()
         {
             var request = new PlacesAddRequest
             {
                 Key = this.ApiKey,
-                Name = "Home",
+                Name = Guid.NewGuid().ToString("N"),
                 Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
@@ -113,12 +113,12 @@ namespace GoogleApi.Test.Places.Add
         }
 
         [Test]
-        public void TranslateWhenAsyncAndCancelledTest()
+        public void PlacesAddWhenAsyncAndCancelledTest()
         {
             var request = new PlacesAddRequest
             {
                 Key = this.ApiKey,
-                Name = "Home",
+                Name = Guid.NewGuid().ToString("N"),
                 Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
@@ -143,7 +143,7 @@ namespace GoogleApi.Test.Places.Add
             var request = new PlacesAddRequest
             {
                 Key = this.ApiKey,
-                Name = "Home",
+                Name = Guid.NewGuid().ToString("N"),
                 Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
