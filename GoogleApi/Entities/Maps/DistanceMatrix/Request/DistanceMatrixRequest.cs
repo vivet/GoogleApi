@@ -12,7 +12,7 @@ using GoogleApi.Entities.Maps.Common.Enums;
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 {
     /// <summary>
-    /// DistanceMatrix Request.
+    /// Distance Matrix Request.
     /// </summary>
     public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
     {
@@ -23,8 +23,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
         /// <summary>
         /// origins — The starting point for calculating travel distance and time. 
-        /// You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, or a placeID.
-        /// If you pass an address, the service geocodes the string and converts it to a latitude/longitude coordinate to calculate distance.
+        /// You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, 
+        /// or a placeID. If you pass an address, the service geocodes the string and converts it to a latitude/longitude coordinate to calculate distance.
         /// This coordinate may be different from that returned by the Google Maps Geocoding API, for example a building entrance rather than its center. 
         /// Example: "origins=Bobcaygeon+ON|24+Sussex+Drive+Ottawa+ON".
         /// If you pass latitude/longitude coordinates, they are used unchanged to calculate distance.
@@ -63,8 +63,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual IEnumerable<Location> Destinations { get; set; }
 
         /// <summary>
-        /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
-        /// Units=metric (default) returns distances in kilometers and meters.
+        /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. 
+        /// The unit system to use can be specified:  Units=metric (default) returns distances in kilometers and meters.
         /// Units=imperial returns distances in miles and feet.
         /// * Note: this unit system setting only affects the text displayed within distance fields. 
         /// The distance fields also contain values which are always expressed in meters
@@ -115,8 +115,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual TransitRoutingPreference TransitRoutingPreference { get; set; } = TransitRoutingPreference.Nothing;
 
         /// <summary>
-        /// The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. Alternatively, you can specify a value of now, 
-        /// which sets the departure time to the current time (correct to the nearest second). 
+        /// The desired time of departure. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. Alternatively, 
+        /// you can specify a value of now, which sets the departure time to the current time (correct to the nearest second). 
         /// The departure time may be specified in two cases:
         /// - For requests where the travel mode is transit: You can optionally specify one of departure_time or arrival_time. If neither time is specified, 
         ///   the departure_time defaults to now (that is, the departure time defaults to the current time).
@@ -161,11 +161,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
                 var parameters = base.QueryStringParameters;
 
+                parameters.Add("language", this.Language.ToCode());
+                parameters.Add("units", this.Units.ToString().ToLower());
+                parameters.Add("mode", this.TravelMode.ToString().ToLower());
                 parameters.Add("origins", string.IsNullOrEmpty(this.OriginsRaw) ? string.Join("|", this.Origins) : this.OriginsRaw);
                 parameters.Add("destinations", string.IsNullOrEmpty(this.DestinationsRaw) ? string.Join("|", this.Destinations) : this.DestinationsRaw);
-                parameters.Add("mode", this.TravelMode.ToString().ToLower());
-                parameters.Add("units", this.Units.ToString().ToLower());
-                parameters.Add("language", this.Language.ToCode());
 
                 if (this.Avoid != AvoidWay.Nothing)
                     parameters.Add("avoid", this.Avoid.ToEnumString('|'));

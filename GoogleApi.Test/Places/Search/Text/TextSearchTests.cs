@@ -7,7 +7,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places.Search.TextSearch
+namespace GoogleApi.Test.Places.Search.Text
 {
     [TestFixture]
     public class TextSearchTests : BaseTest

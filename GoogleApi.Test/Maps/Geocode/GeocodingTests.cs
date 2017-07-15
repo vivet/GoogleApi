@@ -44,7 +44,7 @@ namespace GoogleApi.Test.Maps.Geocode
         }
 
         [Test]
-        public void GeocodingWhenAsyncANdTimeoutTest()
+        public void GeocodingWhenAsyncAndTimeoutTest()
         {
             var request = new GeocodingRequest
             {

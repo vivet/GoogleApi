@@ -48,7 +48,7 @@ namespace GoogleApi.Test.Maps.Directions
         }
 
         [Test]
-        public void DirectionWhenAsyncAndTimeoutTest()
+        public void DirectionsWhenAsyncAndTimeoutTest()
         {
             var request = new DirectionsRequest
             {
@@ -71,7 +71,7 @@ namespace GoogleApi.Test.Maps.Directions
         }
 
         [Test]
-        public void DirectionWhenAsyncAndCancelledTest()
+        public void DirectionsWhenAsyncAndCancelledTest()
         {
             var request = new DirectionsRequest
             {

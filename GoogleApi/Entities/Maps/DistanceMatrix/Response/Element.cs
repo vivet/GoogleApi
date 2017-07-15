@@ -18,13 +18,15 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
         public virtual Status Status { get; set; }
 
         /// <summary>
-        /// Duration: The duration of this route, expressed in seconds (the value field) and as text. The textual representation is localized according to the query's language parameter.
+        /// Duration: The duration of this route, expressed in seconds (the value field) and as text. 
+        /// The textual representation is localized according to the query's language parameter.
         /// </summary>
         [JsonProperty("duration")]
         public virtual Duration Duration { get; set; }
 
         /// <summary>
-        /// Distance: The total distance of this route, expressed in meters (value) and as text. The textual value uses the unit system specified with the unit parameter of the original request, or the origin's region.
+        /// Distance: The total distance of this route, expressed in meters (value) and as text. 
+        /// The textual value uses the unit system specified with the unit parameter of the original request, or the origin's region.
         /// </summary>
         [JsonProperty("distance")]
         public virtual Distance Distance { get; set; }

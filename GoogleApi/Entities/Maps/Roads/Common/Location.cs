@@ -15,7 +15,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         public double Latitude { get; set; }
 
         /// <summary>
-        /// Longitude
+        /// Longitude.
         /// </summary>
         [JsonProperty("longitude")]
         public double Longitude { get; set; }

@@ -4,7 +4,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Radar.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places.Search.RadarSearch
+namespace GoogleApi.Test.Places.Search.Radar
 {
     [TestFixture]
     public class RadarSearchRequestTests : BaseTest
