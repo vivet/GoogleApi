@@ -5,6 +5,7 @@ using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Response
 {
@@ -17,38 +18,38 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// <summary>
         /// Icon contains the URL of a recommended icon which may be displayed to the user when indicating this result.
         /// </summary>
-        [DataMember(Name = "icon")]
+        [JsonProperty("icon")]
         public virtual string IconUrl { get; set; }
 
         /// <summary>
         /// Name contains the human-readable name for the returned result. For establishment results, this is usually the business name.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public virtual string Name { get; set; }
 
         /// <summary>
         /// OpeningHours may contain the following information:
         /// </summary>
-        [DataMember(Name = "opening_hours")]
+        [JsonProperty("opening_hours")]
         public virtual OpeningHours OpeningHours { get; set; }
 
         /// <summary>
         /// Photos — an array of photo objects, each containing a reference to an image. A Place Search will return at most one photo object. Performing a Place Details request on the place may return up to ten photos. More information about Place Photos and how you can use the images in your application can be found in the Place Photos documentation. A photo object is described as:
         /// </summary>
-        [DataMember(Name = "photos")]
+        [JsonProperty("photos")]
         public virtual IEnumerable<Photo> Photos { get; set; }
 
         /// <summary>
         /// AlternativePlaceIds — An array of zero, one or more alternative place IDs for the place, with a scope related to each alternative ID. Note: This array may be empty or not present. 
         /// If present, it contains the following fields:
         /// </summary>
-        [DataMember(Name = "alt_ids")]
+        [JsonProperty("alt_ids")]
         public virtual IEnumerable<AlternativePlace> AlternativePlaceIds { get; set; }
 
         /// <summary>
         /// Rating contains the place's rating, from 1.0 to 5.0, based on aggregated user reviews.
         /// </summary>
-        [DataMember(Name = "rating")]
+        [JsonProperty("rating")]
         public virtual double Rating { get; set; }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// </summary>
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
-        [DataMember(Name = "types")]
+        [JsonProperty("types")]
         internal IEnumerable<string> TypesStr
         {
             get { return Types?.Select(x => x.ToEnumString()) ?? new string[0]; }
@@ -67,7 +68,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// <summary>
         /// Vicinity contains a feature name of a nearby location. Often this feature refers to a street or neighborhood within the given results. The vicinity property is only returned for a Nearby Search.
         /// </summary>
-        [DataMember(Name = "vicinity")]
+        [JsonProperty("vicinity")]
         public virtual string Vicinity { get; set; }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// </summary>
         public virtual Scope Scope { get; set; }
 
-        [DataMember(Name = "scope")]
+        [JsonProperty("scope")]
         internal string ScopeStr
         {
             get => this.Scope.ToEnumString();
@@ -89,7 +90,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// </summary>
         public virtual PriceLevel PriceLevel { get; set; }
 
-        [DataMember(Name = "price_level")]
+        [JsonProperty("price_level")]
         internal string PriceLevelStr
         {
             get => this.PriceLevel.ToEnumString();

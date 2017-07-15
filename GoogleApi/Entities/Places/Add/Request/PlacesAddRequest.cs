@@ -25,7 +25,7 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// <summary>
         /// Required. The full text name of the place. Limited to 255 characters.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public virtual string Name { get; set; }
 
         /// <summary>
@@ -33,19 +33,19 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// If a place has a well-formatted, human-readable address, it is more likely to pass the moderation process for inclusion in the Google Maps database.
         /// (recommended, to improve chances of passing moderation)
         /// </summary>
-        [DataMember(Name = "address")]
+        [JsonProperty("address")]
         public virtual string Address { get; set; }
 
         /// <summary>
         /// Required. The geographical location, specified as latitude and longitude values, of the place you want to add.
         /// </summary>
-        [DataMember(Name = "location")]
+        [JsonProperty("location")]
         public virtual Location Location { get; set; }
 
         /// <summary>
         /// The accuracy of the location signal on which this request is based, expressed in meters.
         /// </summary>
-        [DataMember(Name = "accuracy")]
+        [JsonProperty("accuracy")]
         public virtual int? Accuracy { get; set; }
 
         /// <summary>
@@ -53,14 +53,14 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// If a Place has a well-formatted website address, it is more likely to pass the moderation process for inclusion in the Google Maps database
         /// (recommended, to improve chances of passing moderation) — 
         /// </summary>
-        [DataMember(Name = "website")]
+        [JsonProperty("website")]
         public virtual string Website { get; set; }
 
         /// <summary>
         /// The language in which the place's name is being reported. 
         /// See the list of supported languages and their codes. Note that we often update supported languages so this list may not be exhaustive.
         /// </summary>
-        [DataMember(Name = "language")]
+        [JsonProperty("language")]
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// International format includes the country code, and is prefixed with a plus (+) sign. For example, the international phone number for Google's Sydney, Australia office is +61 2 9374 4000.
         /// (recommended, to improve chances of passing moderation).
         /// </summary>
-        [DataMember(Name = "phone_number")]
+        [JsonProperty("phone_number")]
         public virtual string PhoneNumber { get; set; }
 
         /// <summary>
@@ -79,8 +79,7 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// XML requests require a single type element. See the list of supported types for more information.  
         /// If none of the supported types are a match for this place, you may specify other.
         /// </summary>
-        [DataMember(Name = "types")]
-        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>

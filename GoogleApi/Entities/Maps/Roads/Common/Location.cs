@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
@@ -13,13 +14,13 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// <summary>
         /// Latitude.
         /// </summary>
-        [DataMember(Name = "latitude")]
+        [JsonProperty("latitude")]
         public double Latitude { get; set; }
 
         /// <summary>
         /// Longitude
         /// </summary>
-        [DataMember(Name = "longitude")]
+        [JsonProperty("longitude")]
         public double Longitude { get; set; }
 
         /// <summary>

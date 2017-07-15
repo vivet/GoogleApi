@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -12,13 +13,13 @@ namespace GoogleApi.Entities.Places.Common
         /// <summary>
         /// Offset.
         /// </summary>
-        [DataMember(Name = "offset")]
+        [JsonProperty("offset")]
         public virtual string Offset { get; set; }
 
         /// <summary>
         /// Length.
         /// </summary>
-        [DataMember(Name = "length")]
+        [JsonProperty("length")]
         public virtual string Length { get; set; }
     }
 }

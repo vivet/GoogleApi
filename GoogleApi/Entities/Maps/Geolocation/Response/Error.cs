@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
@@ -11,19 +12,19 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
         /// <summary>
         /// This is the same as the HTTP status of the response.
         /// </summary>
-        [DataMember(Name = "domain")]
+        [JsonProperty("domain")]
         public virtual string Domain { get; set; }
 
         /// <summary>
         /// This is the same as the HTTP status of the response.
         /// </summary>
-        [DataMember(Name = "reason")]
+        [JsonProperty("reason")]
         public virtual string Reason { get; set; }
 
         /// <summary>
         /// This is the same as the HTTP status of the response.
         /// </summary>
-        [DataMember(Name = "message")]
+        [JsonProperty("message")]
         public virtual string Message { get; set; }
     }
 }

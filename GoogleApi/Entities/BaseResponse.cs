@@ -26,8 +26,8 @@ namespace GoogleApi.Entities
         /// <summary>
         /// Success status of the request.
         /// </summary>
-        [DataMember(Name = "status")]
-        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("status")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Status Status { get; set; }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace GoogleApi.Entities
         /// This field contains more detailed information about the reasons behind the given status code.
         /// Note: This field is not guaranteed to be always present, and its content is subject to change.
         /// </summary>
-        [DataMember(Name = "error_message")]
-        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("error_message")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual string ErrorMessage { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request
 {
@@ -13,31 +14,31 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// <summary>
         /// Required. The MAC address of the WiFi node. Separators must be : (colon).
         /// </summary>
-        [DataMember(Name = "macAddress")]
+        [JsonProperty("macAddress")]
         public virtual string MacAddress { get; set; }
 
         /// <summary>
         /// The current signal strength measured in dBm.
         /// </summary>
-        [DataMember(Name = "signalStrength")]
+        [JsonProperty("signalStrength")]
         public virtual int SignalStrength { get; set; }
 
         /// <summary>
         /// The number of milliseconds since this access point was detected.
         /// </summary>
-        [DataMember(Name = "age")]
+        [JsonProperty("age")]
         public virtual int Age { get; set; }
 
         /// <summary>
         /// The channel over which the client is communicating with the access point.
         /// </summary>
-        [DataMember(Name = "channel")]
+        [JsonProperty("channel")]
         public virtual int Channel { get; set; }
 
         /// <summary>
         /// The current signal to noise ratio measured in dB.
         /// </summary>
-        [DataMember(Name = "signalToNoiseRatio")]
+        [JsonProperty("signalToNoiseRatio")]
         public virtual int SignalToNoiseRatio { get; set; }
     }
 }

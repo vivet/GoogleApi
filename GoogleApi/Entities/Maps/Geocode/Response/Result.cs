@@ -18,13 +18,13 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// For example, you can use the place_id in a Google Places API request to get details of a local business, such as phone number, 
         /// opening hours, user reviews, and more. See the place ID overview.
         /// </summary>
-        [DataMember(Name = "place_id")]
+        [JsonProperty("place_id")]
         public virtual string PlaceId { get; set; }
 
         /// <summary>
         /// Geometry.
         /// </summary>
-        [DataMember(Name = "geometry")]
+        [JsonProperty("geometry")]
         public virtual Geometry Geometry { get; set; }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// (the street number, "8th Avenue" (the route), "New York" (the city) and "NY" (the US state). These address components contain 
         /// additional information as noted below.
         /// </summary>
-        [DataMember(Name = "formatted_address")]
+        [JsonProperty("formatted_address")]
         public virtual string FormattedAddress { get; set; }
 
         /// <summary>
@@ -47,14 +47,14 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// For example, "21 Henr St, Bristol, UK" will return a partial match for both Henry Street and Henrietta Street. 
         /// Note that if a request includes a misspelled address component, the geocoding service may suggest an alternative address. Suggestions triggered in this way will also be marked as a partial match.
         /// </summary>
-        [DataMember(Name = "partial_match")]
+        [JsonProperty("partial_match")]
         public virtual bool PartialMatch { get; set; }
 
         /// <summary>
         /// postcode_localities[] is an array denoting all the localities contained in a postal code. 
         /// This is only present when the result is a postal code that contains multiple localities.
         /// </summary>
-        [DataMember(Name = "postcode_localities")]
+        [JsonProperty("postcode_localities")]
         public virtual IEnumerable<string> PostcodeLocalities { get; set; }
 
         /// <summary>
@@ -63,14 +63,13 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// For example, a geocode of "Chicago" returns "locality" which indicates that "Chicago" is a city, 
         /// and also returns "political" which indicates it is a political entity.
         /// </summary>
-        [DataMember(Name = "types")]
-        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
         public virtual IEnumerable<LocationType> Types { get; set; }
 
         /// <summary>
         /// address_components[] is an array containing the separate address components
         /// </summary>
-        [DataMember(Name = "address_components")]
+        [JsonProperty("address_components")]
         public virtual IEnumerable<AddressComponent> AddressComponents { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
@@ -12,13 +13,13 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
         /// <summary>
         /// The user’s estimated latitude and longitude, in degrees. Contains one lat and one lng subfield.
         /// </summary>
-        [DataMember(Name = "location")]
+        [JsonProperty("location")]
         public virtual Location Location { get; set; }
 
         /// <summary>
         /// The accuracy of the estimated location, in meters. This represents the radius of a circle around the given location.
         /// </summary>
-        [DataMember(Name = "accuracy")]
+        [JsonProperty("accuracy")]
         public virtual double Accuracy { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Indicates a precise street address.
         /// </summary>
         [EnumMember(Value = "street_address")]
-        StreetAddress,
+        Street_Address,
 
         /// <summary>
         /// Indicates a named route (such as "US 101").
@@ -52,41 +52,41 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// these administrative levels are states. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_1")]
-        AdministrativeAreaLevel1,
+        Administrative_Area_Level_1,
 
         /// <summary>
         /// Indicates a second-order civil entity below the country level. Within the United States, 
         /// these administrative levels are counties. Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_2")]
-        AdministrativeAeaLvel2,
+        Administrative_Area_Level_2,
 
         /// <summary>
         /// Indicates a third-order civil entity below the country level. This type indicates a minor civil division. 
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_3")]
-        AdministrativeAeaLevel3,
+        Administrative_Area_Level_3,
 
         /// <summary>
         /// Indicates a fourth-order civil entity below the country level. This type indicates a minor civil division. 
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_4")]
-        AdministrativeAeaLevel4,
+        Administrative_Area_Level_4,
 
         /// <summary>
         /// Indicates a fifth-order civil entity below the country level. This type indicates a minor civil division. 
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_5")]
-        AdministrativeAeaLevel5,
+        Administrative_Area_Level_5,
 
         /// <summary>
         /// Indicates a commonly-used alternative name for the entity.
         /// </summary>
         [EnumMember(Value = "colloquial_area")]
-        ColloquialArea,
+        Colloquial_Area,
 
         /// <summary>
         /// Indicates an incorporated city or town political entity.
@@ -104,31 +104,31 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// indicates an first-order civil entity below a locality.
         /// </summary>
         [EnumMember(Value = "sublocality_level_1")]
-        SublocalityLevel1,
+        Sublocality_Level_1,
 
         /// <summary>
         /// indicates an second-order civil entity below a locality.
         /// </summary>
         [EnumMember(Value = "sublocality_level_2")]
-        SublocalityLevel2,
+        Sublocality_Level_2,
 
         /// <summary>
         /// indicates an third-order civil entity below a locality.
         /// </summary>
         [EnumMember(Value = "sublocality_level_3")]
-        SublocalityLevel3,
+        Sublocality_Level_3,
 
         /// <summary>
         /// indicates an first-order civil entity below a locality.
         /// </summary>
         [EnumMember(Value = "sublocality_level_4")]
-        SublocalityLevel4,
+        Sublocality_Level_4,
 
         /// <summary>
         /// indicates an first-order civil entity below a locality.
         /// </summary>
         [EnumMember(Value = "sublocality_level_5")]
-        SublocalityLevel5,
+        Sublocality_Level_5,
 
         /// <summary>
         /// Indicates a named neighborhood
@@ -152,31 +152,31 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Indicates a postal code as used to address postal mail within the country.
         /// </summary>
         [EnumMember(Value = "postal_code")]
-        PostalCode,
+        Postal_Code,
 
         /// <summary>
         /// Indicates a postal code prefix.
         /// </summary>
         [EnumMember(Value = "postal_code_prefix")]
-        PostalCodePrefix,
+        Postal_Code_Prefix,
 
         /// <summary>
         /// Indicates a postal code suffix.
         /// </summary>
         [EnumMember(Value = "postal_code_suffix")]
-        PostalCodeSuffix,
+        Postal_Code_Suffix,
 
         /// <summary>
         /// Indicates a prominent natural feature.
         /// </summary>
         [EnumMember(Value = "natural_feature")]
-        NaturalFeature,
+        Natural_Feature,
 
         /// <summary>
         /// Indicates a named point of interest. Typically, these "POI"s are prominent local entities that don't easily fit in another category such as "Empire State Building" or "Statue of Liberty."
         /// </summary>
         [EnumMember(Value = "point_of_interest")]
-        PointOfInterest,
+        Point_Of_Interest,
 
         /// <summary>
         /// Indicates the floor of a building address.
@@ -188,13 +188,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// post_box indicates a specific postal box.
         /// </summary>
         [EnumMember(Value = "post_box")]
-        PostBox,
+        Post_Box,
 
         /// <summary>
         /// postal_town indicates a grouping of geographic areas, such as locality and sublocality, used for mailing addresses in some countries.
         /// </summary>
         [EnumMember(Value = "postal_town")]
-        PostalTown,
+        Postal_Town,
 
         /// <summary>
         /// room indicates the room of a building address.
@@ -206,13 +206,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// street_number indicates the precise street number.
         /// </summary>
         [EnumMember(Value = "street_number")]
-        StreetNumber,
+        Street_Number,
 
         /// <summary>
         /// Indicate the location of a public transit stop.
         /// </summary>
         [EnumMember(Value = "transit_station")]
-        TransitStation,
+        Transit_Station,
 
         /// <summary>
         /// Accounting.
@@ -230,7 +230,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Amusement Park.
         /// </summary>
         [EnumMember(Value = "amusement_park")]
-        AmusementPark,
+        Amusement_Park,
 
         /// <summary>
         /// Aquarium.
@@ -242,7 +242,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Art Gallery.
         /// </summary>
         [EnumMember(Value = "art_gallery")]
-        ArtGallery,
+        Art_Gallery,
 
         /// <summary>
         /// Atm.
@@ -272,31 +272,31 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Beauty Salon.
         /// </summary>
         [EnumMember(Value = "beauty_salon")]
-        BeautySalon,
+        Beauty_Salon,
 
         /// <summary>
         /// Bicycle Store.
         /// </summary>
         [EnumMember(Value = "bicycle_store")]
-        BicycleStore,
+        Bicycle_Store,
 
         /// <summary>
         /// Book Store.
         /// </summary>
         [EnumMember(Value = "book_store")]
-        BookStore,
+        Book_Store,
 
         /// <summary>
         /// Bowling Alley.
         /// </summary>
         [EnumMember(Value = "bowling_alley")]
-        BowlingAlley,
+        Bowling_Alley,
 
         /// <summary>
         /// Bus Station.
         /// </summary>
         [EnumMember(Value = "bus_station")]
-        BusStation,
+        Bus_Station,
 
         /// <summary>
         /// Cafe.
@@ -314,25 +314,25 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Car Dealer.
         /// </summary>
         [EnumMember(Value = "car_dealer")]
-        CarDealer,
+        Car_Dealer,
 
         /// <summary>
         /// Car Rental.
         /// </summary>
         [EnumMember(Value = "car_rental")]
-        CarRental,
+        Car_Rental,
 
         /// <summary>
         /// Car Repair.
         /// </summary>
         [EnumMember(Value = "car_repair")]
-        CarRepair,
+        Car_Repair,
 
         /// <summary>
         /// Car Wash.
         /// </summary>
         [EnumMember(Value = "car_wash")]
-        CarWash,
+        Car_Wash,
 
         /// <summary>
         /// Casino.
@@ -356,19 +356,19 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// City Hall.
         /// </summary>
         [EnumMember(Value = "city_hall")]
-        CityHall,
+        City_Hall,
 
         /// <summary>
         /// Clothing Store.
         /// </summary>
         [EnumMember(Value = "clothing_store")]
-        ClothingStore,
+        Clothing_Store,
 
         /// <summary>
         /// Convenience Store.
         /// </summary>
         [EnumMember(Value = "convenience_store")]
-        ConvenienceStore,
+        Convenience_Store,
 
         /// <summary>
         /// Courthouse.
@@ -386,7 +386,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Department Store.
         /// </summary>
         [EnumMember(Value = "department_store")]
-        DepartmentStore,
+        Department_Store,
 
         /// <summary>
         /// Doctor.
@@ -404,7 +404,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Electronics Store.
         /// </summary>
         [EnumMember(Value = "electronics_store")]
-        ElectronicsStore,
+        Electronics_Store,
 
         /// <summary>
         /// Establishment.
@@ -422,7 +422,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Fire Station.
         /// </summary>
         [EnumMember(Value = "fire_station")]
-        FireStation,
+        Fire_Station,
 
         /// <summary>
         /// Florist.
@@ -440,31 +440,31 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Funeral Home.
         /// </summary>
         [EnumMember(Value = "funeral_home")]
-        FuneralHome,
+        Funeral_Home,
 
         /// <summary>
         /// Furniture Store.
         /// </summary>
         [EnumMember(Value = "furniture_store")]
-        FurnitureStore,
+        Furniture_Store,
 
         /// <summary>
         /// Gas Station.
         /// </summary>
         [EnumMember(Value = "gas_station")]
-        GasStation,
+        Gas_Station,
 
         /// <summary>
         /// General Contractor.
         /// </summary>
         [EnumMember(Value = "general_contractor")]
-        GeneralContractor,
+        General_Contractor,
 
         /// <summary>
         /// Grocery Or Supermarket.
         /// </summary>
         [EnumMember(Value = "grocery_or_supermarket")]
-        GroceryOrSupermarket,
+        Grocery_Or_Supermarket,
 
         /// <summary>
         /// Gym.
@@ -476,13 +476,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Hair Care.
         /// </summary>
         [EnumMember(Value = "hair_care")]
-        HairCare,
+        Hair_Care,
 
         /// <summary>
         /// Hardware Store.
         /// </summary>
         [EnumMember(Value = "hardware_store")]
-        HardwareStore,
+        Hardware_Store,
 
         /// <summary>
         /// Health.
@@ -494,13 +494,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Hindu Temple.
         /// </summary>
         [EnumMember(Value = "hindu_temple")]
-        HinduTemple,
+        Hindu_Temple,
 
         /// <summary>
         /// Home Goods Store.
         /// </summary>
         [EnumMember(Value = "home_goods_store")]
-        HomeGoodsStore,
+        Home_Goods_Store,
 
         /// <summary>
         /// Hospital.
@@ -512,13 +512,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Insurance Agency.
         /// </summary>
         [EnumMember(Value = "insurance_agency")]
-        InsuranceAgency,
+        Insurance_Agency,
 
         /// <summary>
         /// Jewelry Store.
         /// </summary>
         [EnumMember(Value = "jewelry_store")]
-        JewelryStore,
+        Jewelry_Store,
 
         /// <summary>
         /// Laundry.
@@ -542,13 +542,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Liquor Store.
         /// </summary>
         [EnumMember(Value = "liquor_store")]
-        LiquorStore,
+        Liquor_Store,
 
         /// <summary>
         /// Local Government Office.
         /// </summary>
         [EnumMember(Value = "local_government_office")]
-        LocalGovernmentOffice,
+        Local_Government_Office,
 
         /// <summary>
         /// Locksmith.
@@ -566,13 +566,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Meal Delivery.
         /// </summary>
         [EnumMember(Value = "meal_delivery")]
-        MealDelivery,
+        Meal_Delivery,
 
         /// <summary>
         /// 
         /// </summary>
         [EnumMember(Value = "meal_takeaway")]
-        MealTakeaway,
+        Meal_Takeaway,
 
         /// <summary>
         /// Mosque.
@@ -584,19 +584,19 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Movie Rental.
         /// </summary>
         [EnumMember(Value = "movie_rental")]
-        MovieRental,
+        Movie_Rental,
 
         /// <summary>
         /// Movie Theater.
         /// </summary>
         [EnumMember(Value = "movie_theater")]
-        MovieTheater,
+        Movie_Theater,
 
         /// <summary>
         /// Moving Company.
         /// </summary>
         [EnumMember(Value = "moving_company")]
-        MovingCompany,
+        Moving_Company,
 
         /// <summary>
         /// Museum.
@@ -608,7 +608,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Night Club.
         /// </summary>
         [EnumMember(Value = "night_club")]
-        NightClub,
+        Night_Club,
 
         /// <summary>
         /// Painter.
@@ -632,7 +632,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Pet Store.
         /// </summary>
         [EnumMember(Value = "pet_store")]
-        PetStore,
+        Pet_Store,
 
         /// <summary>
         /// Pharmacy.
@@ -650,7 +650,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Place Of Worship.
         /// </summary>
         [EnumMember(Value = "place_of_worship")]
-        PlaceOfWorship,
+        Place_Of_Worship,
 
         /// <summary>
         /// Plumber.
@@ -674,7 +674,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Real Estate Agency.
         /// </summary>
         [EnumMember(Value = "real_estate_agency")]
-        RealEstateAgency,
+        Real_Estate_Agency,
 
         /// <summary>
         /// Restaurant.
@@ -686,13 +686,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Roofing Contractor.
         /// </summary>
         [EnumMember(Value = "roofing_contractor")]
-        RoofingContractor,
+        Roofing_Contractor,
 
         /// <summary>
         /// Rv Park.
         /// </summary>
         [EnumMember(Value = "rv_park")]
-        RvPark,
+        Rv_Park,
 
         /// <summary>
         /// School.
@@ -704,13 +704,13 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// 
         /// </summary>
         [EnumMember(Value = "shoe_store")]
-        ShoeStore,
+        Shoe_Store,
 
         /// <summary>
         /// Shopping Mall.
         /// </summary>
         [EnumMember(Value = "shopping_mall")]
-        ShoppingMall,
+        Shopping_Mall,
 
         /// <summary>
         /// Spa.
@@ -740,7 +740,7 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Subway Station.
         /// </summary>
         [EnumMember(Value = "subway_station")]
-        SubwayStation,
+        Subway_Station,
 
         /// <summary>
         /// Synagogue.
@@ -752,19 +752,19 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Taxi Stand.
         /// </summary>
         [EnumMember(Value = "taxi_stand")]
-        TaxiStand,
+        Taxi_Stand,
 
         /// <summary>
         /// Train Station.
         /// </summary>
         [EnumMember(Value = "train_station")]
-        TrainStation,
+        Train_Station,
 
         /// <summary>
         /// Travel Agency.
         /// </summary>
         [EnumMember(Value = "travel_agency")]
-        TravelAgency,
+        Travel_Agency,
 
         /// <summary>
         /// University.
@@ -776,10 +776,10 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// VeterinaryCare.
         /// </summary>
         [EnumMember(Value = "veterinary_care")]
-        VeterinaryCare,
+        Veterinary_Care,
 
         /// <summary>
-        /// Zoo-
+        /// Zoo.
         /// </summary>
         [EnumMember(Value = "zoo")]
         Zoo

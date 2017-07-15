@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Details.Response
 {
@@ -12,7 +13,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// "results" contains an array of places, with information about the place. See Place Search Results for information about these results. 
         /// The Places API returns up to 20 establishment results. Additionally, political results may be returned which serve to identify the area of the request.
         /// </summary>
-        [DataMember(Name = "result")]
+        [JsonProperty("result")]
         public virtual DetailsResult Result { get; set; }
     }
 }

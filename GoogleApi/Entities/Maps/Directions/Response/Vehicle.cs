@@ -1,6 +1,7 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -13,13 +14,13 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// Contains the name of the vehicle on this line. eg. "Subway."
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public virtual string Name { get; set; }
 
         /// <summary>
         /// Contains the URL for an icon associated with this vehicle type.
         /// </summary>
-        [DataMember(Name = "icon")]
+        [JsonProperty("icon")]
         public virtual string Icon { get; set; }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// </summary>
         public virtual VehicleType VehicleType { get; set; }
 
-        [DataMember(Name = "type")]
+        [JsonProperty("type")]
         internal string VehicleTypeStr
         {
             get => this.VehicleType.ToEnumString();

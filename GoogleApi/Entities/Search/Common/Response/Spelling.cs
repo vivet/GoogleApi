@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
@@ -11,13 +12,13 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// <summary>
         /// The corrected query.
         /// </summary>
-        [DataMember(Name = "correctedQuery")]
+        [JsonProperty("correctedQuery")]
         public virtual string CorrectedQuery { get; set; }
 
         /// <summary>
         /// The corrected query, formatted in HTML.
         /// </summary>
-        [DataMember(Name = "htmlCorrectedQuery")]
+        [JsonProperty("htmlCorrectedQuery")]
         public virtual string HtmlCorrectedQuery { get; set; }
     }
 }

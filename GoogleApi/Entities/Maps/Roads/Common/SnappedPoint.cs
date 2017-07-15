@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// <summary>
         /// Location — Contains a latitude and longitude value.
         /// </summary>
-        [DataMember(Name = "location")]
+        [JsonProperty("location")]
         public virtual Location Location { get; set; }
 
         /// <summary>
@@ -20,7 +21,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// Interpolated values will not have an originalIndex. 
         /// These values are indexed from 0, so a point with an originalIndex of 4 will be the snapped value of the 5th latitude/longitude passed to the path parameter.
         /// </summary>
-        [DataMember(Name = "originalIndex")]
+        [JsonProperty("originalIndex")]
         public virtual int? OriginalIndex { get; set; }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// Google Places API or the Google Maps Geocoding API. Within the Google Maps Roads API, you can pass the placeId to the speedLimit method to 
         /// determine the speed limit along that road segment.
         /// </summary>
-        [DataMember(Name = "PlaceId")]
+        [JsonProperty("PlaceId")]
         public virtual string PlaceId { get; set; }
     }
 }

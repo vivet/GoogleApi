@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Translate.Languages.Response
         /// <summary>
         /// Human readable name of the language localized to the target language.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public virtual string Name { get; set; }
 
         /// <summary>

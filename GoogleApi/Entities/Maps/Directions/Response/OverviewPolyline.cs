@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -21,7 +22,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// The encoded string containing the overview path points as they were received.
         /// </summary>
-        [DataMember(Name = "points")]
+        [JsonProperty("points")]
         protected virtual string EncodedPoints { get; set; }
 
         /// <summary>

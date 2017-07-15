@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Photos.Response
 {
@@ -17,7 +18,7 @@ namespace GoogleApi.Entities.Places.Photos.Response
         /// <summary>
         /// A string containing the downloded photo.
         /// </summary>
-        [DataMember(Name = "photo")]
+        [JsonProperty("photo")]
         protected virtual byte[] PhotoStr
         {
             get => this.Photo.ToArray();

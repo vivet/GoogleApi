@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
 {
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Translate.Translate.Response
         /// <summary>
         /// Container for the translated results.
         /// </summary>
-        [DataMember(Name = "data")]
+        [JsonProperty("data")]
         public virtual Data Data { get; set; }
     }
 }

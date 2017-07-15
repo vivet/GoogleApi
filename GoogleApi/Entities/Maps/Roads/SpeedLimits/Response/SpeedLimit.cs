@@ -20,20 +20,20 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
         /// Google Places API or the Google Maps Geocoding API. Within the Google Maps Roads API, you can pass the placeId to the speedLimit method to 
         /// determine the speed limit along that road segment.
         /// </summary>
-        [DataMember(Name = "PlaceId")]
+        [JsonProperty("PlaceId")]
         public virtual string PlaceId { get; set; }
 
         /// <summary>
         /// SpeedLimit — The speed limit for that road segment.
         /// </summary>
-        [DataMember(Name = "speedLimit")]
+        [JsonProperty("speedLimit")]
         public virtual int? Limit { get; set; }
 
         /// <summary>
         /// units — Returns either KPH or MPH.
         /// </summary>
-        [DataMember(Name = "units")]
-        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("units")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Units Units { get; set; }
     }
 }

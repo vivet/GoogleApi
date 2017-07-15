@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
@@ -11,25 +12,25 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// <summary>
         /// The time taken for the server to return search results.
         /// </summary>
-        [DataMember(Name = "searchTime")]
+        [JsonProperty("searchTime")]
         public virtual double SearchTime { get; set; }
 
         /// <summary>
         /// The time taken for the server to return search results, formatted according to locale style.
         /// </summary>
-        [DataMember(Name = "formattedSearchTime")]
+        [JsonProperty("formattedSearchTime")]
         public virtual string SearchTimeFormatted { get; set; }
 
         /// <summary>
         /// The total number of search results returned by the query.
         /// </summary>
-        [DataMember(Name = "totalResults")]
+        [JsonProperty("totalResults")]
         public virtual long TotalResults { get; set; }
 
         /// <summary>
         /// The total number of search results, formatted according to locale style.
         /// </summary>
-        [DataMember(Name = "formattedTotalResults")]
+        [JsonProperty("formattedTotalResults")]
         public virtual string TotalResultsFormatted { get; set; }
     }
 }

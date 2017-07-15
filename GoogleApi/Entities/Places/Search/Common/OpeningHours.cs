@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Common
 {
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// <summary>
         /// OpenNow is a boolean value indicating if the place is open at the current time.
         /// </summary>
-        [DataMember(Name = "OpenNow")]
+        [JsonProperty("OpenNow")]
         public virtual bool OpenNow { get; set; }
     }
 }

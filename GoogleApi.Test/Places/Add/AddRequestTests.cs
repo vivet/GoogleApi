@@ -27,7 +27,7 @@ namespace GoogleApi.Test.Places.Add
                 Key = null,
                 Name = "test",
                 Location = new Location(0, 0),
-                Types = new[] { PlaceLocationType.StreetAddress }
+                Types = new[] { PlaceLocationType.Street_Address }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -46,7 +46,7 @@ namespace GoogleApi.Test.Places.Add
                 Key = string.Empty,
                 Name = "test",
                 Location = new Location(0, 0),
-                Types = new[] { PlaceLocationType.StreetAddress }
+                Types = new[] { PlaceLocationType.Street_Address }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Languages.Response
 {
@@ -13,7 +14,7 @@ namespace GoogleApi.Entities.Translate.Languages.Response
         /// <summary>
         /// The set of supported languages.
         /// </summary>
-        [DataMember(Name = "languages")]
+        [JsonProperty("languages")]
         public virtual IEnumerable<SupportedLanguage> Languages { get; set; }
     }
 }

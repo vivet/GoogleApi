@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Places.Common.Enums;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Add.Response
 {
@@ -14,13 +15,13 @@ namespace GoogleApi.Entities.Places.Add.Response
         /// pass this identifier in the placeid field of a Place Details request. 
         /// For more information about place IDs, see the place ID overview.
         /// </summary>
-        [DataMember(Name = "place_id")]
+        [JsonProperty("place_id")]
         public virtual string PlaceId { get; set; }
 
         /// <summary>
         /// Indicates the scope of the place_id. 
         /// </summary>
-        [DataMember(Name = "scope")]
+        [JsonProperty("scope")]
         public virtual Scope Scope { get; set; }
     }
 }

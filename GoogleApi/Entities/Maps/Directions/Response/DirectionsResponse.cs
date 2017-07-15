@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -12,13 +13,13 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// "routes" contains an array of routes from the origin to the destination. See Routes below.
         /// </summary>
-        [DataMember(Name = "routes")]
+        [JsonProperty("routes")]
         public virtual IEnumerable<Route> Routes { get; set; }
 
         /// <summary>
         /// "routes" contains an array of routes from the origin to the destination. See Routes below.
         /// </summary>
-        [DataMember(Name = "geocoded_waypoints")]
+        [JsonProperty("geocoded_waypoints")]
         public virtual IEnumerable<Route> WayPoints { get; set; }
     }
 }

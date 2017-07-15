@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {
@@ -14,13 +15,13 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// <summary>
         /// South West.
         /// </summary>
-        [DataMember(Name = "southwest")]
+        [JsonProperty("southwest")]
         public virtual Location SouthWest { get; set; }
 
         /// <summary>
         /// North East.
         /// </summary>
-        [DataMember(Name = "northeast")]
+        [JsonProperty("northeast")]
         public virtual Location NorthEast { get; set; }
     }
 }

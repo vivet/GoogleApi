@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
@@ -14,20 +15,20 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
         /// <summary>
         /// This is the same as the HTTP status of the response.
         /// </summary>
-        [DataMember(Name = "code")]
+        [JsonProperty("code")]
         public virtual string Code { get; set; }
 
         /// <summary>
         /// A short description of the error.
         /// </summary>
-        [DataMember(Name = "message")]
+        [JsonProperty("message")]
         public virtual string Message { get; set; }
 
         /// <summary>
         /// A list of errors which occurred. 
         /// Each error contains an identifier for the type of error (the reason) and a short description (the message).
         /// </summary>
-        [DataMember(Name = "errors")]
+        [JsonProperty("errors")]
         public virtual IEnumerable<Error> Errors { get; set; }
     }
 }

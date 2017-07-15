@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
@@ -14,7 +15,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
         /// <summary>
         /// Each row array contains one or more element entries, which in turn contain the information about a single origin-destination pairing
         /// </summary>
-        [DataMember(Name = "elements")]
+        [JsonProperty("elements")]
         public virtual IEnumerable<Element> Elements { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
             {
                 Key = this.ApiKey,
                 Input = "jagtvej 2200",
-                Sensor = true
             };
+
             var response = GooglePlaces.QueryAutoComplete.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);

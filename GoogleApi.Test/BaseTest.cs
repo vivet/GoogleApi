@@ -39,19 +39,19 @@ namespace GoogleApi.Test
         [DataContract]
         public class AppSettings
         {
-            [DataMember(Name = "ApiKey")]
+            [JsonProperty("ApiKey")]
             public string ApiKey { get; set; }
 
-            [DataMember(Name = "CryptoKey")]
+            [JsonProperty("CryptoKey")]
             public string CryptoKey { get; set; }
 
-            [DataMember(Name = "ClientId")]
+            [JsonProperty("ClientId")]
             public string ClientId { get; set; }
 
-            [DataMember(Name = "SearchEngineId")]
+            [JsonProperty("SearchEngineId")]
             public string SearchEngineId { get; set; }
 
-            [DataMember(Name = "SearchEngineUrl")]
+            [JsonProperty("SearchEngineUrl")]
             public string SearchEngineUrl { get; set; }
         }
     }

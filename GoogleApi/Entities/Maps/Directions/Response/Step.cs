@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -14,50 +15,50 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// html_instructions contains formatted instructions for this step, presented as an HTML text string.
         /// </summary>
-        [DataMember(Name = "html_instructions")]
+        [JsonProperty("html_instructions")]
         public virtual string HtmlInstructions { get; set; }
 
         /// <summary>
         /// distance contains the distance covered by this step until the next step. (See the discussion of this field in Directions Legs above.) This field may be undefined if the distance is unknown.
         /// </summary>
-        [DataMember(Name = "distance")]
+        [JsonProperty("distance")]
         public virtual Distance Distance { get; set; }
 
         /// <summary>
         /// duration contains the typical time required to perform the step, until the next step (See the description in Directions Legs above.) This field may be undefined if the duration is unknown.
         /// </summary>
-        [DataMember(Name = "duration")]
+        [JsonProperty("duration")]
         public virtual Duration Duration { get; set; }
 
         /// <summary>
         /// start_location contains the location of the starting point of this step, as a single set of lat and lng fields.
         /// </summary>
-        [DataMember(Name = "start_location")]
+        [JsonProperty("start_location")]
         public virtual Location StartLocation { get; set; }
 
         /// <summary>
         /// end_location contains the location of the starting point of this step, as a single set of lat and lng fields.
         /// </summary>
-        [DataMember(Name = "end_location")]
+        [JsonProperty("end_location")]
         public virtual Location EndLocation { get; set; }
 
         /// <summary>
         /// Contains an object holding an array of encoded points that represent an approximate (smoothed) path of the resulting directions.
         /// </summary>
-        [DataMember(Name = "polyline")]
+        [JsonProperty("polyline")]
         public virtual OverviewPolyline PolyLine { get; set; }
 
         /// <summary>
         /// More information about the step. Only avaliable when TravelMode = Transit
         /// </summary>
-        [DataMember(Name = "transit_details")]
+        [JsonProperty("transit_details")]
         public virtual TransitDetails TransitDetails { get; set; }
 
         /// <summary>
         /// steps contains detailed directions for walking or driving steps in transit directions. Substeps are only available when travel_mode is set to "transit". 
         /// The inner steps array is of the same type as steps.
         /// </summary>
-        [DataMember(Name = "steps")]
+        [JsonProperty("steps")]
         public virtual IEnumerable<Step> Steps { get; set; }
     }
 }

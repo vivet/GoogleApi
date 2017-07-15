@@ -18,7 +18,7 @@ namespace GoogleApi.Test.Places.Delete
             {
                 Key = this.ApiKey,
                 Name = "Home",
-                Types = new[] { PlaceLocationType.StreetAddress },
+                Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264)
             });
 
@@ -41,7 +41,7 @@ namespace GoogleApi.Test.Places.Delete
             {
                 Key = this.ApiKey,
                 Name = "Home",
-                Types = new[] { PlaceLocationType.StreetAddress },
+                Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264)
             });
 

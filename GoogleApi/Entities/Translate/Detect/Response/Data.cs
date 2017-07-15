@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Detect.Response
 {
@@ -15,7 +16,7 @@ namespace GoogleApi.Entities.Translate.Detect.Response
         /// Language detection results for each input text piece. For backward compatibility, this list must be expressed as an array of arrays, 
         /// which requires using ListValue in proto3.
         /// </summary>
-        [DataMember(Name = "detections")]
+        [JsonProperty("detections")]
         public virtual IEnumerable<Detection[]> Detections { get; set; }
     }
 }

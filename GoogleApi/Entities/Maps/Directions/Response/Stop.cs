@@ -1,5 +1,6 @@
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -12,13 +13,13 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// The name of the transit station/stop. eg. "Union Square".
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public virtual string Name { get; set; }
 
         /// <summary>
         /// The location of the transit station/stop, represented as lattitude and longitude.
         /// </summary>
-        [DataMember(Name = "location")]
+        [JsonProperty("location")]
         public virtual Location Location { get; set; }
     }
 }

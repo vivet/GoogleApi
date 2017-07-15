@@ -21,7 +21,7 @@ namespace GoogleApi.Test.Places.Add
             {
                 Key = this.ApiKey,
                 Name = Guid.NewGuid().ToString("N"),
-                Types = new[] { PlaceLocationType.StreetAddress },
+                Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
                 PhoneNumber = "+45 00000000",
@@ -55,7 +55,7 @@ namespace GoogleApi.Test.Places.Add
 
             Assert.AreEqual(Scope.App, response2.Result.Scope);
             Assert.AreEqual(response2.Result.PlaceId, response.PlaceId);
-            Assert.AreEqual(PlaceLocationType.StreetAddress, response2.Result.Types.FirstOrDefault());
+            Assert.AreEqual(PlaceLocationType.Street_Address, response2.Result.Types.FirstOrDefault());
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace GoogleApi.Test.Places.Add
             {
                 Key = this.ApiKey,
                 Name = "Home",
-                Types = new[] { PlaceLocationType.StreetAddress },
+                Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
                 PhoneNumber = "+45 00000000",
@@ -88,7 +88,7 @@ namespace GoogleApi.Test.Places.Add
             {
                 Key = this.ApiKey,
                 Name = "Home",
-                Types = new[] { PlaceLocationType.StreetAddress },
+                Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
                 PhoneNumber = "+45 00000000",
@@ -119,7 +119,7 @@ namespace GoogleApi.Test.Places.Add
             {
                 Key = this.ApiKey,
                 Name = "Home",
-                Types = new[] { PlaceLocationType.StreetAddress },
+                Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
                 PhoneNumber = "+45 00000000",
@@ -144,7 +144,7 @@ namespace GoogleApi.Test.Places.Add
             {
                 Key = this.ApiKey,
                 Name = "Home",
-                Types = new[] { PlaceLocationType.StreetAddress },
+                Types = new[] { PlaceLocationType.Street_Address },
                 Location = new Location(55.664425, 12.502264),
                 Accuracy = 50,
                 PhoneNumber = "+45 00000000",
@@ -166,7 +166,7 @@ namespace GoogleApi.Test.Places.Add
             };
 
             var response2 = GooglePlaces.Details.Query(request2);
-            Console.WriteLine(response2.RawJson);
+
             Assert.IsNotNull(response2);
             Assert.AreEqual(Status.Ok, response2.Status);
             Assert.AreEqual(response2.Result.Name, request.Name);
@@ -178,7 +178,7 @@ namespace GoogleApi.Test.Places.Add
 
             Assert.AreEqual(Scope.App, response2.Result.Scope);
             Assert.AreEqual(response2.Result.PlaceId, response.PlaceId);
-            Assert.AreEqual(PlaceLocationType.StreetAddress, response2.Result.Types.FirstOrDefault());
+            Assert.AreEqual(PlaceLocationType.Street_Address, response2.Result.Types.FirstOrDefault());
         }
 
         [Test]
@@ -189,7 +189,7 @@ namespace GoogleApi.Test.Places.Add
                 Key = null,
                 Name = "test",
                 Location = new Location(0, 0),
-                Types = new[] { PlaceLocationType.StreetAddress }
+                Types = new[] { PlaceLocationType.Street_Address }
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
@@ -204,7 +204,7 @@ namespace GoogleApi.Test.Places.Add
                 Key = string.Empty,
                 Name = "test",
                 Location = new Location(0, 0),
-                Types = new[] { PlaceLocationType.StreetAddress }
+                Types = new[] { PlaceLocationType.Street_Address }
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));

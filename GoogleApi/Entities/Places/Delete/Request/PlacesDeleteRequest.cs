@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Interfaces;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Delete.Request
 {
@@ -20,7 +21,7 @@ namespace GoogleApi.Entities.Places.Delete.Request
         /// To retrieve information about the place, pass this identifier in the placeid field of a Place request. 
         /// For more information about place IDs, see the place ID overview.
         /// </summary>
-        [DataMember(Name = "place_id")]
+        [JsonProperty("place_id")]
         public virtual string PlaceId { get; set; }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
@@ -11,19 +12,19 @@ namespace GoogleApi.Entities.Search.Common.Response
         /// <summary>
         /// URL of the image for this promotion link.
         /// </summary>
-        [DataMember(Name = "source")]
+        [JsonProperty("source")]
         public virtual string Source { get; set; }
 
         /// <summary>
         /// Image width in pixels.
         /// </summary>
-        [DataMember(Name = "width")]
+        [JsonProperty("width")]
         public virtual int Width { get; set; }
 
         /// <summary>
         /// Image height in pixels.
         /// </summary>
-        [DataMember(Name = "height")]
+        [JsonProperty("height")]
         public virtual int Height { get; set; }
     }
 }

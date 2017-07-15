@@ -14,13 +14,13 @@ namespace GoogleApi.Entities.Translate.Detect.Response
         /// <summary>
         /// Indicates whether the language detection result is reliable.
         /// </summary>
-        [DataMember(Name = "isReliable")]
+        [JsonProperty("isReliable")]
         public virtual bool IsReliable { get; set; }
 
         /// <summary>
         /// The confidence of the detection result for this language.
         /// </summary>
-        [DataMember(Name = "confidence")]
+        [JsonProperty("confidence")]
         public virtual double Confidence { get; set; }
 
         /// <summary>
