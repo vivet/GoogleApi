@@ -1,7 +1,7 @@
 using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
-using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Roads.SpeedLimits

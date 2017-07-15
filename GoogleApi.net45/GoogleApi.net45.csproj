@@ -266,6 +266,9 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\BaseRoadsResponse.cs">
       <Link>Entities\Maps\Roads\BaseRoadsResponse.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Enums\Units.cs">
+      <Link>Entities\Maps\Roads\Common\Enums\Units.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Location.cs">
       <Link>Entities\Maps\Roads\Common\Location.cs</Link>
     </Compile>

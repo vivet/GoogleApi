@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
+using GoogleApi.Entities.Maps.Roads.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
 {

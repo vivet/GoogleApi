@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums
+namespace GoogleApi.Entities.Maps.Roads.Common.Enums
 {
     /// <summary>
     /// Speed Units.

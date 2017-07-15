@@ -16,8 +16,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.CryptoKey,
-                ClientId = this.ClientId
+                Key = this.ApiKey
             };
 
             var result = GoogleMaps.Geolocation.Query(request);
@@ -31,8 +30,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.CryptoKey,
-                ClientId = this.ClientId
+                Key = this.ApiKey
             };
             var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
 

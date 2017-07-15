@@ -1,4 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
+﻿using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

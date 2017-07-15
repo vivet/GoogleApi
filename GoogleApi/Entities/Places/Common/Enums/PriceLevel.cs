@@ -35,6 +35,6 @@ namespace GoogleApi.Entities.Places.Common.Enums
         /// Very Expensive.
         /// </summary>
         [EnumMember(Value = "4")]
-        VeryExpensive = 4,
+        VeryExpensive = 4
     }
 }

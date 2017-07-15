@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request
 {
@@ -37,7 +38,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// <summary>
         /// The mobile radio type. Supported values are lte, gsm, cdma, and wcdma. While this field is optional, it should be included if a value is available, for more accurate results.
         /// </summary>
-        [JsonProperty("radioType")]
+        [JsonProperty("radioType", ItemConverterType = typeof(StringEnumConverter))]
         public virtual RadioType? RadioType { get; set; }
 
         /// <summary>
