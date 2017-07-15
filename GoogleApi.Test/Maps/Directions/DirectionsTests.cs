@@ -30,7 +30,7 @@ namespace GoogleApi.Test.Maps.Directions
             Assert.AreEqual(10, overviewPath.Points.Count(), 2);
             Assert.AreEqual(2, polyline.Points.Count());
             Assert.AreEqual(700.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Distance.Value), 100.00);
-            Assert.AreEqual(90.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Duration.Value.Seconds), 10.00);
+            Assert.AreEqual(209.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Duration.Value), 30.00);
         }
 
         [Test]

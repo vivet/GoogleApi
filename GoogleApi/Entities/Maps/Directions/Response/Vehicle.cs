@@ -1,7 +1,7 @@
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -26,13 +26,8 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// Contains the type of vehicle that runs on this line.
         /// </summary>
-        public virtual VehicleType VehicleType { get; set; }
-
         [JsonProperty("type")]
-        internal string VehicleTypeStr
-        {
-            get => this.VehicleType.ToEnumString();
-            set => this.VehicleType = value.ToEnum<VehicleType>();
-        }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public virtual VehicleType VehicleType { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             Assert.IsNotNull(element.Distance.Text);
             Assert.AreEqual(706.00, element.Distance.Value, 100.00);
             Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(208.00, element.Duration.Value.TotalSeconds, 30.00);
+            Assert.AreEqual(208.00, element.Duration.Value, 30.00);
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
-                Origins = new[] { new Location(0, 0), },
+                Origins = new[] { new Location(0, 0) },
                 Destinations = new[] { new Location("test") }
             };
             var cancellationTokenSource = new CancellationTokenSource();

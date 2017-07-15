@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace GoogleApi.Entities.Common.Extensions
@@ -12,22 +11,6 @@ namespace GoogleApi.Entities.Common.Extensions
     /// </summary>
     public static class EnumExtension
     {
-        /// <summary>
-        /// Convert enum to string.
-        /// </summary>
-        /// <typeparam name="T">The <see cref="Enum"/> type.</typeparam>
-        /// <param name="enum">The <see cref="Enum"/> to convert of <typeparamref name="T"/>.</param>
-        /// <returns>A <see cref="string"/> representation of the enum value.</returns>
-        public static string ToEnumString<T>(this T @enum)
-            where T : struct
-        {
-            var enumType = typeof(T);
-            var name = Enum.GetName(enumType, @enum); 
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetRuntimeField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-
-            return enumMemberAttribute.Value;
-        }
-
         /// <summary>
         /// Converts a <see cref="Enum"/> value to string. 
         /// If enum is a <see cref="FlagsAttribute"/>, values are separated by the passed <paramref name="delimeter"/>.

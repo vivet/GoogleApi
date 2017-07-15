@@ -113,9 +113,6 @@
     <Compile Include="..\GoogleApi\Entities\Common\Extensions\EnumExtension.cs">
       <Link>Entities\Common\Extensions\EnumExtension.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Extensions\StringExtension.cs">
-      <Link>Entities\Common\Extensions\StringExtension.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
     </Compile>

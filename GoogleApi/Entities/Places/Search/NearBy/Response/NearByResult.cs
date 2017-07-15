@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Response
 {
@@ -56,14 +55,8 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// Types contains an array of feature types describing the given result. See the list of supported types for more information. 
         /// XML responses include multiple type elements if more than one type is assigned to the result.
         /// </summary>
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
-
-        [JsonProperty("types")]
-        internal IEnumerable<string> TypesStr
-        {
-            get { return Types?.Select(x => x.ToEnumString()) ?? new string[0]; }
-            set { this.Types = value.Select(x => x.ToEnum<PlaceLocationType>()); }
-        }
 
         /// <summary>
         /// Vicinity contains a feature name of a nearby location. Often this feature refers to a street or neighborhood within the given results. The vicinity property is only returned for a Nearby Search.
@@ -76,25 +69,13 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// Note: The scope field is included only in Nearby Search results and Place Details results. You can only retrieve app-scoped places via the Nearby Search and the Place Details requests. 
         /// If the scope field is not present in a response, it is safe to assume the scope is GOOGLE
         /// </summary>
+        [JsonProperty("scope", ItemConverterType = typeof(StringEnumConverter))]
         public virtual Scope Scope { get; set; }
-
-        [JsonProperty("scope")]
-        internal string ScopeStr
-        {
-            get => this.Scope.ToEnumString();
-            set => this.Scope = value.ToEnum<Scope>();
-        }
 
         /// <summary>
         /// price_level — The price level of the place, on a scale of 0 to 4. The exact amount indicated by a specific value will vary from region to region. Price levels are interpreted as follows:
         /// </summary>
+        [JsonProperty("price_level", ItemConverterType = typeof(StringEnumConverter))]
         public virtual PriceLevel PriceLevel { get; set; }
-
-        [JsonProperty("price_level")]
-        internal string PriceLevelStr
-        {
-            get => this.PriceLevel.ToEnumString();
-            set => this.PriceLevel = value.ToEnum<PriceLevel>();
-        }
     }
 }
