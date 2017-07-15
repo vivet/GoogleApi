@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Common
     /// The location of the entered term in the prediction result text, 
     /// so that the term can be highlighted if desired.
     /// </summary>
-    [DataContract(Name = "matched_ubstring")]
     public class MatchedSubstring
     {
         /// <summary>

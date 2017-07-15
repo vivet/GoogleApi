@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -9,7 +8,6 @@ namespace GoogleApi.Entities.Common
     /// <summary>
     /// Address Component.
     /// </summary>
-    [DataContract]
     public class AddressComponent
     {
         /// <summary>

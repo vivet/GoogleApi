@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common
 {
     /// <summary>
     /// Term.
     /// </summary>
-    [DataContract]
     public class Term
     {
         /// <summary>

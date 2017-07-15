@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Details.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// <summary>
     /// Opening Hours.
     /// </summary>
-    [DataContract(Name = "openingHours")]
     public class OpeningHours
     {
         /// <summary>

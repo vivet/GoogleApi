@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Maps.Roads.Common
     /// <summary>
     /// Location (Roads only). 
     /// </summary>
-    [DataContract]
     public class Location
     {
         /// <summary>

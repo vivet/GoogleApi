@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -36,7 +35,6 @@ namespace GoogleApi.Test
             }
         }
 
-        [DataContract]
         public class AppSettings
         {
             [JsonProperty("ApiKey")]

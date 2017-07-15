@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using Newtonsoft.Json;
 
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Contains information about the stop/station for this part of the trip
     /// </summary>
-    [DataContract(Name = "stop")]
     public class Stop
     {
         /// <summary>

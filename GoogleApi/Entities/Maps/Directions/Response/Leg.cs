@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
@@ -9,7 +8,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Each element in the legs array specifies a single leg of the journey from the origin to the destination in the calculated route. For routes that contain no waypoints, the route will consist of a single "leg," but for routes that define one or more waypoints, the route will consist of one or more legs, corresponding to the specific legs of the journey.
     /// </summary>
-    [DataContract(Name = "leg")]
     public class Leg
     {
         /// <summary>

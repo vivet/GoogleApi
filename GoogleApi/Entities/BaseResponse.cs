@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
@@ -10,7 +9,6 @@ namespace GoogleApi.Entities
     /// MapsBase Response.
     /// Base abstract class for Google responses.
     /// </summary>
-    [DataContract]
     public abstract class BaseResponse : IResponse
     {
         /// <summary>

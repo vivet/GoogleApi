@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
     /// <summary>
     /// Error.
     /// </summary>
-    [DataContract]
     public class Error : BaseResponse
     {
         /// <summary>

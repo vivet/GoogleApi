@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
     /// <summary>
     /// Body line.
     /// </summary>
-    [DataContract]
     public class BodyLine
     {
         /// <summary>

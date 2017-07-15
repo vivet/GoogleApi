@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Common
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Common
     /// <summary>
     /// Location.
     /// </summary>
-    [DataContract(Name = "location")]
     public class Location
     {
         /// <summary>

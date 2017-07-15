@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Contains information about bounding box of the direction requested.
     /// </summary>
-    [DataContract(Name = "bounds")]
     public class Bounds
     {
         /// <summary>

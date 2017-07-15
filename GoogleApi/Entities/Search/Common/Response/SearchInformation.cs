@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
     /// <summary>
     /// Encapsulates all information about the search.
     /// </summary>
-    [DataContract]
     public class SearchInformation
     {
         /// <summary>

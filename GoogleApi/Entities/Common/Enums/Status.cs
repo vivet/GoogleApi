@@ -5,7 +5,6 @@ namespace GoogleApi.Entities.Common.Enums
     /// <summary>
     /// Response status.
     /// </summary>
-    [DataContract]
     public enum Status
     {
         /// <summary>

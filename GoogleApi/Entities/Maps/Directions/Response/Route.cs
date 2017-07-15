@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
 
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Route Request.
     /// </summary>
-    [DataContract(Name = "route")]
     public class Route
     {
         /// <summary>

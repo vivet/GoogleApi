@@ -5,7 +5,6 @@ namespace GoogleApi.Entities.Maps.Geocode.Response.Enums
     /// <summary>
     /// Location Type.
     /// </summary>
-    [DataContract]
     public enum GeometryLocationType
     {
         /// <summary>

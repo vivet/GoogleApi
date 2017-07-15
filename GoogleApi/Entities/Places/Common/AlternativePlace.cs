@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
 
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Common
     /// <summary>
     /// Alternative Place.
     /// </summary>
-    [DataContract]
     public class AlternativePlace
     {
         /// <summary>

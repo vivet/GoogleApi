@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Request;
 using GoogleApi.Entities.Search.Common.Response.Enums;
@@ -12,7 +11,6 @@ namespace GoogleApi.Entities.Search.Common.Response
     /// <summary>
     /// Query Information.
     /// </summary>
-    [DataContract(Name = "request")]
     public class QueryInformation
     {
         /// <summary>

@@ -5,7 +5,6 @@ namespace GoogleApi.Entities.Places.Common.Enums
     /// <summary>
     /// Specifies the order in which results are listed for place searches.
     /// </summary>
-    [DataContract]
     public enum PriceLevel
     {
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -9,7 +8,6 @@ namespace GoogleApi.Entities.Places.Common
     /// <summary>
     /// Prediction.
     /// </summary>
-    [DataContract(Name = "prediction")]
     public class Prediction
     {
         /// <summary>

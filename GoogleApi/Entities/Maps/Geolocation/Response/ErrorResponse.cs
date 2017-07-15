@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
@@ -9,7 +8,6 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
     /// In the case of an error, a standard format error response body will be returned and the HTTP status code will be set to an error status.
     /// The response contains an object with a single error object with the following keys:
     /// </summary>
-    [DataContract]
     public class ErrorResponse : BaseResponse
     {
         /// <summary>

@@ -5,7 +5,6 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request.Enums
     /// <summary>
     /// Radio Type.
     /// </summary>
-    [DataContract]
     public enum RadioType
     {
         /// <summary>

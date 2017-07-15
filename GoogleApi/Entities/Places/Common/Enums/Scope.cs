@@ -5,7 +5,6 @@ namespace GoogleApi.Entities.Places.Common.Enums
     /// <summary>
     /// Scope.
     /// </summary>
-    [DataContract]
     public enum Scope
     {
         /// <summary>

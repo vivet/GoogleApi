@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
 
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Places.Delete.Request
     /// <summary>
     /// Places delete Request.
     /// </summary>
-    [DataContract]
     public class PlacesDeleteRequest : BasePlacesRequest, IRequestJson
     {
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
     /// <summary>
     /// Geocoding Response.
     /// </summary>
-    [DataContract]
     public class GeolocationResponse : BaseResponse
     {
         /// <summary>

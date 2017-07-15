@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Details.Response
 {
     /// <summary>
     /// Aspect Rating.
     /// </summary>
-    [DataContract(Name = "aspectRating")]
     public class AspectRating
     {
         /// <summary>

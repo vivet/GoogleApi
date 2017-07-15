@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Search.Common.Response
     /// <summary>
     /// PageMap information.
     /// </summary>
-    [DataContract]
     public class PageMap
     {
         /// <summary>

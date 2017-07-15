@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Directions Response.
     /// </summary>
-    [DataContract(Name = "DirectionsResponse")]
     public class DirectionsResponse : BaseResponse
     {
         /// <summary>

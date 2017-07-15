@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
     /// <summary>
     /// SpeedLimits Response.
     /// </summary>
-    [DataContract]
     public class SpeedLimitsResponse : BaseRoadsResponse
     {
         /// <summary>

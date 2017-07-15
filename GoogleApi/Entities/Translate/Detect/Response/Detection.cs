@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Translate.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Translate.Detect.Response
     /// <summary>
     /// Language detection result.
     /// </summary>
-    [DataContract(Name = "detection")]
     public class Detection
     {
         /// <summary>

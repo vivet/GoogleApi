@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Places.Common.Enums;
+﻿using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Add.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Add.Response
     /// <summary>
     /// Places add response.
     /// </summary>
-    [DataContract]
     public class PlacesAddResponse : BasePlacesResponse
     {
         /// <summary>

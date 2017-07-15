@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Search.Common.Response
     /// A facet object (refinements) you can use for refining a search.
     /// https://developers.google.com/custom-search/docs/refinements#create
     /// </summary>
-    [DataContract]
     public class Facet
     {
         /// <summary>

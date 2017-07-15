@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
     /// <summary>
     /// The OpenSearch URL element that defines the template for the API.
     /// </summary>
-    [DataContract]
     public class Url
     {
         /// <summary>

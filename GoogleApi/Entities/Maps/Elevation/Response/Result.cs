@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Elevation.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Elevation.Response
     /// <summary>
     /// Result.
     /// </summary>
-    [DataContract(Name = "result")]
     public class Result
     {
         /// <summary>

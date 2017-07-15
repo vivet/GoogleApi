@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
@@ -10,7 +9,6 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
     /// <summary>
     /// When the geocoder returns results, it places them within a (JSON) results array. Even if the geocoder returns no results (such as if the address doesn't exist) it still returns an empty results array. (XML responses consist of zero or more result elements.)
     /// </summary>
-    [DataContract(Name = "result")]
     public class Result
     {
         /// <summary>

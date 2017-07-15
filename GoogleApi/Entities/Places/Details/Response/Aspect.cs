@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Details.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// <summary>
     /// Aspect.
     /// </summary>
-    [DataContract(Name = "aspect")]
     public class Aspect
     {
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Common
     /// <summary>
     /// Geometry.
     /// </summary>
-    [DataContract]
     public class Geometry
     {
         /// <summary>

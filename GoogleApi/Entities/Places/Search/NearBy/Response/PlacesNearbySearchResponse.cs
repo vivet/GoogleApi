@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Places.Search.Common;
 using Newtonsoft.Json;
 
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
     /// <summary>
     /// Places NearbySearch Response.
     /// </summary>
-    [DataContract]
     public class PlacesNearbySearchResponse : BasePlacesSearchResponse
     {
         /// <summary>

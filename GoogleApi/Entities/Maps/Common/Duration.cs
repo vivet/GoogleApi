@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Common
 {
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Common
     /// Duration indicates the total duration of this leg
     /// These fields may be absent if the duration is unknown.
     /// </summary>
-    [DataContract(Name = "duration")]
     public class Duration
     {
         /// <summary>

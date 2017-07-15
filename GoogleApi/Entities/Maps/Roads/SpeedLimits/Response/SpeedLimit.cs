@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
+﻿using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -9,7 +8,6 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
     /// Speed Limit.
     /// Each element consists of the following fields.
     /// </summary>
-    [DataContract(Name = "speedLimit")]
     public class SpeedLimit
     {
         /// <summary>

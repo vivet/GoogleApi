@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
 {
     /// <summary>
     /// Translate Response.
     /// </summary>
-    [DataContract]
     public class TranslateResponse : BaseResponse
     {
         /// <summary>

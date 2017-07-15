@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Response
 {
     /// <summary>
     /// TimeZone Response.
     /// </summary>
-    [DataContract]
     public class TimeZoneResponse : BaseResponse
     {
         /// <summary>

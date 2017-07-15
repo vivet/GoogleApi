@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Common
 {
     /// <summary>
     /// Opening Hours.
     /// </summary>
-    [DataContract]
     public class OpeningHours
     {
         /// <summary>

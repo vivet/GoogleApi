@@ -5,7 +5,6 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums
     /// <summary>
     /// Speed Units.
     /// </summary>
-    [DataContract(Name = "units")]
     public enum Units
     {
         /// <summary>

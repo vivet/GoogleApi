@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
@@ -9,7 +8,6 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
     /// <summary>
     /// Element.
     /// /// </summary>
-    [DataContract(Name = "element")]
     public class Element
     {
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common.Extensions;
 using Newtonsoft.Json;
 
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Places.Details.Response
     /// <summary>
     /// Review.
     /// </summary>
-    [DataContract(Name = "review")]
     public class Review
     {
         /// <summary>

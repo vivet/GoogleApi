@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Places.Common;
+﻿using GoogleApi.Entities.Places.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Common
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Search.Common
     /// <summary>
     /// BasePlace Result.
     /// </summary>
-    [DataContract]
     public abstract class BaseResult
     {
         /// <summary>

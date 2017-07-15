@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.Common
 {
     /// <summary>
     /// Snapped point.
     /// </summary>
-    [DataContract(Name = "snappedPoint")]
     public class SnappedPoint
     {
         /// <summary>

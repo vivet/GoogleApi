@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Common
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Places.Search.Common
     /// PlacesBaseSearch Request.
     /// Base abstract class for places search.
     /// </summary>
-    [DataContract]
     public abstract class BasePlacesSearchResponse : BasePlacesResponse
     {
         /// <summary>

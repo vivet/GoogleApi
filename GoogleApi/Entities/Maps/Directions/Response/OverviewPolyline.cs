@@ -9,7 +9,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Contains the encoded and decoded data returned in the overview_polyline field.
     /// </summary>
-    [DataContract]
     public class OverviewPolyline
     {
         private Lazy<IEnumerable<Location>> pointsLazy;

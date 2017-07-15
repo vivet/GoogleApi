@@ -5,7 +5,6 @@ namespace GoogleApi.Entities.Common.Enums
     /// <summary>
     /// Location types.
     /// </summary>
-    [DataContract]
     public enum LocationType
     {
         /// <summary>

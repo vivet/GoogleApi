@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Detect.Response
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Translate.Detect.Response
     /// The list of detection responses.
     /// This list will contain a language detection response for each query (q) sent in the language detection request.
     /// </summary>
-    [DataContract(Name = "Data")]
     public class Data
     {
         /// <summary>

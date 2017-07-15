@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Details.Response
 {
     /// <summary>
     /// DayTime.
     /// </summary>
-    [DataContract(Name = "dayTime")]
     public class DayTime
     {
         /// <summary>

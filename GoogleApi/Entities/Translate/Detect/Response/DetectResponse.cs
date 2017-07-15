@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Detect.Response
 {
     /// <summary>
     /// Detect Response.
     /// </summary>
-    [DataContract]
     public class DetectResponse : BaseResponse
     {
         /// <summary>

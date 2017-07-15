@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Common
 {
     /// <summary>
     /// Distance.
     /// </summary>
-    [DataContract(Name = "distance")]
     public class Distance
     {
         /// <summary>

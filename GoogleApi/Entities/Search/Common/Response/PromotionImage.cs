@@ -1,12 +1,10 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
 {
     /// <summary>
     /// Image associated with this promotion, if there is one.
     /// </summary>
-    [DataContract]
     public class PromotionImage
     {
         /// <summary>

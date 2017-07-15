@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     /// MacAddress is required.
     /// All other fields are optional.
     /// </summary>
-    [DataContract(Name = "wifiAccessPoint")]
     public class WifiAccessPoint
     {
         /// <summary>

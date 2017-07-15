@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// Information about the transit agency.
     /// Note: You must display the names and URLs of the transit agencies servicing the trip results.
     /// </summary>
-    [DataContract(Name = "TransitAgency")]
     public class TransitAgency
     {
         /// <summary>

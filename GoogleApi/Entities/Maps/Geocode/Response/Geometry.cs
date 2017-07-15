@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Geocode.Response.Enums;
 using Newtonsoft.Json;
 
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
     /// <summary>
     /// Geometry.
     /// </summary>
-    [DataContract(Name = "geometry")]
     public class Geometry
     {
         /// <summary>

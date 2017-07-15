@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search.Common.Response
@@ -6,7 +5,6 @@ namespace GoogleApi.Entities.Search.Common.Response
     /// <summary>
     /// Label.
     /// </summary>
-    [DataContract]
     public class Label
     {
         /// <summary>

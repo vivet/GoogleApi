@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
     /// <summary>
     /// DistanceMatrix Response.
     /// </summary>
-    [DataContract(Name = "DistanceMatrixResponse")]
     public class DistanceMatrixResponse : BaseResponse
     {
         /// <summary>

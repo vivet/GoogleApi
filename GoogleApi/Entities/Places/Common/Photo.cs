@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common
@@ -7,7 +6,6 @@ namespace GoogleApi.Entities.Places.Common
     /// <summary>
     /// Photo.
     /// </summary>
-    [DataContract]
     public class Photo
     {
         /// <summary>

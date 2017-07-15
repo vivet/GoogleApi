@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common;
@@ -11,7 +10,6 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
     /// <summary>
     /// NearBy Result.
     /// </summary>
-    [DataContract]
     public class NearByResult : BaseResult
     {
         /// <summary>

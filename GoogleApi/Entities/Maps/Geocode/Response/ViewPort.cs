@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
@@ -9,7 +8,6 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
     /// the southwest and northeast corner of the viewport bounding box. 
     /// Generally the viewport is used to frame a result when displaying it to a user.
     /// </summary>
-    [DataContract(Name = "viewPort")]
     public class ViewPort
     {
         /// <summary>

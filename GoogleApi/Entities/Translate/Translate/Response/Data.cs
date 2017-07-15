@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Translate.Translate.Response
     /// The list of language translation responses.
     /// This list contains a language translation response for each query (q) sent in the language translation request.
     /// </summary>
-    [DataContract(Name = "Data")]
     public class Data
     {
         /// <summary>

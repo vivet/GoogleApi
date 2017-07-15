@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -8,7 +7,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// <summary>
     /// Vehicle
     /// </summary>
-    [DataContract(Name = "vehicle")]
     public class Vehicle
     {
         /// <summary>
