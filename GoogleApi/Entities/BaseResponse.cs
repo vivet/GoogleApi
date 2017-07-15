@@ -26,15 +26,14 @@ namespace GoogleApi.Entities
         /// </summary>
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Status Status { get; set; }
+        public virtual Status? Status { get; set; }
 
         /// <summary>
-        /// When the status code is other than 'Ok', there may be an additional error_message field within the Directions response object. 
+        /// When the status code is other than 'Ok', there may be an additional error_message field within the response object. 
         /// This field contains more detailed information about the reasons behind the given status code.
         /// Note: This field is not guaranteed to be always present, and its content is subject to change.
         /// </summary>
         [JsonProperty("error_message")]
-        [JsonConverter(typeof(StringEnumConverter))]
         public virtual string ErrorMessage { get; set; }
     }
 }

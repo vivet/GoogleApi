@@ -23,7 +23,7 @@ namespace GoogleApi
     /// <typeparam name="TResponse"></typeparam>
     public sealed class HttpEngine<TRequest, TResponse>
         where TRequest : BaseRequest, new()
-        where TResponse : IResponse
+        where TResponse : IResponse, new()
     {
         internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
         internal static readonly HttpEngine<TRequest, TResponse> instance = new HttpEngine<TRequest, TResponse>();
@@ -181,14 +181,13 @@ namespace GoogleApi
 
             var uri = this.GetUri(request);
             var httpClient = new HttpClient { Timeout = timeout };
-            var jsonString = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             var task = request is IRequestQueryString
                 ? httpClient.GetAsync(uri, cancellationToken)
-                : httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
+                : httpClient.PostAsync(uri, new StringContent(JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }), Encoding.UTF8), cancellationToken);
 
             task.ContinueWith(x =>
             {
@@ -198,7 +197,10 @@ namespace GoogleApi
                 }
                 else if (x.IsFaulted)
                 {
-                    var exception = x.Exception == null ? new NullReferenceException("task.Exception") : task.Exception?.InnerException ?? task.Exception ?? new Exception("error");
+                    var exception = x.Exception == null 
+                        ? new NullReferenceException("task.Exception") 
+                        : task.Exception?.InnerException ?? task.Exception ?? new Exception("error");
+
                     taskCompletionSource.SetException(exception);
                 }
                 else
@@ -216,7 +218,10 @@ namespace GoogleApi
                         TResponse response;
                         if (typeof(TResponse) == typeof(PlacesPhotosResponse))
                         {
-                            response = (TResponse)(IResponse)new PlacesPhotosResponse { Photo = stream };
+                            response = (TResponse)(IResponse)new PlacesPhotosResponse
+                            {
+                                Photo = stream
+                            };
                         }
                         else
                         {

@@ -69,6 +69,7 @@ namespace GoogleApi.Test
         {
             public virtual string RawJson { get; set; }
             public virtual string RawQueryString { get; set; }
+            public virtual string ErrorMessage { get; set; }
         }
 
         public class TestRequest : BaseRequest

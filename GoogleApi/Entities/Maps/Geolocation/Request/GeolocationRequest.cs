@@ -36,17 +36,22 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         public virtual string HomeMobileNetworkCode { get; set; }
 
         /// <summary>
-        /// The mobile radio type. Supported values are lte, gsm, cdma, and wcdma. While this field is optional, it should be included if a value is available, for more accurate results.
+        /// The mobile radio type. 
+        /// Supported values are lte, gsm, cdma, and wcdma. While this field is optional, it should be included if a value is available, 
+        /// for more accurate results.
         /// </summary>
-        [JsonProperty("radioType", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("radioType")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual RadioType? RadioType { get; set; }
 
         /// <summary>
         /// Specifies whether to fall back to IP geolocation if wifi and cell tower signals are not available. 
-        /// Note that the IP address in the request header may not be the IP of the device. Defaults to true. Set considerIp to false to disable fall back.
+        /// Note that the IP address in the request header may not be the IP of the device. 
+        /// Defaults to true. 
+        /// Set considerIp to false to disable fall back.
         /// </summary>
         [JsonProperty("considerIp")]
-        public virtual bool ConsiderIp { get; set; }
+        public virtual bool ConsiderIp { get; set; } = true;
 
         /// <summary>
         /// An array of cell tower objects. See <see cref="CellTower"/>.
@@ -72,8 +77,6 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
                     throw new ArgumentException("Key is required");
 
                 var parameters = base.QueryStringParameters;
-
-                // TODO: Valudate JSon Body.
 
                 return parameters;
             }

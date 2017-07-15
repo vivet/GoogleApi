@@ -11,11 +11,11 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 * Walk-through of all endpoints aligned with Google Api Documentation.
 * Request validation improved for all endpoints (all cases covered).
 * Added missing endpoints. All Api's are now complete.
-* Search fully implemented and supported (possibly postponed to v3.1).
 * Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
 * Type and Namespace cleanup. Base / Common entities refactored.
 * Test Suite expanded greatly. 90% or overall average coverage.
 * and much more.
+* BE AWARE: The endpoints marked with '*' below, still have a fiew issues in v3.0
 
 
 ### Google Api Integrations:
@@ -25,11 +25,11 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Elevation
   * Geocoding
   * Reverse Geocoding
-  * Geolocation
+  * Geolocation *
   * Roads
-    * Nearest Roads
-    * Snap To Roads
-    * Speed Limits
+    * Nearest Roads *
+    * Snap To Roads *
+    * Speed Limits *
   * Time Zone
 
 ##### Google Places

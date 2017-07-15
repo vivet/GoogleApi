@@ -16,8 +16,15 @@
     <Version>3.0.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geocode geocoder geocoding search text nearby radar translate translation geolocation nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic</PackageTags>
-    <PackageReleaseNotes>
-    </PackageReleaseNotes>
+    <PackageReleaseNotes>- All Google endpoints updated (Maps, Places, Translate).
+- Downgraded to netstandard1.2 (more portable platforms support, i think).
+- Walk-through of all endpoints aligned with Google Api Documentation.
+- Request validation improved for all endpoints (all cases covered).
+- Added missing endpoints. All Api's are now complete.
+- Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
+- Type and Namespace cleanup. Base / Common entities refactored.
+- Test Suite expanded greatly. 90% or overall average coverage.
+- and much more.</PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/vivet/GoogleApi/blob/master/UNLICENSE.txt</PackageLicenseUrl>
     <Copyright>
     </Copyright>
@@ -25,8 +32,8 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <PackageIconUrl>https://github.com/vivet/GoogleApi/blob/master/icon.ico</PackageIconUrl>
-    <AssemblyVersion>2.5.2.0</AssemblyVersion>
-    <FileVersion>2.5.2.0</FileVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

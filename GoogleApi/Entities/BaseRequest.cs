@@ -1,5 +1,6 @@
 ﻿using System;
 using GoogleApi.Entities.Interfaces;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities
 {
@@ -16,21 +17,25 @@ namespace GoogleApi.Entities
         /// <summary>
         /// See <see cref="IRequest.Key"/>.
         /// </summary>
+        [JsonIgnore]
         public virtual string Key { get; set; }
 
         /// <summary>
         /// See <see cref="IRequest.ClientId"/>.
         /// </summary>
+        [JsonIgnore]
         public virtual string ClientId { get; set; }
 
         /// <summary>
         /// See <see cref="IRequest.IsSsl"/>.
         /// </summary>
+        [JsonIgnore]
         public virtual bool IsSsl { get; set; }
 
         /// <summary>
         /// See <see cref="IRequest.QueryStringParameters"/>.
         /// </summary>
+        [JsonIgnore]
         public virtual QueryStringParameters QueryStringParameters
         {
             get

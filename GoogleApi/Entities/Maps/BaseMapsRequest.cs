@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps
 {
@@ -11,11 +12,12 @@ namespace GoogleApi.Entities.Maps
         /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => "maps.google.com/maps/api/";
-     
+
         /// <summary>
         /// Always true. 
         /// Setter is not supported.
         /// </summary>
+        [JsonIgnore]
         public override bool IsSsl
         {
             get => true;

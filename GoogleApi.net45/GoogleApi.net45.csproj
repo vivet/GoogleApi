@@ -287,9 +287,6 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs">
       <Link>Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Request\Enums\Units.cs">
-      <Link>Entities\Maps\Roads\SpeedLimits\Request\Enums\Units.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs">
       <Link>Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs</Link>
     </Compile>
