@@ -16,20 +16,7 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <Version>3.0.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation  detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
-    <PackageReleaseNotes>- BE AWARE - BREAKING CHANGES
-- Changes shouldn't be time consuming to adjust to though.
-- Downgraded to netstandard1.1 (more portable platforms support, I think).
-- Added build package for Xamarin.Forms (Portable).
-- Missing endpoints added. All Api's are now complete.
-- Api's refactored, updated and aligned (Maps, Places, Roads and Translate) - 100% up-to-date.
-- Request and response documentation updated and improved.
-- Request validation improved and aligned for all Api's.
-- Error / Exception handling aligned for all Api's. 
-- New 'GoogleApiException', thrown when errors and http error code isn't isn't returned by Google.
-- Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
-- Type and Namespace cleanup. Base / Common entities refactored.
-- Test Suite expanded greatly. 90% or overall average coverage.
-- and much more.</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseUrl>https://github.com/vivet/GoogleApi/blob/master/UNLICENSE.txt</PackageLicenseUrl>
     <Copyright>
     </Copyright>
