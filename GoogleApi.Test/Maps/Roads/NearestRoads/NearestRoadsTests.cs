@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
@@ -28,6 +29,22 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
+
+            var snappedPoints = result.SnappedPoints?.ToArray();
+            Assert.IsNotNull(snappedPoints);
+            Assert.AreEqual(3, snappedPoints.Length);
+
+            Assert.AreEqual(0, snappedPoints[0].OriginalIndex);
+            Assert.AreEqual(60.170877918672588, snappedPoints[0].Location.Latitude, 0.0001);
+            Assert.AreEqual(24.942699821922421, snappedPoints[0].Location.Longitude, 0.0001);
+
+            Assert.AreEqual(1, snappedPoints[1].OriginalIndex);
+            Assert.AreEqual(60.170876898776406, snappedPoints[1].Location.Latitude, 0.0001);
+            Assert.AreEqual(24.942699912064771, snappedPoints[1].Location.Longitude, 0.0001);
+
+            Assert.AreEqual(2, snappedPoints[2].OriginalIndex);
+            Assert.AreEqual(60.170874902634374, snappedPoints[2].Location.Latitude, 0.0001);
+            Assert.AreEqual(24.942700088491474, snappedPoints[2].Location.Longitude, 0.0001);
         }
 
         [Test]
@@ -36,12 +53,33 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
             var request = new NearestRoadsRequest
             {
                 Key = this.ApiKey,
-                Points = new[] { new Location(0, 0) }
+                Points = new[]
+                {
+                    new Location(60.170880, 24.942795),
+                    new Location(60.170879, 24.942796),
+                    new Location(60.170877, 24.942796)
+                }
             };
             var result = GoogleMaps.NearestRoads.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
+
+            var snappedPoints = result.SnappedPoints?.ToArray();
+            Assert.IsNotNull(snappedPoints);
+            Assert.AreEqual(3, snappedPoints.Length);
+
+            Assert.AreEqual(0, snappedPoints[0].OriginalIndex);
+            Assert.AreEqual(60.170877918672588, snappedPoints[0].Location.Latitude, 0.0001);
+            Assert.AreEqual(24.942699821922421, snappedPoints[0].Location.Longitude, 0.0001);
+
+            Assert.AreEqual(1, snappedPoints[1].OriginalIndex);
+            Assert.AreEqual(60.170876898776406, snappedPoints[1].Location.Latitude, 0.0001);
+            Assert.AreEqual(24.942699912064771, snappedPoints[1].Location.Longitude, 0.0001);
+
+            Assert.AreEqual(2, snappedPoints[2].OriginalIndex);
+            Assert.AreEqual(60.170874902634374, snappedPoints[2].Location.Latitude, 0.0001);
+            Assert.AreEqual(24.942700088491474, snappedPoints[2].Location.Longitude, 0.0001);
         }
 
         [Test]
