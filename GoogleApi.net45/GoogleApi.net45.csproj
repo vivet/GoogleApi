@@ -107,6 +107,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Status.cs">
       <Link>Entities\Common\Enums\Status.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Error.cs">
+      <Link>Entities\Common\Error.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Extensions\DateTimeExtension.cs">
       <Link>Entities\Common\Extensions\DateTimeExtension.cs</Link>
     </Compile>
@@ -115,6 +118,9 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\ErrorResponse.cs">
+      <Link>Entities\ErrorResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Interfaces\IRequest.cs">
       <Link>Entities\Interfaces\IRequest.cs</Link>
@@ -250,12 +256,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\WifiAccessPoint.cs">
       <Link>Entities\Maps\Geolocation\Request\WifiAccessPoint.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\Error.cs">
-      <Link>Entities\Maps\Geolocation\Response\Error.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\ErrorResponse.cs">
-      <Link>Entities\Maps\Geolocation\Response\ErrorResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\GeolocationResponse.cs">
       <Link>Entities\Maps\Geolocation\Response\GeolocationResponse.cs</Link>

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Geolocation.Response
+namespace GoogleApi.Entities.Common
 {
     /// <summary>
     /// Error.

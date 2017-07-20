@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Geolocation.Response;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Geolocation.Response
+namespace GoogleApi.Entities
 {
     /// <summary>
     /// Error response.
