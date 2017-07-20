@@ -4,8 +4,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Optimize>True</Optimize>
     <NoWarn></NoWarn>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>NETSTANDARD1_2</DefineConstants>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>bin\Debug\GoogleApi.XML</DocumentationFile>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
