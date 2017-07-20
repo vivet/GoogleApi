@@ -1,12 +1,12 @@
 ## GoogleApi v3.0.0
 Seamless Google Api integrations.
-Supports Maps, Places, Roads, Custom Search and Translate.  
-Feel free to contribute, ask questions or report issues. I usually reply within 24 hours.
+Supports Maps, Places, Roads, Search and Translate.  
+Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).
 
-##### Nuget: https://www.nuget.org/packages/GoogleApi (net4.5, netstandard1.2)
+##### Nuget: https://www.nuget.org/packages/GoogleApi (netstandard1.2, net4.5)
 
-##### Version 3.0.0 Highlights: 
-*All Google endpoints updated (Maps, Places, Translate).
+##### Highlights (v3.0):
+* All Google endpoints updated (Maps, Places, Translate).
 * Downgrade to netstandard1.2 (more portable platforms support, i think).
 * Walk-through of all endpoints aligned with Google Api Documentation.
 * Request validation improved for all endpoints (all cases covered).
@@ -15,9 +15,9 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 * Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
 * Type and Namespace cleanup. Base / Common entities refactored.
 * Test Suite expanded greatly. 90% or overall average coverage.
-* and much more.
-* BE AWARE: The endpoints marked with '*' below, still have a fiew issues in v3.0
 
+##### Known Issues (v3.0):
+* Geolocation sometimes respond with 400 Bad Request.
 
 ### Google Api Integrations:
 ##### Google Maps
@@ -26,18 +26,18 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
   * Elevation
   * Geocoding
   * Reverse Geocoding
-  * Geolocation *
+  * Geolocation
   * Roads
-    * Nearest Roads *
-    * Snap To Roads *
-    * Speed Limits *
+    * Nearest Roads
+    * Snap To Roads
+    * Speed Limits
   * Time Zone
 
 ##### Google Places
   * Place Search
     * Near By
-	* Text
-	* Radar (*deprecated June 30, 2018*)
+    * Text
+    * Radar (*deprecated June 30th 2018*)
   * Place Details
   * Place Add
   * Place Delete
