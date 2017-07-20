@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Radar.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Search.Radar
@@ -130,6 +131,27 @@ namespace GoogleApi.Test.Places.Search.Radar
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesRadarSearchWhenInvalidKeyTest()
+        {
+            var request = new PlacesRadarSearchRequest
+            {
+                Key = "test",
+                Location = new Location(55.673323, 12.527438),
+                Radius = 500,
+                Keyword = "abc"
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.RadarSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual("The provided API key is invalid.", innerException.Message);
         }
 
         [Test]

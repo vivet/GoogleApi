@@ -99,6 +99,25 @@ namespace GoogleApi.Test.Translate.Detect
         }
 
         [Test]
+        public void DetectWhenInvalidKeyTest()
+        {
+            var request = new DetectRequest()
+            {
+                Key = "test",
+                Qs = new[] { "Hello World" }
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
+        }
+
+        [Test]
         public void DetectWhenMultipleQsTest()
         {
             var request = new DetectRequest

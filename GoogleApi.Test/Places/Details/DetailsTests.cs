@@ -6,6 +6,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Details
@@ -95,7 +96,7 @@ namespace GoogleApi.Test.Places.Details
         }
 
         [Test]
-        public void PlacesDeleteWhenAsyncAndTimeoutTest()
+        public void PlacesDetailsWhenAsyncAndTimeoutTest()
         {
             var request = new PlacesDetailsRequest
             {
@@ -118,7 +119,7 @@ namespace GoogleApi.Test.Places.Details
         }
 
         [Test]
-        public void PlacesDeleteWhenAsyncAndCancelledTest()
+        public void PlacesDetailsWhenAsyncAndCancelledTest()
         {
             var request = new PlacesDetailsRequest
             {
@@ -135,13 +136,32 @@ namespace GoogleApi.Test.Places.Details
         }
 
         [Test]
-        public void PlacesDeleteWhenLanguageTest()
+        public void PlacesDetailsWhenInvalidKeyTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = "test",
+                PlaceId = "abc"
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual("The provided API key is invalid.", innerException.Message);
+        }
+
+        [Test]
+        public void PlacesDetailsWhenLanguageTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void PlacesDeleteWhenExtensionsTest()
+        public void PlacesDetailsWhenExtensionsTest()
         {
             Assert.Inconclusive();
         }

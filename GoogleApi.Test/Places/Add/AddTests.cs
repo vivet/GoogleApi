@@ -7,6 +7,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Add
@@ -135,6 +136,32 @@ namespace GoogleApi.Test.Places.Add
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesAddWhenInvalidKeyTest()
+        {
+            var request = new PlacesAddRequest
+            {
+                Key = "test",
+                Name = Guid.NewGuid().ToString("N"),
+                Types = new[] { PlaceLocationType.Street_Address },
+                Location = new Location(55.664425, 12.502264),
+                Accuracy = 50,
+                PhoneNumber = "+45 00000000",
+                Address = Guid.NewGuid().ToString("N"),
+                Website = "http://www.google.com",
+                Language = Language.English
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Add.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual("The provided API key is invalid.", innerException.Message);
         }
 
         [Test]

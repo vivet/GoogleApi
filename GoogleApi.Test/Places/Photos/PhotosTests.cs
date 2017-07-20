@@ -111,6 +111,26 @@ namespace GoogleApi.Test.Places.Photos
         }
 
         [Test]
+        public void PlacesPhotosWhenInvalidKeyTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = "test",
+                PhotoReference = "abc",
+                MaxWidth = 1600
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual("Response status code does not indicate success: 403 (Forbidden).", innerException.Message);
+        }
+
+        [Test]
         public void PlacesPhotosWhenMaxWidthTest()
         {
             Assert.Inconclusive();

@@ -123,6 +123,30 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
         }
 
         [Test]
+        public void SnapToRoadWhenInvalidKeyTest()
+        {
+            var request = new SnapToRoadsRequest
+            {
+                Key = "test",
+                Path = new[]
+                {
+                    new Location(60.170880, 24.942795),
+                    new Location(60.170879, 24.942796),
+                    new Location(60.170877, 24.942796)
+                }
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
+        }
+
+        [Test]
         public void SnapToRoadWhenKeyIsNullTest()
         {
             var request = new SnapToRoadsRequest

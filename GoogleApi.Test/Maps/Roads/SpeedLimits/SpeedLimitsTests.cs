@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
@@ -82,6 +83,30 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 	        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
 	        Assert.IsNotNull(exception);
 	        Assert.AreEqual(exception.Message, "The operation was canceled.");
+	    }
+
+	    [Test]
+	    public void SpeedLimitsWhenInvalidKeyTest()
+	    {
+	        var request = new SpeedLimitsRequest
+	        {
+	            Key = "test",
+	            Path = new[]
+	            {
+	                new Location(60.170880, 24.942795),
+	                new Location(60.170879, 24.942796),
+	                new Location(60.170877, 24.942796)
+	            }
+	        };
+
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.Query(request));
+	        Assert.IsNotNull(exception);
+	        Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+	        var innerException = exception.InnerExceptions.FirstOrDefault();
+	        Assert.IsNotNull(innerException);
+	        Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+	        Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
 	    }
 
         [Test]

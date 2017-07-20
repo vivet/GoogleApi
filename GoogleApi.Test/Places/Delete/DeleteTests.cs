@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
@@ -7,6 +8,7 @@ using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Delete.Request;
 using GoogleApi.Entities.Places.Details.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Delete
@@ -45,9 +47,15 @@ namespace GoogleApi.Test.Places.Delete
                 PlaceId = response.PlaceId
             };
 
-            var response3 = GooglePlaces.Details.Query(request3);
-            Assert.IsNotNull(response3);
-            Assert.AreEqual(response3.Status, Status.NotFound);
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request3));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault() as GoogleApiException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(Status.NotFound, innerException.Status);
+            Assert.AreEqual("Exception of type 'GoogleApi.GoogleApiException' was thrown.", innerException.Message);
         }
 
         [Test]
@@ -114,6 +122,25 @@ namespace GoogleApi.Test.Places.Delete
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesDeleteWhenInvalidKeyTest()
+        {
+            var request = new PlacesDeleteRequest
+            {
+                Key = "test",
+                PlaceId = "abc"
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Delete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual("The provided API key is invalid.", innerException.Message);
         }
 
         [Test]

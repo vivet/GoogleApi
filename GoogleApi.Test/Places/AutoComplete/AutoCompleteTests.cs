@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Common.Enums;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.AutoComplete
@@ -105,6 +106,25 @@ namespace GoogleApi.Test.Places.AutoComplete
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenInvalidKeyTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = "test",
+                Input = "jagtvej 2200 København"
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.AutoComplete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual("The provided API key is invalid.", innerException.Message);
         }
 
         [Test]

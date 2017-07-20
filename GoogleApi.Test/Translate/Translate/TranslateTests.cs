@@ -112,6 +112,27 @@ namespace GoogleApi.Test.Translate.Translate
         }
 
         [Test]
+        public void TranslateWhenInvalidKeyTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = "test",
+                Source = Language.English,
+                Target = Language.Danish,
+                Qs = new[] { "Hello World" }
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Translate.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
+        }
+
+        [Test]
         public void TranslateWhenDetectedSourceLanguageTest()
         {
             var request = new TranslateRequest

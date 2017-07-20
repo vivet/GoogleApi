@@ -1,12 +1,10 @@
 using System;
-using System.Net.Http;
-using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
-using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geolocation
@@ -76,6 +74,24 @@ namespace GoogleApi.Test.Maps.Geolocation
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void GeolocationWhenInvalidKeyTest()
+        {
+            var request = new GeolocationRequest
+            {
+                Key = "test"
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Geolocation.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
         }
 
         [Test]

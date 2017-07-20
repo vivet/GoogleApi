@@ -123,6 +123,30 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
         }
 
         [Test]
+        public void NearestRoadsWhenInvalidKeyTest()
+        {
+            var request = new NearestRoadsRequest
+            {
+                Key = "test",
+                Points = new[]
+                {
+                    new Location(60.170880, 24.942795),
+                    new Location(60.170879, 24.942796),
+                    new Location(60.170877, 24.942796)
+                }
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.NearestRoads.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
+        }
+
+        [Test]
         public void NearestRoadsWhenKeyIsNullTest()
         {
             var request = new NearestRoadsRequest
