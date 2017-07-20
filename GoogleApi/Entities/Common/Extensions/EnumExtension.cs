@@ -26,9 +26,9 @@ namespace GoogleApi.Entities.Common.Extensions
                 return Convert.ToString(@enum, CultureInfo.InvariantCulture).ToLower();
 
             var stringBuilder = new StringBuilder();
-            var binaryCharArray = Convert.ToString(@enum, CultureInfo.InvariantCulture).Reverse().ToArray();
+            var binaryCharArray = Convert.ToString(@enum, CultureInfo.InvariantCulture);
 
-            for (var i = 0; i < binaryCharArray.Length; i++)
+            for (var i = binaryCharArray.Length; i >= 0; i--)
             {
                 if (binaryCharArray[i] != '1')
                     continue;
@@ -37,6 +37,7 @@ namespace GoogleApi.Entities.Common.Extensions
 
                 if (i != binaryCharArray.Length - 1)
                     stringBuilder.Append(delimeter);
+
             }
 
             return stringBuilder.ToString().ToLower();

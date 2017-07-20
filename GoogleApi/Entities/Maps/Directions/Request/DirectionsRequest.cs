@@ -167,7 +167,6 @@ namespace GoogleApi.Entities.Maps.Directions.Request
                 if (this.Avoid != AvoidWay.Nothing)
                     parameters.Add("avoid", this.Avoid.ToEnumString('|'));
 
-
                 if (this.Waypoints != null && this.Waypoints.Any())
                 {
                     var waypoints = this.Waypoints.Select(x => x.ToString());

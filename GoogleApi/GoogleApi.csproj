@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
+    <TargetFramework>netstandard1.1</TargetFramework>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Optimize>True</Optimize>
     <NoWarn></NoWarn>
-    <DefineConstants>NETSTANDARD1_2</DefineConstants>
+    <DefineConstants>DEBUG;NETSTANDARD1_1</DefineConstants>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>bin\Debug\GoogleApi.XML</DocumentationFile>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -18,7 +18,8 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation  detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
     <PackageReleaseNotes>- BE AWARE - BREAKING CHANGES
 - Changes shouldn't be time consuming to adjust to though.
-- Downgraded to netstandard1.2 (more portable platforms support, I think).
+- Downgraded to netstandard1.1 (more portable platforms support, I think).
+- Added build package for Xamarin.Forms (Portable).
 - Missing endpoints added. All Api's are now complete.
 - Api's refactored, updated and aligned (Maps, Places, Roads and Translate) - 100% up-to-date.
 - Request and response documentation updated and improved.
