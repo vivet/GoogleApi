@@ -2,14 +2,11 @@
   "version": "1.0.0-*",
   "buildOptions": {},
   "dependencies": {
+    "BouncyCastle": "1.8.1",
     "NETStandard.Library": "1.6.1.*",
-    "Newtonsoft.Json": "9.0.1",
-    "NUnit": "3.6.0",
-    "NUnit3TestAdapter": "3.7.0",
-    "System.Console": "4.0.0",
-    "System.Diagnostics.DiagnosticSource": "4.0.0",
-    "System.Runtime.Serialization.Primitives": "4.1.1",
-    "System.Security.Cryptography.Primitives": "4.0.0"
+    "Newtonsoft.Json": "10.0.3",
+    "NUnit": "3.7.1",
+    "NUnit3TestAdapter": "3.8.0-alpha1"
   },
   "frameworks": {
     "net460": {}

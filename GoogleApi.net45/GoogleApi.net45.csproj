@@ -21,7 +21,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>618;1591</NoWarn>
+    <NoWarn>
+    </NoWarn>
     <DocumentationFile>..\GoogleApi\bin\Debug\net45\GoogleApi.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -70,8 +71,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BouncyCastle">
+      <Version>1.8.1</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>8.0.1</Version>
+      <Version>10.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -79,17 +83,14 @@
     <None Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GoogleApi\Entities\BaseRequest.cs">
+      <Link>Entities\BaseRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\BaseResponse.cs">
+      <Link>Entities\BaseResponse.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\AddressComponent.cs">
       <Link>Entities\Common\AddressComponent.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\AddressLocation.cs">
-      <Link>Entities\Common\AddressLocation.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\BaseRequest.cs">
-      <Link>Entities\Common\BaseRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\BaseResponse.cs">
-      <Link>Entities\Common\BaseResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
@@ -103,29 +104,41 @@
     <Compile Include="..\GoogleApi\Entities\Common\Enums\LocationType.cs">
       <Link>Entities\Common\Enums\LocationType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IJsonRequest.cs">
-      <Link>Entities\Common\Interfaces\IJsonRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\Status.cs">
+      <Link>Entities\Common\Enums\Status.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\ILocationString.cs">
-      <Link>Entities\Common\Interfaces\ILocationString.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Common\Error.cs">
+      <Link>Entities\Common\Error.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IQueryStringRequest.cs">
-      <Link>Entities\Common\Interfaces\IQueryStringRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Common\Extensions\DateTimeExtension.cs">
+      <Link>Entities\Common\Extensions\DateTimeExtension.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Interfaces\IResponseFor.cs">
-      <Link>Entities\Common\Interfaces\IResponseFor.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Common\Extensions\EnumExtension.cs">
+      <Link>Entities\Common\Extensions\EnumExtension.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Status.cs">
-      <Link>Entities\Common\Status.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\ErrorResponse.cs">
+      <Link>Entities\ErrorResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsChannelRequest.cs">
-      <Link>Entities\Maps\Common\BaseMapsChannelRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IRequest.cs">
+      <Link>Entities\Interfaces\IRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Common\BaseMapsRequest.cs">
-      <Link>Entities\Maps\Common\BaseMapsRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IRequestJson.cs">
+      <Link>Entities\Interfaces\IRequestJson.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IRequestQueryString.cs">
+      <Link>Entities\Interfaces\IRequestQueryString.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Interfaces\IResponse.cs">
+      <Link>Entities\Interfaces\IResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\BaseMapsChannelRequest.cs">
+      <Link>Entities\Maps\BaseMapsChannelRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\BaseMapsRequest.cs">
+      <Link>Entities\Maps\BaseMapsRequest.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Common\Distance.cs">
       <Link>Entities\Maps\Common\Distance.cs</Link>
@@ -211,8 +224,8 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\ElevationResponse.cs">
       <Link>Entities\Maps\Elevation\Response\ElevationResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\ElevationResult.cs">
-      <Link>Entities\Maps\Elevation\Response\ElevationResult.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\Result.cs">
+      <Link>Entities\Maps\Elevation\Response\Result.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Request\GeocodingRequest.cs">
       <Link>Entities\Maps\Geocode\Request\GeocodingRequest.cs</Link>
@@ -220,14 +233,14 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs">
       <Link>Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\GeocodeResult.cs">
-      <Link>Entities\Maps\Geocode\Response\GeocodeResult.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\GeocodingResponse.cs">
       <Link>Entities\Maps\Geocode\Response\GeocodingResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Geometry.cs">
       <Link>Entities\Maps\Geocode\Response\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Result.cs">
+      <Link>Entities\Maps\Geocode\Response\Result.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\ViewPort.cs">
       <Link>Entities\Maps\Geocode\Response\ViewPort.cs</Link>
@@ -244,20 +257,17 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\WifiAccessPoint.cs">
       <Link>Entities\Maps\Geolocation\Request\WifiAccessPoint.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\Error.cs">
-      <Link>Entities\Maps\Geolocation\Response\Error.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\Errors.cs">
-      <Link>Entities\Maps\Geolocation\Response\Errors.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Response\GeolocationResponse.cs">
       <Link>Entities\Maps\Geolocation\Response\GeolocationResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\BaseRoadsRequest.cs">
-      <Link>Entities\Maps\Roads\Common\BaseRoadsRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\BaseRoadsRequest.cs">
+      <Link>Entities\Maps\Roads\BaseRoadsRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\BaseRoadsResponse.cs">
-      <Link>Entities\Maps\Roads\Common\BaseRoadsResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\BaseRoadsResponse.cs">
+      <Link>Entities\Maps\Roads\BaseRoadsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Enums\Units.cs">
+      <Link>Entities\Maps\Roads\Common\Enums\Units.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Location.cs">
       <Link>Entities\Maps\Roads\Common\Location.cs</Link>
@@ -276,9 +286,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs">
       <Link>Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Request\Enums\Units.cs">
-      <Link>Entities\Maps\Roads\SpeedLimits\Request\Enums\Units.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs">
       <Link>Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs</Link>
@@ -310,14 +317,14 @@
     <Compile Include="..\GoogleApi\Entities\Places\AutoComplete\Response\PlacesAutoCompleteResponse.cs">
       <Link>Entities\Places\AutoComplete\Response\PlacesAutoCompleteResponse.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\BasePlacesRequest.cs">
+      <Link>Entities\Places\BasePlacesRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\BasePlacesResponse.cs">
+      <Link>Entities\Places\BasePlacesResponse.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\AlternativePlace.cs">
       <Link>Entities\Places\Common\AlternativePlace.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Common\BasePlacesRequest.cs">
-      <Link>Entities\Places\Common\BasePlacesRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Common\BasePlacesResponse.cs">
-      <Link>Entities\Places\Common\BasePlacesResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\Enums\PlaceLocationType.cs">
       <Link>Entities\Places\Common\Enums\PlaceLocationType.cs</Link>
@@ -339,6 +346,9 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\Prediction.cs">
       <Link>Entities\Places\Common\Prediction.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\Common\StructuredFormatting.cs">
+      <Link>Entities\Places\Common\StructuredFormatting.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\Term.cs">
       <Link>Entities\Places\Common\Term.cs</Link>
@@ -388,23 +398,23 @@
     <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Request\PlacesQueryAutoCompleteRequest.cs">
       <Link>Entities\Places\QueryAutoComplete\Request\PlacesQueryAutoCompleteRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Response\PlacesAutoCompleteResponse.cs">
-      <Link>Entities\Places\QueryAutoComplete\Response\PlacesAutoCompleteResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs">
+      <Link>Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BasePlacesSearchRequest.cs">
-      <Link>Entities\Places\Search\Common\Enums\BasePlacesSearchRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Places\Search\BasePlacesSearchRequest.cs">
+      <Link>Entities\Places\Search\BasePlacesSearchRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BasePlacesSearchResponse.cs">
-      <Link>Entities\Places\Search\Common\Enums\BasePlacesSearchResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Places\Search\BasePlacesSearchResponse.cs">
+      <Link>Entities\Places\Search\BasePlacesSearchResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\BaseResult.cs">
-      <Link>Entities\Places\Search\Common\Enums\BaseResult.cs</Link>
+      <Link>Entities\Places\Search\Common\BaseResult.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\Enums\SearchPlaceType.cs">
       <Link>Entities\Places\Search\Common\Enums\SearchPlaceType.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\OpeningHours.cs">
-      <Link>Entities\Places\Search\Common\Enums\OpeningHours.cs</Link>
+      <Link>Entities\Places\Search\Common\OpeningHours.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\NearBy\Request\Enums\Ranking.cs">
       <Link>Entities\Places\Search\NearBy\Request\Enums\Ranking.cs</Link>
@@ -435,6 +445,12 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Text\Response\TextResult.cs">
       <Link>Entities\Places\Search\Text\Response\TextResult.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\QueryStringParameter.cs">
+      <Link>Entities\QueryStringParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\QueryStringParameters.cs">
+      <Link>Entities\QueryStringParameters.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\AltType.cs">
       <Link>Entities\Search\Common\AltType.cs</Link>
@@ -553,6 +569,45 @@
     <Compile Include="..\GoogleApi\Entities\Search\Web\Request\WebSearchRequest.cs">
       <Link>Entities\Search\Web\Request\WebSearchRequest.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\BaseTranslateRequest.cs">
+      <Link>Entities\Translate\BaseTranslateRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs">
+      <Link>Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Extensions\StringExtension.cs">
+      <Link>Entities\Translate\Common\Enums\Extensions\StringExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Language.cs">
+      <Link>Entities\Translate\Common\Enums\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Common\Enums\Model.cs">
+      <Link>Entities\Translate\Common\Enums\Model.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Request\DetectRequest.cs">
+      <Link>Entities\Translate\Detect\Request\DetectRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Response\Data.cs">
+      <Link>Entities\Translate\Detect\Response\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Response\Detection.cs">
+      <Link>Entities\Translate\Detect\Response\Detection.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Detect\Response\DetectResponse.cs">
+      <Link>Entities\Translate\Detect\Response\DetectResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Request\LanguagesRequest.cs">
+      <Link>Entities\Translate\Languages\Request\LanguagesRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Response\Data.cs">
+      <Link>Entities\Translate\Languages\Response\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Response\LanguagesResponse.cs">
+      <Link>Entities\Translate\Languages\Response\LanguagesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Translate\Languages\Response\SupportedLanguage.cs">
+      <Link>Entities\Translate\Languages\Response\SupportedLanguage.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Translate\Translate\Request\Enums\Format.cs">
       <Link>Entities\Translate\Translate\Request\Enums\Format.cs</Link>
     </Compile>
@@ -568,20 +623,8 @@
     <Compile Include="..\GoogleApi\Entities\Translate\Translate\Response\Translation.cs">
       <Link>Entities\Translate\Translate\Response\Translation.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Extensions\DateTimeExtension.cs">
-      <Link>Extensions\DateTimeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Extensions\Entities\QueryStringParameter.cs">
-      <Link>Extensions\Entities\QueryStringParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Extensions\EnumExtension.cs">
-      <Link>Extensions\EnumExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Extensions\QueryStringParameters.cs">
-      <Link>Extensions\QueryStringParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Extensions\StringExtension.cs">
-      <Link>Extensions\StringExtension.cs</Link>
+    <Compile Include="..\GoogleApi\Exceptions\GoogleApiException.cs">
+      <Link>Exceptions\GoogleApiException.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\GoogleFunctions.cs">
       <Link>GoogleFunctions.cs</Link>
@@ -603,5 +646,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

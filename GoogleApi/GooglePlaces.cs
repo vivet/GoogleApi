@@ -30,6 +30,7 @@ namespace GoogleApi
         /// The Place Photo service gives you access to the millions of photos stored in the Places and Google+ Local database. When you get place information using a Place Details request, 
         /// photo references will be returned for relevant photographic content. The Nearby Search and Text Search requests also return a single photo reference per place, when relevant. 
         /// Using the Photo service you can then access the referenced photos and resize the image to the optimal size for your application.
+        /// https://developers.google.com/places/web-service/photos
         /// </summary>
         public static HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse> Photos => HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse>.instance;
 
@@ -44,6 +45,8 @@ namespace GoogleApi
         /// <summary>
         /// The Google Places API Radar Search Service allows you to search for up to 200 places at once, but with less detail than is typically returned from a Text Search or Nearby Search request. 
         /// With Radar Search, you can create applications that help users identify specific areas of interest within a geographic area.
+        /// NOTE: Radar Search is deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018, 
+        /// and will no longer be available after that date.
         /// https://developers.google.com/places/web-service/search
         /// </summary>
         public static HttpEngine<PlacesRadarSearchRequest, PlacesRadarSearchResponse> RadarSearch => HttpEngine<PlacesRadarSearchRequest, PlacesRadarSearchResponse>.instance;

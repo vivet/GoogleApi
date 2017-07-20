@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
-using GoogleApi.Entities.Maps.Roads.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
 {
     /// <summary>
     /// SpeedLimits Response.
     /// </summary>
-    [DataContract]
     public class SpeedLimitsResponse : BaseRoadsResponse
     {
         /// <summary>
-        /// SpeedLimits — An array of road metadata. Each element consists of the following fields:
+        /// SpeedLimits — A collection of road metadata. 
         /// </summary>
-        [DataMember(Name = "speedLimits")]
+        [JsonProperty("speedLimits")]
         public virtual IEnumerable<SpeedLimit> SpeedLimits { get; set; }
     }
 }

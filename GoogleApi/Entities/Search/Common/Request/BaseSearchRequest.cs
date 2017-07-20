@@ -1,15 +1,13 @@
 ﻿using System;
-using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Search.Common.Request
 {
     /// <summary>
     /// Base abstract class for Search requests.
     /// </summary>
-    public abstract class BaseSearchRequest : BaseRequest, IQueryStringRequest
+    public abstract class BaseSearchRequest : BaseRequest, IRequestQueryString
     {
         /// <summary>
         /// BaseUrl property overriden.
@@ -36,8 +34,8 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// </summary>
         public override bool IsSsl
         {
-            get { return true; }
-            set { throw new NotSupportedException("This operation is not supported, SearchRequest must use SSL"); }
+            get => true;
+            set => throw new NotSupportedException("This operation is not supported, SearchRequest must use SSL");
         }
 
         /// <summary>

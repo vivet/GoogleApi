@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
     /// <summary>
     /// Contains the encoded and decoded data returned in the overview_polyline field.
     /// </summary>
-    [DataContract]
     public class OverviewPolyline
     {
         private Lazy<IEnumerable<Location>> pointsLazy;
@@ -21,7 +21,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// <summary>
         /// The encoded string containing the overview path points as they were received.
         /// </summary>
-        [DataMember(Name = "points")]
+        [JsonProperty("points")]
         protected virtual string EncodedPoints { get; set; }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         }
 
         [OnDeserializing]
-        protected void InitLazyPoints(StreamingContext contex)
+        internal void InitLazyPoints(StreamingContext contex)
         {
             this.pointsLazy = new Lazy<IEnumerable<Location>>(DecodePoints);
         }

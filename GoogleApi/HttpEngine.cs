@@ -3,14 +3,18 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
+using GoogleApi.Entities;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Photos.Response;
+using GoogleApi.Exceptions;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Crypto.Macs;
+using Org.BouncyCastle.Crypto.Parameters;
 
 namespace GoogleApi
 {
@@ -21,7 +25,7 @@ namespace GoogleApi
     /// <typeparam name="TResponse"></typeparam>
     public sealed class HttpEngine<TRequest, TResponse>
         where TRequest : BaseRequest, new()
-        where TResponse : IResponseFor
+        where TResponse : IResponse, new()
     {
         internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
         internal static readonly HttpEngine<TRequest, TResponse> instance = new HttpEngine<TRequest, TResponse>();
@@ -56,7 +60,7 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return this.HttpRequest(request, timeout).Result;
+            return this.QueryAsync(request).Result;
         }
 
         /// <summary>
@@ -95,7 +99,7 @@ namespace GoogleApi
         /// Asynchronously query the Google Maps API using the provided request.
         /// </summary>
         /// <param name="request">The request that will be sent.</param>
-        /// <param name="token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
+        /// <param name="token">A cancellation cancellationToken that can be used to cancel the pending asynchronous task.</param>
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         public Task<TResponse> QueryAsync(TRequest request, CancellationToken token)
@@ -103,7 +107,7 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return this.HttpRequest(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
+            return this.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
         }
 
         /// <summary>
@@ -113,19 +117,92 @@ namespace GoogleApi
         /// <param name="timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
         /// The specify an infinite timeout, pass a TimeSpan with a TotalMillisecond value of Timeout.Infinite.
         /// When a request is aborted due to a timeout the returned task will transition to the Faulted state with a TimeoutException.</param>
-        /// <param name="token">A cancellation token that can be used to cancel the pending asynchronous task.</param>
+        /// <param name="cancellationToken">A cancellation cancellationToken that can be used to cancel the pending asynchronous task.</param>
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken token)
+        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return this.HttpRequest(request, timeout, token);
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var uri = this.GetUri(request);
+            var httpClient = new HttpClient { Timeout = timeout };
+            var taskCompletionSource = new TaskCompletionSource<TResponse>();
+
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var task = request is IRequestQueryString
+                ? httpClient.GetAsync(uri, cancellationToken)
+                : httpClient.PostAsync(uri, new StringContent(JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })), cancellationToken);
+
+            task.ContinueWith(x =>
+            {
+                try
+                {
+                    if (x.IsCanceled)
+                    {
+                        taskCompletionSource.SetCanceled();
+                    }
+                    else if (x.IsFaulted)
+                    {
+                        var exception = x.Exception == null
+                            ? new NullReferenceException("task.Exception")
+                            : task.Exception?.InnerException ?? task.Exception ?? new Exception("unknown error");
+
+                        throw exception;
+                    }
+                    else
+                    {
+                        x.Result.EnsureSuccessStatusCode();
+
+                        var result = x.Result;
+                        var content = result.Content;
+                        var json = content.ReadAsStringAsync().Result;
+                        var data = content.ReadAsByteArrayAsync().Result;
+                        var stream = new MemoryStream(data);
+
+                        TResponse response;
+                        if (typeof(TResponse) == typeof(PlacesPhotosResponse))
+                        {
+                            response = (TResponse)(IResponse)new PlacesPhotosResponse
+                            {
+                                Photo = stream
+                            };
+                        }
+                        else
+                        {
+                            using (var streamReader = new StreamReader(stream))
+                            {
+                                var jsonSerializer = new JsonSerializer();
+                                var jsonTextReader = new JsonTextReader(streamReader);
+
+                                response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
+                            }
+                        }
+
+                        response.RawJson = json;
+                        response.RawQueryString = uri.PathAndQuery;
+                        response.Status = response.Status ?? Status.Ok;
+
+                        if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
+                            throw new GoogleApiException(response.ErrorMessage, response.Status);
+
+                        taskCompletionSource.SetResult(response);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    taskCompletionSource.SetException(ex);
+                }
+            }, TaskContinuationOptions.ExecuteSynchronously);
+
+            return taskCompletionSource.Task;
         }
 
-        // Private methods.
         private Uri GetUri(TRequest request)
         {
             if (request == null)
@@ -146,97 +223,19 @@ namespace GoogleApi
                 throw new ArgumentNullException(nameof(uri));
 
             var url = uri.LocalPath + uri.Query + "&client=" + request.ClientId;
-            var privateKey = this.FromBase64UrlString(request.Key);
+            var bytes = Encoding.UTF8.GetBytes(url);
+            var privateKey = Convert.FromBase64String(request.Key.Replace("-", "+").Replace("_", "/"));
 
-            byte[] signature;
-            using (var algorithm = new HMACSHA1(privateKey))
-            {
-                signature = algorithm.ComputeHash(Encoding.ASCII.GetBytes(url));
-            }
+            var hmac = new HMac(new Sha256Digest());
+            hmac.Init(new KeyParameter(privateKey));
 
-            return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + this.ToBase64UrlString(signature));
-        }
-        private string ToBase64UrlString(byte[] data)
-        {
-            if (data == null)
-                throw new ArgumentNullException(nameof(data));
+            var signature = new byte[hmac.GetMacSize()];
+            var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
 
-            return Convert.ToBase64String(data).Replace("+", "-").Replace("/", "_");
-        }
-        private byte[] FromBase64UrlString(string base64UrlString)
-        {
-            if (base64UrlString == null)
-                throw new ArgumentNullException(nameof(base64UrlString));
+            hmac.BlockUpdate(bytes, 0, bytes.Length);
+            hmac.DoFinal(signature, 0);
 
-            return Convert.FromBase64String(base64UrlString.Replace("-", "+").Replace("_", "/"));
-        }
-        private Task<TResponse> HttpRequest(TRequest request, TimeSpan timeout, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            var uri = this.GetUri(request);
-            var httpClient = new HttpClient { Timeout = timeout };
-            var jsonString = JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            var taskCompletionSource = new TaskCompletionSource<TResponse>();
-
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var task = request is IQueryStringRequest
-                ? httpClient.GetAsync(uri, cancellationToken)
-                : httpClient.PostAsync(uri, new StringContent(jsonString, Encoding.UTF8), cancellationToken);
-
-            task.ContinueWith(x =>
-            {
-                if (x.IsCanceled)
-                {
-                    taskCompletionSource.SetCanceled();
-                }
-                else if (x.IsFaulted)
-                {
-                    var exception = x.Exception == null ? new NullReferenceException("task.Exception") : task.Exception?.InnerException ?? task.Exception ?? new Exception("error");
-                    taskCompletionSource.SetException(exception);
-                }
-                else
-                {
-                    try
-                    {
-                        x.Result.EnsureSuccessStatusCode();
-
-                        var result = x.Result;
-                        var content = result.Content;
-                        var json = content.ReadAsStringAsync().Result;
-                        var data = content.ReadAsByteArrayAsync().Result;
-                        var stream = new MemoryStream(data, false);
-
-                        TResponse response;
-                        if (typeof(TResponse) == typeof(PlacesPhotosResponse))
-                        {
-                            response = (TResponse)(IResponseFor)new PlacesPhotosResponse { Photo = stream };
-                        }
-                        else
-                        {
-                            var jsonSerializer = new JsonSerializer();
-
-                            using (var streamReader = new StreamReader(stream))
-                            {
-                                response = jsonSerializer.Deserialize<TResponse>(new JsonTextReader(streamReader));
-                            }
-
-                            response.RawJson = json;
-                            response.RawQueryString = uri.PathAndQuery;
-                        }
-
-                        taskCompletionSource.SetResult(response);
-                    }
-                    catch (Exception ex)
-                    {
-                        taskCompletionSource.SetException(ex);
-                    }
-                }
-            }, TaskContinuationOptions.ExecuteSynchronously);
-
-            return taskCompletionSource.Task;
+            return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
         }
     }
 }

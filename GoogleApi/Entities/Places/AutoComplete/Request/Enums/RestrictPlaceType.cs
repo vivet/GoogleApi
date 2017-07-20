@@ -2,8 +2,9 @@
 {
     /// <summary>
     /// You may restrict results from a Place Autocomplete request to be of a certain type by passing a types parameter. 
-    /// The parameter specifies a type or a type collection, as listed in the supported types below. If nothing is specified, all types are returned. In general only a single type is allowed. 
-    /// The exception is that you can safely mix the geocode and establishment types, but note that this will have the same effect as specifying no types. 
+    /// The parameter specifies a type or a type collection, as listed in the supported types below. If nothing is specified, all types are returned. 
+    /// In general only a single type is allowed.  The exception is that you can safely mix the geocode and establishment types, 
+    /// but note that this will have the same effect as specifying no types. 
     /// https://developers.google.com/places/supported_types#table3
     /// </summary>
     public enum RestrictPlaceType
@@ -26,7 +27,8 @@
         Establishment,
 
         /// <summary>
-        /// The (regions) type collection instructs the Places service to return any result matching the following types: locality, sublocality, postal_code, country, administrative_area_level_1, administrative_area_level_2
+        /// The (regions) type collection instructs the Places service to return any result matching the following types: 
+        /// locality, sublocality, postal_code, country, administrative_area_level_1, administrative_area_level_2
         /// </summary>
         Regions,
 

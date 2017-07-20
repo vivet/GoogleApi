@@ -30,8 +30,14 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("{0}, {1}, {2}", this.By.ToString().ToLower(), this.Order.ToString().ToLower(), this.DefaultValue?.ToString());
+            return $"{this.By.ToString().ToLower()}, {this.Order.ToString().ToLower()}, {this.DefaultValue}";
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sortStr"></param>
+        /// <returns></returns>
         public virtual SortExpression FromString(string sortStr)
         {
             var strings = sortStr.Split(',');

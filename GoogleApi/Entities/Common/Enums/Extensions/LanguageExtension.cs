@@ -6,10 +6,10 @@
     public static class LanguageExtension
     {
         /// <summary>
-        /// Return the Language code.
+        /// Gets the ISO-639-1 code for the specified <see cref="Language"/>.
         /// </summary>
-        /// <param name="language"></param>
-        /// <returns></returns>
+        /// <param name="language">The <see cref="Language"/>.</param>
+        /// <returns>The ISO-639-1 code matching the passed <paramref name="language"/>.</returns>
         public static string ToCode(this Language language)
         {
             switch (language)
@@ -67,9 +67,10 @@
                 case Language.Filipino: return "fil";
                 case Language.Malayalam: return "ml";
                 case Language.Portuguese: return "pt";
-            }
 
-            return string.Empty;
+                default:
+                    return null;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         Nothing = 0x0,
 
         /// <summary>
-        /// Avoid Tolls
+        /// Avoid tolls
         /// </summary>
         Tolls = 0x1,
 
@@ -24,7 +24,7 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         Highways = 0x2,
 
         /// <summary>
-        /// Avoid Indoor
+        /// Avoid indoor
         /// </summary>
         Indoor = 0x3
     }

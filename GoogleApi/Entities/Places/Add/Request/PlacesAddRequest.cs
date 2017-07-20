@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Entities.Places.Common;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common.Enums;
-using GoogleApi.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -15,55 +13,53 @@ namespace GoogleApi.Entities.Places.Add.Request
     /// <summary>
     /// Places Add Request.
     /// </summary>
-    [DataContract]
-    public class PlacesAddRequest : BasePlacesRequest, IJsonRequest
+    public class PlacesAddRequest : BasePlacesRequest, IRequestJson
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "add/json";
 
         /// <summary>
         /// Required. The full text name of the place. Limited to 255 characters.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty("name")]
         public virtual string Name { get; set; }
-
-        /// <summary>
-        /// Required. The geographical location, specified as latitude and longitude values, of the place you want to add.
-        /// </summary>
-        [DataMember(Name = "location")]
-        public virtual Location Location { get; set; }
-
-        /// <summary>
-        /// Required. The category in which this place belongs.  While types takes an array, only one type can currently be specified for a place. 
-        /// XML requests require a single type element. See the list of supported types for more information.  
-        /// If none of the supported types are a match for this place, you may specify other.
-        /// </summary>
-        [DataMember(Name = "types")]
-        [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
-        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
-
-        /// <summary>
-        /// The accuracy of the location signal on which this request is based, expressed in meters.
-        /// </summary>
-        [DataMember(Name = "accuracy")]
-        public virtual int? Accuracy { get; set; }
 
         /// <summary>
         /// The address of the place you wish to add. 
         /// If a place has a well-formatted, human-readable address, it is more likely to pass the moderation process for inclusion in the Google Maps database.
         /// (recommended, to improve chances of passing moderation)
         /// </summary>
-        [DataMember(Name = "address")]
+        [JsonProperty("address")]
         public virtual string Address { get; set; }
+
+        /// <summary>
+        /// Required. The geographical location, specified as latitude and longitude values, of the place you want to add.
+        /// </summary>
+        [JsonProperty("location")]
+        public virtual Location Location { get; set; }
+
+        /// <summary>
+        /// The accuracy of the location signal on which this request is based, expressed in meters.
+        /// </summary>
+        [JsonProperty("accuracy")]
+        public virtual int? Accuracy { get; set; }
+
+        /// <summary>
+        /// A URL pointing to the authoritative website for this Place, such as a business home page. 
+        /// If a Place has a well-formatted website address, it is more likely to pass the moderation process for inclusion in the Google Maps database
+        /// (recommended, to improve chances of passing moderation) — 
+        /// </summary>
+        [JsonProperty("website")]
+        public virtual string Website { get; set; }
 
         /// <summary>
         /// The language in which the place's name is being reported. 
         /// See the list of supported languages and their codes. Note that we often update supported languages so this list may not be exhaustive.
         /// </summary>
-        [DataMember(Name = "language")]
-        public virtual string Language { get; set; }
+        [JsonProperty("language")]
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// The phone number associated with the place. 
@@ -73,33 +69,33 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// International format includes the country code, and is prefixed with a plus (+) sign. For example, the international phone number for Google's Sydney, Australia office is +61 2 9374 4000.
         /// (recommended, to improve chances of passing moderation).
         /// </summary>
-        [DataMember(Name = "phone_number")]
+        [JsonProperty("phone_number")]
         public virtual string PhoneNumber { get; set; }
 
         /// <summary>
-        /// A URL pointing to the authoritative website for this Place, such as a business home page. 
-        /// If a Place has a well-formatted website address, it is more likely to pass the moderation process for inclusion in the Google Maps database
-        /// (recommended, to improve chances of passing moderation) — 
+        /// Required. The category in which this place belongs.  While types takes an array, only one type can currently be specified for a place. 
+        /// XML requests require a single type element. See the list of supported types for more information.  
+        /// If none of the supported types are a match for this place, you may specify other.
         /// </summary>
-        [DataMember(Name = "website")]
-        public virtual string Website { get; set; }
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(this.Name))
-                    throw new ArgumentException("Name must be provided.");
+                    throw new ArgumentException("Name must be provided");
 
                 if (this.Location == null)
-                    throw new ArgumentException("Location must be provided.");
+                    throw new ArgumentException("Location must be provided");
 
                 if (this.Types == null || !this.Types.Any())
-                    throw new ArgumentException("Types must be provided. At least one type must be specified.");
+                    throw new ArgumentException("Types must be provided. At least one type must be specified");
 
                 var parameters = base.QueryStringParameters;
 

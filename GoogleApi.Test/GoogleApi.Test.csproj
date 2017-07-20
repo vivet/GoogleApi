@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -45,33 +46,59 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Maps\DirectionsTests.cs" />
-    <Compile Include="Maps\DistanceMatrixTests.cs" />
-    <Compile Include="Maps\ElevationTests.cs" />
-    <Compile Include="Maps\GeolocationTests.cs" />
-    <Compile Include="Maps\GeocodingTests.cs" />
-    <Compile Include="HttpEngineTest.cs" />
-    <Compile Include="Extensions\DateTimeExtensionTest.cs" />
-    <Compile Include="Extensions\EnumExtensionTest.cs" />
-    <Compile Include="Extensions\StringExtensionTest.cs" />
+    <Compile Include="Common\Enums\Extensions\LanguagesExtensionTests.cs" />
+    <Compile Include="Maps\Directions\DirectionsRequestTests.cs" />
+    <Compile Include="Maps\Directions\DirectionsTests.cs" />
+    <Compile Include="Maps\DistanceMatrix\DistanceMatrixRequestTests.cs" />
+    <Compile Include="Maps\DistanceMatrix\DistanceMatrixTests.cs" />
+    <Compile Include="Maps\Elevation\ElevationRequestTests.cs" />
+    <Compile Include="Maps\Elevation\ElevationTests.cs" />
+    <Compile Include="Maps\Geocode\GeocodingRequestTests.cs" />
+    <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
+    <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
+    <Compile Include="Maps\Geocode\GeocodingTests.cs" />
+    <Compile Include="HttpEngineTests.cs" />
+    <Compile Include="Common\Extensions\DateTimeExtensionTest.cs" />
+    <Compile Include="Common\Extensions\EnumExtensionTest.cs" />
     <Compile Include="Functions\FunctionsTests.cs" />
-    <Compile Include="Maps\Roads\SpeedLimitsTests.cs" />
-    <Compile Include="Places\AddTests.cs" />
-    <Compile Include="Places\AutoCompleteTests.cs" />
-    <Compile Include="Places\DeleteTests.cs" />
-    <Compile Include="Places\DetailsTests.cs" />
-    <Compile Include="Places\PhotosTests.cs" />
-    <Compile Include="Places\Search\NearBySearchTests.cs" />
-    <Compile Include="Places\QueryAutoCompleteTests.cs" />
-    <Compile Include="Places\Search\RadarSearchTests.cs" />
-    <Compile Include="Places\Search\TextSearchTests.cs" />
-    <Compile Include="Search\EnterpriseSearchTests.cs" />
-    <Compile Include="Search\ImageSearchTests.cs" />
-    <Compile Include="Search\WebSearchTests.cs" />
-    <Compile Include="Translate\TranslateTests.cs" />
-    <Compile Include="Maps\Roads\NearestRoadsTests.cs" />
-    <Compile Include="Maps\Roads\SnapToRoadTests.cs" />
-    <Compile Include="Maps\TimeZoneTests.cs" />
+    <Compile Include="Maps\Roads\NearestRoads\NearestRoadsRequestTests.cs" />
+    <Compile Include="Maps\Roads\SnapToRoad\SnapToRoadRequestTests.cs" />
+    <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsRequestTests.cs" />
+    <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsTests.cs" />
+    <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
+    <Compile Include="Places\Add\AddRequestTests.cs" />
+    <Compile Include="Places\Add\AddTests.cs" />
+    <Compile Include="Places\AutoComplete\AutoCompleteRequstTests.cs" />
+    <Compile Include="Places\AutoComplete\AutoCompleteTests.cs" />
+    <Compile Include="Places\Delete\DeleteRequestTests.cs" />
+    <Compile Include="Places\Delete\DeleteTests.cs" />
+    <Compile Include="Places\Details\DetailsRequestTests.cs" />
+    <Compile Include="Places\Details\DetailsTests.cs" />
+    <Compile Include="Places\Photos\PhotosRequestTests.cs" />
+    <Compile Include="Places\Photos\PhotosTests.cs" />
+    <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteRequstTests.cs" />
+    <Compile Include="Places\Search\NearBy\NearBySearchRequestTests.cs" />
+    <Compile Include="Places\Search\NearBy\NearBySearchTests.cs" />
+    <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteTests.cs" />
+    <Compile Include="Places\Search\Radar\RadarSearchRequestTests.cs" />
+    <Compile Include="Places\Search\Radar\RadarSearchTests.cs" />
+    <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
+    <Compile Include="Places\Search\Text\TextSearchTests.cs" />
+    <Compile Include="QueryStringParametersTests.cs" />
+    <Compile Include="Search\Enterprise\EnterpriseSearchTests.cs" />
+    <Compile Include="Search\Image\ImageSearchTests.cs" />
+    <Compile Include="Search\Web\WebSearchTests.cs" />
+    <Compile Include="Translate\Common\Extensions\LanguagesExtensionTests.cs" />
+    <Compile Include="Translate\Common\Extensions\StringExtensionTests.cs" />
+    <Compile Include="Translate\Detect\DetectTests.cs" />
+    <Compile Include="Translate\Detect\DetectRequestTests.cs" />
+    <Compile Include="Translate\Languages\LanguagesTests.cs" />
+    <Compile Include="Translate\Languages\LanguagesRequestTests.cs" />
+    <Compile Include="Translate\Translate\TranslateRequestTests.cs" />
+    <Compile Include="Translate\Translate\TranslateTests.cs" />
+    <Compile Include="Maps\Roads\NearestRoads\NearestRoadsTests.cs" />
+    <Compile Include="Maps\Roads\SnapToRoad\SnapToRoadTests.cs" />
+    <Compile Include="Maps\TimeZone\TimeZoneTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="application.default.json" />

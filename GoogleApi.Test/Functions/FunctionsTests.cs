@@ -27,6 +27,7 @@ namespace GoogleApi.Test.Functions
             Assert.IsNotNull(encodePolyLine.FirstOrDefault());
             Assert.AreEqual(FunctionsTests.POLY_LINE, encodePolyLine);
         }
+
         [Test]
         public void EncodePolyLineWhenLocationsIsNullTest()
         {
@@ -46,13 +47,14 @@ namespace GoogleApi.Test.Functions
 
             Assert.IsNotNull(decodePolyLine.FirstOrDefault());
             Assert.AreEqual(6, decodePolyLine.Length);
-            Assert.AreEqual(decodePolyLine[0].LocationString, location1.LocationString);
-            Assert.AreEqual(decodePolyLine[1].LocationString, location2.LocationString);
-            Assert.AreEqual(decodePolyLine[2].LocationString, location3.LocationString);
-            Assert.AreEqual(decodePolyLine[3].LocationString, location4.LocationString);
-            Assert.AreEqual(decodePolyLine[4].LocationString, location5.LocationString);
-            Assert.AreEqual(decodePolyLine[5].LocationString, location6.LocationString);
+            Assert.AreEqual(decodePolyLine[0].ToString(), location1.ToString());
+            Assert.AreEqual(decodePolyLine[1].ToString(), location2.ToString());
+            Assert.AreEqual(decodePolyLine[2].ToString(), location3.ToString());
+            Assert.AreEqual(decodePolyLine[3].ToString(), location4.ToString());
+            Assert.AreEqual(decodePolyLine[4].ToString(), location5.ToString());
+            Assert.AreEqual(decodePolyLine[5].ToString(), location6.ToString());
         }
+
         [Test]
         public void MergePolyLineWhenEncdodedLocationsIsNullTest()
         {
@@ -67,12 +69,13 @@ namespace GoogleApi.Test.Functions
 
             Assert.IsNotNull(decodePolyLine.FirstOrDefault());
             Assert.AreEqual(3, decodePolyLine.Length);
-            Assert.AreEqual(decodePolyLine[0].LocationString, location1.LocationString);
-            Assert.AreEqual(decodePolyLine[1].LocationString, location2.LocationString);
-            Assert.AreEqual(decodePolyLine[2].LocationString, location3.LocationString);
+            Assert.AreEqual(decodePolyLine[0].ToString(), location1.ToString());
+            Assert.AreEqual(decodePolyLine[1].ToString(), location2.ToString());
+            Assert.AreEqual(decodePolyLine[2].ToString(), location3.ToString());
 
 
         }
+
         [Test]
         public void DecodePolyLineWhenEncdodedLocationsIsNullTest()
         {

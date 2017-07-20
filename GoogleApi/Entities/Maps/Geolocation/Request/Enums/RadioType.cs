@@ -3,29 +3,32 @@
 namespace GoogleApi.Entities.Maps.Geolocation.Request.Enums
 {
     /// <summary>
-    /// RadioType
+    /// Radio Type.
     /// </summary>
-    [DataContract]
     public enum RadioType
     {
         /// <summary>
-        /// Radio type lete
+        /// Lte.
         /// </summary>
-        [EnumMember(Value = "lte")] Lte,
+        [EnumMember(Value = "lte")]
+        Lte,
 
         /// <summary>
-        /// 
+        /// Gsm.
         /// </summary>
-        [EnumMember(Value = "gsm")] Gsm,
+        [EnumMember(Value = "gsm")]
+        Gsm,
 
         /// <summary>
-        /// 
+        /// Cdma.
         /// </summary>
-        [EnumMember(Value = "cdma")] Cdma,
+        [EnumMember(Value = "cdma")]
+        Cdma,
 
         /// <summary>
-        /// 
+        /// Wcdma.
         /// </summary>
-        [EnumMember(Value = "wcdma")] Wcdma
+        [EnumMember(Value = "wcdma")]
+        Wcdma
     }
 }

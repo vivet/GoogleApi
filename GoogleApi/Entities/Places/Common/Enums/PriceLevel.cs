@@ -5,32 +5,36 @@ namespace GoogleApi.Entities.Places.Common.Enums
     /// <summary>
     /// Specifies the order in which results are listed for place searches.
     /// </summary>
-    [DataContract]
     public enum PriceLevel
     {
         /// <summary>
-        /// Free 
+        /// Free.
         /// </summary>
-        [EnumMember(Value = "0")] Free = 0,
+        [EnumMember(Value = "0")]
+        Free = 0,
 
         /// <summary>
-        /// Inexpensive 
+        /// Inexpensive.
         /// </summary>
-        [EnumMember(Value = "1")] Inexpensive = 1,
+        [EnumMember(Value = "1")]
+        Inexpensive = 1,
 
         /// <summary>
-        /// Moderate 
+        /// Moderate.
         /// </summary>
-        [EnumMember(Value = "2")] Moderate = 2,
+        [EnumMember(Value = "2")]
+        Moderate = 2,
 
         /// <summary>
-        /// Expensive 
+        /// Expensive.
         /// </summary>
-        [EnumMember(Value = "3")] Expensive = 3,
+        [EnumMember(Value = "3")]
+        Expensive = 3,
 
         /// <summary>
-        /// Very Expensive 
+        /// Very Expensive.
         /// </summary>
-        [EnumMember(Value = "4")] VeryExpensive = 4,
+        [EnumMember(Value = "4")]
+        VeryExpensive = 4
     }
 }

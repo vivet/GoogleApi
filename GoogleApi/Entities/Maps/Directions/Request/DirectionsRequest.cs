@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common.Enums;
-using GoogleApi.Extensions;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
     /// <summary>
     /// Directions Request.
     /// </summary>
-    public class DirectionsRequest : BaseMapsChannelRequest, IQueryStringRequest
+    public class DirectionsRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "directions/json";
 
@@ -33,13 +33,13 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// You can retrieve place IDs from the Google Maps Geocoding API and the Google Places API (including Place Autocomplete). 
         /// For an example using place IDs from Place Autocomplete, see Place Autocomplete and Directions.For more about place IDs, see the place ID overview. "origins= place_id:ChIJ3S-JXmauEmsRUcIaWtf4MzE".
         /// </summary>
-        public virtual string Origin { get; set; }
+        public virtual Location Origin { get; set; }
 
         /// <summary>
         /// The address, textual latitude/longitude value, or place ID to which you wish to calculate directions. 
         /// The options for the destination parameter are the same as for the <see cref="Origin"/> parameter, described above.
         /// </summary>
-        public virtual string Destination { get; set; }
+        public virtual Location Destination { get; set; }
 
         /// <summary>
         /// Directions results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
@@ -90,25 +90,34 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         public virtual DateTime? DepartureTime { get; set; }
   
         /// <summary>
-        /// waypoints (optional) specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). 
-        /// A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded. (For more information on waypoints, see Using Waypoints in Routes below.)
+        /// Waypoints (optional) specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). 
+        /// A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded. 
+        /// (For more information on waypoints, see Using Waypoints in Routes below.)
         /// If you'd like to influence the route using waypoints without adding a stopover, prefix the waypoint with 'via:' (deprecated On Aug 20, 2017)
         /// Waypoints prefixed with via: will not add an entry to the legs array, but will instead route the journey through the provided waypoint.
-        /// The via: prefix is most effective when creating routes in response to the user dragging the waypoints on the map. Doing so allows the user to see how the final route may look in real-time and helps ensure that waypoints are placed in locations that are accessible to the Google Maps Directions API.
-        /// Caution: Using the via: prefix to avoid stopovers results in directions that are very strict in their interpretation of the waypoint. This may result in severe detours on the route or ZERO_RESULTS in the response status code if the Google Maps Directions API is unable to create directions through that point.
+        /// The via: prefix is most effective when creating routes in response to the user dragging the waypoints on the map. 
+        /// Doing so allows the user to see how the final route may look in real-time and helps ensure that waypoints are placed in locations that 
+        /// are accessible to the Google Maps Directions API.
+        /// Caution: Using the via: prefix to avoid stopovers results in directions that are very strict in their interpretation of the waypoint. 
+        /// This may result in severe detours on the route or ZERO_RESULTS in the response status code if the Google Maps Directions API is unable to create directions 
+        /// through that point.
         /// </summary>
-        public virtual string[] Waypoints { get; set; }
+        public virtual Location[] Waypoints { get; set; }
 
         /// <summary>
-        /// optimize the provided route by rearranging the waypoints in a more efficient order. (This optimization is an application of the Travelling Salesman Problem.)
+        /// Optimize the provided route by rearranging the waypoints in a more efficient order. 
+        /// (This optimization is an application of the Travelling Salesman Problem.)
+        /// Default: false.
         /// http://en.wikipedia.org/wiki/Travelling_salesman_problem
         /// </summary>
-        public virtual bool OptimizeWaypoints { get; set; }
+        public virtual bool OptimizeWaypoints { get; set; } = false;
 
         /// <summary>
-        /// alternatives (optional), if set to true, specifies that the Directions service may provide more than one route alternative in the response. Note that providing route alternatives may increase the response time from the server.
+        /// Alternatives (optional), if set to true, specifies that the Directions service may provide more than one route alternative in the response. 
+        /// Note that providing route alternatives may increase the response time from the server.
+        /// Default: false.
         /// </summary>
-        public virtual bool Alternatives { get; set; }
+        public virtual bool Alternatives { get; set; } = false;
 
         /// <summary>
         /// Specifies the region code, specified as a ccTLD ("top-level domain") two-character value. (For more information see Region Biasing below.)
@@ -116,7 +125,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         public virtual string Region { get; set; }
 
         /// <summary>
-        /// language (optional) — The language in which to return results. See the supported list of domain languages. 
+        /// Language (optional) — The language in which to return results. See the supported list of domain languages. 
         /// Note that we often update supported languages so this list may not be exhaustive. 
         /// If language is not supplied, the Directions service will attempt to use the native language of the browser wherever possible. 
         /// You may also explicitly bias the results by using localized domains of http://map.google.com. 
@@ -125,26 +134,26 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// <see cref="BaseMapsChannelRequest.QueryStringParameters"/>
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this.Origin))
-                    throw new ArgumentException("Origin is required.");
+                if (this.Origin == null)
+                    throw new ArgumentException("Origin is required");
 
-                if (string.IsNullOrWhiteSpace(this.Destination))
-                    throw new ArgumentException("Destination is required.");
+                if (this.Destination == null)
+                    throw new ArgumentException("Destination is required");
 
                 if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
                     throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
 
                 var parameters = base.QueryStringParameters;
 
-                parameters.Add("origin", this.Origin);
-                parameters.Add("destination", this.Destination);
+                parameters.Add("origin", this.Origin.ToString());
+                parameters.Add("destination", this.Destination.ToString());
                 parameters.Add("units", this.Units.ToString().ToLower());
                 parameters.Add("mode", this.TransitMode.ToString().ToLower());
                 parameters.Add("language", this.Language.ToCode());
@@ -160,7 +169,10 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 
 
                 if (this.Waypoints != null && this.Waypoints.Any())
-                    parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(Waypoints) : this.Waypoints));
+                {
+                    var waypoints = this.Waypoints.Select(x => x.ToString());
+                    parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
+                }
 
                 if (this.TravelMode == TravelMode.Transit)
                 {

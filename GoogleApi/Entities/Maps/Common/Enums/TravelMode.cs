@@ -1,7 +1,7 @@
 ﻿namespace GoogleApi.Entities.Maps.Common.Enums
 {
     /// <summary>
-    /// Travel mode
+    /// Travel mode.
     /// </summary>
     public enum TravelMode
     {

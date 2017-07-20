@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Globalization;
-using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Entities.Places.Common;
-using GoogleApi.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Places.Photos.Request
 {
     /// <summary>
     /// Places Photos Request.
     /// </summary>
-    public class PlacesPhotosRequest : BasePlacesRequest, IQueryStringRequest
+    public class PlacesPhotosRequest : BasePlacesRequest, IRequestQueryString
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => base.BaseUrl + "photo";
 
@@ -33,29 +31,30 @@ namespace GoogleApi.Entities.Places.Photos.Request
         public virtual int? MaxHeight { get; set; }
 
         /// <summary>
-        /// photoreference (required) — A string identifier that uniquely identifies a photo. Photo references are returned from either a Place Search or Place Details request.
+        /// photoreference (required) — A string identifier that uniquely identifies a photo. 
+        /// Photo references are returned from either a Place Search or Place Details request.
         /// </summary>
         public virtual string PhotoReference { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(this.PhotoReference))
-                    throw new ArgumentException("PhotoReference is required.");
+                    throw new ArgumentException("PhotoReference is required");
 
                 if (!this.MaxHeight.HasValue && !this.MaxWidth.HasValue)
-                    throw new ArgumentException("MaxHeight or MaxWidth is required.");
+                    throw new ArgumentException("MaxHeight or MaxWidth is required");
 
                 if (this.MaxHeight.HasValue && (this.MaxHeight > 1600 || this.MaxHeight < 1))
-                    throw new ArgumentException("MaxHeight must be greater than or equal to 1 and less than or equal to 1.600.");
+                    throw new ArgumentException("MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
 
                 if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
-                    throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600.");
+                    throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
 
                 var parameters = base.QueryStringParameters;
 

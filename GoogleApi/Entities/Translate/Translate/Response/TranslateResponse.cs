@@ -1,18 +1,16 @@
-﻿using System.Runtime.Serialization;
-using GoogleApi.Entities.Common;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Translate.Translate.Response
 {
     /// <summary>
     /// Translate Response.
     /// </summary>
-    [DataContract]
     public class TranslateResponse : BaseResponse
     {
         /// <summary>
-        /// Data container returned by google translate.
+        /// Container for the translated results.
         /// </summary>
-        [DataMember(Name = "data")]
+        [JsonProperty("data")]
         public virtual Data Data { get; set; }
     }
 }

@@ -3,7 +3,7 @@
 namespace GoogleApi.Entities.Maps.Common.Enums
 {
     /// <summary>
-    /// Transit mode
+    /// Transit mode.
     /// </summary>
     [Flags]
     public enum TransitMode
@@ -29,7 +29,8 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         Tram = 0x3,
 
         /// <summary>
-        /// Indicates that the calculated route should prefer travel by train, tram, light rail, and subway. This is equivalent to transit_mode=train|tram|subway.
+        /// Indicates that the calculated route should prefer travel by train, tram, light rail, and subway. 
+        /// This is equivalent to transit_mode=train|tram|subway.
         /// </summary>
         Rail = 0x1 | 0x2 | 0x3
     }

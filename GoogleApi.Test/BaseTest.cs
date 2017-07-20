@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -11,8 +10,9 @@ namespace GoogleApi.Test
     public abstract class BaseTest
     {
         protected virtual AppSettings Settings { get; private set; }
-
         protected virtual string ApiKey => this.Settings.ApiKey;
+        protected virtual string CryptoKey => this.Settings.CryptoKey;
+        protected virtual string ClientId => this.Settings.ClientId;
         protected virtual string SearchEngineId => this.Settings.SearchEngineId;
         protected virtual string SearchEngineUrl => this.Settings.SearchEngineUrl;
 
@@ -35,16 +35,21 @@ namespace GoogleApi.Test
             }
         }
 
-        [DataContract]
         public class AppSettings
         {
-            [DataMember(Name = "ApiKey")]
+            [JsonProperty("ApiKey")]
             public string ApiKey { get; set; }
 
-            [DataMember(Name = "SearchEngineId")]
+            [JsonProperty("CryptoKey")]
+            public string CryptoKey { get; set; }
+
+            [JsonProperty("ClientId")]
+            public string ClientId { get; set; }
+
+            [JsonProperty("SearchEngineId")]
             public string SearchEngineId { get; set; }
 
-            [DataMember(Name = "SearchEngineUrl")]
+            [JsonProperty("SearchEngineUrl")]
             public string SearchEngineUrl { get; set; }
         }
     }

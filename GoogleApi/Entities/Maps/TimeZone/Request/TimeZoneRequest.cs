@@ -2,18 +2,20 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Interfaces;
-using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Extensions;
+using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Maps.TimeZone.Request
 {
     /// <summary>
-    /// TimeZone Request.
+    /// TimeZone request.
     /// </summary>
-    public class TimeZoneRequest : BaseMapsChannelRequest, IQueryStringRequest
+    public class TimeZoneRequest : BaseMapsChannelRequest, IRequestQueryString
     {
-        private const string BASE_URL = "maps.googleapis.com/maps/api/timezone/json";
+        /// <summary>
+        /// Base Url.
+        /// </summary>
+        protected internal override string BaseUrl => "maps.googleapis.com/maps/api/timezone/json";
 
         /// <summary>
         /// A comma-separated lat,lng tuple (eg. location=-33.86,151.20), representing the location to look up
@@ -22,9 +24,10 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
 
         /// <summary>
         /// Timestamp specifies the desired time as seconds since midnight, January 1, 1970 UTC. 
-        /// The Time Zone API uses the timestamp to determine whether or not Daylight Savings should be applied. Times before 1970 can be expressed as negative values.
+        /// The Time Zone API uses the timestamp to determine whether or not Daylight Savings should be applied. 
+        /// Times before 1970 can be expressed as negative values.
         /// </summary>
-        public virtual DateTime TimeStamp { get; set; }
+        public virtual DateTime TimeStamp { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// The language in which to return results. See the list of supported domain languages. 
@@ -33,29 +36,21 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
-        /// BaseUrl property overridden.
+        /// <see cref="BaseMapsChannelRequest.QueryStringParameters"/>
         /// </summary>
-        protected internal override string BaseUrl => TimeZoneRequest.BASE_URL;
-
-        /// <summary>
-        /// Get the query string collection of added parameters for the request.
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
             {
                 if (this.Location == null)
-                    throw new ArgumentException("Location is required.");
-
-                if (this.TimeStamp == null)
-                    throw new ArgumentException("TimeStamp is required.");
+                    throw new ArgumentException("Location is required");
 
                 var parameters = base.QueryStringParameters;
 
-                parameters.Add("location", this.Location.LocationString);
-                parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
                 parameters.Add("language", this.Language.ToCode());
+                parameters.Add("location", this.Location.ToString());
+                parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
 
                 return parameters;
             }

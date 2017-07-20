@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Maps.Roads.Common;
-using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request.Enums;
-using GoogleApi.Extensions;
-using Location = GoogleApi.Entities.Maps.Roads.Common.Location;
+using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Roads.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
 {
     /// <summary>
-    /// SpeedLimits Request.
+    /// Speed limits request.
     /// </summary>
     public class SpeedLimitsRequest : BaseRoadsRequest
     {
         /// <summary>
-        /// BaseUrl property overridden.
+        /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => "roads.googleapis.com/v1/speedLimits";
 
@@ -38,9 +36,9 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
         public virtual Units Unit { get; set; } = Units.Kph;
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
         public override QueryStringParameters QueryStringParameters
         {
             get
@@ -50,10 +48,10 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
                 if (this.Path == null || !this.Path.Any())
                 {
                     if (this.PlaceIds == null || !this.PlaceIds.Any())
-                        throw new ArgumentException("Path or PlaceId's is required.");
+                        throw new ArgumentException("Path or PlaceId's is required");
 
                     if (this.PlaceIds.Count() > 100)
-                        throw new ArgumentException("Max 100 PlaceId's is allowed.");
+                        throw new ArgumentException("Max PlaceId's exceeded");
 
                     foreach (var placeId in this.PlaceIds)
                     {
