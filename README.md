@@ -1,9 +1,9 @@
 ## GoogleApi v3.0.1
-#### Seamless Google Api integrations. Supports Maps, Places, Roads, Search and Translate.  
-Feel free to contribute, throw questions and report issues. 
-I usually respond fast (24-48 hours).
+### Seamless Google Api integrations. Supports Maps, Places, Roads, Search and Translate.  
 
 ##### Nuget: https://www.nuget.org/packages/GoogleApi (netstandard1.1, net4.5, portable-net45+win8+wpa81)
+
+##### Contact: Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).
 
 ##### Upcoming: GoogleApi v3.1, Complete 'Search Api' and open-search spec support.
 
