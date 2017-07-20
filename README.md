@@ -10,6 +10,7 @@ Feel free to contribute, ask questions or report issues. I usually reply within 
 * Downgrade to netstandard1.2 (more portable platforms support, i think).
 * Walk-through of all endpoints aligned with Google Api Documentation.
 * Request validation improved for all endpoints (all cases covered).
+* Error / Exception handling aligned for all Api's. New GoogleApiException, thrown when errors and http exception isn't thrown.
 * Added missing endpoints. All Api's are now complete.
 * Improvements to Language and Country Enums / Extensions (aligned with Google, isolated for all endpoints).
 * Type and Namespace cleanup. Base / Common entities refactored.
