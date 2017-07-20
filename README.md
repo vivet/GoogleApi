@@ -1,9 +1,11 @@
-## GoogleApi v3.0.0
+## GoogleApi v3.0.1
 Seamless Google Api integrations.
 Supports Maps, Places, Roads, Search and Translate.  
 Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).
 
-##### Nuget: https://www.nuget.org/packages/GoogleApi (netstandard1.2, net4.5)
+##### Nuget: https://www.nuget.org/packages/GoogleApi (netstandard1.1, net4.5, portable-net45+win8+wpa81)
+
+##### Upcoming: GoogleApi v3.1, Complete 'Search Api' and open-search spec support.
 
 ### Google Api Integrations:
 ##### Google Maps
@@ -23,7 +25,7 @@ Feel free to contribute, throw questions and report issues. I usually respond fa
   * Place Search
     * Near By
     * Text
-    * Radar (*deprecated June 30th 2018*)
+    * Radar (*deprecated by Google, June 30th 2018*)
   * Place Details
   * Place Add
   * Place Delete
@@ -31,7 +33,7 @@ Feel free to contribute, throw questions and report issues. I usually respond fa
   * Place Autocomplete
   * Query Autocomplete
 
-##### Google Search (*Alpha*)
+##### Google Search
   * Web
   * Image
   * Enterprise (Paid)
