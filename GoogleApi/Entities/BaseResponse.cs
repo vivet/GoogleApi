@@ -6,23 +6,22 @@ using Newtonsoft.Json.Converters;
 namespace GoogleApi.Entities
 {
     /// <summary>
-    /// MapsBase Response.
-    /// Base abstract class for Google responses.
+    /// Base abstract class for responses.
     /// </summary>
     public abstract class BaseResponse : IResponse
     {
         /// <summary>
-        /// See <see cref="IResponse.RawJson"/>
+        /// See <see cref="IResponse.RawJson"/>.
         /// </summary>
         public virtual string RawJson { get; set; }
 
         /// <summary>
-        /// See <see cref="IResponse.RawQueryString"/>
+        /// See <see cref="IResponse.RawQueryString"/>.
         /// </summary>
         public virtual string RawQueryString { get; set; }
 
         /// <summary>
-        /// Success status of the request.
+        /// See <see cref="IResponse.Status"/>.
         /// </summary>
         [JsonProperty("status")]
         [JsonConverter(typeof(StringEnumConverter))]

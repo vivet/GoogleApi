@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using GoogleApi.Entities;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
@@ -69,7 +70,7 @@ namespace GoogleApi.Test
         {
             public virtual string RawJson { get; set; }
             public virtual string RawQueryString { get; set; }
-            public virtual string ErrorMessage { get; set; }
+            public virtual Status? Status { get; set; }
         }
 
         public class TestRequest : BaseRequest
