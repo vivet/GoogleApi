@@ -3,6 +3,7 @@
 Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).
 
 **Nuget:** https://www.nuget.org/packages/GoogleApi (netstandard1.1, net4.5, portable-net45+win8+wpa81)
+
 **Upcoming:** Version 3.1, including full 'search api' and 'open-search-spec' support.
 
 ### Google Api Metods
