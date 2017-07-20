@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Geolocation.Response;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities
