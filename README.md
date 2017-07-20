@@ -5,7 +5,7 @@ Feel free to contribute, throw questions and report issues. I usually respond fa
 #### Upcoming: Version 3.1, including full 'search api' and 'open-search-spec' support.
 <br />
 
-### Google Api Metods
+### Google Api Methods
 ##### Google Maps
   * Directions
   * Distance Matrix
