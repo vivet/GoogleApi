@@ -1,0 +1,653 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoogleApi</RootNamespace>
+    <AssemblyName>GoogleApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\GoogleApi\bin\Debug\portable\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\GoogleApi\bin\Debug\net45\GoogleApi.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\googleapi\entities\BaseRequest.cs">
+      <Link>Entities\BaseRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\BaseResponse.cs">
+      <Link>Entities\BaseResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\AddressComponent.cs">
+      <Link>Entities\Common\AddressComponent.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\enums\Component.cs">
+      <Link>Entities\Common\Enums\Component.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\enums\extensions\LanguageExtension.cs">
+      <Link>Entities\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\enums\Language.cs">
+      <Link>Entities\Common\Enums\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\enums\LocationType.cs">
+      <Link>Entities\Common\Enums\LocationType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\enums\Status.cs">
+      <Link>Entities\Common\Enums\Status.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\Error.cs">
+      <Link>Entities\Common\Error.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\extensions\DateTimeExtension.cs">
+      <Link>Entities\Common\Extensions\DateTimeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\extensions\EnumExtension.cs">
+      <Link>Entities\Common\Extensions\EnumExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\common\Location.cs">
+      <Link>Entities\Common\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\ErrorResponse.cs">
+      <Link>Entities\ErrorResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\interfaces\IRequest.cs">
+      <Link>Entities\Interfaces\IRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\interfaces\IRequestJson.cs">
+      <Link>Entities\Interfaces\IRequestJson.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\interfaces\IRequestQueryString.cs">
+      <Link>Entities\Interfaces\IRequestQueryString.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\interfaces\IResponse.cs">
+      <Link>Entities\Interfaces\IResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\BaseMapsChannelRequest.cs">
+      <Link>Entities\Maps\BaseMapsChannelRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\BaseMapsRequest.cs">
+      <Link>Entities\Maps\BaseMapsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\Distance.cs">
+      <Link>Entities\Maps\Common\Distance.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\Duration.cs">
+      <Link>Entities\Maps\Common\Duration.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\enums\AvoidWay.cs">
+      <Link>Entities\Maps\Common\Enums\AvoidWay.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\enums\TrafficModel.cs">
+      <Link>Entities\Maps\Common\Enums\TrafficModel.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\enums\TransitMode.cs">
+      <Link>Entities\Maps\Common\Enums\TransitMode.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\enums\TransitRoutingPreference.cs">
+      <Link>Entities\Maps\Common\Enums\TransitRoutingPreference.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\enums\TravelMode.cs">
+      <Link>Entities\Maps\Common\Enums\TravelMode.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\enums\Units.cs">
+      <Link>Entities\Maps\Common\Enums\Units.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\common\Fare.cs">
+      <Link>Entities\Maps\Common\Fare.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\request\DirectionsRequest.cs">
+      <Link>Entities\Maps\Directions\Request\DirectionsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\Bounds.cs">
+      <Link>Entities\Maps\Directions\Response\Bounds.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\DirectionsResponse.cs">
+      <Link>Entities\Maps\Directions\Response\DirectionsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\enums\VehicleType.cs">
+      <Link>Entities\Maps\Directions\Response\Enums\VehicleType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\Leg.cs">
+      <Link>Entities\Maps\Directions\Response\Leg.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\Line.cs">
+      <Link>Entities\Maps\Directions\Response\Line.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\OverviewPolyline.cs">
+      <Link>Entities\Maps\Directions\Response\OverviewPolyline.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\Route.cs">
+      <Link>Entities\Maps\Directions\Response\Route.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\Step.cs">
+      <Link>Entities\Maps\Directions\Response\Step.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\Stop.cs">
+      <Link>Entities\Maps\Directions\Response\Stop.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\TransitAgency.cs">
+      <Link>Entities\Maps\Directions\Response\TransitAgency.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\TransitDetails.cs">
+      <Link>Entities\Maps\Directions\Response\TransitDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\directions\response\Vehicle.cs">
+      <Link>Entities\Maps\Directions\Response\Vehicle.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\distancematrix\request\DistanceMatrixRequest.cs">
+      <Link>Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\distancematrix\response\DistanceMatrixResponse.cs">
+      <Link>Entities\Maps\DistanceMatrix\Response\DistanceMatrixResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\distancematrix\response\Element.cs">
+      <Link>Entities\Maps\DistanceMatrix\Response\Element.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\distancematrix\response\Row.cs">
+      <Link>Entities\Maps\DistanceMatrix\Response\Row.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\elevation\request\ElevationRequest.cs">
+      <Link>Entities\Maps\Elevation\Request\ElevationRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\elevation\response\ElevationResponse.cs">
+      <Link>Entities\Maps\Elevation\Response\ElevationResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\elevation\response\Result.cs">
+      <Link>Entities\Maps\Elevation\Response\Result.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocode\request\GeocodingRequest.cs">
+      <Link>Entities\Maps\Geocode\Request\GeocodingRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocode\response\enums\GeometryLocationType.cs">
+      <Link>Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocode\response\GeocodingResponse.cs">
+      <Link>Entities\Maps\Geocode\Response\GeocodingResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocode\response\Geometry.cs">
+      <Link>Entities\Maps\Geocode\Response\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocode\response\Result.cs">
+      <Link>Entities\Maps\Geocode\Response\Result.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocode\response\ViewPort.cs">
+      <Link>Entities\Maps\Geocode\Response\ViewPort.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geolocation\request\CellTower.cs">
+      <Link>Entities\Maps\Geolocation\Request\CellTower.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geolocation\request\enums\RadioType.cs">
+      <Link>Entities\Maps\Geolocation\Request\Enums\RadioType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geolocation\request\GeolocationRequest.cs">
+      <Link>Entities\Maps\Geolocation\Request\GeolocationRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geolocation\request\WifiAccessPoint.cs">
+      <Link>Entities\Maps\Geolocation\Request\WifiAccessPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geolocation\response\GeolocationResponse.cs">
+      <Link>Entities\Maps\Geolocation\Response\GeolocationResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\BaseRoadsRequest.cs">
+      <Link>Entities\Maps\Roads\BaseRoadsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\BaseRoadsResponse.cs">
+      <Link>Entities\Maps\Roads\BaseRoadsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\common\enums\Units.cs">
+      <Link>Entities\Maps\Roads\Common\Enums\Units.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\common\Location.cs">
+      <Link>Entities\Maps\Roads\Common\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\common\SnappedPoint.cs">
+      <Link>Entities\Maps\Roads\Common\SnappedPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\nearestroads\request\NearestRoadsRequest.cs">
+      <Link>Entities\Maps\Roads\NearestRoads\Request\NearestRoadsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\nearestroads\response\NearestRoadsResponse.cs">
+      <Link>Entities\Maps\Roads\NearestRoads\Response\NearestRoadsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\snaptoroads\request\SnapToRoadsRequest.cs">
+      <Link>Entities\Maps\Roads\SnapToRoads\Request\SnapToRoadsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\snaptoroads\response\SnapToRoadsResponse.cs">
+      <Link>Entities\Maps\Roads\SnapToRoads\Response\SnapToRoadsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\speedlimits\request\SpeedLimitsRequest.cs">
+      <Link>Entities\Maps\Roads\SpeedLimits\Request\SpeedLimitsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\speedlimits\response\SpeedLimit.cs">
+      <Link>Entities\Maps\Roads\SpeedLimits\Response\SpeedLimit.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\roads\speedlimits\response\SpeedLimitsResponse.cs">
+      <Link>Entities\Maps\Roads\SpeedLimits\Response\SpeedLimitsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\timezone\request\TimeZoneRequest.cs">
+      <Link>Entities\Maps\TimeZone\Request\TimeZoneRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\timezone\response\TimeZoneResponse.cs">
+      <Link>Entities\Maps\TimeZone\Response\TimeZoneResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\add\request\PlacesAddRequest.cs">
+      <Link>Entities\Places\Add\Request\PlacesAddRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\add\response\PlacesAddResponse.cs">
+      <Link>Entities\Places\Add\Response\PlacesAddResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\autocomplete\request\enums\RestrictPlaceType.cs">
+      <Link>Entities\Places\AutoComplete\Request\Enums\RestrictPlaceType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\autocomplete\request\PlacesAutoCompleteRequest.cs">
+      <Link>Entities\Places\AutoComplete\Request\PlacesAutoCompleteRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\autocomplete\response\PlacesAutoCompleteResponse.cs">
+      <Link>Entities\Places\AutoComplete\Response\PlacesAutoCompleteResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\BasePlacesRequest.cs">
+      <Link>Entities\Places\BasePlacesRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\BasePlacesResponse.cs">
+      <Link>Entities\Places\BasePlacesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\AlternativePlace.cs">
+      <Link>Entities\Places\Common\AlternativePlace.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\enums\PlaceLocationType.cs">
+      <Link>Entities\Places\Common\Enums\PlaceLocationType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\enums\PriceLevel.cs">
+      <Link>Entities\Places\Common\Enums\PriceLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\enums\Scope.cs">
+      <Link>Entities\Places\Common\Enums\Scope.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\Geometry.cs">
+      <Link>Entities\Places\Common\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\MatchedSubstring.cs">
+      <Link>Entities\Places\Common\MatchedSubstring.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\Photo.cs">
+      <Link>Entities\Places\Common\Photo.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\Prediction.cs">
+      <Link>Entities\Places\Common\Prediction.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\StructuredFormatting.cs">
+      <Link>Entities\Places\Common\StructuredFormatting.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\common\Term.cs">
+      <Link>Entities\Places\Common\Term.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\delete\request\PlacesDeleteRequest.cs">
+      <Link>Entities\Places\Delete\Request\PlacesDeleteRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\delete\response\PlacesDeleteResponse.cs">
+      <Link>Entities\Places\Delete\Response\PlacesDeleteResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\request\enums\Extensions.cs">
+      <Link>Entities\Places\Details\Request\Enums\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\request\PlacesDetailsRequest.cs">
+      <Link>Entities\Places\Details\Request\PlacesDetailsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\Aspect.cs">
+      <Link>Entities\Places\Details\Response\Aspect.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\AspectRating.cs">
+      <Link>Entities\Places\Details\Response\AspectRating.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\DayTime.cs">
+      <Link>Entities\Places\Details\Response\DayTime.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\DetailsResult.cs">
+      <Link>Entities\Places\Details\Response\DetailsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\OpeningHours.cs">
+      <Link>Entities\Places\Details\Response\OpeningHours.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\Period.cs">
+      <Link>Entities\Places\Details\Response\Period.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\PlacesDetailsResponse.cs">
+      <Link>Entities\Places\Details\Response\PlacesDetailsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\details\response\Review.cs">
+      <Link>Entities\Places\Details\Response\Review.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\photos\request\PlacesPhotosRequest.cs">
+      <Link>Entities\Places\Photos\Request\PlacesPhotosRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\photos\response\PlacesPhotosResponse.cs">
+      <Link>Entities\Places\Photos\Response\PlacesPhotosResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\queryautocomplete\request\PlacesQueryAutoCompleteRequest.cs">
+      <Link>Entities\Places\QueryAutoComplete\Request\PlacesQueryAutoCompleteRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\queryautocomplete\response\PlacesQueryAutoCompleteResponse.cs">
+      <Link>Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\BasePlacesSearchRequest.cs">
+      <Link>Entities\Places\Search\BasePlacesSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\BasePlacesSearchResponse.cs">
+      <Link>Entities\Places\Search\BasePlacesSearchResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\common\BaseResult.cs">
+      <Link>Entities\Places\Search\Common\BaseResult.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\common\enums\SearchPlaceType.cs">
+      <Link>Entities\Places\Search\Common\Enums\SearchPlaceType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\common\OpeningHours.cs">
+      <Link>Entities\Places\Search\Common\OpeningHours.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\nearby\request\enums\Ranking.cs">
+      <Link>Entities\Places\Search\NearBy\Request\Enums\Ranking.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\nearby\request\PlacesNearBySearchRequest.cs">
+      <Link>Entities\Places\Search\NearBy\Request\PlacesNearBySearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\nearby\response\NearByResult.cs">
+      <Link>Entities\Places\Search\NearBy\Response\NearByResult.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\nearby\response\PlacesNearbySearchResponse.cs">
+      <Link>Entities\Places\Search\NearBy\Response\PlacesNearbySearchResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\radar\request\PlacesRadarSearchRequest.cs">
+      <Link>Entities\Places\Search\Radar\Request\PlacesRadarSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\radar\response\PlacesRadarSearchResponse.cs">
+      <Link>Entities\Places\Search\Radar\Response\PlacesRadarSearchResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\radar\response\RadarResult.cs">
+      <Link>Entities\Places\Search\Radar\Response\RadarResult.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\text\request\PlacesTextSearchRequest.cs">
+      <Link>Entities\Places\Search\Text\Request\PlacesTextSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\text\response\PlacesTextSearchResponse.cs">
+      <Link>Entities\Places\Search\Text\Response\PlacesTextSearchResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\text\response\TextResult.cs">
+      <Link>Entities\Places\Search\Text\Response\TextResult.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\QueryStringParameter.cs">
+      <Link>Entities\QueryStringParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\QueryStringParameters.cs">
+      <Link>Entities\QueryStringParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\AltType.cs">
+      <Link>Entities\Search\Common\AltType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\ColorType.cs">
+      <Link>Entities\Search\Common\ColorType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\Country.cs">
+      <Link>Entities\Search\Common\Country.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\DateRestrictType.cs">
+      <Link>Entities\Search\Common\DateRestrictType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\DominantColorType.cs">
+      <Link>Entities\Search\Common\DominantColorType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\extensions\CountryExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\CountryExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\extensions\LanguageExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\FileType.cs">
+      <Link>Entities\Search\Common\FileType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\ImageSize.cs">
+      <Link>Entities\Search\Common\ImageSize.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\ImageType.cs">
+      <Link>Entities\Search\Common\ImageType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\Language.cs">
+      <Link>Entities\Search\Common\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\RightsType.cs">
+      <Link>Entities\Search\Common\RightsType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\SafetyLevel.cs">
+      <Link>Entities\Search\Common\SafetyLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\SearchType.cs">
+      <Link>Entities\Search\Common\SearchType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\SortBy.cs">
+      <Link>Entities\Search\Common\SortBy.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\enums\SortOrder.cs">
+      <Link>Entities\Search\Common\SortOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\request\ApiSpecificQueryParameters.cs">
+      <Link>Entities\Search\Common\Request\ApiSpecificQueryParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\request\BaseSearchRequest.cs">
+      <Link>Entities\Search\Common\Request\BaseSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\request\SortExpression.cs">
+      <Link>Entities\Search\Common\Request\SortExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\request\StandardQueryParameters.cs">
+      <Link>Entities\Search\Common\Request\StandardQueryParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\BaseSearchResponse.cs">
+      <Link>Entities\Search\Common\Response\BaseSearchResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\BodyLine.cs">
+      <Link>Entities\Search\Common\Response\BodyLine.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\Context.cs">
+      <Link>Entities\Search\Common\Response\Context.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\enums\EncodingType.cs">
+      <Link>Entities\Search\Common\Response\Enums\EncodingType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\enums\extensions\EncodingTypeExtension.cs">
+      <Link>Entities\Search\Common\Response\Enums\Extensions\EncodingTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\Facet.cs">
+      <Link>Entities\Search\Common\Response\Facet.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\Item.cs">
+      <Link>Entities\Search\Common\Response\Item.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\ItemImage.cs">
+      <Link>Entities\Search\Common\Response\ItemImage.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\Label.cs">
+      <Link>Entities\Search\Common\Response\Label.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\PageMap.cs">
+      <Link>Entities\Search\Common\Response\PageMap.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\Promotion.cs">
+      <Link>Entities\Search\Common\Response\Promotion.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\PromotionImage.cs">
+      <Link>Entities\Search\Common\Response\PromotionImage.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\QueryInformation.cs">
+      <Link>Entities\Search\Common\Response\QueryInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\SearchInformation.cs">
+      <Link>Entities\Search\Common\Response\SearchInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\Spelling.cs">
+      <Link>Entities\Search\Common\Response\Spelling.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\common\response\Url.cs">
+      <Link>Entities\Search\Common\Response\Url.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\enterprise\request\EnterpriseSearchRequest.cs">
+      <Link>Entities\Search\Enterprise\Request\EnterpriseSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\image\request\ImageSearchRequest.cs">
+      <Link>Entities\Search\Image\Request\ImageSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\search\web\request\WebSearchRequest.cs">
+      <Link>Entities\Search\Web\Request\WebSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\BaseTranslateRequest.cs">
+      <Link>Entities\Translate\BaseTranslateRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\common\enums\extensions\LanguageExtension.cs">
+      <Link>Entities\Translate\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\common\enums\extensions\StringExtension.cs">
+      <Link>Entities\Translate\Common\Enums\Extensions\StringExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\common\enums\Language.cs">
+      <Link>Entities\Translate\Common\Enums\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\common\enums\Model.cs">
+      <Link>Entities\Translate\Common\Enums\Model.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\detect\request\DetectRequest.cs">
+      <Link>Entities\Translate\Detect\Request\DetectRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\detect\response\Data.cs">
+      <Link>Entities\Translate\Detect\Response\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\detect\response\Detection.cs">
+      <Link>Entities\Translate\Detect\Response\Detection.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\detect\response\DetectResponse.cs">
+      <Link>Entities\Translate\Detect\Response\DetectResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\languages\request\LanguagesRequest.cs">
+      <Link>Entities\Translate\Languages\Request\LanguagesRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\languages\response\Data.cs">
+      <Link>Entities\Translate\Languages\Response\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\languages\response\LanguagesResponse.cs">
+      <Link>Entities\Translate\Languages\Response\LanguagesResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\languages\response\SupportedLanguage.cs">
+      <Link>Entities\Translate\Languages\Response\SupportedLanguage.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\translate\request\enums\Format.cs">
+      <Link>Entities\Translate\Translate\Request\Enums\Format.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\translate\request\TranslateRequest.cs">
+      <Link>Entities\Translate\Translate\Request\TranslateRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\translate\response\Data.cs">
+      <Link>Entities\Translate\Translate\Response\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\translate\response\TranslateResponse.cs">
+      <Link>Entities\Translate\Translate\Response\TranslateResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\translate\translate\response\Translation.cs">
+      <Link>Entities\Translate\Translate\Response\Translation.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\exceptions\GoogleApiException.cs">
+      <Link>Exceptions\GoogleApiException.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\GoogleFunctions.cs">
+      <Link>GoogleFunctions.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\GoogleMaps.cs">
+      <Link>GoogleMaps.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\GooglePlaces.cs">
+      <Link>GooglePlaces.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\GoogleSearch.cs">
+      <Link>GoogleSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\GoogleTranslate.cs">
+      <Link>GoogleTranslate.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\HttpEngine.cs">
+      <Link>HttpEngine.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="crypto, Version=1.7.0.0, Culture=neutral, PublicKeyToken=52d7d8cd84e8295f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle-Signed.1.7.0.2\lib\portable-net45+dnxcore50+wp80+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GoogleApi.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
