@@ -60,7 +60,7 @@ namespace GoogleApi.Test.Places.Search.Radar
             {
                 Key = this.ApiKey,
                 Location = new Location(55.673323, 12.527438),
-                Radius = 5000,
+                Radius = 50000,
                 Keyword = "abc"
             };
 

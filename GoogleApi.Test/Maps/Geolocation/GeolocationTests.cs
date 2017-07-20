@@ -1,8 +1,12 @@
 using System;
+using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geolocation
@@ -13,31 +17,27 @@ namespace GoogleApi.Test.Maps.Geolocation
         [Test]
         public void GeolocationTest()
         {
-            Assert.Inconclusive();
+            var request = new GeolocationRequest
+            {
+                Key = this.ApiKey
+            };
 
-            //var request = new GeolocationRequest
-            //{
-            //    Key = this.ApiKey
-            //};
-
-            //var result = GoogleMaps.Geolocation.Query(request);
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(Status.Ok, result.Status);
+            var result = GoogleMaps.Geolocation.Query(request);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
         public void GeolocationWhenAsyncTest()
         {
-            Assert.Inconclusive();
+            var request = new GeolocationRequest
+            {
+                Key = this.ApiKey
+            };
 
-            //var request = new GeolocationRequest
-            //{
-            //    Key = this.ApiKey
-            //};
-
-            //var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(Status.Ok, result.Status);
+            var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
@@ -111,31 +111,29 @@ namespace GoogleApi.Test.Maps.Geolocation
         [Test]
         public void GeolocationWhenWifiAccessPointsTest()
         {
-            Assert.Inconclusive();
-            
-            //var request = new GeolocationRequest
-            //{
-            //    Key = this.ApiKey,
-            //    WifiAccessPoints = new[]
-            //    {
-            //        new WifiAccessPoint
-            //        {
-            //            MacAddress = "00:25:9c:cf:1c:ac",
-            //            SignalStrength = -43,
-            //            SignalToNoiseRatio = 0
-            //        },
-            //        new WifiAccessPoint
-            //        {
-            //            MacAddress = "00:25:9c:cf:1c:ad",
-            //            SignalStrength = -55,
-            //            SignalToNoiseRatio = 0
-            //        }
-            //    }
-            //};
-            //var result = GoogleMaps.Geolocation.Query(request);
+            var request = new GeolocationRequest
+            {
+                Key = this.ApiKey,
+                WifiAccessPoints = new[]
+                {
+                    new WifiAccessPoint
+                    {
+                        MacAddress = "00:25:9c:cf:1c:ac",
+                        SignalStrength = -43,
+                        SignalToNoiseRatio = 0
+                    },
+                    new WifiAccessPoint
+                    {
+                        MacAddress = "00:25:9c:cf:1c:ad",
+                        SignalStrength = -55,
+                        SignalToNoiseRatio = 0
+                    }
+                }
+            };
+            var result = GoogleMaps.Geolocation.Query(request);
 
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(Status.Ok, result.Status);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]

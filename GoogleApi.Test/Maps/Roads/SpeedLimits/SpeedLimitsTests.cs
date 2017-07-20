@@ -14,39 +14,35 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
         [Test]
         public void SpeedLimitsTest()
         {
-            Assert.Inconclusive();
+            var request = new SpeedLimitsRequest
+            {
+                Key = this.ApiKey,
+                Path = new[]
+                {
+                    new Location(60.170880, 24.942795),
+                    new Location(60.170879, 24.942796),
+                    new Location(60.170877, 24.942796)
+                }
+            };
 
-            //var request = new SpeedLimitsRequest
-            //{
-            //    Key = this.ApiKey,
-            //    Path = new[]
-            //    {
-            //        new Location(60.170880, 24.942795),
-            //        new Location(60.170879, 24.942796),
-            //        new Location(60.170877, 24.942796)
-            //    }
-            //};
-
-            //var result = GoogleMaps.SpeedLimits.Query(request);
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(Status.Ok, result.Status);
+            var result = GoogleMaps.SpeedLimits.Query(request);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
 	    public void SpeedLimitsWhenAsyncTest()
 	    {
-	        Assert.Inconclusive();
+            var request = new SpeedLimitsRequest
+            {
+                Key = this.ApiKey,
+                Path = new[] { new Location(0, 0) }
+            };
+            var result = GoogleMaps.SpeedLimits.QueryAsync(request).Result;
 
-         //   var request = new SpeedLimitsRequest
-	        //{
-	        //    Key = this.ApiKey,
-	        //    Path = new[] { new Location(0, 0) }
-	        //};
-	        //var result = GoogleMaps.SpeedLimits.QueryAsync(request).Result;
-
-	        //Assert.IsNotNull(result);
-	        //Assert.AreEqual(Status.Ok, result.Status);
-	    }
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+        }
 
 	    [Test]
 	    public void SpeedLimitsWhenAsyncAndTimeoutTest()
