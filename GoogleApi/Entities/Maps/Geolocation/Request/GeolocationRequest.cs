@@ -48,7 +48,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// Specifies whether to fall back to IP geolocation if wifi and cell tower signals are not available. 
         /// Note that the IP address in the request header may not be the IP of the device. 
         /// Defaults to true. 
-        /// Set considerIp to false to disable fall back.
+        /// Set considerIp to false to disable fallback.
         /// </summary>
         [JsonProperty("considerIp")]
         public virtual bool ConsiderIp { get; set; } = true;

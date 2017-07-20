@@ -623,6 +623,9 @@
     <Compile Include="..\GoogleApi\Entities\Translate\Translate\Response\Translation.cs">
       <Link>Entities\Translate\Translate\Response\Translation.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Exceptions\GoogleApiException.cs">
+      <Link>Exceptions\GoogleApiException.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\GoogleFunctions.cs">
       <Link>GoogleFunctions.cs</Link>
     </Compile>

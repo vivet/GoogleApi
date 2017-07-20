@@ -10,6 +10,7 @@ using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Photos.Response;
+using GoogleApi.Exceptions;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;
@@ -162,7 +163,7 @@ namespace GoogleApi
                         var content = result.Content;
                         var json = content.ReadAsStringAsync().Result;
                         var data = content.ReadAsByteArrayAsync().Result;
-                        var stream = new MemoryStream(data, false);
+                        var stream = new MemoryStream(data);
 
                         TResponse response;
                         if (typeof(TResponse) == typeof(PlacesPhotosResponse))
@@ -186,6 +187,9 @@ namespace GoogleApi
                         response.RawJson = json;
                         response.RawQueryString = uri.PathAndQuery;
                         response.Status = response.Status ?? Status.Ok;
+
+                        if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
+                            throw new GoogleApiException(response.ErrorMessage, response.Status);
 
                         taskCompletionSource.SetResult(response);
                     }

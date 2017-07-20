@@ -28,9 +28,7 @@ namespace GoogleApi.Entities
         public virtual Status? Status { get; set; }
 
         /// <summary>
-        /// When the status code is other than 'Ok', there may be an additional error_message field within the response object. 
-        /// This field contains more detailed information about the reasons behind the given status code.
-        /// Note: This field is not guaranteed to be always present, and its content is subject to change.
+        /// See <see cref="IResponse.ErrorMessage"/>.
         /// </summary>
         [JsonProperty("error_message")]
         public virtual string ErrorMessage { get; set; }
