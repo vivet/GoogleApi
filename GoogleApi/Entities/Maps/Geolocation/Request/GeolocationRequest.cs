@@ -69,6 +69,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// See <see cref="BaseRequest.QueryStringParameters"/>.
         /// </summary>
         /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
+        [JsonIgnore]
         public override QueryStringParameters QueryStringParameters
         {
             get

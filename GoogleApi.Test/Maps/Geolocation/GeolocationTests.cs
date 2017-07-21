@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
+using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geolocation
@@ -17,12 +18,23 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey
+                Key = this.ApiKey,
+                ConsiderIp = false,
+                RadioType = RadioType.Gsm,
+                HomeMobileCountryCode = "310",
+                HomeMobileNetworkCode = "410",
+                Carrier = "Vodafone",
+
             };
 
             var result = GoogleMaps.Geolocation.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
+
+            Assert.IsNotNull(result.Location);
+            Assert.AreEqual(1457.00, result.Accuracy, 100.00);
+            Assert.AreEqual(55.660850200000006, result.Location.Latitude, 0.0001);
+            Assert.AreEqual(12.5031106, result.Location.Longitude, 0.0001);
         }
 
         [Test]
@@ -30,12 +42,22 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey
+                Key = this.ApiKey,
+                ConsiderIp = false,
+                RadioType = RadioType.Gsm,
+                HomeMobileCountryCode = "310",
+                HomeMobileNetworkCode = "410",
+                Carrier = "Vodafone",
             };
 
             var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
+
+            Assert.IsNotNull(result.Location);
+            Assert.AreEqual(1457.00, result.Accuracy, 100.00);
+            Assert.AreEqual(55.660850200000006, result.Location.Latitude, 0.0001);
+            Assert.AreEqual(12.5031106, result.Location.Longitude, 0.0001);
         }
 
         [Test]

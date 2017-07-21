@@ -1,20 +1,15 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Photos.Response;
 using GoogleApi.Exceptions;
 using Newtonsoft.Json;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Macs;
-using Org.BouncyCastle.Crypto.Parameters;
 
 namespace GoogleApi
 {
@@ -24,7 +19,7 @@ namespace GoogleApi
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
     public sealed class HttpEngine<TRequest, TResponse>
-        where TRequest : BaseRequest, new()
+        where TRequest : IRequest, new()
         where TResponse : IResponse, new()
     {
         internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
@@ -92,6 +87,9 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
+            if (timeout == null)
+                throw new ArgumentNullException(nameof(timeout));
+
             return this.QueryAsync(request, timeout, CancellationToken.None);
         }
 
@@ -99,15 +97,18 @@ namespace GoogleApi
         /// Asynchronously query the Google Maps API using the provided request.
         /// </summary>
         /// <param name="request">The request that will be sent.</param>
-        /// <param name="token">A cancellation cancellationToken that can be used to cancel the pending asynchronous task.</param>
+        /// <param name="cancellationToken">A cancellation cancellationToken that can be used to cancel the pending asynchronous task.</param>
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        public Task<TResponse> QueryAsync(TRequest request, CancellationToken token)
+        public Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return this.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), token);
+            if (cancellationToken == null)
+                throw new ArgumentNullException(nameof(cancellationToken));
+
+            return this.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), cancellationToken);
         }
 
         /// <summary>
@@ -126,18 +127,34 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            if (timeout == null)
+                throw new ArgumentNullException(nameof(timeout));
 
-            var uri = this.GetUri(request);
+            if (cancellationToken == null)
+                throw new ArgumentNullException(nameof(cancellationToken));
+
+            var uri = request.GetUri();
             var httpClient = new HttpClient { Timeout = timeout };
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Task<HttpResponseMessage> task;
+            if (request is IRequestJson)
+            {
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var task = request is IRequestQueryString
-                ? httpClient.GetAsync(uri, cancellationToken)
-                : httpClient.PostAsync(uri, new StringContent(JsonConvert.SerializeObject(request, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })), cancellationToken);
+                var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                var serializeObject = JsonConvert.SerializeObject(request, jsonSerializerSettings);
+
+                using (var json = new StringContent(serializeObject, Encoding.UTF8))
+                {
+                    var content = json.ReadAsByteArrayAsync().Result;
+                    var streamContent = new StreamContent(new MemoryStream(content));
+
+                    task = httpClient.PostAsync(uri, streamContent, cancellationToken);
+                }
+            }
+            else
+                task = httpClient.GetAsync(uri, cancellationToken);
 
             task.ContinueWith(x =>
             {
@@ -151,7 +168,7 @@ namespace GoogleApi
                     {
                         var exception = x.Exception == null
                             ? new NullReferenceException("task.Exception")
-                            : task.Exception?.InnerException ?? task.Exception ?? new Exception("unknown error");
+                            : x.Exception?.InnerException ?? x.Exception ?? new Exception("unknown error");
 
                         throw exception;
                     }
@@ -161,21 +178,21 @@ namespace GoogleApi
 
                         var result = x.Result;
                         var content = result.Content;
-                        var json = content.ReadAsStringAsync().Result;
-                        var data = content.ReadAsByteArrayAsync().Result;
-                        var stream = new MemoryStream(data);
+                        var rawJson = content.ReadAsStringAsync().Result;
+                        var rawBuffer = content.ReadAsByteArrayAsync().Result;
+                        var memoryStream = new MemoryStream(rawBuffer);
 
                         TResponse response;
                         if (typeof(TResponse) == typeof(PlacesPhotosResponse))
                         {
                             response = (TResponse)(IResponse)new PlacesPhotosResponse
                             {
-                                Photo = stream
+                                Photo = memoryStream
                             };
                         }
                         else
                         {
-                            using (var streamReader = new StreamReader(stream))
+                            using (var streamReader = new StreamReader(memoryStream))
                             {
                                 var jsonSerializer = new JsonSerializer();
                                 var jsonTextReader = new JsonTextReader(streamReader);
@@ -184,8 +201,8 @@ namespace GoogleApi
                             }
                         }
 
-                        response.RawJson = json;
-                        response.RawQueryString = uri.PathAndQuery;
+                        response.RawJson = rawJson;
+                        response.RawQueryString = x.Result.RequestMessage.RequestUri.PathAndQuery;
                         response.Status = response.Status ?? Status.Ok;
 
                         if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
@@ -198,44 +215,13 @@ namespace GoogleApi
                 {
                     taskCompletionSource.SetException(ex);
                 }
+                finally
+                {
+                    httpClient.Dispose();
+                }
             }, TaskContinuationOptions.ExecuteSynchronously);
 
             return taskCompletionSource.Task;
-        }
-
-        private Uri GetUri(TRequest request)
-        {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            var scheme = request.IsSsl ? "https://" : "http://";
-            var queryString = string.Join("&", request.QueryStringParameters.Select(x => Uri.EscapeDataString(x.Name) + "=" + Uri.EscapeDataString(x.Value)));
-            var uri = new Uri(scheme + request.BaseUrl + "?" + queryString);
-
-            return request.ClientId == null ? uri : this.SignUri(request, uri);
-        }
-        private Uri SignUri(TRequest request, Uri uri)
-        {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            if (uri == null)
-                throw new ArgumentNullException(nameof(uri));
-
-            var url = uri.LocalPath + uri.Query + "&client=" + request.ClientId;
-            var bytes = Encoding.UTF8.GetBytes(url);
-            var privateKey = Convert.FromBase64String(request.Key.Replace("-", "+").Replace("_", "/"));
-
-            var hmac = new HMac(new Sha256Digest());
-            hmac.Init(new KeyParameter(privateKey));
-
-            var signature = new byte[hmac.GetMacSize()];
-            var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
-
-            hmac.BlockUpdate(bytes, 0, bytes.Length);
-            hmac.DoFinal(signature, 0);
-
-            return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
         }
     }
 }

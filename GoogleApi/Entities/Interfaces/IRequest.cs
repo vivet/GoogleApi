@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Interfaces
+﻿using System;
+
+namespace GoogleApi.Entities.Interfaces
 {
     /// <summary>
     /// Base interface for requests.
@@ -22,6 +24,12 @@
         /// Determines if htttp or htttps is used when submitting the request.
         /// </summary>
         bool IsSsl { get; set; }
+
+        /// <summary>
+        /// Returns the Uri for the request.
+        /// </summary>
+        /// <returns>The <see cref="Uri"/>.</returns>
+        Uri GetUri();
 
         /// <summary>
         /// Get the query string collection of aggregated from all parameters added to the request.
