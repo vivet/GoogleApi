@@ -15,7 +15,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// <summary>
         /// Base url.
         /// </summary>
-        protected internal override string BaseUrl => "www.googleapis.com/language/translate/v2";
+        protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2";
 
         /// <summary>
         /// The language of the source text, set to one of the language codes listed in Language Support. 
