@@ -23,7 +23,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 RadioType = RadioType.Gsm,
                 HomeMobileCountryCode = "310",
                 HomeMobileNetworkCode = "410",
-                Carrier = "Vodafone",
+                Carrier = "Vodafone"
 
             };
 
@@ -47,7 +47,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 RadioType = RadioType.Gsm,
                 HomeMobileCountryCode = "310",
                 HomeMobileNetworkCode = "410",
-                Carrier = "Vodafone",
+                Carrier = "Vodafone"
             };
 
             var result = GoogleMaps.Geolocation.QueryAsync(request).Result;

@@ -54,7 +54,7 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
             if (this.Location == null)
                 throw new ArgumentException("Location is required");
 
-            if (!this.Radius.HasValue)
+            if (this.Radius == null)
                 throw new ArgumentException("Radius is required");
 
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
@@ -66,7 +66,7 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
             var parameters = base.GetQueryStringParameters();
 
             parameters.Add("location", this.Location.ToString());
-            parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+            parameters.Add("radius", this.Radius.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
 
             if (!string.IsNullOrWhiteSpace(this.Name))
                 parameters.Add("name", this.Name);
