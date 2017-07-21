@@ -23,21 +23,18 @@ namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
         public virtual IEnumerable<Location> Points { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseRoadsRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (this.Points == null || !this.Points.Any())
-                    throw new ArgumentException("Points is required");
+            if (this.Points == null || !this.Points.Any())
+                throw new ArgumentException("Points is required");
 
-                var parameters = base.QueryStringParameters;
-                parameters.Add("points", string.Join("|", this.Points));
+            var parameters = base.GetQueryStringParameters();
+            parameters.Add("points", string.Join("|", this.Points));
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

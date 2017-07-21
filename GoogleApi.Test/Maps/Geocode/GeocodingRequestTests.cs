@@ -21,7 +21,7 @@ namespace GoogleApi.Test.Maps.Geocode
             var request = new GeocodingRequest();
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
 

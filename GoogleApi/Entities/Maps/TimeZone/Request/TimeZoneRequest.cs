@@ -36,24 +36,21 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
-        /// <see cref="BaseMapsChannelRequest.QueryStringParameters"/>
+        /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (this.Location == null)
-                    throw new ArgumentException("Location is required");
+            if (this.Location == null)
+                throw new ArgumentException("Location is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("language", this.Language.ToCode());
-                parameters.Add("location", this.Location.ToString());
-                parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
+            parameters.Add("language", this.Language.ToCode());
+            parameters.Add("location", this.Location.ToString());
+            parameters.Add("timestamp", this.TimeStamp.DateTimeToUnixTimestamp().ToString());
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

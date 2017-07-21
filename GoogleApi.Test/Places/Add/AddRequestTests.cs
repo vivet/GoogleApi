@@ -32,7 +32,7 @@ namespace GoogleApi.Test.Places.Add
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -51,7 +51,7 @@ namespace GoogleApi.Test.Places.Add
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -68,7 +68,7 @@ namespace GoogleApi.Test.Places.Add
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Name must be provided");
@@ -85,7 +85,7 @@ namespace GoogleApi.Test.Places.Add
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Name must be provided");
@@ -103,7 +103,7 @@ namespace GoogleApi.Test.Places.Add
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Location must be provided");
@@ -122,7 +122,7 @@ namespace GoogleApi.Test.Places.Add
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Types must be provided. At least one type must be specified");
@@ -141,7 +141,7 @@ namespace GoogleApi.Test.Places.Add
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Types must be provided. At least one type must be specified");

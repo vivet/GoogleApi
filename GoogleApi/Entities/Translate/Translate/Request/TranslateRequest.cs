@@ -54,47 +54,44 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseTranslateRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
+            if (this.Target == null)
+                throw new ArgumentException("Target is required");
+
+            if (this.Qs == null || !this.Qs.Any())
+                throw new ArgumentException("Qs is required");
+
+            if (this.Model == Model.Nmt)
             {
-                if (this.Target == null)
-                    throw new ArgumentException("Target is required");
+                if (this.Source != null && !this.Source.Value.IsValidNmt())
+                    throw new ArgumentException("Source is not compatible with model 'nmt'");
 
-                if (this.Qs == null || !this.Qs.Any())
-                    throw new ArgumentException("Qs is required");
+                if (!this.Target.Value.IsValidNmt())
+                    throw new ArgumentException("Target is not compatible with model 'nmt'");
 
-                if (this.Model == Model.Nmt)
-                {
-                    if (this.Source != null && !this.Source.Value.IsValidNmt())
-                        throw new ArgumentException("Source is not compatible with model 'nmt'");
-
-                    if (!this.Target.Value.IsValidNmt())
-                        throw new ArgumentException("Target is not compatible with model 'nmt'");
-
-                    if (this.Source != null && this.Source != Language.English && this.Target != Language.English)
-                        throw new ArgumentException("Source or Target must be english");
-                }
-
-                var parameters = base.QueryStringParameters;
-
-                parameters.Add("target", this.Target?.ToCode());
-                parameters.Add("model", this.Model.ToString().ToLower());
-                parameters.Add("format", this.Format.ToString().ToLower());
-
-                if (this.Source != null)
-                    parameters.Add("source", this.Source?.ToCode());
-
-                foreach (var q in this.Qs)
-                {
-                    parameters.Add("q", q);
-                }
-
-                return parameters;
+                if (this.Source != null && this.Source != Language.English && this.Target != Language.English)
+                    throw new ArgumentException("Source or Target must be english");
             }
+
+            var parameters = base.GetQueryStringParameters();
+
+            parameters.Add("target", this.Target?.ToCode());
+            parameters.Add("model", this.Model.ToString().ToLower());
+            parameters.Add("format", this.Format.ToString().ToLower());
+
+            if (this.Source != null)
+                parameters.Add("source", this.Source?.ToCode());
+
+            foreach (var q in this.Qs)
+            {
+                parameters.Add("q", q);
+            }
+
+            return parameters;
         }
     }
 }

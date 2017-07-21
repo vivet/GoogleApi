@@ -30,7 +30,7 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -46,7 +46,7 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -63,7 +63,7 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Input is required");
@@ -80,7 +80,7 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Input is required");
@@ -98,7 +98,7 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
@@ -116,7 +116,7 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");

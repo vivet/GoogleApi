@@ -34,6 +34,7 @@ namespace GoogleApi.Entities.Interfaces
         /// <summary>
         /// Get the query string collection of aggregated from all parameters added to the request.
         /// </summary>
-        QueryStringParameters QueryStringParameters { get; }
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        QueryStringParameters GetQueryStringParameters();
     }
 }

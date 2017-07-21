@@ -37,31 +37,28 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         public virtual Location Location { get; set; }
 
         /// <summary>
-        /// See <see cref="BasePlacesSearchRequest.QueryStringParameters"/>.
+        /// See <see cref="BasePlacesSearchRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.Query))
-                    throw new ArgumentException("Query is required");
+            if (string.IsNullOrWhiteSpace(this.Query))
+                throw new ArgumentException("Query is required");
 
-                if (this.Location != null && this.Radius == null)
-                    throw new ArgumentException("Radius is required when Location is specified");
+            if (this.Location != null && this.Radius == null)
+                throw new ArgumentException("Radius is required when Location is specified");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("query", this.Query);
+            parameters.Add("query", this.Query);
 
-                if (this.Location != null)
-                    parameters.Add("location", this.Location.ToString());
+            if (this.Location != null)
+                parameters.Add("location", this.Location.ToString());
 
-                if (this.Radius != null)
-                    parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+            if (this.Radius != null)
+                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

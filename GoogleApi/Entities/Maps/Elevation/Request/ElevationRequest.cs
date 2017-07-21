@@ -43,34 +43,31 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
         public virtual int? Samples { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseMapsChannelRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
+            if (this.Locations == null && this.Path == null)
+                throw new ArgumentException("Locations or Path is required");
+
+            if (this.Locations != null && this.Path != null)
+                throw new ArgumentException("Path and Locations cannot both be specified");
+
+            var parameters = base.GetQueryStringParameters();
+
+            if (this.Locations == null)
             {
-                if (this.Locations == null && this.Path == null)
-                    throw new ArgumentException("Locations or Path is required");
+                if (this.Samples == null)
+                    throw new ArgumentException("Samples is required, when using Path");
 
-                if (this.Locations != null && this.Path != null)
-                    throw new ArgumentException("Path and Locations cannot both be specified");
-
-                var parameters = base.QueryStringParameters;
-
-                if (this.Locations == null)
-                {
-                    if (this.Samples == null)
-                        throw new ArgumentException("Samples is required, when using Path");
-
-                    parameters.Add("path", string.Join("|", this.Path ?? new[] { new Location(0, 0) }));
-                    parameters.Add("samples", this.Samples.ToString());
-                }
-                else
-                    parameters.Add("locations", string.Join("|", this.Locations));
-
-                return parameters;                
+                parameters.Add("path", string.Join("|", this.Path ?? new[] { new Location(0, 0) }));
+                parameters.Add("samples", this.Samples.ToString());
             }
+            else
+                parameters.Add("locations", string.Join("|", this.Locations));
+
+            return parameters;
         }
     }
 }

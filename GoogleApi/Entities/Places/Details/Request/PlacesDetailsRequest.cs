@@ -34,26 +34,23 @@ namespace GoogleApi.Entities.Places.Details.Request
         public virtual Enums.Extensions Extensions { get; set; } = Enums.Extensions.None;
 
         /// <summary>
-        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
+        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.PlaceId))
-                    throw new ArgumentException("PlaceId is required");
+            if (string.IsNullOrWhiteSpace(this.PlaceId))
+                throw new ArgumentException("PlaceId is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("placeid", this.PlaceId);
-                parameters.Add("language", this.Language.ToCode());
+            parameters.Add("placeid", this.PlaceId);
+            parameters.Add("language", this.Language.ToCode());
 
-                if (this.Extensions != Enums.Extensions.None)
-                    parameters.Add("extensions", this.Extensions.ToString().ToLower());
+            if (this.Extensions != Enums.Extensions.None)
+                parameters.Add("extensions", this.Extensions.ToString().ToLower());
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

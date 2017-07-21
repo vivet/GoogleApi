@@ -15,22 +15,19 @@ namespace GoogleApi.Entities.Search.Enterprise.Request
         public virtual string SearchEngineUrl { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseSearchRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns></returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrEmpty(this.SearchEngineUrl))
-                    throw new ArgumentException("SearchEngineUrl is required.");
+            if (string.IsNullOrEmpty(this.SearchEngineUrl))
+                throw new ArgumentException("SearchEngineUrl is required.");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("cref", this.SearchEngineUrl);
+            parameters.Add("cref", this.SearchEngineUrl);
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

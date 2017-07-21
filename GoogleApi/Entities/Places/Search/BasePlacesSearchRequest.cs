@@ -58,34 +58,31 @@ namespace GoogleApi.Entities.Places.Search
         public virtual string PageToken { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns></returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("language", Language.ToCode());
+            parameters.Add("language", Language.ToCode());
 
-                if (this.Type.HasValue)
-                    parameters.Add("type", this.Type.Value.ToString().ToLower());
+            if (this.Type.HasValue)
+                parameters.Add("type", this.Type.Value.ToString().ToLower());
 
-                if (this.OpenNow)
-                    parameters.Add("opennow");
+            if (this.OpenNow)
+                parameters.Add("opennow");
 
-                if (this.Minprice.HasValue)
-                    parameters.Add("minprice", this.Minprice.Value.ToString().ToLower());
+            if (this.Minprice.HasValue)
+                parameters.Add("minprice", this.Minprice.Value.ToString().ToLower());
 
-                if (this.Maxprice.HasValue)
-                    parameters.Add("maxprice", this.Maxprice.Value.ToString().ToLower());
+            if (this.Maxprice.HasValue)
+                parameters.Add("maxprice", this.Maxprice.Value.ToString().ToLower());
 
-                if (!string.IsNullOrWhiteSpace(this.PageToken))
-                    parameters.Add("pagetoken", this.PageToken);
+            if (!string.IsNullOrWhiteSpace(this.PageToken))
+                parameters.Add("pagetoken", this.PageToken);
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

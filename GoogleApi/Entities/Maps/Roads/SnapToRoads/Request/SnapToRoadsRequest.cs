@@ -29,23 +29,20 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         public virtual bool Interpolate { get; set; } = false;
 
         /// <summary>
-        /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>
+        /// See <see cref="BaseRoadsRequest.GetQueryStringParameters()"/>
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (this.Path == null || !this.Path.Any())
-                    throw new ArgumentException("Path is required");
+            if (this.Path == null || !this.Path.Any())
+                throw new ArgumentException("Path is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("path", string.Join("|", this.Path));
-                parameters.Add("interpolate", this.Interpolate.ToString());
+            parameters.Add("path", string.Join("|", this.Path));
+            parameters.Add("interpolate", this.Interpolate.ToString());
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

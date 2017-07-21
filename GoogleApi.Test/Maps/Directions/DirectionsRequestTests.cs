@@ -38,7 +38,7 @@ namespace GoogleApi.Test.Maps.Directions
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
@@ -55,7 +55,7 @@ namespace GoogleApi.Test.Maps.Directions
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
@@ -76,7 +76,7 @@ namespace GoogleApi.Test.Maps.Directions
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);

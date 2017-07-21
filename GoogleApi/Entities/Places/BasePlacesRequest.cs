@@ -46,23 +46,19 @@ namespace GoogleApi.Entities.Places
         }
 
         /// <summary>
-        /// See <see cref="BaseRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        /// <returns></returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required");
+            if (string.IsNullOrWhiteSpace(this.Key))
+                throw new ArgumentException("Key is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("sensor", Sensor.ToString().ToLower());
+            parameters.Add("sensor", Sensor.ToString().ToLower());
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

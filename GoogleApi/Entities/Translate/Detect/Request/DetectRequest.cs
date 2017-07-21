@@ -21,25 +21,22 @@ namespace GoogleApi.Entities.Translate.Detect.Request
         public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseTranslateRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
+            if (this.Qs == null || !this.Qs.Any())
+                throw new ArgumentException("Qs is required");
+
+            var parameters = base.GetQueryStringParameters();
+
+            foreach (var q in this.Qs)
             {
-                if (this.Qs == null || !this.Qs.Any())
-                    throw new ArgumentException("Qs is required");
-
-                var parameters = base.QueryStringParameters;
-
-                foreach (var q in this.Qs)
-                {
-                    parameters.Add("q", q);
-                }
-
-                return parameters;
+                parameters.Add("q", q);
             }
+
+            return parameters;
         }
     }
 }

@@ -48,35 +48,32 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
-        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
+        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrEmpty(this.Input))
-                    throw new ArgumentException("Input is required");
+            if (string.IsNullOrEmpty(this.Input))
+                throw new ArgumentException("Input is required");
 
-                if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
+            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("input", this.Input);
-                parameters.Add("language", this.Language.ToCode());
+            parameters.Add("input", this.Input);
+            parameters.Add("language", this.Language.ToCode());
 
-                if (!string.IsNullOrEmpty(this.Offset))
-                    parameters.Add("offset", this.Offset);
+            if (!string.IsNullOrEmpty(this.Offset))
+                parameters.Add("offset", this.Offset);
 
-                if (this.Location != null)
-                    parameters.Add("location", this.Location.ToString());
+            if (this.Location != null)
+                parameters.Add("location", this.Location.ToString());
 
-                if (this.Radius.HasValue)
-                    parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+            if (this.Radius.HasValue)
+                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

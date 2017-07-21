@@ -26,22 +26,19 @@ namespace GoogleApi.Entities.Search.Web.Request
         public virtual string SearchEngineId { get; set; }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseSearchRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns></returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrEmpty(this.SearchEngineId))
-                    throw new ArgumentException("SearchEngineId is required.");
+            if (string.IsNullOrEmpty(this.SearchEngineId))
+                throw new ArgumentException("SearchEngineId is required.");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("cx", this.SearchEngineId);
+            parameters.Add("cx", this.SearchEngineId);
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

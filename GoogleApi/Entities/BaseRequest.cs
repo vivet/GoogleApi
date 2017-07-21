@@ -44,7 +44,7 @@ namespace GoogleApi.Entities
         public virtual Uri GetUri()
         {
             var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = string.Join("&", this.QueryStringParameters.Select(x => Uri.EscapeDataString(x.Name) + "=" + Uri.EscapeDataString(x.Value)));
+            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => Uri.EscapeDataString(x.Name) + "=" + Uri.EscapeDataString(x.Value)));
             var uri = new Uri(scheme + this.BaseUrl + "?" + queryString);
 
             if (this.ClientId != null)
@@ -69,31 +69,28 @@ namespace GoogleApi.Entities
         }
 
         /// <summary>
-        /// See <see cref="IRequest.QueryStringParameters"/>.
+        /// See <see cref="IRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        [JsonIgnore]
-        public virtual QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public virtual QueryStringParameters GetQueryStringParameters()
         {
-            get
+            var parameters = new QueryStringParameters();
+
+            if (this.ClientId == null)
             {
-                var parameters = new QueryStringParameters();
-
-                if (this.ClientId == null)
-                {
-                    if (!string.IsNullOrWhiteSpace(this.Key))
-                        parameters.Add("key", this.Key);
-                }
-                else
-                {
-                    if (string.IsNullOrWhiteSpace(this.Key))
-                        throw new ArgumentException("Key is required.");
-
-                    if (!this.ClientId.StartsWith("gme-"))
-                        throw new ArgumentException("ClientId must begin with 'gme-'.");
-                }
-
-                return parameters;
+                if (!string.IsNullOrWhiteSpace(this.Key))
+                    parameters.Add("key", this.Key);
             }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(this.Key))
+                    throw new ArgumentException("Key is required.");
+
+                if (!this.ClientId.StartsWith("gme-"))
+                    throw new ArgumentException("ClientId must begin with 'gme-'.");
+            }
+
+            return parameters;
         }
     }
 }

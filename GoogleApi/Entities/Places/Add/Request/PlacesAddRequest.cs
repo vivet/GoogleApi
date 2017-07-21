@@ -81,26 +81,23 @@ namespace GoogleApi.Entities.Places.Add.Request
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>
-        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
+        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.Name))
-                    throw new ArgumentException("Name must be provided");
+            if (string.IsNullOrWhiteSpace(this.Name))
+                throw new ArgumentException("Name must be provided");
 
-                if (this.Location == null)
-                    throw new ArgumentException("Location must be provided");
+            if (this.Location == null)
+                throw new ArgumentException("Location must be provided");
 
-                if (this.Types == null || !this.Types.Any())
-                    throw new ArgumentException("Types must be provided. At least one type must be specified");
+            if (this.Types == null || !this.Types.Any())
+                throw new ArgumentException("Types must be provided. At least one type must be specified");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

@@ -39,80 +39,77 @@ namespace GoogleApi.Entities.Search.Common.Request
         }
 
         /// <summary>
-        /// Get the query string collection of added parameters for the request.
+        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns></returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required.");
+            if (string.IsNullOrWhiteSpace(this.Key))
+                throw new ArgumentException("Key is required.");
 
-                if (string.IsNullOrEmpty(this.Query))
-                    throw new ArgumentException("Query is required.");
+            if (string.IsNullOrEmpty(this.Query))
+                throw new ArgumentException("Query is required.");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("q", this.Query);
-                parameters.Add("alt", this.Standard.Alt.ToString().ToLower());
-                parameters.Add("userIp", this.Standard.UserIp ?? string.Empty);
-                parameters.Add("quotaUser", this.Standard.QuotaUser ?? string.Empty);
-                parameters.Add("prettyPrint", this.Standard.PrettyPrint.ToString().ToLower());
+            parameters.Add("q", this.Query);
+            parameters.Add("alt", this.Standard.Alt.ToString().ToLower());
+            parameters.Add("userIp", this.Standard.UserIp ?? string.Empty);
+            parameters.Add("quotaUser", this.Standard.QuotaUser ?? string.Empty);
+            parameters.Add("prettyPrint", this.Standard.PrettyPrint.ToString().ToLower());
 
-                if (this.Standard.Fields != null)
-                    parameters.Add("fields", this.Standard.Fields);
+            if (this.Standard.Fields != null)
+                parameters.Add("fields", this.Standard.Fields);
 
-                parameters.Add("hl", this.ApiSpecific.InterfaceLanguage.ToHl());
-                parameters.Add("gl", this.ApiSpecific.GeoLocation?.ToCr() ?? string.Empty);
-                parameters.Add("cr", this.ApiSpecific.CountryRestriction?.ToCr() ?? string.Empty);
-                parameters.Add("sort", this.ApiSpecific.SortExpression.ToString());
-                parameters.Add("start", this.ApiSpecific.StartIndex.ToString());
-                parameters.Add("safe", this.ApiSpecific.SafetyLevel.ToString().ToLower());
-                parameters.Add("filter", this.ApiSpecific.Filter ? "0" : "1");
-                parameters.Add("c2coff", this.ApiSpecific.DisableCnTwTranslation ? "0" : "1");
-                parameters.Add("rights", string.Join(",", this.ApiSpecific.Rights));
-                parameters.Add("fileType", string.Join(",", this.ApiSpecific.FileTypes));
-                parameters.Add("dateRestrict", this.ApiSpecific.DateRestrictType == null ? string.Empty : this.ApiSpecific.DateRestrictType.ToString().ToLower()[0] + "[" + this.ApiSpecific.DateRestrictNumber.GetValueOrDefault() + "]");
+            parameters.Add("hl", this.ApiSpecific.InterfaceLanguage.ToHl());
+            parameters.Add("gl", this.ApiSpecific.GeoLocation?.ToCr() ?? string.Empty);
+            parameters.Add("cr", this.ApiSpecific.CountryRestriction?.ToCr() ?? string.Empty);
+            parameters.Add("sort", this.ApiSpecific.SortExpression.ToString());
+            parameters.Add("start", this.ApiSpecific.StartIndex.ToString());
+            parameters.Add("safe", this.ApiSpecific.SafetyLevel.ToString().ToLower());
+            parameters.Add("filter", this.ApiSpecific.Filter ? "0" : "1");
+            parameters.Add("c2coff", this.ApiSpecific.DisableCnTwTranslation ? "0" : "1");
+            parameters.Add("rights", string.Join(",", this.ApiSpecific.Rights));
+            parameters.Add("fileType", string.Join(",", this.ApiSpecific.FileTypes));
+            parameters.Add("dateRestrict", this.ApiSpecific.DateRestrictType == null ? string.Empty : this.ApiSpecific.DateRestrictType.ToString().ToLower()[0] + "[" + this.ApiSpecific.DateRestrictNumber.GetValueOrDefault() + "]");
 
-                if (this.ApiSpecific.Number != null)
-                    parameters.Add("num", this.ApiSpecific.Number.ToString());
+            if (this.ApiSpecific.Number != null)
+                parameters.Add("num", this.ApiSpecific.Number.ToString());
 
-                if (this.ApiSpecific.Googlehost != null)
-                    parameters.Add("googleHost", this.ApiSpecific.Googlehost);
+            if (this.ApiSpecific.Googlehost != null)
+                parameters.Add("googleHost", this.ApiSpecific.Googlehost);
 
-                if (this.ApiSpecific.SiteSearch != null)
-                    parameters.Add("siteSearch", this.ApiSpecific.SiteSearch ?? string.Empty);
+            if (this.ApiSpecific.SiteSearch != null)
+                parameters.Add("siteSearch", this.ApiSpecific.SiteSearch ?? string.Empty);
 
-                if (this.ApiSpecific.SiteSearchFilter != null)
-                    parameters.Add("siteSearchFilter", this.ApiSpecific.SiteSearchFilter ?? string.Empty);
+            if (this.ApiSpecific.SiteSearchFilter != null)
+                parameters.Add("siteSearchFilter", this.ApiSpecific.SiteSearchFilter ?? string.Empty);
 
-                if (this.ApiSpecific.ExactTerms != null)
-                    parameters.Add("exactTerms", this.ApiSpecific.ExactTerms ?? string.Empty);
+            if (this.ApiSpecific.ExactTerms != null)
+                parameters.Add("exactTerms", this.ApiSpecific.ExactTerms ?? string.Empty);
 
-                if (this.ApiSpecific.ExcludeTerms != null)
-                    parameters.Add("excludeTerms", this.ApiSpecific.ExcludeTerms ?? string.Empty);
+            if (this.ApiSpecific.ExcludeTerms != null)
+                parameters.Add("excludeTerms", this.ApiSpecific.ExcludeTerms ?? string.Empty);
 
-                if (this.ApiSpecific.AndTerms != null)
-                    parameters.Add("hq", this.ApiSpecific.AndTerms ?? string.Empty);
+            if (this.ApiSpecific.AndTerms != null)
+                parameters.Add("hq", this.ApiSpecific.AndTerms ?? string.Empty);
 
-                if (this.ApiSpecific.OrTerms != null)
-                    parameters.Add("orTerms", this.ApiSpecific.OrTerms ?? string.Empty);
+            if (this.ApiSpecific.OrTerms != null)
+                parameters.Add("orTerms", this.ApiSpecific.OrTerms ?? string.Empty);
 
-                if (this.ApiSpecific.LinkSite != null)
-                    parameters.Add("linkSite", this.ApiSpecific.LinkSite ?? string.Empty);
+            if (this.ApiSpecific.LinkSite != null)
+                parameters.Add("linkSite", this.ApiSpecific.LinkSite ?? string.Empty);
 
-                if (this.ApiSpecific.RelatedSite != null)
-                    parameters.Add("relatedSite", this.ApiSpecific.RelatedSite ?? string.Empty);
+            if (this.ApiSpecific.RelatedSite != null)
+                parameters.Add("relatedSite", this.ApiSpecific.RelatedSite ?? string.Empty);
 
-                if (this.ApiSpecific.LowRange != null)
-                    parameters.Add("lowRange", this.ApiSpecific.LowRange.ToString());
+            if (this.ApiSpecific.LowRange != null)
+                parameters.Add("lowRange", this.ApiSpecific.LowRange.ToString());
 
-                if (this.ApiSpecific.HighRange != null)
-                    parameters.Add("highRange", this.ApiSpecific.HighRange.ToString());
+            if (this.ApiSpecific.HighRange != null)
+                parameters.Add("highRange", this.ApiSpecific.HighRange.ToString());
 
-                return parameters;
-            }           
+            return parameters;
         }
     }
 }

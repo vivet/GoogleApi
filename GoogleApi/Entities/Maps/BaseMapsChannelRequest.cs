@@ -21,20 +21,17 @@ namespace GoogleApi.Entities.Maps
         public virtual string Channel { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                if (!string.IsNullOrEmpty(this.Channel))
-                    parameters.Add("channel", this.Channel);
+            if (!string.IsNullOrEmpty(this.Channel))
+                parameters.Add("channel", this.Channel);
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

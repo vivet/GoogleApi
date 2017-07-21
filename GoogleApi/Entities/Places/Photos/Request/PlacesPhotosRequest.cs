@@ -37,37 +37,34 @@ namespace GoogleApi.Entities.Places.Photos.Request
         public virtual string PhotoReference { get; set; }
 
         /// <summary>
-        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
+        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.PhotoReference))
-                    throw new ArgumentException("PhotoReference is required");
+            if (string.IsNullOrWhiteSpace(this.PhotoReference))
+                throw new ArgumentException("PhotoReference is required");
 
-                if (!this.MaxHeight.HasValue && !this.MaxWidth.HasValue)
-                    throw new ArgumentException("MaxHeight or MaxWidth is required");
+            if (!this.MaxHeight.HasValue && !this.MaxWidth.HasValue)
+                throw new ArgumentException("MaxHeight or MaxWidth is required");
 
-                if (this.MaxHeight.HasValue && (this.MaxHeight > 1600 || this.MaxHeight < 1))
-                    throw new ArgumentException("MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
+            if (this.MaxHeight.HasValue && (this.MaxHeight > 1600 || this.MaxHeight < 1))
+                throw new ArgumentException("MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
 
-                if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
-                    throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
+            if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
+                throw new ArgumentException("MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("photoreference", this.PhotoReference);
+            parameters.Add("photoreference", this.PhotoReference);
 
-                if (this.MaxHeight.HasValue)
-                    parameters.Add("maxheight", this.MaxHeight.Value.ToString(CultureInfo.InvariantCulture));
+            if (this.MaxHeight.HasValue)
+                parameters.Add("maxheight", this.MaxHeight.Value.ToString(CultureInfo.InvariantCulture));
 
-                if (this.MaxWidth.HasValue)
-                    parameters.Add("maxwidth", this.MaxWidth.Value.ToString(CultureInfo.InvariantCulture));
+            if (this.MaxWidth.HasValue)
+                parameters.Add("maxwidth", this.MaxWidth.Value.ToString(CultureInfo.InvariantCulture));
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace GoogleApi.Test.Translate.Languages
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -46,7 +46,7 @@ namespace GoogleApi.Test.Translate.Languages
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -63,7 +63,7 @@ namespace GoogleApi.Test.Translate.Languages
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Target is required");

@@ -9,20 +9,17 @@ namespace GoogleApi.Entities.Maps.Roads
     public abstract class BaseRoadsRequest : BaseMapsRequest, IRequestQueryString
     {
         /// <summary>
-        /// See <see cref="BaseRequest.QueryStringParameters"/>
+        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>
         /// </summary>
-        /// <returns></returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required");
+            if (string.IsNullOrWhiteSpace(this.Key))
+                throw new ArgumentException("Key is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

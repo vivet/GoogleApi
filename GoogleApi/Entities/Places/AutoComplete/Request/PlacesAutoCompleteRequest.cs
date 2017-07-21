@@ -77,44 +77,41 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         public virtual Dictionary<Component, string> Components { get; set; }
 
         /// <summary>
-        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
+        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                if (string.IsNullOrEmpty(this.Input))
-                    throw new ArgumentException("Input is required");
+            if (string.IsNullOrEmpty(this.Input))
+                throw new ArgumentException("Input is required");
 
-                if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
+            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
 
-                parameters.Add("input", this.Input);
-                parameters.Add("language", this.Language.ToCode());
+            parameters.Add("input", this.Input);
+            parameters.Add("language", this.Language.ToCode());
 
-                if (!string.IsNullOrEmpty(this.Offset))
-                    parameters.Add("offset", this.Offset);
+            if (!string.IsNullOrEmpty(this.Offset))
+                parameters.Add("offset", this.Offset);
 
-                if (this.Location != null)
-                    parameters.Add("location", this.Location.ToString());
+            if (this.Location != null)
+                parameters.Add("location", this.Location.ToString());
 
-                if (this.Radius.HasValue)
-                    parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+            if (this.Radius.HasValue)
+                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-                if (this.Strictbounds)
-                    parameters.Add("strictbounds");
-                
-                if (this.Types != null && this.Types.Any())
-                    parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));
+            if (this.Strictbounds)
+                parameters.Add("strictbounds");
 
-                if (this.Components != null && this.Components.Any())
-                    parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
+            if (this.Types != null && this.Types.Any())
+                parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));
 
-                return parameters;
-            }
+            if (this.Components != null && this.Components.Any())
+                parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
+
+            return parameters;
         }
     }
 }

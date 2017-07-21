@@ -30,23 +30,20 @@ namespace GoogleApi.Entities.Translate.Languages.Request
         public virtual Model Model { get; set; } = Model.Base;
 
         /// <summary>
-        /// See <see cref="BaseTranslateRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (this.Target == null)
-                    throw new ArgumentException("Target is required");
+            if (this.Target == null)
+                throw new ArgumentException("Target is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("target", this.Target?.ToCode());
-                parameters.Add("model", this.Model.ToString().ToLower());
+            parameters.Add("target", this.Target?.ToCode());
+            parameters.Add("model", this.Model.ToString().ToLower());
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

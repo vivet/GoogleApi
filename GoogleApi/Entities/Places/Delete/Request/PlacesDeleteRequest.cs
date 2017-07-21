@@ -23,20 +23,17 @@ namespace GoogleApi.Entities.Places.Delete.Request
         public virtual string PlaceId { get; set; }
 
         /// <summary>
-        /// See <see cref="BasePlacesRequest.QueryStringParameters"/>.
+        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(this.PlaceId))
-                    throw new ArgumentException("PlaceId is required");
+            if (string.IsNullOrWhiteSpace(this.PlaceId))
+                throw new ArgumentException("PlaceId is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }

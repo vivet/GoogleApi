@@ -26,7 +26,7 @@ namespace GoogleApi.Test.Places.Delete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -43,7 +43,7 @@ namespace GoogleApi.Test.Places.Delete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Key is required");
@@ -60,7 +60,7 @@ namespace GoogleApi.Test.Places.Delete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "PlaceId is required");
@@ -77,7 +77,7 @@ namespace GoogleApi.Test.Places.Delete
 
             var exception = Assert.Throws<ArgumentException>(() =>
             {
-                var parameters = request.QueryStringParameters;
+                var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "PlaceId is required");

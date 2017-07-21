@@ -36,35 +36,32 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
         public virtual Units Unit { get; set; } = Units.Kph;
 
         /// <summary>
-        /// See <see cref="BaseRoadsRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseRoadsRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
+            var parameters = base.GetQueryStringParameters();
+
+            if (this.Path == null || !this.Path.Any())
             {
-                var parameters = base.QueryStringParameters;
+                if (this.PlaceIds == null || !this.PlaceIds.Any())
+                    throw new ArgumentException("Path or PlaceId's is required");
 
-                if (this.Path == null || !this.Path.Any())
+                if (this.PlaceIds.Count() > 100)
+                    throw new ArgumentException("Max PlaceId's exceeded");
+
+                foreach (var placeId in this.PlaceIds)
                 {
-                    if (this.PlaceIds == null || !this.PlaceIds.Any())
-                        throw new ArgumentException("Path or PlaceId's is required");
-
-                    if (this.PlaceIds.Count() > 100)
-                        throw new ArgumentException("Max PlaceId's exceeded");
-
-                    foreach (var placeId in this.PlaceIds)
-                    {
-                        parameters.Add("placeId", placeId);
-                    }
+                    parameters.Add("placeId", placeId);
                 }
-                else
-                {
-                    parameters.Add("path", string.Join("|", this.Path));
-                }
-
-                return parameters;
             }
+            else
+            {
+                parameters.Add("path", string.Join("|", this.Path));
+            }
+
+            return parameters;
         }
     }
 }

@@ -134,61 +134,58 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
-        /// <see cref="BaseMapsChannelRequest.QueryStringParameters"/>
+        /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
+            if (this.Origin == null)
+                throw new ArgumentException("Origin is required");
+
+            if (this.Destination == null)
+                throw new ArgumentException("Destination is required");
+
+            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
+                throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
+
+            var parameters = base.GetQueryStringParameters();
+
+            parameters.Add("origin", this.Origin.ToString());
+            parameters.Add("destination", this.Destination.ToString());
+            parameters.Add("units", this.Units.ToString().ToLower());
+            parameters.Add("mode", this.TransitMode.ToString().ToLower());
+            parameters.Add("language", this.Language.ToCode());
+
+            if (this.Region != null)
+                parameters.Add("region", this.Region);
+
+            if (this.Alternatives)
+                parameters.Add("alternatives", "true");
+
+            if (this.Avoid != AvoidWay.Nothing)
+                parameters.Add("avoid", this.Avoid.ToEnumString('|'));
+
+            if (this.Waypoints != null && this.Waypoints.Any())
             {
-                if (this.Origin == null)
-                    throw new ArgumentException("Origin is required");
+                var waypoints = this.Waypoints.Select(x => x.ToString());
+                parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
+            }
 
-                if (this.Destination == null)
-                    throw new ArgumentException("Destination is required");
+            if (this.TravelMode == TravelMode.Transit)
+            {
+                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
-                if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
-                    throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
+                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
 
-                var parameters = base.QueryStringParameters;
+                if (this.ArrivalTime != null)
+                    parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
-                parameters.Add("origin", this.Origin.ToString());
-                parameters.Add("destination", this.Destination.ToString());
-                parameters.Add("units", this.Units.ToString().ToLower());
-                parameters.Add("mode", this.TransitMode.ToString().ToLower());
-                parameters.Add("language", this.Language.ToCode());
+                if (this.DepartureTime != null)
+                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+            }
 
-                if (this.Region != null)
-                    parameters.Add("region", this.Region);
-
-                if (this.Alternatives)
-                    parameters.Add("alternatives", "true");
-
-                if (this.Avoid != AvoidWay.Nothing)
-                    parameters.Add("avoid", this.Avoid.ToEnumString('|'));
-
-                if (this.Waypoints != null && this.Waypoints.Any())
-                {
-                    var waypoints = this.Waypoints.Select(x => x.ToString());
-                    parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
-                }
-
-                if (this.TravelMode == TravelMode.Transit)
-                {
-                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
-
-                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
-
-                    if (this.ArrivalTime != null)
-                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-
-                    if (this.DepartureTime != null)
-                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-                }
-
-                return parameters;
-            }          
+            return parameters;
         }
     }
 }

@@ -55,37 +55,33 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         public virtual Dictionary<Component, string> Components { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseMapsChannelRequest.QueryStringParameters"/>.
+        /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        /// <returns></returns>
-        public override QueryStringParameters QueryStringParameters
+        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
+        public override QueryStringParameters GetQueryStringParameters()
         {
-            get
-            {
-                if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
-                    throw new ArgumentException("Location or Address is required");
+            if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
+                throw new ArgumentException("Location or Address is required");
 
-                var parameters = base.QueryStringParameters;
+            var parameters = base.GetQueryStringParameters();
 
-                parameters.Add("language", this.Language.ToCode());
+            parameters.Add("language", this.Language.ToCode());
 
-                if (this.Location != null)
-                    parameters.Add("latlng", this.Location.ToString());
-                else
-                    parameters.Add("address", this.Address);
+            if (this.Location != null)
+                parameters.Add("latlng", this.Location.ToString());
+            else
+                parameters.Add("address", this.Address);
 
-                if (this.Bounds != null && this.Bounds.Any())
-                    parameters.Add("bounds", string.Join("|", this.Bounds.AsEnumerable()));
+            if (this.Bounds != null && this.Bounds.Any())
+                parameters.Add("bounds", string.Join("|", this.Bounds.AsEnumerable()));
 
-                if (!string.IsNullOrWhiteSpace(this.Region))
-                    parameters.Add("region", this.Region);
+            if (!string.IsNullOrWhiteSpace(this.Region))
+                parameters.Add("region", this.Region);
 
-                if (this.Components != null && this.Components.Any())
-                    parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
+            if (this.Components != null && this.Components.Any())
+                parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
 
-                return parameters;
-            }
+            return parameters;
         }
     }
 }
