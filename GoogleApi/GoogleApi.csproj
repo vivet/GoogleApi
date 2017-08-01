@@ -30,7 +30,7 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.2" />
   </ItemGroup>
 </Project>
