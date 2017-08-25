@@ -1,7 +1,7 @@
 namespace GoogleApi.Entities.Search.Common.Enums
 {
     /// <summary>
-    /// Search Type
+    /// Search Type.
     /// </summary>
     public enum SearchType
     {

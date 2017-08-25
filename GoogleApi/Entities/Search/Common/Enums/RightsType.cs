@@ -9,18 +9,22 @@
         /// Cc_PublicDomain
         /// </summary>
         Cc_PublicDomain,
+
         /// <summary>
         /// Cc_Attribute
         /// </summary>
         Cc_Attribute,
+
         /// <summary>
         /// Cc_ShareAlike
         /// </summary>
         Cc_ShareAlike,
+
         /// <summary>
         /// Cc_NonCommercial
         /// </summary>
         Cc_NonCommercial,
+
         /// <summary>
         /// Cc_NonDerived
         /// </summary>

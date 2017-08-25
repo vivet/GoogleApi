@@ -1,13 +1,13 @@
+using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Request;
-using GoogleApi.Entities.Search.Web.Request;
 
 namespace GoogleApi.Entities.Search.Image.Request
 {
     /// <summary>
     /// Image Search Request.
     /// </summary>
-    public class ImageSearchRequest : WebSearchRequest
+    public class ImageSearchRequest : BaseSearchRequest
     {
         /// <summary>
         /// Type - Returns images of a type. 

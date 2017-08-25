@@ -1,7 +1,7 @@
 ﻿namespace GoogleApi.Entities.Search.Common.Enums
 {
     /// <summary>
-    /// Date restriction format.
+    /// Date restriction type.
     /// </summary>
     public enum DateRestrictType
     {

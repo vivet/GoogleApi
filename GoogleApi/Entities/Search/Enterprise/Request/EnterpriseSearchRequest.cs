@@ -1,5 +1,5 @@
 ﻿using System;
-using GoogleApi.Entities.Search.Common.Request;
+using GoogleApi.Entities.Search.Common;
 
 namespace GoogleApi.Entities.Search.Enterprise.Request
 {

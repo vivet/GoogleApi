@@ -9,34 +9,42 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// Black.
         /// </summary>
         Black,
+
         /// <summary>
         /// Blue.
         /// </summary>
         Blue,
+        
         /// <summary>
         /// Brown.
         /// </summary>
         Brown,
+        
         /// <summary>
         /// Gray.
         /// </summary>
         Gray,
+        
         /// <summary>
         /// Green.
         /// </summary>
         Green,
+        
         /// <summary>
         /// Purple.
         /// </summary>
         Purple,
+        
         /// <summary>
         /// Teal.
         /// </summary>
         Teal,
+        
         /// <summary>
         /// White.
         /// </summary>
         White,
+        
         /// <summary>
         /// Yellow.
         /// </summary>

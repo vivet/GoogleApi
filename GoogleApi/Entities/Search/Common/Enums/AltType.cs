@@ -9,6 +9,7 @@
         /// Json format.
         /// </summary>
         Json,
+
         /// <summary>
         /// Atom format.
         /// </summary>

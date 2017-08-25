@@ -9,6 +9,7 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// Rank.
         /// </summary>
         Rank,
+
         /// <summary>
         /// Date.
         /// </summary>

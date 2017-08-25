@@ -34,10 +34,10 @@ namespace GoogleApi.Entities.Search.Common.Request
         }
 
         /// <summary>
-        /// 
+        /// Converts a <see cref="string"/> into a <see cref="SortExpression"/>.
         /// </summary>
-        /// <param name="sortStr"></param>
-        /// <returns></returns>
+        /// <param name="sortStr">The <see cref="string"/> formatted as a valid sort expression.</param>
+        /// <returns>The converted <see cref="SortExpression"/></returns>
         public virtual SortExpression FromString(string sortStr)
         {
             var strings = sortStr.Split(',');
