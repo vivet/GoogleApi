@@ -169,7 +169,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
         [Test]
         public void SpeedLimitsWhenPathIsEmptyAndPlaceIdsIsEmptyTest()
         {
-            var request = new SpeedLimitsRequest()
+            var request = new SpeedLimitsRequest
             {
                 Key = this.ApiKey,
                 Path = new Location[0],

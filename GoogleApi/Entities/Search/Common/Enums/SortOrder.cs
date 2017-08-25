@@ -9,6 +9,7 @@
         /// Ascending.
         /// </summary>
         Ascending,
+
         /// <summary>
         /// Descending.
         /// </summary>

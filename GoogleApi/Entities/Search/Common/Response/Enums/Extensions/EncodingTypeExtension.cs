@@ -8,8 +8,8 @@
         /// <summary>
         /// Returns the encoding type code.
         /// </summary>
-        /// <param name="encodingType"></param>
-        /// <returns></returns>
+        /// <param name="encodingType">The <see cref="EncodingType"/>.</param>
+        /// <returns>Encoded name as string.</returns>
         public static string ToCode(this EncodingType encodingType)
         {
             switch (encodingType)
@@ -40,9 +40,10 @@
                 case EncodingType.VietnameseWindows1258: return "windows-1258";
                 case EncodingType.WestEuropeanLatin1Iso88591: return "ISO-8859-1";
                 case EncodingType.WestEuropeanLatin9Iso885915: return "ISO-8859-15";
-            }
 
-            return string.Empty;
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

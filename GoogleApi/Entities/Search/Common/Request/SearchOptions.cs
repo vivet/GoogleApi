@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Search.Common.Request
     /// <summary>
     /// Define properties of your search, like the search expression, number of results, language etc.
     /// </summary>
-    public class ApiSpecificQueryParameters
+    public class SearchOptions
     {
         /// <summary>
         /// Number of search results to return.
@@ -139,14 +139,11 @@ namespace GoogleApi.Entities.Search.Common.Request
         public virtual IEnumerable<FileType> FileTypes { get; set; } = new List<FileType>();
 
         /// <summary>
-        /// DateRestrict - Restricts results to URLs based on date.
+        /// Restricts results to URLs based on date. 
+        /// Supported values include:d[number]: requests results from the specified number of past days. w[number]: requests results from the specified number 
+        /// of past weeks. m[number]: requests results from the specified number of past months. y[number]: requests results from the specified number of past years.
         /// </summary>
-        public virtual DateRestrictType? DateRestrictType { get; set; }
-
-        /// <summary>
-        /// DateRestrictNumber - Requests results from the specified number of past days, weeks, months or years.
-        /// </summary>
-        public virtual int? DateRestrictNumber { get; set; }
+        public virtual DataRestrict DateRestrict { get; set; }
 
         /// <summary>
         /// Allowed values are web or image. If unspecified, results are limited to webpages.

@@ -9,9 +9,11 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// Color.
         /// </summary>
         Color,
+
         /// <summary>
         /// Grayscale.
         /// </summary>
+
         Grey,
         /// <summary>
         /// Black and white.

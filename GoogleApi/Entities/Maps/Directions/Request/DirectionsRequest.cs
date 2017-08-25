@@ -171,19 +171,19 @@ namespace GoogleApi.Entities.Maps.Directions.Request
                 parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
             }
 
-            if (this.TravelMode == TravelMode.Transit)
-            {
-                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+            if (this.TravelMode != TravelMode.Transit)
+                return parameters;
 
-                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+            parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
-                if (this.ArrivalTime != null)
-                    parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+            if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
 
-                if (this.DepartureTime != null)
-                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-            }
+            if (this.ArrivalTime != null)
+                parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+
+            if (this.DepartureTime != null)
+                parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
             return parameters;
         }

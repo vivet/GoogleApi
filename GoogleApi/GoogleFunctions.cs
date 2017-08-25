@@ -49,17 +49,17 @@ namespace GoogleApi
 
             foreach (var location in locations)
             {
-                if (location != null)
-                {
-                    var lat = (int) Math.Round(location.Latitude * 1E5);
-                    var lng = (int) Math.Round(location.Longitude * 1E5);
+                if (location == null)
+                    continue;
 
-                    encodeDiff(lat - lastLat);
-                    encodeDiff(lng - lastLng);
+                var lat = (int) Math.Round(location.Latitude * 1E5);
+                var lng = (int) Math.Round(location.Longitude * 1E5);
 
-                    lastLat = lat;
-                    lastLng = lng;
-                }
+                encodeDiff(lat - lastLat);
+                encodeDiff(lng - lastLng);
+
+                lastLat = lat;
+                lastLng = lng;
             }
 
             return encodedString.ToString();

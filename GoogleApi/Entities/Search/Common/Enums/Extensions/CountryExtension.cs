@@ -8,8 +8,8 @@
         /// <summary>
         /// Returns the Country restriction.
         /// </summary>
-        /// <param name="country"></param>
-        /// <returns></returns>
+        /// <param name="country">The <see cref="Country"/>.</param>
+        /// <returns>The <see cref="string"/> representation of the <see cref="Country"/> as 'cr' request parameter.</returns>
         public static string ToCr(this Country country)
         {
             switch (country)
@@ -256,16 +256,17 @@
                 case Country.Yugoslavia: return "countryYU";
                 case Country.Zambia: return "countryZM";
                 case Country.Zimbabwe: return "countryZW";
-            }
 
-            return string.Empty;
+                default:
+                    return string.Empty;
+            }
         }
 
         /// <summary>
         /// Return the GeoLocation code.
         /// </summary>
-        /// <param name="country"></param>
-        /// <returns></returns>
+        /// <param name="country">The <see cref="Country"/>.</param>
+        /// <returns>The <see cref="string"/> representation of the <see cref="Country"/> as 'gl' request parameter.</returns>
         public static string ToGl(this Country country)
         {
             switch (country)
@@ -512,9 +513,10 @@
                 case Country.Yugoslavia: return "yo";
                 case Country.Zambia: return "zm";
                 case Country.Zimbabwe: return "zw";
-            }
 
-            return string.Empty;
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

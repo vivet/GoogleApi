@@ -9,26 +9,32 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// Icon.
         /// </summary>
         Icon,
+
         /// <summary>
         /// Small.
         /// </summary>
         Small,
+        
         /// <summary>
         /// Medium.
         /// </summary>
         Medium,
+        
         /// <summary>
         /// Large.
         /// </summary>
         Large,
+        
         /// <summary>
         /// Xlarge.
         /// </summary>
         Xlarge,
+        
         /// <summary>
         /// Xxlarge.
         /// </summary>
         Xxlarge,
+        
         /// <summary>
         /// Huge.
         /// </summary>

@@ -28,6 +28,7 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Extensions
                 case Language.Catalan: return "ca";
                 case Language.Cebuano: return "ceb";
                 case Language.Chichewa: return "ny";
+                case Language.Chinese: return "zh-CN";
                 case Language.Chinese_Simplified: return "zh-CN";
                 case Language.Chinese_Traditional: return "zh-TW";
                 case Language.Corsican: return "co";
@@ -165,6 +166,82 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Extensions
                 case Language.Thai: return true;
                 case Language.Turkish: return true;
                 case Language.Vietnamese: return true;
+
+                case Language.Albanian:
+                case Language.Amharic:
+                case Language.Armenian:
+                case Language.Azeerbaijani:
+                case Language.Basque:
+                case Language.Belarusian:
+                case Language.Bengali:
+                case Language.Bosnian:
+                case Language.Catalan:
+                case Language.Cebuano:
+                case Language.Chichewa:
+                case Language.Chinese:
+                case Language.Corsican:
+                case Language.Esperanto:
+                case Language.Estonian:
+                case Language.Filipino:
+                case Language.Finnish:
+                case Language.Frisian:
+                case Language.Galician:
+                case Language.Georgian:
+                case Language.Gujarati:
+                case Language.Haitian_Creole:
+                case Language.Hausa:
+                case Language.Hawaiian:
+                case Language.Hmong:
+                case Language.Hungarian:
+                case Language.Igbo:
+                case Language.Irish:
+                case Language.Javanese:
+                case Language.Kannada:
+                case Language.Kazakh:
+                case Language.Khmer:
+                case Language.Kurdish:
+                case Language.Kyrgyz:
+                case Language.Lao:
+                case Language.Latin:
+                case Language.Latvian:
+                case Language.Lithuanian:
+                case Language.Luxembourgish:
+                case Language.Macedonian:
+                case Language.Malagasy:
+                case Language.Malay:
+                case Language.Malayalam:
+                case Language.Maltese:
+                case Language.Maori:
+                case Language.Marathi:
+                case Language.Mongolian:
+                case Language.Burmese:
+                case Language.Nepali:
+                case Language.Pashto:
+                case Language.Persian:
+                case Language.Punjabi:
+                case Language.Samoan:
+                case Language.Scots_Gaelic:
+                case Language.Serbian:
+                case Language.Sesotho:
+                case Language.Shona:
+                case Language.Sindhi:
+                case Language.Sinhala:
+                case Language.Slovenian:
+                case Language.Somali:
+                case Language.Sundanese:
+                case Language.Swahili:
+                case Language.Tajik:
+                case Language.Tamil:
+                case Language.Telugu:
+                case Language.Ukrainian:
+                case Language.Urdu:
+                case Language.Uzbek:
+                case Language.Welsh:
+                case Language.Xhosa:
+                case Language.Yiddish:
+                case Language.Yoruba:
+                case Language.Zulu:
+                    return false;
 
                 default:
                     return false;

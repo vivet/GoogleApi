@@ -182,16 +182,16 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                     parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
             }
 
-            if (this.TravelMode == TravelMode.Driving)
-            {
-                if (this.DepartureTime != null)
-                {
-                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+            if (this.TravelMode != TravelMode.Driving)
+                return parameters;
 
-                    if (this.Key != null || this.ClientId != null)
-                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
-                }
-            }
+            if (this.DepartureTime == null)
+                return parameters;
+
+            parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+
+            if (this.Key != null || this.ClientId != null)
+                parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
 
             return parameters;
         }
