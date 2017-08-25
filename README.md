@@ -2,8 +2,8 @@
 Seamless Google Api integrations.<br /> 
 Supports Maps, Places, Roads, Search and Translate.<br />
 Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).<br />
+NOTE: Google Search still has some work, like full OpenSearch support...
 #### Nuget: https://www.nuget.org/packages/GoogleApi (netstandard1.1, net4.5, portable-net45+win8+wpa81).
-<br />
 
 ### Google Api Methods
 ##### Google Maps
