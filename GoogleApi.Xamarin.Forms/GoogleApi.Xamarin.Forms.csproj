@@ -419,6 +419,9 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\BaseSearchRequest.cs">
       <Link>Entities\Search\Common\BaseSearchRequest.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\BaseSearchResponse.cs">
+      <Link>Entities\Search\Common\BaseSearchResponse.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\AltType.cs">
       <Link>Entities\Search\Common\Enums\AltType.cs</Link>
     </Compile>
@@ -475,9 +478,6 @@
     </Compile>
     <Compile Include="..\googleapi\entities\search\common\request\SortExpression.cs">
       <Link>Entities\Search\Common\Request\SortExpression.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\BaseSearchResponse.cs">
-      <Link>Entities\Search\Common\Response\BaseSearchResponse.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\search\common\response\BodyLine.cs">
       <Link>Entities\Search\Common\Response\BodyLine.cs</Link>

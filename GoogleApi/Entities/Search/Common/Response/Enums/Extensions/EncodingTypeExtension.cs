@@ -8,8 +8,8 @@
         /// <summary>
         /// Returns the encoding type code.
         /// </summary>
-        /// <param name="encodingType"></param>
-        /// <returns></returns>
+        /// <param name="encodingType">The <see cref="EncodingType"/>.</param>
+        /// <returns>Encoded name as string.</returns>
         public static string ToCode(this EncodingType encodingType)
         {
             switch (encodingType)

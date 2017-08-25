@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Search.Common.Response;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Search.Common.Response
+namespace GoogleApi.Entities.Search.Common
 {
     /// <summary>
     /// Base abstract class for Search responses.
