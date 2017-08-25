@@ -17,12 +17,14 @@ namespace GoogleApi.Entities.Search.Common
         protected internal override string BaseUrl => "www.googleapis.com/customsearch/v1";
 
         /// <summary>
+        /// Required. 
         /// Use the q query parameter to specify your search expression.
         /// </summary>
         public virtual string Query { get; set; }
 
         /// <summary>
-        /// Required. Search engine created for a site with the Google Control Panel 
+        /// Required. 
+        /// Search engine created for a site with the Google Control Panel 
         /// To create a Google Custom Search engine that searches the entire web:
         /// 1. From the Google Custom Search homepage (http://www.google.com/cse), click Create a Custom Search Engine.
         /// 2. Type a name and description for your search engine.

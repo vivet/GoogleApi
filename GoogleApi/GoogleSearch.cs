@@ -1,4 +1,4 @@
-﻿using GoogleApi.Entities.Search.Common.Response;
+﻿using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Image.Request;
 using GoogleApi.Entities.Search.Web.Request;
 

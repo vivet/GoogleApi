@@ -1,6 +1,5 @@
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
-using GoogleApi.Entities.Search.Common.Request;
 
 namespace GoogleApi.Entities.Search.Image.Request
 {
