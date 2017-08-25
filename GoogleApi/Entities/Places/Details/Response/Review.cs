@@ -49,6 +49,18 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual string Text { get; set; }
 
         /// <summary>
+        /// The url to the photo.
+        /// </summary>
+        [JsonProperty("profile_photo_url")]
+        public virtual string ProfilePhotoUrl { get; set; }
+
+        /// <summary>
+        /// The relative time, in human language description.
+        /// </summary>
+        [JsonProperty("relative_time_description")]
+        public virtual string RelativeTime { get; set; }
+
+        /// <summary>
         /// Time the time that the review was submitted, measured in the number of seconds since since midnight, January 1, 1970 UTC.
         /// </summary>
         public virtual DateTime Time { get; set; }
