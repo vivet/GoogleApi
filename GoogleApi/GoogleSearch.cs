@@ -1,5 +1,4 @@
 ﻿using GoogleApi.Entities.Search.Common.Response;
-using GoogleApi.Entities.Search.Enterprise.Request;
 using GoogleApi.Entities.Search.Image.Request;
 using GoogleApi.Entities.Search.Web.Request;
 
@@ -25,13 +24,6 @@ namespace GoogleApi
         /// You pass in the details of the search request as query parameters. 
         /// </summary>
         public static HttpEngine<WebSearchRequest, BaseSearchResponse> WebSearch => HttpEngine<WebSearchRequest, BaseSearchResponse>.instance;
-
-        /// <summary>
-        /// Enterprise Search (paid).
-        /// You can retrieve results for a particular search by sending an HTTP GET request to its URI. 
-        /// You pass in the details of the search request as query parameters. 
-        /// </summary>
-        public static HttpEngine<EnterpriseSearchRequest, BaseSearchResponse> EnterpriseSearch => HttpEngine<EnterpriseSearchRequest, BaseSearchResponse>.instance;
 
         /// <summary>
         /// Image Search (free).

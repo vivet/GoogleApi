@@ -561,9 +561,6 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Response\Url.cs">
       <Link>Entities\Search\Common\Response\Url.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Enterprise\Request\EnterpriseSearchRequest.cs">
-      <Link>Entities\Search\Enterprise\Request\EnterpriseSearchRequest.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Image\Request\ImageSearchRequest.cs">
       <Link>Entities\Search\Image\Request\ImageSearchRequest.cs</Link>
     </Compile>

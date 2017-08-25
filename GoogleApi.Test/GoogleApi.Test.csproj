@@ -85,7 +85,6 @@
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchTests.cs" />
     <Compile Include="QueryStringParametersTests.cs" />
-    <Compile Include="Search\Enterprise\EnterpriseSearchTests.cs" />
     <Compile Include="Search\Image\ImageSearchTests.cs" />
     <Compile Include="Search\Web\WebSearchTests.cs" />
     <Compile Include="Translate\Common\Extensions\LanguagesExtensionTests.cs" />
