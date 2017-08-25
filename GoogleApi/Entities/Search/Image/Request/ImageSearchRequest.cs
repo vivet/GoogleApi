@@ -33,7 +33,7 @@ namespace GoogleApi.Entities.Search.Image.Request
         /// </summary>
         public ImageSearchRequest()
         {
-            this.ApiSpecific.SearchType = SearchType.Image;
+            this.Options.SearchType = SearchType.Image;
         }
 
         /// <summary>
