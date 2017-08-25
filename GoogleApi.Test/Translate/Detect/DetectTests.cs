@@ -101,7 +101,7 @@ namespace GoogleApi.Test.Translate.Detect
         [Test]
         public void DetectWhenInvalidKeyTest()
         {
-            var request = new DetectRequest()
+            var request = new DetectRequest
             {
                 Key = "test",
                 Qs = new[] { "Hello World" }

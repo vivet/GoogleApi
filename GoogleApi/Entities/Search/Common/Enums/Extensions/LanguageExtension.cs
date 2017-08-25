@@ -97,9 +97,10 @@
                 case Language.Welsh: return "cy";
                 case Language.Xhosa: return "xh";
                 case Language.Zulu: return "zu";
-            }
 
-            return string.Empty;
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

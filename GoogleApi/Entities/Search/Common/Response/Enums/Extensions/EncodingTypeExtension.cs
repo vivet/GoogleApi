@@ -40,9 +40,10 @@
                 case EncodingType.VietnameseWindows1258: return "windows-1258";
                 case EncodingType.WestEuropeanLatin1Iso88591: return "ISO-8859-1";
                 case EncodingType.WestEuropeanLatin9Iso885915: return "ISO-8859-15";
-            }
 
-            return string.Empty;
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

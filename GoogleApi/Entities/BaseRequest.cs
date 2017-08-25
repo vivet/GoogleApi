@@ -47,25 +47,23 @@ namespace GoogleApi.Entities
             var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => Uri.EscapeDataString(x.Name) + "=" + Uri.EscapeDataString(x.Value)));
             var uri = new Uri(scheme + this.BaseUrl + "?" + queryString);
 
-            if (this.ClientId != null)
-            {
-                var url = uri.LocalPath + uri.Query + "&client=" + this.ClientId;
-                var bytes = Encoding.UTF8.GetBytes(url);
-                var privateKey = Convert.FromBase64String(this.Key.Replace("-", "+").Replace("_", "/"));
+            if (this.ClientId == null)
+                return uri;
 
-                var hmac = new HMac(new Sha256Digest());
-                hmac.Init(new KeyParameter(privateKey));
+            var url = uri.LocalPath + uri.Query + "&client=" + this.ClientId;
+            var bytes = Encoding.UTF8.GetBytes(url);
+            var privateKey = Convert.FromBase64String(this.Key.Replace("-", "+").Replace("_", "/"));
 
-                var signature = new byte[hmac.GetMacSize()];
-                var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
+            var hmac = new HMac(new Sha256Digest());
+            hmac.Init(new KeyParameter(privateKey));
 
-                hmac.BlockUpdate(bytes, 0, bytes.Length);
-                hmac.DoFinal(signature, 0);
+            var signature = new byte[hmac.GetMacSize()];
+            var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
 
-                return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
-            }
+            hmac.BlockUpdate(bytes, 0, bytes.Length);
+            hmac.DoFinal(signature, 0);
 
-            return uri;
+            return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
         }
 
         /// <summary>
@@ -84,7 +82,7 @@ namespace GoogleApi.Entities
             else
             {
                 if (string.IsNullOrWhiteSpace(this.Key))
-                    throw new ArgumentException("Key is required.");
+                    throw new ArgumentException("Key is required");
 
                 if (!this.ClientId.StartsWith("gme-"))
                     throw new ArgumentException("ClientId must begin with 'gme-'.");
