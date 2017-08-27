@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Search.Common.Response;
+using GoogleApi.Entities.Search.Common;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Search.Common
+namespace GoogleApi.Entities.Search
 {
     /// <summary>
     /// Base abstract class for Search responses.
@@ -37,7 +37,7 @@ namespace GoogleApi.Entities.Search.Common
         /// Encapsulates all information about the search.
         /// </summary>
         [JsonProperty("searchInformation")]
-        public virtual SearchInformation SearchInformation { get; set; }
+        public virtual SearchInfo Search { get; set; }
 
         /// <summary>
         /// The current set of search results.
@@ -58,6 +58,6 @@ namespace GoogleApi.Entities.Search.Common
         /// http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_Query_element
         /// </summary>
         [JsonProperty("queries")]
-        public virtual IDictionary<string, IEnumerable<QueryInformation>> Queries { get; set; }
+        public virtual IDictionary<string, IEnumerable<QueryInfo>> Queries { get; set; }
     }
 }

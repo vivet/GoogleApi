@@ -1,10 +1,10 @@
 ﻿using System;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
-using GoogleApi.Entities.Search.Common.Request;
 
-namespace GoogleApi.Entities.Search.Common
+namespace GoogleApi.Entities.Search
 {
     /// <summary>
     /// Base abstract class for Search requests.
@@ -48,11 +48,26 @@ namespace GoogleApi.Entities.Search.Common
         public virtual AltType Alt { get; } = AltType.Json;
 
         /// <summary>
+        /// Callback function.
+        /// Name of the JavaScript callback function that handles the response.
+        /// Used in JavaScript JSON-P requests
+        /// </summary>
+        public virtual string Callback { get; set; }
+
+        /// <summary>
         /// fields - Selector specifying a subset of fields to include in the response.	
         /// For more information, see the partial response section in the Performance Tips document.
         /// Use for better performance. https://developers.google.com/custom-search/json-api/v1/performance#partial
         /// </summary>
         public virtual string Fields { get; set; }
+
+        /// <summary>
+        /// PrettyPrint - Returns response with indentations and line breaks.
+        /// Returns the response in a human-readable format if true.
+        /// Default value: true.
+        /// When this is false, it can reduce the response payload size, which might lead to better performance in some environments.
+        /// </summary>
+        public virtual bool PrettyPrint { get; set; } = true;
 
         /// <summary>
         /// userIp IP address of the end user for whom the API call is being made.	
@@ -69,14 +84,6 @@ namespace GoogleApi.Entities.Search.Common
         /// Learn more about Capping API usage. https://support.google.com/cloud/answer/7035610
         /// </summary>
         public virtual string QuotaUser { get; set; }
-
-        /// <summary>
-        /// PrettyPrint - Returns response with indentations and line breaks.
-        /// Returns the response in a human-readable format if true.
-        /// Default value: true.
-        /// When this is false, it can reduce the response payload size, which might lead to better performance in some environments.
-        /// </summary>
-        public virtual bool PrettyPrint { get; set; } = true;
 
         /// <summary>
         /// Define properties of your search, like the search expression, number of results, language etc.
@@ -112,41 +119,22 @@ namespace GoogleApi.Entities.Search.Common
             parameters.Add("q", this.Query);
             parameters.Add("cx", this.SearchEngineId);
             parameters.Add("alt", this.Alt.ToString().ToLower());
-            parameters.Add("userIp", this.UserIp ?? string.Empty);
-            parameters.Add("quotaUser", this.QuotaUser ?? string.Empty);
-            parameters.Add("prettyPrint", this.PrettyPrint.ToString().ToLower());
+
+            if (this.Callback != null)
+                parameters.Add("callback", this.Callback);
 
             if (this.Fields != null)
                 parameters.Add("fields", this.Fields);
 
-            parameters.Add("hl", this.Options.InterfaceLanguage.ToHl());
-            parameters.Add("gl", this.Options.GeoLocation?.ToCr() ?? string.Empty);
+            parameters.Add("prettyPrint", this.PrettyPrint.ToString().ToLower());
+            parameters.Add("userIp", this.UserIp ?? string.Empty);
+            parameters.Add("quotaUser", this.QuotaUser ?? string.Empty);
+
+            parameters.Add("c2coff", this.Options.DisableCnTwTranslation ? "1" : "0");
             parameters.Add("cr", this.Options.CountryRestriction?.ToCr() ?? string.Empty);
-            parameters.Add("sort", this.Options.SortExpression.ToString());
-            parameters.Add("start", this.Options.StartIndex.ToString());
-            parameters.Add("safe", this.Options.SafetyLevel.ToString().ToLower());
-            parameters.Add("filter", this.Options.Filter ? "0" : "1");
-            parameters.Add("c2coff", this.Options.DisableCnTwTranslation ? "0" : "1");
-            parameters.Add("rights", string.Join(",", this.Options.Rights));
-            parameters.Add("fileType", string.Join(",", this.Options.FileTypes));
-            parameters.Add("dateRestrict", this.Options.DateRestrict == null 
-                ? string.Empty 
-                : this.Options.DateRestrict.Type.ToString().ToLower()[0] + "[" + this.Options.DateRestrict.Number + "]");
 
-            if (this.Options.SearchType != SearchType.Web)
-                parameters.Add("searchType", this.Options.SearchType.ToString().ToLower());
-
-            if (this.Options.Number != null)
-                parameters.Add("num", this.Options.Number.ToString());
-
-            if (this.Options.Googlehost != null)
-                parameters.Add("googleHost", this.Options.Googlehost);
-
-            if (this.Options.SiteSearch != null)
-                parameters.Add("siteSearch", this.Options.SiteSearch ?? string.Empty);
-
-            if (this.Options.SiteSearchFilter != null)
-                parameters.Add("siteSearchFilter", this.Options.SiteSearchFilter ?? string.Empty);
+            if (this.Options.DateRestrict != null)
+                parameters.Add("dateRestrict", this.Options.DateRestrict.ToString());
 
             if (this.Options.ExactTerms != null)
                 parameters.Add("exactTerms", this.Options.ExactTerms ?? string.Empty);
@@ -154,23 +142,57 @@ namespace GoogleApi.Entities.Search.Common
             if (this.Options.ExcludeTerms != null)
                 parameters.Add("excludeTerms", this.Options.ExcludeTerms ?? string.Empty);
 
+            parameters.Add("fileType", string.Join(",", this.Options.FileTypes));
+            parameters.Add("filter", this.Options.Filter ? "0" : "1");
+            parameters.Add("gl", this.Options.GeoLocation?.ToCr() ?? string.Empty);
+
+            if (this.Options.Googlehost != null)
+                parameters.Add("googleHost", this.Options.Googlehost);
+
+            if (this.Options.HighRange != null)
+                parameters.Add("highRange", this.Options.HighRange.ToString());
+
+            parameters.Add("hl", this.Options.InterfaceLanguage.ToHl());
+
             if (this.Options.AndTerms != null)
                 parameters.Add("hq", this.Options.AndTerms ?? string.Empty);
-
-            if (this.Options.OrTerms != null)
-                parameters.Add("orTerms", this.Options.OrTerms ?? string.Empty);
 
             if (this.Options.LinkSite != null)
                 parameters.Add("linkSite", this.Options.LinkSite ?? string.Empty);
 
-            if (this.Options.RelatedSite != null)
-                parameters.Add("relatedSite", this.Options.RelatedSite ?? string.Empty);
-
             if (this.Options.LowRange != null)
                 parameters.Add("lowRange", this.Options.LowRange.ToString());
 
-            if (this.Options.HighRange != null)
-                parameters.Add("highRange", this.Options.HighRange.ToString());
+            if (this.Options.Number != null)
+            {
+                if (this.Options.Number > 10 || this.Options.Number < 1)
+                    throw new InvalidOperationException("Number must be between 1 and 10");
+
+                parameters.Add("num", this.Options.Number.ToString());
+            }
+
+            if (this.Options.OrTerms != null)
+                parameters.Add("orTerms", this.Options.OrTerms ?? string.Empty);
+
+            if (this.Options.RelatedSite != null)
+                parameters.Add("relatedSite", this.Options.RelatedSite ?? string.Empty);
+
+            parameters.Add("rights", string.Join(",", this.Options.Rights));
+            parameters.Add("safe", this.Options.SafetyLevel.ToString().ToLower());
+
+            if (this.Options.SearchType != SearchType.Web)
+                parameters.Add("searchType", this.Options.SearchType.ToString().ToLower());
+
+            if (this.Options.SiteSearch != null)
+            {
+                parameters.Add("siteSearch", this.Options.SiteSearch.Site ?? string.Empty);
+                parameters.Add("siteSearchFilter", this.Options.SiteSearch.Filter.ToFilterString() ?? string.Empty);
+            }
+
+            if (this.Options.SortExpression != null)
+                parameters.Add("sort", this.Options.SortExpression.ToString());
+
+            parameters.Add("start", this.Options.StartIndex.ToString());
 
             return parameters;
         }

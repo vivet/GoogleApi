@@ -1,7 +1,7 @@
 using System;
 using GoogleApi.Entities.Search.Common.Enums;
 
-namespace GoogleApi.Entities.Search.Common.Request
+namespace GoogleApi.Entities.Search.Common
 {
     /// <summary>
     /// The sort expression to apply to the results.
@@ -25,9 +25,9 @@ namespace GoogleApi.Entities.Search.Common.Request
         public virtual int? DefaultValue { get; set; }
 
         /// <summary>
-        /// Returns the sort expression as string.
+        /// Returns the <see cref="SortExpression"/> to <see cref="string"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The <see cref="SortExpression"/> object as <see cref="string"/>.</returns>
         public override string ToString()
         {
             return $"{this.By.ToString().ToLower()}, {this.Order.ToString().ToLower()}, {this.DefaultValue}";
@@ -36,17 +36,21 @@ namespace GoogleApi.Entities.Search.Common.Request
         /// <summary>
         /// Converts a <see cref="string"/> into a <see cref="SortExpression"/>.
         /// </summary>
-        /// <param name="sortStr">The <see cref="string"/> formatted as a valid sort expression.</param>
+        /// <param name="str">The <see cref="string"/> formatted as a valid <see cref="SortExpression"/>.</param>
         /// <returns>The converted <see cref="SortExpression"/></returns>
-        public virtual SortExpression FromString(string sortStr)
+        public virtual SortExpression FromString(string str)
         {
-            var strings = sortStr.Split(',');
+            var strings = str.Split(',');
+
+            Enum.TryParse(strings[0], true, out SortBy sortBy);
+            Enum.TryParse(strings[1], true, out SortOrder sortOrder);
+            int.TryParse(strings[2], out var defualtValue);
 
             return new SortExpression
             {
-                By = (SortBy)Enum.Parse(typeof(SortBy), strings[0]),
-                Order = (SortOrder)Enum.Parse(typeof(SortOrder), strings[1]),
-                DefaultValue = int.Parse(strings[2])
+                By = sortBy,
+                Order = sortOrder,
+                DefaultValue = defualtValue
             };
         }
     }

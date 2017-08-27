@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Search.Common.Response
+namespace GoogleApi.Entities.Search.Common
 {
     /// <summary>
     /// Encapsulates all information about the search.
     /// </summary>
-    public class SearchInformation
+    public class SearchInfo
     {
         /// <summary>
         /// The time taken for the server to return search results.

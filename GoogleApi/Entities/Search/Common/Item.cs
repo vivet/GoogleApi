@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Search.Common.Response
+namespace GoogleApi.Entities.Search.Common
 {
     /// <summary>
     /// A search result item.
@@ -81,16 +81,16 @@ namespace GoogleApi.Entities.Search.Common.Response
         public virtual string HtmlFormattedUrl { get; set; }
 
         /// <summary>
-        /// Encapsulates all information about an image returned in search results.
-        /// </summary>
-        [JsonProperty("image")]
-        public virtual ItemImage Image { get; set; }
-
-        /// <summary>
         /// Contains PageMap information for this search result.
         /// </summary>
         [JsonProperty("pagemap")]
         public virtual PageMap PageMap { get; set; }
+
+        /// <summary>
+        /// Encapsulates all information about an image returned in search results.
+        /// </summary>
+        [JsonProperty("image")]
+        public virtual ItemImage Image { get; set; }
 
         /// <summary>
         /// Encapsulates all information about refinement labels.	

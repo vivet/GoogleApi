@@ -416,11 +416,32 @@
     <Compile Include="..\googleapi\entities\QueryStringParameters.cs">
       <Link>Entities\QueryStringParameters.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\BaseSearchRequest.cs">
-      <Link>Entities\Search\Common\BaseSearchRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\BaseSearchRequest.cs">
+      <Link>Entities\Search\BaseSearchRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\BaseSearchResponse.cs">
-      <Link>Entities\Search\Common\BaseSearchResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\BaseSearchResponse.cs">
+      <Link>Entities\Search\BaseSearchResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\BodyLine.cs">
+      <Link>Entities\Search\Common\BodyLine.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Context.cs">
+      <Link>Entities\Search\Common\Context.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\BooleanJsonConverter.cs">
+      <Link>Entities\Search\Common\Converters\BooleanJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\DateRestrictJsonConverter.cs">
+      <Link>Entities\Search\Common\Converters\DateRestrictJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\FileTypeJsonConverter.cs">
+      <Link>Entities\Search\Common\Converters\FileTypeJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\SortExpressionJsonConverter.cs">
+      <Link>Entities\Search\Common\Converters\SortExpressionJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\DateRestrict.cs">
+      <Link>Entities\Search\Common\DateRestrict.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\AltType.cs">
       <Link>Entities\Search\Common\Enums\AltType.cs</Link>
@@ -437,11 +458,23 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\DominantColorType.cs">
       <Link>Entities\Search\Common\Enums\DominantColorType.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\enums\extensions\CountryExtension.cs">
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\EncodingType.cs">
+      <Link>Entities\Search\Common\Enums\EncodingType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\CountryExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\CountryExtension.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\enums\extensions\LanguageExtension.cs">
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\DateRestrictTypeExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\DateRestrictTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\EncodingTypeExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\EncodingTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\LanguageExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\SiteSearchFilterExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\SiteSearchFilterExtension.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\FileType.cs">
       <Link>Entities\Search\Common\Enums\FileType.cs</Link>
@@ -464,65 +497,59 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\SearchType.cs">
       <Link>Entities\Search\Common\Enums\SearchType.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\SiteSearchFilter.cs">
+      <Link>Entities\Search\Common\Enums\SiteSearchFilter.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\SortBy.cs">
       <Link>Entities\Search\Common\Enums\SortBy.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\SortOrder.cs">
       <Link>Entities\Search\Common\Enums\SortOrder.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\Request\DataRestrict.cs">
-      <Link>Entities\Search\Common\Request\DataRestrict.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Facet.cs">
+      <Link>Entities\Search\Common\Facet.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\Request\SearchOptions.cs">
-      <Link>Entities\Search\Common\Request\SearchOptions.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Item.cs">
+      <Link>Entities\Search\Common\Item.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\request\SortExpression.cs">
-      <Link>Entities\Search\Common\Request\SortExpression.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\ItemImage.cs">
+      <Link>Entities\Search\Common\ItemImage.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\BodyLine.cs">
-      <Link>Entities\Search\Common\Response\BodyLine.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Label.cs">
+      <Link>Entities\Search\Common\Label.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\Context.cs">
-      <Link>Entities\Search\Common\Response\Context.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\PageMap.cs">
+      <Link>Entities\Search\Common\PageMap.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\enums\EncodingType.cs">
-      <Link>Entities\Search\Common\Response\Enums\EncodingType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Promotion.cs">
+      <Link>Entities\Search\Common\Promotion.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\enums\extensions\EncodingTypeExtension.cs">
-      <Link>Entities\Search\Common\Response\Enums\Extensions\EncodingTypeExtension.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\PromotionImage.cs">
+      <Link>Entities\Search\Common\PromotionImage.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\Facet.cs">
-      <Link>Entities\Search\Common\Response\Facet.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\QueryInfo.cs">
+      <Link>Entities\Search\Common\QueryInfo.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\Item.cs">
-      <Link>Entities\Search\Common\Response\Item.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\SearchImageOptions.cs">
+      <Link>Entities\Search\Common\SearchImageOptions.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\ItemImage.cs">
-      <Link>Entities\Search\Common\Response\ItemImage.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\SearchInfo.cs">
+      <Link>Entities\Search\Common\SearchInfo.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\Label.cs">
-      <Link>Entities\Search\Common\Response\Label.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\SearchOptions.cs">
+      <Link>Entities\Search\Common\SearchOptions.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\PageMap.cs">
-      <Link>Entities\Search\Common\Response\PageMap.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\SiteSearch.cs">
+      <Link>Entities\Search\Common\SiteSearch.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\Promotion.cs">
-      <Link>Entities\Search\Common\Response\Promotion.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\SortExpression.cs">
+      <Link>Entities\Search\Common\SortExpression.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\PromotionImage.cs">
-      <Link>Entities\Search\Common\Response\PromotionImage.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Spelling.cs">
+      <Link>Entities\Search\Common\Spelling.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\QueryInformation.cs">
-      <Link>Entities\Search\Common\Response\QueryInformation.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\SearchInformation.cs">
-      <Link>Entities\Search\Common\Response\SearchInformation.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\Spelling.cs">
-      <Link>Entities\Search\Common\Response\Spelling.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\search\common\response\Url.cs">
-      <Link>Entities\Search\Common\Response\Url.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Url.cs">
+      <Link>Entities\Search\Common\Url.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\search\image\request\ImageSearchRequest.cs">
       <Link>Entities\Search\Image\Request\ImageSearchRequest.cs</Link>

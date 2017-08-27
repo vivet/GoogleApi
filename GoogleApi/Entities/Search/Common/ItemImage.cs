@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Search.Common.Response
+namespace GoogleApi.Entities.Search.Common
 {
     /// <summary>
     /// 

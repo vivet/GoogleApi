@@ -9,24 +9,9 @@ namespace GoogleApi.Entities.Search.Image.Request
     public class ImageSearchRequest : BaseSearchRequest
     {
         /// <summary>
-        /// Type - Returns images of a type. 
+        /// Search Image Options.
         /// </summary>
-        public virtual ImageType? ImageType { get; set; }
-
-        /// <summary>
-        /// Size - Returns images of a specified size.
-        /// </summary>
-        public virtual ImageSize? ImageSize { get; set; }
-
-        /// <summary>
-        /// ColorType - Returns black and white, grayscale, or color images: mono, gray, and color.
-        /// </summary>
-        public virtual ColorType? ImageColorType { get; set; }
-
-        /// <summary>
-        /// DominantColor - Returns images of a specific dominant color. 
-        /// </summary>
-        public virtual DominantColorType? ImageDominantColor { get; set; }
+        public virtual SearchImageOptions ImageOptions { get; set; } = new SearchImageOptions();
 
         /// <summary>
         /// Default Constructor.
@@ -44,17 +29,17 @@ namespace GoogleApi.Entities.Search.Image.Request
         {
             var parameters = base.GetQueryStringParameters();
 
-            if (this.ImageType != null)
-                parameters.Add("imgType", this.ImageType.ToString().ToLower());
+            if (this.ImageOptions.ImageType != null)
+                parameters.Add("imgType", this.ImageOptions.ImageType.ToString().ToLower());
 
-            if (this.ImageSize != null)
-                parameters.Add("imgSize", this.ImageSize.ToString().ToLower());
+            if (this.ImageOptions.ImageSize != null)
+                parameters.Add("imgSize", this.ImageOptions.ImageSize.ToString().ToLower());
 
-            if (this.ImageColorType != null)
-                parameters.Add("imgColorType", this.ImageColorType.ToString().ToLower());
+            if (this.ImageOptions.ImageColorType != null)
+                parameters.Add("imgColorType", this.ImageOptions.ImageColorType.ToString().ToLower());
 
-            if (this.ImageDominantColor != null)
-                parameters.Add("imgDominantColor", this.ImageDominantColor.ToString().ToLower());
+            if (this.ImageOptions.ImageDominantColor != null)
+                parameters.Add("imgDominantColor", this.ImageOptions.ImageDominantColor.ToString().ToLower());
 
             return parameters;
         }

@@ -1,4 +1,4 @@
-﻿namespace GoogleApi.Entities.Search.Common.Response.Enums.Extensions
+﻿namespace GoogleApi.Entities.Search.Common.Enums.Extensions
 {
     /// <summary>
     /// Encoding type Extension methods.
@@ -14,7 +14,7 @@
         {
             switch (encodingType)
             {
-                case EncodingType.UnicodeUtf8: return "UTF-8";
+                case EncodingType.Utf8: return "UTF-8";
                 case EncodingType.ArabicWindows1256: return "windows-1256";
                 case EncodingType.CentralEuropeanLatin2Iso88592: return "ISO-8859-2";
                 case EncodingType.CentralEuropeanWindows1250: return "windows-1250";

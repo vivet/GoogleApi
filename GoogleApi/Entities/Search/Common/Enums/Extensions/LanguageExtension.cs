@@ -26,6 +26,7 @@
                 case Language.Bosnian: return "bs";
                 case Language.Bulgarian: return "bg";
                 case Language.Catalan: return "ca";
+                case Language.Chinese: return "zh";
                 case Language.ChineseSimplified: return "zh-CN";
                 case Language.ChineseTraditional: return "zh-TW";
                 case Language.Croatian: return "hr";
@@ -70,6 +71,7 @@
                 case Language.Occitan: return "oc";
                 case Language.Persian: return "fa";
                 case Language.Polish: return "pl";
+                case Language.Portuguese: return "pt";
                 case Language.PortugueseBrazil: return "pt-BR";
                 case Language.PortuguesePortugal: return "pt-PT";
                 case Language.Punjabi: return "pa";

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Search.Common.Response
+namespace GoogleApi.Entities.Search.Common
 {
     /// <summary>
     /// A facet object (refinements) you can use for refining a search.

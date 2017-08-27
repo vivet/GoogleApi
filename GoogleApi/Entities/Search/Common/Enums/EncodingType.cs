@@ -1,4 +1,4 @@
-﻿namespace GoogleApi.Entities.Search.Common.Response.Enums
+﻿namespace GoogleApi.Entities.Search.Common.Enums
 {
     /// <summary>
     /// Encoding Types.
@@ -8,7 +8,7 @@
         /// <summary>
         /// Unicode(UTF-8)
         /// </summary>
-        UnicodeUtf8,
+        Utf8,
 
         /// <summary>
         /// Arabic(Windows-1256)

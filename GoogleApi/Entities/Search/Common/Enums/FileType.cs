@@ -2,6 +2,7 @@ namespace GoogleApi.Entities.Search.Common.Enums
 {
     /// <summary>
     /// File Types.
+    /// https://support.google.com/webmasters/answer/35287?hl=en
     /// </summary>
     public enum FileType
     {
@@ -9,7 +10,7 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// Adobe Flash (.swf)
         /// </summary>
         AdobeFlash,
-        
+
         /// <summary>
         /// Adobe Portable Document Format (.pdf)
         /// </summary>
@@ -124,7 +125,7 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// Wireless Markup Language (.wml, .wap)
         /// </summary>
         WirelessMarkupLanguage,
-        
+
         /// <summary>
         /// XML (.xml)
         /// </summary>
