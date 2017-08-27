@@ -4,7 +4,7 @@
   "dependencies": {
     "BouncyCastle": "1.8.1",
     "NETStandard.Library": "1.6.1.*",
-    "Newtonsoft.Json": "9.0.1",
+    "Newtonsoft.Json": "10.0.3",
     "NUnit": "3.7.1",
     "NUnit3TestAdapter": "3.8.0-alpha1"
   },
