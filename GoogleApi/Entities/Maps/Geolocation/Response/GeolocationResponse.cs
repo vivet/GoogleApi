@@ -1,5 +1,6 @@
-﻿using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
+using Location = GoogleApi.Entities.Common.Location;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
@@ -19,5 +20,11 @@ namespace GoogleApi.Entities.Maps.Geolocation.Response
         /// </summary>
         [JsonProperty("accuracy")]
         public virtual double Accuracy { get; set; }
+
+        /// <summary>
+        /// Error, if any occured. 
+        /// </summary>
+        [JsonProperty("error")]
+        public virtual Error Error { get; set; }
     }
 }

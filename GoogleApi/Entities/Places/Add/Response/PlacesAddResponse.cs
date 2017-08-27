@@ -1,5 +1,6 @@
 ﻿using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Places.Add.Response
 {
@@ -20,6 +21,7 @@ namespace GoogleApi.Entities.Places.Add.Response
         /// Indicates the scope of the place_id. 
         /// </summary>
         [JsonProperty("scope")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Scope Scope { get; set; }
     }
 }

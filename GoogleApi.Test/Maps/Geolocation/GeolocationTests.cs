@@ -6,6 +6,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geolocation
@@ -112,7 +113,7 @@ namespace GoogleApi.Test.Maps.Geolocation
 
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
             Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
         }
 

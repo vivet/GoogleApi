@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Details.Response
 {
@@ -15,11 +14,5 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// </summary>
         [JsonProperty("result")]
         public virtual DetailsResult Result { get; set; }
-
-        /// <summary>
-        /// html_attributions contain a set of attributions which must be displayed to the user.
-        /// </summary>
-        [JsonProperty("html_attributions")]
-        public virtual IEnumerable<string> HtmlAttributions { get; set; }
     }
 }

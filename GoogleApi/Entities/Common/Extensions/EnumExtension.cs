@@ -20,7 +20,7 @@ namespace GoogleApi.Entities.Common.Extensions
         /// <param name="delimeter">The separator inserted between each value if the <see cref="Enum"/>.</param>
         /// <returns>A <see cref="string"/> representation of the enum value.</returns>
         public static string ToEnumString<T>(this T @enum, char delimeter)
-            where T : struct
+            where T : struct 
         {
             if (@enum.GetType().GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
                 return Convert.ToString(@enum, CultureInfo.InvariantCulture).ToLower();
@@ -37,7 +37,6 @@ namespace GoogleApi.Entities.Common.Extensions
 
                 if (i != binaryCharArray.Length - 1)
                     stringBuilder.Append(delimeter);
-
             }
 
             return stringBuilder.ToString().ToLower();

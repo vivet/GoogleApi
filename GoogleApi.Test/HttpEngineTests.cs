@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Enums;
@@ -68,10 +69,11 @@ namespace GoogleApi.Test
 
         public class TestResponse : IResponse
         {
-            public virtual string RawJson { get; set; }
-            public virtual string RawQueryString { get; set; }
-            public virtual Status? Status { get; set; }
-            public virtual string ErrorMessage { get; set; }
+            public string RawJson { get; set; }
+            public string RawQueryString { get; set; }
+            public Status? Status { get; set; }
+            public string ErrorMessage { get; set; }
+            public IEnumerable<string> HtmlAttributions { get; set; }
         }
 
         public class TestRequest : BaseRequest

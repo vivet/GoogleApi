@@ -74,14 +74,16 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Response
         /// You can only retrieve app-scoped places via the Nearby Search and the Place Details requests. 
         /// If the scope field is not present in a response, it is safe to assume the scope is GOOGLE
         /// </summary>
-        [JsonProperty("scope", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("scope")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Scope Scope { get; set; }
 
         /// <summary>
         /// price_level — The price level of the place, on a scale of 0 to 4. 
         /// The exact amount indicated by a specific value will vary from region to region. 
         /// </summary>
-        [JsonProperty("price_level", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("price_level")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual PriceLevel PriceLevel { get; set; }
     }
 }

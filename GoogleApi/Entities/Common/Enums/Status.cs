@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Common.Enums
         Ok,
 
         /// <summary>
-        /// Indicates that the search was successful but returned no results. This may occur if the search was passed a latlng in a remote location.
+        /// Indicates that the requst was successful but returned no results. This may occur if the search was passed a latlng in a remote location.
         /// </summary>
         [EnumMember(Value = "ZERO_RESULTS")]
         ZeroResults,
@@ -56,9 +56,15 @@ namespace GoogleApi.Entities.Common.Enums
         NotFound,
 
         /// <summary>
-        /// Indicates a directions request could not be processed due to a server error. The request may succeed if you try again
+        /// Indicates the request could not be processed due to a server error. The request may succeed if you try again.
         /// </summary>
         [EnumMember(Value = "UNKNOWN_ERROR")]
-        UnknownError
+        UnknownError,
+
+        /// <summary>
+        /// Indicates the request resulted in a Http error code.
+        /// </summary>
+        [EnumMember(Value = "HTTP_ERROR")]
+        HttpError
     }
 }

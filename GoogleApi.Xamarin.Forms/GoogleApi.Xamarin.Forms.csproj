@@ -56,6 +56,12 @@
     <Compile Include="..\googleapi\entities\common\AddressComponent.cs">
       <Link>Entities\Common\AddressComponent.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Converters\BooleanJsonConverter.cs">
+      <Link>Entities\Common\Converters\BooleanJsonConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Converters\StringEnumListJsonConverter.cs">
+      <Link>Entities\Common\Converters\StringEnumListJsonConverter.cs</Link>
+    </Compile>
     <Compile Include="..\googleapi\entities\common\enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
     </Compile>
@@ -71,20 +77,17 @@
     <Compile Include="..\googleapi\entities\common\enums\Status.cs">
       <Link>Entities\Common\Enums\Status.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\common\Error.cs">
-      <Link>Entities\Common\Error.cs</Link>
-    </Compile>
     <Compile Include="..\googleapi\entities\common\extensions\DateTimeExtension.cs">
       <Link>Entities\Common\Extensions\DateTimeExtension.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\common\extensions\EnumExtension.cs">
       <Link>Entities\Common\Extensions\EnumExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Extensions\StringExtension.cs">
+      <Link>Entities\Common\Extensions\StringExtension.cs</Link>
+    </Compile>
     <Compile Include="..\googleapi\entities\common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\ErrorResponse.cs">
-      <Link>Entities\ErrorResponse.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\interfaces\IRequest.cs">
       <Link>Entities\Interfaces\IRequest.cs</Link>
@@ -127,6 +130,12 @@
     </Compile>
     <Compile Include="..\googleapi\entities\maps\common\enums\Units.cs">
       <Link>Entities\Maps\Common\Enums\Units.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\Error.cs">
+      <Link>Entities\Maps\Common\Error.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\ErrorDetail.cs">
+      <Link>Entities\Maps\Common\ErrorDetail.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\maps\common\Fare.cs">
       <Link>Entities\Maps\Common\Fare.cs</Link>
@@ -232,6 +241,15 @@
     </Compile>
     <Compile Include="..\googleapi\entities\maps\roads\common\enums\Units.cs">
       <Link>Entities\Maps\Roads\Common\Enums\Units.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Error.cs">
+      <Link>Entities\Maps\Roads\Common\Error.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\ErrorDetail.cs">
+      <Link>Entities\Maps\Roads\Common\ErrorDetail.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Roads\Common\Link.cs">
+      <Link>Entities\Maps\Roads\Common\Link.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\maps\roads\common\Location.cs">
       <Link>Entities\Maps\Roads\Common\Location.cs</Link>
@@ -428,14 +446,11 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Context.cs">
       <Link>Entities\Search\Common\Context.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\BooleanJsonConverter.cs">
-      <Link>Entities\Search\Common\Converters\BooleanJsonConverter.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\DateRestrictJsonConverter.cs">
       <Link>Entities\Search\Common\Converters\DateRestrictJsonConverter.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\FileTypeJsonConverter.cs">
-      <Link>Entities\Search\Common\Converters\FileTypeJsonConverter.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\SiteSearchJsonConverter.cs">
+      <Link>Entities\Search\Common\Converters\SiteSearchJsonConverter.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\SortExpressionJsonConverter.cs">
       <Link>Entities\Search\Common\Converters\SortExpressionJsonConverter.cs</Link>

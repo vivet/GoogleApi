@@ -1,5 +1,6 @@
 using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Places.Common
 {
@@ -20,6 +21,7 @@ namespace GoogleApi.Entities.Places.Common
         /// The scope of an alternative place ID will always be APP, indicating that the alternative place ID is recognised by your application only.
         /// </summary>
         [JsonProperty("scope")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Scope Scope { get; set; }
     }
 }

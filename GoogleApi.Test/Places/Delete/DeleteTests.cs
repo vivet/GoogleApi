@@ -54,7 +54,6 @@ namespace GoogleApi.Test.Places.Delete
             var innerException = exception.InnerExceptions.FirstOrDefault() as GoogleApiException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(Status.NotFound, innerException.Status);
             Assert.AreEqual("Exception of type 'GoogleApi.Exceptions.GoogleApiException' was thrown.", innerException.Message);
         }
 

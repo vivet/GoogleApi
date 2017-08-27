@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Roads.SpeedLimits
@@ -105,7 +106,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 
 	        var innerException = exception.InnerExceptions.FirstOrDefault();
 	        Assert.IsNotNull(innerException);
-	        Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+	        Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
 	        Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
 	    }
 
