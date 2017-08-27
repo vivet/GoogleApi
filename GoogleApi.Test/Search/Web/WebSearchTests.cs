@@ -11,6 +11,10 @@ using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
 namespace GoogleApi.Test.Search.Web
 {
+    // TODO: Request.GetQueryString tests for Search
+    // TODO: Search Request(FileTypes, Terms (Exact / Excluded / And / Or), Filters, Pagination(next, prev, etc).
+    // TODO: Search Response(all response properties)
+
     [TestFixture]
     public class WebSearchTests : BaseTest
     {

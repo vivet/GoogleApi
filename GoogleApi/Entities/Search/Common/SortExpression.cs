@@ -36,11 +36,14 @@ namespace GoogleApi.Entities.Search.Common
         /// <summary>
         /// Converts a <see cref="string"/> into a <see cref="SortExpression"/>.
         /// </summary>
-        /// <param name="str">The <see cref="string"/> formatted as a valid <see cref="SortExpression"/>.</param>
+        /// <param name="string">The <see cref="string"/> formatted as a valid <see cref="SortExpression"/>.</param>
         /// <returns>The converted <see cref="SortExpression"/></returns>
-        public virtual SortExpression FromString(string str)
+        public virtual SortExpression FromString(string @string)
         {
-            var strings = str.Split(',');
+            if (@string == null)
+                return new SortExpression();
+
+            var strings = @string.Split(',');
 
             Enum.TryParse(strings[0], true, out SortBy sortBy);
             Enum.TryParse(strings[1], true, out SortOrder sortOrder);

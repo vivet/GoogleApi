@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Search.Common.Converters;
 using GoogleApi.Entities.Search.Common.Enums;
 using Newtonsoft.Json;
@@ -167,8 +168,10 @@ namespace GoogleApi.Entities.Search.Common
         /// <summary>
         /// Specifies all search results should be pages either included or excluded, from a given site.
         /// </summary>
-        public virtual SiteSearch SiteSearch => new SiteSearch { Site = this.SiteSearchStr, Filter = this.SiteSearchFilterStr };
-
+        [JsonProperty("siteSearch")]
+        [JsonConverter(typeof(SiteSearchJsonConverter))]
+        public virtual SiteSearch SiteSearch { get; set; }  
+        
         /// <summary>
         /// Identifies a phrase that all documents in the search results must contain.
         /// </summary>
@@ -233,8 +236,8 @@ namespace GoogleApi.Entities.Search.Common
         /// A list of file types indexable by Google can be found in Search Console Help Center. https://support.google.com/webmasters/answer/35287?hl=en
         /// Additional filetypes may be added in the future. An up-to-date list can always be found in Google's file type FAQ.
         /// </summary>
-        [JsonProperty("fileType", ItemConverterType = typeof(StringEnumConverter))] // TODO: test
-        //[JsonConverter(typeof(FileTypeJsonConverter))]
+        [JsonProperty("fileType")] // TODO: test (, ItemConverterType = typeof(StringEnumConverter))
+        [JsonConverter(typeof(StringEnumListJsonConverter<FileType>))]
         public virtual IEnumerable<FileType> FileTypes { get; set; }
 
         /// <summary>
@@ -284,13 +287,5 @@ namespace GoogleApi.Entities.Search.Common
         [JsonProperty("imgDominantColor")]
         [JsonConverter(typeof(StringEnumConverter))]
         public virtual DominantColorType? ImageDominantColor { get; set; }
-
-        // TODO: Remove custom serialization here.
-        [JsonProperty("siteSearch")]
-        private string SiteSearchStr { get; set; }
-
-        [JsonProperty("siteSearchFilter")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        private SiteSearchFilter SiteSearchFilterStr { get; set; } = SiteSearchFilter.Include;
     }
 }

@@ -29,25 +29,31 @@ namespace GoogleApi.Entities.Search.Common
         /// <summary>
         /// Converts a <see cref="string"/> into a <see cref="DateRestrict"/>.
         /// </summary>
-        /// <param name="str">The <see cref="string"/> formatted as a valid <see cref="DateRestrict"/>.</param>
+        /// <param name="string">The <see cref="string"/> formatted as a valid <see cref="DateRestrict"/>.</param>
         /// <returns>The converted <see cref="DateRestrict"/></returns>
-        public virtual DateRestrict FromString(string str)
+        public virtual DateRestrict FromString(string @string)
         {
-            var indexOf = str.LastIndexOf('[');
-            int.TryParse(str.Substring(indexOf + 1, str.Length - indexOf - 2), out var number);
+            if (@string == null)
+                return new DateRestrict();
+
+            var indexOf = @string.LastIndexOf('[');
+            int.TryParse(@string.Substring(indexOf + 1, @string.Length - indexOf - 2), out var number);
 
             DateRestrictType type;
-            switch (str.Substring(0, indexOf))
+            switch (@string.Substring(0, indexOf))
             {
                 case "d":
                     type = DateRestrictType.Days;
                     break;
+
                 case "w":
                     type = DateRestrictType.Weeks;
                     break;
+
                 case "m":
                     type = DateRestrictType.Months;
                     break;
+
                 case "y":
                     type = DateRestrictType.Years;
                     break;
