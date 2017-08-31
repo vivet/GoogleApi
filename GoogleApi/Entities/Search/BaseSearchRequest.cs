@@ -3,6 +3,7 @@ using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Search
 {
@@ -91,13 +92,19 @@ namespace GoogleApi.Entities.Search
         public virtual SearchOptions Options { get; set; } = new SearchOptions();
 
         /// <summary>
-        /// True to use use the https protocol; false to use http. The default is false.
+        /// See <see cref="BaseRequest.IsSsl"/>.
         /// </summary>
         public override bool IsSsl
         {
             get => true;
             set => throw new NotSupportedException("This operation is not supported, SearchRequest must use SSL");
         }
+
+        /// <summary>
+        /// See <see cref="BaseRequest.IsGzip"/>.
+        /// </summary>
+        [JsonIgnore]
+        public override bool IsGzip { get; set; } = true;
 
         /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.

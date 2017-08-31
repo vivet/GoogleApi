@@ -26,6 +26,11 @@ namespace GoogleApi.Entities.Interfaces
         bool IsSsl { get; set; }
 
         /// <summary>
+        /// Determines if Gzip compression is used with the <see cref="IRequest"/>.
+        /// </summary>
+        bool IsGzip { get; set; }
+
+        /// <summary>
         /// Returns the Uri for the request.
         /// </summary>
         /// <returns>The <see cref="Uri"/>.</returns>
