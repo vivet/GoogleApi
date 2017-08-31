@@ -43,8 +43,8 @@ namespace GoogleApi.Entities.Search.Common
         public virtual int StartIndex { get; set; }
 
         /// <summary>
-                /// The page number of this set of results, where the page length is set by the count property.
-                /// </summary>
+        /// The page number of this set of results, where the page length is set by the count property.
+        /// </summary>
         [JsonProperty("startPage")]
         public virtual int StartPage { get; set; }
 

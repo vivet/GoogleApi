@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using GoogleApi.Entities.Search.Common;
 using Newtonsoft.Json;
 
@@ -51,6 +52,21 @@ namespace GoogleApi.Entities.Search
         /// </summary>
         [JsonProperty("promotions")]
         public virtual IEnumerable<Promotion> Promotions { get; set; }
+
+        /// <summary>
+        /// Contains <see cref="QueryInfo"/> about the executed request.
+        /// </summary>
+        public virtual QueryInfo Query => this.Queries.Where(x => x.Key == "request").Select(x => x.Value.FirstOrDefault()).FirstOrDefault();
+
+        /// <summary>
+        /// Contains <see cref="QueryInfo"/> about the next page of the executed request.
+        /// </summary>
+        public virtual QueryInfo NextPage => this.Queries.Where(x => x.Key == "nextPage").Select(x => x.Value.FirstOrDefault()).FirstOrDefault();
+
+        /// <summary>
+        /// Contains <see cref="QueryInfo"/> about the previous page of the executed request.
+        /// </summary>
+        public virtual QueryInfo PreviousPage => this.Queries.Where(x => x.Key == "previousPage").Select(x => x.Value.FirstOrDefault()).FirstOrDefault();
 
         /// <summary>
         /// Contains one or more sets of query metadata, keyed by role name. 
