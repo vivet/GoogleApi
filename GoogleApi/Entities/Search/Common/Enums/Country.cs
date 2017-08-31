@@ -2,7 +2,6 @@ using System.Runtime.Serialization;
 
 namespace GoogleApi.Entities.Search.Common.Enums
 {
-    // TODO: Correct EnumMember Attributes.
     /// <summary>
     /// Country.
     /// </summary>
@@ -11,1453 +10,1453 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// <summary>
         /// Afghanistan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAF")]
         Afghanistan,
 
         /// <summary>
         /// Albania
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAL")]
         Albania,
 
         /// <summary>
         /// Algeria
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryDZ")]
         Algeria,
 
         /// <summary>
         /// American Samoa
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAS")]
         AmericanSamoa,
 
         /// <summary>
         /// Andorra
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAD")]
         Andorra,
 
         /// <summary>
         /// Angola
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAO")]
         Angola,
 
         /// <summary>
         /// Anguilla
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAI")]
         Anguilla,
 
         /// <summary>
         /// Antarctica
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAQ")]
         Antarctica,
 
         /// <summary>
         /// Antigua and Barbuda
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAG")]
         AntiguaAndBarbuda,
 
         /// <summary>
         /// Argentina
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAR")]
         Argentina,
 
         /// <summary>
         /// Armenia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAM")]
         Armenia,
 
         /// <summary>
         /// Aruba
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAW")]
         Aruba,
 
         /// <summary>
         /// Australia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAU")]
         Australia,
 
         /// <summary>
         /// Austria
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAT")]
         Austria,
 
         /// <summary>
         /// Azerbaijan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAZ")]
         Azerbaijan,
 
         /// <summary>
         /// Bahamas
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBS")]
         Bahamas,
 
         /// <summary>
         /// Bahrain
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBH")]
         Bahrain,
 
         /// <summary>
         /// Bangladesh
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBD")]
         Bangladesh,
 
         /// <summary>
         /// Barbados
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBB")]
         Barbados,
 
         /// <summary>
         /// Belarus
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBY")]
         Belarus,
 
         /// <summary>
         /// Belgium
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBE")]
         Belgium,
 
         /// <summary>
         /// Belize
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBZ")]
         Belize,
 
         /// <summary>
         /// Benin
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBJ")]
         Benin,
 
         /// <summary>
         /// Bermuda
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBM")]
         Bermuda,
 
         /// <summary>
         /// Bhutan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBT")]
         Bhutan,
 
         /// <summary>
         /// Bolivia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBO")]
         Bolivia,
 
         /// <summary>
         /// Bosnia and Herzegovina
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBA")]
         BosniaAndHerzegovina,
 
         /// <summary>
         /// Botswana
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBW")]
         Botswana,
 
         /// <summary>
         /// Bouvet Island
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBV")]
         BouvetIsland,
 
         /// <summary>
         /// Brazil
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBR")]
         Brazil,
 
         /// <summary>
         /// British Indian Ocean Territory
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIO")]
         BritishIndianOceanTerritory,
 
         /// <summary>
         /// Brunei Darussalam
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBN")]
         BruneiDarussalam,
 
         /// <summary>
         /// Bulgaria
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBG")]
         Bulgaria,
 
         /// <summary>
         /// Burkina Faso
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBF")]
         BurkinaFaso,
 
         /// <summary>
         /// Burundi
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryBI")]
         Burundi,
 
         /// <summary>
         /// Cambodia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKH")]
         Cambodia,
 
         /// <summary>
         /// Cameroon
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCM")]
         Cameroon,
 
         /// <summary>
         /// Canada
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCA")]
         Canada,
 
         /// <summary>
         /// Cape Verde
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCV")]
         CapeVerde,
 
         /// <summary>
         /// Cayman Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKY")]
         CaymanIslands,
 
         /// <summary>
         /// Central African Republic
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCF")]
         CentralAfricanRepublic,
 
         /// <summary>
         /// Chad
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTD")]
         Chad,
 
         /// <summary>
         /// Chile
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCL")]
         Chile,
 
         /// <summary>
         /// China
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCN")]
         China,
 
         /// <summary>
         /// Christmas Island
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCX")]
         ChristmasIsland,
 
         /// <summary>
         /// Cocos (Keeling) Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCC")]
         CocosIslands,
 
         /// <summary>
         /// Colombia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCO")]
         Colombia,
 
         /// <summary>
         /// Comoros
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKM")]
         Comoros,
 
         /// <summary>
         /// Congo
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCG")]
         Congo,
 
         /// <summary>
         /// Congo, the Democratic Republic of the
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCD")]
         TheDemocraticRepublicOfCongo,
 
         /// <summary>
         /// Cook Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCK")]
         CookIslands,
 
         /// <summary>
         /// Costa Rica
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCR")]
         CostaRica,
 
         /// <summary>
         /// Cote D'ivoire
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCI")]
         CoteDivoire,
 
         /// <summary>
         /// Croatia (Hrvatska)
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryHR")]
         Croatia,
 
         /// <summary>
         /// Cuba
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCU")]
         Cuba,
 
         /// <summary>
         /// Cyprus
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCY")]
         Cyprus,
 
         /// <summary>
         /// Czech Republic
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCZ")]
         CzechRepublic,
 
         /// <summary>
         /// Denmark
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryDK")]
         Denmark,
 
         /// <summary>
         /// Djibouti
         /// </summary>
-        [EnumMember(Value = "countryDK")]
+        [EnumMember(Value = "countryDJ")]
         Djibouti,
 
         /// <summary>
         /// Dominica
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryDM")]
         Dominica,
 
         /// <summary>
         /// Dominican Republic
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryDO")]
         DominicanRepublic,
 
         /// <summary>
         /// East Timor
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTP")]
         EastTimor,
 
         /// <summary>
         /// Ecuador
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryEC")]
         Ecuador,
 
         /// <summary>
         /// Egypt
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryEG")]
         Egypt,
 
         /// <summary>
         /// El Salvador
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySV")]
         ElSalvador,
 
         /// <summary>
         /// Equatorial Guinea
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGQ")]
         EquatorialGuinea,
 
         /// <summary>
         /// Eritrea
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryER")]
         Eritrea,
 
         /// <summary>
         /// Estonia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryEE")]
         Estonia,
 
         /// <summary>
         /// Ethiopia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryET")]
         Ethiopia,
 
         /// <summary>
         /// European Union
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryEU")]
         EuropeanUnion,
 
         /// <summary>
         /// Falkland Islands (Malvinas)
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryFK")]
         FalklandIslAndsMalvinas,
 
         /// <summary>
         /// Faroe Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryFO")]
         FaroeIslands,
 
         /// <summary>
         /// Fiji
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryFJ")]
         Fiji,
 
         /// <summary>
         /// Finland
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryFI")]
         Finland,
 
         /// <summary>
         /// France
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryFR")]
         France,
 
         /// <summary>
         /// France, Metropolitan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryFX")]
         FranceMetropolitan,
 
         /// <summary>
         /// French Guiana
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGF")]
         FrenchGuiana,
 
         /// <summary>
         /// French Polynesia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPF")]
         FrenchPolynesia,
 
         /// <summary>
         /// French Southern Territories
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTF")]
         FrenchSouthernTerritories,
 
         /// <summary>
         /// Gabon
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGA")]
         Gabon,
 
         /// <summary>
         /// Gambia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGM")]
         Gambia,
 
         /// <summary>
         /// Georgia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGE")]
         Georgia,
 
         /// <summary>
         /// Germany
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryDE")]
         Germany,
 
         /// <summary>
         /// Ghana
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGH")]
         Ghana,
 
         /// <summary>
         /// Gibraltar
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGI")]
         Gibraltar,
 
         /// <summary>
         /// Greece
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGR")]
         Greece,
 
         /// <summary>
         /// Greenland
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGL")]
         Greenland,
 
         /// <summary>
         /// Grenada
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGD")]
         Grenada,
 
         /// <summary>
         /// Guadeloupe
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGP")]
         Guadeloupe,
 
         /// <summary>
         /// Guam
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGU")]
         Guam,
 
         /// <summary>
         /// Guatemala
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGT")]
         Guatemala,
 
         /// <summary>
         /// Guinea
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGN")]
         Guinea,
 
         /// <summary>
         /// Guinea-Bissau
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGW")]
         GuineaBissau,
 
         /// <summary>
         /// Guyana
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGY")]
         Guyana,
 
         /// <summary>
         /// Haiti
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryHT")]
         Haiti,
 
         /// <summary>
         /// Heard Island and Mcdonald Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryHM")]
         HeardIslandAndMcdonaldIslands,
 
         /// <summary>
         /// Holy See (Vatican City State)
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryVA")]
         VaticanCityState,
 
         /// <summary>
         /// Honduras
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryHN")]
         Honduras,
 
         /// <summary>
         /// Hong Kong
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryHK")]
         HongKong,
 
         /// <summary>
         /// Hungary
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryHU")]
         Hungary,
 
         /// <summary>
         /// Iceland
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIS")]
         Iceland,
 
         /// <summary>
         /// India
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIN")]
         India,
 
         /// <summary>
         /// Indonesia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryID")]
         Indonesia,
 
         /// <summary>
         /// Iran, Islamic Republic of
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIR")]
         Iran,
 
         /// <summary>
         /// Iraq
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIQ")]
         Iraq,
 
         /// <summary>
         /// Ireland
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIE")]
         Ireland,
 
         /// <summary>
         /// Israel
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIL")]
         Israel,
 
         /// <summary>
         /// Italy
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryIT")]
         Italy,
 
         /// <summary>
         /// Jamaica
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryJM")]
         Jamaica,
 
         /// <summary>
         /// Japan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryJP")]
         Japan,
 
         /// <summary>
         /// Jordan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryJO")]
         Jordan,
 
         /// <summary>
         /// Kazakhstan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKZ")]
         Kazakhstan,
 
         /// <summary>
         /// Kenya
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKE")]
         Kenya,
 
         /// <summary>
         /// Kiribati
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKI")]
         Kiribati,
 
         /// <summary>
         /// Korea, Democratic People's Republic of
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKP")]
         DemocraticPeoplesRepublicOfKorea,
 
         /// <summary>
         /// Korea, Republic of
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKR")]
         RepublicOfKorea,
 
         /// <summary>
         /// Kuwait
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKW")]
         Kuwait,
 
         /// <summary>
         /// Kyrgyzstan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKG")]
         Kyrgyzstan,
 
         /// <summary>
         /// Lao People's Democratic Republic
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLA")]
         LaoPeoplesDemocraticRepublic,
 
         /// <summary>
         /// Latvia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLV")]
         Latvia,
 
         /// <summary>
         /// Lebanon
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLB")]
         Lebanon,
 
         /// <summary>
         /// Lesotho
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLS")]
         Lesotho,
 
         /// <summary>
         /// Liberia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLR")]
         Liberia,
 
         /// <summary>
         /// Libyan Arab Jamahiriya
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLY")]
         LibyanArabJamahiriya,
 
         /// <summary>
         /// Liechtenstein
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLI")]
         Liechtenstein,
 
         /// <summary>
         /// Lithuania
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLT")]
         Lithuania,
 
         /// <summary>
         /// Luxembourg
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLU")]
         Luxembourg,
 
         /// <summary>
         /// Macao
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMO")]
         Macao,
 
         /// <summary>
         /// Macedonia, the Former Yugosalv Republic of
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMK")]
         Macedonia,
 
         /// <summary>
         /// Madagascar
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMG")]
         Madagascar,
 
         /// <summary>
         /// Malawi
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMW")]
         Malawi,
 
         /// <summary>
         /// Malaysia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMY")]
         Malaysia,
 
         /// <summary>
         /// Maldives
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMV")]
         Maldives,
 
         /// <summary>
         /// Mali
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryML")]
         Mali,
 
         /// <summary>
         /// Malta
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMT")]
         Malta,
 
         /// <summary>
         /// Marshall Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMH")]
         MarshallIslands,
 
         /// <summary>
         /// Martinique
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMQ")]
         Martinique,
 
         /// <summary>
         /// Mauritania
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMR")]
         Mauritania,
         
         /// <summary>
         /// Mauritius
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMU")]
         Mauritius,
 
         /// <summary>
         /// Mayotte
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryYT")]
         Mayotte,
 
         /// <summary>
         /// Mexico
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMX")]
         Mexico,
 
         /// <summary>
         /// Micronesia, Federated States of
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryFM")]
         Micronesia,
 
         /// <summary>
         /// Moldova, Republic of
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMD")]
         Moldova,
 
         /// <summary>
         /// Monaco
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMC")]
         Monaco,
 
         /// <summary>
         /// Mongolia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMN")]
         Mongolia,
 
         /// <summary>
         /// Montserrat
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMS")]
         Montserrat,
 
         /// <summary>
         /// Morocco
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMA")]
         Morocco,
 
         /// <summary>
         /// Mozambique
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMZ")]
         Mozambique,
 
         /// <summary>
         /// Myanmar
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMM")]
         Myanmar,
 
         /// <summary>
         /// Namibia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNA")]
         Namibia,
 
         /// <summary>
         /// Nauru
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNR")]
         Nauru,
 
         /// <summary>
         /// Nepal
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNP")]
         Nepal,
 
         /// <summary>
         /// Netherlands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNL")]
         Netherlands,
 
         /// <summary>
         /// Netherlands Antilles
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAN")]
         NetherlandsAntilles,
 
         /// <summary>
         /// New Caledonia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNC")]
         NewCaledonia,
 
         /// <summary>
         /// New Zealand
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNZ")]
         NewZealand,
 
         /// <summary>
         /// Nicaragua
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNI")]
         Nicaragua,
 
         /// <summary>
         /// Niger
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNE")]
         Niger,
 
         /// <summary>
         /// Nigeria
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNG")]
         Nigeria,
 
         /// <summary>
         /// Niue
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNU")]
         Niue,
 
         /// <summary>
         /// Norfolk Island
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNF")]
         NorfolkIsland,
 
         /// <summary>
         /// Northern Mariana Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryMP")]
         NorthernMarianaIslands,
 
         /// <summary>
         /// Norway
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryNO")]
         Norway,
 
         /// <summary>
         /// Oman
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryOM")]
         Oman,
 
         /// <summary>
         /// Pakistan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPK")]
         Pakistan,
 
         /// <summary>
         /// Palau
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPW")]
         Palau,
 
         /// <summary>
         /// Palestinian Territory
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPS")]
         PalestinianTerritory,
 
         /// <summary>
         /// Panama
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPA")]
         Panama,
 
         /// <summary>
         /// Papua New Guinea
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPG")]
         PapuaNewGuinea,
 
         /// <summary>
         /// Paraguay
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPY")]
         Paraguay,
 
         /// <summary>
         /// Peru
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPE")]
         Peru,
 
         /// <summary>
         /// Philippines
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPH")]
         Philippines,
 
         /// <summary>
         /// Pitcairn
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPN")]
         Pitcairn,
 
         /// <summary>
         /// Poland
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPL")]
         Poland,
 
         /// <summary>
         /// Portugal
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPT")]
         Portugal,
 
         /// <summary>
         /// Puerto Rico
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPR")]
         PuertoRico,
 
         /// <summary>
         /// Qatar
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryQA")]
         Qatar,
 
         /// <summary>
         /// Reunion
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryRE")]
         Reunion,
 
         /// <summary>
         /// Romania
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryRO")]
         Romania,
 
         /// <summary>
         /// Russian Federation
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryRU")]
         RussianFederation,
 
         /// <summary>
         /// Rwanda
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryRW")]
         Rwanda,
 
         /// <summary>
         /// Saint Helena
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySH")]
         SaintHelena,
 
         /// <summary>
         /// Saint Kitts and Nevis
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryKN")]
         SaintKittsAndNevis,
 
         /// <summary>
         /// Saint Lucia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLC")]
         SaintLucia,
 
         /// <summary>
         /// Saint Pierre and Miquelon
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryPM")]
         SaintPierreAndMiquelon,
 
         /// <summary>
         /// Saint Vincent and the Grenadines
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryVC")]
         SaintVincentAndtheGrenadines,
 
         /// <summary>
         /// Samoa
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryWS")]
         Samoa,
 
         /// <summary>
         /// San Marino
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySM")]
         SanMarino,
 
         /// <summary>
         /// Sao Tome and Principe
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryST")]
         SaoTomeAndPrincipe,
 
         /// <summary>
         /// Saudi Arabia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySA")]
         SaudiArabia,
 
         /// <summary>
         /// Senegal
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySN")]
         Senegal,
 
         /// <summary>
         /// Serbia and Montenegro
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCS")]
         SerbiaAndMontenegro,
 
         /// <summary>
         /// Seychelles
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySC")]
         Seychelles,
 
         /// <summary>
         /// Sierra Leone
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySL")]
         SierraLeone,
 
         /// <summary>
         /// Singapore
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySG")]
         Singapore,
 
         /// <summary>
         /// Slovakia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySK")]
         Slovakia,
 
         /// <summary>
         /// Slovenia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySI")]
         Slovenia,
 
         /// <summary>
         /// Solomon Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySB")]
         SolomonIslands,
 
         /// <summary>
         /// Somalia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySO")]
         Somalia,
 
         /// <summary>
         /// South Africa
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryZA")]
         SouthAfrica,
 
         /// <summary>
         /// South Georgia and the South Sandwich Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryGS")]
         SouthGeorgiaAndTheSouthSAndwichIslands,
 
         /// <summary>
         /// Spain
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryES")]
         Spain,
 
         /// <summary>
         /// Sri Lanka
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryLK")]
         SriLanka,
 
         /// <summary>
         /// Sudan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySD")]
         Sudan,
 
         /// <summary>
         /// Suriname
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySR")]
         Suriname,
 
         /// <summary>
         /// Svalbard and Jan Mayen
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySJ")]
         SvalbardAndJanMayen,
 
         /// <summary>
         /// Swaziland
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySZ")]
         Swaziland,
 
         /// <summary>
         /// Sweden
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySE")]
         Sweden,
 
         /// <summary>
         /// Switzerland
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryCH")]
         Switzerland,
 
         /// <summary>
         /// Syrian Arab Republic
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countrySY")]
         SyrianArabRepublic,
 
         /// <summary>
         /// Taiwan, Province of China
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTW")]
         Taiwan,
 
         /// <summary>
         /// Tajikistan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTJ")]
         Tajikistan,
 
         /// <summary>
         /// Tanzania, United Republic of
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTZ")]
         Tanzania,
 
         /// <summary>
         /// Thailand
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTH")]
         Thailand,
 
         /// <summary>
         /// Togo
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTG")]
         Togo,
 
         /// <summary>
         /// Tokelau
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTK")]
         Tokelau,
 
         /// <summary>
         /// Tonga
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTO")]
         Tonga,
 
         /// <summary>
         /// Trinidad and Tobago
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTT")]
         TrinidadAndTobago,
 
         /// <summary>
         /// Tunisia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTN")]
         Tunisia,
 
         /// <summary>
         /// Turkey
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTR")]
         Turkey,
 
         /// <summary>
         /// Turkmenistan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTM")]
         Turkmenistan,
 
         /// <summary>
         /// Turks and Caicos Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTC")]
         TurksAndCaicosIslands,
 
         /// <summary>
         /// Tuvalu
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryTV")]
         Tuvalu,
 
         /// <summary>
         /// Uganda
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryUG")]
         Uganda,
 
         /// <summary>
         /// Ukraine
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryUA")]
         Ukraine,
 
         /// <summary>
         /// United Arab Emirates
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryAE")]
         UnitedArabEmirates,
 
         /// <summary>
         /// United Kingdom
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryUK")]
         UnitedKingdom,
 
         /// <summary>
         /// United States
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryUS")]
         UnitedStates,
 
         /// <summary>
         /// United States Minor Outlying Islands
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryUM")]
         UnitedStatesMinorOutlyingIslands,
 
         /// <summary>
         /// Uruguay
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryUY")]
         Uruguay,
 
         /// <summary>
         /// Uzbekistan
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryUZ")]
         Uzbekistan,
 
         /// <summary>
         /// Vanuatu
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryVU")]
         Vanuatu,
 
         /// <summary>
         /// Venezuela
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryVE")]
         Venezuela,
 
         /// <summary>
         /// Vietnam
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryVN")]
         Vietnam,
 
         /// <summary>
         /// Virgin Islands, British
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryVG")]
         VirginIslandsBritish,
 
         /// <summary>
         /// Virgin Islands, U.S.
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryVI")]
         VirginIslandsUs,
 
         /// <summary>
         /// Wallis and Futuna
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryWF")]
         WallisandFutuna,
 
         /// <summary>
         /// Western Sahara
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryEH")]
         WesternSahara,
 
         /// <summary>
         /// Yemen
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryYE")]
         Yemen,
 
         /// <summary>
         /// Yugoslavia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryYU")]
         Yugoslavia,
 
         /// <summary>
         /// Zambia
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryZM")]
         Zambia,
 
         /// <summary>
         /// Zimbabwe
         /// </summary>
-        [EnumMember(Value = "af")]
+        [EnumMember(Value = "countryZW")]
         Zimbabwe
     }
 }
