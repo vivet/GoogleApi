@@ -33,9 +33,9 @@ namespace GoogleApi.Test.Maps.Geolocation
             Assert.AreEqual(Status.Ok, result.Status);
 
             Assert.IsNotNull(result.Location);
-            Assert.AreEqual(1457.00, result.Accuracy, 100.00);
-            Assert.AreEqual(55.660850200000006, result.Location.Latitude, 0.0001);
-            Assert.AreEqual(12.5031106, result.Location.Longitude, 0.0001);
+            Assert.AreEqual(3147.00, result.Accuracy, 300.00);
+            Assert.AreEqual(55.692889700000002d, result.Location.Latitude, 0.001);
+            Assert.AreEqual(12.547805d, result.Location.Longitude, 0.001);
         }
 
         [Test]
@@ -54,11 +54,7 @@ namespace GoogleApi.Test.Maps.Geolocation
             var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
-
             Assert.IsNotNull(result.Location);
-            Assert.AreEqual(1457.00, result.Accuracy, 100.00);
-            Assert.AreEqual(55.660850200000006, result.Location.Latitude, 0.0001);
-            Assert.AreEqual(12.5031106, result.Location.Longitude, 0.0001);
         }
 
         [Test]
