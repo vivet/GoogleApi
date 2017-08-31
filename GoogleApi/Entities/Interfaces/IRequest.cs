@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GoogleApi.Entities.Interfaces
 {
@@ -39,7 +40,7 @@ namespace GoogleApi.Entities.Interfaces
         /// <summary>
         /// Get the query string collection of aggregated from all parameters added to the request.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        QueryStringParameters GetQueryStringParameters();
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        IList<KeyValuePair<string, string>> GetQueryStringParameters();
     }
 }

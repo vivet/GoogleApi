@@ -5,6 +5,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocode.Request
 {
@@ -57,8 +58,8 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         /// <summary>
         /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
                 throw new ArgumentException("Location or Address is required");

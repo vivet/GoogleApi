@@ -145,8 +145,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// <summary>
         /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrEmpty(this.OriginsRaw) && (this.Origins == null || !this.Origins.Any()))
                 throw new ArgumentException("Origins is required");

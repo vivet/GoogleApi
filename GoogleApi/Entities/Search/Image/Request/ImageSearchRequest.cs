@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Search.Image.Request
 {
@@ -24,8 +26,8 @@ namespace GoogleApi.Entities.Search.Image.Request
         /// <summary>
         /// See <see cref="BaseSearchRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 

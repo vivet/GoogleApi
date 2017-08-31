@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.Details.Request
 {
@@ -36,8 +38,8 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// <summary>
         /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.PlaceId))
                 throw new ArgumentException("PlaceId is required");

@@ -7,6 +7,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.AutoComplete.Request
 {
@@ -79,8 +80,8 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// <summary>
         /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/>.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 
@@ -103,7 +104,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
             if (this.Strictbounds)
-                parameters.Add("strictbounds");
+                parameters.Add("strictbounds", string.Empty);
 
             if (this.Types != null && this.Types.Any())
                 parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));

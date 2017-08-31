@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
 {
@@ -25,8 +26,8 @@ namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
         /// <summary>
         /// See <see cref="BaseRoadsRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Points == null || !this.Points.Any())
                 throw new ArgumentException("Points is required");

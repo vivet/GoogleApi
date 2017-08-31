@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Request
 {
@@ -57,8 +59,8 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// <summary>
         /// See <see cref="BasePlacesSearchRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Location == null)
                 throw new ArgumentException("Location is required");

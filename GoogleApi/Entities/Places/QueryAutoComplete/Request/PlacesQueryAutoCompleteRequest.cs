@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
 {
@@ -50,8 +52,8 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         /// <summary>
         /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrEmpty(this.Input))
                 throw new ArgumentException("Input is required");

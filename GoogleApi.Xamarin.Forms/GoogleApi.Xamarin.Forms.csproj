@@ -83,6 +83,9 @@
     <Compile Include="..\googleapi\entities\common\extensions\EnumExtension.cs">
       <Link>Entities\Common\Extensions\EnumExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Extensions\ListExtension.cs">
+      <Link>Entities\Common\Extensions\ListExtension.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Extensions\StringExtension.cs">
       <Link>Entities\Common\Extensions\StringExtension.cs</Link>
     </Compile>
@@ -427,12 +430,6 @@
     </Compile>
     <Compile Include="..\googleapi\entities\places\search\text\response\TextResult.cs">
       <Link>Entities\Places\Search\Text\Response\TextResult.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\QueryStringParameter.cs">
-      <Link>Entities\QueryStringParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\QueryStringParameters.cs">
-      <Link>Entities\QueryStringParameters.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\BaseSearchRequest.cs">
       <Link>Entities\Search\BaseSearchRequest.cs</Link>

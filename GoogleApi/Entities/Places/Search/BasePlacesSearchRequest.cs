@@ -1,8 +1,10 @@
-﻿using GoogleApi.Entities.Common.Enums;
+﻿using System.Collections.Generic;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.Search
 {
@@ -60,8 +62,8 @@ namespace GoogleApi.Entities.Places.Search
         /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 
@@ -71,7 +73,7 @@ namespace GoogleApi.Entities.Places.Search
                 parameters.Add("type", this.Type.Value.ToString().ToLower());
 
             if (this.OpenNow)
-                parameters.Add("opennow");
+                parameters.Add("opennow", string.Empty);
 
             if (this.Minprice.HasValue)
                 parameters.Add("minprice", this.Minprice.Value.ToString().ToLower());

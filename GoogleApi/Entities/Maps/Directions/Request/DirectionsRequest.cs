@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Common;
@@ -136,8 +137,8 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// <summary>
         /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Origin == null)
                 throw new ArgumentException("Origin is required");

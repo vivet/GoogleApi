@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GoogleApi.Entities.Interfaces;
@@ -6,6 +7,7 @@ using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;
 using Org.BouncyCastle.Crypto.Parameters;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities
 {
@@ -50,7 +52,7 @@ namespace GoogleApi.Entities
         public virtual Uri GetUri()
         {
             var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => Uri.EscapeDataString(x.Name) + "=" + Uri.EscapeDataString(x.Value)));
+            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
             var uri = new Uri(scheme + this.BaseUrl + "?" + queryString);
 
             if (this.ClientId == null)
@@ -75,10 +77,10 @@ namespace GoogleApi.Entities
         /// <summary>
         /// See <see cref="IRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public virtual QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public virtual IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            var parameters = new QueryStringParameters();
+            var parameters = new List<KeyValuePair<string, string>>();
 
             if (this.ClientId == null)
             {
