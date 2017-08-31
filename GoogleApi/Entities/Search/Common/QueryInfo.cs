@@ -234,8 +234,9 @@ namespace GoogleApi.Entities.Search.Common
         /// A list of file types indexable by Google can be found in Search Console Help Center. https://support.google.com/webmasters/answer/35287?hl=en
         /// Additional filetypes may be added in the future. An up-to-date list can always be found in Google's file type FAQ.
         /// </summary>
-        [JsonProperty("fileType", ItemConverterType = typeof(StringEnumConverter))]
-        public virtual IEnumerable<FileType> FileTypes { get; set; }
+        [JsonProperty("fileType")]
+        [JsonConverter(typeof(StringEnumListJsonConverter<FileType>))]
+        public virtual IEnumerable<FileType?> FileTypes { get; set; }
 
         /// <summary>
         /// Rights - Filters based on licensing.
@@ -247,8 +248,9 @@ namespace GoogleApi.Entities.Search.Common
         /// - cc_nonderived
         /// - and combinations of these.
         /// </summary>
-        [JsonProperty("rights", ItemConverterType = typeof(StringEnumConverter))]
-        public virtual IEnumerable<RightsType> Rights { get; set; }
+        [JsonProperty("rights")]
+        [JsonConverter(typeof(StringEnumListJsonConverter<RightsType>))]
+        public virtual IEnumerable<RightsType?> Rights { get; set; }
 
         /// <summary>
         /// Allowed values are web or image. If unspecified, results are limited to webpages.

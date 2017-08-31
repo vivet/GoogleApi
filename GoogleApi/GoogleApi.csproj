@@ -28,6 +28,8 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <FileVersion>3.2.0.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
+    <RepositoryType></RepositoryType>
+    <RepositoryUrl></RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />

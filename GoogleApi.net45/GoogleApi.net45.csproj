@@ -96,6 +96,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Converters\BooleanJsonConverter.cs">
       <Link>Entities\Common\Converters\BooleanJsonConverter.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Converters\StringEnumListJsonConverter.cs">
+      <Link>Entities\Common\Converters\StringEnumListJsonConverter.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
     </Compile>
