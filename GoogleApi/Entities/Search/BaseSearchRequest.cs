@@ -185,6 +185,10 @@ namespace GoogleApi.Entities.Search
                 parameters.Add("relatedSite", this.Options.RelatedSite ?? string.Empty);
 
             parameters.Add("rights", string.Join(",", this.Options.Rights));
+
+            if (this.Options.SafetyLevel != SafetyLevel.Off && !this.Options.InterfaceLanguage.AllowSafeSearch())
+                throw new InvalidOperationException($"SafetyLevel is not allowed for specified InterfaceLanguage: {this.Options.InterfaceLanguage}");
+
             parameters.Add("safe", this.Options.SafetyLevel.ToString().ToLower());
 
             if (this.Options.SearchType != SearchType.Web)

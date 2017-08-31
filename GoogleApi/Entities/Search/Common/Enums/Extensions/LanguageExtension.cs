@@ -104,5 +104,31 @@
                     return string.Empty;
             }
         }
+
+        /// <summary>
+        /// Determines whether the <see cref="Language"/> supports safe search filter.
+        /// </summary>
+        /// <param name="language">The <see cref="Language"/>.</param>
+        /// <returns>Boolean, indicating if the passed <see cref="Language"/> supports safe search filter.</returns>
+        public static bool AllowSafeSearch(this Language language)
+        {
+            switch (language)
+            {
+                case Language.Dutch:
+                case Language.English:
+                case Language.French:
+                case Language.German:
+                case Language.Italian:
+                case Language.Portuguese:
+                case Language.PortugueseBrazil:
+                case Language.Spanish:
+                case Language.Chinese:
+                case Language.ChineseTraditional:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
     }
 }

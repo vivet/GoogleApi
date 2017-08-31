@@ -490,6 +490,43 @@ namespace GoogleApi.Test.Search.Web
         }
 
         [Test]
+        public void WebSearchWhenSafetyLevelOffTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    InterfaceLanguage = Language.Danish,
+                    SafetyLevel = SafetyLevel.Off
+                }
+            };
+
+            Assert.DoesNotThrow(() => GoogleSearch.WebSearch.Query(request));
+        }
+
+        [Test]
+        public void WebSearchWhenSafetyLevelAndNotAllowedTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    InterfaceLanguage = Language.Danish,
+                    SafetyLevel = SafetyLevel.High
+                }
+            };
+
+            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.AreEqual(exception.Message, $"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}");
+        }
+
+        [Test]
         public void WebSearchWhenSiteSearchTest()
         {
             var request = new WebSearchRequest
@@ -602,6 +639,42 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
             Assert.AreEqual(exception.Message, "SearchEngineId is required");
+        }
+
+        [Test]
+        public void WebSearchWhenNumberIsLessThanOneTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    Number = 0
+                }
+            };
+
+            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
+        }
+
+        [Test]
+        public void WebSearchWhenNumberIsGreaterThanTenTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    Number = 11
+                }
+            };
+
+            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
         }
     }
 }
