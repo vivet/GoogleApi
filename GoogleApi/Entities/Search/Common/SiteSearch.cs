@@ -1,5 +1,6 @@
 using GoogleApi.Entities.Search.Common.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Search.Common
 {
@@ -21,6 +22,7 @@ namespace GoogleApi.Entities.Search.Common
         /// - "i": include
         /// </summary>
         [JsonProperty("siteSearchFilter")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual SiteSearchFilter Filter { get; set; } = SiteSearchFilter.Include;
     }
 }

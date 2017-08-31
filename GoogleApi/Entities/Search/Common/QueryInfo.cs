@@ -43,8 +43,8 @@ namespace GoogleApi.Entities.Search.Common
         public virtual int StartIndex { get; set; }
 
         /// <summary>
-        /// The page number of this set of results, where the page length is set by the count property.
-        /// </summary>
+                /// The page number of this set of results, where the page length is set by the count property.
+                /// </summary>
         [JsonProperty("startPage")]
         public virtual int StartPage { get; set; }
 
@@ -53,21 +53,21 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("language")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Language Language { get; set; }
+        public virtual Language? Language { get; set; }
 
         /// <summary>
         /// The character encoding supported for search request.
         /// </summary>
         [JsonProperty("inputEncoding")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual EncodingType InputEncoding { get; set; }
+        public virtual EncodingType? InputEncoding { get; set; }
 
         /// <summary>
         /// The character encoding supported for search results.
         /// </summary>
         [JsonProperty("outputEncoding")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual EncodingType OutputEncoding { get; set; }
+        public virtual EncodingType? OutputEncoding { get; set; }
 
         /// <summary>
         /// Specifies the SafeSearch level used for filtering out adult results.
@@ -78,7 +78,7 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("safe")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual SafetyLevel SafetyLevel { get; set; }
+        public virtual SafetyLevel? SafetyLevel { get; set; }
 
         /// <summary>
         /// The identifier of a custom search engine created using the Custom Search Control Panel, if specified in request. 
@@ -106,7 +106,7 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("filter")]
         [JsonConverter(typeof(StringBooleanJsonConverter))]
-        public virtual bool Filter { get; set; } = true;
+        public virtual bool Filter { get; set; }
 
         /// <summary>
         /// Boosts search results whose country of origin matches the parameter value. 
@@ -163,15 +163,13 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("hl")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Language InterfaceLanguage { get; set; }
+        public virtual Language? InterfaceLanguage { get; set; }
 
         /// <summary>
         /// Specifies all search results should be pages either included or excluded, from a given site.
         /// </summary>
-        [JsonProperty("siteSearch")]
-        [JsonConverter(typeof(SiteSearchJsonConverter))]
-        public virtual SiteSearch SiteSearch { get; set; }  
-        
+        public virtual SiteSearch SiteSearch => string.IsNullOrEmpty(this.SiteSearchStr ) ? null : new SiteSearch { Site = SiteSearchStr, Filter = SiteSearchFilterEnum };
+
         /// <summary>
         /// Identifies a phrase that all documents in the search results must contain.
         /// </summary>
@@ -236,8 +234,7 @@ namespace GoogleApi.Entities.Search.Common
         /// A list of file types indexable by Google can be found in Search Console Help Center. https://support.google.com/webmasters/answer/35287?hl=en
         /// Additional filetypes may be added in the future. An up-to-date list can always be found in Google's file type FAQ.
         /// </summary>
-        [JsonProperty("fileType")] // TODO: test (, ItemConverterType = typeof(StringEnumConverter))
-        [JsonConverter(typeof(StringEnumListJsonConverter<FileType>))]
+        [JsonProperty("fileType", ItemConverterType = typeof(StringEnumConverter))]
         public virtual IEnumerable<FileType> FileTypes { get; set; }
 
         /// <summary>
@@ -258,7 +255,7 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("searchType")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual SearchType SearchType { get; set; }
+        public virtual SearchType? SearchType { get; set; }
 
         /// <summary>
         /// Restricts results to images of a specified size. 
@@ -287,5 +284,12 @@ namespace GoogleApi.Entities.Search.Common
         [JsonProperty("imgDominantColor")]
         [JsonConverter(typeof(StringEnumConverter))]
         public virtual DominantColorType? ImageDominantColor { get; set; }
+
+        [JsonProperty("siteSearch")]
+        private string SiteSearchStr { get; set; }
+
+        [JsonProperty("siteSearchFilter")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        private SiteSearchFilter SiteSearchFilterEnum { get; set; } = SiteSearchFilter.Include;
     }
 }

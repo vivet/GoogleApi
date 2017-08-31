@@ -21,7 +21,7 @@ namespace GoogleApi.Entities.Search.Common
         public virtual string Label { get; set; }
 
         /// <summary>
-        /// 
+        /// Label With Op.
         /// </summary>
         [JsonProperty("label_with_op")]
         public virtual string LabelWithOp { get; set; }        
