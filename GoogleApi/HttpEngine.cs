@@ -137,8 +137,9 @@ namespace GoogleApi
             var httpClient = new HttpClient { Timeout = timeout };
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
-            if (request.IsGzip)
-                httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
+            // TODO: Test 'IsGzip'
+            //if (request.IsGzip)
+            //    httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
 
             Task<HttpResponseMessage> task;
             if (request is IRequestJson)
