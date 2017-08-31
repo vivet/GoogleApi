@@ -12,12 +12,12 @@ namespace GoogleApi.Test.Common.Extensions
         public void AddTest()
         {
             var list = new List<KeyValuePair<string, string>>();
-            var key = "abc";
-            var value = "123";
+            const string KEY = "abc";
+            const string VALUE = "123";
 
-            list.Add(key, value);
+            list.Add(KEY, VALUE);
 
-            Assert.Contains(new KeyValuePair<string, string>(key, value), list);
+            Assert.Contains(new KeyValuePair<string, string>(KEY, VALUE), list);
         }
 
         [Test]

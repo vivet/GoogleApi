@@ -14,7 +14,6 @@ namespace GoogleApi.Test
         protected virtual string CryptoKey => this.Settings.CryptoKey;
         protected virtual string ClientId => this.Settings.ClientId;
         protected virtual string SearchEngineId => this.Settings.SearchEngineId;
-        protected virtual string SearchEngineUrl => this.Settings.SearchEngineUrl;
 
         [OneTimeSetUp]
         public virtual void Setup()
@@ -48,9 +47,6 @@ namespace GoogleApi.Test
 
             [JsonProperty("SearchEngineId")]
             public string SearchEngineId { get; set; }
-
-            [JsonProperty("SearchEngineUrl")]
-            public string SearchEngineUrl { get; set; }
         }
     }
 }

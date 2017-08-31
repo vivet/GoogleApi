@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Common\Converters\BooleanJsonConverter.cs" />
+    <Compile Include="Common\Converters\BooleanJsonConverterTest.cs" />
     <Compile Include="Common\Converters\StringEnumListJsonConverterTest.cs" />
     <Compile Include="Common\Enums\Extensions\LanguagesExtensionTests.cs" />
     <Compile Include="Common\Extensions\ListExtensionTest.cs" />
