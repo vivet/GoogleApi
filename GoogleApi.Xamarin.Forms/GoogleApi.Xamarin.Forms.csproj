@@ -59,9 +59,6 @@
     <Compile Include="..\GoogleApi\Entities\Common\Converters\BooleanJsonConverter.cs">
       <Link>Entities\Common\Converters\BooleanJsonConverter.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Converters\StringEnumListJsonConverter.cs">
-      <Link>Entities\Common\Converters\StringEnumListJsonConverter.cs</Link>
-    </Compile>
     <Compile Include="..\googleapi\entities\common\enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
     </Compile>
@@ -448,9 +445,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\DateRestrictJsonConverter.cs">
       <Link>Entities\Search\Common\Converters\DateRestrictJsonConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\SiteSearchJsonConverter.cs">
-      <Link>Entities\Search\Common\Converters\SiteSearchJsonConverter.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\SortExpressionJsonConverter.cs">
       <Link>Entities\Search\Common\Converters\SortExpressionJsonConverter.cs</Link>
