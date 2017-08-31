@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
 
@@ -25,8 +26,8 @@ namespace GoogleApi.Entities.Places.Delete.Request
         /// <summary>
         /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/>.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.PlaceId))
                 throw new ArgumentException("PlaceId is required");

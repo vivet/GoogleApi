@@ -26,6 +26,7 @@
                 case Language.Bosnian: return "bs";
                 case Language.Bulgarian: return "bg";
                 case Language.Catalan: return "ca";
+                case Language.Chinese: return "zh";
                 case Language.ChineseSimplified: return "zh-CN";
                 case Language.ChineseTraditional: return "zh-TW";
                 case Language.Croatian: return "hr";
@@ -70,6 +71,7 @@
                 case Language.Occitan: return "oc";
                 case Language.Persian: return "fa";
                 case Language.Polish: return "pl";
+                case Language.Portuguese: return "pt";
                 case Language.PortugueseBrazil: return "pt-BR";
                 case Language.PortuguesePortugal: return "pt-PT";
                 case Language.Punjabi: return "pa";
@@ -100,6 +102,109 @@
 
                 default:
                     return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the <see cref="Language"/> supports safe search filter.
+        /// </summary>
+        /// <param name="language">The <see cref="Language"/>.</param>
+        /// <returns>Boolean, indicating if the passed <see cref="Language"/> supports safe search filter.</returns>
+        public static bool AllowSafeSearch(this Language language)
+        {
+            switch (language)
+            {
+                case Language.Dutch:
+                case Language.English:
+                case Language.French:
+                case Language.German:
+                case Language.Italian:
+                case Language.Portuguese:
+                case Language.PortugueseBrazil:
+                case Language.Spanish:
+                case Language.Chinese:
+                case Language.ChineseTraditional:
+                    return true;
+
+                case Language.Afrikaans:
+                case Language.Albanian:
+                case Language.Amharic:
+                case Language.Arabic:
+                case Language.Azerbaijani:
+                case Language.Basque:
+                case Language.Belarusian:
+                case Language.Bengali:
+                case Language.Bihari:
+                case Language.Bosnian:
+                case Language.Bulgarian:
+                case Language.Catalan:
+                case Language.ChineseSimplified:
+                case Language.Croatian:
+                case Language.Czech:
+                case Language.Danish:
+                case Language.Esperanto:
+                case Language.Estonian:
+                case Language.Faroese:
+                case Language.Finnish:
+                case Language.Frisian:
+                case Language.Galician:
+                case Language.Georgian:
+                case Language.Greek:
+                case Language.Gujarati:
+                case Language.Hebrew:
+                case Language.Hindi:
+                case Language.Hungarian:
+                case Language.Icelandic:
+                case Language.Indonesian:
+                case Language.Interlingua:
+                case Language.Irish:
+                case Language.Japanese:
+                case Language.Javanese:
+                case Language.Kannada:
+                case Language.Korean:
+                case Language.Latin:
+                case Language.Latvian:
+                case Language.Lithuanian:
+                case Language.Macedonian:
+                case Language.Malay:
+                case Language.Malayam:
+                case Language.Maltese:
+                case Language.Marathi:
+                case Language.Nepali:
+                case Language.Norwegian:
+                case Language.NorwegianNynorsk:
+                case Language.Occitan:
+                case Language.Persian:
+                case Language.Polish:
+                case Language.PortuguesePortugal:
+                case Language.Punjabi:
+                case Language.Romanian:
+                case Language.Russian:
+                case Language.ScotsGaelic:
+                case Language.Serbian:
+                case Language.Sinhalese:
+                case Language.Slovak:
+                case Language.Slovenian:
+                case Language.Sudanese:
+                case Language.Swahili:
+                case Language.Swedish:
+                case Language.Tagalog:
+                case Language.Tamil:
+                case Language.Telugu:
+                case Language.Thai:
+                case Language.Tigrinya:
+                case Language.Turkish:
+                case Language.Ukrainian:
+                case Language.Urdu:
+                case Language.Uzbek:
+                case Language.Vietnamese:
+                case Language.Welsh:
+                case Language.Xhosa:
+                case Language.Zulu:
+                    return false;
+
+                default:
+                    return false;
             }
         }
     }

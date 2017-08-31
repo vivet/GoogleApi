@@ -3,8 +3,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Search.Common;
+using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Web.Request;
 using NUnit.Framework;
+using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
 namespace GoogleApi.Test.Search.Web
 {
@@ -22,34 +25,107 @@ namespace GoogleApi.Test.Search.Web
             };
 
             var response = GoogleSearch.WebSearch.Query(request);
-
             Assert.IsNotNull(response);
-            Assert.IsNotEmpty(response.Items);
-            Assert.AreEqual(response.Kind, "customsearch#search");
             Assert.AreEqual(response.Status, Status.Ok);
+            Assert.AreEqual(response.Kind, "customsearch#search");
 
             Assert.IsNotNull(response.Url);
             Assert.AreEqual(response.Url.Type, "application/json");
             Assert.AreEqual(response.Url.Template, "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json");
 
-            Assert.IsNotNull(response.SearchInformation);
-            Assert.Greater(response.SearchInformation.SearchTime, 0.00);
-            Assert.IsNotEmpty(response.SearchInformation.SearchTimeFormatted);
-            Assert.Greater(response.SearchInformation.TotalResults, 0);
-            Assert.IsNotEmpty(response.SearchInformation.TotalResultsFormatted);
+            Assert.IsNotNull(response.Context);
+            Assert.IsNull(response.Context.Facets);
+            Assert.AreEqual(response.Context.Title, "Google Web");
 
-            var context = response.Context;
-            Assert.IsNotNull(context);
-            Assert.AreEqual(context.Title, "Google Web");
+            Assert.IsNull(response.Spelling);
+
+            Assert.IsNotNull(response.Search);
+            Assert.LessOrEqual(response.Search.SearchTime, 3.00);
+            Assert.IsNotNull(response.Search.SearchTimeFormatted);
+            Assert.IsNotEmpty(response.Search.SearchTimeFormatted);
+            Assert.Greater(response.Search.TotalResults, 800000000);
 
             var items = response.Items;
             Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
 
             var item = response.Items.FirstOrDefault();
             Assert.IsNotNull(item);
             Assert.AreEqual(item.Link, "https://www.google.com/");
             Assert.AreEqual(item.Title, "Google");
             Assert.AreEqual(item.DisplayLink, "www.google.com");
+
+            Assert.IsNull(response.Promotions);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.AreEqual("Google Custom Search - google", query.Title);
+            Assert.Greater(query.TotalResults, 800000000);
+            Assert.AreEqual("google", query.SearchTerms);
+            Assert.AreEqual(10, query.Count);
+            Assert.AreEqual(1, query.StartIndex);
+            Assert.AreEqual(0, query.StartPage);
+            Assert.IsNull(query.Language);
+            Assert.AreEqual(EncodingType.Utf8, query.InputEncoding);
+            Assert.AreEqual(EncodingType.Utf8, query.OutputEncoding);
+            Assert.AreEqual(SafetyLevel.Off, query.SafetyLevel);
+            Assert.AreEqual(this.SearchEngineId, query.SearchEngineId);
+            Assert.IsFalse(query.Filter);
+            Assert.IsTrue(query.DisableCnTwTranslation);
+            Assert.AreEqual(Language.English, query.InterfaceLanguage);
+
+            var nextPage = response.NextPage;
+            Assert.IsNotNull(nextPage);
+            Assert.AreEqual("Google Custom Search - google", nextPage.Title);
+            Assert.Greater(nextPage.TotalResults, 800000000);
+            Assert.AreEqual("google", nextPage.SearchTerms);
+            Assert.AreEqual(10, nextPage.Count);
+            Assert.AreEqual(11, nextPage.StartIndex);
+            Assert.AreEqual(0, nextPage.StartPage);
+            Assert.IsNull(nextPage.Language);
+            Assert.AreEqual(EncodingType.Utf8, nextPage.InputEncoding);
+            Assert.AreEqual(EncodingType.Utf8, nextPage.OutputEncoding);
+            Assert.AreEqual(SafetyLevel.Off, nextPage.SafetyLevel);
+            Assert.AreEqual(this.SearchEngineId, nextPage.SearchEngineId);
+            Assert.IsFalse(nextPage.Filter);
+            Assert.IsTrue(nextPage.DisableCnTwTranslation);
+            Assert.AreEqual(Language.English, nextPage.InterfaceLanguage);
+
+            Assert.IsNull(response.PreviousPage);
+
+            var sort = query.SortExpression;
+            Assert.IsNull(sort);
+
+            Assert.IsFalse(query.Filter);
+            Assert.IsNull(query.GeoLocation);
+            Assert.IsNull(query.CountryRestriction);
+            Assert.IsNull(query.Googlehost);
+            Assert.IsTrue(query.DisableCnTwTranslation);
+            Assert.IsNull(query.AndTerms);
+            Assert.AreEqual(Language.English, query.InterfaceLanguage);
+
+            var siteSearch = query.SiteSearch;
+            Assert.IsNull(siteSearch);
+
+            Assert.IsNull(query.ExactTerms);
+            Assert.IsNull(query.ExcludeTerms);
+            Assert.IsNull(query.LinkSite);
+            Assert.IsNull(query.OrTerms);
+            Assert.IsNull(query.RelatedSite);
+
+            var dateRestrict = query.DateRestrict;
+            Assert.IsNull(dateRestrict);
+
+            Assert.IsNull(query.LowRange);
+            Assert.IsNull(query.HighRange);
+            Assert.IsNull(query.FileTypes);
+            Assert.IsNull(query.Rights);
+            Assert.IsNull(query.SearchType);
+
+            Assert.IsNull(query.ImageSize);
+            Assert.IsNull(query.ImageType);
+            Assert.IsNull(query.ImageColorType);
+            Assert.IsNull(query.ImageDominantColor);
         }
 
         [Test]
@@ -66,31 +142,10 @@ namespace GoogleApi.Test.Search.Web
 
             Assert.IsNotNull(response);
             Assert.IsNotEmpty(response.Items);
-            Assert.AreEqual(response.Kind, "customsearch#search");
             Assert.AreEqual(response.Status, Status.Ok);
 
-            Assert.IsNotNull(response.Url);
-            Assert.AreEqual(response.Url.Type, "application/json");
-            Assert.AreEqual(response.Url.Template, "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json");
-
-            Assert.IsNotNull(response.SearchInformation);
-            Assert.Greater(response.SearchInformation.SearchTime, 0.00);
-            Assert.IsNotEmpty(response.SearchInformation.SearchTimeFormatted);
-            Assert.Greater(response.SearchInformation.TotalResults, 0);
-            Assert.IsNotEmpty(response.SearchInformation.TotalResultsFormatted);
-
-            var context = response.Context;
-            Assert.IsNotNull(context);
-            Assert.AreEqual(context.Title, "Google Web");
-
             var items = response.Items;
-            Assert.IsNotNull(items);
-
-            var item = response.Items.FirstOrDefault();
-            Assert.IsNotNull(item);
-            Assert.AreEqual(item.Link, "https://www.google.com/");
-            Assert.AreEqual(item.Title, "Google");
-            Assert.AreEqual(item.DisplayLink, "www.google.com");
+            Assert.IsNotEmpty(items);
         }
 
         [Test]
@@ -140,97 +195,132 @@ namespace GoogleApi.Test.Search.Web
         [Test]
         public void WebSearchWhenFieldsTest()
         {
-            Assert.Inconclusive();
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Fields = "kind"
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+            Assert.AreEqual(response.Kind, "customsearch#search");
+
+            Assert.IsNull(response.Url);
+            Assert.IsNull(response.Context);
+            Assert.IsNull(response.Spelling);
+            Assert.IsNull(response.Search);
+            Assert.IsNull(response.Items);
+            Assert.IsNull(response.Promotions);
+            Assert.IsNull(response.Query);
+            Assert.IsNull(response.NextPage);
+            Assert.IsNull(response.PreviousPage);
         }
 
         [Test]
-        public void WebSearchWhenNumberTest()
+        public void WebSearchWhenPrettyPrintTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void WebSearchWhenInterfaceLanguageTest()
+        public void WebSearchWhenUserIpTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void WebSearchWhenGeoLocationTest()
+        public void WebSearchWhenQuotaUserTest()
         {
             Assert.Inconclusive();
+        }
+
+        [Test]
+        public void WebSearchWhenDisableCnTwTranslationFalseTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    DisableCnTwTranslation = false
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.IsFalse(query.DisableCnTwTranslation);
         }
 
         [Test]
         public void WebSearchWhenCountryRestrictionTest()
         {
-            Assert.Inconclusive();
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    CountryRestriction = Country.Denmark
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.AreEqual(Country.Denmark, query.CountryRestriction);
         }
 
         [Test]
-        public void WebSearchWhenSortExpressionTest()
+        public void WebSearchWhenDateRestrictTest()
         {
-            Assert.Inconclusive();
-        }
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    DateRestrict = new DateRestrict
+                    {
+                        Type = DateRestrictType.Days,
+                        Number = 3
+                    }
+                }
+            };
 
-        [Test]
-        public void WebSearchWhenStartIndexTest()
-        {
-            Assert.Inconclusive();
-        }
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
 
-        [Test]
-        public void WebSearchWhenSafetyLevelTest()
-        {
-            Assert.Inconclusive();
-        }
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
 
-        [Test]
-        public void WebSearchWhenFilterTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void WebSearchWhenDisableCnTwTranslationTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void WebSearchWhenRightsTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void WebSearchWhenFileTypesTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void WebSearchWhenDateRestrictTypeTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void WebSearchWhenGooglehostTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void WebSearchWhenSiteSearchTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void WebSearchWhenSiteSearchFilterTest()
-        {
-            Assert.Inconclusive();
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.AreEqual(3, query.DateRestrict.Number);
+            Assert.AreEqual(DateRestrictType.Days, query.DateRestrict.Type);
         }
 
         [Test]
@@ -246,13 +336,113 @@ namespace GoogleApi.Test.Search.Web
         }
 
         [Test]
-        public void WebSearchWheAndTermsnTest()
+        public void WebSearchWhenFileTypesTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    FileTypes = new[]
+                    {
+                        FileType.Text,
+                        FileType.AdobePortableDocumentFormat
+                    }
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+
+            var fileTypes = query.FileTypes.ToArray();
+            Assert.Contains(FileType.Text, fileTypes);
+            Assert.Contains(FileType.AdobePortableDocumentFormat, fileTypes);
+        }
+
+        [Test]
+        public void WebSearchWhenFilterTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void WebSearchWhenOrTermsTest()
+        public void WebSearchWhenGeoLocationTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    GeoLocation = Country.Denmark
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.AreEqual(Country.Denmark, query.GeoLocation);
+        }
+
+        [Test]
+        public void WebSearchWhenGooglehostTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void WebSearchWhenHighRangeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void WebSearchWhenInterfaceLanguageTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    InterfaceLanguage = Language.German
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.AreEqual(Language.German, query.InterfaceLanguage);
+        }
+
+        [Test]
+        public void WebSearchWhenAndTermsTest()
         {
             Assert.Inconclusive();
         }
@@ -264,21 +454,209 @@ namespace GoogleApi.Test.Search.Web
         }
 
         [Test]
-        public void WebSearchWhenRelatedSiteTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
         public void WebSearchWhenLowRangeTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void WebSearchWhenHighRangeTest()
+        public void WebSearchWhenNumberTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    Number = 6
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.AreEqual(6, query.Count);
+        }
+
+        [Test]
+        public void WebSearchWhenOrTermsTest()
         {
             Assert.Inconclusive();
+        }
+
+        [Test]
+        public void WebSearchWhenRelatedSiteTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void WebSearchWhenRightsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void WebSearchWhenSafetyLevelTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void WebSearchWhenSafetyLevelOffTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    InterfaceLanguage = Language.Danish,
+                    SafetyLevel = SafetyLevel.Off
+                }
+            };
+
+            Assert.DoesNotThrow(() => GoogleSearch.WebSearch.Query(request));
+        }
+
+        [Test]
+        public void WebSearchWhenSafetyLevelAndNotAllowedTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    InterfaceLanguage = Language.Danish,
+                    SafetyLevel = SafetyLevel.High
+                }
+            };
+
+            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.AreEqual(exception.Message, $"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}");
+        }
+
+        [Test]
+        public void WebSearchWhenSiteSearchTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    SiteSearch = new SiteSearch
+                    {
+                        Site = "google.com",
+                        Filter = SiteSearchFilter.Exclude
+                    }
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.IsNotNull(query.SiteSearch);
+            Assert.AreEqual("google.com", query.SiteSearch.Site);
+            Assert.AreEqual(SiteSearchFilter.Exclude, query.SiteSearch.Filter);
+        }
+
+        [Test]
+        public void WebSearchWhenSortExpressionTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    SortExpression = new SortExpression
+                    {
+                        By = SortBy.Date,
+                        Order = SortOrder.Descending,
+                        DefaultValue = 2
+                    }
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+
+            var sort = query.SortExpression;
+            Assert.IsNotNull(sort);
+            Assert.AreEqual(SortBy.Date, sort.By);
+            Assert.AreEqual(SortOrder.Descending, sort.Order);
+            Assert.AreEqual(2, sort.DefaultValue);
+        }
+
+        [Test]
+        public void WebSearchWhenStartIndexTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                SearchEngineId = this.SearchEngineId,
+                Query = "google",
+                Options =
+                {
+                    StartIndex = 11
+                }
+            };
+
+            var response = GoogleSearch.WebSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.AreEqual(response.Status, Status.Ok);
+            Assert.AreEqual(response.Kind, "customsearch#search");
+
+            var items = response.Items;
+            Assert.IsNotNull(items);
+            Assert.IsNotEmpty(response.Items);
+
+            var item = response.Items.FirstOrDefault();
+            Assert.IsNotNull(item);
+            Assert.AreEqual(item.Link, "https://www.google.com/alerts");
+            Assert.AreEqual(item.Title, "Google Alerts - Monitor the Web for interesting new content");
+            Assert.AreEqual(item.DisplayLink, "www.google.com");
+
+            var query = response.Query;
+            Assert.IsNotNull(query);
+            Assert.AreEqual(11, query.StartIndex);
+
+            var nextPage = response.NextPage;
+            Assert.IsNotNull(nextPage);
+            Assert.AreEqual(21, nextPage.StartIndex);
+
+            var previousPage = response.PreviousPage;
+            Assert.IsNotNull(previousPage);
+            Assert.AreEqual(1, previousPage.StartIndex);
         }
 
         [Test]
@@ -318,6 +696,42 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
             Assert.AreEqual(exception.Message, "SearchEngineId is required");
+        }
+
+        [Test]
+        public void WebSearchWhenNumberIsLessThanOneTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    Number = 0
+                }
+            };
+
+            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
+        }
+
+        [Test]
+        public void WebSearchWhenNumberIsGreaterThanTenTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "google",
+                SearchEngineId = this.SearchEngineId,
+                Options =
+                {
+                    Number = 11
+                }
+            };
+
+            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
         }
     }
 }

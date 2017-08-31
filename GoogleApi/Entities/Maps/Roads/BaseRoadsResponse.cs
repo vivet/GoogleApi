@@ -14,5 +14,11 @@ namespace GoogleApi.Entities.Maps.Roads
         /// </summary>
         [JsonProperty("snappedPoints")]
         public virtual IEnumerable<SnappedPoint> SnappedPoints { get; set; }
+
+        /// <summary>
+        /// A list of errors which occurred. 
+        /// </summary>
+        [JsonProperty("errors")]
+        public virtual IEnumerable<Error> Errors { get; set; }
     }
 }

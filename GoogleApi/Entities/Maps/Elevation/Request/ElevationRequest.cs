@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Maps.Elevation.Request
 {
@@ -45,8 +46,8 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
         /// <summary>
         /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Locations == null && this.Path == null)
                 throw new ArgumentException("Locations or Path is required");

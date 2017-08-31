@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.Text.Request
 {
@@ -39,8 +41,8 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         /// <summary>
         /// See <see cref="BasePlacesSearchRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Query))
                 throw new ArgumentException("Query is required");

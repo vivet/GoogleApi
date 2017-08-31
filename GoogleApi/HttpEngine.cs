@@ -137,6 +137,10 @@ namespace GoogleApi
             var httpClient = new HttpClient { Timeout = timeout };
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
+            // TODO: Test 'IsGzip'
+            //if (request.IsGzip)
+            //    httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
+
             Task<HttpResponseMessage> task;
             if (request is IRequestJson)
             {
@@ -158,6 +162,7 @@ namespace GoogleApi
 
             task.ContinueWith(x =>
             {
+                var response = default(TResponse);
                 try
                 {
                     if (x.IsCanceled)
@@ -174,23 +179,13 @@ namespace GoogleApi
                     }
                     else
                     {
-                        x.Result.EnsureSuccessStatusCode();
-
                         var result = x.Result;
                         var content = result.Content;
-                        var rawJson = content.ReadAsStringAsync().Result;
                         var rawBuffer = content.ReadAsByteArrayAsync().Result;
+                        var rawJson = content.ReadAsStringAsync().Result;
                         var memoryStream = new MemoryStream(rawBuffer);
 
-                        TResponse response;
-                        if (typeof(TResponse) == typeof(PlacesPhotosResponse))
-                        {
-                            response = (TResponse)(IResponse)new PlacesPhotosResponse
-                            {
-                                Photo = memoryStream
-                            };
-                        }
-                        else
+                        if (typeof(TResponse) != typeof(PlacesPhotosResponse))
                         {
                             using (var streamReader = new StreamReader(memoryStream))
                             {
@@ -200,20 +195,26 @@ namespace GoogleApi
                                 response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
                             }
                         }
+                        else
+                            response = (TResponse)(IResponse)new PlacesPhotosResponse { Photo = memoryStream };
 
                         response.RawJson = rawJson;
-                        response.RawQueryString = x.Result.RequestMessage.RequestUri.PathAndQuery;
-                        response.Status = response.Status ?? Status.Ok;
+                        response.RawQueryString = result.RequestMessage.RequestUri.PathAndQuery;
+                        response.Status = result.IsSuccessStatusCode ? response.Status ?? Status.Ok : Status.HttpError;
+
+                        result.EnsureSuccessStatusCode();
 
                         if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
-                            throw new GoogleApiException(response.ErrorMessage, response.Status);
+                            throw new GoogleApiException(response.ErrorMessage) { Response = response };
 
                         taskCompletionSource.SetResult(response);
                     }
                 }
                 catch (Exception ex)
                 {
-                    taskCompletionSource.SetException(ex);
+                    var exception = ex is GoogleApiException ? ex : new GoogleApiException(ex.Message, ex) { Response = response };
+
+                    taskCompletionSource.SetException(exception);
                 }
                 finally
                 {

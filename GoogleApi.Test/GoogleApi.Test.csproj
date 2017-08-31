@@ -46,7 +46,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="Common\Converters\BooleanJsonConverterTest.cs" />
+    <Compile Include="Common\Converters\StringEnumListJsonConverterTest.cs" />
     <Compile Include="Common\Enums\Extensions\LanguagesExtensionTests.cs" />
+    <Compile Include="Common\Extensions\ListExtensionTest.cs" />
+    <Compile Include="Common\Extensions\StringExtensionTest.cs" />
     <Compile Include="Maps\Directions\DirectionsRequestTests.cs" />
     <Compile Include="Maps\Directions\DirectionsTests.cs" />
     <Compile Include="Maps\DistanceMatrix\DistanceMatrixRequestTests.cs" />
@@ -84,7 +88,6 @@
     <Compile Include="Places\Search\Radar\RadarSearchTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchTests.cs" />
-    <Compile Include="QueryStringParametersTests.cs" />
     <Compile Include="Search\Image\ImageSearchTests.cs" />
     <Compile Include="Search\Web\WebSearchTests.cs" />
     <Compile Include="Translate\Common\Extensions\LanguagesExtensionTests.cs" />

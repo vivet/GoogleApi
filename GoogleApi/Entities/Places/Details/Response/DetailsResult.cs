@@ -103,6 +103,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// If the scope field is not present in a response, it is safe to assume the scope is GOOGLE
         /// </summary>
         [JsonProperty("scope")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Scope Scope { get; set; }
 
         /// <summary>
@@ -119,6 +120,7 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// Price levels are interpreted as follows:
         /// </summary>
         [JsonProperty("price_level")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual PriceLevel PriceLevel { get; set; }
 
         /// <summary>

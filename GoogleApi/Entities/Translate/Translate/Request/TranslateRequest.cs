@@ -4,6 +4,7 @@ using System.Linq;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
+using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Translate.Translate.Request
 {
@@ -56,8 +57,8 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// <summary>
         /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Target == null)
                 throw new ArgumentException("Target is required");

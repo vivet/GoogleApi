@@ -6,27 +6,27 @@
     public enum RightsType
     {
         /// <summary>
-        /// Cc_PublicDomain
+        /// Cc_PublicDomain.
         /// </summary>
         Cc_PublicDomain,
 
         /// <summary>
-        /// Cc_Attribute
+        /// Cc_Attribute.
         /// </summary>
         Cc_Attribute,
 
         /// <summary>
-        /// Cc_ShareAlike
+        /// Cc_ShareAlike.
         /// </summary>
         Cc_ShareAlike,
 
         /// <summary>
-        /// Cc_NonCommercial
+        /// Cc_NonCommercial.
         /// </summary>
         Cc_NonCommercial,
 
         /// <summary>
-        /// Cc_NonDerived
+        /// Cc_NonDerived.
         /// </summary>
         Cc_NonDerived
     }

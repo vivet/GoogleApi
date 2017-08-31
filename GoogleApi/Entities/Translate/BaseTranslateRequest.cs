@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Translate
@@ -21,8 +22,8 @@ namespace GoogleApi.Entities.Translate
         /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("Key is required");

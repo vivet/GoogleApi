@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GoogleApi.Entities.Common.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace GoogleApi.Entities.Places
 {
@@ -48,8 +50,8 @@ namespace GoogleApi.Entities.Places
         /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Key))
                 throw new ArgumentException("Key is required");

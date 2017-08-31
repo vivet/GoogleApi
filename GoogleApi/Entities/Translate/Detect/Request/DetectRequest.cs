@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GoogleApi.Entities.Common.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,8 +24,8 @@ namespace GoogleApi.Entities.Translate.Detect.Request
         /// <summary>
         /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>The <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Qs == null || !this.Qs.Any())
                 throw new ArgumentException("Qs is required");

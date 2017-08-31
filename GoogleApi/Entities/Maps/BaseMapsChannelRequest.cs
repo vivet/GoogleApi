@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using GoogleApi.Entities.Common.Extensions;
+
 namespace GoogleApi.Entities.Maps
 {
     /// <summary>
@@ -23,8 +26,8 @@ namespace GoogleApi.Entities.Maps
         /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
-        /// <returns>A <see cref="QueryStringParameters"/> collection.</returns>
-        public override QueryStringParameters GetQueryStringParameters()
+        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 

@@ -6,6 +6,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geolocation
@@ -32,9 +33,9 @@ namespace GoogleApi.Test.Maps.Geolocation
             Assert.AreEqual(Status.Ok, result.Status);
 
             Assert.IsNotNull(result.Location);
-            Assert.AreEqual(1457.00, result.Accuracy, 100.00);
-            Assert.AreEqual(55.660850200000006, result.Location.Latitude, 0.0001);
-            Assert.AreEqual(12.5031106, result.Location.Longitude, 0.0001);
+            Assert.AreEqual(3147.00, result.Accuracy, 300.00);
+            Assert.AreEqual(55.692889700000002d, result.Location.Latitude, 0.001);
+            Assert.AreEqual(12.547805d, result.Location.Longitude, 0.001);
         }
 
         [Test]
@@ -53,11 +54,7 @@ namespace GoogleApi.Test.Maps.Geolocation
             var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
-
             Assert.IsNotNull(result.Location);
-            Assert.AreEqual(1457.00, result.Accuracy, 100.00);
-            Assert.AreEqual(55.660850200000006, result.Location.Latitude, 0.0001);
-            Assert.AreEqual(12.5031106, result.Location.Longitude, 0.0001);
         }
 
         [Test]
@@ -112,7 +109,7 @@ namespace GoogleApi.Test.Maps.Geolocation
 
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
             Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
         }
 

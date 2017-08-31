@@ -6,6 +6,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Photos.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Photos
@@ -126,7 +127,7 @@ namespace GoogleApi.Test.Places.Photos
 
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(System.Net.Http.HttpRequestException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
             Assert.AreEqual("Response status code does not indicate success: 403 (Forbidden).", innerException.Message);
         }
 

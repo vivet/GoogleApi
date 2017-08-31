@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
@@ -32,5 +33,11 @@ namespace GoogleApi.Entities
         /// </summary>
         [JsonProperty("error_message")]
         public virtual string ErrorMessage { get; set; }
+
+        /// <summary>
+        /// See <see cref="IResponse.HtmlAttributions"/>.
+        /// </summary>
+        [JsonProperty("html_attributions")]
+        public virtual IEnumerable<string> HtmlAttributions { get; set; }
     }
 }
