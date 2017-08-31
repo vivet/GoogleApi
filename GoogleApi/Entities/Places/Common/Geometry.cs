@@ -1,4 +1,5 @@
 ﻿using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Geocode.Response;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common
@@ -13,5 +14,13 @@ namespace GoogleApi.Entities.Places.Common
         /// </summary>
         [JsonProperty("location")]
         public virtual Location Location { get; set; }
+
+        /// <summary>
+        /// Viewport contains the recommended viewport for displaying the returned result, specified as two latitude,longitude values defining 
+        /// the southwest and northeast corner of the viewport bounding box. 
+        /// Generally the viewport is used to frame a result when displaying it to a user.
+        /// </summary>
+        [JsonProperty("viewPort")]
+        public virtual ViewPort ViewPort { get; set; }
     }
 }

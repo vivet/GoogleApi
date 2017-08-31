@@ -129,6 +129,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\ViewPort.cs">
+      <Link>Entities\Common\ViewPort.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Interfaces\IRequest.cs">
       <Link>Entities\Interfaces\IRequest.cs</Link>
     </Compile>
@@ -254,9 +257,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Result.cs">
       <Link>Entities\Maps\Geocode\Response\Result.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\ViewPort.cs">
-      <Link>Entities\Maps\Geocode\Response\ViewPort.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\CellTower.cs">
       <Link>Entities\Maps\Geolocation\Request\CellTower.cs</Link>
