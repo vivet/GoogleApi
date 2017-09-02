@@ -236,7 +236,7 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("fileType")]
         [JsonConverter(typeof(StringEnumListJsonConverter<FileType>))]
-        public virtual IEnumerable<FileType?> FileTypes { get; set; }
+        public virtual IEnumerable<FileType> FileTypes { get; set; }
 
         /// <summary>
         /// Rights - Filters based on licensing.
