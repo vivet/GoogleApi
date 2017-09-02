@@ -129,7 +129,7 @@ namespace GoogleApi.Entities.Search.Common
         /// https://developers.google.com/custom-search/docs/xml_results#countryCollections
         /// </summary>
         [JsonProperty("cr")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(CountryRestrictJsonConverter))]
         public virtual Country? CountryRestriction { get; set; }
 
         /// <summary>

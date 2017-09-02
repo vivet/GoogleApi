@@ -23,7 +23,7 @@ namespace GoogleApi.Entities.Search.Common
         /// See the Country Parameter Values page for a list of valid values for this parameter.
         /// https://developers.google.com/custom-search/docs/xml_results_appendices#countryCollections
         /// </summary>
-        public virtual Country? CountryRestriction { get; set; }
+        public virtual CountryRestrict CountryRestrict { get; set; }
 
         /// <summary>
         /// Restricts results to URLs based on date. 

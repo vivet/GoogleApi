@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -274,7 +275,14 @@ namespace GoogleApi.Test.Search.Web
                 Query = "google",
                 Options =
                 {
-                    CountryRestriction = Country.Denmark
+                    CountryRestrict = new CountryRestrict
+                    {
+                        Expressions = new List<CountryRestrictExpression>
+                        {
+                            new CountryRestrictExpression { Country = Country.Denmark},
+                            new CountryRestrictExpression { Country = Country.Italy }
+                        }
+                    }
                 }
             };
 
