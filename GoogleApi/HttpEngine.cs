@@ -191,7 +191,14 @@ namespace GoogleApi
                                 var jsonSerializer = new JsonSerializer();
                                 var jsonTextReader = new JsonTextReader(streamReader);
 
-                                response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
+                                try
+                                {
+                                    response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
+                                }
+                                catch
+                                {
+                                    response = new TResponse();
+                                }
                             }
                         }
                         else
