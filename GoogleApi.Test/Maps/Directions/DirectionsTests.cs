@@ -17,6 +17,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
@@ -38,6 +39,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
@@ -52,6 +54,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
@@ -75,6 +78,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
@@ -152,6 +156,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Origin = new Location("NYC, USA"),
                 Destination = new Location("Miami, USA"),
                 Waypoints = new[] { new Location("Philadelphia, USA") },
@@ -176,6 +181,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Origin = new Location("NYC, USA"),
                 Destination = new Location("Miami, USA"),
                 Waypoints = new[] { new Location("Philadelphia, USA") },
@@ -200,6 +206,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
 
@@ -213,6 +220,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
+                Key = this.ApiKey,
                 Origin = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
 

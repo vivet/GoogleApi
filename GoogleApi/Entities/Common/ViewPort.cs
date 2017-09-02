@@ -1,7 +1,6 @@
-﻿using GoogleApi.Entities.Common;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Geocode.Response
+namespace GoogleApi.Entities.Common
 {
     /// <summary>
     /// viewport contains the recommended viewport for displaying the returned result, specified as two latitude,longitude values defining 

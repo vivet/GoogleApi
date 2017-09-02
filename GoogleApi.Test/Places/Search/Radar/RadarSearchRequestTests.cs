@@ -103,6 +103,7 @@ namespace GoogleApi.Test.Places.Search.Radar
             var request = new PlacesRadarSearchRequest
             {
                 Key = this.ApiKey,
+                Name = "test",
                 Location = new Location(51.491431, -3.16668),
                 Radius = 0
             };
@@ -121,6 +122,7 @@ namespace GoogleApi.Test.Places.Search.Radar
             var request = new PlacesRadarSearchRequest
             {
                 Key = this.ApiKey,
+                Name = "test",
                 Location = new Location(51.491431, -3.16668),
                 Radius = 50001
             };

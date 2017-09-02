@@ -142,7 +142,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             {
                 Key = this.ApiKey,
                 Location = new Location(51.491431, -3.16668),
-                Radius = 50001,
+                Radius = 5001,
                 Rankby = Ranking.Distance
             };
 

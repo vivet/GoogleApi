@@ -18,6 +18,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
                 Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
@@ -45,6 +46,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
                 Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
@@ -59,6 +61,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new[] { new Location(0, 0) },
                 Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
@@ -82,6 +85,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new[] { new Location(0, 0) },
                 Destinations = new[] { new Location("test") }
             };
@@ -147,6 +151,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Destinations = new[] { new Location("test") }
             };
 
@@ -160,6 +165,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new Location[0],
                 Destinations = new[] { new Location(0, 0) }
             };
@@ -174,6 +180,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new[] { new Location(0, 0) }
             };
 
@@ -187,6 +194,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new[] { new Location(0, 0) },
                 Destinations = new Location[0]
             };
@@ -201,6 +209,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest
             {
+                Key = this.ApiKey,
                 Origins = new[] { new Location(0, 0) },
                 Destinations = new[] { new Location("test") },
                 TravelMode = TravelMode.Transit,
