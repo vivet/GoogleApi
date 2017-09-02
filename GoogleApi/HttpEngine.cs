@@ -180,30 +180,32 @@ namespace GoogleApi
                     {
                         var result = x.Result;
                         var content = result.Content;
-                        var rawBuffer = content.ReadAsByteArrayAsync().Result;
                         var rawJson = content.ReadAsStringAsync().Result;
-                        var memoryStream = new MemoryStream(rawBuffer);
-
+                        var rawBuffer = content.ReadAsByteArrayAsync().Result;
+           
                         if (typeof(TResponse) != typeof(PlacesPhotosResponse))
                         {
-                            using (var streamReader = new StreamReader(memoryStream))
+                            using (var memoryStream = new MemoryStream(rawBuffer))
                             {
-                                var jsonSerializer = new JsonSerializer();
-                                var jsonTextReader = new JsonTextReader(streamReader);
+                                using (var streamReader = new StreamReader(memoryStream))
+                                {
+                                    var jsonSerializer = new JsonSerializer();
+                                    var jsonTextReader = new JsonTextReader(streamReader);
 
-                                try
-                                {
-                                    response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
-                                }
-                                catch
-                                {
-                                    response = new TResponse();
+                                    try
+                                    {
+                                        response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
+                                    }
+                                    catch
+                                    {
+                                        response = new TResponse();
+                                    }
                                 }
                             }
                         }
                         else
-                            response = (TResponse)(IResponse)new PlacesPhotosResponse { Photo = memoryStream };
-
+                            response = (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = rawBuffer };
+                       
                         response.RawJson = rawJson;
                         response.RawQueryString = result.RequestMessage.RequestUri.PathAndQuery;
                         response.Status = result.IsSuccessStatusCode ? response.Status ?? Status.Ok : Status.HttpError;
