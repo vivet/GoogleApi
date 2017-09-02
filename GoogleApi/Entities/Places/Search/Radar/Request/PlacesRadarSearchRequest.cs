@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.Search.Radar.Request
@@ -31,22 +29,7 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
         /// including but not limited to name, type, and address, as well as customer reviews and other third-party content.
         /// </summary>
         public virtual string Keyword { get; set; }
-
-        /// <summary>
-        /// Radius (required).
-        /// The distance (in meters) within which to return Place results. 
-        /// Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area. 
-        /// See Location Biasing below.
-        /// </summary>
-        public virtual double? Radius { get; set; }
-
-        /// <summary>
-        /// Location (required).
-        /// The point around which you wish to retrieve Place information. 
-        /// Must be specified as latitude,longitude.
-        /// </summary>
-        public virtual Location Location { get; set; }
-
+        
         /// <summary>
         /// See <see cref="BasePlacesSearchRequest.GetQueryStringParameters()"/>.
         /// </summary>
@@ -59,16 +42,10 @@ namespace GoogleApi.Entities.Places.Search.Radar.Request
             if (this.Radius == null)
                 throw new ArgumentException("Radius is required");
 
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
-
             if (string.IsNullOrWhiteSpace(this.Keyword) && string.IsNullOrWhiteSpace(this.Name) && !this.Type.HasValue)
                 throw new ArgumentException("Keyword, Name or Type is required");
 
             var parameters = base.GetQueryStringParameters();
-
-            parameters.Add("location", this.Location.ToString());
-            parameters.Add("radius", this.Radius.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
 
             if (!string.IsNullOrWhiteSpace(this.Name))
                 parameters.Add("name", this.Name);

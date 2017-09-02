@@ -12,20 +12,6 @@ namespace GoogleApi.Entities.Places.Search.Common
     public abstract class BaseResult
     {        
         /// <summary>
-        /// Name contains the human-readable name for the returned result. 
-        /// For establishment results, this is usually the business name.
-        /// </summary>
-        [JsonProperty("name")]
-        public virtual string Name { get; set; }
-
-        /// <summary>
-        /// PlaceId — a textual identifier that uniquely identifies a place. 
-        /// To retrieve information about the place, pass this identifier in the placeId field of a Places API request. For more information about place IDs, see the place ID overview.
-        /// </summary>
-        [JsonProperty("place_id")]
-        public virtual string PlaceId { get; set; }
-
-        /// <summary>
         /// Icon contains the URL of a recommended icon which may be displayed to the user when indicating this result.
         /// </summary>
         [JsonProperty("icon")]
@@ -37,6 +23,13 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// </summary>
         [JsonProperty("geometry")]
         public virtual Geometry Geometry { get; set; }
+
+        /// <summary>
+        /// Name contains the human-readable name for the returned result. 
+        /// For establishment results, this is usually the business name.
+        /// </summary>
+        [JsonProperty("name")]
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// OpeningHours may contain the following information:
@@ -53,11 +46,36 @@ namespace GoogleApi.Entities.Places.Search.Common
         public virtual IEnumerable<Photo> Photos { get; set; }
 
         /// <summary>
+        /// PlaceId — a textual identifier that uniquely identifies a place. 
+        /// To retrieve information about the place, pass this identifier in the placeId field of a Places API request. For more information about place IDs, see the place ID overview.
+        /// </summary>
+        [JsonProperty("place_id")]
+        public virtual string PlaceId { get; set; }
+
+        /// <summary>
+        /// Scope — Indicates the scope of the placeId.
+        /// Note: The scope field is included only in Nearby Search results and Place Details results. 
+        /// You can only retrieve app-scoped places via the Nearby Search and the Place Details requests. 
+        /// If the scope field is not present in a response, it is safe to assume the scope is GOOGLE
+        /// </summary>
+        [JsonProperty("scope")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public virtual Scope? Scope { get; set; } = Places.Common.Enums.Scope.Google;
+
+        /// <summary>
         /// AlternativePlaceIds — An array of zero, one or more alternative place IDs for the place, with a scope related to each alternative ID. 
         /// Note: This array may be empty or not present. 
         /// </summary>
         [JsonProperty("alt_ids")]
         public virtual IEnumerable<AlternativePlace> AlternativePlaceIds { get; set; }
+
+        /// <summary>
+        /// price_level — The price level of the place, on a scale of 0 to 4. 
+        /// The exact amount indicated by a specific value will vary from region to region. 
+        /// </summary>
+        [JsonProperty("price_level")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public virtual PriceLevel? PriceLevel { get; set; }
 
         /// <summary>
         /// Rating contains the place's rating, from 1.0 to 5.0, based on aggregated user reviews.
@@ -73,29 +91,10 @@ namespace GoogleApi.Entities.Places.Search.Common
         public virtual IEnumerable<PlaceLocationType?> Types { get; set; }
 
         /// <summary>
-        /// Vicinity contains a feature name of a nearby location. 
-        /// Often this feature refers to a street or neighborhood within the given results. 
-        /// The vicinity property is only returned for a Nearby Search.
+        /// permanently_closed is a boolean flag indicating whether the place has permanently shut down(value true). 
+        /// If the place is not permanently closed, the flag is absent from the response.
         /// </summary>
-        [JsonProperty("vicinity")]
-        public virtual string Vicinity { get; set; }
-
-        /// <summary>
-        /// Scope — Indicates the scope of the placeId.
-        /// Note: The scope field is included only in Nearby Search results and Place Details results. 
-        /// You can only retrieve app-scoped places via the Nearby Search and the Place Details requests. 
-        /// If the scope field is not present in a response, it is safe to assume the scope is GOOGLE
-        /// </summary>
-        [JsonProperty("scope")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Scope? Scope { get; set; }
-
-        /// <summary>
-        /// price_level — The price level of the place, on a scale of 0 to 4. 
-        /// The exact amount indicated by a specific value will vary from region to region. 
-        /// </summary>
-        [JsonProperty("price_level")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public virtual PriceLevel? PriceLevel { get; set; }
+        [JsonProperty("permanently_closed")]
+        public virtual bool PermanentlyClosed { get; set; }
     }
 }

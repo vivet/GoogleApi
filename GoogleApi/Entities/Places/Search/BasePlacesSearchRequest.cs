@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
@@ -53,6 +56,21 @@ namespace GoogleApi.Entities.Places.Search
         public virtual SearchPlaceType? Type { get; set; }
 
         /// <summary>
+        /// Location (optional).
+        /// The latitude/longitude around which to retrieve place information. 
+        /// If you specify a location parameter, you must also specify a radius parameter.
+        /// </summary>
+        public virtual Location Location { get; set; }
+
+        /// <summary>
+        /// Radius (Radius).
+        /// Defines the distance (in meters) within which to bias place results. The maximum allowed radius is 50 000 meters. 
+        /// Results inside of this region will be ranked higher than results outside of the search circle; 
+        /// however, prominent results from outside of the search radius may be included
+        /// </summary>
+        public virtual double? Radius { get; set; }
+
+        /// <summary>
         /// pagetoken — Returns the next 20 results from a previously run search. 
         /// Setting a pagetoken parameter will execute a search with the same parameters 
         /// used previously — all parameters other than pagetoken will be ignored.
@@ -67,7 +85,16 @@ namespace GoogleApi.Entities.Places.Search
         {
             var parameters = base.GetQueryStringParameters();
 
+            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
+
             parameters.Add("language", Language.ToCode());
+
+            if (this.Location != null)
+                parameters.Add("location", this.Location.ToString());
+
+            if (this.Radius != null)
+                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
             if (this.Type.HasValue)
                 parameters.Add("type", this.Type.Value.ToString().ToLower());
