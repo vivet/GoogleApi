@@ -1,5 +1,4 @@
 ﻿using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Geocode.Response;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common
