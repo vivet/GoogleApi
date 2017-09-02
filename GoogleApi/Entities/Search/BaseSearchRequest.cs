@@ -155,7 +155,7 @@ namespace GoogleApi.Entities.Search
 
             parameters.Add("fileType", string.Join(",", this.Options.FileTypes));
             parameters.Add("filter", this.Options.Filter ? "0" : "1");
-            parameters.Add("gl", this.Options.GeoLocation?.ToCr() ?? string.Empty); // TODO: Changed from 'ToCr' to 'ToGl', seems wrong now.
+            parameters.Add("gl", this.Options.GeoLocation?.ToGl() ?? string.Empty);
 
             if (this.Options.Googlehost != null)
                 parameters.Add("googleHost", this.Options.Googlehost);

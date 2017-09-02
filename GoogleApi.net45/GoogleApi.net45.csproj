@@ -522,6 +522,9 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\EncodingTypeExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\EncodingTypeExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\GeoLocationExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\GeoLocationExtension.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\LanguageExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\LanguageExtension.cs</Link>
     </Compile>
@@ -533,6 +536,9 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\FileType.cs">
       <Link>Entities\Search\Common\Enums\FileType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\GeoLocation.cs">
+      <Link>Entities\Search\Common\Enums\GeoLocation.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\ImageSize.cs">
       <Link>Entities\Search\Common\Enums\ImageSize.cs</Link>

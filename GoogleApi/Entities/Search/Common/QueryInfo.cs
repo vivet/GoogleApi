@@ -117,7 +117,7 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("gl")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Country? GeoLocation { get; set; }
+        public virtual GeoLocation? GeoLocation { get; set; }
 
         /// <summary>
         /// Restricts search results to documents originating in a particular country. 

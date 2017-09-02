@@ -393,7 +393,7 @@ namespace GoogleApi.Test.Search.Web
                 Query = "google",
                 Options =
                 {
-                    GeoLocation = Country.Denmark
+                    GeoLocation = GeoLocation.Denmark
                 }
             };
 
@@ -407,7 +407,7 @@ namespace GoogleApi.Test.Search.Web
 
             var query = response.Query;
             Assert.IsNotNull(query);
-            Assert.AreEqual(Country.Denmark, query.GeoLocation);
+            Assert.AreEqual(GeoLocation.Denmark, query.GeoLocation);
         }
 
         [Test]
