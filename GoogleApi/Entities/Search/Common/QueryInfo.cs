@@ -128,9 +128,16 @@ namespace GoogleApi.Entities.Search.Common
         /// See Country(cr) Parameter Values for a list of valid values for this parameter.
         /// https://developers.google.com/custom-search/docs/xml_results#countryCollections
         /// </summary>
+        [JsonIgnore] // TODO: Remove after fix of CountryRestrictJsonConverter / CountryRestrict.FromString(string)
         [JsonProperty("cr")]
         [JsonConverter(typeof(CountryRestrictJsonConverter))]
-        public virtual Country? CountryRestriction { get; set; }
+        public virtual CountryRestrict CountryRestrict { get; set; }
+
+        /// <summary>
+        /// See <see cref="QueryInfo.CountryRestrict"/>.
+        /// </summary>
+        [JsonProperty("cr")]
+        public virtual string CountryRestrictStr { get; set; }
 
         /// <summary>
         /// Specifies the Google domain (for example, google.com, google.de, or google.fr) to which the search should be limited.

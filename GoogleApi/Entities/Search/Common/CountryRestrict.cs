@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -36,16 +35,16 @@ namespace GoogleApi.Entities.Search.Common
         }
 
         /// <summary>
-        /// Converts a <see cref="string"/> country restrict expression into a <see cref="CountryRestrict"/> object.
+        /// Converts a <see cref="string"/> country restrict into a <see cref="CountryRestrict"/> object.
         /// </summary>
         /// <param name="string">The <see cref="string"/> to convert.</param>
         /// <returns>A <see cref="CountryRestrict"/> object.</returns>
         public virtual CountryRestrict FromString(string @string)
         {
-            if (@string == null)
-                throw new ArgumentNullException(nameof(@string));
+            if (string.IsNullOrEmpty(@string))
+                return null;
 
-            // TODO: implement conversion.
+            // TODO: Implement CountryRestrict.FromString(string)
             return null;
         }
     }

@@ -11,7 +11,9 @@ namespace GoogleApi.Test.Search.Web.Entities
         [Test]
         public void ToStringTest()
         {
-            var countryRestriction = new CountryRestrict
+            const string EXPECTED = "(-countryIT.countryAF).";
+
+            var countryRestrict = new CountryRestrict
             {
                 Expressions = new List<CountryRestrictExpression>
                 {
@@ -28,17 +30,18 @@ namespace GoogleApi.Test.Search.Web.Entities
                 }
             };
 
-            var expected = "-countryIT.countryAF";
-            var actual = countryRestriction.ToString();
+            var actual = countryRestrict.ToString();
 
             Assert.IsNotNull(actual);
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(EXPECTED, actual);
         }
 
         [Test]
         public void ToStringWhenNestedExpressionsTest()
         {
-            var countryRestriction = new CountryRestrict
+            const string EXPECTED = "(-countryIT.(-countryES|countryPT).countryAF).";
+
+            var countryRestrict = new CountryRestrict
             {
                 Expressions = new List<CountryRestrictExpression>
                 {
@@ -71,15 +74,10 @@ namespace GoogleApi.Test.Search.Web.Entities
                 }
             };
 
-            var expected = "(-countryIT.(-countryES|countryPT).countryAF).";
-            var actual = countryRestriction.ToString();
+            var actual = countryRestrict.ToString();
 
             Assert.IsNotNull(actual);
-            Assert.AreEqual(expected, actual);
-
-
-            // "(-countryIT.(-countryES.countryPT.)countryAF.)"
-            // "(-countryIT.(-countryES.countryPT).countryAF)."
+            Assert.AreEqual(EXPECTED, actual);
         }
 
         [Test]

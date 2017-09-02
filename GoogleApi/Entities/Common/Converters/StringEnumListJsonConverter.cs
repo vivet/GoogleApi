@@ -37,7 +37,7 @@ namespace GoogleApi.Entities.Common.Converters
 
             return string.IsNullOrEmpty(@string) 
                 ? null 
-                : @string.ToStringEnum<T>();
+                : @string.ToEnumList<T>();
         }
 
         /// <inheritdoc />

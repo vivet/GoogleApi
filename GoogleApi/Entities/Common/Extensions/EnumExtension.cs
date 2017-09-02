@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace GoogleApi.Entities.Common.Extensions
@@ -40,6 +41,23 @@ namespace GoogleApi.Entities.Common.Extensions
             }
 
             return stringBuilder.ToString().ToLower();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T">The <see cref="Enum"/> type.</typeparam>
+        /// <param name="type"></param>
+        /// <returns>A <see cref="string"/> representation of the enum value.</returns>
+        public static string ToEnumMemberString<T>(this T type)
+            where T : struct
+        {
+            // TODO: Method not used, either use instead of some extension methods or remove (possiblity its needed when passing Country Restriction in search api)
+            var enumType = typeof(T);
+            var name = Enum.GetName(enumType, type);
+            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetRuntimeField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+
+            return enumMemberAttribute.Value;
         }
     }
 }
