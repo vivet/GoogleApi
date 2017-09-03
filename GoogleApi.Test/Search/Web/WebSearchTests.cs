@@ -297,22 +297,7 @@ namespace GoogleApi.Test.Search.Web
 
             var query = response.Query;
             Assert.IsNotNull(query);
-            Assert.AreEqual("(countryDK.countryIT).", query.CountryRestrictStr);
-
-            // TODO: Implement CountryRestrict.FromString(string)
-            //Assert.IsNotNull(query.CountryRestrict);
-            //Assert.IsNotNull(query.CountryRestrict.Expressions);
-
-            //var countryRestrictExpressions = query.CountryRestrict.Expressions?.ToArray();
-            //Assert.IsNotEmpty(countryRestrictExpressions);
-
-            //Assert.IsFalse(countryRestrictExpressions[0].Not);
-            //Assert.AreEqual(Operator.And, countryRestrictExpressions[0].Operator);
-            //Assert.AreEqual(Country.Denmark, countryRestrictExpressions[0].Country);
-
-            //Assert.IsFalse(countryRestrictExpressions[1].Not);
-            //Assert.AreEqual(Operator.And, countryRestrictExpressions[1].Operator);
-            //Assert.AreEqual(Country.Denmark, countryRestrictExpressions[1].Country);
+            Assert.AreEqual("(countryDK.countryIT).", query.CountryRestrict);
         }
 
         [Test]

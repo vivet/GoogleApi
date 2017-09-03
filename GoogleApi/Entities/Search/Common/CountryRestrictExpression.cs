@@ -1,5 +1,3 @@
-using System;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
 
@@ -51,25 +49,5 @@ namespace GoogleApi.Entities.Search.Common
 
             return $"{not}{cr}{op}{nested}";
         }
-
-        /// <summary>
-        /// Converts a <see cref="string"/> country restrict expression into a <see cref="CountryRestrictExpression"/> object.
-        /// </summary>
-        /// <param name="string">The <see cref="string"/> to convert.</param>
-        /// <returns>A <see cref="CountryRestrictExpression"/> object.</returns>
-        public virtual CountryRestrictExpression FromString(string @string)
-        {
-            if (string.IsNullOrEmpty(@string))
-                return null;
-
-            // TODO: Implement CountryRestrict.FromString(string) (NestedCountryRestrict)
-
-            this.Not = @string.StartsWith("-");
-            this.Operator = @string.Substring(@string.Length - 1) == "." ? Operator.And : Operator.Or;
-            this.Country = @string.Substring(@string.IndexOf("country", StringComparison.Ordinal), 9).ToEnum<Country>();
-
-            return this;
-        }
-
     }
 }

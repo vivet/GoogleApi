@@ -480,9 +480,6 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Context.cs">
       <Link>Entities\Search\Common\Context.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\CountryRestrictJsonConverter.cs">
-      <Link>Entities\Search\Common\Converters\CountryRestrictJsonConverter.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\DateRestrictJsonConverter.cs">
       <Link>Entities\Search\Common\Converters\DateRestrictJsonConverter.cs</Link>
     </Compile>

@@ -30,23 +30,5 @@ namespace GoogleApi.Test.Search.Web.Entities
         {
             Assert.Inconclusive();
         }
-
-        [Test]
-        public void FromStringTest()
-        {
-            const string ACTUAL = "-countryIT.";
-            var expected = new CountryRestrictExpression().FromString(ACTUAL);
-
-            Assert.IsNotNull(expected);
-            Assert.IsTrue(expected.Not);
-            Assert.AreEqual(Country.Italy, expected.Country);
-            Assert.AreEqual(Operator.And, expected.Operator);
-        }
-
-        [Test]
-        public void FromStringWhenNestedCountryRestrictTest()
-        {
-            Assert.Inconclusive();
-        }
     }
 }
