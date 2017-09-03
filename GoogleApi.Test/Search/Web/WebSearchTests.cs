@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace GoogleApi.Test.Search.Web
             };
 
             var response = GoogleSearch.WebSearch.Query(request);
+
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
             Assert.AreEqual(response.Kind, "customsearch#search");
@@ -98,7 +100,7 @@ namespace GoogleApi.Test.Search.Web
 
             Assert.IsFalse(query.Filter);
             Assert.IsNull(query.GeoLocation);
-            Assert.IsNull(query.CountryRestriction);
+            Assert.IsNull(query.CountryRestrict);
             Assert.IsNull(query.Googlehost);
             Assert.IsTrue(query.DisableCnTwTranslation);
             Assert.IsNull(query.AndTerms);
@@ -274,7 +276,14 @@ namespace GoogleApi.Test.Search.Web
                 Query = "google",
                 Options =
                 {
-                    CountryRestriction = Country.Denmark
+                    CountryRestrict = new CountryRestrict
+                    {
+                        Expressions = new List<CountryRestrictExpression>
+                        {
+                            new CountryRestrictExpression { Country = Country.Denmark},
+                            new CountryRestrictExpression { Country = Country.Italy }
+                        }
+                    }
                 }
             };
 
@@ -288,7 +297,7 @@ namespace GoogleApi.Test.Search.Web
 
             var query = response.Query;
             Assert.IsNotNull(query);
-            Assert.AreEqual(Country.Denmark, query.CountryRestriction);
+            Assert.AreEqual("(countryDK.countryIT).", query.CountryRestrict);
         }
 
         [Test]
@@ -385,7 +394,7 @@ namespace GoogleApi.Test.Search.Web
                 Query = "google",
                 Options =
                 {
-                    GeoLocation = Country.Denmark
+                    GeoLocation = GeoLocation.Denmark
                 }
             };
 
@@ -399,7 +408,7 @@ namespace GoogleApi.Test.Search.Web
 
             var query = response.Query;
             Assert.IsNotNull(query);
-            Assert.AreEqual(Country.Denmark, query.GeoLocation);
+            Assert.AreEqual(GeoLocation.Denmark, query.GeoLocation);
         }
 
         [Test]

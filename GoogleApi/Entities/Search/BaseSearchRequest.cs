@@ -140,7 +140,9 @@ namespace GoogleApi.Entities.Search
             parameters.Add("quotaUser", this.QuotaUser ?? string.Empty);
 
             parameters.Add("c2coff", this.Options.DisableCnTwTranslation ? "1" : "0");
-            parameters.Add("cr", this.Options.CountryRestriction?.ToCr() ?? string.Empty);
+
+            if (this.Options.CountryRestrict != null)
+                parameters.Add("cr", this.Options.CountryRestrict.ToString());
 
             if (this.Options.DateRestrict != null)
                 parameters.Add("dateRestrict", this.Options.DateRestrict.ToString());
@@ -153,7 +155,7 @@ namespace GoogleApi.Entities.Search
 
             parameters.Add("fileType", string.Join(",", this.Options.FileTypes));
             parameters.Add("filter", this.Options.Filter ? "0" : "1");
-            parameters.Add("gl", this.Options.GeoLocation?.ToCr() ?? string.Empty);
+            parameters.Add("gl", this.Options.GeoLocation?.ToGl() ?? string.Empty);
 
             if (this.Options.Googlehost != null)
                 parameters.Add("googleHost", this.Options.Googlehost);

@@ -6,7 +6,13 @@ namespace GoogleApi.Test.Common.Extensions
     public class StringExtensionTest
     {
         [Test]
-        public void ToStringEnumTest()
+        public void ToEnumTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void ToEnumListTest()
         {
             Assert.Inconclusive();
         }

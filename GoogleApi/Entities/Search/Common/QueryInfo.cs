@@ -117,7 +117,7 @@ namespace GoogleApi.Entities.Search.Common
         /// </summary>
         [JsonProperty("gl")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Country? GeoLocation { get; set; }
+        public virtual GeoLocation? GeoLocation { get; set; }
 
         /// <summary>
         /// Restricts search results to documents originating in a particular country. 
@@ -129,8 +129,7 @@ namespace GoogleApi.Entities.Search.Common
         /// https://developers.google.com/custom-search/docs/xml_results#countryCollections
         /// </summary>
         [JsonProperty("cr")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Country? CountryRestriction { get; set; }
+        public virtual string CountryRestrict { get; set; }
 
         /// <summary>
         /// Specifies the Google domain (for example, google.com, google.de, or google.fr) to which the search should be limited.

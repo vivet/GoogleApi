@@ -9,9 +9,15 @@ namespace GoogleApi.Entities.Places.Photos.Response
     public class PlacesPhotosResponse : BasePlacesResponse
     {
         /// <summary>
-        /// A stream containing the downloded photo.
+        /// 
         /// </summary>
         [JsonProperty("photo")]
-        public virtual MemoryStream Photo { get; set; }
+        public virtual byte[] PhotoBuffer { get; set; }
+
+        /// <summary>
+        /// Returns a <see cref="MemoryStream"/> based on the <see cref="PlacesPhotosResponse.PhotoBuffer"/> downloded.
+        /// </summary>
+        [JsonProperty("photo")]
+        public virtual MemoryStream Photo => new MemoryStream(this.PhotoBuffer ?? new byte[0]);
     }
 }

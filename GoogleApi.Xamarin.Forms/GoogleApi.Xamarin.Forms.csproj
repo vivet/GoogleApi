@@ -449,6 +449,12 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Converters\SortExpressionJsonConverter.cs">
       <Link>Entities\Search\Common\Converters\SortExpressionJsonConverter.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\CountryRestrict.cs">
+      <Link>Entities\Search\Common\CountryRestrict.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\CountryRestrictExpression.cs">
+      <Link>Entities\Search\Common\CountryRestrictExpression.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\DateRestrict.cs">
       <Link>Entities\Search\Common\DateRestrict.cs</Link>
     </Compile>
@@ -479,14 +485,23 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\EncodingTypeExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\EncodingTypeExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\GeoLocationExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\GeoLocationExtension.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\LanguageExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\OperatorExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\OperatorExtension.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\SiteSearchFilterExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\SiteSearchFilterExtension.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\FileType.cs">
       <Link>Entities\Search\Common\Enums\FileType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\GeoLocation.cs">
+      <Link>Entities\Search\Common\Enums\GeoLocation.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\ImageSize.cs">
       <Link>Entities\Search\Common\Enums\ImageSize.cs</Link>
@@ -496,6 +511,9 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Language.cs">
       <Link>Entities\Search\Common\Enums\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Operator.cs">
+      <Link>Entities\Search\Common\Enums\Operator.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\RightsType.cs">
       <Link>Entities\Search\Common\Enums\RightsType.cs</Link>

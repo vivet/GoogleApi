@@ -154,7 +154,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             parameters.Add("origin", this.Origin.ToString());
             parameters.Add("destination", this.Destination.ToString());
             parameters.Add("units", this.Units.ToString().ToLower());
-            parameters.Add("mode", this.TransitMode.ToString().ToLower());
+            parameters.Add("mode", this.TravelMode.ToString().ToLower());
             parameters.Add("language", this.Language.ToCode());
 
             if (this.Region != null)

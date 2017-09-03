@@ -23,7 +23,7 @@ namespace GoogleApi.Entities.Search.Common
         /// See the Country Parameter Values page for a list of valid values for this parameter.
         /// https://developers.google.com/custom-search/docs/xml_results_appendices#countryCollections
         /// </summary>
-        public virtual Country? CountryRestriction { get; set; }
+        public virtual CountryRestrict CountryRestrict { get; set; }
 
         /// <summary>
         /// Restricts results to URLs based on date. 
@@ -64,7 +64,7 @@ namespace GoogleApi.Entities.Search.Common
         /// Specifying a geolocation parameter value should lead to more relevant results.
         /// This is particularly true for international customers and, even more specifically, for customers in English- speaking countries other than the United States.
         /// </summary>
-        public virtual Country? GeoLocation { get; set; }
+        public virtual GeoLocation? GeoLocation { get; set; }
 
         /// <summary>
         /// Googlehost - The local Google domain (for example, google.com, google.de, or google.fr) to use to perform the search.

@@ -89,6 +89,8 @@
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchTests.cs" />
     <Compile Include="Search\Image\ImageSearchTests.cs" />
+    <Compile Include="Search\Web\Entities\CountryRestrictExpressionTests.cs" />
+    <Compile Include="Search\Web\Entities\CountryRestrictTests.cs" />
     <Compile Include="Search\Web\WebSearchTests.cs" />
     <Compile Include="Translate\Common\Extensions\LanguagesExtensionTests.cs" />
     <Compile Include="Translate\Common\Extensions\StringExtensionTests.cs" />
