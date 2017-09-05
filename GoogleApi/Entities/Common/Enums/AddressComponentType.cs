@@ -1,11 +1,11 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace GoogleApi.Entities.Common.Enums
 {
     /// <summary>
     /// Location types.
     /// </summary>
-    public enum LocationType
+    public enum AddressComponentType
     {
         /// <summary>
         /// Indicates a precise street address.
@@ -79,17 +79,17 @@ namespace GoogleApi.Entities.Common.Enums
         Colloquial_Area,
 
         /// <summary>
-        /// Ward indicates a specific type of Japanese locality, to facilitate distinction between multiple locality components within a Japanese address.
-        /// </summary>
-        [EnumMember(Value = "ward")]
-        Ward,
-
-        /// <summary>
         /// Indicates an incorporated city or town political entity.
         /// </summary>
         [EnumMember(Value = "locality")]
         Locality,
 
+        /// <summary>
+        /// Ward indicates a specific type of Japanese locality, to facilitate distinction between multiple locality components within a Japanese address.
+        /// </summary>
+        [EnumMember(Value = "ward")]
+        Ward,
+        
         /// <summary>
         /// indicates an first-order civil entity below a locality
         /// </summary>
@@ -167,12 +167,6 @@ namespace GoogleApi.Entities.Common.Enums
         [EnumMember(Value = "park")] Park,
 
         /// <summary>
-        /// Indicates a named point of interest. Typically, these "POI"s are prominent local entities that don't easily fit in another category such as "Empire State Building" or "Statue of Liberty."
-        /// </summary>
-        [EnumMember(Value = "point_of_interest")]
-        Point_Of_Interest,
-
-        /// <summary>
         /// Indicates the floor of a building address.
         /// </summary>
         [EnumMember(Value = "floor")]
@@ -183,6 +177,12 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         [EnumMember(Value = "establishment")]
         Establishment,
+
+        /// <summary>
+        /// Indicates a named point of interest. Typically, these "POI"s are prominent local entities that don't easily fit in another category such as "Empire State Building" or "Statue of Liberty."
+        /// </summary>
+        [EnumMember(Value = "point_of_interest")]
+        Point_Of_Interest,
 
         /// <summary>
         /// Parking indicates a parking lot or parking structure.
@@ -233,7 +233,19 @@ namespace GoogleApi.Entities.Common.Enums
         Transit_Station,
 
         /// <summary>
-        /// 
+        /// Geocode.
+        /// </summary>
+        [EnumMember(Value = "geocode")]
+        Geocode,
+
+        /// <summary>
+        /// Postal code prefix.
+        /// </summary>
+        [EnumMember(Value = "postal_code_prefix")]
+        Postal_Code_Prefix,
+
+        /// <summary>
+        /// Postal code suffix.
         /// </summary>
         [EnumMember(Value = "postal_code_suffix")]
         Postal_Code_Suffix

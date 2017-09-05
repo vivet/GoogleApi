@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -62,7 +63,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// and also returns "political" which indicates it is a political entity.
         /// </summary>
         [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
-        public virtual IEnumerable<LocationType> Types { get; set; }
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>
         /// address_components[] is an array containing the separate address components

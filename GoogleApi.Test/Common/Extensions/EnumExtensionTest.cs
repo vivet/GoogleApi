@@ -10,7 +10,7 @@ namespace GoogleApi.Test.Common.Extensions
         [Test]
         public void ToEnumStringTest()
         {
-            var result = LocationType.Postal_Code.ToEnumString(',');
+            var result = AddressComponentType.Postal_Code.ToEnumString(',');
             Assert.AreEqual("postal_code", result);
         }
     }

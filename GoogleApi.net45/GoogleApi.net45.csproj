@@ -99,6 +99,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Converters\StringEnumListJsonConverter.cs">
       <Link>Entities\Common\Converters\StringEnumListJsonConverter.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\AddressComponentType.cs">
+      <Link>Entities\Common\Enums\AddressComponentType.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Component.cs">
       <Link>Entities\Common\Enums\Component.cs</Link>
     </Compile>
@@ -108,8 +111,8 @@
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Language.cs">
       <Link>Entities\Common\Enums\Language.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Common\Enums\LocationType.cs">
-      <Link>Entities\Common\Enums\LocationType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Common\Enums\PlaceLocationType.cs">
+      <Link>Entities\Common\Enums\PlaceLocationType.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\Status.cs">
       <Link>Entities\Common\Enums\Status.cs</Link>
@@ -347,9 +350,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\AlternativePlace.cs">
       <Link>Entities\Places\Common\AlternativePlace.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Common\Enums\PlaceLocationType.cs">
-      <Link>Entities\Places\Common\Enums\PlaceLocationType.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\Enums\PriceLevel.cs">
       <Link>Entities\Places\Common\Enums\PriceLevel.cs</Link>
