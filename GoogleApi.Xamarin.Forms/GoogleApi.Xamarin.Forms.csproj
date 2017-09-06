@@ -62,6 +62,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Converters\StringEnumListJsonConverter.cs">
       <Link>Entities\Common\Converters\StringEnumListJsonConverter.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Converters\StringEnumOrDefaultConverter.cs">
+      <Link>Entities\Common\Converters\StringEnumOrDefaultConverter.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\Enums\AddressComponentType.cs">
       <Link>Entities\Common\Enums\AddressComponentType.cs</Link>
     </Compile>
