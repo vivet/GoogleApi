@@ -46,8 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Common\Converters\BooleanJsonConverterTest.cs" />
+    <Compile Include="Common\Converters\BooleanConverterTest.cs" />
     <Compile Include="Common\Converters\StringEnumListConverterTest.cs" />
+    <Compile Include="Common\Converters\StringEnumOrDefaultConverterTest.cs" />
     <Compile Include="Common\Enums\Extensions\LanguagesExtensionTests.cs" />
     <Compile Include="Common\Extensions\ListExtensionTest.cs" />
     <Compile Include="Maps\Directions\DirectionsRequestTests.cs" />

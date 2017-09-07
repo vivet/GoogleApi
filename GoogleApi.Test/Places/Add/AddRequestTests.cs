@@ -2,7 +2,6 @@ using System;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Add.Request;
-using GoogleApi.Entities.Places.Common.Enums;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Add
