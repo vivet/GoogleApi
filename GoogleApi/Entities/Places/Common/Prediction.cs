@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Places.Common.Enums;
+using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

@@ -1,20 +1,24 @@
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Common.Converters
 {
     /// <summary>
-    /// String Boolean Json Converter.
-    /// Converter for a <see cref="string"/> to a <see cref="bool"/>.
-    /// If the string value is "1" then true, otherwise false.
+    /// Converts a <see cref="string"/> to an <see cref="Enum"/> of type <typeparamref name="T"/>.
+    /// If no enum member is found, default(T) it returned.
     /// </summary>
-    public class StringBooleanConverter : JsonConverter
+    /// <typeparam name="T"><see cref="Enum"/> type.</typeparam>
+    public class StringEnumOrDefaultConverter<T> : StringEnumConverter
+        where T : struct
     {
         /// <inheritdoc />
         public override bool CanConvert(Type objectType)
-        {   
-            return objectType == typeof(string);
+        {
+            if (objectType == null)
+                throw new ArgumentNullException(nameof(objectType));
+
+            return base.CanConvert(typeof(T));
         }
 
         /// <inheritdoc />
@@ -29,11 +33,14 @@ namespace GoogleApi.Entities.Common.Converters
             if (serializer == null)
                 throw new ArgumentNullException(nameof(serializer));
 
-            var token = JToken.Load(reader);
-
-            bool.TryParse(token.ToString() == "0" ? "false" : "true", out var result);
-
-            return result;
+            try
+            {
+                return base.ReadJson(reader, objectType, existingValue, serializer);
+            }
+            catch
+            {
+                return default(T);
+            }
         }
 
         /// <inheritdoc />
@@ -48,7 +55,7 @@ namespace GoogleApi.Entities.Common.Converters
             if (serializer == null)
                 throw new ArgumentNullException(nameof(serializer));
 
-            throw new NotImplementedException();
+            base.WriteJson(writer, value, serializer);
         }
     }
 }

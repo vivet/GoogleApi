@@ -4,7 +4,6 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

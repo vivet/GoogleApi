@@ -20,6 +20,7 @@ namespace GoogleApi.Test.Maps.Geocode
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
             };
             var result = GoogleMaps.Geocode.Query(request);
+            Console.WriteLine(result.RawJson);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -28,6 +29,11 @@ namespace GoogleApi.Test.Maps.Geocode
             Assert.IsNotNull(geocodeResult);
             Assert.AreEqual(40.7140415, geocodeResult.Geometry.Location.Latitude, 0.001);
             Assert.AreEqual(-73.9613119, geocodeResult.Geometry.Location.Longitude, 0.001);
+
+            var types = geocodeResult.Types?.ToArray();
+            Assert.IsNotNull(types);
+            Assert.IsNotEmpty(types);
+            Assert.Contains(PlaceLocationType.Street_Address, types);
         }
 
         [Test]

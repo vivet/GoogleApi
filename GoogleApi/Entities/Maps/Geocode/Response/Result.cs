@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.Geocode.Response
 {
@@ -61,8 +61,8 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// For example, a geocode of "Chicago" returns "locality" which indicates that "Chicago" is a city, 
         /// and also returns "political" which indicates it is a political entity.
         /// </summary>
-        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
-        public virtual IEnumerable<LocationType> Types { get; set; }
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<PlaceLocationType>))]
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>
         /// address_components[] is an array containing the separate address components

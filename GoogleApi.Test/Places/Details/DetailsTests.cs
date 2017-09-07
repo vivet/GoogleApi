@@ -59,17 +59,17 @@ namespace GoogleApi.Test.Places.Details
 
             Assert.AreEqual("Jagtvej", addressComponents[0].LongName);
             Assert.AreEqual("Jagtvej", addressComponents[0].ShortName);
-            Assert.Contains(LocationType.Route, addressComponents[0].Types.ToArray());
+            Assert.Contains(AddressComponentType.Route, addressComponents[0].Types.ToArray());
 
             Assert.AreEqual("København", addressComponents[1].LongName);
             Assert.AreEqual("København", addressComponents[1].ShortName);
-            Assert.Contains(LocationType.Locality, addressComponents[1].Types.ToArray());
-            Assert.Contains(LocationType.Political, addressComponents[1].Types.ToArray());
+            Assert.Contains(AddressComponentType.Locality, addressComponents[1].Types.ToArray());
+            Assert.Contains(AddressComponentType.Political, addressComponents[1].Types.ToArray());
 
             Assert.AreEqual("Denmark", addressComponents[2].LongName);
             Assert.AreEqual("DK", addressComponents[2].ShortName);
-            Assert.Contains(LocationType.Country, addressComponents[2].Types.ToArray());
-            Assert.Contains(LocationType.Political, addressComponents[2].Types.ToArray());
+            Assert.Contains(AddressComponentType.Country, addressComponents[2].Types.ToArray());
+            Assert.Contains(AddressComponentType.Political, addressComponents[2].Types.ToArray());
         }
 
         [Test]

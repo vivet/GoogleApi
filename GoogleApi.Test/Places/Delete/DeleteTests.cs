@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Add.Request;
-using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Delete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Exceptions;

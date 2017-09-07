@@ -105,7 +105,7 @@ namespace GoogleApi.Entities.Search.Common
         /// Note: By default, Google applies filtering to all search results to improve the quality of those results.
         /// </summary>
         [JsonProperty("filter")]
-        [JsonConverter(typeof(StringBooleanJsonConverter))]
+        [JsonConverter(typeof(StringBooleanConverter))]
         public virtual bool Filter { get; set; }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace GoogleApi.Entities.Search.Common
         /// - 1: disabled
         /// </summary>
         [JsonProperty("disableCnTwTranslation")]
-        [JsonConverter(typeof(StringBooleanJsonConverter))]
+        [JsonConverter(typeof(StringBooleanConverter))]
         public virtual bool DisableCnTwTranslation { get; set; } = true;
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace GoogleApi.Entities.Search.Common
         /// Additional filetypes may be added in the future. An up-to-date list can always be found in Google's file type FAQ.
         /// </summary>
         [JsonProperty("fileType")]
-        [JsonConverter(typeof(StringEnumListJsonConverter<FileType>))]
+        [JsonConverter(typeof(StringEnumListConverter<FileType>))]
         public virtual IEnumerable<FileType> FileTypes { get; set; }
 
         /// <summary>
@@ -248,8 +248,8 @@ namespace GoogleApi.Entities.Search.Common
         /// - and combinations of these.
         /// </summary>
         [JsonProperty("rights")]
-        [JsonConverter(typeof(StringEnumListJsonConverter<RightsType>))]
-        public virtual IEnumerable<RightsType?> Rights { get; set; }
+        [JsonConverter(typeof(StringEnumListConverter<RightsType>))]
+        public virtual IEnumerable<RightsType> Rights { get; set; }
 
         /// <summary>
         /// Allowed values are web or image. If unspecified, results are limited to webpages.

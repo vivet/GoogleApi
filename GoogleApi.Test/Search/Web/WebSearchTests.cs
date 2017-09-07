@@ -374,6 +374,7 @@ namespace GoogleApi.Test.Search.Web
             Assert.IsNotNull(query);
 
             var fileTypes = query.FileTypes.ToArray();
+            Assert.AreEqual(2, fileTypes.Length);
             Assert.Contains(FileType.Text, fileTypes);
             Assert.Contains(FileType.AdobePortableDocumentFormat, fileTypes);
         }
@@ -651,9 +652,6 @@ namespace GoogleApi.Test.Search.Web
 
             var item = response.Items.FirstOrDefault();
             Assert.IsNotNull(item);
-            Assert.AreEqual(item.Link, "https://www.google.com/alerts");
-            Assert.AreEqual(item.Title, "Google Alerts - Monitor the Web for interesting new content");
-            Assert.AreEqual(item.DisplayLink, "www.google.com");
 
             var query = response.Query;
             Assert.IsNotNull(query);

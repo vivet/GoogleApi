@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Places.Common.Enums
+namespace GoogleApi.Entities.Common.Enums
 {
     /// <summary>
     /// Place Location Types
@@ -9,6 +9,12 @@ namespace GoogleApi.Entities.Places.Common.Enums
     /// </summary>
     public enum PlaceLocationType
     {
+        /// <summary>
+        /// Unknown is set when unmapped place location types is returned.
+        /// </summary>
+        [EnumMember(Value = "unknown")]
+        Uknown,
+
         /// <summary>
         /// Geocode instructs the Place Autocomplete service to return only geocoding results, 
         /// rather than business results. Generally, you use this request to disambiguate results where the location specified may be indeterminate.

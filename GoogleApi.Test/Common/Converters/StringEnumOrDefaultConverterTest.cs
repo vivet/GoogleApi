@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace GoogleApi.Test.Common.Converters
 {
     [TestFixture]
-    public class StringEnumListJsonConverterTest
+    public class StringEnumOrDefaultConverterTest
     {
         [Test]
         public void CanConvertTest()

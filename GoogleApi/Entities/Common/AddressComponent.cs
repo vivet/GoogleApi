@@ -26,6 +26,6 @@ namespace GoogleApi.Entities.Common
         /// types[] is an array indicating the type of the address component.
         /// </summary>
         [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
-        public virtual IEnumerable<LocationType> Types { get; set; }
+        public virtual IEnumerable<AddressComponentType> Types { get; set; }
     }
 }

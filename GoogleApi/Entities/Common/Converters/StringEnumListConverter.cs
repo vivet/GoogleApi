@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GoogleApi.Entities.Common.Extensions;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -11,12 +11,15 @@ namespace GoogleApi.Entities.Common.Converters
     /// Converter for a comma separated <see cref="string"/> of items, to a <see cref="List{T}"/>.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class StringEnumListJsonConverter<T> : JsonConverter
+    public class StringEnumListConverter<T> : JsonConverter
         where T: struct 
     {
         /// <inheritdoc />
         public override bool CanConvert(Type objectType)
         {
+            if (objectType == null)
+                throw new ArgumentNullException(nameof(objectType));
+
             return objectType == typeof(T);
         }
 
@@ -35,9 +38,15 @@ namespace GoogleApi.Entities.Common.Converters
             var token = JToken.Load(reader);
             var @string = token.ToString();
 
-            return string.IsNullOrEmpty(@string) 
-                ? null 
-                : @string.ToEnumList<T>();
+            if (string.IsNullOrEmpty(@string))
+                return null;
+
+            return @string.Split(',').Select(x =>
+            {
+                var success = Enum.TryParse(x, true, out T type);
+
+                return success ? type : default;
+            });
         }
 
         /// <inheritdoc />
