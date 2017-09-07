@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -38,6 +37,9 @@ namespace GoogleApi.Entities.Common.Converters
 
             var token = JToken.Load(reader);
             var @string = token.ToString();
+
+            if (string.IsNullOrEmpty(@string))
+                return null;
 
             return @string.Split(',').Select(x =>
             {
