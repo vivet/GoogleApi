@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Common.Converters
     /// Converter for a <see cref="string"/> to a <see cref="bool"/>.
     /// If the string value is "1" then true, otherwise false.
     /// </summary>
-    public class StringBooleanJsonConverter : JsonConverter
+    public class StringBooleanConverter : JsonConverter
     {
         /// <inheritdoc />
         public override bool CanConvert(Type objectType)

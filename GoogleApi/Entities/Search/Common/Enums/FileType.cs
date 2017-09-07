@@ -7,6 +7,11 @@ namespace GoogleApi.Entities.Search.Common.Enums
     public enum FileType
     {
         /// <summary>
+        /// Unknown.
+        /// </summary>
+        Unknown,
+
+        /// <summary>
         /// Adobe Flash (.swf)
         /// </summary>
         AdobeFlash,
