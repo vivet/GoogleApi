@@ -29,7 +29,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// </summary>
         public OverviewPolyline()
         {
-            this.InitLazyPoints(default(StreamingContext));
+            this.InitLazyPoints(default);
         }
 
         /// <summary>

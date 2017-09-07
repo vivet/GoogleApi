@@ -33,6 +33,9 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <RepositoryType></RepositoryType>
     <RepositoryUrl>https://github.com/vivet/GoogleApi</RepositoryUrl>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.2" />

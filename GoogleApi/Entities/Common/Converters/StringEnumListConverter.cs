@@ -45,7 +45,7 @@ namespace GoogleApi.Entities.Common.Converters
             {
                 var success = Enum.TryParse(x, true, out T type);
 
-                return success ? type : default(T);
+                return success ? type : default;
             });
         }
 
