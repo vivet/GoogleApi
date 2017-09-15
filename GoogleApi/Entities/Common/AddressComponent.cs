@@ -2,7 +2,6 @@
 using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Common
 {
