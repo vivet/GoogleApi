@@ -6,7 +6,13 @@ namespace GoogleApi.Entities.Common.Enums
     /// Location types.
     /// </summary>
     public enum AddressComponentType
-    {
+    {        
+        /// <summary>
+        /// Unknown is set when unmapped place location types is returned.
+        /// </summary>
+        [EnumMember(Value = "unknown")]
+        Uknown,
+        
         /// <summary>
         /// Indicates a precise street address.
         /// </summary>

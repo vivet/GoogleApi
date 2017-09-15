@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -25,7 +26,7 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// types[] is an array indicating the type of the address component.
         /// </summary>
-        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<AddressComponentType>))]
         public virtual IEnumerable<AddressComponentType> Types { get; set; }
     }
 }
