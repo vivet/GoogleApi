@@ -25,8 +25,8 @@ Feel free to contribute, throw questions and report issues. I usually respond fa
     * Text
     * Radar (*deprecated by Google, June 30th 2018*)
   * Place Details
-  * Place Add
-  * Place Delete
+  * Place Add (*deprecated by Google, June 30th 2018*)
+  * Place Delete (*deprecated by Google, June 30th 2018*)
   * Place Photos
   * Place Autocomplete
   * Query Autocomplete

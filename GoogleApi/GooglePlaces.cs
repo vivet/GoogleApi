@@ -1,4 +1,5 @@
-﻿using GoogleApi.Entities.Places.Add.Request;
+﻿using System;
+using GoogleApi.Entities.Places.Add.Request;
 using GoogleApi.Entities.Places.Add.Response;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.AutoComplete.Response;
@@ -45,10 +46,10 @@ namespace GoogleApi
         /// <summary>
         /// The Google Places API Radar Search Service allows you to search for up to 200 places at once, but with less detail than is typically returned from a Text Search or Nearby Search request. 
         /// With Radar Search, you can create applications that help users identify specific areas of interest within a geographic area.
-        /// NOTE: Radar Search is deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018, 
-        /// and will no longer be available after that date.
+        /// NOTE: Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.
         /// https://developers.google.com/places/web-service/search
         /// </summary>
+        [Obsolete("Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.")]
         public static HttpEngine<PlacesRadarSearchRequest, PlacesRadarSearchResponse> RadarSearch => HttpEngine<PlacesRadarSearchRequest, PlacesRadarSearchResponse>.instance;
 
         /// <summary>
@@ -65,8 +66,10 @@ namespace GoogleApi
         /// Differentiate your application from other apps with similar functionality.
         /// Create applications that are targeted to a specific user base or geographic location.
         /// Influence the results of a Places Search issued from your application.
+        /// NOTE: Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.
         /// https://developers.google.com/places/web-service/add-place
         /// </summary>
+        [Obsolete("Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.")]
         public static HttpEngine<PlacesAddRequest, PlacesAddResponse> Add => HttpEngine<PlacesAddRequest, PlacesAddResponse>.instance;
 
         /// <summary>
@@ -74,8 +77,10 @@ namespace GoogleApi
         /// The place was added by the application that is requesting the deletion.
         /// The place add request has not successfully passed through the Google Maps moderation process, and the place is therefore visible only to the application that added it.
         /// If you try to delete a place that does not meet these criteria, the API will return a REQUEST_DENIED status code.
+        /// NOTE: Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.
         /// https://developers.google.com/places/web-service/add-place
         /// </summary>
+        [Obsolete("Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.")]
         public static HttpEngine<PlacesDeleteRequest, PlacesDeleteResponse> Delete => HttpEngine<PlacesDeleteRequest, PlacesDeleteResponse>.instance;
 
         /// <summary>
