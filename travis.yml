@@ -1,0 +1,6 @@
+{
+  "language": "csharp",
+  "group": "stable",
+  "dist": "trusty",
+  "os": "linux"
+}
