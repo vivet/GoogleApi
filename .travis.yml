@@ -1,5 +1,6 @@
 {
   "language": "csharp",
+  "solution": GoogleApi.sln
   "group": "stable",
   "dist": "trusty",
   "os": "linux"
