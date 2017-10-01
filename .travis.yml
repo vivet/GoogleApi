@@ -1,7 +1,2 @@
-{
-  "language": "csharp",
-  "solution": GoogleApi.sln
-  "group": "stable",
-  "dist": "trusty",
-  "os": "linux"
-}
+language: csharp
+solution: GoogleApi.sln
