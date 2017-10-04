@@ -20,14 +20,26 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         protected internal override string BaseUrl => base.BaseUrl + "geocode/json";
 
         /// <summary>
-        /// address (required) — The address that you want to geocode. Required or Location.
+        /// Address (required).
+        /// The address that you want to geocode. Required or Location.
+        /// If <see cref="PlaceId"/> or <see cref="Location"/> is specified, this is ignored.
         /// </summary>
         public virtual string Address { get; set; }
 
         /// <summary>
-        /// latlng (required) — The textual latitude/longitude value for which you wish to obtain the closest, human-readable address.
+        /// PlaceId (required).
+        /// The place ID of the place for which you wish to obtain the human-readable address. 
+        /// The place ID is a unique identifier that can be used with other Google APIs. For example, you can use the placeID returned by the Google Maps Roads API 
+        /// to get the address for a snapped point. For more information about place IDs, see the place ID overview. 
+        /// The place ID may only be specified if the request includes an API key or a Google Maps APIs Premium Plan client ID.
+        /// </summary>
+        public virtual string PlaceId { get; set; }
+
+        /// <summary>
+        /// Latlng (required).
+        /// The textual latitude/longitude value for which you wish to obtain the closest, human-readable address.
         /// If you pass a latlng, the geocoder performs what is known as a reverse geocode. See Reverse Geocoding for more information.
-        /// Required or Address.
+        /// If <see cref="PlaceId"/> is specified, this is ignored.
         /// </summary>
         public virtual Location Location { get; set; }
 
@@ -61,14 +73,21 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Location == null && string.IsNullOrWhiteSpace(this.Address))
-                throw new ArgumentException("Location or Address is required");
+            if (this.Location == null && string.IsNullOrWhiteSpace(this.PlaceId) && string.IsNullOrWhiteSpace(this.Address))
+                throw new ArgumentException("Location, PlaceId or Address is required");
 
             var parameters = base.GetQueryStringParameters();
 
             parameters.Add("language", this.Language.ToCode());
 
-            if (this.Location != null)
+            if (this.PlaceId != null)
+            {
+                if (this.Key == null)
+                    throw new ArgumentException("Key is required, when using PlaceId");
+
+                parameters.Add("place_id", this.PlaceId);
+            }
+            else if (this.Location != null)
                 parameters.Add("latlng", this.Location.ToString());
             else
                 parameters.Add("address", this.Address);

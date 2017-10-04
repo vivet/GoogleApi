@@ -26,7 +26,21 @@ namespace GoogleApi.Test.Maps.Geocode
             });
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Location or Address is required");
+            Assert.AreEqual(exception.Message, "Location, PlaceId or Address is required");
+        }
+
+        [Test]
+        public void GeocodingWhenPlaceIdAndKeyIsNullTest()
+        {
+            var request = new GeocodingRequest { PlaceId = "test" };
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                var parameters = request.GetQueryStringParameters();
+                Assert.IsNull(parameters);
+            });
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Key is required, when using PlaceId");
         }
     }
 }
