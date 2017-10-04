@@ -194,13 +194,26 @@ namespace GoogleApi.Test.Maps.Geocode
         }
 
         [Test]
-        public void GeocodingWhenAddressAndLocationIsNullTest()
+        public void GeocodingWhenAddressAndPlaceIdAndLocationIsNullTest()
         {
             var request = new GeocodingRequest();
             var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Geocode.Query(request, TimeSpan.FromMilliseconds(1)));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Location or Address is required");
+            Assert.AreEqual(exception.Message, "Location, PlaceId or Address is required");
+        }
+
+        [Test]
+        public void GeocodingWhenPlaceAndKeyIsNullTest()
+        {
+            var request = new GeocodingRequest
+            {
+                PlaceId = "test"
+            };
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Geocode.Query(request, TimeSpan.FromMilliseconds(1)));
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Key is required, when using PlaceId");
         }
 
         [Test]
