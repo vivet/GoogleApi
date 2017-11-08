@@ -466,6 +466,12 @@ namespace GoogleApi.Entities.Common.Enums
         General_Contractor,
 
         /// <summary>
+        /// Supermarket.
+        /// </summary>
+        [EnumMember(Value = "supermarket")]
+        Supermarket,
+
+        /// <summary>
         /// Grocery Or Supermarket.
         /// </summary>
         [EnumMember(Value = "grocery_or_supermarket")]
