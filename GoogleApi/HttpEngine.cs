@@ -134,7 +134,7 @@ namespace GoogleApi
                 throw new ArgumentNullException(nameof(cancellationToken));
 
             var uri = request.GetUri();
-            var httpClient = new HttpClient { Timeout = timeout };
+            var httpClient = new HttpClient {Timeout = timeout};
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
 
             // BUG: Response doesn't get deserialzed correctly.
@@ -152,13 +152,18 @@ namespace GoogleApi
                 using (var json = new StringContent(serializeObject, Encoding.UTF8))
                 {
                     var content = json.ReadAsByteArrayAsync().Result;
-                    var streamContent = new StreamContent(new MemoryStream(content));
 
-                    task = httpClient.PostAsync(uri, streamContent, cancellationToken);
+                    using (var stream = new MemoryStream(content))
+                    {
+                        var streamContent = new StreamContent(stream);
+                        task = httpClient.PostAsync(uri, streamContent, cancellationToken);
+                    }
                 }
             }
             else
+            {
                 task = httpClient.GetAsync(uri, cancellationToken);
+            }
 
             task.ContinueWith(x =>
             {
@@ -181,9 +186,8 @@ namespace GoogleApi
                     {
                         var result = x.Result;
                         var content = result.Content;
-                        var rawJson = content.ReadAsStringAsync().Result;
                         var rawBuffer = content.ReadAsByteArrayAsync().Result;
-           
+
                         if (typeof(TResponse) != typeof(PlacesPhotosResponse))
                         {
                             using (var memoryStream = new MemoryStream(rawBuffer))
@@ -205,23 +209,35 @@ namespace GoogleApi
                             }
                         }
                         else
-                            response = (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = rawBuffer };
-                       
-                        response.RawJson = rawJson;
+                        {
+                            response = (TResponse) (IResponse) new PlacesPhotosResponse
+                            {
+                                PhotoBuffer = rawBuffer
+                            };
+                        }
+
+                        response.RawJsonAsync = content.ReadAsStringAsync();
                         response.RawQueryString = result.RequestMessage.RequestUri.PathAndQuery;
                         response.Status = result.IsSuccessStatusCode ? response.Status ?? Status.Ok : Status.HttpError;
 
                         result.EnsureSuccessStatusCode();
 
                         if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
-                            throw new GoogleApiException(response.ErrorMessage) { Response = response };
+                        {
+                            throw new GoogleApiException(response.ErrorMessage)
+                            {
+                                Response = response
+                            };
+                        }
 
                         taskCompletionSource.SetResult(response);
                     }
                 }
                 catch (Exception ex)
                 {
-                    var exception = ex is GoogleApiException ? ex : new GoogleApiException(ex.Message, ex) { Response = response };
+                    var exception = ex is GoogleApiException
+                        ? ex
+                        : new GoogleApiException(ex.Message, ex) {Response = response};
 
                     taskCompletionSource.SetException(exception);
                 }

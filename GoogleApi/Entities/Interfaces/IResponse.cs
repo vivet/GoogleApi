@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 
 namespace GoogleApi.Entities.Interfaces
@@ -11,7 +12,12 @@ namespace GoogleApi.Entities.Interfaces
         /// <summary>
         /// Raw json of the response.
         /// </summary>
-        string RawJson { get; set; }
+        string RawJson { get; }
+
+        /// <summary>
+        /// Raw json async (Task).
+        /// </summary>
+        Task<string> RawJsonAsync { get; set; }
 
         /// <summary>
         /// Raw querystring of the request.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
@@ -69,7 +70,8 @@ namespace GoogleApi.Test
 
         public class TestResponse : IResponse
         {
-            public string RawJson { get; set; }
+            public string RawJson => this.RawJsonAsync.Result;
+            public Task<string> RawJsonAsync { get; set; }
             public string RawQueryString { get; set; }
             public Status? Status { get; set; }
             public string ErrorMessage { get; set; }
