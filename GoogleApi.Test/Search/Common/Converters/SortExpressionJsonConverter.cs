@@ -1,30 +1,30 @@
 using System;
 using System.IO;
-using GoogleApi.Entities.Common.Converters;
-using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Search.Common;
+using GoogleApi.Entities.Search.Common.Converters;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Common.Converters
+namespace GoogleApi.Test.Search.Common.Converters
 {
     [TestFixture]
-    public class StringEnumOrDefaultConverterTest
+    public class SortExpressionJsonConverterTests : BaseTest
     {
         [Test]
         public void CanConvertWhenTrueTest()
         {
-            var converter = new StringEnumOrDefaultConverter<DayOfWeek>();
+            var converter = new SortExpressionJsonConverter();
 
-            var result = converter.CanConvert(typeof(DayOfWeek));
+            var result = converter.CanConvert(typeof(SortExpression));
             Assert.IsTrue(result);
         }
 
         [Test]
         public void CanConvertWhenFalseTest()
         {
-            var converter = new StringEnumOrDefaultConverter<decimal>();
+            var converter = new SortExpressionJsonConverter();
 
-            var result = converter.CanConvert(typeof(DayOfWeek));
+            var result = converter.CanConvert(typeof(object));
             Assert.IsFalse(result);
         }
 
@@ -39,9 +39,9 @@ namespace GoogleApi.Test.Common.Converters
         {
             var writer = new JsonTextWriter(TextWriter.Null);
             var serializer = new JsonSerializer();
-            var converter = new StringEnumOrDefaultConverter<DayOfWeek>();
+            var converter = new SortExpressionJsonConverter();
 
-            Assert.DoesNotThrow(() => converter.WriteJson(writer, DayOfWeek.Sunday, serializer));
+            Assert.Throws<NotImplementedException>(() => converter.WriteJson(writer, new object(), serializer));
         }
     }
 }

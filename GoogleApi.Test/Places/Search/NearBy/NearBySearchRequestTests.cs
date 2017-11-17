@@ -171,5 +171,15 @@ namespace GoogleApi.Test.Places.Search.NearBy
             });
             Assert.AreEqual(exception.Message, "Keyword, Name or Type is required, If rank by distance");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesNearBySearchRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

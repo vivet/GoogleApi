@@ -13,10 +13,10 @@ namespace GoogleApi.Entities.Common.Converters
         where T : struct
     {
         /// <inheritdoc />
-        public override bool CanConvert(Type objectType)
+        public override bool CanConvert(Type type)
         {
-            if (objectType == null)
-                throw new ArgumentNullException(nameof(objectType));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
 
             return base.CanConvert(typeof(T));
         }

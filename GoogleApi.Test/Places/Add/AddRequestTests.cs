@@ -70,7 +70,7 @@ namespace GoogleApi.Test.Places.Add
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Name must be provided");
+            Assert.AreEqual(exception.Message, "Name is required");
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace GoogleApi.Test.Places.Add
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Name must be provided");
+            Assert.AreEqual(exception.Message, "Name is required");
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace GoogleApi.Test.Places.Add
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Location must be provided");
+            Assert.AreEqual(exception.Message, "Location is required");
         }
 
         [Test]
@@ -124,7 +124,7 @@ namespace GoogleApi.Test.Places.Add
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Types must be provided. At least one type must be specified");
+            Assert.AreEqual(exception.Message, "Types is required. At least one type must be specified");
         }
 
         [Test]
@@ -143,7 +143,17 @@ namespace GoogleApi.Test.Places.Add
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Types must be provided. At least one type must be specified");
+            Assert.AreEqual(exception.Message, "Types is required. At least one type must be specified");
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesAddRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
     }
 }

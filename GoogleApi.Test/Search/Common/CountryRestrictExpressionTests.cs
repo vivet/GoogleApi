@@ -2,7 +2,7 @@ using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Search.Web.Entities
+namespace GoogleApi.Test.Search.Common
 {
     [TestFixture]
     public class CountryRestrictExpressionTests : BaseTest

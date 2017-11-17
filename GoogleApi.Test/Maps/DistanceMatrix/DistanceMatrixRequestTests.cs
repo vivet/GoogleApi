@@ -117,5 +117,15 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new DistanceMatrixRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

@@ -99,7 +99,7 @@ namespace GoogleApi.Entities.Search
         public override bool IsSsl
         {
             get => true;
-            set => throw new NotSupportedException("This operation is not supported, SearchRequest must use SSL");
+            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
         }
 
         /// <summary>

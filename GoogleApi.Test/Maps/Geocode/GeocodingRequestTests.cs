@@ -42,5 +42,15 @@ namespace GoogleApi.Test.Maps.Geocode
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Key is required, when using PlaceId");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new GeocodingRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

@@ -109,5 +109,15 @@ namespace GoogleApi.Test.Places.Search.Text
             });
             Assert.AreEqual(exception.Message, "Radius is required when Location is specified");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesTextSearchRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

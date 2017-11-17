@@ -1,5 +1,6 @@
 using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using NUnit.Framework;
@@ -106,6 +107,16 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             });
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Max PlaceId's exceeded");
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new DirectionsRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
     }
 }

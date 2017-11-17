@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using GoogleApi.Entities.Common.Converters;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Common.Converters
@@ -6,13 +10,25 @@ namespace GoogleApi.Test.Common.Converters
     public class StringEnumListConverterTest
     {
         [Test]
-        public void CanConvertTest()
+        public void CanConvertWhenTrueTest()
         {
-            Assert.Inconclusive();
+            var converter = new StringEnumListConverter<DayOfWeek>();
+
+            var result = converter.CanConvert(typeof(DayOfWeek));
+            Assert.IsTrue(result);
         }
 
         [Test]
-        public void ReadJsonTest()
+        public void CanConvertWhenFalseTest()
+        {
+            var converter = new StringEnumListConverter<decimal>();
+
+            var result = converter.CanConvert(typeof(DayOfWeek));
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void ReadJsonWhenTrueTest()
         {
             Assert.Inconclusive();
         }
@@ -20,7 +36,11 @@ namespace GoogleApi.Test.Common.Converters
         [Test]
         public void WriteJsonTest()
         {
-            Assert.Inconclusive();
+            var writer = new JsonTextWriter(TextWriter.Null);
+            var serializer = new JsonSerializer();
+            var converter = new StringEnumListConverter<DayOfWeek>();
+
+            Assert.Throws<NotImplementedException>(() => converter.WriteJson(writer, new object(), serializer));
         }
     }
 }

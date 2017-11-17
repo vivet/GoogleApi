@@ -86,13 +86,13 @@ namespace GoogleApi.Entities.Places.Add.Request
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Name))
-                throw new ArgumentException("Name must be provided");
+                throw new ArgumentException("Name is required");
 
             if (this.Location == null)
-                throw new ArgumentException("Location must be provided");
+                throw new ArgumentException("Location is required");
 
             if (this.Types == null || !this.Types.Any())
-                throw new ArgumentException("Types must be provided. At least one type must be specified");
+                throw new ArgumentException("Types is required. At least one type must be specified");
 
             var parameters = base.GetQueryStringParameters();
 

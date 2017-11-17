@@ -12,9 +12,12 @@ namespace GoogleApi.Entities.Common.Converters
     public class StringBooleanConverter : JsonConverter
     {
         /// <inheritdoc />
-        public override bool CanConvert(Type objectType)
-        {   
-            return objectType == typeof(string);
+        public override bool CanConvert(Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
+            return type == typeof(string);
         }
 
         /// <inheritdoc />

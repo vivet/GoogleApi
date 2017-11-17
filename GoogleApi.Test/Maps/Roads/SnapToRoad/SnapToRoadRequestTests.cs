@@ -87,5 +87,15 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Path is required");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new SnapToRoadsRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

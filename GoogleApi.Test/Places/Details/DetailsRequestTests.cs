@@ -86,5 +86,15 @@ namespace GoogleApi.Test.Places.Details
             });
             Assert.AreEqual(exception.Message, "PlaceId is required");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesDetailsRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

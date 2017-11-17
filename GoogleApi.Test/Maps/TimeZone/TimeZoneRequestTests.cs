@@ -34,5 +34,15 @@ namespace GoogleApi.Test.Maps.TimeZone
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Location is required");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new TimeZoneRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

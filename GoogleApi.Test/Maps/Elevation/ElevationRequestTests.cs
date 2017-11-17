@@ -65,5 +65,15 @@ namespace GoogleApi.Test.Maps.Elevation
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Locations or Path is required");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new ElevationRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

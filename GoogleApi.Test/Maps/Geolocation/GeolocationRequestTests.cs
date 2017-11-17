@@ -48,5 +48,15 @@ namespace GoogleApi.Test.Maps.Geolocation
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Key is required");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new GeolocationRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

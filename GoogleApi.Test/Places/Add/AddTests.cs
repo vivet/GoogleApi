@@ -248,7 +248,7 @@ namespace GoogleApi.Test.Places.Add
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
-            Assert.AreEqual(exception.Message, "Name must be provided");
+            Assert.AreEqual(exception.Message, "Name is required");
         }
 
         [Test]
@@ -261,7 +261,7 @@ namespace GoogleApi.Test.Places.Add
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
-            Assert.AreEqual(exception.Message, "Name must be provided");
+            Assert.AreEqual(exception.Message, "Name is required");
         }
 
         [Test]
@@ -275,7 +275,7 @@ namespace GoogleApi.Test.Places.Add
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
-            Assert.AreEqual(exception.Message, "Location must be provided");
+            Assert.AreEqual(exception.Message, "Location is required");
         }
 
         [Test]
@@ -290,7 +290,7 @@ namespace GoogleApi.Test.Places.Add
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
-            Assert.AreEqual(exception.Message, "Types must be provided. At least one type must be specified");
+            Assert.AreEqual(exception.Message, "Types is required. At least one type must be specified");
         }
 
         [Test]
@@ -305,7 +305,7 @@ namespace GoogleApi.Test.Places.Add
             };
 
             var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Add.Query(request));
-            Assert.AreEqual(exception.Message, "Types must be provided. At least one type must be specified");
+            Assert.AreEqual(exception.Message, "Types is required. At least one type must be specified");
         }
     }
 }

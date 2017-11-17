@@ -15,12 +15,12 @@ namespace GoogleApi.Entities.Common.Converters
         where T: struct 
     {
         /// <inheritdoc />
-        public override bool CanConvert(Type objectType)
+        public override bool CanConvert(Type type)
         {
-            if (objectType == null)
-                throw new ArgumentNullException(nameof(objectType));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
 
-            return objectType == typeof(T);
+            return type == typeof(T);
         }
 
         /// <inheritdoc />
@@ -41,12 +41,13 @@ namespace GoogleApi.Entities.Common.Converters
             if (string.IsNullOrEmpty(@string))
                 return null;
 
-            return @string.Split(',').Select(x =>
-            {
-                var success = Enum.TryParse(x, true, out T type);
-
-                return success ? type : default;
-            });
+            return @string
+                .Split(',')
+                .Select(x =>
+                {
+                    var success = Enum.TryParse(x, true, out T type);
+                    return success ? type : default;
+                });
         }
 
         /// <inheritdoc />

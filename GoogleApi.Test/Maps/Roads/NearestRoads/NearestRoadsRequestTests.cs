@@ -86,5 +86,15 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Points is required");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new NearestRoadsRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }

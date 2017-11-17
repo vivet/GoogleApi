@@ -152,5 +152,15 @@ namespace GoogleApi.Test.Places.Search.Radar
             });
             Assert.AreEqual(exception.Message, "Keyword, Name or Type is required");
         }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesRadarSearchRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
     }
 }
