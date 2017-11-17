@@ -36,9 +36,9 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             Assert.IsNotNull(element);
             Assert.AreEqual(Status.Ok, element.Status);
             Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(706.00, element.Distance.Value, 100.00);
+            Assert.AreEqual(8258.00, element.Distance.Value, 1000.00);
             Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(208.00, element.Duration.Value, 30.00);
+            Assert.AreEqual(1135.00, element.Duration.Value, 200.00);
         }
 
         [Test]
@@ -113,7 +113,31 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         [Test]
         public void DistanceMatrixWhenAvoidWayTest()
         {
-            Assert.Inconclusive();
+            var request = new DistanceMatrixRequest
+            {
+                Key = this.ApiKey,
+                Origins = new[] { new Location(40.7141289, -73.9614074) },
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
+                Avoid = AvoidWay.Tolls | AvoidWay.Highways
+            };
+
+            var response = GoogleMaps.DistanceMatrix.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
+            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+
+            var row = response.Rows.FirstOrDefault();
+            Assert.IsNotNull(row);
+
+            var element = row.Elements.FirstOrDefault();
+            Assert.IsNotNull(element);
+            Assert.AreEqual(Status.Ok, element.Status);
+            Assert.IsNotNull(element.Distance.Text);
+            Assert.AreEqual(5857.00, element.Distance.Value, 500.00);
+            Assert.IsNotNull(element.Duration.Text);
+            Assert.AreEqual(1509.00, element.Duration.Value, 100.00);
         }
 
         [Test]

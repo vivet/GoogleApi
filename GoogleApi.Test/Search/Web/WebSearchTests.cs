@@ -53,7 +53,7 @@ namespace GoogleApi.Test.Search.Web
 
             var item = response.Items.FirstOrDefault();
             Assert.IsNotNull(item);
-            Assert.AreEqual(item.Link, "https://www.google.com/");
+            Assert.AreEqual(item.Link, "http://www.google.com/");
             Assert.AreEqual(item.Title, "Google");
             Assert.AreEqual(item.DisplayLink, "www.google.com");
 
