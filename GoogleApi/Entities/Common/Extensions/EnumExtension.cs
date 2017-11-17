@@ -1,8 +1,5 @@
 using System;
 using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace GoogleApi.Entities.Common.Extensions
 {
@@ -22,24 +19,7 @@ namespace GoogleApi.Entities.Common.Extensions
         public static string ToEnumString<T>(this T @enum, char delimeter)
             where T : struct 
         {
-            if (@enum.GetType().GetTypeInfo().GetCustomAttributes(typeof(FlagsAttribute), true).FirstOrDefault() == null)
-                return Convert.ToString(@enum, CultureInfo.InvariantCulture).ToLower();
-
-            var stringBuilder = new StringBuilder();
-            var binaryCharArray = Convert.ToString(@enum, CultureInfo.InvariantCulture);
-
-            for (var i = binaryCharArray.Length; i >= 0; i--)
-            {
-                if (binaryCharArray[i] != '1')
-                    continue;
-
-                stringBuilder.AppendFormat("{0}", 1 << i);
-
-                if (i != binaryCharArray.Length - 1)
-                    stringBuilder.Append(delimeter);
-            }
-
-            return stringBuilder.ToString().ToLower();
+            return Convert.ToString(@enum, CultureInfo.InvariantCulture).ToLower().Replace(',', delimeter).Replace(" ", "");
         }
     }
 }

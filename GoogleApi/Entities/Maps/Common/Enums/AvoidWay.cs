@@ -11,21 +11,21 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         /// <summary>
         /// Nothing
         /// </summary>
-        Nothing = 0x0,
+        Nothing = 0,
 
         /// <summary>
         /// Avoid tolls
         /// </summary>
-        Tolls = 0x1,
+        Tolls = 1 << 0,
 
         /// <summary>
         /// Avoid highways
         /// </summary>
-        Highways = 0x2,
+        Highways = 1 << 1,
 
         /// <summary>
         /// Avoid indoor
         /// </summary>
-        Indoor = 0x3
+        Indoor = 1 << 2
     }
 }
