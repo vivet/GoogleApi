@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
@@ -65,13 +64,12 @@ namespace GoogleApi.Test
         public void QueryAsyncWhenRequestIsNullAndTimeoutAndCancellationTokenTest()
         {
             var engine = new HttpEngine<TestRequest, TestResponse>();
-            Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
+            Assert.Throws<ArgumentNullException>(async () => await engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
         }
 
         public class TestResponse : IResponse
         {
-            public string RawJson => this.RawJsonAsync.Result;
-            public Task<string> RawJsonAsync { get; set; }
+            public string RawJson { get; set; }
             public string RawQueryString { get; set; }
             public Status? Status { get; set; }
             public string ErrorMessage { get; set; }

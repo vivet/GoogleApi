@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
@@ -15,12 +14,7 @@ namespace GoogleApi.Entities
         /// <summary>
         /// See <see cref="IResponse.RawJson"/>.
         /// </summary>
-        public virtual string RawJson => this.RawJsonAsync.Result;
-
-        /// <summary>
-        /// See <see cref="IResponse.RawJsonAsync"/>.
-        /// </summary>
-        public virtual Task<string> RawJsonAsync { get; set; }
+        public virtual string RawJson { get; set; }
 
         /// <summary>
         /// See <see cref="IResponse.RawQueryString"/>.

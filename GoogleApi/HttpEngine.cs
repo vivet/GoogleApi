@@ -1,8 +1,7 @@
 ﻿using System;
-using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
@@ -122,7 +121,7 @@ namespace GoogleApi
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken cancellationToken)
+        public async Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -134,120 +133,77 @@ namespace GoogleApi
                 throw new ArgumentNullException(nameof(cancellationToken));
 
             var uri = request.GetUri();
-            var httpClient = new HttpClient {Timeout = timeout};
-            var taskCompletionSource = new TaskCompletionSource<TResponse>();
-
-            // BUG: Response doesn't get deserialzed correctly.
-            //if (request.IsGzip)
-            //    httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
+            var httpHandler = new HttpClientHandler { AutomaticDecompression = request.IsGzip ? DecompressionMethods.GZip | DecompressionMethods.Deflate : DecompressionMethods.None };
+            var httpClient = new HttpClient(httpHandler) { Timeout = timeout };
 
             Task<HttpResponseMessage> task;
             if (request is IRequestJson)
             {
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-                var serializeObject = JsonConvert.SerializeObject(request, jsonSerializerSettings);
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                var serialized = JsonConvert.SerializeObject(request, settings);
 
-                using (var json = new StringContent(serializeObject, Encoding.UTF8))
-                {
-                    var content = json.ReadAsByteArrayAsync().Result;
-
-                    using (var stream = new MemoryStream(content))
-                    {
-                        var streamContent = new StreamContent(stream);
-                        task = httpClient.PostAsync(uri, streamContent, cancellationToken);
-                    }
-                }
+                task = httpClient.PostAsync(uri, new StringContent(serialized), cancellationToken);
             }
             else
             {
                 task = httpClient.GetAsync(uri, cancellationToken);
             }
 
-            task.ContinueWith(x =>
+            var taskCompletionSource = new TaskCompletionSource<TResponse>();
+            await task.ContinueWith(async x =>
             {
                 var response = default(TResponse);
                 try
                 {
-                    if (x.IsCanceled)
+                    if (x.IsFaulted)
                     {
-                        taskCompletionSource.SetCanceled();
-                    }
-                    else if (x.IsFaulted)
-                    {
-                        var exception = x.Exception == null
+                        var exception = x.Exception == null 
                             ? new NullReferenceException("task.Exception")
                             : x.Exception?.InnerException ?? x.Exception ?? new Exception("unknown error");
 
                         throw exception;
                     }
+
+                    if (x.IsCanceled)
+                    {
+                        taskCompletionSource.SetCanceled();
+                    }
                     else
                     {
                         var result = x.Result;
-                        var content = result.Content;
-                        var rawBuffer = content.ReadAsByteArrayAsync().Result;
+                        var rawJson = await result.Content.ReadAsStringAsync();
 
-                        if (typeof(TResponse) != typeof(PlacesPhotosResponse))
-                        {
-                            using (var memoryStream = new MemoryStream(rawBuffer))
-                            {
-                                using (var streamReader = new StreamReader(memoryStream))
-                                {
-                                    var jsonSerializer = new JsonSerializer();
-                                    var jsonTextReader = new JsonTextReader(streamReader);
+                        response = typeof(TResponse) == typeof(PlacesPhotosResponse)
+                            ? (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = await result.Content.ReadAsByteArrayAsync() }
+                            : JsonConvert.DeserializeObject<TResponse>(rawJson);
 
-                                    try
-                                    {
-                                        response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
-                                    }
-                                    catch
-                                    {
-                                        response = new TResponse();
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            response = (TResponse) (IResponse) new PlacesPhotosResponse
-                            {
-                                PhotoBuffer = rawBuffer
-                            };
-                        }
-
-                        response.RawJsonAsync = content.ReadAsStringAsync();
+                        response.RawJson = rawJson;
                         response.RawQueryString = result.RequestMessage.RequestUri.PathAndQuery;
                         response.Status = result.IsSuccessStatusCode ? response.Status ?? Status.Ok : Status.HttpError;
 
                         result.EnsureSuccessStatusCode();
 
                         if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
-                        {
-                            throw new GoogleApiException(response.ErrorMessage)
-                            {
-                                Response = response
-                            };
-                        }
+                            throw new GoogleApiException(response.ErrorMessage) { Response = response };
 
                         taskCompletionSource.SetResult(response);
                     }
                 }
                 catch (Exception ex)
                 {
-                    var exception = ex is GoogleApiException
-                        ? ex
-                        : new GoogleApiException(ex.Message, ex) {Response = response};
-
+                    var exception = ex is GoogleApiException ? ex : new GoogleApiException(ex.Message, ex) { Response = response };
                     taskCompletionSource.SetException(exception);
                 }
                 finally
                 {
                     httpClient.Dispose();
+                    httpHandler.Dispose();
                 }
             }, TaskContinuationOptions.ExecuteSynchronously);
 
-            return taskCompletionSource.Task;
+            return await taskCompletionSource.Task;
         }
     }
 }
