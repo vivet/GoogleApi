@@ -91,6 +91,7 @@
     <Compile Include="Places\Search\Radar\RadarSearchTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\Common\Converters\CountryRestrictExpressionTests.cs" />
     <Compile Include="Search\Common\Converters\SortExpressionJsonConverter.cs" />
     <Compile Include="Search\Image\ImageSearchRequestTests.cs" />
@@ -122,6 +123,8 @@
       <Name>GoogleApi</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
