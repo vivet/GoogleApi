@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
@@ -121,7 +122,7 @@ namespace GoogleApi
         /// <returns>A Task with the future value of the response.</returns>
         /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public async Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken cancellationToken)
+        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken cancellationToken)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -142,9 +143,12 @@ namespace GoogleApi
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-                var serialized = JsonConvert.SerializeObject(request, settings);
+                var serializeObject = JsonConvert.SerializeObject(request, settings);
+                var stringContent = new StringContent(serializeObject, Encoding.UTF8);
+                var content = stringContent.ReadAsStreamAsync().Result;
+                var streamContent = new StreamContent(content);
 
-                task = httpClient.PostAsync(uri, new StringContent(serialized), cancellationToken);
+                task = httpClient.PostAsync(uri, streamContent, cancellationToken);
             }
             else
             {
@@ -152,14 +156,14 @@ namespace GoogleApi
             }
 
             var taskCompletionSource = new TaskCompletionSource<TResponse>();
-            await task.ContinueWith(async x =>
+            task.ContinueWith(x =>
             {
                 var response = default(TResponse);
                 try
                 {
                     if (x.IsFaulted)
                     {
-                        var exception = x.Exception == null 
+                        var exception = x.Exception == null
                             ? new NullReferenceException("task.Exception")
                             : x.Exception?.InnerException ?? x.Exception ?? new Exception("unknown error");
 
@@ -173,10 +177,10 @@ namespace GoogleApi
                     else
                     {
                         var result = x.Result;
-                        var rawJson = await result.Content.ReadAsStringAsync();
+                        var rawJson = result.Content.ReadAsStringAsync().Result;
 
                         response = typeof(TResponse) == typeof(PlacesPhotosResponse)
-                            ? (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = await result.Content.ReadAsByteArrayAsync() }
+                            ? (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = result.Content.ReadAsByteArrayAsync().Result }
                             : JsonConvert.DeserializeObject<TResponse>(rawJson);
 
                         response.RawJson = rawJson;
@@ -203,7 +207,7 @@ namespace GoogleApi
                 }
             }, TaskContinuationOptions.ExecuteSynchronously);
 
-            return await taskCompletionSource.Task;
+            return taskCompletionSource.Task;
         }
     }
 }
