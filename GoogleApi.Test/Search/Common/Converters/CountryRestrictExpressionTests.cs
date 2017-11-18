@@ -1,10 +1,8 @@
 using System;
 using System.IO;
-using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Converters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Search.Common.Converters

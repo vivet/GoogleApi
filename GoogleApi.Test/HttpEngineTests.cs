@@ -64,7 +64,7 @@ namespace GoogleApi.Test
         public void QueryAsyncWhenRequestIsNullAndTimeoutAndCancellationTokenTest()
         {
             var engine = new HttpEngine<TestRequest, TestResponse>();
-            Assert.Throws<ArgumentNullException>(() => engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
+            Assert.Throws<ArgumentNullException>(async () => await engine.QueryAsync(null, new TimeSpan(), new CancellationToken()));
         }
 
         public class TestResponse : IResponse

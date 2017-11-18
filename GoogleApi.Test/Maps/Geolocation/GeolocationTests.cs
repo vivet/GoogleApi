@@ -209,7 +209,7 @@ namespace GoogleApi.Test.Maps.Geolocation
             var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Geocode.Query(request));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "ClientId must begin with 'gme-'.");
+            Assert.AreEqual(exception.Message, "ClientId must begin with 'gme-'");
         }
     }
 }

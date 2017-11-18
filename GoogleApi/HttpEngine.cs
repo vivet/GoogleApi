@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -134,42 +134,34 @@ namespace GoogleApi
                 throw new ArgumentNullException(nameof(cancellationToken));
 
             var uri = request.GetUri();
-            var httpClient = new HttpClient { Timeout = timeout };
-            var taskCompletionSource = new TaskCompletionSource<TResponse>();
-
-            // BUG: Response doesn't get deserialzed correctly.
-            //if (request.IsGzip)
-            //    httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
+            var httpHandler = new HttpClientHandler { AutomaticDecompression = request.IsGzip ? DecompressionMethods.GZip | DecompressionMethods.Deflate : DecompressionMethods.None };
+            var httpClient = new HttpClient(httpHandler) { Timeout = timeout };
 
             Task<HttpResponseMessage> task;
             if (request is IRequestJson)
             {
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-                var serializeObject = JsonConvert.SerializeObject(request, jsonSerializerSettings);
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                var serializeObject = JsonConvert.SerializeObject(request, settings);
+                var stringContent = new StringContent(serializeObject, Encoding.UTF8);
+                var content = stringContent.ReadAsStreamAsync().Result;
+                var streamContent = new StreamContent(content);
 
-                using (var json = new StringContent(serializeObject, Encoding.UTF8))
-                {
-                    var content = json.ReadAsByteArrayAsync().Result;
-                    var streamContent = new StreamContent(new MemoryStream(content));
-
-                    task = httpClient.PostAsync(uri, streamContent, cancellationToken);
-                }
+                task = httpClient.PostAsync(uri, streamContent, cancellationToken);
             }
             else
+            {
                 task = httpClient.GetAsync(uri, cancellationToken);
+            }
 
+            var taskCompletionSource = new TaskCompletionSource<TResponse>();
             task.ContinueWith(x =>
             {
                 var response = default(TResponse);
                 try
                 {
-                    if (x.IsCanceled)
-                    {
-                        taskCompletionSource.SetCanceled();
-                    }
-                    else if (x.IsFaulted)
+                    if (x.IsFaulted)
                     {
                         var exception = x.Exception == null
                             ? new NullReferenceException("task.Exception")
@@ -177,36 +169,20 @@ namespace GoogleApi
 
                         throw exception;
                     }
+
+                    if (x.IsCanceled)
+                    {
+                        taskCompletionSource.SetCanceled();
+                    }
                     else
                     {
                         var result = x.Result;
-                        var content = result.Content;
-                        var rawJson = content.ReadAsStringAsync().Result;
-                        var rawBuffer = content.ReadAsByteArrayAsync().Result;
-           
-                        if (typeof(TResponse) != typeof(PlacesPhotosResponse))
-                        {
-                            using (var memoryStream = new MemoryStream(rawBuffer))
-                            {
-                                using (var streamReader = new StreamReader(memoryStream))
-                                {
-                                    var jsonSerializer = new JsonSerializer();
-                                    var jsonTextReader = new JsonTextReader(streamReader);
+                        var rawJson = result.Content.ReadAsStringAsync().Result;
 
-                                    try
-                                    {
-                                        response = jsonSerializer.Deserialize<TResponse>(jsonTextReader);
-                                    }
-                                    catch
-                                    {
-                                        response = new TResponse();
-                                    }
-                                }
-                            }
-                        }
-                        else
-                            response = (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = rawBuffer };
-                       
+                        response = typeof(TResponse) == typeof(PlacesPhotosResponse)
+                            ? (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = result.Content.ReadAsByteArrayAsync().Result }
+                            : JsonConvert.DeserializeObject<TResponse>(rawJson);
+
                         response.RawJson = rawJson;
                         response.RawQueryString = result.RequestMessage.RequestUri.PathAndQuery;
                         response.Status = result.IsSuccessStatusCode ? response.Status ?? Status.Ok : Status.HttpError;
@@ -222,12 +198,12 @@ namespace GoogleApi
                 catch (Exception ex)
                 {
                     var exception = ex is GoogleApiException ? ex : new GoogleApiException(ex.Message, ex) { Response = response };
-
                     taskCompletionSource.SetException(exception);
                 }
                 finally
                 {
                     httpClient.Dispose();
+                    httpHandler.Dispose();
                 }
             }, TaskContinuationOptions.ExecuteSynchronously);
 

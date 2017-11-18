@@ -37,13 +37,13 @@ namespace GoogleApi.Entities
         /// See <see cref="IRequest.IsSsl"/>.
         /// </summary>
         [JsonIgnore]
-        public virtual bool IsSsl { get; set; }
+        public virtual bool IsSsl { get; set; } = true;
 
         /// <summary>
         /// See <see cref="IRequest.IsGzip"/>.
         /// </summary>
         [JsonIgnore]
-        public virtual bool IsGzip { get; set; }
+        public virtual bool IsGzip { get; set; } = false;
 
         /// <summary>
         /// See <see cref="IRequest.GetUri()"/>.
@@ -93,7 +93,7 @@ namespace GoogleApi.Entities
                     throw new ArgumentException("Key is required");
 
                 if (!this.ClientId.StartsWith("gme-"))
-                    throw new ArgumentException("ClientId must begin with 'gme-'.");
+                    throw new ArgumentException("ClientId must begin with 'gme-'");
             }
 
             return parameters;
