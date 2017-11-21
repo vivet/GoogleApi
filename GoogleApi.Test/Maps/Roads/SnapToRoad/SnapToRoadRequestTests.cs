@@ -89,6 +89,24 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
         }
 
         [Test]
+        public void GetQueryStringParametersWhenPathCotaninsMoreThan100LocationsTest()
+        {
+            var request = new SnapToRoadsRequest
+            {
+                Key = this.ApiKey,
+                Path = new Location[101]
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                var parameters = request.GetQueryStringParameters();
+                Assert.IsNull(parameters);
+            });
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "Path must contain less than 100 locations");
+        }
+
+        [Test]
         public void SetIsSslTest()
         {
             var exception = Assert.Throws<NotSupportedException>(() => new SnapToRoadsRequest

@@ -32,6 +32,9 @@ namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
             if (this.Points == null || !this.Points.Any())
                 throw new ArgumentException("Points is required");
 
+            if (this.Points.Count() > 100)
+                throw new ArgumentException("Path must contain less than 100 locations");
+
             var parameters = base.GetQueryStringParameters();
             parameters.Add("points", string.Join("|", this.Points));
 

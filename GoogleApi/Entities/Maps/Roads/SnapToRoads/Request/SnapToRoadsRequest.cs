@@ -38,6 +38,9 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
             if (this.Path == null || !this.Path.Any())
                 throw new ArgumentException("Path is required");
 
+            if (this.Path.Count() > 100)
+                throw new ArgumentException("Path must contain less than 100 locations");
+
             var parameters = base.GetQueryStringParameters();
 
             parameters.Add("path", string.Join("|", this.Path));
