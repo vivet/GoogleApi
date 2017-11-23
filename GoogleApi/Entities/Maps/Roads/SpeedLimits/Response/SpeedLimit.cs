@@ -25,7 +25,7 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response
         /// SpeedLimit — The speed limit for that road segment.
         /// </summary>
         [JsonProperty("speedLimit")]
-        public virtual int? Limit { get; set; }
+        public virtual double? Limit { get; set; }
 
         /// <summary>
         /// units — Returns either KPH or MPH.
