@@ -157,6 +157,11 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         Doctor,
 
         /// <summary>
+        /// Embassy.
+        /// </summary>
+        Embassy,
+
+        /// <summary>
         /// Electrician
         /// </summary>
         Electrician,
