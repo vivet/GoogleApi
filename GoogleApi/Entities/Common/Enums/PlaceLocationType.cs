@@ -412,6 +412,12 @@ namespace GoogleApi.Entities.Common.Enums
         Electronics_Store,
 
         /// <summary>
+        /// Embassy.
+        /// </summary>
+        [EnumMember(Value = "embassy")]
+        Embassy,
+
+        /// <summary>
         /// Establishment.
         /// </summary>
         [EnumMember(Value = "establishment")]
