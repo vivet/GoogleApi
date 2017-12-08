@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -41,7 +42,7 @@ namespace GoogleApi.Entities.Places.Common
         /// <summary>
         /// Types is an array indicating the type of the prediction.
         /// </summary>        
-        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<PlaceLocationType>))]
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>
