@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
@@ -76,7 +77,7 @@ namespace GoogleApi.Entities.Places.Add.Request
         /// XML requests require a single type element. See the list of supported types for more information.  
         /// If none of the supported types are a match for this place, you may specify other.
         /// </summary>
-        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<PlaceLocationType>))]
         public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
         /// <summary>
