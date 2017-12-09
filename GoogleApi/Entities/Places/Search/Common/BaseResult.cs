@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
@@ -88,7 +89,7 @@ namespace GoogleApi.Entities.Places.Search.Common
         /// Types contains an array of feature types describing the given result. See the list of supported types for more information. 
         /// XML responses include multiple type elements if more than one type is assigned to the result.
         /// </summary>
-        [JsonProperty("types", ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<PlaceLocationType>))]
         public virtual IEnumerable<PlaceLocationType?> Types { get; set; }
 
         /// <summary>
