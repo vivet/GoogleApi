@@ -6,7 +6,6 @@ using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Places.Add.Request
 {
