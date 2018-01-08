@@ -1,7 +1,5 @@
 language: csharp
 solution: GoogleApi.sln
-mono: none
-dotnet: 1.1.5
 install:
   - nuget restore GoogleApi.sln
   - nuget install NUnit.Runners -Version 3.7.0 -OutputDirectory testrunner
