@@ -3,7 +3,7 @@ Seamless Google Api integrations.<br />
 Supports Maps, Places, Roads, Search and Translate.<br />
 Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).<br />
 
-#### Nuget: [![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/) (netstandard1.1, net4.5, portable-net45+win8+wpa81).
+[![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 
 
 
