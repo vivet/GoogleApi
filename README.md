@@ -3,9 +3,8 @@ Seamless Google Api integrations.<br />
 Supports Maps, Places, Roads, Search and Translate.<br />
 Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).<br />
 
+[![Build Status](https://travis-ci.org/vivet/GoogleApi.svg?branch=master)](https://travis-ci.org/vivet/GoogleApi)
 [![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
-
-
 
 ### Google Api Methods
 ##### Google Maps
