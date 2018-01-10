@@ -30,6 +30,7 @@
     <WarningsAsErrors>
     </WarningsAsErrors>
     <NoWarn>CS0618</NoWarn>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
