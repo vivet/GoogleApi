@@ -18,7 +18,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Light rail transit.
         /// </summary>
-        MetroRail,
+        Metro_Rail,
 
         /// <summary>
         /// Underground light rail.
@@ -38,17 +38,17 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Heavy rail.
         /// </summary>
-        HeavyRail,
+        Heavy_Rail,
 
         /// <summary>
         /// Commuter rail.
         /// </summary>
-        CommuterTrain,
+        Commuter_Train,
 
         /// <summary>
         /// High speed train.
         /// </summary>
-        HighSpeedTrain,
+        High_Speed_Train,
 
         /// <summary>
         /// Bus.
@@ -58,7 +58,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Intercity bus.
         /// </summary>
-        IntercityBus,
+        Intercity_Bus,
 
         /// <summary>
         /// Trolleybus.
@@ -68,7 +68,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Share taxi is a kind of bus with the ability to drop off and pick up passengers anywhere on its route.
         /// </summary>
-        ShareTaxi,
+        Share_Taxi,
 
         /// <summary>
         /// Ferry.
@@ -78,12 +78,12 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// A vehicle that operates on a cable, usually on the ground. Aerial cable cars may be of the type GONDOLA_LIFT.
         /// </summary>
-        CableCar,
+        Cable_Car,
 
         /// <summary>
         /// An aerial cable car.
         /// </summary>
-        GondolaLift,
+        Gondola_Lift,
 
         /// <summary>
         /// A vehicle that is pulled up a steep incline by a cable. A Funicular typically consists of two cars, with each car acting as a counterweight for the other.
