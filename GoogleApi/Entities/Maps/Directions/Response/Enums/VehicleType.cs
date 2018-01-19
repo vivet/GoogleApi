@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace GoogleApi.Entities.Maps.Directions.Response.Enums
 {
     /// <summary>
@@ -18,7 +20,8 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Light rail transit.
         /// </summary>
-        Metro_Rail,
+        [EnumMember(Value = "Metro_Rail")]
+        MetroRail,
 
         /// <summary>
         /// Underground light rail.
@@ -38,17 +41,20 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Heavy rail.
         /// </summary>
-        Heavy_Rail,
+        [EnumMember(Value = "Heavy_Rail")]
+        HeavyRail,
 
         /// <summary>
         /// Commuter rail.
         /// </summary>
-        Commuter_Train,
+        [EnumMember(Value = "Commuter_Train")]
+        CommuterTrain,
 
         /// <summary>
         /// High speed train.
         /// </summary>
-        High_Speed_Train,
+        [EnumMember(Value = "High_Speed_Train")]
+        HighSpeedTrain,
 
         /// <summary>
         /// Bus.
@@ -58,7 +64,8 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Intercity bus.
         /// </summary>
-        Intercity_Bus,
+        [EnumMember(Value = "Intercity_Bus")]
+        IntercityBus,
 
         /// <summary>
         /// Trolleybus.
@@ -68,7 +75,8 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Share taxi is a kind of bus with the ability to drop off and pick up passengers anywhere on its route.
         /// </summary>
-        Share_Taxi,
+        [EnumMember(Value = "Share_Taxi")]
+        ShareTaxi,
 
         /// <summary>
         /// Ferry.
@@ -78,12 +86,14 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// A vehicle that operates on a cable, usually on the ground. Aerial cable cars may be of the type GONDOLA_LIFT.
         /// </summary>
-        Cable_Car,
+        [EnumMember(Value = "Cable_Car")]
+        CableCar,
 
         /// <summary>
         /// An aerial cable car.
         /// </summary>
-        Gondola_Lift,
+        [EnumMember(Value = "Gondola_Lift")]
+        GondolaLift,
 
         /// <summary>
         /// A vehicle that is pulled up a steep incline by a cable. A Funicular typically consists of two cars, with each car acting as a counterweight for the other.
