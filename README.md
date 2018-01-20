@@ -1,7 +1,7 @@
 # GoogleApi v3.2.14
 [![Build Status](https://travis-ci.org/vivet/GoogleApi.svg?branch=master)](https://travis-ci.org/vivet/GoogleApi)
-[![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 [![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
+[![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 
 Seamless Google Api integrations.<br /> 
 Supports Maps, Places, Roads, Search and Translate.<br />
