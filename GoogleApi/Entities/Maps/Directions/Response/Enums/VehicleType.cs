@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace GoogleApi.Entities.Maps.Directions.Response.Enums
 {
     /// <summary>
@@ -18,6 +20,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Light rail transit.
         /// </summary>
+        [EnumMember(Value = "Metro_Rail")]
         MetroRail,
 
         /// <summary>
@@ -38,16 +41,19 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Heavy rail.
         /// </summary>
+        [EnumMember(Value = "Heavy_Rail")]
         HeavyRail,
 
         /// <summary>
         /// Commuter rail.
         /// </summary>
+        [EnumMember(Value = "Commuter_Train")]
         CommuterTrain,
 
         /// <summary>
         /// High speed train.
         /// </summary>
+        [EnumMember(Value = "High_Speed_Train")]
         HighSpeedTrain,
 
         /// <summary>
@@ -58,6 +64,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Intercity bus.
         /// </summary>
+        [EnumMember(Value = "Intercity_Bus")]
         IntercityBus,
 
         /// <summary>
@@ -68,6 +75,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// Share taxi is a kind of bus with the ability to drop off and pick up passengers anywhere on its route.
         /// </summary>
+        [EnumMember(Value = "Share_Taxi")]
         ShareTaxi,
 
         /// <summary>
@@ -78,11 +86,13 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         /// <summary>
         /// A vehicle that operates on a cable, usually on the ground. Aerial cable cars may be of the type GONDOLA_LIFT.
         /// </summary>
+        [EnumMember(Value = "Cable_Car")]
         CableCar,
 
         /// <summary>
         /// An aerial cable car.
         /// </summary>
+        [EnumMember(Value = "Gondola_Lift")]
         GondolaLift,
 
         /// <summary>
