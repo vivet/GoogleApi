@@ -1,6 +1,2 @@
 language: csharp
 solution: GoogleApi.sln
-install:
-  - nuget restore GoogleApi.sln
-script:
-  - xbuild /p:Configuration=Release GoogleApi.sln
