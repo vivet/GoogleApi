@@ -3,17 +3,24 @@
 [![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 [![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 
-Seamless Google Api integrations.<br /> 
-Supports Maps, Places, Roads, Search and Translate.<br />
-Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).<br />
+Seamless Google Api integrations.  
+Google Maps, Places, Roads, Search and Translate.
+Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).  
 
-### Google Api Methods
+All operations, as well as request and response data points is supported and covered in the implementation. The library is very easy to consume, and using the service operations, is as seamless as shown below.
+```csharp
+TRequest request = new TRequest();
+TResponse response = await GoogleMaps.Geocode.QueryAsync<TRequest, TResponse>(request);
+```
+The ```TRequest``` represents a request model, with an abitrary number of properties, defining the required and optional parameters supported by the Google api operation, corresponding to the request. The ```TResponse``` defines the response model returned by the Google api operation. Each operation has a request and response implementation, mapped to a facade implementation.  
+
+The following operations are supported.
 ##### Google Maps
   * Directions
   * Distance Matrix
   * Elevation
-  * Geocoding
-  * Reverse Geocoding
+  * Geocode
+  * Reverse Geocode
   * Geolocation
   * Roads
     * Nearest Roads
