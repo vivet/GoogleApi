@@ -8,6 +8,7 @@ Google Maps, Places, Roads, Search and Translate.
 
 Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).  
 
+### Api Operations
 All operations, as well as request and response data points is supported and covered in the implementation. The library is very easy to consume, and using the service operations, is as seamless as shown below.
 ```csharp
 TRequest request = new TRequest();
@@ -54,3 +55,17 @@ The following operations are supported.
   * MergePolyLine
   * EncodePolyLine
   * DecodePolyLine
+
+### Test Suite
+Running the test suite is simple.  
+
+The test project stores settings related to your Google subscription (free or paid) in `application.default.json`. Most importantly, the ```ApiKey```, used to identify the Google subscription.  
+```json
+{ 
+  "ApiKey": "",
+  "CryptoKey": "",
+  "ClientId": "",
+  "SearchEngineId": "",
+}
+```
+More information about generating a key can be found here: https://console.developers.google.com/  
