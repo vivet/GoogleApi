@@ -2,7 +2,5 @@ language: csharp
 solution: GoogleApi.sln
 install:
   - nuget restore GoogleApi.sln
-  - nuget install NUnit.Runners -Version 3.7.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release GoogleApi.sln
-  - mono ./testrunner/NUnit.Runners.3.7.0/tools/nunit-console.exe ./GoogleApi.Test/bin/Release/GoogleApi.Test.dll
