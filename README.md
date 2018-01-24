@@ -4,7 +4,8 @@
 [![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 
 Seamless Google Api integrations.  
-Google Maps, Places, Roads, Search and Translate.
+Google Maps, Places, Roads, Search and Translate.  
+
 Feel free to contribute, throw questions and report issues. I usually respond fast (24-48 hours).  
 
 All operations, as well as request and response data points is supported and covered in the implementation. The library is very easy to consume, and using the service operations, is as seamless as shown below.
