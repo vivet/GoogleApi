@@ -65,7 +65,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
         /// <summary>
         /// The component filters, separated by a pipe (|). Each component filter consists of a component:value pair and will fully restrict the results from the geocoder. For more information see Component Filtering.
         /// </summary>
-        public virtual Dictionary<Component, string> Components { get; set; }
+        public virtual IEnumerable<KeyValuePair<Component, string>> Components { get; set; }
 
         /// <summary>
         /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
