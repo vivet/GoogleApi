@@ -107,7 +107,15 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
                 parameters.Add("strictbounds", string.Empty);
 
             if (this.Types != null && this.Types.Any())
-                parameters.Add("types", string.Join("|", this.Types.Select(x => $"{x.ToString().ToLower()}")));
+            {
+                parameters.Add("types", string.Join("|", this.Types.Select(x =>
+                {
+                    if (x == RestrictPlaceType.Cities || x == RestrictPlaceType.Regions)
+                        return $"({x.ToString().ToLower()})";
+
+                    return $"{x.ToString().ToLower()}";
+                })));
+            }
 
             if (this.Components != null && this.Components.Any())
                 parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
