@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
+using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
 
@@ -18,12 +20,11 @@ namespace GoogleApi.Test.Places.AutoComplete
             var request = new PlacesAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = "jagtvej 2200 København"
+                Input = "jagtvej 2200 København",
+                Types = new List<RestrictPlaceType> { RestrictPlaceType.Address }
             };
 
             var response = GooglePlaces.AutoComplete.Query(request);
-
-            Console.WriteLine(response.RawJson);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -182,7 +183,49 @@ namespace GoogleApi.Test.Places.AutoComplete
         [Test]
         public void PlacesAutoCompleteWhenTypesTest()
         {
-            Assert.Inconclusive();
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "jagtvej 2200 København",
+                Types = new List<RestrictPlaceType> { RestrictPlaceType.Address }
+            };
+
+            var response = GooglePlaces.AutoComplete.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenTypesCitiesTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "København",
+                Types = new List<RestrictPlaceType> { RestrictPlaceType.Cities }
+            };
+
+            var response = GooglePlaces.AutoComplete.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
+        }
+
+        [Test]
+        public void PlacesAutoCompleteWhenTypesRegionsTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = this.ApiKey,
+                Input = "Denmark",
+                Types = new List<RestrictPlaceType> { RestrictPlaceType.Regions }
+            };
+
+            var response = GooglePlaces.AutoComplete.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
         }
 
         [Test]
