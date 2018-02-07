@@ -20,7 +20,8 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             {
                 Key = this.ApiKey,
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
+                DepartureTime = DateTime.Now
             };
             var response = GoogleMaps.DistanceMatrix.Query(request);
 
@@ -167,7 +168,27 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         [Test]
         public void DistanceMatrixWhenDepartureTimeTest()
         {
-            Assert.Inconclusive();
+            var request = new DistanceMatrixRequest
+            {
+                Key = this.ApiKey,
+                Origins = new[] { new Location(40.7141289, -73.9614074) },
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
+                DepartureTime = DateTime.Now
+            };
+            var response = GoogleMaps.DistanceMatrix.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
+
+            var row = response.Rows.FirstOrDefault();
+            Assert.IsNotNull(row);
+
+            var element = row.Elements.FirstOrDefault();
+            Assert.IsNotNull(element);
+            Assert.AreEqual(Status.Ok, element.Status);
+            Assert.IsNotNull(element.Distance.Value);
+            Assert.IsNotNull(element.Duration.Value);
+            Assert.IsNotNull(element.DurationInTraffic.Value);
         }
 
         [Test]

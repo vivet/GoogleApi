@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
     /// <summary>
     /// Element.
-    /// /// </summary>
+    /// </summary>
     public class Element
     {
         /// <summary>
