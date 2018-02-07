@@ -32,10 +32,15 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <RepositoryType></RepositoryType>
     <RepositoryUrl>https://github.com/vivet/GoogleApi</RepositoryUrl>
+    <Configurations>Debug;Release;Travis</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>latest</LangVersion>
     <WarningsAsErrors></WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Travis|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+    <WarningsAsErrors />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningsAsErrors />
