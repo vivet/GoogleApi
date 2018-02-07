@@ -1,7 +1,4 @@
 language: csharp
 solution: GoogleApi.sln
-os: windows
-install:
-  - nuget restore GoogleApi.sln
 script:
   - xbuild /p:Configuration=TravisCI GoogleApi.sln
