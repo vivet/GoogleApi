@@ -2,6 +2,5 @@ language: csharp
 solution: GoogleApi.sln
 install:
   - nuget restore GoogleApi.sln
-  - nuget install NUnit.ConsoleRunner -Version 3.7.0  -OutputDirectory testing
 script:
   - xbuild /p:Configuration=TravisCI GoogleApi.sln
