@@ -3,4 +3,4 @@ mono: none
 dotnet: 1.1.5
 script:
  - dotnet restore
- - xbuild /p:Configuration=TravisCI GoogleApi.sln
+ - dotnet msbuild /p:Configuration=TravisCI GoogleApi.sln
