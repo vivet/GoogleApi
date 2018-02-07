@@ -1,4 +1,6 @@
 language: csharp
-solution: GoogleApi.sln
+mono: none
+dotnet: 1.1.5
 script:
-  - xbuild /p:Configuration=TravisCI GoogleApi.sln
+ - dotnet restore
+ - xbuild /p:Configuration=TravisCI GoogleApi.sln
