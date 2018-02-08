@@ -46,7 +46,7 @@ namespace GoogleApi.Test.Places.AutoComplete
 
             var matchedSubstrings = result.MatchedSubstrings.ToArray();
             Assert.IsNotNull(matchedSubstrings);
-            Assert.AreEqual(3, matchedSubstrings.Length);
+            Assert.AreEqual(2, matchedSubstrings.Length);
 
             var types = result.Types.ToArray();
             Assert.IsNotNull(types);
@@ -146,7 +146,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             var results = response.Predictions.ToArray();
             Assert.IsNotNull(results);
             Assert.IsNotEmpty(results);
-            Assert.AreEqual(1, results.Length);
+            Assert.AreEqual(2, results.Length);
 
             var result = results.FirstOrDefault();
             Assert.IsNotNull(result);
