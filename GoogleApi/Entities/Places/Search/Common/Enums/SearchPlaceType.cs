@@ -1,3 +1,8 @@
+using System;
+using System.Runtime.Serialization;
+
+// ReSharper disable InconsistentNaming
+
 namespace GoogleApi.Entities.Places.Search.Common.Enums
 {
     /// <summary>
@@ -18,7 +23,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
 
         /// <summary>
         /// Amusement Park.
-        /// </summary>
+        /// </summary>       
         AmusementPark,
 
         /// <summary>
@@ -28,7 +33,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
 
         /// <summary>
         /// Art Gallery.
-        /// </summary>
+        /// </summary>        
         ArtGallery,
 
         /// <summary>
@@ -174,11 +179,13 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Establishment.
         /// </summary>
+        [Obsolete]
         Establishment,
 
         /// <summary>
         /// Finance.
         /// </summary>
+        [Obsolete]
         Finance,
 
         /// <summary>
@@ -194,6 +201,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Food.
         /// </summary>
+        [Obsolete]
         Food,
 
         /// <summary>
@@ -214,11 +222,13 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// General Contractor.
         /// </summary>
+        [Obsolete]
         GeneralContractor,
 
         /// <summary>
         /// Grocery Or Supermarket.
         /// </summary>
+        [Obsolete]
         GroceryOrSupermarket,
 
         /// <summary>
@@ -239,6 +249,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Health.
         /// </summary>
+        [Obsolete]
         Health,
 
         /// <summary>
@@ -374,6 +385,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Place Of Worship.
         /// </summary>
+        [Obsolete]
         PlaceOfWorship,
 
         /// <summary>
@@ -485,5 +497,5 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// Zoo.
         /// </summary>
         Zoo
-    }
+    }   
 }

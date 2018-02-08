@@ -8,6 +8,7 @@ using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Search.Common.Enums.Extensions;
 
 namespace GoogleApi.Entities.Places.Search
 {
@@ -97,7 +98,7 @@ namespace GoogleApi.Entities.Places.Search
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
             if (this.Type.HasValue)
-                parameters.Add("type", this.Type.Value.ToString().ToLower());
+                parameters.Add("type", this.Type.Value.ToUnderscoreString());
 
             if (this.OpenNow)
                 parameters.Add("opennow", string.Empty);
