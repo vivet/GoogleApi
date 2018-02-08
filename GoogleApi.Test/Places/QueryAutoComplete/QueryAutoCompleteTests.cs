@@ -18,32 +18,30 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
             var request = new PlacesQueryAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = "jagtvej 2200 København"
+                Input = "jagtvej 2200 København",
+                Language = Language.English
             };
 
             var response = GooglePlaces.QueryAutoComplete.Query(request);
+            Console.WriteLine(response.RawJson);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
 
             var results = response.Predictions.ToArray();
             Assert.IsNotNull(results);
             Assert.IsNotEmpty(results);
-            Assert.AreEqual(5, results.Length);
+            Assert.AreEqual(3, results.Length);
 
             var result = results.FirstOrDefault();
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Terms);
             Assert.IsNotNull(result.PlaceId);
             Assert.IsNotNull(result.StructuredFormatting);
-
-            var description = result.Description.ToLower();
-            Assert.IsTrue(description.Contains("2200"), "1");
-            Assert.IsTrue(description.Contains("jagtvej"), "2");
-            Assert.IsTrue(description.Contains("copenhagen"), "3");
+            Assert.AreEqual(result.Description, "Jagtvej 2200, København, Denmark");
 
             var matchedSubstrings = result.MatchedSubstrings.ToArray();
             Assert.IsNotNull(matchedSubstrings);
-            Assert.AreEqual(3, matchedSubstrings.Length);
+            Assert.AreEqual(2, matchedSubstrings.Length);
 
             var types = result.Types.ToArray();
             Assert.IsNotNull(types);
@@ -144,15 +142,11 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
             var results = response.Predictions.ToArray();
             Assert.IsNotNull(results);
             Assert.IsNotEmpty(results);
-            Assert.AreEqual(5, results.Length);
+            Assert.AreEqual(4, results.Length);
 
             var result = results.FirstOrDefault();
             Assert.IsNotNull(result);
-
-            var description = result.Description.ToLower();
-            Assert.IsTrue(description.Contains("2200"), "1");
-            Assert.IsTrue(description.Contains("jagtvej"), "2");
-            Assert.IsTrue(description.Contains("københavn"), "3");
+            Assert.AreEqual(result.Description, "Jagtvej 2200, København, Danmark");
         }
 
         [Test]
