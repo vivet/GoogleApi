@@ -601,6 +601,9 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\OperatorExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\OperatorExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\SearchPlaceTypeExtension.cs">
+      <Link>Entities\Search\Common\Enums\Extensions\SearchPlaceTypeExtension.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\Extensions\SiteSearchFilterExtension.cs">
       <Link>Entities\Search\Common\Enums\Extensions\SiteSearchFilterExtension.cs</Link>
     </Compile>

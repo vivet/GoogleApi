@@ -83,6 +83,7 @@
     <Compile Include="Common\Converters\StringEnumOrDefaultConverterTest.cs" />
     <Compile Include="Common\Enums\Extensions\LanguagesExtensionTests.cs" />
     <Compile Include="Common\Extensions\ListExtensionTest.cs" />
+    <Compile Include="Search\Common\Extensions\SearchPlaceTypeExtensionTest.cs" />
     <Compile Include="Maps\Directions\DirectionsRequestTests.cs" />
     <Compile Include="Maps\Directions\DirectionsTests.cs" />
     <Compile Include="Maps\DistanceMatrix\DistanceMatrixRequestTests.cs" />
@@ -151,6 +152,11 @@
       <Project>{bf3aa421-d754-4762-ad20-a99123455e99}</Project>
       <Name>GoogleApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="NUnit" Version="3.7.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.7.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
