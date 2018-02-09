@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
+using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
@@ -96,8 +98,9 @@ namespace GoogleApi.Entities.Places.Search
             if (this.Radius != null)
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            if (this.Type.HasValue)
-                parameters.Add("type", this.Type.Value.ToString().ToLower());
+            var attribute = Type?.GetType().GetTypeInfo().GetCustomAttribute<EnumMemberAttribute>();
+            if (attribute != null)
+                parameters.Add("type", attribute.Value.ToLower());
 
             if (this.OpenNow)
                 parameters.Add("opennow", string.Empty);
