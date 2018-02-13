@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
@@ -98,7 +99,9 @@ namespace GoogleApi.Entities.Places.Search
             if (this.Radius != null)
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            var attribute = Type?.GetType().GetTypeInfo().GetCustomAttribute<EnumMemberAttribute>();
+            var attribute = Type?.GetType().GetTypeInfo()
+                .DeclaredMembers.First(m => m.Name == Type.ToString())
+                .GetCustomAttribute<EnumMemberAttribute>();
             if (attribute != null)
                 parameters.Add("type", attribute.Value.ToLower());
 
