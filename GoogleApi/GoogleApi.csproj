@@ -5,7 +5,7 @@
     <Optimize>True</Optimize>
     <NoWarn></NoWarn>
     <DefineConstants>DEBUG</DefineConstants>
-    <OutputPath>bin\Release\netstandard1.1\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>bin\Release\netstandard1.1\GoogleApi.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Description>Google Places, Maps, Roads, Search and Translate integrations. 
