@@ -99,11 +99,13 @@ namespace GoogleApi.Entities.Places.Search
             if (this.Radius != null)
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
-            var attribute = Type?.GetType().GetTypeInfo()
-                .DeclaredMembers.First(m => m.Name == Type.ToString())
-                .GetCustomAttribute<EnumMemberAttribute>();
-            if (attribute != null)
-                parameters.Add("type", attribute.Value.ToLower());
+            if (this.Type.HasValue)
+            {
+                var attribute = this.Type.GetType().GetTypeInfo().DeclaredMembers.FirstOrDefault(x => x.Name == this.Type.ToString()).GetCustomAttribute<EnumMemberAttribute>();
+
+                if (attribute != null)
+                    parameters.Add("type", attribute.Value.ToLower());
+            }
 
             if (this.OpenNow)
                 parameters.Add("opennow", string.Empty);
