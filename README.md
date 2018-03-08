@@ -1,5 +1,4 @@
 # Google Api
-[![Build Status](https://travis-ci.org/vivet/GoogleApi.svg?branch=master)](https://travis-ci.org/vivet/GoogleApi)
 [![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 [![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 
@@ -14,7 +13,7 @@ All operations, as well as request and response data points is supported and cov
 TRequest request = new TRequest();
 TResponse response = await GoogleMaps.Geocode.QueryAsync<TRequest, TResponse>(request);
 ```
-The ```TRequest``` represents a request model, with an abitrary number of properties, defining the required and optional parameters supported by the Google api operation, corresponding to the request. The ```TResponse``` defines the response model returned by the Google api operation. Each operation has a request and response implementation, mapped to a facade implementation.  
+The ```TRequest``` represents a request model, with an abitrary number of properties, defining the required and optional parameters supported by the Google api operation, corresponding to the request. The ```TResponse``` defines the response model returned by the Google api operation. Each operation has a request and response, mapped to a facade implementation.  
 
 The following operations are supported.
 ##### Google Maps
