@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
@@ -127,7 +128,70 @@ namespace GoogleApi.Test.Places.Search.Text
         [Test]
         public void PlacesTextSearchWhenPriceLevelTest()
         {
-            Assert.Inconclusive();
+            var request = new PlacesTextSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "picadelly circus",
+                Minprice = PriceLevel.Expensive,
+                Maxprice = PriceLevel.VeryExpensive
+            };
+
+            var response = GooglePlaces.TextSearch.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.IsEmpty(response.HtmlAttributions);
+            Assert.AreEqual(Status.Ok, response.Status);
+
+            var result = response.Results.FirstOrDefault();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.PlaceId);
+            Assert.GreaterOrEqual(result.PriceLevel, request.Minprice);
+            Assert.LessOrEqual(result.PriceLevel, request.Maxprice);
+        }
+
+        [Test]
+        public void PlacesTextSearchWhenPriceLevelMinTest()
+        {
+            var request = new PlacesTextSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "picadelly circus",
+                Minprice = PriceLevel.Expensive
+            };
+
+            var response = GooglePlaces.TextSearch.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.IsEmpty(response.HtmlAttributions);
+            Assert.AreEqual(Status.Ok, response.Status);
+
+            var result = response.Results.FirstOrDefault();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.PlaceId);
+            Assert.GreaterOrEqual(result.PriceLevel, request.Minprice);
+        }
+
+        [Test]
+        public void PlacesTextSearchWhenPriceLevelMaxTest()
+        {
+            var request = new PlacesTextSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "picadelly circus",
+                Maxprice = PriceLevel.Expensive
+            };
+
+            var response = GooglePlaces.TextSearch.Query(request);
+
+        
+            Assert.IsNotNull(response);
+            Assert.IsEmpty(response.HtmlAttributions);
+            Assert.AreEqual(Status.Ok, response.Status);
+
+            var result = response.Results.FirstOrDefault();
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.PlaceId);
+            Assert.LessOrEqual(result.PriceLevel, request.Maxprice);
         }
 
         [Test]
