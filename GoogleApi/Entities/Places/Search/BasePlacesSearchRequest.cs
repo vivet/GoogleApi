@@ -111,10 +111,10 @@ namespace GoogleApi.Entities.Places.Search
                 parameters.Add("opennow", string.Empty);
 
             if (this.Minprice.HasValue)
-                parameters.Add("minprice", this.Minprice.Value.ToString().ToLower());
+                parameters.Add("minprice", ((int)this.Minprice.Value).ToString());
 
             if (this.Maxprice.HasValue)
-                parameters.Add("maxprice", this.Maxprice.Value.ToString().ToLower());
+                parameters.Add("maxprice", ((int)this.Maxprice.Value).ToString());
 
             if (!string.IsNullOrWhiteSpace(this.PageToken))
                 parameters.Add("pagetoken", this.PageToken);
