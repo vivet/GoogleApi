@@ -63,13 +63,13 @@ namespace GoogleApi.Entities.Places.Details.Response
         /// <summary>
         /// Time the time that the review was submitted, measured in the number of seconds since since midnight, January 1, 1970 UTC.
         /// </summary>
-        public virtual DateTime Time { get; set; }
+        public virtual DateTime DateTime { get; set; }
 
         [JsonProperty("time")]
         internal int TimeInt
         {
-            get => this.Time.DateTimeToUnixTimestamp();
-            set => this.Time = DateTimeExtension.epoch.AddSeconds(value);
+            get => this.DateTime.DateTimeToUnixTimestamp();
+            set => this.DateTime = DateTimeExtension.epoch.AddSeconds(value);
         }
     }
 }
