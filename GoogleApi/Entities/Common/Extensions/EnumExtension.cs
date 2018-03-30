@@ -19,7 +19,7 @@ namespace GoogleApi.Entities.Common.Extensions
         public static string ToEnumString<T>(this T @enum, char delimeter)
             where T : struct 
         {
-            return Convert.ToString(@enum, CultureInfo.InvariantCulture).ToLower().Replace(',', delimeter).Replace(" ", "");
+            return Convert.ToString(@enum, CultureInfo.InvariantCulture)?.ToLower().Replace(',', delimeter).Replace(" ", "");
         }
     }
 }
