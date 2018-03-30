@@ -101,6 +101,8 @@
     <Compile Include="Maps\Roads\SnapToRoad\SnapToRoadRequestTests.cs" />
     <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsRequestTests.cs" />
     <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsTests.cs" />
+    <Compile Include="Maps\StaticMaps\StaticMapsRequestTests.cs" />
+    <Compile Include="Maps\StreetView\StreetViewRequestTests.cs" />
     <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
     <Compile Include="Places\Add\AddRequestTests.cs" />
     <Compile Include="Places\Add\AddTests.cs" />
@@ -155,5 +157,6 @@
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
