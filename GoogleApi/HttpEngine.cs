@@ -2,12 +2,14 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Places.Photos.Response;
 using GoogleApi.Exceptions;
 using Newtonsoft.Json;
 
@@ -178,14 +180,17 @@ namespace GoogleApi
                     {
                         var result = x.Result;
 
-                        if (response is BaseStreamResponse streamResponse)
+                        if (typeof(BaseStreamResponse).GetTypeInfo().IsAssignableFrom(typeof(TResponse).GetTypeInfo()))
                         {
-                            streamResponse.Buffer = result.Content.ReadAsByteArrayAsync().Result;
-                            response = (TResponse)(IResponse)streamResponse;
+                            response = (TResponse)(IResponse)new PlacesPhotosResponse
+                            {
+                                Buffer = result.Content.ReadAsByteArrayAsync().Result
+                            };
                         }
                         else
                         {
                             var rawJson = result.Content.ReadAsStringAsync().Result;
+
                             response = JsonConvert.DeserializeObject<TResponse>(rawJson);
                             response.RawJson = rawJson;
                         }
