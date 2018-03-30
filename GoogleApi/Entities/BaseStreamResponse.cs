@@ -1,24 +1,20 @@
 ﻿using System.IO;
-using GoogleApi.Entities.Places.Photos.Response;
-using Newtonsoft.Json;
 
 namespace GoogleApi.Entities
 {
     /// <summary>
-    /// 
+    /// Base Stream Response.
     /// </summary>
     public class BaseStreamResponse : BaseResponse
     {
         /// <summary>
-        /// 
+        /// Buffer.
         /// </summary>
-        [JsonProperty("")]
         public virtual byte[] Buffer { get; set; }
 
         /// <summary>
-        /// Returns a <see cref="MemoryStream"/> based on the <see cref="PlacesPhotosResponse.PhotoBuffer"/> downloded.
+        /// Stream.
         /// </summary>
-        [JsonProperty("")]
-        public virtual MemoryStream Photo => new MemoryStream(this.Buffer ?? new byte[0]);
+        public virtual MemoryStream Stream => new MemoryStream(this.Buffer ?? new byte[0]);
     }
 }
