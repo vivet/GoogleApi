@@ -14,6 +14,10 @@ using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Response;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Response;
+using GoogleApi.Entities.Maps.StaticMaps.Request;
+using GoogleApi.Entities.Maps.StaticMaps.Response;
+using GoogleApi.Entities.Maps.StreetView.Request;
+using GoogleApi.Entities.Maps.StreetView.Response;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using GoogleApi.Entities.Maps.TimeZone.Response;
 
@@ -112,5 +116,20 @@ namespace GoogleApi
         /// https://developers.google.com/maps/documentation/roads/speed-limits
         /// </summary>
         public static HttpEngine<SpeedLimitsRequest, SpeedLimitsResponse> SpeedLimits => HttpEngine<SpeedLimitsRequest, SpeedLimitsResponse>.instance;
+
+        /// <summary>
+        /// The Google Street View Image API lets you embed a static (non-interactive) Street View panorama or thumbnail into your web page, without the use of JavaScript.
+        /// The viewport is defined with URL parameters sent through a standard HTTP request, and is returned as a static image.
+        /// https://developers.google.com/maps/documentation/streetview/intro
+        /// </summary>
+        public static HttpEngine<StreetViewRequest, StreetViewResponse> StreetView => HttpEngine<StreetViewRequest, StreetViewResponse>.instance;
+
+        /// <summary>
+        /// The Google Static Maps API lets you embed a Google Maps image on your web page without requiring JavaScript or any dynamic page loading. 
+        /// The Google Static Maps API service creates your map based on URL parameters sent through a standard HTTP request and returns the map as an image 
+        /// you can display on your web page.
+        /// https://developers.google.com/maps/documentation/static-maps/intro
+        /// </summary>
+        public static HttpEngine<StaticMapsRequest, StaticMapsResponse> StaticMaps => HttpEngine<StaticMapsRequest, StaticMapsResponse>.instance;
     }
 }
