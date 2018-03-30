@@ -616,6 +616,9 @@
     <Compile Include="..\GoogleApi\Entities\Search\Common\CountryRestrictExpression.cs">
       <Link>Entities\Search\Common\CountryRestrictExpression.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Common\DateRestrict.cs">
+      <Link>Entities\Search\Common\DateRestrict.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Common\Enums\AltType.cs">
       <Link>Entities\Search\Common\Enums\AltType.cs</Link>
     </Compile>
@@ -817,7 +820,6 @@
     <Compile Include="..\GoogleApi\HttpEngine.cs">
       <Link>HttpEngine.cs</Link>
     </Compile>
-    <Compile Include="Entities\Search\Common\DateRestrict.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
