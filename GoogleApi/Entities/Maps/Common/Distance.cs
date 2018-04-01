@@ -2,10 +2,10 @@
 
 namespace GoogleApi.Entities.Maps.Common
 {
-    /// <summary>
-    /// Distance.
-    /// </summary>
-    public class Distance
+	/// <summary>
+	/// Distance.
+	/// </summary>
+	public class Distance
     {
         /// <summary>
         /// Value indicates the distance in meters

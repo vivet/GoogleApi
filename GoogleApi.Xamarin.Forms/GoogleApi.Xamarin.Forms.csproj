@@ -69,6 +69,9 @@
     <Compile Include="..\googleapi\entities\BaseResponse.cs">
       <Link>Entities\BaseResponse.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\BaseStreamResponse.cs">
+      <Link>Entities\BaseStreamResponse.cs</Link>
+    </Compile>
     <Compile Include="..\googleapi\entities\common\AddressComponent.cs">
       <Link>Entities\Common\AddressComponent.cs</Link>
     </Compile>
@@ -164,6 +167,9 @@
     </Compile>
     <Compile Include="..\googleapi\entities\maps\common\Fare.cs">
       <Link>Entities\Maps\Common\Fare.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Common\MapSize.cs">
+      <Link>Entities\Maps\Common\MapSize.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\maps\directions\request\DirectionsRequest.cs">
       <Link>Entities\Maps\Directions\Request\DirectionsRequest.cs</Link>
@@ -299,6 +305,51 @@
     </Compile>
     <Compile Include="..\googleapi\entities\maps\roads\speedlimits\response\SpeedLimitsResponse.cs">
       <Link>Entities\Maps\Roads\SpeedLimits\Response\SpeedLimitsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\Enums\Anchor.cs">
+      <Link>Entities\Maps\StaticMaps\Request\Enums\Anchor.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\Enums\Extensions\ImageFormatExtensions.cs">
+      <Link>Entities\Maps\StaticMaps\Request\Enums\Extensions\ImageFormatExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\Enums\ImageFormat.cs">
+      <Link>Entities\Maps\StaticMaps\Request\Enums\ImageFormat.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\Enums\MapColor.cs">
+      <Link>Entities\Maps\StaticMaps\Request\Enums\MapColor.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\Enums\MapScale.cs">
+      <Link>Entities\Maps\StaticMaps\Request\Enums\MapScale.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\Enums\MapType.cs">
+      <Link>Entities\Maps\StaticMaps\Request\Enums\MapType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\Enums\MarkerSize.cs">
+      <Link>Entities\Maps\StaticMaps\Request\Enums\MarkerSize.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\MapMarker.cs">
+      <Link>Entities\Maps\StaticMaps\Request\MapMarker.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\MapMarkerIcon.cs">
+      <Link>Entities\Maps\StaticMaps\Request\MapMarkerIcon.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\MapPath.cs">
+      <Link>Entities\Maps\StaticMaps\Request\MapPath.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\MapStyle.cs">
+      <Link>Entities\Maps\StaticMaps\Request\MapStyle.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Request\StaticMapsRequest.cs">
+      <Link>Entities\Maps\StaticMaps\Request\StaticMapsRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StaticMaps\Response\StaticMapsResponse.cs">
+      <Link>Entities\Maps\StaticMaps\Response\StaticMapsResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StreetView\Request\StreetViewRequest.cs">
+      <Link>Entities\Maps\StreetView\Request\StreetViewRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\StreetView\Response\StaticMapsResponse.cs">
+      <Link>Entities\Maps\StreetView\Response\StaticMapsResponse.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\maps\timezone\request\TimeZoneRequest.cs">
       <Link>Entities\Maps\TimeZone\Request\TimeZoneRequest.cs</Link>

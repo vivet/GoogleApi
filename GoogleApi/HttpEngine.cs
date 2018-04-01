@@ -5,9 +5,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Places.Photos.Response;
 using GoogleApi.Exceptions;
 using Newtonsoft.Json;
 
@@ -177,13 +177,20 @@ namespace GoogleApi
                     else
                     {
                         var result = x.Result;
-                        var rawJson = result.Content.ReadAsStringAsync().Result;
 
-                        response = typeof(TResponse) == typeof(PlacesPhotosResponse)
-                            ? (TResponse)(IResponse)new PlacesPhotosResponse { PhotoBuffer = result.Content.ReadAsByteArrayAsync().Result }
-                            : JsonConvert.DeserializeObject<TResponse>(rawJson);
+                        if (new TResponse() is BaseStreamResponse streamResponse)
+                        {
+                            streamResponse.Buffer = result.Content.ReadAsByteArrayAsync().Result;
+                            response = (TResponse)(IResponse)streamResponse;
+                        }
+                        else
+                        {
+                            var rawJson = result.Content.ReadAsStringAsync().Result;
 
-                        response.RawJson = rawJson;
+                            response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+                            response.RawJson = rawJson;
+                        }
+
                         response.RawQueryString = result.RequestMessage.RequestUri.PathAndQuery;
                         response.Status = result.IsSuccessStatusCode ? response.Status ?? Status.Ok : Status.HttpError;
 

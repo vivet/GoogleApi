@@ -28,6 +28,8 @@ The following operations are supported.
     * Snap To Roads
     * Speed Limits
   * Time Zone
+  * Street View (_new_)
+  * Static Maps (_new_)
 
 ##### Google Places
   * Place Search

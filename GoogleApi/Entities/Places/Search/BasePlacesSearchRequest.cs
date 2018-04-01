@@ -101,7 +101,8 @@ namespace GoogleApi.Entities.Places.Search
 
             if (this.Type.HasValue)
             {
-                var attribute = this.Type.GetType().GetTypeInfo().DeclaredMembers.FirstOrDefault(x => x.Name == this.Type.ToString()).GetCustomAttribute<EnumMemberAttribute>();
+                var type = this.Type.GetType().GetTypeInfo();
+                var attribute = type.DeclaredMembers.FirstOrDefault(x => x.Name == this.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
 
                 if (attribute != null)
                     parameters.Add("type", attribute.Value.ToLower());

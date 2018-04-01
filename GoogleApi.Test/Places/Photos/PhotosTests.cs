@@ -37,10 +37,10 @@ namespace GoogleApi.Test.Places.Photos
             });
 
             Assert.IsNotNull(response3);
-            Assert.IsNotNull(response3.Photo);
-            Assert.IsNotNull(response3.PhotoBuffer);
+            Assert.IsNotNull(response3.Stream);
+            Assert.IsNotNull(response3.Buffer);
             Assert.AreEqual(Status.Ok, response3.Status);
-            Assert.GreaterOrEqual(response3.Photo.Length, 1000);
+            Assert.GreaterOrEqual(response3.Stream.Length, 1000);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace GoogleApi.Test.Places.Photos
             }).Result;
 
             Assert.IsNotNull(response3);
-            Assert.IsNotNull(response3.Photo);
+            Assert.IsNotNull(response3.Stream);
             Assert.AreEqual(Status.Ok, response3.Status);
         }
 
