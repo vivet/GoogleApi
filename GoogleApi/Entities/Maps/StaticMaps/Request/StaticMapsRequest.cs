@@ -111,10 +111,10 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 	    public virtual IEnumerable<MapStyle> Styles { get; set; } = new List<MapStyle>();
 
         /// <summary>
-        /// Visible (optional) specifies one or more locations that should remain visible on the map, though no markers or other indicators will be displayed. 
+        /// Visibles (optional) specifies one or more locations that should remain visible on the map, though no markers or other indicators will be displayed. 
         /// Use this parameter to ensure that certain features or map locations are shown on the Google Static Maps API.
         /// </summary>
-        public virtual IEnumerable<Location> Visible { get; set; } = new List<Location>();
+        public virtual IEnumerable<Location> Visibles { get; set; } = new List<Location>();
 
         /// <summary>
         /// Markers (optional) define one or more markers to attach to the image at specified locations. 
@@ -131,19 +131,22 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 		{
 		    var parameters = base.GetQueryStringParameters();
 
-		    if (this.Center == null || !this.ZoomLevel.HasValue)
+		    if (string.IsNullOrEmpty(this.Key))
+		        throw new ArgumentException("Key is required");
+
+            if (this.Center == null || !this.ZoomLevel.HasValue)
 		    {
 		        var hasMarkers = this.Markers.Any() && this.Markers.SelectMany(x => x.Locations).Any();
 		        var hasPaths = this.Paths.Any() && this.Paths.SelectMany(x => x.Points).Any();
-		        var hasVisible = this.Visible.Any();
+		        var hasVisible = this.Visibles.Any();
 
 		        if (!hasMarkers && !hasPaths && !hasVisible)
 		        {
                     if (this.Center == null)
-    		            throw new ArgumentException("Center is required, unless Markers, Path or Visible is defined.");
+    		            throw new ArgumentException("Center is required, unless Markers, Path or Visibles is defined");
 
                     if (!this.ZoomLevel.HasValue)
-                        throw new ArgumentException("Zoom Level is required, unless Markers, Path or Visible is defined.");
+                        throw new ArgumentException("Zoom Level is required, unless Markers, Path or Visibles is defined");
                 }
             }
 
@@ -153,7 +156,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
             if (this.ZoomLevel.HasValue)
                 parameters.Add("zoom", this.ZoomLevel.ToString());
 
-		        parameters.Add("size", $"{this.Size.Width}x{this.Size.Height}");
+		    parameters.Add("size", $"{this.Size.Width}x{this.Size.Height}");
 
 			if (this.Type.HasValue)
 				parameters.Add("maptype", this.Type.ToString().ToLower());
@@ -194,11 +197,11 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 				}
 			}
 
-			if (this.Visible.Any())
+			if (this.Visibles.Any())
 			{
-				var points = this.Visible.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
+				var visibles = this.Visibles.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
 
-				parameters.Add("path", $"{points}");
+				parameters.Add("path", $"{visibles}");
 			}
 
 			if (this.Markers.Any())

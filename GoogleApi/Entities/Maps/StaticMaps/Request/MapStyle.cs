@@ -1,5 +1,7 @@
 ﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request
 {
+    // TODO: Improve implementation.
+
 	/// <summary>
 	/// Customize the presentation of the standard Google map by applying your own styles when using the Google Static Maps API.
 	/// You can change the visual display of features such as roads, parks, built-up areas, and other points of interest.Change their color or style to emphasize 
