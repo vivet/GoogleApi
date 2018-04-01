@@ -16,7 +16,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         }
 
         [Test]
-        public void GetQueryStringParametersWhenKayIsNullTest()
+        public void GetQueryStringParametersWhenKeyIsNullTest()
         {
             var request = new GeolocationRequest
             {
@@ -33,7 +33,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         }
 
         [Test]
-        public void GetQueryStringParametersWhenKayIsStringEmptyTest()
+        public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
         {
             var request = new GeolocationRequest
             {

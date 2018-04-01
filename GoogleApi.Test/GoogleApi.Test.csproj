@@ -102,6 +102,8 @@
     <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsRequestTests.cs" />
     <Compile Include="Maps\Roads\SpeedLimits\SpeedLimitsTests.cs" />
     <Compile Include="Maps\StaticMaps\StaticMapsRequestTests.cs" />
+    <Compile Include="Maps\StaticMaps\StaticMapsTests.cs" />
+    <Compile Include="Maps\StreetView\StreetViewTests.cs" />
     <Compile Include="Maps\StreetView\StreetViewRequestTests.cs" />
     <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
     <Compile Include="Places\Add\AddRequestTests.cs" />

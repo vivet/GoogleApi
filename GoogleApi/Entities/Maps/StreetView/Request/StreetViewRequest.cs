@@ -64,29 +64,43 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 		{
 			var parameters = base.GetQueryStringParameters();
 
-			if (this.PanoramaId != null)
-				parameters.Add("pano", this.PanoramaId);
+		    if (string.IsNullOrEmpty(this.Key))
+		        throw new ArgumentException("Key is required");
+
+            if (this.PanoramaId != null)
+		    {
+		        parameters.Add("pano", this.PanoramaId);
+		    }
 			else if (this.Location != null)
-				parameters.Add("location", this.Location.ToString());
+		    {
+		        parameters.Add("location", this.Location.ToString());
+		    }
 			else
 				throw new ArgumentException("Location or PanoramaId is required");
 
 			parameters.Add("size", $"{this.Size.Width}x{this.Size.Height}");
 
-			if (this.Pitch >= -90 || this.Pitch <= 90)
-				parameters.Add("pitch", this.Pitch.ToString());
+		    if (this.Pitch >= -90 && this.Pitch <= 90)
+		    {
+		        parameters.Add("pitch", this.Pitch.ToString());
+		    }
 			else
-				throw new ArgumentException("Pitch must be greater than -90 and less than 90.");
+				throw new ArgumentException("Pitch must be greater than -90 and less than 90");
 
-			if (this.Heading >= 0 || this.Heading <= 360)
-				parameters.Add("heading", this.Heading.ToString());
-			else
-				throw new ArgumentException("Heading must be greater than 0 and less than 360.");
+            if (this.Heading.HasValue)
+            {
+                if (this.Heading >= 0 && this.Heading <= 360)
+				    parameters.Add("heading", this.Heading.ToString());
+			    else
+				    throw new ArgumentException("Heading must be greater than 0 and less than 360");
+            }
 
-			if (this.FieldOfView >= 0 || this.FieldOfView <= 120)
-				parameters.Add("fov", this.FieldOfView.ToString());
+		    if (this.FieldOfView >= 0 && this.FieldOfView <= 120)
+		    {
+		        parameters.Add("fov", this.FieldOfView.ToString());
+		    }
 			else
-				throw new ArgumentException("Field of view must be greater than 0 and less than 120.");
+				throw new ArgumentException("Field of view must be greater than 0 and less than 120");
 
 			return parameters;
 		}
