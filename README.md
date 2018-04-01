@@ -7,8 +7,6 @@ Google Maps, Places, Roads, Search and Translate.
 
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 
-**NEW: Added StaticMaps and StreetView api implementations!**  
-
 ### Api Operations
 All operations, as well as request and response data points is supported and covered in the implementation. The library is very easy to consume, and using the service operations, is as seamless as shown below.
 ```csharp
