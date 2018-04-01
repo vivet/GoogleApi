@@ -5,8 +5,7 @@
 Seamless Google Api integrations.  
 Google Maps, Places, Roads, Search and Translate.  
 
-Feel free to contribute, throw questions and report issues.  
-**I usually respond fast (24-48 hours).**  
+Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 
 **NEW: Added StaticMaps and StreetView api implementations!**  
 
