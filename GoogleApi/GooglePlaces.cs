@@ -1,10 +1,5 @@
-﻿using System;
-using GoogleApi.Entities.Places.Add.Request;
-using GoogleApi.Entities.Places.Add.Response;
-using GoogleApi.Entities.Places.AutoComplete.Request;
+﻿using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.AutoComplete.Response;
-using GoogleApi.Entities.Places.Delete.Request;
-using GoogleApi.Entities.Places.Delete.Response;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Response;
 using GoogleApi.Entities.Places.Photos.Request;
@@ -13,8 +8,6 @@ using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using GoogleApi.Entities.Places.Search.NearBy.Response;
-using GoogleApi.Entities.Places.Search.Radar.Request;
-using GoogleApi.Entities.Places.Search.Radar.Response;
 using GoogleApi.Entities.Places.Search.Text.Request;
 using GoogleApi.Entities.Places.Search.Text.Response;
 
@@ -44,44 +37,11 @@ namespace GoogleApi
         public static HttpEngine<PlacesTextSearchRequest, PlacesTextSearchResponse> TextSearch => HttpEngine<PlacesTextSearchRequest, PlacesTextSearchResponse>.instance;
 
         /// <summary>
-        /// The Google Places API Radar Search Service allows you to search for up to 200 places at once, but with less detail than is typically returned from a Text Search or Nearby Search request. 
-        /// With Radar Search, you can create applications that help users identify specific areas of interest within a geographic area.
-        /// NOTE: Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.
-        /// https://developers.google.com/places/web-service/search
-        /// </summary>
-        [Obsolete("Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.")]
-        public static HttpEngine<PlacesRadarSearchRequest, PlacesRadarSearchResponse> RadarSearch => HttpEngine<PlacesRadarSearchRequest, PlacesRadarSearchResponse>.instance;
-
-        /// <summary>
         /// A Nearby Search lets you search for places within a specified area. 
         /// You can refine your search request by supplying keywords or specifying the type of place you are searching for
         /// https://developers.google.com/places/web-service/search
         /// </summary>
         public static HttpEngine<PlacesNearBySearchRequest, PlacesNearbySearchResponse> NearBySearch => HttpEngine<PlacesNearBySearchRequest, PlacesNearbySearchResponse>.instance;
-
-        /// <summary>
-        /// By adding a place, you can supplement the data in the Google Maps database with data from your application. This allows you to:
-        /// Instantly update the data in Google's database for your users.
-        /// Submit new places to a moderation queue for addition to the Google places database.
-        /// Differentiate your application from other apps with similar functionality.
-        /// Create applications that are targeted to a specific user base or geographic location.
-        /// Influence the results of a Places Search issued from your application.
-        /// NOTE: Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.
-        /// https://developers.google.com/places/web-service/add-place
-        /// </summary>
-        [Obsolete("Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.")]
-        public static HttpEngine<PlacesAddRequest, PlacesAddResponse> Add => HttpEngine<PlacesAddRequest, PlacesAddResponse>.instance;
-
-        /// <summary>
-        /// A place can only be deleted if:
-        /// The place was added by the application that is requesting the deletion.
-        /// The place add request has not successfully passed through the Google Maps moderation process, and the place is therefore visible only to the application that added it.
-        /// If you try to delete a place that does not meet these criteria, the API will return a REQUEST_DENIED status code.
-        /// NOTE: Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.
-        /// https://developers.google.com/places/web-service/add-place
-        /// </summary>
-        [Obsolete("Deprecated as of June 30, 2017. This feature will be turned down on June 30, 2018.")]
-        public static HttpEngine<PlacesDeleteRequest, PlacesDeleteResponse> Delete => HttpEngine<PlacesDeleteRequest, PlacesDeleteResponse>.instance;
 
         /// <summary>
         /// Once you have a place_id from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. 

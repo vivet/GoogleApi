@@ -35,10 +35,7 @@ The following operations are supported.
   * Place Search
     * Near By
     * Text
-    * Radar (*deprecated by Google, June 30th 2018*)
   * Place Details
-  * Place Add (*deprecated by Google, June 30th 2018*)
-  * Place Delete (*deprecated by Google, June 30th 2018*)
   * Place Photos
   * Place Autocomplete
   * Query Autocomplete

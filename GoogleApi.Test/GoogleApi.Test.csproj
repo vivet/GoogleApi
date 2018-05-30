@@ -106,12 +106,8 @@
     <Compile Include="Maps\StreetView\StreetViewTests.cs" />
     <Compile Include="Maps\StreetView\StreetViewRequestTests.cs" />
     <Compile Include="Maps\TimeZone\TimeZoneRequestTests.cs" />
-    <Compile Include="Places\Add\AddRequestTests.cs" />
-    <Compile Include="Places\Add\AddTests.cs" />
     <Compile Include="Places\AutoComplete\AutoCompleteRequstTests.cs" />
     <Compile Include="Places\AutoComplete\AutoCompleteTests.cs" />
-    <Compile Include="Places\Delete\DeleteRequestTests.cs" />
-    <Compile Include="Places\Delete\DeleteTests.cs" />
     <Compile Include="Places\Details\DetailsRequestTests.cs" />
     <Compile Include="Places\Details\DetailsTests.cs" />
     <Compile Include="Places\Photos\PhotosRequestTests.cs" />
@@ -120,8 +116,6 @@
     <Compile Include="Places\Search\NearBy\NearBySearchRequestTests.cs" />
     <Compile Include="Places\Search\NearBy\NearBySearchTests.cs" />
     <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteTests.cs" />
-    <Compile Include="Places\Search\Radar\RadarSearchRequestTests.cs" />
-    <Compile Include="Places\Search\Radar\RadarSearchTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

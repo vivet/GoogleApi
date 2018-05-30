@@ -55,8 +55,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
             var request = new PlacesQueryAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = "jagtvej 2200",
-                Sensor = true
+                Input = "jagtvej 2200"
             };
             var response = GooglePlaces.QueryAutoComplete.QueryAsync(request).Result;
 

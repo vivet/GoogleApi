@@ -47,6 +47,9 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="GoogleApi.csproj.DotSettings" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.3" />
   </ItemGroup>
