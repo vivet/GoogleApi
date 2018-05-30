@@ -197,7 +197,12 @@ namespace GoogleApi
                         result.EnsureSuccessStatusCode();
 
                         if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
-                            throw new GoogleApiException(response.ErrorMessage) { Response = response };
+                        {
+                            throw new GoogleApiException(response.ErrorMessage)
+                            {
+                                Response = response
+                            };
+                        }
 
                         taskCompletionSource.SetResult(response);
                     }
