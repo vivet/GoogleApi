@@ -357,12 +357,6 @@
     <Compile Include="..\googleapi\entities\maps\timezone\response\TimeZoneResponse.cs">
       <Link>Entities\Maps\TimeZone\Response\TimeZoneResponse.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\places\add\request\PlacesAddRequest.cs">
-      <Link>Entities\Places\Add\Request\PlacesAddRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\add\response\PlacesAddResponse.cs">
-      <Link>Entities\Places\Add\Response\PlacesAddResponse.cs</Link>
-    </Compile>
     <Compile Include="..\googleapi\entities\places\autocomplete\request\enums\RestrictPlaceType.cs">
       <Link>Entities\Places\AutoComplete\Request\Enums\RestrictPlaceType.cs</Link>
     </Compile>
@@ -404,12 +398,6 @@
     </Compile>
     <Compile Include="..\googleapi\entities\places\common\Term.cs">
       <Link>Entities\Places\Common\Term.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\delete\request\PlacesDeleteRequest.cs">
-      <Link>Entities\Places\Delete\Request\PlacesDeleteRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\delete\response\PlacesDeleteResponse.cs">
-      <Link>Entities\Places\Delete\Response\PlacesDeleteResponse.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\places\details\request\enums\Extensions.cs">
       <Link>Entities\Places\Details\Request\Enums\Extensions.cs</Link>
@@ -479,15 +467,6 @@
     </Compile>
     <Compile Include="..\googleapi\entities\places\search\nearby\response\PlacesNearbySearchResponse.cs">
       <Link>Entities\Places\Search\NearBy\Response\PlacesNearbySearchResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\search\radar\request\PlacesRadarSearchRequest.cs">
-      <Link>Entities\Places\Search\Radar\Request\PlacesRadarSearchRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\search\radar\response\PlacesRadarSearchResponse.cs">
-      <Link>Entities\Places\Search\Radar\Response\PlacesRadarSearchResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\search\radar\response\RadarResult.cs">
-      <Link>Entities\Places\Search\Radar\Response\RadarResult.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\places\search\text\request\PlacesTextSearchRequest.cs">
       <Link>Entities\Places\Search\Text\Request\PlacesTextSearchRequest.cs</Link>
