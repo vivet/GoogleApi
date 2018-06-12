@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Maps
         /// <summary>
         /// Base Url.
         /// </summary>
-        protected internal override string BaseUrl => "maps.google.com/maps/api/";
+        protected internal override string BaseUrl => "maps.googleapis.com/maps/api/";
 
         /// <summary>
         /// Always true. 
