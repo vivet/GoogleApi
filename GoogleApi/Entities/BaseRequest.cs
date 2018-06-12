@@ -62,14 +62,14 @@ namespace GoogleApi.Entities
             var bytes = Encoding.UTF8.GetBytes(url);
             var privateKey = Convert.FromBase64String(this.Key.Replace("-", "+").Replace("_", "/"));
 
-            var hmac = new HMac(new Sha256Digest());
+            var hmac = new HMac(new Sha1Digest());
             hmac.Init(new KeyParameter(privateKey));
-
+            
             var signature = new byte[hmac.GetMacSize()];
-            var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
-
             hmac.BlockUpdate(bytes, 0, bytes.Length);
             hmac.DoFinal(signature, 0);
+            
+            var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
 
             return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
         }
