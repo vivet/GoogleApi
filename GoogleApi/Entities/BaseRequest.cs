@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto.Digests;
@@ -62,16 +63,12 @@ namespace GoogleApi.Entities
             var bytes = Encoding.UTF8.GetBytes(url);
             var privateKey = Convert.FromBase64String(this.Key.Replace("-", "+").Replace("_", "/"));
 
-            var hmac = new HMac(new Sha256Digest());
-            hmac.Init(new KeyParameter(privateKey));
-
-            var signature = new byte[hmac.GetMacSize()];
-            var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
-
-            hmac.BlockUpdate(bytes, 0, bytes.Length);
-            hmac.DoFinal(signature, 0);
-
-            return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
+            using (var algorithm = new HMACSHA1(privateKey))
+            {
+                var hash = algorithm.ComputeHash(bytes);
+                var base64Signature = Convert.ToBase64String(hash).Replace("+", "-").Replace("/", "_");
+                return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
+            }
         }
 
         /// <summary>
