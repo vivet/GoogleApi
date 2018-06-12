@@ -11,7 +11,7 @@ Feel free to contribute, throw questions and report issues. **I usually respond 
 All operations, as well as request and response data points is supported and covered in the implementation. The library is very easy to consume, and using the service operations, is as seamless as shown below.
 ```csharp
 TRequest request = new TRequest();
-TResponse response = await GoogleMaps.Geocode.QueryAsync<TRequest, TResponse>(request);
+TResponse response = await GoogleMaps.Api.QueryAsync<TRequest, TResponse>(request);
 ```
 The ```TRequest``` represents a request model, with an abitrary number of properties, defining the required and optional parameters supported by the Google api operation, corresponding to the request. The ```TResponse``` defines the response model returned by the Google api operation. Each operation has a request and response, mapped to a facade implementation.  
 
