@@ -4,12 +4,12 @@
   "dependencies": {
     "BouncyCastle": "1.8.1",
     "NETStandard.Library": "1.6.1.*",
-    "Newtonsoft.Json": "10.0.3",
+    "Newtonsoft.Json": "11.0.2",
     "NUnit": "3.7.1",
     "NUnit3TestAdapter": "3.8.0-alpha1"
   },
   "frameworks": {
-    "net460": {}
+    "net462": {}
   },
   "runtimes": {
     "win": {},
