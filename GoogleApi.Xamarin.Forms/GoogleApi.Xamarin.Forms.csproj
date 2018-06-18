@@ -180,6 +180,9 @@
     <Compile Include="..\googleapi\entities\maps\directions\response\DirectionsResponse.cs">
       <Link>Entities\Maps\Directions\Response\DirectionsResponse.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\Enums\ManeuverAction.cs">
+      <Link>Entities\Maps\Directions\Response\Enums\ManeuverAction.cs</Link>
+    </Compile>
     <Compile Include="..\googleapi\entities\maps\directions\response\enums\VehicleType.cs">
       <Link>Entities\Maps\Directions\Response\Enums\VehicleType.cs</Link>
     </Compile>
@@ -209,6 +212,9 @@
     </Compile>
     <Compile Include="..\googleapi\entities\maps\directions\response\Vehicle.cs">
       <Link>Entities\Maps\Directions\Response\Vehicle.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Directions\Response\WayPoint.cs">
+      <Link>Entities\Maps\Directions\Response\WayPoint.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\maps\distancematrix\request\DistanceMatrixRequest.cs">
       <Link>Entities\Maps\DistanceMatrix\Request\DistanceMatrixRequest.cs</Link>

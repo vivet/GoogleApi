@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Directions.Response.Enums;
 using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
@@ -39,6 +41,17 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// </summary>
         [JsonProperty("end_location")]
         public virtual Location EndLocation { get; set; }
+
+        /// <summary>
+        /// Maneuver contains the action to take for the current step (turn left, merge, straight, etc.).
+        /// This field is used to determine which icon to display, and can contain one of the following values: turn-slight-left, turn-sharp-left,
+        /// uturn-left, turn-left, turn-slight-right, turn-sharp-right, uturn-right, turn-right, straight, ramp-left, ramp-right, merge, fork-left,
+        /// fork-right, ferry, ferry-train, roundabout-left, roundabout-right.
+        /// Values in this list are subject to change.
+        /// </summary>
+        [JsonProperty("maneuver")]
+        [JsonConverter(typeof(StringEnumOrDefaultConverter<ManeuverAction>))]
+        public virtual ManeuverAction Maneuver { get; set; }
 
         /// <summary>
         /// Contains an object holding an array of encoded points that represent an approximate (smoothed) path of the resulting directions.
