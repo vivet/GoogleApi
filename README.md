@@ -21,7 +21,9 @@ The following operations are supported.
   * Distance Matrix
   * Elevation
   * Geocode
-  * Reverse Geocode
+    * Place
+    * Address
+    * Location (reverse)
   * Geolocation
   * Roads
     * Nearest Roads

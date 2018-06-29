@@ -32,7 +32,6 @@ namespace GoogleApi.Test.Places.Details
 
             var response2 = GooglePlaces.Details.Query(request2);
             Assert.IsNotNull(response2);
-            Assert.IsEmpty(response2.HtmlAttributions);
             Assert.AreEqual(Status.Ok, response2.Status);
 
             var result = response2.Result;

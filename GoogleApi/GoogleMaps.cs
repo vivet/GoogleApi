@@ -1,4 +1,5 @@
-﻿using GoogleApi.Entities.Maps.Directions.Request;
+﻿using System;
+using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Directions.Response;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Response;
@@ -6,6 +7,10 @@ using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Elevation.Response;
 using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geocode.Response;
+using GoogleApi.Entities.Maps.Geocoding;
+using GoogleApi.Entities.Maps.Geocoding.Address.Request;
+using GoogleApi.Entities.Maps.Geocoding.Location.Request;
+using GoogleApi.Entities.Maps.Geocoding.Place.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.Geolocation.Response;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
@@ -44,7 +49,29 @@ namespace GoogleApi
         /// The Google Maps Geocoding API provides a direct way to access these services via an HTTP request.
         /// https://developers.google.com/maps/documentation/geocoding/intro
         /// </summary>
+        [Obsolete("Use PlaceGeocode, AddressGeocode or LocationGeocode")]
         public static HttpEngine<GeocodingRequest, GeocodingResponse> Geocode => HttpEngine<GeocodingRequest, GeocodingResponse>.instance;
+
+        /// <summary>
+        /// Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into
+        /// geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
+        /// This is the process of converting a place id into a address.
+        /// </summary>
+        public static HttpEngine<PlaceGeocodeRequest, GeocodeResponse> PlaceGeocode => HttpEngine<PlaceGeocodeRequest, GeocodeResponse>.instance;
+
+        /// <summary>
+        /// Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into
+        /// geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
+        /// https://developers.google.com/maps/documentation/geocoding/intro#geocoding
+        /// </summary>
+        public static HttpEngine<AddressGeocodeRequest, GeocodeResponse> AddressGeocode => HttpEngine<AddressGeocodeRequest, GeocodeResponse>.instance;
+
+        /// <summary>
+        /// The term geocoding generally refers to translating a human-readable address into a location on a map.
+        /// The process of doing the opposite, translating a location on the map into a human-readable address, is known as reverse geocoding.
+        /// https://developers.google.com/maps/documentation/geocoding/intro#ReverseGeocoding
+        /// </summary>
+        public static HttpEngine<LocationGeocodeRequest, GeocodeResponse> LocationGeocode => HttpEngine<LocationGeocodeRequest, GeocodeResponse>.instance;
 
         /// <summary>
         /// The Google Maps Geolocation API returns a location and accuracy radius based on information about cell towers and WiFi nodes that the mobile client can detect. 

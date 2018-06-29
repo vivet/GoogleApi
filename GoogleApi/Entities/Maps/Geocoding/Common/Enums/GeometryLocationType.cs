@@ -1,12 +1,10 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Maps.Geocode.Response.Enums
+namespace GoogleApi.Entities.Maps.Geocoding.Common.Enums
 {
     /// <summary>
     /// Location Type.
     /// </summary>
-    [Obsolete]
     public enum GeometryLocationType
     {
         /// <summary>

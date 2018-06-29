@@ -1,14 +1,12 @@
-﻿using System;
-using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Geocode.Response.Enums;
+﻿using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Geocode.Response
+namespace GoogleApi.Entities.Maps.Geocoding.Common
 {
     /// <summary>
     /// Geometry.
     /// </summary>
-    [Obsolete]
     public class Geometry
     {
         /// <summary>
@@ -16,7 +14,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// For normal address lookups, this field is typically the most important.
         /// </summary>
         [JsonProperty("location")]
-        public virtual Location Location { get; set; }
+        public virtual Entities.Common.Location Location { get; set; }
 
         /// <summary>
         /// Viewport contains the recommended viewport for displaying the returned result, specified as two latitude,longitude values defining 

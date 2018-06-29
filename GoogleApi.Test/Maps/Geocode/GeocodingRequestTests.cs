@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocode
 {
+    [Obsolete]
     [TestFixture]
     public class GeocodingRequestTests : BaseTest
     {

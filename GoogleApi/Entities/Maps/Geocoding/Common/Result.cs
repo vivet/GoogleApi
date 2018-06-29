@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Geocode.Response
+namespace GoogleApi.Entities.Maps.Geocoding.Common
 {
     /// <summary>
     /// When the geocoder returns results, it places them within a (JSON) results array. Even if the geocoder returns no results (such as if the address doesn't exist) it still returns an empty results array. (XML responses consist of zero or more result elements.)
     /// </summary>
-    [Obsolete]
     public class Result
     {
         /// <summary>
@@ -49,6 +47,20 @@ namespace GoogleApi.Entities.Maps.Geocode.Response
         /// </summary>
         [JsonProperty("partial_match")]
         public virtual bool PartialMatch { get; set; }
+
+        /// <summary>
+        /// plus_code is an encoded location reference, derived from latitude and longitude coordinates,
+        /// that represents an area: 1/8000th of a degree by 1/8000th of a degree(about 14m x 14m at the equator) or smaller.
+        /// Plus codes can be used as a replacement for street addresses in places where they do not exist (where buildings are not numbered or streets are not named).
+        /// The plus code is formatted as a global code and a compound code:
+        /// - global_code is a 4 character area code and 6 character or longer local code(849VCWC8+R9).
+        /// - compound_code is a 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA).
+        /// Typically, both the global code and compound code are returned.However, if the result is in a remote location(for example, an ocean or desert)
+        /// only the global code may be returned.
+        /// See further details about pkus codes here: https://en.wikipedia.org/wiki/Open_Location_Code and https://plus.codes.
+        /// </summary>
+        [JsonProperty("plus_code")]
+        public virtual OpenLocationPlusCode PlusCode { get; set; }
 
         /// <summary>
         /// postcode_localities[] is an array denoting all the localities contained in a postal code. 

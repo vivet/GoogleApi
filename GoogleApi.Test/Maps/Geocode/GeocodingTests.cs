@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocode
 {
+    [Obsolete]
     [TestFixture]
     public class GeocodingTests : BaseTest
     {
@@ -32,7 +33,7 @@ namespace GoogleApi.Test.Maps.Geocode
             var types = geocodeResult.Types?.ToArray();
             Assert.IsNotNull(types);
             Assert.IsNotEmpty(types);
-            Assert.Contains(PlaceLocationType.Street_Address, types);
+            Assert.Contains(PlaceLocationType.Premise, types);
         }
 
         [Test]
