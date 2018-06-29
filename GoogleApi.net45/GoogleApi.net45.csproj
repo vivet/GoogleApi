@@ -346,6 +346,33 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Result.cs">
       <Link>Entities\Maps\Geocode\Response\Result.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Address\Request\AddressGeocodeRequest.cs">
+      <Link>Entities\Maps\Geocoding\Address\Request\AddressGeocodeRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\BaseGeocodeRequest.cs">
+      <Link>Entities\Maps\Geocoding\BaseGeocodeRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\Enums\GeometryLocationType.cs">
+      <Link>Entities\Maps\Geocoding\Common\Enums\GeometryLocationType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\Geometry.cs">
+      <Link>Entities\Maps\Geocoding\Common\Geometry.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\OpenLocationPlusCode.cs">
+      <Link>Entities\Maps\Geocoding\Common\OpenLocationPlusCode.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\Result.cs">
+      <Link>Entities\Maps\Geocoding\Common\Result.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\GeocodeResponse.cs">
+      <Link>Entities\Maps\Geocoding\GeocodeResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Location\Request\LocationGeocodeRequest.cs">
+      <Link>Entities\Maps\Geocoding\Location\Request\LocationGeocodeRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Place\Request\PlaceGeocodeRequest.cs">
+      <Link>Entities\Maps\Geocoding\Place\Request\PlaceGeocodeRequest.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geolocation\Request\CellTower.cs">
       <Link>Entities\Maps\Geolocation\Request\CellTower.cs</Link>
     </Compile>

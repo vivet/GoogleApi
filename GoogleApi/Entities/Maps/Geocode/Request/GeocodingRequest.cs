@@ -12,6 +12,7 @@ namespace GoogleApi.Entities.Maps.Geocode.Request
     /// <summary>
     /// Geocoding Request.
     /// </summary>
+    [Obsolete]
     public class GeocodingRequest : BaseMapsChannelRequest, IRequestQueryString
     {
         /// <summary>

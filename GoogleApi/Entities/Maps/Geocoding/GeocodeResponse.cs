@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GoogleApi.Entities.Maps.Geocoding.Common;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Geocode.Response
+namespace GoogleApi.Entities.Maps.Geocoding
 {
     /// <summary>
-    /// Geocoding Response.
+    /// Geocode Response.
     /// </summary>
-    [Obsolete]
-    public class GeocodingResponse : BaseResponse
+    public class GeocodeResponse : BaseResponse
     {
         /// <summary>
         /// Results.
