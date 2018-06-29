@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 using GoogleApi.Exceptions;
@@ -200,13 +199,12 @@ namespace GoogleApi.Test.Maps.Geolocation
         [Test]
         public void GeolocationWhenClientCredentialsIsInvalidTest()
         {
-            var request = new GeocodingRequest
+            var request = new GeolocationRequest
             {
-                Address = "test",
                 ClientId = "abc",
                 Key = "abc"
             };
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Geocode.Query(request));
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Geolocation.Query(request));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "ClientId must begin with 'gme-'");

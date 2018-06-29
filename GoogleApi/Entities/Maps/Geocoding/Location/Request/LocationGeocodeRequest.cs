@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
-using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
@@ -47,7 +46,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Location == null)
-                throw new ArgumentException("Location is required");
+                throw new ArgumentException("Location is required.");
 
             var parameters = base.GetQueryStringParameters();
 

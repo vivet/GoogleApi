@@ -45,7 +45,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Address.Request
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Address))
-                throw new ArgumentException("Address is required");
+                throw new ArgumentException("Address is required.");
 
             var parameters = base.GetQueryStringParameters();
 

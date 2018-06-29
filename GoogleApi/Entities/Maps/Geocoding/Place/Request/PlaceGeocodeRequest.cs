@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
-using GoogleApi.Entities.Maps.Geocode.Request;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Place.Request
@@ -52,7 +51,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Place.Request
                 throw new ArgumentException("Key is required.");
 
             if (string.IsNullOrWhiteSpace(this.PlaceId))
-                throw new ArgumentException("PlaceId is required");
+                throw new ArgumentException("PlaceId is required.");
 
             var parameters = base.GetQueryStringParameters();
 
