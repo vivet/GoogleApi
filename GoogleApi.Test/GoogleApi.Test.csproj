@@ -93,6 +93,7 @@
     <Compile Include="Maps\Geocoding\Address\AddressGeocodeTests.cs" />
     <Compile Include="Maps\Geocoding\Location\LocationGeocodeTests.cs" />
     <Compile Include="Maps\Geocoding\Place\PlaceGeocodeTests.cs" />
+    <Compile Include="Maps\Geocoding\PlusCode\PlusCodeGeocodeTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
     <Compile Include="Maps\Geocode\GeocodingTests.cs" />

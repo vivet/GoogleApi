@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using NUnit.Framework;
@@ -109,62 +107,6 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
         public void PlaceGeocodeAndLanguageTest()
         {
             Assert.Inconclusive();
-        }
-
-        [Test]
-        public void PlaceGeocodeWhenResultTypesTest()
-        {
-            var autoCompleteRequest = new PlacesAutoCompleteRequest
-            {
-                Key = this.ApiKey,
-                Input = "285 Bedford Ave, Brooklyn, NY 11211, USA"
-            };
-
-            var autoCompleteResponse = GooglePlaces.AutoComplete.Query(autoCompleteRequest);
-            var placeId = autoCompleteResponse.Predictions.Select(x => x.PlaceId).FirstOrDefault();
-
-            var request = new PlaceGeocodeRequest
-            {
-                Key = this.ApiKey,
-                PlaceId = placeId,
-                ResultTypes = new List<PlaceLocationType> { PlaceLocationType.Premise, PlaceLocationType.Accounting }
-            };
-
-            var result = GoogleMaps.PlaceGeocode.Query(request);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-
-            var geocodeResult = result.Results.FirstOrDefault();
-            Assert.IsNotNull(geocodeResult);
-        }
-
-        [Test]
-        public void PlaceGeocodeWhenLoncationTypesTest()
-        {
-            var autoCompleteRequest = new PlacesAutoCompleteRequest
-            {
-                Key = this.ApiKey,
-                Input = "285 Bedford Ave, Brooklyn, NY 11211, USA"
-            };
-
-            var autoCompleteResponse = GooglePlaces.AutoComplete.Query(autoCompleteRequest);
-            var placeId = autoCompleteResponse.Predictions.Select(x => x.PlaceId).FirstOrDefault();
-
-            var request = new PlaceGeocodeRequest
-            {
-                Key = this.ApiKey,
-                PlaceId = placeId,
-                LocationTypes = new List<GeometryLocationType> { GeometryLocationType.Rooftop }
-            };
-
-            var result = GoogleMaps.PlaceGeocode.Query(request);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-
-            var geocodeResult = result.Results.FirstOrDefault();
-            Assert.IsNotNull(geocodeResult);
         }
 
         [Test]

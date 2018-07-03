@@ -60,7 +60,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Common
         /// See further details about pkus codes here: https://en.wikipedia.org/wiki/Open_Location_Code and https://plus.codes.
         /// </summary>
         [JsonProperty("plus_code")]
-        public virtual OpenLocationPlusCode PlusCode { get; set; }
+        public virtual PlusCode PlusCode { get; set; }
 
         /// <summary>
         /// postcode_localities[] is an array denoting all the localities contained in a postal code. 
