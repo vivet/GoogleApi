@@ -24,7 +24,7 @@ namespace GoogleApi.Entities
         /// <summary>
         /// Key Name.
         /// </summary>
-        protected internal virtual string KeyName { get; set; } = "Key";
+        protected internal virtual string KeyName { get; set; } = "key";
 
         /// <summary>
         /// See <see cref="IRequest.Key"/>.
