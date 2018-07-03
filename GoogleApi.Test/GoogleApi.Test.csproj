@@ -89,14 +89,12 @@
     <Compile Include="Maps\DistanceMatrix\DistanceMatrixTests.cs" />
     <Compile Include="Maps\Elevation\ElevationRequestTests.cs" />
     <Compile Include="Maps\Elevation\ElevationTests.cs" />
-    <Compile Include="Maps\Geocode\GeocodingRequestTests.cs" />
     <Compile Include="Maps\Geocoding\Address\AddressGeocodeTests.cs" />
     <Compile Include="Maps\Geocoding\Location\LocationGeocodeTests.cs" />
     <Compile Include="Maps\Geocoding\Place\PlaceGeocodeTests.cs" />
     <Compile Include="Maps\Geocoding\PlusCode\PlusCodeGeocodeTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
-    <Compile Include="Maps\Geocode\GeocodingTests.cs" />
     <Compile Include="HttpEngineTests.cs" />
     <Compile Include="Common\Extensions\DateTimeExtensionTest.cs" />
     <Compile Include="Common\Extensions\EnumExtensionTest.cs" />

@@ -334,21 +334,6 @@
     <Compile Include="..\GoogleApi\Entities\Maps\Elevation\Response\Result.cs">
       <Link>Entities\Maps\Elevation\Response\Result.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Request\GeocodingRequest.cs">
-      <Link>Entities\Maps\Geocode\Request\GeocodingRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs">
-      <Link>Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\GeocodingResponse.cs">
-      <Link>Entities\Maps\Geocode\Response\GeocodingResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Geometry.cs">
-      <Link>Entities\Maps\Geocode\Response\Geometry.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocode\Response\Result.cs">
-      <Link>Entities\Maps\Geocode\Response\Result.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Address\Request\AddressGeocodeRequest.cs">
       <Link>Entities\Maps\Geocoding\Address\Request\AddressGeocodeRequest.cs</Link>
     </Compile>
