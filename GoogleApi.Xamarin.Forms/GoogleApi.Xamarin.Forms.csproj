@@ -240,21 +240,6 @@
     <Compile Include="..\googleapi\entities\maps\elevation\response\Result.cs">
       <Link>Entities\Maps\Elevation\Response\Result.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\maps\geocode\request\GeocodingRequest.cs">
-      <Link>Entities\Maps\Geocode\Request\GeocodingRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\maps\geocode\response\enums\GeometryLocationType.cs">
-      <Link>Entities\Maps\Geocode\Response\Enums\GeometryLocationType.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\maps\geocode\response\GeocodingResponse.cs">
-      <Link>Entities\Maps\Geocode\Response\GeocodingResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\maps\geocode\response\Geometry.cs">
-      <Link>Entities\Maps\Geocode\Response\Geometry.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\maps\geocode\response\Result.cs">
-      <Link>Entities\Maps\Geocode\Response\Result.cs</Link>
-    </Compile>
     <Compile Include="..\googleapi\entities\maps\geocoding\address\request\AddressGeocodeRequest.cs">
       <Link>Entities\Maps\Geocoding\Address\Request\AddressGeocodeRequest.cs</Link>
     </Compile>

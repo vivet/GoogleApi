@@ -1,12 +1,9 @@
-﻿using System;
-using GoogleApi.Entities.Maps.Directions.Request;
+﻿using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Directions.Response;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Response;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using GoogleApi.Entities.Maps.Elevation.Response;
-using GoogleApi.Entities.Maps.Geocode.Request;
-using GoogleApi.Entities.Maps.Geocode.Response;
 using GoogleApi.Entities.Maps.Geocoding;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
@@ -43,17 +40,6 @@ namespace GoogleApi
     /// </summary>
     public class GoogleMaps
     {
-        /// <summary>
-        /// Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), 
-        /// which you can use to place markers on a map, or position the map.
-        /// Reverse geocoding is the process of converting geographic coordinates into a human-readable address. 
-        /// The Google Maps Geocoding API's reverse geocoding service also lets you find the address for a given place ID.
-        /// The Google Maps Geocoding API provides a direct way to access these services via an HTTP request.
-        /// https://developers.google.com/maps/documentation/geocoding/intro
-        /// </summary>
-        [Obsolete("Use PlaceGeocode, AddressGeocode or LocationGeocode")]
-        public static HttpEngine<GeocodingRequest, GeocodingResponse> Geocode => HttpEngine<GeocodingRequest, GeocodingResponse>.instance;
-
         /// <summary>
         /// Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into
         /// geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
