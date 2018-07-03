@@ -7,6 +7,8 @@ Google Maps, Places, Roads, Search and Translate.
 
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 
+*** 
+
 ### Getting started...
 The library is extremely seamless to consume and use.  
 Each api implementation consists of a request and a response, as well as a generic facade operation to execute the request. The request has properties reflecting the parameters supported, and the response represents the object model for the returned json.  
@@ -25,6 +27,8 @@ var uri = request.GetUri(); // Gets the full request uri, including parameters.
 response.RawJson // The raw json returned by Google.
 response.RawQueryString // The querystring sent to Google when invoking the request.
 ```
+
+*** 
 
 ### Supported Operations
 The following operations are supported.
@@ -70,6 +74,8 @@ The following operations are supported.
   * EncodePolyLine
   * DecodePolyLine
 
+*** 
+
 ### Running Test Suite
 Running the test suite is simple.  
 
@@ -83,3 +89,5 @@ The test project stores settings related to your Google subscription (free or pa
 }
 ```
 More information about generating a key can be found here: https://console.developers.google.com/  
+
+*** 
