@@ -70,7 +70,7 @@ The following operations are supported.
   * EncodePolyLine
   * DecodePolyLine
 
-### Test Suite
+### Running Test Suite
 Running the test suite is simple.  
 
 The test project stores settings related to your Google subscription (free or paid) in `application.default.json`. Most importantly, the ```ApiKey```, used to identify the Google subscription.  
