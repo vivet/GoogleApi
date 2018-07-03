@@ -53,10 +53,10 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
             parameters.Add("latlng", this.Location.ToString());
 
             if (this.ResultTypes != null && this.ResultTypes.Any())
-                parameters.Add("result_type", string.Join("|", this.ResultTypes.AsEnumerable()));
+                parameters.Add("result_type", string.Join("|", this.ResultTypes.Select(x => x.ToString().ToLower()).AsEnumerable()));
 
             if (this.LocationTypes != null && this.LocationTypes.Any())
-                parameters.Add("location_type", string.Join("|", this.LocationTypes.AsEnumerable()));
+                parameters.Add("location_type", string.Join("|", this.LocationTypes.Select(x => x.ToString().ToUpper()).AsEnumerable()));
 
             return parameters;
         }
