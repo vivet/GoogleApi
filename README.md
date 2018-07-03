@@ -7,15 +7,28 @@ Google Maps, Places, Roads, Search and Translate.
 
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 
-### Api Operations
-All operations, as well as request and response data points is supported and covered in the implementation. The library is very easy to consume, and using the service operations, is as seamless as shown below.
+### Getting started...
+The library is extremely seamless to consume and use.  
+Each api implementation consists of a request and a response, as well as a generic facade operation to execute the request. The request has properties reflecting the parameters supported, and the response represents the object model for the returned json.  
+
+The example below, simply populates a request, invokes the facade operation, and recieves the response in return.  
 ```csharp
 TRequest request = new TRequest();
-TResponse response = await GoogleMaps.Api.QueryAsync<TRequest, TResponse>(request);
+TResponse response = await {Api}.{Action}.QueryAsync<TRequest, TResponse>(request);
 ```
-The ```TRequest``` represents a request model, with an abitrary number of properties, defining the required and optional parameters supported by the Google api operation, corresponding to the request. The ```TResponse``` defines the response model returned by the Google api operation. Each operation has a request and response, mapped to a facade implementation.  
 
+A few other noteworthy members.
+```csharp
+var uri = request.GetUri(); // Gets the full request uri, including parameters.
+```
+```csharp
+response.RawJson // The raw json returned by Google.
+response.RawQueryString // The querystring sent to Google when invoking the request.
+```
+
+### Supported Operations
 The following operations are supported.
+
 ##### Google Maps
   * Directions
   * Distance Matrix
