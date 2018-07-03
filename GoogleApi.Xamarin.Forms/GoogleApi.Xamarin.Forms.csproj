@@ -264,8 +264,8 @@
     <Compile Include="..\googleapi\entities\maps\geocoding\common\enums\GeometryLocationType.cs">
       <Link>Entities\Maps\Geocoding\Common\Enums\GeometryLocationType.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\maps\geocoding\common\OpenLocationPlusCode.cs">
-      <Link>Entities\Maps\Geocoding\Common\OpenLocationPlusCode.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\PlusCode.cs">
+      <Link>Entities\Maps\Geocoding\Common\PlusCode.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\maps\geocoding\common\Result.cs">
       <Link>Entities\Maps\Geocoding\Common\Result.cs</Link>
