@@ -144,7 +144,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         public void AddressGeocodeWhenAddressIsNullTest()
         {
             var request = new AddressGeocodeRequest();
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.AddressGeocode.Query(request, TimeSpan.FromMilliseconds(1)));
+            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.AddressGeocode.Query(request));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Address is required.");

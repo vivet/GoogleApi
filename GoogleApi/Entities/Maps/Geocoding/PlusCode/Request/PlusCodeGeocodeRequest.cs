@@ -66,7 +66,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Location == null && string.IsNullOrEmpty(this.Address) && string.IsNullOrEmpty(this.GlobalCode))
-                throw new ArgumentException("Location, Address or GlobalCode is required.");
+                throw new ArgumentException("PlaceId, Location, Address or GlobalCode is required.");
 
             var parameters = base.GetQueryStringParameters();
 
