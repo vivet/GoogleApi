@@ -58,10 +58,10 @@ namespace GoogleApi.Entities.Maps.Geocoding.Place.Request
             parameters.Add("place_id", this.PlaceId);
 
             if (this.ResultTypes != null && this.ResultTypes.Any())
-                parameters.Add("result_type", string.Join("|", this.ResultTypes.AsEnumerable()));
+                parameters.Add("result_type", string.Join("|", this.ResultTypes.Select(x => x.ToString().ToLower()).AsEnumerable()));
 
             if (this.LocationTypes != null && this.LocationTypes.Any())
-                parameters.Add("location_type", string.Join("|", this.LocationTypes.AsEnumerable()));
+                parameters.Add("location_type", string.Join("|", this.LocationTypes.Select(x => x.ToString().ToUpper()).AsEnumerable()));
 
             return parameters;
         }
