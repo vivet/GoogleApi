@@ -9,6 +9,11 @@ namespace GoogleApi.Exceptions
     public class GoogleApiException : Exception
     {
         /// <summary>
+        /// The request.
+        /// </summary>
+        public virtual IRequest Request { get; set; }
+
+        /// <summary>
         /// The response if any is returned and deserialized.
         /// </summary>
         public virtual IResponse Response { get; set; }

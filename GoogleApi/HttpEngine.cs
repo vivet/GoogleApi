@@ -200,6 +200,7 @@ namespace GoogleApi
                         {
                             throw new GoogleApiException(response.ErrorMessage)
                             {
+                                Request = request,
                                 Response = response
                             };
                         }
@@ -209,7 +210,13 @@ namespace GoogleApi
                 }
                 catch (Exception ex)
                 {
-                    var exception = ex is GoogleApiException ? ex : new GoogleApiException(ex.Message, ex) { Response = response };
+                    var exception = ex is GoogleApiException 
+                        ? ex 
+                        : new GoogleApiException(ex.Message, ex)
+                        {
+                            Request = request,
+                            Response = response
+                        };
                     taskCompletionSource.SetException(exception);
                 }
                 finally

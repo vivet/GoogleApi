@@ -22,6 +22,11 @@ namespace GoogleApi.Entities
         protected internal abstract string BaseUrl { get; }
 
         /// <summary>
+        /// Key Name.
+        /// </summary>
+        protected internal virtual string KeyName { get; set; } = "key";
+
+        /// <summary>
         /// See <see cref="IRequest.Key"/>.
         /// </summary>
         [JsonIgnore]
@@ -85,7 +90,7 @@ namespace GoogleApi.Entities
             if (this.ClientId == null)
             {
                 if (!string.IsNullOrWhiteSpace(this.Key))
-                    parameters.Add("key", this.Key);
+                    parameters.Add(this.KeyName, this.Key);
             }
             else
             {

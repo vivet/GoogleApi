@@ -65,6 +65,12 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates the request resulted in a Http error code.
         /// </summary>
         [EnumMember(Value = "HTTP_ERROR")]
-        HttpError
+        HttpError,
+
+        /// <summary>
+        /// Indicates the request has none or an invalid key set.
+        /// </summary>
+        [EnumMember(Value = "NO_API_KEY")]
+        InvalidKey
     }
 }
