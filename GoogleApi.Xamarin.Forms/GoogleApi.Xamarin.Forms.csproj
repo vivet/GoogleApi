@@ -111,6 +111,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Extensions\ListExtension.cs">
       <Link>Entities\Common\Extensions\ListExtension.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\Geometry.cs">
+      <Link>Entities\Common\Geometry.cs</Link>
+    </Compile>
     <Compile Include="..\googleapi\entities\common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
     </Compile>
@@ -261,9 +264,6 @@
     <Compile Include="..\googleapi\entities\maps\geocoding\common\enums\GeometryLocationType.cs">
       <Link>Entities\Maps\Geocoding\Common\Enums\GeometryLocationType.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\maps\geocoding\common\Geometry.cs">
-      <Link>Entities\Maps\Geocoding\Common\Geometry.cs</Link>
-    </Compile>
     <Compile Include="..\googleapi\entities\maps\geocoding\common\OpenLocationPlusCode.cs">
       <Link>Entities\Maps\Geocoding\Common\OpenLocationPlusCode.cs</Link>
     </Compile>
@@ -278,6 +278,18 @@
     </Compile>
     <Compile Include="..\googleapi\entities\maps\geocoding\place\request\PlaceGeocodeRequest.cs">
       <Link>Entities\Maps\Geocoding\Place\Request\PlaceGeocodeRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocoding\pluscode\request\PlusCodeGeocodeRequest.cs">
+      <Link>Entities\Maps\Geocoding\PlusCode\Request\PlusCodeGeocodeRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocoding\pluscode\response\Locality.cs">
+      <Link>Entities\Maps\Geocoding\PlusCode\Response\Locality.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocoding\pluscode\response\PlusCode.cs">
+      <Link>Entities\Maps\Geocoding\PlusCode\Response\PlusCode.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\maps\geocoding\pluscode\response\PlusCodeGeocodeResponse.cs">
+      <Link>Entities\Maps\Geocoding\PlusCode\Response\PlusCodeGeocodeResponse.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\maps\geolocation\request\CellTower.cs">
       <Link>Entities\Maps\Geolocation\Request\CellTower.cs</Link>
@@ -413,9 +425,6 @@
     </Compile>
     <Compile Include="..\googleapi\entities\places\common\enums\Scope.cs">
       <Link>Entities\Places\Common\Enums\Scope.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\common\Geometry.cs">
-      <Link>Entities\Places\Common\Geometry.cs</Link>
     </Compile>
     <Compile Include="..\googleapi\entities\places\common\MatchedSubstring.cs">
       <Link>Entities\Places\Common\MatchedSubstring.cs</Link>

@@ -11,6 +11,8 @@ using GoogleApi.Entities.Maps.Geocoding;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
+using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
+using GoogleApi.Entities.Maps.Geocoding.PlusCode.Response;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using GoogleApi.Entities.Maps.Geolocation.Response;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
@@ -72,6 +74,15 @@ namespace GoogleApi
         /// https://developers.google.com/maps/documentation/geocoding/intro#ReverseGeocoding
         /// </summary>
         public static HttpEngine<LocationGeocodeRequest, GeocodeResponse> LocationGeocode => HttpEngine<LocationGeocodeRequest, GeocodeResponse>.instance;
+
+        /// <summary>
+        /// The pluscode api is the process of converting a location (lat/lng or address) to a plus code (including the bounding box and the center).
+        /// This API is experimental.
+        /// As of December 2016, we are soliciting feedback on the functionality, in order to inform proposals to geocoding API providers such as Google.
+        /// You can discuss the API in the public mailing list or create an issue in the issue tracker.
+        /// https://github.com/google/open-location-code/wiki/Plus-codes-API
+        /// </summary>
+        public static HttpEngine<PlusCodeGeocodeRequest, PlusCodeGeocodeResponse> PlusCodeGeocode => HttpEngine<PlusCodeGeocodeRequest, PlusCodeGeocodeResponse>.instance;
 
         /// <summary>
         /// The Google Maps Geolocation API returns a location and accuracy radius based on information about cell towers and WiFi nodes that the mobile client can detect. 

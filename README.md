@@ -24,6 +24,7 @@ The following operations are supported.
     * Place
     * Address
     * Location (reverse)
+    * Plus Code
   * Geolocation
   * Roads
     * Nearest Roads
