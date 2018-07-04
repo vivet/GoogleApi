@@ -97,6 +97,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
+                Key = this.ApiKey,
                 Location = new Entities.Common.Location(40.7141289, -73.9614074),
                 ResultTypes = new List<PlaceLocationType> { PlaceLocationType.Premise, PlaceLocationType.Accounting }
             };
@@ -116,10 +117,27 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         }
 
         [Test]
+        public void LocationGeocodeWhenResultTypesWhenNoResultsTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = this.ApiKey,
+                Location = new Entities.Common.Location(40.7141289, -73.9614074),
+                ResultTypes = new List<PlaceLocationType> { PlaceLocationType.Accounting }
+            };
+            var response = GoogleMaps.LocationGeocode.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.ZeroResults, response.Status);
+        }
+
+
+        [Test]
         public void LocationGeocodeWhenLoncationTypesTest()
         {
             var request = new LocationGeocodeRequest
             {
+                Key = this.ApiKey,
                 Location = new Entities.Common.Location(40.7141289, -73.9614074),
                 LocationTypes = new List<GeometryLocationType> {  GeometryLocationType.Rooftop }
             };
@@ -131,11 +149,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
 
             Assert.IsNotNull(result);
             Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", result.FormattedAddress);
-
-            var types = result.Types?.ToArray();
-            Assert.IsNotNull(types);
-            Assert.IsNotEmpty(types);
-            Assert.Contains(PlaceLocationType.Premise, types);
+            Assert.AreEqual(GeometryLocationType.Rooftop, result.Geometry.LocationType);
         }
 
         [Test]
