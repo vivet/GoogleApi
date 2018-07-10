@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// "geocoder_status" indicates the status code resulting from the geocoding operation.
         /// This field may contain the following values.
         /// </summary>
-        [JsonProperty("geocoder_status")]
+        [JsonProperty("geocoder_status", ItemConverterType = typeof(StringEnumOrDefaultConverter<Status>))]
         public virtual Status Status { get; set; }
 
         /// <summary>
