@@ -39,6 +39,16 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         public virtual string Offset { get; set; }
 
         /// <summary>
+        /// Place Autocomplete can use session tokens to group together autocomplete requests for billing purposes.
+        /// A session consists of the activities required to resolve user input to a place.
+        /// When a session token is passed (using the optional sessiontoken parameter), 
+        /// autocompleterequests are not billed independently, but are instead billed once after a full 
+        /// utocompleteresult is returned. If the sessiontoken parameter is omitted, each request is billed independently.
+        /// See the pricing sheet for details.
+        /// </summary>
+        public virtual string SessionToken { get; set; }
+
+        /// <summary>
         /// The point around which you wish to retrieve Place information.
         /// </summary>
         public virtual Location Location { get; set; }
@@ -95,8 +105,11 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
             parameters.Add("language", this.Language.ToCode());
 
             if (!string.IsNullOrEmpty(this.Offset))
-                parameters.Add("offset", this.Offset);
+                parameters.Add("sessiontoken", this.Offset);
 
+            if (!string.IsNullOrEmpty(this.SessionToken))
+                parameters.Add("offset", this.SessionToken);
+                
             if (this.Location != null)
                 parameters.Add("location", this.Location.ToString());
 
