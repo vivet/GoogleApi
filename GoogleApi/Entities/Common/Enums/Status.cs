@@ -8,6 +8,11 @@ namespace GoogleApi.Entities.Common.Enums
     public enum Status
     {
         /// <summary>
+        /// Set when deserialization fails (default).
+        /// </summary>
+        Undefined = 0,
+
+        /// <summary>
         /// Indicates that no errors occurred; the place was successfully detected and at least one result was returned.
         /// </summary>
         [EnumMember(Value = "OK")]
