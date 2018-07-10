@@ -105,10 +105,10 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
             parameters.Add("language", this.Language.ToCode());
 
             if (!string.IsNullOrEmpty(this.Offset))
-                parameters.Add("sessiontoken", this.Offset);
+                parameters.Add("offset", this.Offset);
 
             if (!string.IsNullOrEmpty(this.SessionToken))
-                parameters.Add("offset", this.SessionToken);
+                parameters.Add("sessiontoken", this.SessionToken);
                 
             if (this.Location != null)
                 parameters.Add("location", this.Location.ToString());
