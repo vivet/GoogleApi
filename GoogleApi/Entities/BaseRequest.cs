@@ -45,12 +45,6 @@ namespace GoogleApi.Entities
         public virtual bool IsSsl { get; set; } = true;
 
         /// <summary>
-        /// See <see cref="IRequest.IsGzip"/>.
-        /// </summary>
-        [JsonIgnore]
-        public virtual bool IsGzip { get; set; } = false;
-
-        /// <summary>
         /// See <see cref="IRequest.GetUri()"/>.
         /// </summary>
         /// <returns>The <see cref="Uri"/>.</returns>

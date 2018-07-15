@@ -103,12 +103,6 @@ namespace GoogleApi.Entities.Search
         }
 
         /// <summary>
-        /// See <see cref="BaseRequest.IsGzip"/>.
-        /// </summary>
-        [JsonIgnore]
-        public override bool IsGzip { get; set; } = true;
-
-        /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
