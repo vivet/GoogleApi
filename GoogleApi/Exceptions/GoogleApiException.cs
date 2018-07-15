@@ -1,5 +1,4 @@
 using System;
-using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Exceptions
 {
@@ -8,16 +7,6 @@ namespace GoogleApi.Exceptions
     /// </summary>
     public class GoogleApiException : Exception
     {
-        /// <summary>
-        /// The request.
-        /// </summary>
-        public virtual IRequest Request { get; set; }
-
-        /// <summary>
-        /// The response if any is returned and deserialized.
-        /// </summary>
-        public virtual IResponse Response { get; set; }
-
         /// <summary>
         /// Constructor, accepting a error message and a optional status.
         /// </summary>
