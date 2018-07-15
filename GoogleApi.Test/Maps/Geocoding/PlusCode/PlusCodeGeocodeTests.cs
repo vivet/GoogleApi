@@ -1,8 +1,8 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocoding.PlusCode
@@ -110,29 +110,6 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         }
 
         [Test]
-        public void PlusCodeGeocodeWhenAsyncAndTimeoutTest()
-        {
-            var request = new PlusCodeGeocodeRequest
-            {
-                Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.71406249999997, -73.9613125)
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.PlusCodeGeocode.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void PlusCodeGeocodeWhenAsyncAndCancelledTest()
         {
             var request = new PlusCodeGeocodeRequest
@@ -159,10 +136,15 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         public void PlusCodeGeocodeWhenPlaceIdOrLocationOrAddressOrGlobalCodeIsNullTest()
         {
             var request = new PlusCodeGeocodeRequest();
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.PlusCodeGeocode.Query(request));
 
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlusCodeGeocode.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "PlaceId, Location, Address or GlobalCode is required.");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "PlaceId, Location, Address or GlobalCode is required.");
         }
     }
 }

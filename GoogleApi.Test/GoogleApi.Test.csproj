@@ -95,7 +95,6 @@
     <Compile Include="Maps\Geocoding\PlusCode\PlusCodeGeocodeTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
-    <Compile Include="HttpEngineTests.cs" />
     <Compile Include="Common\Extensions\DateTimeExtensionTest.cs" />
     <Compile Include="Common\Extensions\EnumExtensionTest.cs" />
     <Compile Include="Functions\FunctionsTests.cs" />

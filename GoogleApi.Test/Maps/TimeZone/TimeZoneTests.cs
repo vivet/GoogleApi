@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.TimeZone.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.TimeZone
@@ -44,32 +44,9 @@ namespace GoogleApi.Test.Maps.TimeZone
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual("America/New_York", response.TimeZoneId);
-            Assert.IsNotNull(response.TimeZoneName);
+            Assert.AreEqual("Eastern Daylight Time", response.TimeZoneName);
             Assert.IsNotNull(response.OffSet);
             Assert.IsNotNull(response.RawOffSet);
-        }
-
-        [Test]
-        public void TimeZoneWhenAsyncAndTimeoutTest()
-        {
-            var location = new Location(40.7141289, -73.9614074);
-            var request = new TimeZoneRequest
-            {
-                Location = location
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.TimeZone.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
 
         [Test]
@@ -104,6 +81,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual("America/New_York", response.TimeZoneId);
+            Assert.AreEqual("Nordamerikanische Ostküsten-Sommerzeit", response.TimeZoneName);
         }
 
         [Test]
@@ -134,9 +112,14 @@ namespace GoogleApi.Test.Maps.TimeZone
                 Key = this.ApiKey
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.TimeZone.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.TimeZone.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Location is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Location is required");
         }
     }
 }

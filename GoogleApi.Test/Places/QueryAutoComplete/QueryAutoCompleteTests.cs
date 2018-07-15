@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Exceptions;
@@ -61,30 +60,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenAsyncAndTimeoutTest()
-        {
-            var request = new PlacesQueryAutoCompleteRequest
-            {
-                Key = this.ApiKey,
-                Input = "jagtvej 2200"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GooglePlaces.QueryAutoComplete.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
 
         [Test]
@@ -175,8 +150,14 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = "test"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -188,8 +169,14 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = "test"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -201,8 +188,14 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Input is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Input is required");
         }
 
         [Test]
@@ -214,8 +207,14 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = string.Empty
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Input is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Input is required");
         }
 
         [Test]
@@ -228,8 +227,14 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Radius = 0
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
         [Test]
@@ -242,8 +247,14 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Radius = 50001
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.QueryAutoComplete.Query(request));
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
         }
     }
 }

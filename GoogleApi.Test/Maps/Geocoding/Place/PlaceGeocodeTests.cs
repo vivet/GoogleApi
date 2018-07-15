@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocoding.Place
@@ -64,29 +64,6 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
         }
 
         [Test]
-        public void PlaceGeocodeWhenAsyncAndTimeoutTest()
-        {
-            var request = new PlaceGeocodeRequest
-            {
-                Key = this.ApiKey,
-                PlaceId = "abc"
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.PlaceGeocode.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void PlaceGeocodeWhenAsyncAndCancelledTest()
         {
             var request = new PlaceGeocodeRequest
@@ -116,10 +93,15 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
             {
                 PlaceId = "test"
             };
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.PlaceGeocode.Query(request, TimeSpan.FromMilliseconds(1)));
 
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required.");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required.");
         }
 
         [Test]
@@ -131,10 +113,15 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
                 Key = "abc",
                 PlaceId = "test"
             };
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.PlaceGeocode.Query(request));
 
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "ClientId must begin with 'gme-'");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "ClientId must begin with 'gme-'");
         }
 
         [Test]
@@ -144,10 +131,15 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
             {
                 Key = this.ApiKey
             };
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.PlaceGeocode.Query(request, TimeSpan.FromMilliseconds(1)));
 
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "PlaceId is required.");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "PlaceId is required.");
         }
     }
 }

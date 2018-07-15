@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Detect.Request;
 using GoogleApi.Exceptions;
@@ -58,30 +57,6 @@ namespace GoogleApi.Test.Translate.Detect
         }
 
         [Test]
-        public void DetectWhenAsyncAndTimeoutTest()
-        {
-            var request = new DetectRequest
-            {
-                Key = this.ApiKey,
-                Qs = new[] { "Hello World" }
-            };
-
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleTranslate.Detect.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void DetectWhenAsyncAndCancelledTest()
         {
             var request = new DetectRequest
@@ -114,7 +89,7 @@ namespace GoogleApi.Test.Translate.Detect
 
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
             Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
         }
 
@@ -154,8 +129,14 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hej Verden" }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Detect.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -167,8 +148,14 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hej Verden" }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Detect.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -180,8 +167,14 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Detect.Query(request));
-            Assert.AreEqual(exception.Message, "Qs is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Qs is required");
         }
 
         [Test]
@@ -193,8 +186,14 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new string[0]
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleTranslate.Detect.Query(request));
-            Assert.AreEqual(exception.Message, "Qs is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Qs is required");
         }
     }
 }

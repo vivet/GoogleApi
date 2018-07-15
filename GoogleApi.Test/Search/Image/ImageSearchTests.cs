@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Image.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Search.Image
@@ -70,31 +70,6 @@ namespace GoogleApi.Test.Search.Image
         }
 
         [Test]
-        public void ImageSearchWhenAsyncAndTimeoutTest()
-        {
-            var request = new ImageSearchRequest
-            {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
-                Query = "google"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleSearch.ImageSearch.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void ImageSearchWhenAsyncAndCancelledTest()
         {
             var request = new ImageSearchRequest
@@ -145,8 +120,14 @@ namespace GoogleApi.Test.Search.Image
                 Key = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.ImageSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -158,8 +139,14 @@ namespace GoogleApi.Test.Search.Image
                 Query = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.ImageSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Query is required");
         }
 
         [Test]
@@ -172,8 +159,14 @@ namespace GoogleApi.Test.Search.Image
                 SearchEngineId = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.ImageSearch.Query(request));
-            Assert.AreEqual(exception.Message, "SearchEngineId is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "SearchEngineId is required");
         }
     }
 }

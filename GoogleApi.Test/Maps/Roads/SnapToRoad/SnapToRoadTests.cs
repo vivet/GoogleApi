@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
@@ -84,29 +83,6 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
         }
 
         [Test]
-        public void SnapToRoadWhenAsyncAndTimeoutTest()
-        {
-            var request = new SnapToRoadsRequest
-            {
-                Key = this.ApiKey,
-                Path = new[] { new Location(0, 0) }
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.SnapToRoad.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void SnapToRoadWhenAsyncAndCancelledTest()
         {
             var request = new SnapToRoadsRequest
@@ -156,9 +132,14 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Path = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -170,9 +151,14 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Path = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -183,9 +169,14 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Key = this.ApiKey
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Path is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Path is required");
         }
 
         [Test]
@@ -197,9 +188,14 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Path = new Location[0]
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Path is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Path is required");
         }
     }
 }

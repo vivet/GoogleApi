@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
@@ -50,30 +49,6 @@ namespace GoogleApi.Test.Places.Search.Text
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
-        }
-
-        [Test]
-        public void PlacesTextSearchWhenAsyncAndTimeoutTest()
-        {
-            var request = new PlacesTextSearchRequest
-            {
-                Key = this.ApiKey,
-                Query = "picadelly circus"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GooglePlaces.TextSearch.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
 
         [Test]
@@ -203,8 +178,14 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = "test"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -216,8 +197,14 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = "test"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -229,8 +216,14 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Query is required");
         }
 
         [Test]
@@ -242,8 +235,14 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = string.Empty
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Query is required");
         }
 
         [Test]
@@ -272,8 +271,14 @@ namespace GoogleApi.Test.Places.Search.Text
                 Location = new Location(0, 0)
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.TextSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Radius is required when Location is specified");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Radius is required when Location is specified");
         }
     }
 }

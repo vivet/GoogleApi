@@ -15,7 +15,6 @@ namespace GoogleApi.Test.Search.Image
             var request = new ImageSearchRequest();
 
             Assert.IsTrue(request.IsSsl);
-            Assert.IsTrue(request.IsGzip);
             Assert.IsTrue(request.PrettyPrint);
             Assert.AreEqual(request.Alt, AltType.Json);
 
