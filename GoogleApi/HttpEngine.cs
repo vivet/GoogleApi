@@ -19,6 +19,7 @@ namespace GoogleApi
     public abstract class HttpEngine : IDisposable
     {
         private static HttpClient httpClient;
+        private static readonly TimeSpan httpTimeout = new TimeSpan(0, 0, 30);
 
         /// <summary>
         /// Http Client.
@@ -36,7 +37,7 @@ namespace GoogleApi
 
                     HttpEngine.httpClient = new HttpClient(httpClientHandler)
                     {
-                        Timeout = HttpEngine.HttpTimeout
+                        Timeout = HttpEngine.httpTimeout
                     };
 
                     HttpEngine.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -50,11 +51,6 @@ namespace GoogleApi
             }
         }
 
-        /// <summary>
-        /// Http Timeout.
-        /// The http timeout for the request to receive a response.
-        /// </summary>
-        protected internal static TimeSpan HttpTimeout { get; set; } = new TimeSpan(0, 0, 30);
 
         /// <summary>
         /// Always Dispose.
