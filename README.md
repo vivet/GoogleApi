@@ -56,6 +56,7 @@ The following operations are supported.
 
 ##### Google Places
   * Place Search
+    * Find
     * Near By
     * Text
   * Place Details
