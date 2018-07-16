@@ -11,7 +11,7 @@ Feel free to contribute, throw questions and report issues. **I usually respond 
 
 ### Getting started...
 The library is extremely seamless to consume and use.  
-Each api implementation consists of a request and a response, as well as a generic facade operation to execute the request. The request has properties reflecting the parameters supported, and the response represents the object model for the returned json.  
+Each api implementation consists of a request and a response, as well as a generic facade operation to execute the request and return the response. The request has properties reflecting the parameters supported, and the response represents the object model for the returned json.  
 
 The example below, simply populates a request, invokes the facade operation, and recieves the response in return.  
 ```csharp
