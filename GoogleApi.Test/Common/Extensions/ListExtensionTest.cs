@@ -29,15 +29,5 @@ namespace GoogleApi.Test.Common.Extensions
             var exception = Assert.Throws<ArgumentNullException>(() => queryStringParameters.Add(null, VALUE));
             Assert.AreEqual("Value cannot be null.\r\nParameter name: key", exception.Message);
         }
-
-        [Test]
-        public void AddWhenValueIsNull()
-        {
-            const string NAME = "testName";
-            var queryStringParameters = new List<KeyValuePair<string, string>>();
-
-            var exception = Assert.Throws<ArgumentNullException>(() => queryStringParameters.Add(NAME, null));
-            Assert.AreEqual("Value cannot be null.\r\nParameter name: value", exception.Message);
-        }
     }
 }

@@ -87,6 +87,25 @@ namespace GoogleApi.Test.Places.Search.Find
         }
 
         [Test]
+        public void PlacesNearBySearchWhenInvalidKeyTest()
+        {
+            var request = new PlacesFindSearchRequest
+            {
+                Key = "test",
+                Input = "test"
+            };
+
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.FindSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerExceptions.FirstOrDefault();
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual("RequestDenied: The provided API key is invalid.", innerException.Message);
+        }
+
+        [Test]
         public void PlacesFindSearchWhenKeyIsNullTest()
         {
             var request = new PlacesFindSearchRequest

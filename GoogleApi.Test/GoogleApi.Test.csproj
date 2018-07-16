@@ -117,6 +117,7 @@
     <Compile Include="Places\Search\NearBy\NearBySearchRequestTests.cs" />
     <Compile Include="Places\Search\NearBy\NearBySearchTests.cs" />
     <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteTests.cs" />
+    <Compile Include="Places\Search\Find\FindSearchTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

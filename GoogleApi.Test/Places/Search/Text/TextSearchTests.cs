@@ -85,7 +85,7 @@ namespace GoogleApi.Test.Places.Search.Text
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual("The provided API key is invalid.", innerException.Message);
+            Assert.AreEqual("RequestDenied: The provided API key is invalid.", innerException.Message);
         }
 
         [Test]
