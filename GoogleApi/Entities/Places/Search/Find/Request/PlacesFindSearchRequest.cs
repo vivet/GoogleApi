@@ -32,7 +32,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
 
         /// <summary>
         /// Fields (optional).
-        /// Defaults to all basic fields.
+        /// Defaults to place_id.
         /// The fields specifying the types of place data to return, separated by a comma.
         /// Note, if you omit the fields parameter from a Find Place request, only the place_id for the result will be returned.
         /// </summary>
@@ -72,7 +72,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
         public virtual Location Location { get; set; }
 
         /// <summary>
-        /// See <see cref="BasePlacesSearchRequest.GetQueryStringParameters()"/>.
+        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()

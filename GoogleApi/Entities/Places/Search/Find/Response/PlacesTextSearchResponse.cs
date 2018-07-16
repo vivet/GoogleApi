@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
     /// <summary>
     /// Places Find Search Response.
     /// </summary>
-    public class PlacesFindSearchResponse : BasePlacesSearchResponse
+    public class PlacesFindSearchResponse : BasePlacesResponse
     {
         /// <summary>
         /// Candidates.

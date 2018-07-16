@@ -468,12 +468,6 @@
     <Compile Include="..\googleapi\entities\places\queryautocomplete\response\PlacesQueryAutoCompleteResponse.cs">
       <Link>Entities\Places\QueryAutoComplete\Response\PlacesQueryAutoCompleteResponse.cs</Link>
     </Compile>
-    <Compile Include="..\googleapi\entities\places\search\BasePlacesSearchRequest.cs">
-      <Link>Entities\Places\Search\BasePlacesSearchRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\googleapi\entities\places\search\BasePlacesSearchResponse.cs">
-      <Link>Entities\Places\Search\BasePlacesSearchResponse.cs</Link>
-    </Compile>
     <Compile Include="..\googleapi\entities\places\search\common\BaseResult.cs">
       <Link>Entities\Places\Search\Common\BaseResult.cs</Link>
     </Compile>
