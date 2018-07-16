@@ -51,7 +51,10 @@ namespace GoogleApi.Entities
         public virtual Uri GetUri()
         {
             var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
+            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => 
+                x.Value == null
+                    ? Uri.EscapeDataString(x.Key)
+                    : Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
             var uri = new Uri(scheme + this.BaseUrl + "?" + queryString);
 
             if (this.ClientId == null)
