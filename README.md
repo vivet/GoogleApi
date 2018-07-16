@@ -20,9 +20,12 @@ TResponse response = await {Api}.{Action}.QueryAsync<TRequest, TResponse>(reques
 ```
 
 A few other noteworthy members.
+##### Request
 ```csharp
-var uri = request.GetUri(); // Gets the full request uri, including parameters.
+var uri = request.GetUri(); // Gets the full request uri, including query parameters.
+var params = request.GetQUeryStringParameters(); // Gets a list of all the added parameters.
 ```
+##### Response
 ```csharp
 response.RawJson // The raw json returned by Google.
 response.RawQueryString // The querystring sent to Google when invoking the request.
