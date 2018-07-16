@@ -51,7 +51,6 @@ namespace GoogleApi
             }
         }
 
-
         /// <summary>
         /// Always Dispose.
         /// When true the <see cref="HttpClient"/> will be disposed after each execution.
@@ -144,6 +143,7 @@ namespace GoogleApi
                                 var response = await this.ProcessResponse(result);
 
                                 result.EnsureSuccessStatusCode();
+                                taskCompletion.SetResult(response);
 
                                 switch (response.Status)
                                 {
@@ -153,16 +153,17 @@ namespace GoogleApi
                                         break;
 
                                     default:
-                                        throw new InvalidOperationException(response.ErrorMessage);
+                                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            var exception = ex.GetBaseException();
-                            var googleException = new GoogleApiException(exception.Message, exception);
+                            var exception = ex is GoogleApiException 
+                                ? ex 
+                                : new GoogleApiException(ex.Message, ex);
 
-                            taskCompletion.SetException(googleException);
+                            taskCompletion.SetException(exception);
                         }
                     }, cancellationToken);
             }
