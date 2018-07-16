@@ -52,13 +52,6 @@ namespace GoogleApi
         }
 
         /// <summary>
-        /// Always Dispose.
-        /// When true the <see cref="HttpClient"/> will be disposed after each execution.
-        /// Otherwise it's re-used on following invocations.
-        /// </summary>
-        public static bool AlwaysDispose { get; set; } = false;
-
-        /// <summary>
         /// Disposes.
         /// </summary>
         public virtual void Dispose()
@@ -122,64 +115,53 @@ namespace GoogleApi
 
             var taskCompletion = new TaskCompletionSource<TResponse>();
 
-            try
-            {
-                await this.ProcessRequest(request, cancellationToken)
-                    .ContinueWith(async x =>
-                    {
-                        try
-                        {
-                            if (x.IsCanceled)
-                            {
-                                taskCompletion.SetCanceled();
-                            }
-                            else if (x.IsFaulted)
-                            {
-                                throw x.Exception ?? new Exception();
-                            }
-                            else
-                            {
-                                var result = await x;
-                                var response = await this.ProcessResponse(result);
-
-                                result.EnsureSuccessStatusCode();
-
-                                switch (response.Status)
-                                {
-                                    case Status.Ok:
-                                    case Status.ZeroResults:
-                                        taskCompletion.SetResult(response);
-                                        break;
-
-                                    default:
-                                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            if (ex is GoogleApiException)
-                            {
-                                taskCompletion.SetException(ex);
-                            }
-                            else
-                            {
-                                var baseException = ex.GetBaseException();
-                                var exception = new GoogleApiException(baseException.Message, baseException);
-
-                                taskCompletion.SetException(exception);
-                            }
-                        }
-                    }, cancellationToken);
-            }
-            finally
-            {
-                if (HttpEngine.AlwaysDispose)
+            await this.ProcessRequest(request, cancellationToken)
+                .ContinueWith(async x =>
                 {
-                    HttpEngine.HttpClient.Dispose();
-                    HttpEngine.HttpClient = null;
-                }
-            }
+                    try
+                    {
+                        if (x.IsCanceled)
+                        {
+                            taskCompletion.SetCanceled();
+                        }
+                        else if (x.IsFaulted)
+                        {
+                            throw x.Exception ?? new Exception();
+                        }
+                        else
+                        {
+                            var result = await x;
+                            var response = await this.ProcessResponse(result);
+
+                            result.EnsureSuccessStatusCode();
+
+                            switch (response.Status)
+                            {
+                                case Status.Ok:
+                                case Status.ZeroResults:
+                                    taskCompletion.SetResult(response);
+                                    break;
+
+                                default:
+                                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is GoogleApiException)
+                        {
+                            taskCompletion.SetException(ex);
+                        }
+                        else
+                        {
+                            var baseException = ex.GetBaseException();
+                            var exception = new GoogleApiException(baseException.Message, baseException);
+
+                            taskCompletion.SetException(exception);
+                        }
+                    }
+                }, cancellationToken);
 
             return await taskCompletion.Task;
         }
