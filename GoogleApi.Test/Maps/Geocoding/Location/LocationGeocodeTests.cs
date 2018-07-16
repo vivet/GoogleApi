@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocoding.Location
@@ -18,6 +18,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
+                Key = this.ApiKey,
                 Location = new Entities.Common.Location(40.7141289, -73.9614074)
             };
             var response = GoogleMaps.LocationGeocode.Query(request);
@@ -40,34 +41,13 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
+                Key = this.ApiKey,
                 Location = new Entities.Common.Location(40.7141289, -73.9614074)
             };
             var result = GoogleMaps.LocationGeocode.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
-        }
-
-        [Test]
-        public void LocationGeocodeWhenAsyncAndTimeoutTest()
-        {
-            var request = new LocationGeocodeRequest
-            {
-                Location = new Entities.Common.Location(40.7141289, -73.9614074)
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.LocationGeocode.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
 
         [Test]
@@ -131,7 +111,6 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             Assert.AreEqual(Status.ZeroResults, response.Status);
         }
 
-
         [Test]
         public void LocationGeocodeWhenLoncationTypesTest()
         {
@@ -156,10 +135,15 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         public void LocationGeocodeWhenLocationIsNullTest()
         {
             var request = new LocationGeocodeRequest();
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.LocationGeocode.Query(request, TimeSpan.FromMilliseconds(1)));
 
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.LocationGeocode.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Location is required.");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Location is required.");
         }
     }
 }

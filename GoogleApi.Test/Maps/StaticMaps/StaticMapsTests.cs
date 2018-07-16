@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
@@ -14,7 +13,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
     public class StaticMapsTests : BaseTest
     {
         [Test]
-        public void StreetViewTest()
+        public void StaticMapsTest()
         {
             var request = new StaticMapsRequest
             {
@@ -31,7 +30,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         }
 
         [Test]
-        public void StreetViewWhenAsyncTest()
+        public void StaticMapsWhenAsyncTest()
         {
             var request = new StaticMapsRequest
             {
@@ -47,31 +46,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         }
 
         [Test]
-        public void StreetViewWhenAsyncAndTimeoutTest()
-        {
-            var request = new StaticMapsRequest
-            {
-                Key = this.ApiKey,
-                Center = new Location(60.170877, 24.942796),
-                ZoomLevel = 1
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.StaticMaps.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
-        public void StreetViewWhenAsyncAndCancelledTest()
+        public void StaticMapsWhenAsyncAndCancelledTest()
         {
             var request = new StaticMapsRequest
             {
@@ -89,7 +64,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         }
 
         [Test]
-        public void StreetViewWhenInvalidKeyTest()
+        public void StaticMapsWhenInvalidKeyTest()
         {
             var request = new StaticMapsRequest
             {
@@ -109,7 +84,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         }
 
         [Test]
-        public void StreetViewWhenKeyIsNullTest()
+        public void StaticMapsWhenKeyIsNullTest()
         {
             var request = new StaticMapsRequest
             {
@@ -118,13 +93,18 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 ZoomLevel = 1
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.StaticMaps.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
-        public void StreetViewWhenKeyIsStringEmptyTest()
+        public void StaticMapsWhenKeyIsStringEmptyTest()
         {
             var request = new StaticMapsRequest
             {
@@ -133,31 +113,36 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 ZoomLevel = 1
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.StaticMaps.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
-        public void StreetViewWhenPathsTest()
+        public void StaticMapsWhenPathsTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void StreetViewWhenStylesTest()
+        public void StaticMapsWhenStylesTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void StreetViewWhenVisiblesTest()
+        public void StaticMapsWhenVisiblesTest()
         {
             Assert.Inconclusive();
         }
 
         [Test]
-        public void StreetViewWhenMarkersTest()
+        public void StaticMapsWhenMarkersTest()
         {
             Assert.Inconclusive();
         }

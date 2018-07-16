@@ -14,7 +14,6 @@ namespace GoogleApi.Test.Search.Web
             var request = new WebSearchRequest();
 
             Assert.IsTrue(request.IsSsl);
-            Assert.IsTrue(request.IsGzip);
             Assert.IsTrue(request.PrettyPrint);
             Assert.AreEqual(request.Alt, AltType.Json);
         }

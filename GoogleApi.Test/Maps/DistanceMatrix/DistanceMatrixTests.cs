@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.DistanceMatrix
@@ -55,30 +55,6 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
-        }
-
-        [Test]
-        public void DistanceMatrixWhenAsyncAndTimeoutTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(0, 0) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.DistanceMatrix.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
 
         [Test]
@@ -200,9 +176,14 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Destinations = new[] { new Location("test") }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Origins is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Origins is required");
         }
 
         [Test]
@@ -215,9 +196,14 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Destinations = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Origins is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Origins is required");
         }
 
         [Test]
@@ -229,9 +215,14 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Origins = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Destinations is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Destinations is required");
         }
 
         [Test]
@@ -244,9 +235,14 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Destinations = new Location[0]
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Destinations is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Destinations is required");
         }
 
         [Test]
@@ -262,9 +258,14 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 ArrivalTime = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
         }
     }
 }

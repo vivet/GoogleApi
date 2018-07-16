@@ -18,7 +18,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         /// Query — The text string on which to search, for example: "restaurant". 
         /// The Google Places service will return candidate matches based on this string and order the results based on their perceived relevance.
         /// </summary>
-        public string Query { get; set; }
+        public virtual string Query { get; set; }
        
         /// <summary>
         /// See <see cref="BasePlacesSearchRequest.GetQueryStringParameters()"/>.

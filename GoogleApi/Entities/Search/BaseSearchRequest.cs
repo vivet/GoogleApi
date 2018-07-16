@@ -4,7 +4,6 @@ using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
-using Newtonsoft.Json;
 using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Search
@@ -101,12 +100,6 @@ namespace GoogleApi.Entities.Search
             get => true;
             set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
         }
-
-        /// <summary>
-        /// See <see cref="BaseRequest.IsGzip"/>.
-        /// </summary>
-        [JsonIgnore]
-        public override bool IsGzip { get; set; } = true;
 
         /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.

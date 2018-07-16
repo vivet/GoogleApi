@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocoding.Address
@@ -49,28 +49,6 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         }
 
         [Test]
-        public void AddressGeocodeWhenAsyncAndTimeoutTest()
-        {
-            var request = new AddressGeocodeRequest
-            {
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.AddressGeocode.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void AddressGeocodeWhenAsyncAndCancelledTest()
         {
             var request = new AddressGeocodeRequest
@@ -97,6 +75,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         {
             var request = new AddressGeocodeRequest
             {
+                Key = this.ApiKey,
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
                 Bounds = new ViewPort
                 {
@@ -120,6 +99,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         {
             var request = new AddressGeocodeRequest
             {
+                Key = this.ApiKey,
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
                 Region = "Bedford"
             };
@@ -144,10 +124,15 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         public void AddressGeocodeWhenAddressIsNullTest()
         {
             var request = new AddressGeocodeRequest();
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.AddressGeocode.Query(request));
 
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.AddressGeocode.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Address is required.");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Address is required.");
         }
     }
 }

@@ -95,7 +95,6 @@
     <Compile Include="Maps\Geocoding\PlusCode\PlusCodeGeocodeTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationTests.cs" />
-    <Compile Include="HttpEngineTests.cs" />
     <Compile Include="Common\Extensions\DateTimeExtensionTest.cs" />
     <Compile Include="Common\Extensions\EnumExtensionTest.cs" />
     <Compile Include="Functions\FunctionsTests.cs" />
@@ -118,6 +117,7 @@
     <Compile Include="Places\Search\NearBy\NearBySearchRequestTests.cs" />
     <Compile Include="Places\Search\NearBy\NearBySearchTests.cs" />
     <Compile Include="Places\QueryAutoComplete\QueryAutoCompleteTests.cs" />
+    <Compile Include="Places\Search\Find\FindSearchTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -45,19 +45,16 @@ namespace GoogleApi.Entities
         public virtual bool IsSsl { get; set; } = true;
 
         /// <summary>
-        /// See <see cref="IRequest.IsGzip"/>.
-        /// </summary>
-        [JsonIgnore]
-        public virtual bool IsGzip { get; set; } = false;
-
-        /// <summary>
         /// See <see cref="IRequest.GetUri()"/>.
         /// </summary>
         /// <returns>The <see cref="Uri"/>.</returns>
         public virtual Uri GetUri()
         {
             var scheme = this.IsSsl ? "https://" : "http://";
-            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
+            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => 
+                x.Value == null
+                    ? Uri.EscapeDataString(x.Key)
+                    : Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
             var uri = new Uri(scheme + this.BaseUrl + "?" + queryString);
 
             if (this.ClientId == null)

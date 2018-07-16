@@ -1,56 +1,104 @@
-﻿using System;
+﻿using GoogleApi.Entities;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
+using GoogleApi.Exceptions;
+using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GoogleApi.Entities;
-using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Interfaces;
-using GoogleApi.Exceptions;
-using Newtonsoft.Json;
 
 namespace GoogleApi
 {
     /// <summary>
-    /// A public-surface API that exposes the Google Maps API functionality.
+    /// Http Engine (abstract).
     /// </summary>
-    /// <typeparam name="TRequest"></typeparam>
-    /// <typeparam name="TResponse"></typeparam>
-    public sealed class HttpEngine<TRequest, TResponse>
-        where TRequest : IRequest, new()
-        where TResponse : IResponse, new()
+    public abstract class HttpEngine : IDisposable
     {
-        internal readonly TimeSpan defaultTimeout = new TimeSpan(0, 0, 30);
-        internal static readonly HttpEngine<TRequest, TResponse> instance = new HttpEngine<TRequest, TResponse>();
+        private static HttpClient httpClient;
+        private static readonly TimeSpan httpTimeout = new TimeSpan(0, 0, 30);
 
         /// <summary>
-        /// Query the Google Maps API using the provided request with the default timeout of 30 seconds.
+        /// Http Client.
         /// </summary>
-        /// <param name="request">The request that will be sent.</param>
-        /// <returns>The response that was received.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        /// <exception cref="TaskCanceledException">Thrown when the provided Google client ID or signing key are invalid.</exception>
-        public TResponse Query(TRequest request)
+        protected internal static HttpClient HttpClient
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            get
+            {
+                if (HttpEngine.httpClient == null)
+                {
+                    var httpClientHandler = new HttpClientHandler
+                    {
+                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                    };
 
-            return this.Query(request, this.defaultTimeout);
+                    HttpEngine.httpClient = new HttpClient(httpClientHandler)
+                    {
+                        Timeout = HttpEngine.httpTimeout
+                    };
+
+                    HttpEngine.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                }
+
+                return HttpEngine.httpClient;
+            }
+            set
+            {
+                HttpEngine.httpClient = value;
+            }
         }
 
         /// <summary>
-        /// Query the Google Maps API using the provided request and timeout period.
+        /// Always Dispose.
+        /// When true the <see cref="HttpClient"/> will be disposed after each execution.
+        /// Otherwise it's re-used on following invocations.
+        /// </summary>
+        public static bool AlwaysDispose { get; set; } = false;
+
+        /// <summary>
+        /// Disposes.
+        /// </summary>
+        public virtual void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Disposes of the <see cref="HttpClient"/>, if <paramref name="disposing"/> is true.
+        /// </summary>
+        /// <param name="disposing">Whether to dispose resources or not.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+                return;
+
+            HttpEngine.HttpClient?.Dispose();
+            HttpEngine.httpClient = null;
+        }
+    }
+
+    /// <summary>
+    /// Http Engine.
+    /// Manges the http connections, and is responsible for invoking requst and handling responses.
+    /// </summary>
+    /// <typeparam name="TRequest"></typeparam>
+    /// <typeparam name="TResponse"></typeparam>
+    public sealed class HttpEngine<TRequest, TResponse> : HttpEngine
+        where TRequest : IRequest, new()
+        where TResponse : IResponse, new()
+    {
+        internal static readonly HttpEngine<TRequest, TResponse> instance = new HttpEngine<TRequest, TResponse>();
+
+        /// <summary>
+        /// Query.
         /// </summary>
         /// <param name="request">The request that will be sent.</param>
-        /// <param name="timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
-        /// The specify an infinite timeout, pass a TimeSpan with a TotalMillisecond value of Timeout.Infinite.
-        /// When a request is aborted due to a timeout an AggregateException will be thrown with an InnerException of type TimeoutException.</param>
-        /// <returns>The response that was received.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        /// <exception cref="TaskCanceledException">Thrown when the provided Google client ID or signing key are invalid.</exception>
-        public TResponse Query(TRequest request, TimeSpan timeout)
+        /// <returns>The <see cref="IResponse"/>.</returns>
+        public TResponse Query(TRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -59,48 +107,12 @@ namespace GoogleApi
         }
 
         /// <summary>
-        /// Asynchronously query the Google Maps API using the provided request.
+        /// Query Async.
         /// </summary>
         /// <param name="request">The request that will be sent.</param>
-        /// <returns>A Task with the future value of the response.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        public Task<TResponse> QueryAsync(TRequest request)
-        {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            return this.QueryAsync(request, CancellationToken.None);
-        }
-
-        /// <summary>
-        /// Asynchronously query the Google Maps API using the provided request.
-        /// </summary>
-        /// <param name="request">The request that will be sent.</param>
-        /// <param name="timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
-        /// The specify an infinite timeout, pass a TimeSpan with a TotalMillisecond value of Timeout.Infinite.
-        /// When a request is aborted due to a timeout the returned task will transition to the Faulted state with a TimeoutException.</param>
-        /// <returns>A Task with the future value of the response.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout)
-        {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            if (timeout == null)
-                throw new ArgumentNullException(nameof(timeout));
-
-            return this.QueryAsync(request, timeout, CancellationToken.None);
-        }
-
-        /// <summary>
-        /// Asynchronously query the Google Maps API using the provided request.
-        /// </summary>
-        /// <param name="request">The request that will be sent.</param>
-        /// <param name="cancellationToken">A cancellation cancellationToken that can be used to cancel the pending asynchronous task.</param>
-        /// <returns>A Task with the future value of the response.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        public Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken)
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
+        /// <returns>The <see cref="Task{T}"/>.</returns>
+        public async Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -108,125 +120,123 @@ namespace GoogleApi
             if (cancellationToken == null)
                 throw new ArgumentNullException(nameof(cancellationToken));
 
-            return this.QueryAsync(request, TimeSpan.FromMilliseconds(Timeout.Infinite), cancellationToken);
+            var taskCompletion = new TaskCompletionSource<TResponse>();
+
+            try
+            {
+                await this.ProcessRequest(request, cancellationToken)
+                    .ContinueWith(async x =>
+                    {
+                        try
+                        {
+                            if (x.IsCanceled)
+                            {
+                                taskCompletion.SetCanceled();
+                            }
+                            else if (x.IsFaulted)
+                            {
+                                throw x.Exception ?? new Exception();
+                            }
+                            else
+                            {
+                                var result = await x;
+                                var response = await this.ProcessResponse(result);
+
+                                result.EnsureSuccessStatusCode();
+
+                                switch (response.Status)
+                                {
+                                    case Status.Ok:
+                                    case Status.ZeroResults:
+                                        taskCompletion.SetResult(response);
+                                        break;
+
+                                    default:
+                                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex is GoogleApiException)
+                            {
+                                taskCompletion.SetException(ex);
+                            }
+                            else
+                            {
+                                var baseException = ex.GetBaseException();
+                                var exception = new GoogleApiException(baseException.Message, baseException);
+
+                                taskCompletion.SetException(exception);
+                            }
+                        }
+                    }, cancellationToken);
+            }
+            finally
+            {
+                if (HttpEngine.AlwaysDispose)
+                {
+                    HttpEngine.HttpClient.Dispose();
+                    HttpEngine.HttpClient = null;
+                }
+            }
+
+            return await taskCompletion.Task;
         }
 
-        /// <summary>
-        /// Asynchronously query the Google Maps API using the provided request.
-        /// </summary>
-        /// <param name="request">The request that will be sent.</param>
-        /// <param name="timeout">A TimeSpan specifying the amount of time to wait for a response before aborting the request.
-        /// The specify an infinite timeout, pass a TimeSpan with a TotalMillisecond value of Timeout.Infinite.
-        /// When a request is aborted due to a timeout the returned task will transition to the Faulted state with a TimeoutException.</param>
-        /// <param name="cancellationToken">A cancellation cancellationToken that can be used to cancel the pending asynchronous task.</param>
-        /// <returns>A Task with the future value of the response.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when a null value is passed to the request parameter.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the value of timeout is neither a positive value or infinite.</exception>
-        public Task<TResponse> QueryAsync(TRequest request, TimeSpan timeout, CancellationToken cancellationToken)
+        private async Task<HttpResponseMessage> ProcessRequest(TRequest request, CancellationToken cancellationToken = default)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
-
-            if (timeout == null)
-                throw new ArgumentNullException(nameof(timeout));
-
-            if (cancellationToken == null)
-                throw new ArgumentNullException(nameof(cancellationToken));
 
             var uri = request.GetUri();
-            var httpHandler = new HttpClientHandler { AutomaticDecompression = request.IsGzip ? DecompressionMethods.GZip | DecompressionMethods.Deflate : DecompressionMethods.None };
-            var httpClient = new HttpClient(httpHandler) { Timeout = timeout };
 
-            Task<HttpResponseMessage> task;
-            if (request is IRequestJson)
+            if (request is IRequestQueryString)
             {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-                var serializeObject = JsonConvert.SerializeObject(request, settings);
-                var stringContent = new StringContent(serializeObject, Encoding.UTF8);
-                var content = stringContent.ReadAsStreamAsync().Result;
-                var streamContent = new StreamContent(content);
-
-                task = httpClient.PostAsync(uri, streamContent, cancellationToken);
+                return await HttpEngine.HttpClient.GetAsync(uri, cancellationToken);
             }
             else
             {
-                task = httpClient.GetAsync(uri, cancellationToken);
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+                var serializeObject = JsonConvert.SerializeObject(request, settings);
+                var stringContent = new StringContent(serializeObject, Encoding.UTF8);
+                var content = await stringContent.ReadAsStreamAsync();
+                var streamContent = new StreamContent(content);
+
+                return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken);
+            }
+        }
+        private async Task<TResponse> ProcessResponse(HttpResponseMessage httpResponse)
+        {
+            if (httpResponse == null)
+                throw new ArgumentNullException(nameof(httpResponse));
+
+            var response = new TResponse();
+            
+            switch (response)
+            {
+                case BaseStreamResponse streamResponse:
+                    streamResponse.Buffer = await httpResponse.Content.ReadAsByteArrayAsync();
+                    response = (TResponse)(IResponse)streamResponse;
+                    break;
+
+                default:
+                    var rawJson = await httpResponse.Content.ReadAsStringAsync();
+                    response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+                    response.RawJson = rawJson;
+                    break;
             }
 
-            var taskCompletionSource = new TaskCompletionSource<TResponse>();
-            task.ContinueWith(x =>
-            {
-                var response = default(TResponse);
-                try
-                {
-                    if (x.IsFaulted)
-                    {
-                        var exception = x.Exception == null
-                            ? new NullReferenceException("task.Exception")
-                            : x.Exception?.InnerException ?? x.Exception ?? new Exception("unknown error");
+            response.RawQueryString = httpResponse.RequestMessage.RequestUri.PathAndQuery;
+            response.Status = httpResponse.IsSuccessStatusCode
+                ? response.Status ?? Status.Ok
+                : Status.HttpError;
 
-                        throw exception;
-                    }
-
-                    if (x.IsCanceled)
-                    {
-                        taskCompletionSource.SetCanceled();
-                    }
-                    else
-                    {
-                        var result = x.Result;
-
-                        if (new TResponse() is BaseStreamResponse streamResponse)
-                        {
-                            streamResponse.Buffer = result.Content.ReadAsByteArrayAsync().Result;
-                            response = (TResponse)(IResponse)streamResponse;
-                        }
-                        else
-                        {
-                            var rawJson = result.Content.ReadAsStringAsync().Result;
-
-                            response = JsonConvert.DeserializeObject<TResponse>(rawJson);
-                            response.RawJson = rawJson;
-                        }
-
-                        response.RawQueryString = result.RequestMessage.RequestUri.PathAndQuery;
-                        response.Status = result.IsSuccessStatusCode ? response.Status ?? Status.Ok : Status.HttpError;
-
-                        result.EnsureSuccessStatusCode();
-
-                        if (response.Status != Status.Ok && response.Status != Status.ZeroResults)
-                        {
-                            throw new GoogleApiException(response.ErrorMessage)
-                            {
-                                Request = request,
-                                Response = response
-                            };
-                        }
-
-                        taskCompletionSource.SetResult(response);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    var exception = ex is GoogleApiException 
-                        ? ex 
-                        : new GoogleApiException(ex.Message, ex)
-                        {
-                            Request = request,
-                            Response = response
-                        };
-                    taskCompletionSource.SetException(exception);
-                }
-                finally
-                {
-                    httpClient.Dispose();
-                    httpHandler.Dispose();
-                }
-            }, TaskContinuationOptions.ExecuteSynchronously);
-
-            return taskCompletionSource.Task;
+            return response;
         }
     }
 }

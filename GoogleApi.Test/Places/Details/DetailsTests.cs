@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Common.Enums;
@@ -95,29 +94,6 @@ namespace GoogleApi.Test.Places.Details
         }
 
         [Test]
-        public void PlacesDetailsWhenAsyncAndTimeoutTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = this.ApiKey,
-                PlaceId = Guid.NewGuid().ToString("N")
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GooglePlaces.Details.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void PlacesDetailsWhenAsyncAndCancelledTest()
         {
             var request = new PlacesDetailsRequest
@@ -150,7 +126,7 @@ namespace GoogleApi.Test.Places.Details
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual("The provided API key is invalid.", innerException.Message);
+            Assert.AreEqual("RequestDenied: The provided API key is invalid.", innerException.Message);
         }
 
         [Test]
@@ -174,8 +150,14 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = "test"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -187,8 +169,14 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = "test"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -200,8 +188,14 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "PlaceId is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "PlaceId is required");
         }
 
         [Test]
@@ -213,8 +207,14 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = string.Empty
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Details.Query(request));
-            Assert.AreEqual(exception.Message, "PlaceId is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "PlaceId is required");
         }
     }
 }

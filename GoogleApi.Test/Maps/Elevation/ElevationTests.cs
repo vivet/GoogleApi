@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Elevation.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Elevation
@@ -41,28 +41,6 @@ namespace GoogleApi.Test.Maps.Elevation
         }
 
         [Test]
-        public void ElevationWhenAsyncAndTimeoutTest()
-        {
-            var request = new ElevationRequest
-            {
-                Locations = new[] { new Location(40.7141289, -73.9614074) }
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.Elevation.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void ElevationWhenAsyncAndCancelledTest()
         {
             var request = new ElevationRequest
@@ -93,9 +71,14 @@ namespace GoogleApi.Test.Maps.Elevation
                 Samples = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Samples is required, when using Path");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Samples is required, when using Path");
         }
 
         [Test]
@@ -107,9 +90,14 @@ namespace GoogleApi.Test.Maps.Elevation
                 Locations = new[] { new Location(40.7141289, -73.9614074) }
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Path and Locations cannot both be specified");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Path and Locations cannot both be specified");
         }
 
         [Test]
@@ -117,9 +105,14 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest();
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.Elevation.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Locations or Path is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Locations or Path is required");
         }
     }
 }

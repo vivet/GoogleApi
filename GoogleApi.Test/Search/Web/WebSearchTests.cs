@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Web.Request;
+using GoogleApi.Exceptions;
 using NUnit.Framework;
 using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
@@ -148,31 +148,6 @@ namespace GoogleApi.Test.Search.Web
 
             var items = response.Items;
             Assert.IsNotEmpty(items);
-        }
-
-        [Test]
-        public void WebSearchWhenAsyncAndTimeoutTest()
-        {
-            var request = new WebSearchRequest
-            {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
-                Query = "google"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleSearch.WebSearch.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
 
         [Test]
@@ -553,8 +528,14 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, $"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, $"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}");
         }
 
         [Test]
@@ -674,8 +655,14 @@ namespace GoogleApi.Test.Search.Web
                 Key = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -687,8 +674,14 @@ namespace GoogleApi.Test.Search.Web
                 Query = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Query is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Query is required");
         }
 
         [Test]
@@ -701,8 +694,14 @@ namespace GoogleApi.Test.Search.Web
                 SearchEngineId = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "SearchEngineId is required");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "SearchEngineId is required");
         }
 
         [Test]
@@ -719,8 +718,14 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Number must be between 1 and 10");
         }
 
         [Test]
@@ -737,8 +742,14 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var exception = Assert.Throws<InvalidOperationException>(() => GoogleSearch.WebSearch.Query(request));
-            Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Number must be between 1 and 10");
         }
     }
 }

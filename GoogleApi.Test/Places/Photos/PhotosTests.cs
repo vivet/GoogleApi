@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
@@ -71,30 +70,6 @@ namespace GoogleApi.Test.Places.Photos
         }
 
         [Test]
-        public void PlacesPhotosWhenAsyncAndTimeoutTest()
-        {
-            var request = new PlacesPhotosRequest
-            {
-                Key = this.ApiKey,
-                PhotoReference = Guid.NewGuid().ToString("N"),
-                MaxWidth = 1600
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GooglePlaces.Photos.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
-        }
-
-        [Test]
         public void PlacesPhotosWhenAsyncAndCancelledTest()
         {
             var request = new PlacesPhotosRequest
@@ -154,8 +129,14 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 10
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -168,8 +149,14 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 10
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "Key is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -181,8 +168,14 @@ namespace GoogleApi.Test.Places.Photos
                 PhotoReference = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "PhotoReference is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "PhotoReference is required");
         }
 
         [Test]
@@ -194,8 +187,14 @@ namespace GoogleApi.Test.Places.Photos
                 PhotoReference = string.Empty
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "PhotoReference is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "PhotoReference is required");
         }
 
         [Test]
@@ -207,8 +206,14 @@ namespace GoogleApi.Test.Places.Photos
                 PhotoReference = "abc"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxHeight or MaxWidth is required");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "MaxHeight or MaxWidth is required");
         }
 
         [Test]
@@ -221,8 +226,14 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 0
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
         }
 
         [Test]
@@ -235,8 +246,14 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 1601
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
         }
 
         [Test]
@@ -249,8 +266,14 @@ namespace GoogleApi.Test.Places.Photos
                 MaxWidth = 0
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
         }
 
         [Test]
@@ -263,8 +286,14 @@ namespace GoogleApi.Test.Places.Photos
                 MaxWidth = 1601
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GooglePlaces.Photos.Query(request));
-            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
         }
     }
 }

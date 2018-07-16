@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Places.Details.Response;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Places.Details.Response
+namespace GoogleApi.Entities.Places.Common
 {
     /// <summary>
     /// Opening Hours.

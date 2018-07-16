@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.StreetView.Request;
@@ -43,29 +42,6 @@ namespace GoogleApi.Test.Maps.StreetView
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Buffer);
             Assert.AreEqual(Status.Ok, result.Status);
-        }
-
-        [Test]
-        public void StreetViewWhenAsyncAndTimeoutTest()
-        {
-            var request = new StreetViewRequest
-            {
-                Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796)
-            };
-            var exception = Assert.Throws<AggregateException>(() =>
-            {
-                var result = GoogleMaps.StreetView.QueryAsync(request, TimeSpan.FromMilliseconds(1)).Result;
-                Assert.IsNull(result);
-            });
-
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "One or more errors occurred.");
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(innerException.GetType(), typeof(TaskCanceledException));
-            Assert.AreEqual(innerException.Message, "A task was canceled.");
         }
 
         [Test]
@@ -113,9 +89,14 @@ namespace GoogleApi.Test.Maps.StreetView
                 Location = new Location(60.170877, 24.942796)
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.StreetView.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -127,9 +108,14 @@ namespace GoogleApi.Test.Maps.StreetView
                 Location = new Location(60.170877, 24.942796)
             };
 
-            var exception = Assert.Throws<ArgumentException>(() => GoogleMaps.StreetView.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.Query(request));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual("One or more errors occurred.", exception.Message);
+
+            var innerException = exception.InnerException;
+            Assert.IsNotNull(innerException);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]

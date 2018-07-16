@@ -14,16 +14,13 @@ namespace GoogleApi.Entities.Common.Extensions
         /// <param name="list">The <see cref="List{T}"/> to add a <see cref="KeyValuePair{TKey,TValue}"/> to.</param>
         /// <param name="key">The <see cref="string"/> key.</param>
         /// <param name="value">The <see cref="string"/> value.</param>
-        public static void Add(this IList<KeyValuePair<string, string>> list, string key, string value)
+        public static void Add(this IList<KeyValuePair<string, string>> list, string key, string value = null)
         {
             if (list == null)
                 throw new ArgumentNullException(nameof(list));
 
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
-
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
 
             var parameter = new KeyValuePair<string, string>(key, value);
 
