@@ -4,7 +4,6 @@ using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
-using Newtonsoft.Json;
 using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Search
