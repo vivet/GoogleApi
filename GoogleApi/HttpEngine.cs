@@ -143,7 +143,6 @@ namespace GoogleApi
                                 var response = await this.ProcessResponse(result);
 
                                 result.EnsureSuccessStatusCode();
-                                taskCompletion.SetResult(response);
 
                                 switch (response.Status)
                                 {
@@ -159,11 +158,17 @@ namespace GoogleApi
                         }
                         catch (Exception ex)
                         {
-                            var exception = ex is GoogleApiException 
-                                ? ex 
-                                : new GoogleApiException(ex.Message, ex);
+                            if (ex is GoogleApiException)
+                            {
+                                taskCompletion.SetException(ex);
+                            }
+                            else
+                            {
+                                var baseException = ex.GetBaseException();
+                                var exception = new GoogleApiException(baseException.Message, baseException);
 
-                            taskCompletion.SetException(exception);
+                                taskCompletion.SetException(exception);
+                            }
                         }
                     }, cancellationToken);
             }
