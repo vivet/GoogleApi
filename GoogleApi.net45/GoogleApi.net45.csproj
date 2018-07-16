@@ -508,6 +508,9 @@
     <Compile Include="..\GoogleApi\Entities\Places\Common\MatchedSubstring.cs">
       <Link>Entities\Places\Common\MatchedSubstring.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\Common\OpeningHours.cs">
+      <Link>Entities\Places\Common\OpeningHours.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Common\Photo.cs">
       <Link>Entities\Places\Common\Photo.cs</Link>
     </Compile>
@@ -537,9 +540,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Details\Response\DetailsResult.cs">
       <Link>Entities\Places\Details\Response\DetailsResult.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Places\Details\Response\OpeningHours.cs">
-      <Link>Entities\Places\Details\Response\OpeningHours.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Details\Response\Period.cs">
       <Link>Entities\Places\Details\Response\Period.cs</Link>
@@ -576,6 +576,21 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\Common\OpeningHours.cs">
       <Link>Entities\Places\Search\Common\OpeningHours.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\find\request\enums\FieldTypes.cs">
+      <Link>Entities\Places\Search\Find\Request\Enums\FieldTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\find\request\enums\InputType.cs">
+      <Link>Entities\Places\Search\Find\Request\Enums\InputType.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\find\request\PlacesFindSearchRequest.cs">
+      <Link>Entities\Places\Search\Find\Request\PlacesFindSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\find\response\Candidate.cs">
+      <Link>Entities\Places\Search\Find\Response\Candidate.cs</Link>
+    </Compile>
+    <Compile Include="..\googleapi\entities\places\search\find\response\PlacesTextSearchResponse.cs">
+      <Link>Entities\Places\Search\Find\Response\PlacesTextSearchResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Search\NearBy\Request\Enums\Ranking.cs">
       <Link>Entities\Places\Search\NearBy\Request\Enums\Ranking.cs</Link>

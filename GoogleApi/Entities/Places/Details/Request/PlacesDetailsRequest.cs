@@ -24,7 +24,8 @@ namespace GoogleApi.Entities.Places.Details.Request
 
         /// <summary>
         /// Language (optional) — The language code, indicating in which language the results should be returned, if possible. 
-        /// See the list of supported languages and their codes. Note that we often update supported languages so this list may not be exhaustive.
+        /// See the list of supported languages and their codes: https://developers.google.com/maps/faq#languagesupport
+        /// Note that we often update supported languages so this list may not be exhaustive.
         /// </summary>
         public virtual Language Language { get; set; } = Language.English;
 

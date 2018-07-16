@@ -6,6 +6,8 @@ using GoogleApi.Entities.Places.Photos.Request;
 using GoogleApi.Entities.Places.Photos.Response;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using GoogleApi.Entities.Places.QueryAutoComplete.Response;
+using GoogleApi.Entities.Places.Search.Find.Request;
+using GoogleApi.Entities.Places.Search.Find.Response;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using GoogleApi.Entities.Places.Search.NearBy.Response;
 using GoogleApi.Entities.Places.Search.Text.Request;
@@ -27,6 +29,14 @@ namespace GoogleApi
         /// https://developers.google.com/places/web-service/photos
         /// </summary>
         public static HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse> Photos => HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse>.instance;
+
+        /// <summary>
+        /// The Google Places API Find Search Service is a web service that returns information about a set of places based on an input.
+        /// A Find Place request takes a text input, and returns a place.
+        /// The text input can be any kind of Places data, for example, a name, address, or phone number.
+        /// https://developers.google.com/places/web-service/search#FindPlaceRequests
+        /// </summary>
+        public static HttpEngine<PlacesFindSearchRequest, PlacesFindSearchResponse> FindSearch => HttpEngine<PlacesFindSearchRequest, PlacesFindSearchResponse>.instance;
 
         /// <summary>
         /// The Google Places API Text Search Service is a web service that returns information about a set of places based on a string — for example "pizza in New York" or "shoe stores near Ottawa". 
