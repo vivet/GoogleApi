@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Geocoding.Common
+namespace GoogleApi.Entities.Common
 {
     /// <summary>
-    /// Open Location Plus Code.
+    /// Plus Code.
     /// </summary>
     public class PlusCode
     {

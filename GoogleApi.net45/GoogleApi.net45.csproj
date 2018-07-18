@@ -211,6 +211,9 @@
     <Compile Include="..\GoogleApi\Entities\Common\Location.cs">
       <Link>Entities\Common\Location.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Common\PlusCode.cs">
+      <Link>Entities\Common\PlusCode.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Common\ViewPort.cs">
       <Link>Entities\Common\ViewPort.cs</Link>
     </Compile>
@@ -342,9 +345,6 @@
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\Enums\GeometryLocationType.cs">
       <Link>Entities\Maps\Geocoding\Common\Enums\GeometryLocationType.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\PlusCode.cs">
-      <Link>Entities\Maps\Geocoding\Common\PlusCode.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Maps\Geocoding\Common\Result.cs">
       <Link>Entities\Maps\Geocoding\Common\Result.cs</Link>
