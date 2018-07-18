@@ -40,13 +40,15 @@ namespace GoogleApi
                         Timeout = HttpEngine.httpTimeout
                     };
 
-                    HttpEngine.httpClient.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpEngine.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 }
 
                 return HttpEngine.httpClient;
             }
-            set { HttpEngine.httpClient = value; }
+            set
+            {
+                HttpEngine.httpClient = value;
+            }
         }
 
         /// <summary>

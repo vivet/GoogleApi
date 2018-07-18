@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Tests", ".Tests", "{371523
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.Xamarin.Forms", "GoogleApi.Xamarin.Forms\GoogleApi.Xamarin.Forms.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleApi.UnitTests", ".tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj", "{342902C0-8260-4429-B8FD-7205C0C9283C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,12 +105,31 @@ Global
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.TravisCI|x64.Build.0 = Travis|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.TravisCI|x86.ActiveCfg = Travis|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.TravisCI|x86.Build.0 = Travis|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Debug|x64.Build.0 = Debug|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Debug|x86.Build.0 = Debug|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Release|x64.ActiveCfg = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Release|x64.Build.0 = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Release|x86.ActiveCfg = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.Release|x86.Build.0 = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.TravisCI|Any CPU.ActiveCfg = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.TravisCI|Any CPU.Build.0 = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.TravisCI|x64.ActiveCfg = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.TravisCI|x64.Build.0 = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.TravisCI|x86.ActiveCfg = Release|Any CPU
+		{342902C0-8260-4429-B8FD-7205C0C9283C}.TravisCI|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E4CE6985-8A7F-4C37-9BA5-24061D89E16C} = {37152381-2B7E-4C14-A6F3-D60EC1612060}
+		{342902C0-8260-4429-B8FD-7205C0C9283C} = {37152381-2B7E-4C14-A6F3-D60EC1612060}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94795C07-24B6-493F-976C-FD2A69F26781}
