@@ -52,13 +52,6 @@ namespace GoogleApi
         }
 
         /// <summary>
-        /// Always Dispose.
-        /// When true the <see cref="HttpClient"/> will be disposed after each execution.
-        /// Otherwise it's re-used on following invocations.
-        /// </summary>
-        public static bool AlwaysDispose { get; set; } = false;
-
-        /// <summary>
         /// Disposes.
         /// </summary>
         public virtual void Dispose()
@@ -122,69 +115,57 @@ namespace GoogleApi
 
             var taskCompletion = new TaskCompletionSource<TResponse>();
 
-            try
-            {
-                await this.ProcessRequest(request, cancellationToken)
-                    .ContinueWith(async x =>
-                    {
-                        try
-                        {
-                            if (x.IsCanceled)
-                            {
-                                taskCompletion.SetCanceled();
-                            }
-                            else if (x.IsFaulted)
-                            {
-                                throw x.Exception ?? new Exception();
-                            }
-                            else
-                            {
-                                var result = await x;
-                                var response = await this.ProcessResponse(result);
-
-                                result.EnsureSuccessStatusCode();
-
-                                switch (response.Status)
-                                {
-                                    case Status.Ok:
-                                    case Status.ZeroResults:
-                                        taskCompletion.SetResult(response);
-                                        break;
-
-                                    default:
-                                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            if (ex is GoogleApiException)
-                            {
-                                taskCompletion.SetException(ex);
-                            }
-                            else
-                            {
-                                var baseException = ex.GetBaseException();
-                                var exception = new GoogleApiException(baseException.Message, baseException);
-
-                                taskCompletion.SetException(exception);
-                            }
-                        }
-                    }, cancellationToken);
-            }
-            finally
-            {
-                if (HttpEngine.AlwaysDispose)
+            await this.ProcessRequest(request, cancellationToken)
+                .ContinueWith(async x =>
                 {
-                    HttpEngine.HttpClient.Dispose();
-                    HttpEngine.HttpClient = null;
-                }
-            }
+                    try
+                    {
+                        if (x.IsCanceled)
+                        {
+                            taskCompletion.SetCanceled();
+                        }
+                        else if (x.IsFaulted)
+                        {
+                            throw x.Exception ?? new Exception();
+                        }
+                        else
+                        {
+                            var result = await x;
+                            var response = await this.ProcessResponse(result);
+
+                            switch (response.Status)
+                            {
+                                case Status.Ok:
+                                case Status.ZeroResults:
+                                    taskCompletion.SetResult(response);
+                                    break;
+
+                                default:
+                                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is GoogleApiException)
+                        {
+                            taskCompletion.SetException(ex);
+                        }
+                        else
+                        {
+                            var baseException = ex.GetBaseException();
+                            var exception = new GoogleApiException(baseException.Message, baseException);
+
+                            taskCompletion.SetException(exception);
+                        }
+                    }
+                }, cancellationToken);
 
             return await taskCompletion.Task;
         }
 
-        private async Task<HttpResponseMessage> ProcessRequest(TRequest request, CancellationToken cancellationToken = default)
+        private async Task<HttpResponseMessage> ProcessRequest(TRequest request,
+            CancellationToken cancellationToken = default)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -203,40 +184,51 @@ namespace GoogleApi
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 };
                 var serializeObject = JsonConvert.SerializeObject(request, settings);
-                var stringContent = new StringContent(serializeObject, Encoding.UTF8);
-                var content = await stringContent.ReadAsStreamAsync();
-                var streamContent = new StreamContent(content);
 
-                return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken);
+                using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
+                {
+                    var content = await stringContent.ReadAsStreamAsync();
+
+                    using (var streamContent = new StreamContent(content))
+                    {
+                        return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken);
+                    }
+                }
             }
         }
+
         private async Task<TResponse> ProcessResponse(HttpResponseMessage httpResponse)
         {
             if (httpResponse == null)
                 throw new ArgumentNullException(nameof(httpResponse));
 
-            var response = new TResponse();
-            
-            switch (response)
+            using (httpResponse)
             {
-                case BaseStreamResponse streamResponse:
-                    streamResponse.Buffer = await httpResponse.Content.ReadAsByteArrayAsync();
-                    response = (TResponse)(IResponse)streamResponse;
-                    break;
+                httpResponse.EnsureSuccessStatusCode();
 
-                default:
-                    var rawJson = await httpResponse.Content.ReadAsStringAsync();
-                    response = JsonConvert.DeserializeObject<TResponse>(rawJson);
-                    response.RawJson = rawJson;
-                    break;
+                var response = new TResponse();
+
+                switch (response)
+                {
+                    case BaseStreamResponse streamResponse:
+                        streamResponse.Buffer = await httpResponse.Content.ReadAsByteArrayAsync();
+                        response = (TResponse) (IResponse) streamResponse;
+                        break;
+
+                    default:
+                        var rawJson = await httpResponse.Content.ReadAsStringAsync();
+                        response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+                        response.RawJson = rawJson;
+                        break;
+                }
+
+                response.RawQueryString = httpResponse.RequestMessage.RequestUri.PathAndQuery;
+                response.Status = httpResponse.IsSuccessStatusCode
+                    ? response.Status ?? Status.Ok
+                    : Status.HttpError;
+
+                return response;
             }
-
-            response.RawQueryString = httpResponse.RequestMessage.RequestUri.PathAndQuery;
-            response.Status = httpResponse.IsSuccessStatusCode
-                ? response.Status ?? Status.Ok
-                : Status.HttpError;
-
-            return response;
         }
     }
 }

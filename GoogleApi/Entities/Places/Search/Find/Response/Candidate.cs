@@ -52,6 +52,20 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
         public virtual OpeningHours OpeningHours { get; set; }
 
         /// <summary>
+        /// plus_code is an encoded location reference, derived from latitude and longitude coordinates,
+        /// that represents an area: 1/8000th of a degree by 1/8000th of a degree(about 14m x 14m at the equator) or smaller.
+        /// Plus codes can be used as a replacement for street addresses in places where they do not exist (where buildings are not numbered or streets are not named).
+        /// The plus code is formatted as a global code and a compound code:
+        /// - global_code is a 4 character area code and 6 character or longer local code(849VCWC8+R9).
+        /// - compound_code is a 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA).
+        /// Typically, both the global code and compound code are returned.However, if the result is in a remote location(for example, an ocean or desert)
+        /// only the global code may be returned.
+        /// See further details about pkus codes here: https://en.wikipedia.org/wiki/Open_Location_Code and https://plus.codes.
+        /// </summary>
+        [JsonProperty("plus_code")]
+        public virtual PlusCode PlusCode { get; set; }
+
+        /// <summary>
         /// Scope — Indicates the scope of the placeId.
         /// Note: The scope field is included only in Nearby Search results and Place Details results. 
         /// You can only retrieve app-scoped places via the Nearby Search and the Place Details requests. 
