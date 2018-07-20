@@ -113,7 +113,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GoogleApi\GoogleApi.csproj">
+    <ProjectReference Include="..\..\GoogleApi\GoogleApi.csproj">
       <Project>{bf3aa421-d754-4762-ad20-a99123455e99}</Project>
       <Name>GoogleApi</Name>
     </ProjectReference>
