@@ -16,7 +16,7 @@ namespace GoogleApi.Entities.Translate
         public override bool IsSsl
         {
             get => true;
-            set => throw new NotSupportedException("This operation is not supported, SSL is required.");
+            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
         }
 
         /// <summary>
