@@ -85,7 +85,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 	    /// Note that this parameter is only supported for some country tiles; if the specific language requested is not supported for the tile set, 
 	    /// then the default language for that tileset will be used.
 	    /// </summary>
-	    public virtual Language? Language { get; set; }
+	    public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// region (optional) defines the appropriate borders to display, based on geo-political sensitivities. 
@@ -150,6 +150,8 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
                 }
             }
 
+		    parameters.Add("language", this.Language.ToCode());
+
             if (this.Center != null)
                 parameters.Add("center", this.Center.ToString());
 
@@ -166,9 +168,6 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 
 		    if (this.Format.HasValue)
 		        parameters.Add("format", this.Format.Value.GetParameterName());
-
-		    if (this.Language.HasValue)
-		        parameters.Add("language", this.Language.Value.ToCode());
 
             if (this.Region != null)
     		    parameters.Add("region", this.Region);
@@ -201,7 +200,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 			{
 				var visibles = this.Visibles.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
 
-				parameters.Add("path", $"{visibles}");
+				parameters.Add("visible", $"{visibles}");
 			}
 
 			if (this.Markers.Any())
