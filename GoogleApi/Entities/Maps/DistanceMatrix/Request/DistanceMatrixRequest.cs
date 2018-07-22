@@ -159,11 +159,11 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
             var parameters = base.GetQueryStringParameters();
 
-            parameters.Add("language", this.Language.ToCode());
-            parameters.Add("units", this.Units.ToString().ToLower());
-            parameters.Add("mode", this.TravelMode.ToString().ToLower());
             parameters.Add("origins", string.IsNullOrEmpty(this.OriginsRaw) ? string.Join("|", this.Origins) : this.OriginsRaw);
             parameters.Add("destinations", string.IsNullOrEmpty(this.DestinationsRaw) ? string.Join("|", this.Destinations) : this.DestinationsRaw);
+            parameters.Add("units", this.Units.ToString().ToLower());
+            parameters.Add("mode", this.TravelMode.ToString().ToLower());
+            parameters.Add("language", this.Language.ToCode());
 
             if (this.Avoid != AvoidWay.Nothing)
                 parameters.Add("avoid", this.Avoid.ToEnumString('|'));
@@ -181,17 +181,14 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                 if (this.DepartureTime != null)
                     parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
             }
+            else if (this.TravelMode == TravelMode.Driving)
+            {
+                if (this.DepartureTime.HasValue)
+                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
-            if (this.TravelMode != TravelMode.Driving)
-                return parameters;
-
-            if (this.DepartureTime == null)
-                return parameters;
-
-            parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-
-            if (this.Key != null || this.ClientId != null)
-                parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                if (this.Key != null || this.ClientId != null)
+                    parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+            }
 
             return parameters;
         }
