@@ -141,14 +141,16 @@ namespace GoogleApi.Entities.Search
                 parameters.Add("dateRestrict", this.Options.DateRestrict.ToString());
 
             if (this.Options.ExactTerms != null)
-                parameters.Add("exactTerms", this.Options.ExactTerms ?? string.Empty);
+                parameters.Add("exactTerms", this.Options.ExactTerms);
 
             if (this.Options.ExcludeTerms != null)
-                parameters.Add("excludeTerms", this.Options.ExcludeTerms ?? string.Empty);
+                parameters.Add("excludeTerms", this.Options.ExcludeTerms);
 
             parameters.Add("fileType", string.Join(",", this.Options.FileTypes));
             parameters.Add("filter", this.Options.Filter ? "0" : "1");
-            parameters.Add("gl", this.Options.GeoLocation?.ToGl() ?? string.Empty);
+
+            if (this.Options.GeoLocation != null)
+               parameters.Add("gl", this.Options.GeoLocation.Value.ToGl());
 
             if (this.Options.Googlehost != null)
                 parameters.Add("googleHost", this.Options.Googlehost);
