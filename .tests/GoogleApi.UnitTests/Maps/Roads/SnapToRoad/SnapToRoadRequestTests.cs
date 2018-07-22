@@ -18,6 +18,32 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
         }
 
         [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new SnapToRoadsRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new SnapToRoadsRequest
+            {
+                Key = "abc",
+                Path = new[]
+                {
+                    new Location(1, 1),
+                    new Location(2, 2)
+                }
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenKeyIsNullTest()
         {
             var request = new SnapToRoadsRequest
@@ -89,7 +115,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
         }
 
         [Test]
-        public void GetQueryStringParametersWhenPathCotaninsMoreThan100LocationsTest()
+        public void GetQueryStringParametersWhenPathCotaninsMoreThanHundredLocationsTest()
         {
             var request = new SnapToRoadsRequest
             {
@@ -107,13 +133,22 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new SnapToRoadsRequest
+            var request = new SnapToRoadsRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                Path = new[]
+                {
+                    new Location(1, 1),
+                    new Location(2, 2)
+                }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/v1/snapToRoads?key={request.Key}&path={Uri.EscapeDataString(string.Join("|", request.Path))}&interpolate={request.Interpolate.ToString().ToLower()}", uri.PathAndQuery);
         }
     }
 }

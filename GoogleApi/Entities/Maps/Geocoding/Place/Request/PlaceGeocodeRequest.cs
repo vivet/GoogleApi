@@ -25,10 +25,10 @@ namespace GoogleApi.Entities.Maps.Geocoding.Place.Request
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Key == null)
-                throw new ArgumentException("Key is required.");
+                throw new ArgumentException("Key is required");
 
             if (string.IsNullOrWhiteSpace(this.PlaceId))
-                throw new ArgumentException("PlaceId is required.");
+                throw new ArgumentException("PlaceId is required");
 
             var parameters = base.GetQueryStringParameters();
 

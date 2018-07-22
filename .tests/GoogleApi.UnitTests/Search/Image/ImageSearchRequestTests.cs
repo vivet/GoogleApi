@@ -1,5 +1,6 @@
 using System;
 using GoogleApi.Entities.Search.Common.Enums;
+using GoogleApi.Entities.Search.Common.Enums.Extensions;
 using GoogleApi.Entities.Search.Image.Request;
 using NUnit.Framework;
 using Language = GoogleApi.Entities.Search.Common.Enums.Language;
@@ -23,6 +24,29 @@ namespace GoogleApi.UnitTests.Search.Image
             Assert.IsNull(request.ImageOptions.ImageType);
             Assert.IsNull(request.ImageOptions.ImageColorType);
             Assert.IsNull(request.ImageOptions.ImageDominantColor);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new ImageSearchRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new ImageSearchRequest
+            {
+                Key = "abc",
+                SearchEngineId = "abc",
+                Query = "abc"
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
         }
 
         [Test]
@@ -195,13 +219,43 @@ namespace GoogleApi.UnitTests.Search.Image
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new ImageSearchRequest
+            var request = new ImageSearchRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                SearchEngineId = "abc",
+                Query = "abc"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/customsearch/v1?key={request.Key}&q={request.Query}&cx={request.SearchEngineId}&alt={request.Alt.ToString().ToLower()}&prettyPrint={request.PrettyPrint.ToString().ToLower()}&userIp={request.UserIp}&quotaUser={request.QuotaUser}&c2coff=1&fileType={string.Join(",", request.Options.FileTypes)}&filter=0&hl={request.Options.InterfaceLanguage.ToHl()}&num={request.Options.Number}&rights={string.Join(",", request.Options.Rights)}&safe={request.Options.SafetyLevel.ToString().ToLower()}&searchType=image&start={request.Options.StartIndex.ToString()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenImageTypeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenImageSizeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenImageColorTypeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenImageDominantColorTest()
+        {
+            Assert.Inconclusive();
         }
     }
 }

@@ -1,6 +1,12 @@
 using System;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
+using GoogleApi.Entities.Places.Common.Enums;
+using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
 using NUnit.Framework;
@@ -24,6 +30,30 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             Assert.IsFalse(request.OpenNow);
             Assert.AreEqual(Language.English, request.Language);
             Assert.AreEqual(Ranking.Prominence, request.Rankby);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesNearBySearchRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "abc",
+                Location = new Location(0, 0),
+                Radius = 5000,
+                Keyword = "test"
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
         }
 
         [Test]
@@ -173,13 +203,105 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesNearBySearchRequest
+            var request = new PlacesNearBySearchRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                Location = new Location(1, 1),
+                Radius = 50
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenTypeTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "abc",
+                Location = new Location(1, 1),
+                Radius = 50,
+                Type = SearchPlaceType.Accounting 
+            };
+
+            var uri = request.GetUri();
+            var attribute = request.Type?.GetType().GetMembers().FirstOrDefault(x => x.Name == request.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&type={attribute?.Value.ToLower()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenOpenNowTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "abc",
+                Location = new Location(1, 1),
+                Radius = 50,
+                OpenNow = true
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&opennow", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenMinpriceTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "abc",
+                Location = new Location(1, 1),
+                Radius = 50,
+                Minprice = PriceLevel.Expensive
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&minprice={((int)request.Minprice.GetValueOrDefault()).ToString()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenMaxpriceTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "abc",
+                Location = new Location(1, 1),
+                Radius = 50,
+                Maxprice = PriceLevel.Free
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&maxprice={((int)request.Maxprice.GetValueOrDefault()).ToString()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenPageTokenTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "abc",
+                Location = new Location(1, 1),
+                Radius = 50,
+                PageToken = "abc"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&pagetoken={request.PageToken}", uri.PathAndQuery);
         }
     }
 }

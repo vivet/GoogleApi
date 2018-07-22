@@ -125,7 +125,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
             }
 
             if (this.OpenNow)
-                parameters.Add("opennow", string.Empty);
+                parameters.Add("opennow");
 
             if (this.Minprice.HasValue)
                 parameters.Add("minprice", ((int)this.Minprice.Value).ToString());

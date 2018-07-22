@@ -17,6 +17,28 @@ namespace GoogleApi.UnitTests.Maps.Elevation
         }
 
         [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new ElevationRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new ElevationRequest
+            {
+                Path = new[] { new Location(40.7141289, -73.9614074) },
+                Samples = 2
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenPathAndSamplesIsNullTest()
         {
             var request = new ElevationRequest
@@ -67,13 +89,34 @@ namespace GoogleApi.UnitTests.Maps.Elevation
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriWhenLocationsTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new ElevationRequest
+            var request = new ElevationRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                Locations = new[] { new Location(40.7141289, -73.9614074) }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/elevation/json?key={request.Key}&locations={Uri.EscapeDataString(string.Join("|", request.Locations))}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenWhenPathAndSamplesTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "abc",
+                Path = new[] { new Location(40.7141289, -73.9614074) },
+                Samples = 2
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/elevation/json?key={request.Key}&path={Uri.EscapeDataString(string.Join("|", request.Path))}&samples={request.Samples.ToString()}", uri.PathAndQuery);
         }
     }
 }

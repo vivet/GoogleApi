@@ -65,10 +65,10 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Location == null && string.IsNullOrEmpty(this.Address) && string.IsNullOrEmpty(this.GlobalCode))
-                throw new ArgumentException("PlaceId, Location, Address or GlobalCode is required.");
-
             var parameters = base.GetQueryStringParameters();
+
+            if (this.PlaceId == null && this.Location == null && string.IsNullOrEmpty(this.Address) && string.IsNullOrEmpty(this.GlobalCode))
+                throw new ArgumentException("PlaceId, Location, Address or GlobalCode is required");
 
             var address = !string.IsNullOrEmpty(this.PlaceId)
                 ? this.PlaceId

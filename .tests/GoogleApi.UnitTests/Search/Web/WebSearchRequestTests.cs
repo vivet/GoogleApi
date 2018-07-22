@@ -1,5 +1,6 @@
 using System;
 using GoogleApi.Entities.Search.Common.Enums;
+using GoogleApi.Entities.Search.Common.Enums.Extensions;
 using GoogleApi.Entities.Search.Web.Request;
 using NUnit.Framework;
 
@@ -16,6 +17,29 @@ namespace GoogleApi.UnitTests.Search.Web
             Assert.IsTrue(request.IsSsl);
             Assert.IsTrue(request.PrettyPrint);
             Assert.AreEqual(request.Alt, AltType.Json);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new WebSearchRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new WebSearchRequest
+            {
+                Key = "abc",
+                SearchEngineId = "abc",
+                Query = "abc"
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
         }
 
         [Test]
@@ -188,13 +212,127 @@ namespace GoogleApi.UnitTests.Search.Web
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new WebSearchRequest
+            var request = new WebSearchRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                SearchEngineId = "abc",
+                Query = "abc"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/customsearch/v1?key={request.Key}&q={request.Query}&cx={request.SearchEngineId}&alt={request.Alt.ToString().ToLower()}&prettyPrint={request.PrettyPrint.ToString().ToLower()}&userIp={request.UserIp}&quotaUser={request.QuotaUser}&c2coff=1&fileType={string.Join(",", request.Options.FileTypes)}&filter=0&hl={request.Options.InterfaceLanguage.ToHl()}&num={request.Options.Number}&rights={string.Join(",", request.Options.Rights)}&safe={request.Options.SafetyLevel.ToString().ToLower()}&start={request.Options.StartIndex.ToString()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenCallbackTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenFieldsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenCountryRestrictionTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenDateRestrictionTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenExactTermsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenExcludeTermsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenGoogleHostTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenHighRangeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenAndTermsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenLinkSiteTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenLowRangeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenNumberTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenOrTermsTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenRelatedSiteTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenSearchTypeTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenSiteSearchTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenSiteSearchFilterTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenSortExpressionTest()
+        {
+            Assert.Inconclusive();
         }
     }
 }

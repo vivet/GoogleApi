@@ -144,9 +144,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
 
             parameters.Add("rankby", this.Rankby.ToString().ToLower());
             parameters.Add("language", Language.ToCode());
-
-            if (this.Location != null)
-                parameters.Add("location", this.Location.ToString());
+            parameters.Add("location", this.Location.ToString());
 
             if (this.Radius != null)
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
@@ -161,7 +159,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
             }
 
             if (this.OpenNow)
-                parameters.Add("opennow", string.Empty);
+                parameters.Add("opennow");
 
             if (this.Minprice.HasValue)
                 parameters.Add("minprice", ((int)this.Minprice.Value).ToString());

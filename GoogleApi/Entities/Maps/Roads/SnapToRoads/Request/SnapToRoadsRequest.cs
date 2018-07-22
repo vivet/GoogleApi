@@ -44,7 +44,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
             var parameters = base.GetQueryStringParameters();
 
             parameters.Add("path", string.Join("|", this.Path));
-            parameters.Add("interpolate", this.Interpolate.ToString());
+            parameters.Add("interpolate", this.Interpolate.ToString().ToLower());
 
             return parameters;
         }

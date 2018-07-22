@@ -1,16 +1,17 @@
 using System;
-using GoogleApi.Entities.Maps.Geolocation.Request;
+using GoogleApi.Entities.Common.Enums.Extensions;
+using GoogleApi.Entities.Maps.Geocoding.Place.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.UnitTests.Maps.Geolocation
+namespace GoogleApi.UnitTests.Maps.Geocoding.Place
 {
     [TestFixture]
-    public class GeolocationRequestTests
+    public class GeocodingPlaceRequestTests
     {
         [Test]
         public void ConstructorDefaultTest()
         {
-            var request = new GeolocationRequest();
+            var request = new PlaceGeocodeRequest();
 
             Assert.IsTrue(request.IsSsl);
         }
@@ -18,7 +19,7 @@ namespace GoogleApi.UnitTests.Maps.Geolocation
         [Test]
         public void SetIsSslTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new GeolocationRequest
+            var exception = Assert.Throws<NotSupportedException>(() => new PlaceGeocodeRequest
             {
                 IsSsl = false
             });
@@ -28,9 +29,10 @@ namespace GoogleApi.UnitTests.Maps.Geolocation
         [Test]
         public void GetQueryStringParametersTest()
         {
-            var request = new GeolocationRequest
+            var request = new PlaceGeocodeRequest
             {
-                Key = "abc"
+                Key = "abc",
+                PlaceId= "abc"
             };
 
             Assert.DoesNotThrow(() => request.GetQueryStringParameters());
@@ -39,7 +41,7 @@ namespace GoogleApi.UnitTests.Maps.Geolocation
         [Test]
         public void GetQueryStringParametersWhenKeyIsNullTest()
         {
-            var request = new GeolocationRequest
+            var request = new PlaceGeocodeRequest
             {
                 Key = null
             };
@@ -54,11 +56,11 @@ namespace GoogleApi.UnitTests.Maps.Geolocation
         }
 
         [Test]
-        public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
+        public void GetQueryStringParametersWhenPlaceIdIsNullTest()
         {
-            var request = new GeolocationRequest
+            var request = new PlaceGeocodeRequest
             {
-                Key = string.Empty
+                Key = "abc"
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -67,21 +69,22 @@ namespace GoogleApi.UnitTests.Maps.Geolocation
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "PlaceId is required");
         }
 
         [Test]
-        public void GetUriWhenTest()
+        public void GetUriTest()
         {
-            var request = new GeolocationRequest
+            var request = new PlaceGeocodeRequest
             {
-                Key = "abc"
+                Key = "abc",
+                PlaceId = "abc"
             };
 
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/geolocation/v1/geolocate?key={request.Key}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/geocode/json?key={request.Key}&language={request.Language.ToCode()}&place_id={Uri.EscapeDataString(request.PlaceId)}", uri.PathAndQuery);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
+using System.Linq;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using NUnit.Framework;
@@ -17,6 +17,32 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
 
             Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(Units.Kph, request.Unit);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new SpeedLimitsRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new SpeedLimitsRequest
+            {
+                Key = "abc",
+                Path = new[]
+                {
+                    new Location(1, 1),
+                    new Location(2, 2)
+                }
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
         }
 
         [Test]
@@ -110,13 +136,41 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new DirectionsRequest
+            var request = new SpeedLimitsRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                Path = new[]
+                {
+                    new Location(1, 1),
+                    new Location(2, 2)
+                }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/v1/speedLimits?key={request.Key}&path={Uri.EscapeDataString(string.Join("|", request.Path))}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenPlaceIdsTest()
+        {
+            var request = new SpeedLimitsRequest
+            {
+                Key = "abc",
+                PlaceIds = new[]
+                {
+                    "abc",
+                    "def"
+                }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/v1/speedLimits?key={request.Key}&placeId={Uri.EscapeDataString(request.PlaceIds.First())}&placeId={Uri.EscapeDataString(request.PlaceIds.Last())}", uri.PathAndQuery);
         }
     }
 }

@@ -132,7 +132,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Address is required.");
+            Assert.AreEqual(innerException.Message, "Address is required");
         }
     }
 }

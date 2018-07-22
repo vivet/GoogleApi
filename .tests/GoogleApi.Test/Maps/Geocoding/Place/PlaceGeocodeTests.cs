@@ -101,7 +101,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required.");
+            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "PlaceId is required.");
+            Assert.AreEqual(innerException.Message, "PlaceId is required");
         }
     }
 }

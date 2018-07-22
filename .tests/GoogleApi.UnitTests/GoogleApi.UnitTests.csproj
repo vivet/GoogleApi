@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Converters\BooleanConverterTest.cs" />
@@ -46,6 +47,10 @@
     <Compile Include="Maps\Directions\DirectionsRequestTests.cs" />
     <Compile Include="Maps\DistanceMatrix\DistanceMatrixRequestTests.cs" />
     <Compile Include="Maps\Elevation\ElevationRequestTests.cs" />
+    <Compile Include="Maps\Geocoding\Address\GeocodingAddressRequestTests.cs" />
+    <Compile Include="Maps\Geocoding\Location\GeocodingLocationRequestTests.cs" />
+    <Compile Include="Maps\Geocoding\Place\GeocodingPlaceRequestTests.cs" />
+    <Compile Include="Maps\Geocoding\PlusCode\GeocodingPlusCodeRequestTests.cs" />
     <Compile Include="Maps\Geolocation\GeolocationRequestTests.cs" />
     <Compile Include="Maps\Roads\NearestRoads\NearestRoadsRequestTests.cs" />
     <Compile Include="Maps\Roads\SnapToRoad\SnapToRoadRequestTests.cs" />
@@ -61,8 +66,8 @@
     <Compile Include="Places\Search\NearBy\NearBySearchRequestTests.cs" />
     <Compile Include="Places\Search\Text\TextSearchRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Search\Common\Converters\CountryRestrictExpressionTests.cs" />
-    <Compile Include="Search\Common\Converters\SortExpressionJsonConverter.cs" />
+    <Compile Include="Search\Common\Converters\DateRestrictJsonConverterTests.cs" />
+    <Compile Include="Search\Common\Converters\SortExpressionJsonConverterTests.cs" />
     <Compile Include="Search\Common\CountryRestrictExpressionTests.cs" />
     <Compile Include="Search\Common\CountryRestrictTests.cs" />
     <Compile Include="Search\Image\ImageSearchRequestTests.cs" />
@@ -87,11 +92,6 @@
       <Name>GoogleApi</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Maps\Geocoding\Address\" />
-    <Folder Include="Maps\Geocoding\Location\" />
-    <Folder Include="Maps\Geocoding\Place\" />
-    <Folder Include="Maps\Geocoding\PlusCode\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
