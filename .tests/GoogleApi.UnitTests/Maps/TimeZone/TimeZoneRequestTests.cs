@@ -22,7 +22,7 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
         }
 
         [Test]
-        public void SetIsSslThrowsNotSupportedExceptionTest()
+        public void SetIsSslTest()
         {
             var exception = Assert.Throws<NotSupportedException>(() => new TimeZoneRequest
             {
@@ -38,7 +38,6 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
             {
                 Key = "abc",
                 Location = new Location(40.7141289, -73.9614074)
-
             };
 
             Assert.DoesNotThrow(() => request.GetQueryStringParameters());
@@ -73,7 +72,7 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"?key={request.Key}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&timestamp={request.TimeStamp.DateTimeToUnixTimestamp()}", uri.Query);
+            Assert.AreEqual($"/maps/api/timezone/json?key={request.Key}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&timestamp={request.TimeStamp.DateTimeToUnixTimestamp()}", uri.PathAndQuery);
         }
     }
 }

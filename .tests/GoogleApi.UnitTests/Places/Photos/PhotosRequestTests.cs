@@ -1,5 +1,4 @@
 using System;
-using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Photos.Request;
 using NUnit.Framework;
 
@@ -11,9 +10,32 @@ namespace GoogleApi.UnitTests.Places.Photos
         [Test]
         public void ConstructorDefaultTest()
         {
-            var request = new PlacesAutoCompleteRequest();
+            var request = new PlacesPhotosRequest();
 
             Assert.IsTrue(request.IsSsl);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesPhotosRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = "abc",
+                PhotoReference = "test",
+                MaxHeight = 10
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
         }
 
         [Test]
@@ -176,13 +198,20 @@ namespace GoogleApi.UnitTests.Places.Photos
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesPhotosRequest
+            var request = new PlacesPhotosRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                PhotoReference = "test",
+                MaxHeight = 10, 
+                MaxWidth =  10
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/photo?key={request.Key}&photoreference={request.PhotoReference}&maxheight={request.MaxHeight}&maxwidth={request.MaxWidth}", uri.PathAndQuery);
         }
     }
 }

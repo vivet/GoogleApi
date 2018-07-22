@@ -19,6 +19,16 @@ namespace GoogleApi.UnitTests.Maps.StreetView
         }
 
         [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new StreetViewRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
         public void GetQueryStringParametersTest()
         {
             var request = new StreetViewRequest
@@ -187,6 +197,52 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             });
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Field of view must be greater than 0 and less than 120");
+        }
+
+        [Test]
+        public void GetUriTest()
+        {
+            var request = new StreetViewRequest
+            {
+                Key = "abc",
+                PanoramaId = "def"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/streetview?key={request.Key}&pano={request.PanoramaId}&size={request.Size.Width}x{request.Size.Height}&pitch={request.Pitch}&fov={request.FieldOfView}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenHeadingTest()
+        {
+            var request = new StreetViewRequest
+            {
+                Key = "abc",
+                PanoramaId = "def",
+                Heading = 2
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/streetview?key={request.Key}&pano={request.PanoramaId}&size={request.Size.Width}x{request.Size.Height}&pitch={request.Pitch}&heading={request.Heading}&fov={request.FieldOfView}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenLocationTest()
+        {
+            var request = new StreetViewRequest
+            {
+                Key = "abc",
+                Location = new Location(1, 1)
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/streetview?key={request.Key}&location={Uri.EscapeDataString(request.Location.ToString())}&size={request.Size.Width}x{request.Size.Height}&pitch={request.Pitch}&fov={request.FieldOfView}", uri.PathAndQuery);
         }
     }
 }

@@ -2,9 +2,11 @@ using System;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
+using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
 using NUnit.Framework;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps
@@ -18,6 +20,15 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var request = new StaticMapsRequest();
 
             Assert.IsTrue(request.IsSsl);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            Assert.DoesNotThrow(() => new StaticMapsRequest
+            {
+                IsSsl = false
+            });
         }
 
         [Test]
@@ -132,6 +143,114 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
 
         [Test]
         public void GetQueryStringParametersWhenMarkersAndLocationsIsEmptyTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriTest()
+        {
+            var request = new StaticMapsRequest
+            {
+                Key = "abc",
+                Center = new Location(1, 1), 
+                ZoomLevel = 1
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/staticmap?key={request.Key}&language={request.Language.ToCode()}&center={Uri.EscapeDataString(request.Center.ToString())}&zoom={request.ZoomLevel.ToString()}&size={request.Size.Width}x{request.Size.Height}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenMapTypeTest()
+        {
+            var request = new StaticMapsRequest
+            {
+                Key = "abc",
+                Center = new Location(1, 1),
+                ZoomLevel = 1, 
+                Type = MapType.Hybrid
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/staticmap?key={request.Key}&language={request.Language.ToCode()}&center={Uri.EscapeDataString(request.Center.ToString())}&zoom={request.ZoomLevel.ToString()}&size={request.Size.Width}x{request.Size.Height}&maptype={request.Type.ToString().ToLower()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenScaleTest()
+        {
+            var request = new StaticMapsRequest
+            {
+                Key = "abc",
+                Center = new Location(1, 1),
+                ZoomLevel = 1,
+                Scale = MapScale.Huge
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/staticmap?key={request.Key}&language={request.Language.ToCode()}&center={Uri.EscapeDataString(request.Center.ToString())}&zoom={request.ZoomLevel.ToString()}&size={request.Size.Width}x{request.Size.Height}&scale={((int)request.Scale.GetValueOrDefault()).ToString()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriFormatTest()
+        {
+            var request = new StaticMapsRequest
+            {
+                Key = "abc",
+                Center = new Location(1, 1),
+                ZoomLevel = 1,
+                Format = ImageFormat.Gif
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/staticmap?key={request.Key}&language={request.Language.ToCode()}&center={Uri.EscapeDataString(request.Center.ToString())}&zoom={request.ZoomLevel.ToString()}&size={request.Size.Width}x{request.Size.Height}&format={request.Format.GetValueOrDefault().GetParameterName()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenRegionTest()
+        {
+            var request = new StaticMapsRequest
+            {
+                Key = "abc",
+                Center = new Location(1, 1),
+                ZoomLevel = 1,
+                Region = "abc"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/staticmap?key={request.Key}&language={request.Language.ToCode()}&center={Uri.EscapeDataString(request.Center.ToString())}&zoom={request.ZoomLevel.ToString()}&size={request.Size.Width}x{request.Size.Height}&region={request.Region}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenPathTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenStylesTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenVisiblesTest()
+        {
+            Assert.Inconclusive();
+        }
+
+        [Test]
+        public void GetUriWhenMarkersTest()
         {
             Assert.Inconclusive();
         }

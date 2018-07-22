@@ -17,6 +17,32 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
         }
 
         [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new NearestRoadsRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new NearestRoadsRequest
+            {
+                Key = "abc",
+                Points = new[]
+                {
+                    new Location(1, 1),
+                    new Location(2, 2)
+                }
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenKeyIsNullTest()
         {
             var request = new NearestRoadsRequest
@@ -88,7 +114,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
         }
 
         [Test]
-        public void GetQueryStringParametersWhenPathCotaninsMoreThan100LocationsTest()
+        public void GetQueryStringParametersWhenPathCotaninsMoreThanHundredLocationsTest()
         {
             var request = new NearestRoadsRequest
             {
@@ -106,13 +132,22 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new NearestRoadsRequest
+            var request = new NearestRoadsRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                Points = new[]
+                {
+                    new Location(1, 1),
+                    new Location(2, 2) 
+                }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/v1/nearestRoads?key={request.Key}&points={Uri.EscapeDataString(string.Join("|", request.Points))}", uri.PathAndQuery);
         }
     }
 }

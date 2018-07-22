@@ -1,5 +1,7 @@
 using System;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
 using NUnit.Framework;
 
@@ -18,6 +20,28 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
             Assert.IsNull(request.Radius);
             Assert.IsNull(request.Location);
             Assert.AreEqual(Language.English, request.Language);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new PlacesQueryAutoCompleteRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = "abc",
+                Input = "abc"
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
         }
 
         [Test]
@@ -125,13 +149,66 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
         }
 
         [Test]
-        public void SetIsSslTest()
+        public void GetUriTest()
         {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesQueryAutoCompleteRequest
+            var request = new PlacesQueryAutoCompleteRequest
             {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+                Key = "abc",
+                Input = "abc"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/queryautocomplete/json?key={request.Key}&input={request.Input}&language={request.Language.ToCode()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenOffsetTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = "abc",
+                Input = "abc",
+                Offset = "abc"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/queryautocomplete/json?key={request.Key}&input={request.Input}&language={request.Language.ToCode()}&offset={request.Offset}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenLocationTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = "abc",
+                Input = "abc",
+                Location = new Location(1, 1)
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/queryautocomplete/json?key={request.Key}&input={request.Input}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenRadiusTest()
+        {
+            var request = new PlacesQueryAutoCompleteRequest
+            {
+                Key = "abc",
+                Input = "abc",
+                Radius = 50
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/queryautocomplete/json?key={request.Key}&input={request.Input}&language={request.Language.ToCode()}&radius={request.Radius}", uri.PathAndQuery);
         }
     }
 }

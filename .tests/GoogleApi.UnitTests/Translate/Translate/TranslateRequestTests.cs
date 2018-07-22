@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using GoogleApi.Entities.Translate.Common.Enums;
+using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
 using NUnit.Framework;
@@ -19,6 +21,32 @@ namespace GoogleApi.UnitTests.Translate.Translate
             Assert.IsNull(request.Target);
             Assert.AreEqual(Model.Base, request.Model);
             Assert.AreEqual(Format.Html, request.Format);
+        }
+
+        [Test]
+        public void SetIsSslTest()
+        {
+            var exception = Assert.Throws<NotSupportedException>(() => new TranslateRequest
+            {
+                IsSsl = false
+            });
+            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = "abc",
+                Target = Language.Afrikaans,
+                Qs = new[]
+                {
+                    "abc"
+                }
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
         }
 
         [Test]
@@ -108,6 +136,47 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "Qs is required");
+        }
+
+        [Test]
+        public void GetUriTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = "abc",
+                Target = Language.Afrikaans,
+                Qs = new[]
+                {
+                    "abc",
+                    "def"
+                }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/language/translate/v2?key={request.Key}&target={request.Target.GetValueOrDefault().ToCode()}&model={request.Model.ToString().ToLower()}&format={request.Format.ToString().ToLower()}&q={request.Qs.First()}&q={request.Qs.Last()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenSourceTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = "abc",
+                Target = Language.Afrikaans,
+                Qs = new[]
+                {
+                    "abc",
+                    "def"
+                },
+                Source = Language.Albanian
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/language/translate/v2?key={request.Key}&target={request.Target.GetValueOrDefault().ToCode()}&model={request.Model.ToString().ToLower()}&format={request.Format.ToString().ToLower()}&source={request.Source.GetValueOrDefault().ToCode()}&q={request.Qs.First()}&q={request.Qs.Last()}", uri.PathAndQuery);
         }
     }
 }
