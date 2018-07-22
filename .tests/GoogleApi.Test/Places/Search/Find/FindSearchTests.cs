@@ -49,7 +49,7 @@ namespace GoogleApi.Test.Places.Search.Find
             Assert.IsNotNull(candidate.Geometry.Location);
             Assert.IsNotNull(candidate.Geometry.ViewPort);
             Assert.AreEqual("Piccadilly Circus", candidate.Name);
-            Assert.AreEqual("London W1D 7ET, UK", candidate.FormatttedAddress);
+            Assert.AreEqual("London W1D 7ET, UK", candidate.FormattedAddress);
             Assert.AreEqual("https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png", candidate.Icon);
         }
 

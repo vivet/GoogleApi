@@ -32,12 +32,12 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
         public virtual string PlaceId { get; set; }
 
         /// <summary>
-        /// FormattedAddress is a string containing the human-readable address of this place. 
+        /// FormatedAddress is a string containing the human-readable address of this place. 
         /// Often this address is equivalent to the "postal address". 
         /// The formatted_address property is only returned for a Text Search.
         /// </summary>
         [JsonProperty("formatted_address")]
-        public virtual string FormatttedAddress { get; set; }
+        public virtual string FormattedAddress { get; set; }
 
         /// <summary>
         /// Geometry contains a location.
