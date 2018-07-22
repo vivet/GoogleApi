@@ -117,7 +117,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
 
             if (this.Strictbounds)
-                parameters.Add("strictbounds", string.Empty);
+                parameters.Add("strictbounds");
 
             if (this.Types != null && this.Types.Any())
             {
