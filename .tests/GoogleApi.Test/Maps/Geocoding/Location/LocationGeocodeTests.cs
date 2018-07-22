@@ -143,7 +143,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Location is required.");
+            Assert.AreEqual(innerException.Message, "Location is required");
         }
     }
 }
