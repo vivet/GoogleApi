@@ -46,7 +46,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (this.Location == null)
-                throw new ArgumentException("Location is required.");
+                throw new ArgumentException("Location is required");
 
             var parameters = base.GetQueryStringParameters();
 
