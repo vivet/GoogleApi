@@ -125,6 +125,22 @@ namespace GoogleApi.UnitTests.Places.Details
         }
 
         [Test]
+        public void GetUriWhenSessionTokenTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = "abc",
+                PlaceId = "abc",
+                SessionToken = "abc"
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&sessiontoken={request.SessionToken}", uri.PathAndQuery);
+        }
+
+        [Test]
         public void GetUriWhenExtensionsTest()
         {
             var request = new PlacesDetailsRequest

@@ -23,6 +23,12 @@ namespace GoogleApi.Entities.Places.Details.Request
         public virtual string PlaceId { get; set; }
 
         /// <summary>
+        /// A random string which identifies an autocomplete session for billing purposes.
+        /// Use this for Place Details requests that are called following an autocomplete request in the same user session
+        /// </summary>
+        public virtual string SessionToken { get; set; }
+
+        /// <summary>
         /// Language (optional) — The language code, indicating in which language the results should be returned, if possible. 
         /// See the list of supported languages and their codes: https://developers.google.com/maps/faq#languagesupport
         /// Note that we often update supported languages so this list may not be exhaustive.
@@ -49,6 +55,9 @@ namespace GoogleApi.Entities.Places.Details.Request
 
             parameters.Add("placeid", this.PlaceId);
             parameters.Add("language", this.Language.ToCode());
+
+            if (!string.IsNullOrEmpty(this.SessionToken))
+                parameters.Add("sessiontoken", this.SessionToken);
 
             if (this.Extensions != Enums.Extensions.None)
                 parameters.Add("extensions", this.Extensions.ToString().ToLower());

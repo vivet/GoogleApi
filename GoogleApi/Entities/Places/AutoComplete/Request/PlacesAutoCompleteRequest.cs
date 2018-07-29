@@ -43,7 +43,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// A session consists of the activities required to resolve user input to a place.
         /// When a session token is passed (using the optional sessiontoken parameter), 
         /// autocompleterequests are not billed independently, but are instead billed once after a full 
-        /// utocompleteresult is returned. If the sessiontoken parameter is omitted, each request is billed independently.
+        /// autocompleteresult is returned. If the sessiontoken parameter is omitted, each request is billed independently.
         /// See the pricing sheet for details.
         /// </summary>
         public virtual string SessionToken { get; set; }
