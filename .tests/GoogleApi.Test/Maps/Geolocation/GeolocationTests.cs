@@ -24,7 +24,7 @@ namespace GoogleApi.Test.Maps.Geolocation
             Assert.AreEqual(Status.Ok, result.Status);
 
             Assert.IsNotNull(result.Location);
-            Assert.AreEqual(3628.00, result.Accuracy, 1000.00);
+            Assert.AreEqual(3628.00, result.Accuracy, 2000.00);
             Assert.AreEqual(55.692889700000002d, result.Location.Latitude, 0.1);
             Assert.AreEqual(12.547805d, result.Location.Longitude, 0.1);
         }

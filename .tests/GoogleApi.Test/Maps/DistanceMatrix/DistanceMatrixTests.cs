@@ -49,7 +49,8 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             {
                 Key = this.ApiKey,
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
+                DepartureTime = DateTime.Now
             };
             var response = GoogleMaps.DistanceMatrix.QueryAsync(request).Result;
 
@@ -95,7 +96,8 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
                 Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
-                Avoid = AvoidWay.Tolls | AvoidWay.Highways
+                Avoid = AvoidWay.Tolls | AvoidWay.Highways,
+                DepartureTime = DateTime.Now
             };
 
             var response = GoogleMaps.DistanceMatrix.Query(request);
