@@ -161,27 +161,6 @@ namespace GoogleApi.Test.Maps.Directions
         }
 
         [Test]
-        public void DirectionsWhenTransitModeAndDepartureTimeAndArrivalTimeIsNullTest()
-        {
-            var request = new DirectionsRequest
-            {
-                Key = this.ApiKey,
-                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-                TravelMode = TravelMode.Transit
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Directions.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
-
-            var innerException = exception.InnerException ;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
-        }
-
-        [Test]
         public void DirectionsWhenTransitRoutingPreferenceTest()
         {
             var request = new DirectionsRequest

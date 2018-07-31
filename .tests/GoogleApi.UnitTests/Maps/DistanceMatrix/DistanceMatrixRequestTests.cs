@@ -123,27 +123,6 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
         }
 
         [Test]
-        public void GetQueryStringParametersWhenWhenTravelModeIsTransitAndDepartureTimeIsNullAndArrivalTimeIsNullTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Origins = new[] { new Location(1, 1) },
-                Destinations = new[] { new Location("test") },
-                TravelMode = TravelMode.Transit,
-                DepartureTime = null,
-                ArrivalTime = null
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
-        }
-
-        [Test]
         public void GetUriTest()
         {
             var request = new DistanceMatrixRequest
@@ -169,15 +148,51 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Origins = new[] { new Location("test") },
                 Destinations = new[] { new Location("test") },
                 TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Bus
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time=now", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenTravelModeTransitAndArrivalTimeTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "abc",
+                Origins = new[] { new Location("test") },
+                Destinations = new[] { new Location("test") },
+                TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Bus,
-                ArrivalTime = DateTime.UtcNow,
+                ArrivalTime = DateTime.UtcNow
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&arrival_time={request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenTravelModeTransitAndDepartureTimeTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "abc",
+                Origins = new[] { new Location("test") },
+                Destinations = new[] { new Location("test") },
+                TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Bus,
                 DepartureTime = DateTime.UtcNow
             };
 
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&arrival_time={request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
         }
 
         [Test]
@@ -194,7 +209,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]

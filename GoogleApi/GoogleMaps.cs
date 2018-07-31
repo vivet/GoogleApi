@@ -36,7 +36,7 @@ namespace GoogleApi
     /// - Google Maps Geolocation API
     /// - Google Maps Roads API
     /// - Google Maps Time Zone API
-    /// Documentation: https://developers.google.com/maps/web-services/overview
+    /// Documentation: https://developers.google.com/maps/documentation
     /// </summary>
     public class GoogleMaps
     {
