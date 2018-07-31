@@ -184,10 +184,12 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             else if (this.TravelMode == TravelMode.Driving)
             {
                 if (this.DepartureTime.HasValue)
+                {
                     parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
-                if (this.Key != null || this.ClientId != null)
-                    parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                    if (this.Key != null || this.ClientId != null)
+                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                }
             }
 
             return parameters;
