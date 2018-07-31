@@ -64,6 +64,15 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         public virtual TravelMode TravelMode { get; set; } = TravelMode.Driving;
 
         /// <summary>
+        /// Traffic mdel (defaults to best_guess).
+        /// Specifies the assumptions to use when calculating time in traffic. This setting affects the value returned 
+        /// in the duration_in_traffic field in the response, which contains the predicted time in traffic based on historical averages.
+        /// The traffic_model parameter may only be specified for requests where the travel mode is driving, and where the request includes a departure_time, 
+        /// and only if the request includes an API key or a Google Maps APIs Premium Plan client ID.The available values for this parameter are:
+        /// </summary>
+        public virtual TrafficModel TrafficModel { get; set; } = TrafficModel.Best_Guess;
+
+        /// <summary>
         /// Specifies one or more preferred modes of transit. 
         /// This parameter may only be specified for requests where the mode is transit. 
         /// The parameter supports the following arguments <see cref="Common.Enums.TransitMode"/>
@@ -146,9 +155,6 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             if (this.Destination == null)
                 throw new ArgumentException("Destination is required");
 
-            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
-                throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
-
             var parameters = base.GetQueryStringParameters();
 
             parameters.Add("origin", this.Origin.ToString());
@@ -181,9 +187,15 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 
                 if (this.ArrivalTime != null)
                     parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                else
+                    parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
+            }
+            else if (this.TravelMode == TravelMode.Driving)
+            {
+                parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
 
-                if (this.DepartureTime != null)
-                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                if (this.Key != null || this.ClientId != null)
+                    parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
             }
 
             return parameters;

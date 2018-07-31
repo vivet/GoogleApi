@@ -154,9 +154,6 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             if (string.IsNullOrEmpty(this.DestinationsRaw) && (this.Destinations == null || !this.Destinations.Any()))
                 throw new ArgumentException("Destinations is required");
 
-            //if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
-            //    throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
-
             var parameters = base.GetQueryStringParameters();
 
             parameters.Add("origins", string.IsNullOrEmpty(this.OriginsRaw) ? string.Join("|", this.Origins) : this.OriginsRaw);
@@ -175,29 +172,17 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                 if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
                     parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
 
-                //if (this.ArrivalTime == null && this.DepartureTime == null)
-                //{
-                //    parameters.Add("departure_time", "now");
-                //}
-                //else
-                //{
-                //}
-
                 if (this.ArrivalTime != null)
                     parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-
-                if (this.DepartureTime != null)
-                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                else
+                    parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
             }
             else if (this.TravelMode == TravelMode.Driving)
             {
-                if (this.DepartureTime.HasValue)
-                {
-                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
 
-                    if (this.Key != null || this.ClientId != null)
-                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
-                }
+                if (this.Key != null || this.ClientId != null)
+                    parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
             }
 
             return parameters;
