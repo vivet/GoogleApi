@@ -154,8 +154,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             if (string.IsNullOrEmpty(this.DestinationsRaw) && (this.Destinations == null || !this.Destinations.Any()))
                 throw new ArgumentException("Destinations is required");
 
-            if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
-                throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
+            //if (this.TravelMode == TravelMode.Transit && this.DepartureTime == null && this.ArrivalTime == null)
+            //    throw new ArgumentException("DepatureTime or ArrivalTime is required, when TravelMode is Transit");
 
             var parameters = base.GetQueryStringParameters();
 
@@ -174,6 +174,14 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
                 if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
                     parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+
+                //if (this.ArrivalTime == null && this.DepartureTime == null)
+                //{
+                //    parameters.Add("departure_time", "now");
+                //}
+                //else
+                //{
+                //}
 
                 if (this.ArrivalTime != null)
                     parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));

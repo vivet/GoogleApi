@@ -20,8 +20,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             {
                 Key = this.ApiKey,
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
-                DepartureTime = DateTime.Now
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
             var response = GoogleMaps.DistanceMatrix.Query(request);
 
@@ -49,8 +48,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             {
                 Key = this.ApiKey,
                 Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
-                DepartureTime = DateTime.Now
+                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
             };
             var response = GoogleMaps.DistanceMatrix.QueryAsync(request).Result;
 
@@ -245,29 +243,6 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
             Assert.AreEqual(innerException.Message, "Destinations is required");
-        }
-
-        [Test]
-        public void DistanceMatrixWhenWhenTravelModeIsTransitAndDepartureTimeIsNullAndArrivalTimeIsNullTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(0, 0) },
-                Destinations = new[] { new Location("test") },
-                TravelMode = TravelMode.Transit,
-                DepartureTime = null,
-                ArrivalTime = null
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
         }
     }
 }
