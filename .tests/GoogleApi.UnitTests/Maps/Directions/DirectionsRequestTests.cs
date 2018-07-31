@@ -87,27 +87,6 @@ namespace GoogleApi.UnitTests.Maps.Directions
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Destination is required");
         }
-       
-        [Test]
-        public void GetQueryStringParametersWhenWhenTravelModeIsTransitAndDepartureTimeIsNullAndArrivalTimeIsNullTest()
-        {
-            var request = new DirectionsRequest
-            {
-                Origin = new Location(0, 0),
-                Destination = new Location("test"),
-                TravelMode = TravelMode.Transit,
-                DepartureTime = null,
-                ArrivalTime = null
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "DepatureTime or ArrivalTime is required, when TravelMode is Transit");
-        }
 
         [Test]
         public void GetUriTest()
@@ -122,7 +101,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -140,7 +119,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&region={request.Region}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&region={request.Region}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -157,7 +136,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&alternatives={request.Alternatives.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&alternatives={request.Alternatives.ToString().ToLower()}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -174,7 +153,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&avoid={Uri.EscapeDataString(request.Avoid.ToEnumString('|'))}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&avoid={Uri.EscapeDataString(request.Avoid.ToEnumString('|'))}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -192,7 +171,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var waypoints = request.Waypoints.Select(x => x.ToString());
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -211,7 +190,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var waypoints = request.Waypoints.Select(x => x.ToString());
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString("optimize:true|")}{Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString("optimize:true|")}{Uri.EscapeDataString(string.Join("|", waypoints))}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -223,15 +202,51 @@ namespace GoogleApi.UnitTests.Maps.Directions
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
                 TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Bus
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time=now", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenTravelModeTransitAndArrivalTimeTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "abc",
+                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
+                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
+                TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Bus,
-                ArrivalTime = DateTime.UtcNow,
+                ArrivalTime = DateTime.UtcNow
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&arrival_time={request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenTravelModeTransitAndDepatureTtimeTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "abc",
+                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
+                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
+                TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Bus,
                 DepartureTime = DateTime.UtcNow
             };
 
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&arrival_time={request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
         }
 
         [Test]
@@ -244,15 +259,13 @@ namespace GoogleApi.UnitTests.Maps.Directions
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
                 TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Bus,
-                ArrivalTime = DateTime.UtcNow,
-                DepartureTime = DateTime.UtcNow,
                 TransitRoutingPreference = TransitRoutingPreference.FewerTransfers | TransitRoutingPreference.LessWalking
             };
 
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&transit_routing_preference={Uri.EscapeDataString(request.TransitRoutingPreference.ToEnumString('|'))}&arrival_time={request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&transit_routing_preference={Uri.EscapeDataString(request.TransitRoutingPreference.ToEnumString('|'))}&departure_time=now", uri.PathAndQuery);
         }
     }
 }
