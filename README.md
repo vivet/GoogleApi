@@ -1,5 +1,5 @@
 # Google Api
-[![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
+[![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg?longCache=true&style=for-the-badge)](https://www.nuget.org/packages/GoogleApi/)
 [![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi/)
 
 Seamless Google Api integrations.  
