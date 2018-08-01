@@ -17,6 +17,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         {
             var request = new AddressGeocodeRequest
             {
+                Key = this.ApiKey,
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
             };
             var result = GoogleMaps.AddressGeocode.Query(request);
@@ -40,6 +41,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         {
             var request = new AddressGeocodeRequest
             {
+                Key = this.ApiKey,
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
             };
             var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;
