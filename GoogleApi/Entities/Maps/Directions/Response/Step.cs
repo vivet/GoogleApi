@@ -2,6 +2,7 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
 using Newtonsoft.Json;
 
@@ -52,6 +53,13 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         [JsonProperty("maneuver")]
         [JsonConverter(typeof(StringEnumOrDefaultConverter<ManeuverAction>))]
         public virtual ManeuverAction Maneuver { get; set; }
+
+        /// <summary>
+        /// TravelMode. The mode of transport to use when calculating directions.
+        /// </summary>
+        [JsonProperty("travel_mode")]
+        [JsonConverter(typeof(StringEnumOrDefaultConverter<TravelMode>))]
+        public virtual TravelMode TravelMode { get; set; }
 
         /// <summary>
         /// Contains an object holding an array of encoded points that represent an approximate (smoothed) path of the resulting directions.
