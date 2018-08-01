@@ -1,7 +1,7 @@
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
 {
@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Response
         /// Status: See Status Codes for a list of possible status codes.
         /// </summary>
         [JsonProperty("status")]
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(StringEnumOrDefaultConverter<Status>))]
         public virtual Status Status { get; set; }
 
         /// <summary>
