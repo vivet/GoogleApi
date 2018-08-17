@@ -90,17 +90,18 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
             if (this.Location != null)
             {
                 parameters.Add(
+                    "locationbias",
                     this.Radius.HasValue 
-                        ? $"circle:{this.Radius} @{this.Location}" 
+                        ? $"circle:{this.Radius}@{this.Location}" 
                         : $"point:{this.Location}");
             }
             else if (this.Bounds != null)
             {
-                parameters.Add($"rectangle:{this.Bounds.NorthEast}|{this.Bounds.SouthWest}");
+                parameters.Add("locationbias", $"rectangle:{this.Bounds.NorthEast}|{this.Bounds.SouthWest}");
             }
             else
             {
-                parameters.Add("ipbias");
+                parameters.Add("locationbias", "ipbias");
             }
 
             return parameters;
