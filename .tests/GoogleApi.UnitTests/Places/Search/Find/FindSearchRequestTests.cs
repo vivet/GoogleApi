@@ -108,7 +108,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&ipbias", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=ipbias", uri.PathAndQuery);
         }
 
         [Test]
@@ -124,7 +124,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&point%3A{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=point%3A{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
         }
 
         [Test]
@@ -141,7 +141,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&circle%3A{request.Radius}%20%40{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=circle%3A{request.Radius}%40{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
         }
 
         [Test]
@@ -161,7 +161,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&rectangle%3A{Uri.EscapeDataString(request.Bounds.NorthEast.ToString())}%7C{Uri.EscapeDataString(request.Bounds.SouthWest.ToString())}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=rectangle%3A{Uri.EscapeDataString(request.Bounds.NorthEast.ToString())}%7C{Uri.EscapeDataString(request.Bounds.SouthWest.ToString())}", uri.PathAndQuery);
         }
     }
 }

@@ -89,11 +89,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
 
             if (this.Location != null)
             {
-                parameters.Add(
-                    "locationbias",
-                    this.Radius.HasValue 
-                        ? $"circle:{this.Radius}@{this.Location}" 
-                        : $"point:{this.Location}");
+                parameters.Add("locationbias", this.Radius.HasValue ? $"circle:{this.Radius}@{this.Location}" : $"point:{this.Location}");
             }
             else if (this.Bounds != null)
             {
