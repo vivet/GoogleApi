@@ -26,8 +26,8 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <PackageProjectUrl>https://github.com/vivet/GoogleApi</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.6.8.0</AssemblyVersion>
-    <FileVersion>3.6.8.0</FileVersion>
+    <AssemblyVersion>3.6.9.0</AssemblyVersion>
+    <FileVersion>3.6.9.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <RepositoryType></RepositoryType>
