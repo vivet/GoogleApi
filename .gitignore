@@ -8,5 +8,7 @@ _ReSharper*
 packages
 .vs
 project.lock.json
+**/*.nuget.props
+*.props
 TestResults*
 application.json
