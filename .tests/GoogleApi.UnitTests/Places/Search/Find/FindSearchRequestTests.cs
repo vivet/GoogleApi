@@ -1,7 +1,6 @@
 using System;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
 using NUnit.Framework;
@@ -108,7 +107,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=ipbias", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=place_id&language={request.Language.ToCode()}&locationbias=ipbias", uri.PathAndQuery);
         }
 
         [Test]
@@ -124,7 +123,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=point%3A{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=place_id&language={request.Language.ToCode()}&locationbias=point%3A{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
         }
 
         [Test]
@@ -141,7 +140,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=circle%3A{request.Radius}%40{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=place_id&language={request.Language.ToCode()}&locationbias=circle%3A{request.Radius}%40{Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
         }
 
         [Test]
@@ -161,7 +160,23 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields={request.Fields.ToEnumString(',').ToLower()}&language={request.Language.ToCode()}&locationbias=rectangle%3A{Uri.EscapeDataString(request.Bounds.NorthEast.ToString())}%7C{Uri.EscapeDataString(request.Bounds.SouthWest.ToString())}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=place_id&language={request.Language.ToCode()}&locationbias=rectangle%3A{Uri.EscapeDataString(request.Bounds.NorthEast.ToString())}%7C{Uri.EscapeDataString(request.Bounds.SouthWest.ToString())}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenFieldsTest()
+        {
+            var request = new PlacesFindSearchRequest
+            {
+                Key = "abc",
+                Input = "test",
+                Fields = FieldTypes.Id | FieldTypes.Name
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=id%2Cname&language={request.Language.ToCode()}&locationbias=ipbias", uri.PathAndQuery);
         }
     }
 }

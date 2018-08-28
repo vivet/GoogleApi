@@ -5,6 +5,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
+using GoogleApi.Entities.Places.Details.Request.Enums;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
 
@@ -133,6 +134,30 @@ namespace GoogleApi.Test.Places.Details
         public void PlacesDetailsWhenLanguageTest()
         {
             Assert.Inconclusive();
+        }
+
+        [Test]
+        public void PlacesDetailsWhenFieldsTest()
+        {
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = ApiKey,
+                Input = "jagtvej 2200 København"
+            };
+
+            var response = GooglePlaces.AutoComplete.Query(request);
+            var request2 = new PlacesDetailsRequest
+            {
+                Key = ApiKey,
+                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
+                Fields = FieldTypes.Place_Id
+            };
+
+            var response2 = GooglePlaces.Details.Query(request2);
+            Assert.IsNotNull(response2);
+            Assert.AreEqual(Status.Ok, response2.Status);
+            Assert.IsNotNull(response2.Result.PlaceId);
+
         }
 
         [Test]

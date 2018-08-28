@@ -20,20 +20,6 @@ namespace GoogleApi.Test.Places.Search.Find
             {
                 Key = this.ApiKey,
                 Input = "picadelly circus",
-                Fields = FieldTypes.Formatted_Address | 
-                         FieldTypes.Geometry | 
-                         FieldTypes.Icon | 
-                         FieldTypes.Id | 
-                         FieldTypes.Name | 
-                         FieldTypes.Permanently_Closed | 
-                         FieldTypes.Photos | 
-                         FieldTypes.Place_Id | 
-                         FieldTypes.Plus_Code |
-                         //FieldTypes.Scope |
-                         //FieldTypes.Opening_Hours |
-                         FieldTypes.Price_Level |
-                         FieldTypes.Rating,
-
                 Type = InputType.TextQuery
             };
 
@@ -45,10 +31,6 @@ namespace GoogleApi.Test.Places.Search.Find
             var candidate = response.Candidates.FirstOrDefault();
             Assert.IsNotNull(candidate);
             Assert.IsNotNull(candidate.PlaceId);
-            Assert.IsNotNull(candidate.Geometry);
-            Assert.IsNotNull(candidate.Geometry.Location);
-            Assert.IsNotNull(candidate.Geometry.ViewPort);
-            Assert.AreEqual("https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png", candidate.Icon);
         }
 
         [Test]
@@ -188,7 +170,27 @@ namespace GoogleApi.Test.Places.Search.Find
         [Test]
         public void PlacesFindSearchWhenFieldsTest()
         {
-            Assert.Inconclusive();
+            var request = new PlacesFindSearchRequest
+            {
+                Key = this.ApiKey,
+                Input = "picadelly circus",
+                Type = InputType.TextQuery,
+                Fields = FieldTypes.Basic
+            };
+
+            var response = GooglePlaces.FindSearch.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
+
+            var candidate = response.Candidates.FirstOrDefault();
+            Assert.IsNotNull(candidate);
+            Assert.IsNotNull(candidate.Name);
+            Assert.IsNotNull(candidate.Icon);
+            Assert.IsNotNull(candidate.PlaceId);
+            Assert.IsNotNull(candidate.Geometry);
+            Assert.IsNotNull(candidate.Geometry.Location);
+            Assert.IsNotNull(candidate.Geometry.ViewPort);
         }
 
         [Test]
