@@ -54,11 +54,6 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         Plus_Code = 1 << 8,
 
         /// <summary>
-        /// Scope (billing: basic).
-        /// </summary>
-        Scope = 1 << 9,
-
-        /// <summary>
         /// Types (billing: basic).
         /// </summary>
         Types = 1 << 10,
@@ -76,6 +71,21 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         /// <summary>
         /// Rating (billing: atmosphere).
         /// </summary>
-        Rating = 1 << 13
+        Rating = 1 << 13,
+
+        /// <summary>
+        /// Basic (all).
+        /// </summary>
+        Basic = Formatted_Address | Geometry | Icon | Id | Name | Permanently_Closed | Photos | Place_Id | Plus_Code | Types,
+
+        /// <summary>
+        /// Contact (all).
+        /// </summary>
+        Contact = Opening_Hours,
+
+        /// <summary>
+        /// Atmosphere (all).
+        /// </summary>
+        Atmosphere = Price_Level | Rating
     }
 }

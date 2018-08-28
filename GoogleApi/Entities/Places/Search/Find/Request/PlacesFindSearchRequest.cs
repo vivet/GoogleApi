@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
@@ -32,7 +33,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
 
         /// <summary>
         /// Fields (optional).
-        /// Defaults to place_id.
+        /// Defaults to 'place_id'.
         /// The fields specifying the types of place data to return, separated by a comma.
         /// Note, if you omit the fields parameter from a Find Place request, only the place_id for the result will be returned.
         /// </summary>
@@ -84,7 +85,13 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
 
             parameters.Add("input", this.Input);
             parameters.Add("inputtype", this.Type.ToString().ToLower());
-            parameters.Add("fields", this.Fields.ToEnumString(',').ToLower());
+
+            var fields = Enum.GetValues(typeof(FieldTypes))
+                .Cast<FieldTypes>()
+                .Where(x => this.Fields.HasFlag(x) && x != FieldTypes.Basic && x != FieldTypes.Contact && x != FieldTypes.Atmosphere)
+                .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLower()},");
+
+            parameters.Add("fields", fields.EndsWith(",") ? fields.Substring(0, fields.Length - 1) : fields);
             parameters.Add("language", this.Language.ToCode());
 
             if (this.Location != null)
