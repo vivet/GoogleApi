@@ -526,6 +526,9 @@
     <Compile Include="..\GoogleApi\Entities\Places\Details\Request\Enums\Extensions.cs">
       <Link>Entities\Places\Details\Request\Enums\Extensions.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleApi\Entities\Places\Details\Request\Enums\FieldTypes.cs">
+      <Link>Entities\Places\Details\Request\Enums\FieldTypes.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleApi\Entities\Places\Details\Request\PlacesDetailsRequest.cs">
       <Link>Entities\Places\Details\Request\PlacesDetailsRequest.cs</Link>
     </Compile>

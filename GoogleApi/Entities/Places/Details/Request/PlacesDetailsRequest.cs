@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Places.Details.Request.Enums;
 
 namespace GoogleApi.Entities.Places.Details.Request
 {
@@ -36,11 +38,21 @@ namespace GoogleApi.Entities.Places.Details.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
+        /// Fields (optional).
+        /// Defaults to 'Basic'.
+        /// One or more fields, specifying the types of place data to return, separated by a comma.
+        /// Fields correspond to Place Details results, and are divided into three billing categories: Basic, Contact, and Atmosphere.
+        /// Basic fields are billed at base rate, and incur no additional charges.Contact and Atmosphere fields are billed at a higher rate.
+        /// See the pricing sheet for more information. Attributions (html_attributions) are always returned with every call, regardless of whether it has been requested.
+        /// </summary>
+        public virtual FieldTypes Fields { get; set; } = FieldTypes.Basic;
+
+        /// <summary>
         /// Extensions (optional) — Indicates if the Place Details response should include additional fields. 
         /// Additional fields may include Premium data, requiring an additional license, or values that are not commonly requested. 
         /// Supported values for the extensions parameter are: ◦review_summary includes a rich and concise review curated by Google's editorial staff.
         /// </summary>
-        public virtual Enums.Extensions Extensions { get; set; } = Enums.Extensions.None;
+        public virtual Extensions Extensions { get; set; } = Extensions.None;
 
         /// <summary>
         /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
@@ -55,6 +67,13 @@ namespace GoogleApi.Entities.Places.Details.Request
 
             parameters.Add("placeid", this.PlaceId);
             parameters.Add("language", this.Language.ToCode());
+
+            var fields = Enum.GetValues(typeof(FieldTypes))
+                .Cast<FieldTypes>()
+                .Where(x => this.Fields.HasFlag(x) && x != FieldTypes.Basic && x != FieldTypes.Contact && x != FieldTypes.Atmosphere)
+                .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLower()},");
+
+            parameters.Add("fields", fields.EndsWith(",") ? fields.Substring(0, fields.Length - 1) : fields);
 
             if (!string.IsNullOrEmpty(this.SessionToken))
                 parameters.Add("sessiontoken", this.SessionToken);
