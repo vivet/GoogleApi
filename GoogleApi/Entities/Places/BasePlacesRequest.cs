@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Places
 {
     /// <summary>
     /// Base abstract class for Places requests.
     /// </summary>
-    public abstract class BasePlacesRequest : BaseRequest
+    public abstract class BasePlacesRequest : BaseRequest, IRequestQueryString
     {
         /// <summary>
         /// Base Url.
