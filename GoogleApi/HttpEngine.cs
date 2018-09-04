@@ -96,7 +96,28 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            return this.QueryAsync(request).Result;
+            try
+            {
+                var result = this.ProcessRequest(request);
+                var response = this.ProcessResponse(result);
+
+                switch (response.Status)
+                {
+                    case Status.Ok:
+                    case Status.ZeroResults:
+                        return response;
+
+                    default:
+                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex is GoogleApiException)
+                    throw;
+
+                throw new GoogleApiException(ex.Message, ex);
+            }
         }
 
         /// <summary>
@@ -115,7 +136,7 @@ namespace GoogleApi
 
             var taskCompletion = new TaskCompletionSource<TResponse>();
 
-            await this.ProcessRequest(request, cancellationToken)
+            await this.ProcessRequestAsync(request, cancellationToken)
                 .ContinueWith(async x =>
                 {
                     try
@@ -131,7 +152,7 @@ namespace GoogleApi
                         else
                         {
                             var result = await x;
-                            var response = await this.ProcessResponse(result);
+                            var response = await this.ProcessResponseAsync(result);
 
                             switch (response.Status)
                             {
@@ -164,8 +185,38 @@ namespace GoogleApi
             return await taskCompletion.Task;
         }
 
-        private async Task<HttpResponseMessage> ProcessRequest(TRequest request,
-            CancellationToken cancellationToken = default)
+        private HttpResponseMessage ProcessRequest(TRequest request)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var uri = request.GetUri();
+
+            if (request is IRequestQueryString)
+            {
+                return HttpEngine.HttpClient.GetAsync(uri).Result;
+            }
+            else
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+                var serializeObject = JsonConvert.SerializeObject(request, settings);
+
+                using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
+                {
+                    var content = stringContent.ReadAsStreamAsync().Result;
+
+                    using (var streamContent = new StreamContent(content))
+                    {
+                        return HttpEngine.HttpClient.PostAsync(uri, streamContent).Result;
+                    }
+                }
+            }
+        }
+        private async Task<HttpResponseMessage> ProcessRequestAsync(TRequest request, CancellationToken cancellationToken = default)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -196,8 +247,40 @@ namespace GoogleApi
                 }
             }
         }
+        private TResponse ProcessResponse(HttpResponseMessage httpResponse)
+        {
+            if (httpResponse == null)
+                throw new ArgumentNullException(nameof(httpResponse));
 
-        private async Task<TResponse> ProcessResponse(HttpResponseMessage httpResponse)
+            using (httpResponse)
+            {
+                httpResponse.EnsureSuccessStatusCode();
+
+                var response = new TResponse();
+
+                switch (response)
+                {
+                    case BaseStreamResponse streamResponse:
+                        streamResponse.Buffer = httpResponse.Content.ReadAsByteArrayAsync().Result;
+                        response = (TResponse)(IResponse)streamResponse;
+                        break;
+
+                    default:
+                        var rawJson = httpResponse.Content.ReadAsStringAsync().Result;
+                        response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+                        response.RawJson = rawJson;
+                        break;
+                }
+
+                response.RawQueryString = httpResponse.RequestMessage.RequestUri.PathAndQuery;
+                response.Status = httpResponse.IsSuccessStatusCode
+                    ? response.Status ?? Status.Ok
+                    : Status.HttpError;
+
+                return response;
+            }
+        }
+        private async Task<TResponse> ProcessResponseAsync(HttpResponseMessage httpResponse)
         {
             if (httpResponse == null)
                 throw new ArgumentNullException(nameof(httpResponse));
