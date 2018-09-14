@@ -9,11 +9,6 @@ namespace GoogleApi.Entities.Maps.Common.Enums
     public enum TransitMode
     {
         /// <summary>
-        /// Indicates that the calculated route should prefer travel by bus.
-        /// </summary>
-        Bus = 0,
-
-        /// <summary>
         /// Indicates that the calculated route should prefer travel by subway.
         /// </summary>
         Subway = 1 << 0,
@@ -27,6 +22,11 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         /// Indicates that the calculated route should prefer travel by tram and light rail.
         /// </summary>
         Tram = 1 << 2,
+
+        /// <summary>
+        /// Indicates that the calculated route should prefer travel by bus.
+        /// </summary>
+        Bus = 1 << 3,
 
         /// <summary>
         /// Indicates that the calculated route should prefer travel by train, tram, light rail, and subway. 
