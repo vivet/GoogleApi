@@ -89,7 +89,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = "jagtvej 2200 København"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -150,7 +150,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -169,7 +169,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -188,7 +188,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -207,7 +207,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Input = string.Empty
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -227,7 +227,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Radius = 0
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -247,7 +247,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
                 Radius = 50001
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

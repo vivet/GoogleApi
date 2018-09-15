@@ -70,7 +70,7 @@ namespace GoogleApi.Test.Maps.StreetView
                 Location = new Location(60.170877, 24.942796)
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -89,7 +89,7 @@ namespace GoogleApi.Test.Maps.StreetView
                 Location = new Location(60.170877, 24.942796)
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -108,7 +108,7 @@ namespace GoogleApi.Test.Maps.StreetView
                 Location = new Location(60.170877, 24.942796)
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

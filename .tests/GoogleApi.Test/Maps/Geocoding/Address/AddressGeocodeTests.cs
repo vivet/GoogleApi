@@ -127,7 +127,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         {
             var request = new AddressGeocodeRequest();
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.AddressGeocode.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.AddressGeocode.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

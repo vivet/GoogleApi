@@ -99,8 +99,8 @@ namespace GoogleApi.Test.Maps.TimeZone
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual("America/New_York", response.TimeZoneId);
-            Assert.AreEqual("Eastern Standard Time", response.TimeZoneName);
-            Assert.AreEqual(0.00, response.OffSet);
+            Assert.AreEqual("Eastern Daylight Time", response.TimeZoneName);
+            Assert.AreEqual(3600.00, response.OffSet);
             Assert.AreEqual(-18000.00, response.RawOffSet);
         }
 
@@ -112,7 +112,7 @@ namespace GoogleApi.Test.Maps.TimeZone
                 Key = this.ApiKey
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.TimeZone.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.TimeZone.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

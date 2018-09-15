@@ -80,7 +80,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Type = SearchPlaceType.School
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -118,7 +118,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Radius = 10
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -138,7 +138,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Radius = 10
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -157,7 +157,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Location = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -177,7 +177,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Radius = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -197,7 +197,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Radius = 0
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -217,7 +217,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Radius = 50001
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -238,7 +238,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Rankby = Ranking.Distance
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -258,7 +258,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Rankby = Ranking.Distance
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.NearBySearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

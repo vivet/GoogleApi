@@ -309,7 +309,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Directions.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Directions.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -328,7 +328,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Origin = new Location("185 Broadway Ave, Manhattan, NY, USA")
             };
             
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Directions.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Directions.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

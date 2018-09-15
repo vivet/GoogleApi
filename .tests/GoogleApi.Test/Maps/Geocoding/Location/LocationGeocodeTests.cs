@@ -28,7 +28,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             Assert.AreEqual(Status.Ok, response.Status);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", result.FormattedAddress);
+            Assert.AreEqual("281 Bedford Ave, Brooklyn, NY 11211, USA", result.FormattedAddress);
 
             var types = result.Types?.ToArray();
             Assert.IsNotNull(types);
@@ -88,7 +88,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             Assert.AreEqual(Status.Ok, response.Status);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", result.FormattedAddress);
+            Assert.AreEqual("281 Bedford Ave, Brooklyn, NY 11211, USA", result.FormattedAddress);
 
             var types = result.Types?.ToArray();
             Assert.IsNotNull(types);
@@ -127,7 +127,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             Assert.AreEqual(Status.Ok, response.Status);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("285 Bedford Ave, Brooklyn, NY 11211, USA", result.FormattedAddress);
+            Assert.AreEqual("281 Bedford Ave, Brooklyn, NY 11211, USA", result.FormattedAddress);
             Assert.AreEqual(GeometryLocationType.Rooftop, result.Geometry.LocationType);
         }
 
@@ -136,7 +136,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest();
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.LocationGeocode.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.LocationGeocode.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

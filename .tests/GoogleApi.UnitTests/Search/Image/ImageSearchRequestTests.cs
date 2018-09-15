@@ -231,7 +231,7 @@ namespace GoogleApi.UnitTests.Search.Image
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/customsearch/v1?key={request.Key}&q={request.Query}&cx={request.SearchEngineId}&alt={request.Alt.ToString().ToLower()}&prettyPrint={request.PrettyPrint.ToString().ToLower()}&userIp={request.UserIp}&quotaUser={request.QuotaUser}&c2coff=1&fileType={string.Join(",", request.Options.FileTypes)}&filter=0&hl={request.Options.InterfaceLanguage.ToHl()}&num={request.Options.Number}&rights={string.Join(",", request.Options.Rights)}&safe={request.Options.SafetyLevel.ToString().ToLower()}&searchType=image&start={request.Options.StartIndex.ToString()}", uri.PathAndQuery);
+            Assert.AreEqual($"/customsearch/v1?key={request.Key}&q={request.Query}&alt={request.Alt.ToString().ToLower()}&prettyPrint={request.PrettyPrint.ToString().ToLower()}&cx={request.SearchEngineId}&c2coff=1&fileType={string.Join(",", request.Options.FileTypes)}&filter=0&hl={request.Options.InterfaceLanguage.ToHl()}&num={request.Options.Number}&rights={string.Join(",", request.Options.Rights)}&safe={request.Options.SafetyLevel.ToString().ToLower()}&start={request.Options.StartIndex.ToString()}&searchType=image", uri.PathAndQuery);
         }
 
         [Test]

@@ -137,7 +137,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         {
             var request = new PlusCodeGeocodeRequest();
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlusCodeGeocode.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlusCodeGeocode.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
