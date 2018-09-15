@@ -1,39 +1,34 @@
-﻿namespace GoogleApi.Entities.Search.Video.Response
+﻿using Newtonsoft.Json;
+
+namespace GoogleApi.Entities.Search.Video.Response
 {
     /// <summary>
-    /// 
+    /// Video.
     /// </summary>
     public class Video
     {
         /// <summary>
-        /// 
+        /// Video Id.
         /// </summary>
-        public virtual string Id { get; set; }
+        [JsonProperty("id")]
+        public virtual Id Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Kind.
         /// </summary>
+        [JsonProperty("kind")]
         public virtual string Kind { get; set; }
 
         /// <summary>
-        /// 
+        /// ETag.
         /// </summary>
-        public virtual string ETag { get; set; }      
+        [JsonProperty("etag")]
+        public virtual string ETag { get; set; }
 
         /// <summary>
-        /// 
+        /// Snippet.
         /// </summary>
-        public virtual Status Status { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual Statistics Statistics { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual ContentDetails ContentDetails { get; set; }
-
+        [JsonProperty("snippet")]
+        public virtual Snippet Snippet { get; set; }
     }
 }

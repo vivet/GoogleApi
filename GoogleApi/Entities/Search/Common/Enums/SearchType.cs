@@ -13,6 +13,11 @@ namespace GoogleApi.Entities.Search.Common.Enums
         /// <summary>
         /// Image.
         /// </summary>
-        Image
+        Image,
+
+        /// <summary>
+        /// Video.
+        /// </summary>
+        Video
     }
 }
