@@ -3,7 +3,7 @@
     /// <summary>
     /// Static Maps Response.
     /// </summary>
-    public class StaticMapsResponse : BaseStreamResponse
+    public class StaticMapsResponse : BaseResponseStream
     {
 
     }

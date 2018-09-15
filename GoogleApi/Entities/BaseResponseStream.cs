@@ -3,9 +3,9 @@
 namespace GoogleApi.Entities
 {
     /// <summary>
-    /// Base Stream Response.
+    /// Base Response Stream.
     /// </summary>
-    public class BaseStreamResponse : BaseResponse
+    public class BaseResponseStream : BaseResponse
     {
         /// <summary>
         /// Buffer.
