@@ -67,6 +67,7 @@ The following operations are supported.
 ##### Google Search
   * Web
   * Image
+  * Video
 
 ##### Google Translate
   * Detect
