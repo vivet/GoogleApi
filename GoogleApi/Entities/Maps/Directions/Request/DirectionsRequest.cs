@@ -90,12 +90,27 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// <summary>
         /// The time of arrival.
         /// Required when TravelMode = Transit
+        /// Specifies the desired time of arrival for transit directions, in seconds since midnight, January 1, 1970 UTC.
+        /// You can specify either departure_time or arrival_time, but not both. 
+        /// Note that arrival_time must be specified as an integer.
         /// </summary>
         public virtual DateTime? ArrivalTime { get; set; }
 
         /// <summary>
         /// The time of departure.
         /// Required when TravelMode = Transit
+        /// Specifies the desired time of departure.
+        /// You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC. 
+        /// Alternatively, you can specify a value of now, which sets the departure time to the current time (correct to the nearest second).
+        /// The departure time may be specified in two cases:
+        /// 1. For requests where the travel mode is transit: 
+        /// You can optionally specify one of departure_time or arrival_time. 
+        /// If neither time is specified, the departure_time defaults to now (that is, the departure time defaults to the current time).
+        /// 2. For requests where the travel mode is driving: 
+        /// You can specify the departure_time to receive a route and trip duration (response field: duration_in_traffic) 
+        /// that take traffic conditions into account. 
+        /// This option is only available if the request contains a valid API key, or a valid Google Maps APIs Premium Plan client ID and signature. 
+        /// The departure_time must be set to the current time or some time in the future. It cannot be in the past.
         /// </summary>
         public virtual DateTime? DepartureTime { get; set; }
   
@@ -103,7 +118,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// Waypoints (optional) specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). 
         /// A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded. 
         /// (For more information on waypoints, see Using Waypoints in Routes below.)
-        /// If you'd like to influence the route using waypoints without adding a stopover, prefix the waypoint with 'via:' (deprecated On Aug 20, 2017)
+        /// If you'd like to influence the route using waypoints without adding a stopover, prefix the waypoint with via:' (deprecated On Aug 20, 2017)
         /// Waypoints prefixed with via: will not add an entry to the legs array, but will instead route the journey through the provided waypoint.
         /// The via: prefix is most effective when creating routes in response to the user dragging the waypoints on the map. 
         /// Doing so allows the user to see how the final route may look in real-time and helps ensure that waypoints are placed in locations that 
