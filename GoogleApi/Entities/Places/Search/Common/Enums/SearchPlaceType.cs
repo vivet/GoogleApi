@@ -203,7 +203,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Electronics Store.
         /// </summary>
-        [EnumMember(Value = "department_store")]
+        [EnumMember(Value = "electronics_store")]
         ElectronicsStore,
 
         /// <summary>
