@@ -4,7 +4,6 @@ using System.Globalization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
@@ -12,7 +11,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
     /// <summary>
     /// Places QueryAutoComplete Request.
     /// </summary>
-    public class PlacesQueryAutoCompleteRequest : BasePlacesRequest, IRequestQueryString
+    public class PlacesQueryAutoCompleteRequest : BasePlacesRequest
     {
         /// <summary>
         /// Base Url.

@@ -760,74 +760,95 @@
     <Compile Include="..\GoogleApi\Entities\Search\Image\Request\ImageSearchRequest.cs">
       <Link>Entities\Search\Image\Request\ImageSearchRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\ChannelType.cs">
-      <Link>Entities\Search\Video\Request\Enums\ChannelType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\BaseVideoSearchRequest.cs">
+      <Link>Entities\Search\Video\BaseVideoSearchRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\EventType.cs">
-      <Link>Entities\Search\Video\Request\Enums\EventType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\BaseVideoSearchResponse.cs">
+      <Link>Entities\Search\Video\BaseVideoSearchResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\Order.cs">
-      <Link>Entities\Search\Video\Request\Enums\Order.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Channels\Request\ChannelsSearchRequest.cs">
+      <Link>Entities\Search\Video\Channels\Request\ChannelsSearchRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\PartType.cs">
-      <Link>Entities\Search\Video\Request\Enums\PartType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Channels\Response\ChannelSearchResponse.cs">
+      <Link>Entities\Search\Video\Channels\Response\ChannelSearchResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\SafeSearch.cs">
-      <Link>Entities\Search\Video\Request\Enums\SafeSearch.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Enums\ChannelType.cs">
+      <Link>Entities\Search\Video\Common\Enums\ChannelType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoCaptionType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoCaptionType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Enums\Country.cs">
+      <Link>Entities\Search\Video\Common\Enums\Country.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoDefinitionType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoDefinitionType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Enums\EventType.cs">
+      <Link>Entities\Search\Video\Common\Enums\EventType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoDimensionType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoDimensionType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Enums\Extensions\CountryExtension.cs">
+      <Link>Entities\Search\Video\Common\Enums\Extensions\CountryExtension.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoDurationType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoDurationType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Enums\Order.cs">
+      <Link>Entities\Search\Video\Common\Enums\Order.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoEmbeddableType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoEmbeddableType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Enums\PartType.cs">
+      <Link>Entities\Search\Video\Common\Enums\PartType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoLicenseType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoLicenseType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Enums\SafeSearch.cs">
+      <Link>Entities\Search\Video\Common\Enums\SafeSearch.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoSyndicatedType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoSyndicatedType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Id.cs">
+      <Link>Entities\Search\Video\Common\Id.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\Enums\VideoType.cs">
-      <Link>Entities\Search\Video\Request\Enums\VideoType.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Item.cs">
+      <Link>Entities\Search\Video\Common\Item.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Request\VideoSearchRequest.cs">
-      <Link>Entities\Search\Video\Request\VideoSearchRequest.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\PageInfo.cs">
+      <Link>Entities\Search\Video\Common\PageInfo.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\Enums\Country.cs">
-      <Link>Entities\Search\Video\Response\Enums\Country.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Snippet.cs">
+      <Link>Entities\Search\Video\Common\Snippet.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\Enums\Extensions\CountryExtension.cs">
-      <Link>Entities\Search\Video\Response\Enums\Extensions\CountryExtension.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Thumbnail.cs">
+      <Link>Entities\Search\Video\Common\Thumbnail.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\Id.cs">
-      <Link>Entities\Search\Video\Response\Id.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Common\Thumbnails.cs">
+      <Link>Entities\Search\Video\Common\Thumbnails.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\PageInfo.cs">
-      <Link>Entities\Search\Video\Response\PageInfo.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Playlists\Request\PlaylistSearchRequest.cs">
+      <Link>Entities\Search\Video\Playlists\Request\PlaylistSearchRequest.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\Snippet.cs">
-      <Link>Entities\Search\Video\Response\Snippet.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Playlists\Response\PlaylistSearchResponse.cs">
+      <Link>Entities\Search\Video\Playlists\Response\PlaylistSearchResponse.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\Thumbnail.cs">
-      <Link>Entities\Search\Video\Response\Thumbnail.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoCaptionType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoCaptionType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\Thumbnails.cs">
-      <Link>Entities\Search\Video\Response\Thumbnails.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoDefinitionType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoDefinitionType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\Video.cs">
-      <Link>Entities\Search\Video\Response\Video.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoDimensionType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoDimensionType.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleApi\Entities\Search\Video\Response\VideoSearchResponse.cs">
-      <Link>Entities\Search\Video\Response\VideoSearchResponse.cs</Link>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoDurationType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoDurationType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoEmbeddableType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoEmbeddableType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoLicenseType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoLicenseType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoSyndicatedType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoSyndicatedType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\Enums\VideoType.cs">
+      <Link>Entities\Search\Video\Videos\Request\Enums\VideoType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\VideoOptions.cs">
+      <Link>Entities\Search\Video\Videos\Request\VideoOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Request\VideoSearchRequest.cs">
+      <Link>Entities\Search\Video\Videos\Request\VideoSearchRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleApi\Entities\Search\Video\Videos\Response\VideoSearchResponse.cs">
+      <Link>Entities\Search\Video\Videos\Response\VideoSearchResponse.cs</Link>
     </Compile>
     <Compile Include="..\GoogleApi\Entities\Search\Web\Request\WebSearchRequest.cs">
       <Link>Entities\Search\Web\Request\WebSearchRequest.cs</Link>

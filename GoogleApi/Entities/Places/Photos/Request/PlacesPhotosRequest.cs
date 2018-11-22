@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Places.Photos.Request
@@ -9,7 +8,7 @@ namespace GoogleApi.Entities.Places.Photos.Request
     /// <summary>
     /// Places Photos Request.
     /// </summary>
-    public class PlacesPhotosRequest : BasePlacesRequest, IRequestQueryString
+    public class PlacesPhotosRequest : BasePlacesRequest
     {
         /// <summary>
         /// Base Url.

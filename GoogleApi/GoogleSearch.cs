@@ -1,7 +1,11 @@
 ﻿using GoogleApi.Entities.Search;
 using GoogleApi.Entities.Search.Image.Request;
-using GoogleApi.Entities.Search.Video.Request;
-using GoogleApi.Entities.Search.Video.Response;
+using GoogleApi.Entities.Search.Video.Channels.Request;
+using GoogleApi.Entities.Search.Video.Channels.Response;
+using GoogleApi.Entities.Search.Video.Playlists.Request;
+using GoogleApi.Entities.Search.Video.Playlists.Response;
+using GoogleApi.Entities.Search.Video.Videos.Request;
+using GoogleApi.Entities.Search.Video.Videos.Response;
 using GoogleApi.Entities.Search.Web.Request;
 
 namespace GoogleApi
@@ -35,11 +39,33 @@ namespace GoogleApi
         public static HttpEngine<ImageSearchRequest, BaseSearchResponse> ImageSearch => HttpEngine<ImageSearchRequest, BaseSearchResponse>.instance;
 
         /// <summary>
-        /// Video Search.
-        /// You can retrieve results for a particular search by sending an HTTP GET request to its URI.
-        /// You pass in the details of the search request as query parameters.
-        /// Docs: https://developers.google.com/youtube/v3/getting-started
+        /// Video Search (nested class).
         /// </summary>
-        public static HttpEngine<VideoSearchRequest, VideoSearchResponse> VideoSearch => HttpEngine<VideoSearchRequest, VideoSearchResponse>.instance;
+        public static class VideoSearch
+        {
+            /// <summary>
+            /// Video Search.
+            /// You can retrieve results for a particular search by sending an HTTP GET request to its URI.
+            /// You pass in the details of the search request as query parameters.
+            /// Docs: https://developers.google.com/youtube/v3/getting-started
+            /// </summary>
+            public static HttpEngine<VideoSearchRequest, VideoSearchResponse> Videos => HttpEngine<VideoSearchRequest, VideoSearchResponse>.instance;
+
+            /// <summary>
+            /// Video Channel Search
+            /// You can retrieve results for a particular search by sending an HTTP GET request to its URI.
+            /// You pass in the details of the search request as query parameters.
+            /// Docs: https://developers.google.com/youtube/v3/getting-started
+            /// </summary>
+            public static HttpEngine<ChannelSearchRequest, ChannelSearchResponse> Channels => HttpEngine<ChannelSearchRequest, ChannelSearchResponse>.instance;
+
+            /// <summary>
+            /// Video Playlist Search
+            /// You can retrieve results for a particular search by sending an HTTP GET request to its URI.
+            /// You pass in the details of the search request as query parameters.
+            /// Docs: https://developers.google.com/youtube/v3/getting-started
+            /// </summary>
+            public static HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse> Playlists => HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse>.instance;
+        }
     }
 }
