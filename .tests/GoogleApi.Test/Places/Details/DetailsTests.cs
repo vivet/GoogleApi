@@ -54,21 +54,7 @@ namespace GoogleApi.Test.Places.Details
 
             var addressComponents = result.AddressComponents?.ToArray();
             Assert.IsNotNull(addressComponents);
-            Assert.AreEqual(3, addressComponents.Length);
-
-            Assert.AreEqual("Jagtvej", addressComponents[0].LongName);
-            Assert.AreEqual("Jagtvej", addressComponents[0].ShortName);
-            Assert.Contains(AddressComponentType.Route, addressComponents[0].Types.ToArray());
-
-            Assert.AreEqual("København", addressComponents[1].LongName);
-            Assert.AreEqual("København", addressComponents[1].ShortName);
-            Assert.Contains(AddressComponentType.Locality, addressComponents[1].Types.ToArray());
-            Assert.Contains(AddressComponentType.Political, addressComponents[1].Types.ToArray());
-
-            Assert.AreEqual("Denmark", addressComponents[2].LongName);
-            Assert.AreEqual("DK", addressComponents[2].ShortName);
-            Assert.Contains(AddressComponentType.Country, addressComponents[2].Types.ToArray());
-            Assert.Contains(AddressComponentType.Political, addressComponents[2].Types.ToArray());
+            Assert.AreEqual(5, addressComponents.Length);
         }
 
         [Test]
@@ -120,7 +106,7 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = "abc"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -175,7 +161,7 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -194,7 +180,7 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -213,7 +199,7 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -232,7 +218,7 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = string.Empty
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

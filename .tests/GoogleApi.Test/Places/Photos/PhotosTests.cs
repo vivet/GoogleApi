@@ -97,7 +97,7 @@ namespace GoogleApi.Test.Places.Photos
                 MaxWidth = 1600
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -129,7 +129,7 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 10
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -149,7 +149,7 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 10
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -168,7 +168,7 @@ namespace GoogleApi.Test.Places.Photos
                 PhotoReference = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -187,7 +187,7 @@ namespace GoogleApi.Test.Places.Photos
                 PhotoReference = string.Empty
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -206,7 +206,7 @@ namespace GoogleApi.Test.Places.Photos
                 PhotoReference = "abc"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -226,7 +226,7 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 0
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -246,7 +246,7 @@ namespace GoogleApi.Test.Places.Photos
                 MaxHeight = 1601
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -266,7 +266,7 @@ namespace GoogleApi.Test.Places.Photos
                 MaxWidth = 0
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -286,7 +286,7 @@ namespace GoogleApi.Test.Places.Photos
                 MaxWidth = 1601
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

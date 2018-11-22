@@ -3,7 +3,7 @@
     /// <summary>
     /// Places Photos Response.
     /// </summary>
-    public class PlacesPhotosResponse : BaseStreamResponse
+    public class PlacesPhotosResponse : BaseResponseStream
     {
 
     }

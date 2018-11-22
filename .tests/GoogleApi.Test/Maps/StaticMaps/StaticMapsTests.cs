@@ -73,7 +73,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 ZoomLevel = 1
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -93,7 +93,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 ZoomLevel = 1
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -113,7 +113,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 ZoomLevel = 1
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StaticMaps.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

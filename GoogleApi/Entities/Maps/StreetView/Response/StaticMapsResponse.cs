@@ -3,7 +3,7 @@
     /// <summary>
     /// Street View Response.
     /// </summary>
-    public class StreetViewResponse : BaseStreamResponse
+    public class StreetViewResponse : BaseResponseStream
     {
 
     }

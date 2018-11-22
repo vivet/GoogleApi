@@ -71,7 +71,7 @@ namespace GoogleApi.Test.Maps.Elevation
                 Samples = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -90,7 +90,7 @@ namespace GoogleApi.Test.Maps.Elevation
                 Locations = new[] { new Location(40.7141289, -73.9614074) }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -105,7 +105,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest();
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

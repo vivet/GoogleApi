@@ -76,7 +76,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 	            }
 	        };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.Query(request));
+	        var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
 	        Assert.IsNotNull(exception);
 	        Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -90,16 +90,6 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
         public void SpeedLimitsWhenPlaceIdsTest()
         {
             Assert.Inconclusive();
-
-            //var request = new SpeedLimitsRequest
-            //{
-            //    Key = this.ApiKey,
-            //    PlaceIds = new[] { "test" }
-            //};
-            //var result = GoogleMaps.SpeedLimits.Query(request);
-
-            //Assert.IsNotNull(result);
-            //Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
@@ -111,7 +101,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
                 Path = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -130,7 +120,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
                 Path = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -148,7 +138,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
                 Key = this.ApiKey
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -168,7 +158,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
                 PlaceIds = new string[0]
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -187,7 +177,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
                 PlaceIds = new string[101]
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

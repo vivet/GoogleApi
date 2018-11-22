@@ -83,7 +83,7 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hello World" }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -129,7 +129,7 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hej Verden" }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -148,7 +148,7 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hej Verden" }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -167,7 +167,7 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -186,7 +186,7 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new string[0]
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Detect.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

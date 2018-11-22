@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Places.Details.Request.Enums;
 
@@ -12,7 +11,7 @@ namespace GoogleApi.Entities.Places.Details.Request
     /// <summary>
     /// Places Details Request.
     /// </summary>
-    public class PlacesDetailsRequest : BasePlacesRequest, IRequestQueryString
+    public class PlacesDetailsRequest : BasePlacesRequest
     {
         /// <summary>
         /// Base Url.

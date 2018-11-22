@@ -260,7 +260,7 @@ namespace GoogleApi
 
                 switch (response)
                 {
-                    case BaseStreamResponse streamResponse:
+                    case BaseResponseStream streamResponse:
                         streamResponse.Buffer = httpResponse.Content.ReadAsByteArrayAsync().Result;
                         response = (TResponse)(IResponse)streamResponse;
                         break;
@@ -293,7 +293,7 @@ namespace GoogleApi
 
                 switch (response)
                 {
-                    case BaseStreamResponse streamResponse:
+                    case BaseResponseStream streamResponse:
                         streamResponse.Buffer = await httpResponse.Content.ReadAsByteArrayAsync();
                         response = (TResponse) (IResponse) streamResponse;
                         break;

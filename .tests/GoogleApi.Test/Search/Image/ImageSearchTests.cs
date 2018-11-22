@@ -120,7 +120,7 @@ namespace GoogleApi.Test.Search.Image
                 Key = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -139,7 +139,7 @@ namespace GoogleApi.Test.Search.Image
                 Query = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -159,7 +159,7 @@ namespace GoogleApi.Test.Search.Image
                 SearchEngineId = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

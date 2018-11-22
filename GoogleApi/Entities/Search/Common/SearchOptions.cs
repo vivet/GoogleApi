@@ -135,11 +135,6 @@ namespace GoogleApi.Entities.Search.Common
         public virtual SafetyLevel SafetyLevel { get; set; } = SafetyLevel.Off;
 
         /// <summary>
-        /// Allowed values are web or image. If unspecified, results are limited to webpages.
-        /// </summary>
-        public virtual SearchType SearchType { get; set; } = SearchType.Web;
-
-        /// <summary>
         /// SiteSearch - Specifies all search results should be pages either included or excluded, from a given site.
         /// </summary>
         public virtual SiteSearch SiteSearch { get; set; }

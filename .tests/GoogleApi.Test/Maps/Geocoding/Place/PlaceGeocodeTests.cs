@@ -94,7 +94,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
                 PlaceId = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -114,7 +114,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
                 PlaceId = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -126,13 +126,13 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
 
         [Test]
         public void PlaceGeocodeWhenPlaceIdIsNullTest()
-        {
+            {
             var request = new PlaceGeocodeRequest
             {
                 Key = this.ApiKey
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.PlaceGeocode.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

@@ -113,7 +113,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -132,7 +132,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Path = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -151,7 +151,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Path = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -169,7 +169,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Key = this.ApiKey
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -188,7 +188,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Path = new Location[0]
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

@@ -78,7 +78,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = "picadelly circus"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -106,7 +106,7 @@ namespace GoogleApi.Test.Places.Search.Text
             var request = new PlacesTextSearchRequest
             {
                 Key = this.ApiKey,
-                Query = "picadelly circus",
+                Query = "new york",
                 Minprice = PriceLevel.Expensive,
                 Maxprice = PriceLevel.VeryExpensive
             };
@@ -130,7 +130,7 @@ namespace GoogleApi.Test.Places.Search.Text
             var request = new PlacesTextSearchRequest
             {
                 Key = this.ApiKey,
-                Query = "picadelly circus",
+                Query = "new york",
                 Minprice = PriceLevel.Expensive
             };
 
@@ -152,12 +152,11 @@ namespace GoogleApi.Test.Places.Search.Text
             var request = new PlacesTextSearchRequest
             {
                 Key = this.ApiKey,
-                Query = "picadelly circus",
+                Query = "new york",
                 Maxprice = PriceLevel.Expensive
             };
 
             var response = GooglePlaces.TextSearch.Query(request);
-
         
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -178,7 +177,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -197,7 +196,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = "test"
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -216,7 +215,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -235,7 +234,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = string.Empty
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -271,7 +270,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Location = new Location(0, 0)
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 

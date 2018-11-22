@@ -176,7 +176,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Destinations = new[] { new Location("test") }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -196,7 +196,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Destinations = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -215,7 +215,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Origins = new[] { new Location(0, 0) }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
@@ -235,7 +235,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Destinations = new Location[0]
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.Query(request));
+            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
             Assert.AreEqual("One or more errors occurred.", exception.Message);
 
