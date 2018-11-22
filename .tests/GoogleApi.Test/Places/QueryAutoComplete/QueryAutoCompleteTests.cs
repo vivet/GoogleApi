@@ -116,7 +116,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
             var results = response.Predictions.ToArray();
             Assert.IsNotNull(results);
             Assert.IsNotEmpty(results);
-            Assert.AreEqual(3, results.Length);
+            Assert.GreaterOrEqual(results.Length, 3);
 
             var result = results.FirstOrDefault();
             Assert.IsNotNull(result);

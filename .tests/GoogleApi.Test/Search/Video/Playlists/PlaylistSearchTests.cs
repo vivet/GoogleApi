@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Playlists.Request;
-using GoogleApi.Entities.Search.Video.Videos.Request;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Search.Video.Playlists

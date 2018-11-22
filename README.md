@@ -70,7 +70,7 @@ The following operations are supported.
   * Video (*beta*)
     * Channels
 	* Playlists
-	* vidoes
+	* Vidoes
 
 ##### Google Translate
   * Detect

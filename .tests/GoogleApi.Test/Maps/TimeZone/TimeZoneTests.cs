@@ -17,6 +17,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Location(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
+                Key = this.ApiKey,
                 Location = location
             };
 
@@ -36,6 +37,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Location(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
+                Key = this.ApiKey,
                 Location = location
             };
 
@@ -44,7 +46,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual("America/New_York", response.TimeZoneId);
-            Assert.AreEqual("Eastern Daylight Time", response.TimeZoneName);
+            Assert.IsNotNull(response.TimeZoneName);
             Assert.IsNotNull(response.OffSet);
             Assert.IsNotNull(response.RawOffSet);
         }
@@ -55,6 +57,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Location(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
+                Key = this.ApiKey,
                 Location = location
             };
             var cancellationTokenSource = new CancellationTokenSource();
@@ -72,6 +75,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Location(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
+                Key = this.ApiKey,
                 Location = location,
                 Language = Language.German
             };
@@ -81,7 +85,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
             Assert.AreEqual("America/New_York", response.TimeZoneId);
-            Assert.AreEqual("Nordamerikanische Ostküsten-Sommerzeit", response.TimeZoneName);
+            Assert.IsNotNull(response.TimeZoneName);
         }
 
         [Test]
@@ -90,6 +94,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Location(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
+                Key = this.ApiKey,
                 Location = location,
                 TimeStamp = DateTime.Now.AddMonths(6)
             };

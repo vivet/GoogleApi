@@ -17,6 +17,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest
             {
+                Key = this.ApiKey,
                 Locations = new[] { new Location(40.7141289, -73.9614074) }
             };
 
@@ -32,6 +33,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest
             {
+                Key = this.ApiKey,
                 Locations = new[] { new Location(40.7141289, -73.9614074) }
             };
             var response = GoogleMaps.Elevation.QueryAsync(request).Result;
@@ -45,6 +47,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest
             {
+                Key = this.ApiKey,
                 Locations = new[] { new Location(40.7141289, -73.9614074) }
             };
             var cancellationTokenSource = new CancellationTokenSource();
@@ -67,6 +70,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest
             {
+                Key = this.ApiKey,
                 Path = new[] { new Location(40.7141289, -73.9614074) },
                 Samples = null
             };
@@ -86,6 +90,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest
             {
+                Key = this.ApiKey,
                 Path = new[] { new Location(40.7141289, -73.9614074) },
                 Locations = new[] { new Location(40.7141289, -73.9614074) }
             };
