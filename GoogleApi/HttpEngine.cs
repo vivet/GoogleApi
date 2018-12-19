@@ -295,7 +295,7 @@ namespace GoogleApi
                 {
                     case BaseResponseStream streamResponse:
                         streamResponse.Buffer = await httpResponse.Content.ReadAsByteArrayAsync();
-                        response = (TResponse) (IResponse) streamResponse;
+                        response = (TResponse)(IResponse)streamResponse;
                         break;
 
                     default:

@@ -12,6 +12,7 @@ namespace GoogleApi.Entities.Interfaces
         /// Your application's API key (required). 
         /// This key identifies your application for purposes of quota management and so that Places added from your application are made immediately available to your app. 
         /// Visit the APIs Console to create an API Project and obtain your key.
+        /// https://developers.google.com/maps/api-key-best-practices
         /// </summary>
         string Key { get; set; }
 
