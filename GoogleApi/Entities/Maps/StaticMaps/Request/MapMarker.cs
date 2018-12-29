@@ -18,10 +18,21 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
         public virtual string Label { get; set; }
 
         /// <summary>
-        /// Color: (optional) specifies a 24-bit color (example: color=0xFFFFCC) or a predefined color from the set {black, brown, green, purple, yellow, blue, gray, orange, red, white}.
-        /// Note that transparencies (specified using 32-bit hex color values) are not supported in markers, though they are supported for paths.
+        /// Color (optional).
+        /// Specifies a predefined color from the set {black, brown, green, purple, yellow, blue, gray, orange, red, white}.
+        /// If no value is provided, the value for <see cref="ColorHex"/> is used.
         /// </summary>
         public virtual MapColor? Color { get; set; }
+
+        /// <summary>
+        /// Color (optional).
+        /// Specifies a color either as a 24-bit (example: color=0xFFFFCC) or 32-bit hexadecimal value (example: color=0xFFFFCCFF), 
+        /// or from the set {black, brown, green, purple, yellow, blue, gray, orange, red, white}.  
+        /// When a 32-bit hex value is specified, the last two characters specify the 8-bit alpha transparency value.
+        /// This value varies between 00 (completely transparent) and FF (completely opaque). 
+        /// Note that transparencies are supported in paths, though they are not supported for markers.
+        /// </summary>
+        public virtual string ColorHex { get; set; }
 
         /// <summary>
         /// Size: (optional) specifies the size of marker from the set {tiny, mid, small}. 

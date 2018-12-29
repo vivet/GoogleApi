@@ -180,6 +180,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 						continue;
 
 					var color = path.Color != null ? $"color:{path.Color}|" : string.Empty;
+
 					var fillColor = path.FillColor != null ? $"fillcolor:{path.Color}|" : string.Empty;
 					var geodesic = path.Geodesic ? "geodesic|" : string.Empty;
 					var points = path.Points.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
@@ -213,9 +214,9 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 
 				    var isLabel = string.IsNullOrEmpty(marker.Label) && !(marker.Size == MarkerSize.Tiny || marker.Size == MarkerSize.Small);
 
-                    var label = isLabel ? $"label:{marker.Label}|" : string.Empty;
-				    var color = marker.Color.HasValue ? $"color:{marker.Color.ToString()}|" : string.Empty;
-                    var size = marker.Size.HasValue ? $"size:{marker.Size.ToString().ToLower()}|" : string.Empty;
+				    var label = isLabel ? $"label:{marker.Label}|" : string.Empty;
+				    var color = marker.Color.HasValue ? $"color:{marker.Color.ToString().ToLower()}|" : marker.ColorHex;
+				    var size = marker.Size.HasValue ? $"size:{marker.Size.ToString().ToLower()}|" : string.Empty;
 				    var iconUrl = marker.Icon?.Url != null ? $"icon:{marker.Icon.Url}|" : string.Empty;
 				    var iconAnchor = marker.Icon?.Anchor != null ? $"anchor:{marker.Icon?.Anchor.ToString()}|" : string.Empty;
 				    var locations = marker.Locations.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
