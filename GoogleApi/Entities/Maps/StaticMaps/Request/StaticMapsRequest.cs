@@ -183,8 +183,9 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 					var fillColor = path.FillColor != null ? $"fillcolor:{path.Color}|" : string.Empty;
 					var geodesic = path.Geodesic ? "geodesic|" : string.Empty;
 					var points = path.Points.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
+				    points = points.Substring(0, points.Length - 1);
 
-					parameters.Add("path", $"{color}{fillColor}{geodesic}{points}");
+				    parameters.Add("path", $"{color}{fillColor}{geodesic}{points}");
 				}
 			}
 
