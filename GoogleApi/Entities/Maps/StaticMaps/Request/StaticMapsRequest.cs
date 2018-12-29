@@ -212,7 +212,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
                     if (!marker.Locations.Any())
                         continue;
 
-				    var isLabel = string.IsNullOrEmpty(marker.Label) && !(marker.Size == MarkerSize.Tiny || marker.Size == MarkerSize.Small);
+				    var isLabel = !string.IsNullOrEmpty(marker.Label) && !(marker.Size == MarkerSize.Tiny || marker.Size == MarkerSize.Small);
 
 				    var label = isLabel ? $"label:{marker.Label}|" : string.Empty;
 				    var color = marker.Color.HasValue ? $"color:{marker.Color.ToString().ToLower()}|" : marker.ColorHex;
