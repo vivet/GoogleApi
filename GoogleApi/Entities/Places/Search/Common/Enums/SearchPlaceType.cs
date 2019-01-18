@@ -515,7 +515,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Train Station.
         /// </summary>
-        [EnumMember(Value = "transit_station")]
+        [EnumMember(Value = "train_station")]
         TrainStation,
 
         /// <summary>
