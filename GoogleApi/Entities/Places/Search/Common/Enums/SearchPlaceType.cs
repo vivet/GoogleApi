@@ -503,6 +503,12 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Synagogue.
         /// </summary>
+        [EnumMember(Value = "supermarket")]
+        SuperMarket,
+
+        /// <summary>
+        /// Synagogue.
+        /// </summary>
         [EnumMember(Value = "synagogue")]
         Synagogue,
 
