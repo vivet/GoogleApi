@@ -18,12 +18,12 @@
         /// <summary>
         /// Administrative_area matches all the administrative_area levels. 
         /// </summary>
-        AdministrativeArea,
+        Administrative_Area,
 
         /// <summary>
         /// Postal_code matches postal_code and postal_code_prefix.
         /// </summary>
-        PostalCode,
+        Postal_Code,
 
         /// <summary>
         /// Country matches a country name or a two letter ISO 3166-1 country code.

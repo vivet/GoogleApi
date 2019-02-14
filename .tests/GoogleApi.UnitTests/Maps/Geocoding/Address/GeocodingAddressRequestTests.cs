@@ -119,7 +119,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
                 Address = "abc",
                 Components = new []
                 {
-                    new KeyValuePair<Component, string>(Component.AdministrativeArea, "abc"),
+                    new KeyValuePair<Component, string>(Component.Administrative_Area, "abc"),
                     new KeyValuePair<Component, string>(Component.Locality, "def")
                 }
             };

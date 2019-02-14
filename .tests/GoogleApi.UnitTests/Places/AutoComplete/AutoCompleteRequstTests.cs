@@ -252,7 +252,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
                 Input = "abc",
                 Components = new[]
                 {
-                    new KeyValuePair<Component, string>(Component.AdministrativeArea, "abc") 
+                    new KeyValuePair<Component, string>(Component.Administrative_Area, "abc") 
                 }
             };
 
