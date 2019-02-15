@@ -1,7 +1,7 @@
 version: 3.8.0.{build}
 skip_tags: true
 max_jobs: 1
-image: Visual Studio 2019 Preview
+image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 force_https_clone: true
