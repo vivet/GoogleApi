@@ -23,7 +23,7 @@ environment:
 build_script:
 - ps: >-
     dotnet build .\GoogleApi.sln;
-    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj --list-tests --no-build --no-restore;
+    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj --list-tests;
 artifacts:
 - path: '**\*.nupkg'
   name: NuGet Package
@@ -32,4 +32,4 @@ deploy:
   server: $(NUGET_HOST)
   api_key: $(NUGET_APIKEY)
   on:
-    branch: master 
+    branch: master
