@@ -1,0 +1,21 @@
+version: 3.8.0.{build}
+skip_tags: true
+max_jobs: 1
+image: Ubuntu
+configuration: Release
+platform: Any CPU
+force_https_clone: true
+nuget:
+  account_feed: false
+  project_feed: false
+environment:
+  NUGET_HOST:  https://api.nuget.org
+  NUGET_APIKEY: 
+    secure: oeSwT33L7QcWnDXH3H/pWIUJDdM+el24LvqEQ6HqzpR0Ok/7Z3VZj51u14veU1Ho
+build:
+  project: GoogleApi.sln
+  verbosity: minimal
+test: false
+artifacts:
+- path: '**\*.nupkg'
+  name: NuGet Package
