@@ -5,20 +5,34 @@ image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 force_https_clone: true
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 nuget:
   account_feed: false
   project_feed: false
 environment:
-  NUGET_HOST:  https://api.nuget.org
+  NUGET_HOST: https://www.myget.org/F/wannasport
   NUGET_APIKEY: 
-    secure: oeSwT33L7QcWnDXH3H/pWIUJDdM+el24LvqEQ6HqzpR0Ok/7Z3VZj51u14veU1Ho
-before_build:
-- ps: >-
-    dotnet restore;
+    secure: yMeWmWdQRq8bMauFYpWoluKNuh/+GOyniRyIKi1xVK9e6pSSx0uDfsiWHM4v9QdN
 build_script:
 - ps: >-
+    dotnet restore;
     dotnet build .\GoogleApi.sln;
-test: false
-artifacts:
-- path: '**\*.nupkg'
-  name: NuGet Package
+test_script:
+- ps: >-
+    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj --list-tests --no-build --no-restore;
+deploy_script:
+- ps: >-
+    dotnet nuget push .\GoogleApi\GoogleApi\Bin\Release\GoogleApi.$VERSION.nupkg -s $NUGET_HOST -k $NUGET_APIKEY;
