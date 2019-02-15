@@ -23,12 +23,14 @@ nuget:
   account_feed: false
   project_feed: false
 environment:
-  NUGET_HOST: https://www.myget.org/F/wannasport
+  NUGET_HOST:  https://api.nuget.org
   NUGET_APIKEY: 
-    secure: yMeWmWdQRq8bMauFYpWoluKNuh/+GOyniRyIKi1xVK9e6pSSx0uDfsiWHM4v9QdN
+    secure: oeSwT33L7QcWnDXH3H/pWIUJDdM+el24LvqEQ6HqzpR0Ok/7Z3VZj51u14veU1Ho
+branches:
+  only:
+    - master    
 build_script:
 - ps: >-
-    dotnet restore;
     dotnet build .\GoogleApi.sln;
 artifacts:
 - path: '**\*.nupkg'
