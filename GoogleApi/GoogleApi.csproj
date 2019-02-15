@@ -32,7 +32,7 @@
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/GoogleApi</RepositoryUrl>
-    <Configurations>Debug;Release;Travis</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>latest</LangVersion>
