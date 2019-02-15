@@ -14,7 +14,7 @@
     <Summary>Google Places, Maps, Roads, Search and Translate API support (100%)</Summary>
     <Authors>Michael Vivet</Authors>
     <Owners>Michael Vivet</Owners>
-    <Version>3.8.0</Version>
+    <Version>1.0.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
     <PackageReleaseNotes>- Changed to building multiple target frameworks 
@@ -26,8 +26,8 @@
     <PackageProjectUrl>https://github.com/vivet/GoogleApi</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.8.0.0</AssemblyVersion>
-    <FileVersion>3.8.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <RepositoryType>GitHub</RepositoryType>
