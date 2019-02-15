@@ -5,12 +5,6 @@ image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 force_https_clone: true
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -29,6 +23,7 @@ environment:
 build_script:
 - ps: >-
     dotnet build .\GoogleApi.sln;
+    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj --list-tests --no-build --no-restore;
 artifacts:
 - path: '**\*.nupkg'
   name: NuGet Package
