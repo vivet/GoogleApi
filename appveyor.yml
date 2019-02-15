@@ -25,9 +25,6 @@ build_script:
 - ps: >-
     dotnet build .\GoogleApi.sln;
 test: off
-test_script:
-- ps: >-
-    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj --list-tests;
 artifacts:
 - path: '**\*.nupkg'
   name: NuGet Package
