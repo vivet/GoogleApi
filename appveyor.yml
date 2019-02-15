@@ -12,9 +12,12 @@ environment:
   NUGET_HOST:  https://api.nuget.org
   NUGET_APIKEY: 
     secure: oeSwT33L7QcWnDXH3H/pWIUJDdM+el24LvqEQ6HqzpR0Ok/7Z3VZj51u14veU1Ho
-build:
-  project: GoogleApi.sln
-  verbosity: minimal
+before_build:
+- ps: >-
+    dotnet restore;
+build_script:
+- ps: >-
+    dotnet build .\GoogleApi.sln;
 test: false
 artifacts:
 - path: '**\*.nupkg'
