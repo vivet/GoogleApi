@@ -26,9 +26,6 @@ environment:
   NUGET_HOST:  https://api.nuget.org
   NUGET_APIKEY: 
     secure: oeSwT33L7QcWnDXH3H/pWIUJDdM+el24LvqEQ6HqzpR0Ok/7Z3VZj51u14veU1Ho
-branches:
-  only:
-    - master    
 build_script:
 - ps: >-
     dotnet build .\GoogleApi.sln;
@@ -39,3 +36,5 @@ deploy:
 - provider: NuGet
   server: $(NUGET_HOST)
   api_key: $(NUGET_APIKEY)
+  on:
+    branch: master 
