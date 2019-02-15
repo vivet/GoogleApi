@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework></TargetFramework>
+    <TargetFrameworks>netstandard1.1;net45</TargetFrameworks>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Optimize>True</Optimize>
     <NoWarn></NoWarn>
@@ -8,29 +9,28 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>bin\Release\netstandard1.1\GoogleApi.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Description>Google Places, Maps, Roads, Search and Translate integrations. 
-Requests and Responses are complete with Google Api documentation.</Description>
+    <Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
     <Product>GoogleApi</Product>
     <Summary>Google Places, Maps, Roads, Search and Translate API support (100%)</Summary>
-    <Company>Michael Vivet</Company>
-    <Copyright />
     <Authors>Michael Vivet</Authors>
     <Owners>Michael Vivet</Owners>
-    <Version>3.7.6</Version>
+    <Version>3.8.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>- Changed to building multiple target frameworks 
+- Let me know if you are missing a target framework, and i will add it</PackageReleaseNotes>
     <PackageLicense>https://github.com/vivet/GoogleApi/blob/master/UNLICENSE.txt</PackageLicense>
+    <PackageLicenseFile>UNLICENSE.txt</PackageLicenseFile>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <PackageIconUrl>https://raw.githubusercontent.com/vivet/GoogleApi/master/GoogleApi/icon.ico</PackageIconUrl>
     <PackageProjectUrl>https://github.com/vivet/GoogleApi</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.7.6.0</AssemblyVersion>
-    <FileVersion>3.7.6.0</FileVersion>
+    <AssemblyVersion>3.8.0.0</AssemblyVersion>
+    <FileVersion>3.8.0.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
-    <RepositoryType></RepositoryType>
+    <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/GoogleApi</RepositoryUrl>
     <Configurations>Debug;Release;Travis</Configurations>
   </PropertyGroup>
@@ -38,19 +38,21 @@ Requests and Responses are complete with Google Api documentation.</Description>
     <LangVersion>latest</LangVersion>
     <WarningsAsErrors></WarningsAsErrors>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Travis|AnyCPU'">
-    <LangVersion>latest</LangVersion>
-    <WarningsAsErrors />
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningsAsErrors />
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="GoogleApi.csproj.DotSettings" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\UNLICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="GoogleApi.csproj.DotSettings" />
   </ItemGroup>
 </Project>
