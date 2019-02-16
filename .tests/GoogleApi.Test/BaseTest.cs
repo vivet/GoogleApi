@@ -18,7 +18,7 @@ namespace GoogleApi.Test
         [OneTimeSetUp]
         public virtual void Setup()
         {
-            var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent;
+            var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
             var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.json") ?? directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.default.json");
 
             if (fileInfo == null)
