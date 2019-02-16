@@ -27,7 +27,7 @@ build_script:
 test: off
 test_script:
 - ps: >-
-    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj
+    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj -v minimal
 artifacts:
 - path: '**\*.nupkg'
   name: NuGet Package
