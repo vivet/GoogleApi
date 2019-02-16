@@ -1,4 +1,4 @@
-version: 3.8.1.{build}
+version: 3.8.2.{build}
 skip_tags: true
 max_jobs: 1
 image: Visual Studio 2017
@@ -25,6 +25,9 @@ build_script:
 - ps: >-
     dotnet build .\GoogleApi.sln;
 test: off
+test_script:
+- ps: >-
+    dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj
 artifacts:
 - path: '**\*.nupkg'
   name: NuGet Package
