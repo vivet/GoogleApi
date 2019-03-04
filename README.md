@@ -3,7 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi)
 [![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi)
 
-Seamless Google Api integrations.  
+Seemless Google Api integrations.  
 Google Maps, Places, Roads, Search and Translate.  
 
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
