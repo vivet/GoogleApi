@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using Newtonsoft.Json;
 
@@ -11,45 +9,19 @@ namespace GoogleApi.Entities.Maps.Directions.Response
     /// </summary>
     public class OverviewPolyline
     {
-        private Lazy<IEnumerable<Location>> pointsLazy;
-
         /// <summary>
-        /// An array of Location objects representing the points in the overview path, decoded from the string contained in the EncodedPoints property.
-        /// </summary>
-        public IEnumerable<Location> Points => this.pointsLazy.Value;
-
-        /// <summary>
-        /// The encoded string containing the overview path points as they were received.
+        /// Points.
+        /// The encoded string containing the raw overview polyline.
         /// </summary>
         [JsonProperty("points")]
-        protected virtual string EncodedPoints { get; set; }
+        public virtual string Points { get; set; }
 
         /// <summary>
-        /// Default constructor.
+        /// Decoded PolyLine.
+        /// The decocded polyline from the points.
+        /// An array of Location objects representing the points in the encoded overview polyline.
         /// </summary>
-        public OverviewPolyline()
-        {
-            this.InitLazyPoints(default);
-        }
-
-        /// <summary>
-        /// The RAW data of points from Google
-        /// </summary>
-        /// <returns></returns>
-        public virtual string GetRawPointsData()
-        {
-            return this.EncodedPoints;
-        }
-
-        [OnDeserializing]
-        internal void InitLazyPoints(StreamingContext contex)
-        {
-            this.pointsLazy = new Lazy<IEnumerable<Location>>(DecodePoints);
-        }
-
-        private IEnumerable<Location> DecodePoints()
-        {
-            return GoogleFunctions.DecodePolyLine(this.EncodedPoints);
-        }
+        [JsonIgnore]
+        public virtual IEnumerable<Location> Line => GoogleFunctions.DecodePolyLine(this.Points);
     }
 }
