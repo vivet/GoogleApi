@@ -160,7 +160,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=place_id&language={request.Language.ToCode()}&locationbias=rectangle%3A{Uri.EscapeDataString(request.Bounds.NorthEast.ToString())}%7C{Uri.EscapeDataString(request.Bounds.SouthWest.ToString())}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=place_id&language={request.Language.ToCode()}&locationbias=rectangle%3A{Uri.EscapeDataString(request.Bounds.SouthWest.ToString())}%7C{Uri.EscapeDataString(request.Bounds.NorthEast.ToString())}", uri.PathAndQuery);
         }
 
         [Test]

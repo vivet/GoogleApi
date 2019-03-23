@@ -100,7 +100,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
             }
             else if (this.Bounds != null)
             {
-                parameters.Add("locationbias", $"rectangle:{this.Bounds.NorthEast}|{this.Bounds.SouthWest}");
+                parameters.Add("locationbias", $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}");
             }
             else
             {
