@@ -1,4 +1,4 @@
-version: 3.8.4.{build}
+version: 3.8.5.{build}
 skip_tags: true
 max_jobs: 1
 image: Visual Studio 2017
