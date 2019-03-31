@@ -21,6 +21,14 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         public double Longitude { get; set; }
 
         /// <summary>
+        /// Default Constructor.
+        /// </summary>
+        public Location()
+        {
+
+        }
+
+        /// <summary>
         /// Contructor intializing a valid Location.
         /// </summary>
         /// <param name="latitude"></param>

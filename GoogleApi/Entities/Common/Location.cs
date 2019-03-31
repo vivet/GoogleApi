@@ -28,7 +28,7 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// Default Constructor.
         /// </summary>
-        protected Location()
+        public Location()
         {
 
         }
