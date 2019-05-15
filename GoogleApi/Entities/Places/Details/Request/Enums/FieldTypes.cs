@@ -129,6 +129,11 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums
         Review = 1 << 24,
 
         /// <summary>
+        /// User Ratings Total (billing: atmosphere).
+        /// </summary>
+        User_Ratings_Total = 1 << 25,
+
+        /// <summary>
         /// Basic (all).
         /// </summary>
         Basic = Address_Component| Adr_Address | Alt_Id | Formatted_Address | Geometry | Icon | Id | Name | Permanently_Closed | Photo | Place_Id | Plus_Code | Scope | Type | Url | Utc_Offset | Vicinity,
@@ -141,6 +146,6 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums
         /// <summary>
         /// Atmosphere (all).
         /// </summary>
-        Atmosphere = Price_Level | Rating | Review
+        Atmosphere = Price_Level | Rating | User_Ratings_Total | Review
     }
 }
