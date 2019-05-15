@@ -87,6 +87,12 @@ namespace GoogleApi.Entities.Places.Search.Common
         public virtual double Rating { get; set; }
 
         /// <summary>
+        /// The total number of user ratings.
+        /// </summary>
+        [JsonProperty("user_ratings_total")]
+        public virtual int UserRatingsTotal { get; set; }
+
+        /// <summary>
         /// Types contains an array of feature types describing the given result. See the list of supported types for more information. 
         /// XML responses include multiple type elements if more than one type is assigned to the result.
         /// </summary>
