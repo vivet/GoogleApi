@@ -132,6 +132,12 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual double Rating { get; set; }
 
         /// <summary>
+        /// The total number of user ratings.
+        /// </summary>
+        [JsonProperty("user_ratings_total")]
+        public virtual int UserRatingsTotal { get; set; }
+
+        /// <summary>
         /// Reviews, array of up to five reviews. 
         /// If a language parameter was specified in the Place Details request, 
         /// the Places Service will bias the results to prefer reviews written in that language. 

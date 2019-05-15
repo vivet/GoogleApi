@@ -82,6 +82,12 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
         public virtual double Rating { get; set; }
 
         /// <summary>
+        /// The total number of user ratings.
+        /// </summary>
+        [JsonProperty("user_ratings_total")]
+        public virtual int UserRatingsTotal { get; set; }
+
+        /// <summary>
         /// PermanentlyClosed is a boolean flag indicating whether the place has permanently shut down (value true). 
         /// If the place is not permanently closed, the flag is absent from the response.
         /// </summary>

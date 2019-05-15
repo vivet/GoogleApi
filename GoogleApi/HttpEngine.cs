@@ -196,23 +196,21 @@ namespace GoogleApi
             {
                 return HttpEngine.HttpClient.GetAsync(uri).Result;
             }
-            else
+
+            var settings = new JsonSerializerSettings
             {
-                var settings = new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
-                var serializeObject = JsonConvert.SerializeObject(request, settings);
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            var serializeObject = JsonConvert.SerializeObject(request, settings);
 
-                using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
-                {
-                    var content = stringContent.ReadAsStreamAsync().Result;
+            using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
+            {
+                var content = stringContent.ReadAsStreamAsync().Result;
 
-                    using (var streamContent = new StreamContent(content))
-                    {
-                        return HttpEngine.HttpClient.PostAsync(uri, streamContent).Result;
-                    }
+                using (var streamContent = new StreamContent(content))
+                {
+                    return HttpEngine.HttpClient.PostAsync(uri, streamContent).Result;
                 }
             }
         }
@@ -227,23 +225,21 @@ namespace GoogleApi
             {
                 return await HttpEngine.HttpClient.GetAsync(uri, cancellationToken);
             }
-            else
+
+            var settings = new JsonSerializerSettings
             {
-                var settings = new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
-                var serializeObject = JsonConvert.SerializeObject(request, settings);
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            var serializeObject = JsonConvert.SerializeObject(request, settings);
 
-                using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
-                {
-                    var content = await stringContent.ReadAsStreamAsync();
+            using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
+            {
+                var content = await stringContent.ReadAsStreamAsync();
 
-                    using (var streamContent = new StreamContent(content))
-                    {
-                        return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken);
-                    }
+                using (var streamContent = new StreamContent(content))
+                {
+                    return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken);
                 }
             }
         }

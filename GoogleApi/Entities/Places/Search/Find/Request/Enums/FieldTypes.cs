@@ -74,6 +74,11 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         Rating = 1 << 13,
 
         /// <summary>
+        /// User Ratings Total (billing: atmosphere).
+        /// </summary>
+        User_Ratings_Total = 1 << 14,
+
+        /// <summary>
         /// Basic (all).
         /// </summary>
         Basic = Formatted_Address | Geometry | Icon | Id | Name | Permanently_Closed | Photos | Place_Id | Plus_Code | Types,
@@ -86,6 +91,6 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         /// <summary>
         /// Atmosphere (all).
         /// </summary>
-        Atmosphere = Price_Level | Rating
+        Atmosphere = Price_Level | Rating | User_Ratings_Total
     }
 }
