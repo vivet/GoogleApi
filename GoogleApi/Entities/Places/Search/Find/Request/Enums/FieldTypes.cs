@@ -74,7 +74,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         Rating = 1 << 13,
 
         /// <summary>
-        /// Rating (billing: atmosphere).
+        /// User Ratings Total (billing: atmosphere).
         /// </summary>
         User_Ratings_Total = 1 << 14,
 
