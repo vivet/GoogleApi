@@ -6,12 +6,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.8.6.0</AssemblyVersion>
-    <FileVersion>3.8.6.0</FileVersion>
+    <AssemblyVersion>3.9.0.0</AssemblyVersion>
+    <FileVersion>3.9.0.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <LangVersion>latest</LangVersion>
-    <Version>3.8.6.0</Version>
+    <Version>3.9.0.0</Version>
     <Authors>Michael Vivet</Authors>
     <Owners>Michael Vivet</Owners>
     <Product>GoogleApi</Product>
@@ -19,15 +19,13 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
-    <PackageReleaseNotes>- Added user_ratings_total to Places Search Find and NearBy
-- Added user_ratings_total to Places Details</PackageReleaseNotes>
-    <PackageLicense>https://github.com/vivet/GoogleApi/blob/master/UNLICENSE.txt</PackageLicense>
-    <PackageLicenseFile>UNLICENSE.txt</PackageLicenseFile>
-    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <PackageReleaseNotes>- NuGet and License update.</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageIconUrl>https://raw.githubusercontent.com/vivet/GoogleApi/master/GoogleApi/icon.ico</PackageIconUrl>
     <PackageProjectUrl>https://github.com/vivet/GoogleApi</PackageProjectUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <RepositoryUrl>https://github.com/vivet/GoogleApi</RepositoryUrl>
+    <RepositoryUrl>https://github.com/vivet/GoogleApi.git</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
@@ -40,6 +38,13 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>bin\Release\netstandard1.1\GoogleApi.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.1|AnyCPU'">
+    <WarningsAsErrors />
+    <NoWarn />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.1|AnyCPU'">
+    <WarningsAsErrors />
+  </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <Reference Include="System.Net.Http" />
   </ItemGroup>
@@ -48,9 +53,9 @@
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.3" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\UNLICENSE.txt" Pack="true" PackagePath="" />
+    <None Remove="GoogleApi.csproj.DotSettings" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="GoogleApi.csproj.DotSettings" />
+    <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
   </ItemGroup>
 </Project>
