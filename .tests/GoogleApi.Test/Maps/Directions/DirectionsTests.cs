@@ -29,8 +29,8 @@ namespace GoogleApi.Test.Maps.Directions
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
-            Assert.AreEqual(137, overviewPath.Points.Length, 40);
-            Assert.AreEqual(5, polyline.Points.Length);
+            Assert.AreEqual(400, overviewPath.Points.Length, 100);
+            Assert.AreEqual(25, polyline.Points.Length, 10);
             Assert.AreEqual(8258.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Distance.Value), 1000.00);
             Assert.AreEqual(1135.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Duration.Value), 200.00);
         }
@@ -311,7 +311,6 @@ namespace GoogleApi.Test.Maps.Directions
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Directions.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -330,7 +329,6 @@ namespace GoogleApi.Test.Maps.Directions
             
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Directions.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);

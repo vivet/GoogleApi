@@ -78,7 +78,6 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 
 	        var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
 	        Assert.IsNotNull(exception);
-	        Assert.AreEqual("One or more errors occurred.", exception.Message);
 
 	        var innerException = exception.InnerExceptions.FirstOrDefault();
 	        Assert.IsNotNull(innerException);
@@ -103,7 +102,6 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -122,7 +120,6 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -140,7 +137,6 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -160,7 +156,6 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -179,7 +174,6 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);

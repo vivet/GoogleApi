@@ -530,7 +530,6 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -657,7 +656,6 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -676,7 +674,6 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -696,7 +693,6 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -720,7 +716,6 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -744,7 +739,6 @@ namespace GoogleApi.Test.Search.Web
 
             var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
