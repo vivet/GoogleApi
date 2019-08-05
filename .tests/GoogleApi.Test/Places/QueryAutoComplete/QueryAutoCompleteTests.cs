@@ -36,11 +36,11 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
             Assert.IsNotNull(result.Terms);
             Assert.IsNotNull(result.PlaceId);
             Assert.IsNotNull(result.StructuredFormatting);
-            Assert.AreEqual(result.Description, "Jagtvej 2200, København, Denmark");
+            Assert.AreEqual(result.Description, "Jagtvej, 2200 København, Denmark");
 
             var matchedSubstrings = result.MatchedSubstrings.ToArray();
             Assert.IsNotNull(matchedSubstrings);
-            Assert.AreEqual(2, matchedSubstrings.Length);
+            Assert.AreEqual(3, matchedSubstrings.Length);
 
             var types = result.Types.ToArray();
             Assert.IsNotNull(types);
@@ -91,7 +91,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
@@ -120,7 +119,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var result = results.FirstOrDefault();
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Description, "Jagtvej 2200, København, Danmark");
+            Assert.AreEqual(result.Description, "Jagtvej, 2200 København, Danmark");
         }
 
         [Test]
@@ -152,7 +151,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -171,7 +169,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -190,7 +187,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -209,7 +205,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -229,7 +224,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -249,7 +243,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);

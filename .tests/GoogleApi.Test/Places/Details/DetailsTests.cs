@@ -54,7 +54,7 @@ namespace GoogleApi.Test.Places.Details
 
             var addressComponents = result.AddressComponents?.ToArray();
             Assert.IsNotNull(addressComponents);
-            Assert.AreEqual(5, addressComponents.Length);
+            Assert.AreEqual(4, addressComponents.Length);
         }
 
         [Test]
@@ -108,7 +108,6 @@ namespace GoogleApi.Test.Places.Details
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
@@ -163,7 +162,6 @@ namespace GoogleApi.Test.Places.Details
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -182,7 +180,6 @@ namespace GoogleApi.Test.Places.Details
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -201,7 +198,6 @@ namespace GoogleApi.Test.Places.Details
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -220,7 +216,6 @@ namespace GoogleApi.Test.Places.Details
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);

@@ -25,7 +25,7 @@ namespace GoogleApi.Test.Maps.Elevation
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
-            Assert.AreEqual(14.782454490661619, response.Results.First().Elevation, 0.10);
+            Assert.AreEqual(16.9243183135986, response.Results.First().Elevation, 2.00);
         }
 
         [Test]
@@ -77,7 +77,6 @@ namespace GoogleApi.Test.Maps.Elevation
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -97,7 +96,6 @@ namespace GoogleApi.Test.Maps.Elevation
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -112,7 +110,6 @@ namespace GoogleApi.Test.Maps.Elevation
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Elevation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);

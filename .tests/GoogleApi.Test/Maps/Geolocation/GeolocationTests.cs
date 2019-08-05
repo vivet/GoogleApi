@@ -69,7 +69,6 @@ namespace GoogleApi.Test.Maps.Geolocation
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Geolocation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -210,7 +209,6 @@ namespace GoogleApi.Test.Maps.Geolocation
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Geolocation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -228,7 +226,6 @@ namespace GoogleApi.Test.Maps.Geolocation
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Geolocation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
@@ -247,7 +244,6 @@ namespace GoogleApi.Test.Maps.Geolocation
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Geolocation.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
-            Assert.AreEqual("One or more errors occurred.", exception.Message);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
