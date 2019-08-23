@@ -29,10 +29,10 @@ namespace GoogleApi.Test.Maps.Directions
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
-            Assert.AreEqual(400, overviewPath.Points.Length, 100);
+            Assert.AreEqual(400, overviewPath.Points.Length, 300);
             Assert.AreEqual(25, polyline.Points.Length, 10);
-            Assert.AreEqual(8258.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Distance.Value), 1000.00);
-            Assert.AreEqual(1135.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Duration.Value), 200.00);
+            Assert.AreEqual(8258.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Distance.Value), 5000.00);
+            Assert.AreEqual(1135.00, result.Routes.First().Legs.First().Steps.Sum(s => s.Duration.Value), 500.00);
         }
 
         [Test]

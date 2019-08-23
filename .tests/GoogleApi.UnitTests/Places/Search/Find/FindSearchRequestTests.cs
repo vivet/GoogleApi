@@ -170,13 +170,13 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             {
                 Key = "abc",
                 Input = "test",
-                Fields = FieldTypes.Id | FieldTypes.Name
+                Fields = FieldTypes.Name
             };
 
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=id%2Cname&language={request.Language.ToCode()}&locationbias=ipbias", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/findplacefromtext/json?key={request.Key}&input={request.Input}&inputtype={request.Type.ToString().ToLower()}&fields=name&language={request.Language.ToCode()}&locationbias=ipbias", uri.PathAndQuery);
         }
     }
 }

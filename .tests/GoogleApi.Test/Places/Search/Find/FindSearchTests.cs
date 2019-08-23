@@ -20,7 +20,8 @@ namespace GoogleApi.Test.Places.Search.Find
             {
                 Key = this.ApiKey,
                 Input = "picadelly circus",
-                Type = InputType.TextQuery
+                Type = InputType.TextQuery,
+                Fields = FieldTypes.Basic
             };
 
             var response = GooglePlaces.FindSearch.Query(request);
