@@ -24,11 +24,6 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         Icon = 1 << 2,
 
         /// <summary>
-        /// Id (billing: basic).
-        /// </summary>
-        Id = 1 << 3,
-
-        /// <summary>
         /// Name (billing: basic).
         /// </summary>
         Name = 1 << 4,
@@ -81,7 +76,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         /// <summary>
         /// Basic (all).
         /// </summary>
-        Basic = Formatted_Address | Geometry | Icon | Id | Name | Permanently_Closed | Photos | Place_Id | Plus_Code | Types,
+        Basic = Formatted_Address | Geometry | Icon | Name | Permanently_Closed | Photos | Place_Id | Plus_Code | Types,
 
         /// <summary>
         /// Contact (all).

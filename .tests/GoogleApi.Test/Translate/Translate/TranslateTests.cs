@@ -102,7 +102,7 @@ namespace GoogleApi.Test.Translate.Translate
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
-            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
+            Assert.AreEqual("Response status code does not indicate success: 403 (Forbidden).", innerException.Message);
         }
 
         [Test]

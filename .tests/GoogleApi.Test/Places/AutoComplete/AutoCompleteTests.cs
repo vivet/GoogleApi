@@ -120,7 +120,7 @@ namespace GoogleApi.Test.Places.AutoComplete
             var results = response.Predictions.ToArray();
             Assert.IsNotNull(results);
             Assert.IsNotEmpty(results);
-            Assert.AreEqual(2, results.Length);
+            Assert.GreaterOrEqual(results.Length, 2);
 
             var result = results.FirstOrDefault();
             Assert.IsNotNull(result);

@@ -44,7 +44,6 @@ namespace GoogleApi.Test.Places.Details
             Assert.IsNotNull(result.AdrAddress);
             Assert.IsNotNull(result.Geometry);
             Assert.IsNotNull(result.Geometry.Location);
-            Assert.AreEqual(Scope.Google, result.Scope);
             Assert.Contains(PlaceLocationType.Route, result.Types.ToArray());
 
             var formattedAddress = result.FormattedAddress.ToLower();

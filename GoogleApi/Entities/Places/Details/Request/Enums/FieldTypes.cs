@@ -19,11 +19,6 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums
         Adr_Address = 1 << 2,
 
         /// <summary>
-        /// Alt Id (billing: basic).
-        /// </summary>
-        Alt_Id = 1 << 3,
-
-        /// <summary>
         /// Formatted Address (billing: basic).
         /// </summary>
         Formatted_Address = 1 << 4,
@@ -67,11 +62,6 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums
         /// Plus_Code (billing: basic).
         /// </summary>
         Plus_Code = 1 << 12,
-
-        /// <summary>
-        /// Scope (billing: basic).
-        /// </summary>
-        Scope = 1 << 13,
 
         /// <summary>
         /// Type (billing: basic).
@@ -136,7 +126,7 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums
         /// <summary>
         /// Basic (all).
         /// </summary>
-        Basic = Address_Component| Adr_Address | Alt_Id | Formatted_Address | Geometry | Icon | Id | Name | Permanently_Closed | Photo | Place_Id | Plus_Code | Scope | Type | Url | Utc_Offset | Vicinity,
+        Basic = Address_Component| Adr_Address | Formatted_Address | Geometry | Icon | Id | Name | Permanently_Closed | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity,
 
         /// <summary>
         /// Contact (all).
