@@ -537,6 +537,12 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         TravelAgency,
 
         /// <summary>
+        /// University.
+        /// </summary>
+        [EnumMember(Value = "university")]
+        University,
+
+        /// <summary>
         /// Veterinary Care.
         /// </summary>
         [EnumMember(Value = "veterinary_care")]
