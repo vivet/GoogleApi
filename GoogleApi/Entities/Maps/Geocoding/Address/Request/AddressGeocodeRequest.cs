@@ -55,7 +55,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Address.Request
                 parameters.Add("region", this.Region);
 
             if (this.Bounds != null)
-                parameters.Add("bounds", $"{this.Bounds.NorthEast}|{this.Bounds.SouthWest}");
+                parameters.Add("bounds", $"{this.Bounds.SouthWest}|{this.Bounds.NorthEast}");
 
             if (this.Components != null && this.Components.Any())
                 parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
