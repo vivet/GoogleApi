@@ -147,7 +147,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
                 Key = "abc",
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-                Avoid = AvoidWay.Highways | AvoidWay.Indoor
+                Avoid = AvoidWay.Highways | AvoidWay.Indoor | AvoidWay.Ferries
             };
 
             var uri = request.GetUri();
