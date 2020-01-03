@@ -97,6 +97,30 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         }
 
         [Test]
+        public void AddressGeocodeWhenBoundsAmbiguousTest()
+        {
+            var request = new AddressGeocodeRequest
+            {
+                Key = this.ApiKey,
+                Address = "Yellow Rock",
+                Bounds = new ViewPort
+                {
+                    NorthEast = new Entities.Common.Location(37.771819, -111.603914),
+                    SouthWest = new Entities.Common.Location(37.039739, -112.514545)
+                }
+            };
+            var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+
+            var geocodeResult = result.Results.FirstOrDefault();
+            Assert.IsNotNull(geocodeResult);
+            Assert.AreEqual(37.2583855, geocodeResult.Geometry.Location.Latitude, 0.001);
+            Assert.AreEqual(-111.9221377, geocodeResult.Geometry.Location.Longitude, 0.001);
+        }
+
+        [Test]
         public void AddressGeocodeWhenRegionTest()
         {
             var request = new AddressGeocodeRequest
