@@ -5,6 +5,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
+using GoogleApi.Entities.Maps.Directions.Response.Enums;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
 
@@ -120,6 +121,30 @@ namespace GoogleApi.Test.Maps.Directions
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
             Assert.IsNotEmpty(result.Routes);
+        }
+
+        [Test]
+        public void DirectionsWhenAvoidFerriesTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = this.ApiKey,
+                Origin = new Location("1001 Alaskan Way, Seattle, WA 98104"),
+                Destination = new Location("550 Winslow Way E, Bainbridge Island, WA 98110"),
+                Avoid = AvoidWay.Ferries
+            };
+
+            var result = GoogleMaps.Directions.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+            Assert.IsNotEmpty(result.Routes);
+
+            Assert.IsFalse((from route in result.Routes
+                            from leg in route.Legs
+                            from step in leg.Steps
+                            where step.Maneuver == ManeuverAction.Ferry
+                            select step).Any());
         }
 
         [Test]

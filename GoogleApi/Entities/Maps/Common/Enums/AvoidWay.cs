@@ -26,6 +26,11 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         /// <summary>
         /// Avoid indoor
         /// </summary>
-        Indoor = 1 << 2
+        Indoor = 1 << 2,
+
+        /// <summary>
+        /// Avoid ferries
+        /// </summary>
+        Ferries = 1 << 3
     }
 }
