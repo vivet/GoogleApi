@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
-using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
 using GoogleApi.Exceptions;
