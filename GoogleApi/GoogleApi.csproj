@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TargetFramework></TargetFramework>
-    <TargetFrameworks>netstandard1.1;netstandard1.4;netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;netstandard1.4;netstandard2.0;netstandard2.1;net45</TargetFrameworks>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.9.4.0</AssemblyVersion>
-    <FileVersion>3.9.4.0</FileVersion>
+    <AssemblyVersion>3.9.5.0</AssemblyVersion>
+    <FileVersion>3.9.5.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <LangVersion>latest</LangVersion>
-    <Version>3.9.4.0</Version>
+    <Version>3.9.5.0</Version>
     <Authors>Michael Vivet</Authors>
     <Owners>Michael Vivet</Owners>
     <Product>GoogleApi</Product>
