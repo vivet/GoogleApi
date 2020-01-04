@@ -27,7 +27,8 @@
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/GoogleApi.git</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageIcon>icon.ico</PackageIcon>
+    <PackageIcon>icon.jpg</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>false</Optimize>
@@ -61,8 +62,17 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="icon.jpg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="icon.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
