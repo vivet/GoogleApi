@@ -97,7 +97,26 @@ namespace GoogleApi.Test.Places.Search.NearBy
         [Test]
         public void PlacesNearBySearchWhenPageTokenTest()
         {
-            Assert.Inconclusive();
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(51.491431, -3.16668),
+                Radius = 1000,
+                Type = SearchPlaceType.School
+            };
+
+            var response = GooglePlaces.NearBySearch.Query(request);
+            Assert.IsNotNull(response);
+            
+            var requestNextPage = new PlacesNearBySearchRequest
+            {
+                Key = this.ApiKey,
+                PageToken = response.NextPageToken
+            };
+
+            var responseNextPage = GooglePlaces.NearBySearch.Query(requestNextPage);
+            Assert.IsNotNull(responseNextPage);
+            Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
         }
 
         [Test]
