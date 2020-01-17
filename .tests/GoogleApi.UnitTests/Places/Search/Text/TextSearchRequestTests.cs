@@ -257,14 +257,13 @@ namespace GoogleApi.UnitTests.Places.Search.Text
             var request = new PlacesTextSearchRequest
             {
                 Key = "abc",
-                Query = "test",
                 PageToken = "abc"
             };
 
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/textsearch/json?key={request.Key}&query={request.Query}&language={request.Language.ToCode()}&pagetoken={request.PageToken}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/textsearch/json?key={request.Key}&pagetoken={request.PageToken}", uri.PathAndQuery);
         }
     }
 }

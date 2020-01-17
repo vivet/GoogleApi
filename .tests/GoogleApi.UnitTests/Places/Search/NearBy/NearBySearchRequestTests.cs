@@ -292,15 +292,13 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1),
-                Radius = 50,
                 PageToken = "abc"
             };
 
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&pagetoken={request.PageToken}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&pagetoken={request.PageToken}", uri.PathAndQuery);
         }
     }
 }

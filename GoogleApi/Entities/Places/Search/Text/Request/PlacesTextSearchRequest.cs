@@ -95,47 +95,50 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.Query))
-                throw new ArgumentException("Query is required");
-
-            if (this.Location != null && this.Radius == null)
-                throw new ArgumentException("Radius is required when Location is specified");
-
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
-
             var parameters = base.GetQueryStringParameters();
 
-            parameters.Add("query", this.Query);
-            parameters.Add("language", Language.ToCode());
-
-            if (this.Location != null)
-                parameters.Add("location", this.Location.ToString());
-
-            if (this.Radius != null)
-                parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
-
-            if (this.Type.HasValue)
+            if (!string.IsNullOrEmpty(this.PageToken))
             {
-                var type = this.Type.GetType().GetTypeInfo();
-                var attribute = type.DeclaredMembers.FirstOrDefault(x => x.Name == this.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
-
-                if (attribute != null)
-                    parameters.Add("type", attribute.Value.ToLower());
-            }
-
-            if (this.OpenNow)
-                parameters.Add("opennow");
-
-            if (this.Minprice.HasValue)
-                parameters.Add("minprice", ((int)this.Minprice.Value).ToString());
-
-            if (this.Maxprice.HasValue)
-                parameters.Add("maxprice", ((int)this.Maxprice.Value).ToString());
-
-            if (!string.IsNullOrWhiteSpace(this.PageToken))
                 parameters.Add("pagetoken", this.PageToken);
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(this.Query))
+                    throw new ArgumentException("Query is required");
 
+                if (this.Location != null && this.Radius == null)
+                    throw new ArgumentException("Radius is required when Location is specified");
+
+                if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
+
+                parameters.Add("query", this.Query);
+                parameters.Add("language", Language.ToCode());
+
+                if (this.Location != null)
+                    parameters.Add("location", this.Location.ToString());
+
+                if (this.Radius != null)
+                    parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+
+                if (this.Type.HasValue)
+                {
+                    var type = this.Type.GetType().GetTypeInfo();
+                    var attribute = type.DeclaredMembers.FirstOrDefault(x => x.Name == this.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
+
+                    if (attribute != null)
+                        parameters.Add("type", attribute.Value.ToLower());
+                }
+
+                if (this.OpenNow)
+                    parameters.Add("opennow");
+
+                if (this.Minprice.HasValue)
+                    parameters.Add("minprice", ((int)this.Minprice.Value).ToString());
+
+                if (this.Maxprice.HasValue)
+                    parameters.Add("maxprice", ((int)this.Maxprice.Value).ToString());
+            }
             return parameters;
         }
     }
