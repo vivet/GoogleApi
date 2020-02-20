@@ -107,7 +107,8 @@ namespace GoogleApi.Test.Places.Search.NearBy
 
             var response = GooglePlaces.NearBySearch.Query(request);
             Assert.IsNotNull(response);
-            
+            Assert.IsNotNull(response.NextPageToken);
+
             var requestNextPage = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,

@@ -96,7 +96,25 @@ namespace GoogleApi.Test.Places.Search.Text
         [Test]
         public void PlacesTextSearchWhenPageTokenTest()
         {
-            Assert.Inconclusive();
+            var request = new PlacesTextSearchRequest
+            {
+                Key = this.ApiKey,
+                Query = "l"
+            };
+
+            var response = GooglePlaces.TextSearch.Query(request);
+            Assert.IsNotNull(response);
+            Assert.IsNotNull(response.NextPageToken);
+
+            var requestNextPage = new PlacesTextSearchRequest
+            {
+                Key = this.ApiKey,
+                PageToken = response.NextPageToken
+            };
+
+            var responseNextPage = GooglePlaces.TextSearch.Query(requestNextPage);
+            Assert.IsNotNull(responseNextPage);
+            Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
         }
 
         [Test]

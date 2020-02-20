@@ -429,6 +429,12 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         PostOffice,
 
         /// <summary>
+        /// Primary School.
+        /// </summary>
+        [EnumMember(Value = "primary_school")]
+        PrimarySchool,
+
+        /// <summary>
         /// Real Estate Agency.
         /// </summary>
         [EnumMember(Value = "real_estate_agency")]
@@ -457,6 +463,12 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// </summary>
         [EnumMember(Value = "school")]
         School,
+
+        /// <summary>
+        /// Secondary School.
+        /// </summary>
+        [EnumMember(Value = "secondary_school")]
+        SecondarySchool,
 
         /// <summary>
         /// Shoe Store.
