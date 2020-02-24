@@ -37,7 +37,7 @@ namespace GoogleApi
 
                     if (Proxy != null)
                     {
-                        httpClientHandler.Proxy = Proxy;
+                        httpClientHandler.Proxy = HttpEngine.Proxy;
                     }
 
                     HttpEngine.httpClient = new HttpClient(httpClientHandler)
