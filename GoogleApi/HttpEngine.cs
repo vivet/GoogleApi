@@ -35,6 +35,11 @@ namespace GoogleApi
                         AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                     };
 
+                    if (Proxy != null)
+                    {
+                        httpClientHandler.Proxy = Proxy;
+                    }
+
                     HttpEngine.httpClient = new HttpClient(httpClientHandler)
                     {
                         Timeout = HttpEngine.httpTimeout
@@ -50,6 +55,11 @@ namespace GoogleApi
                 HttpEngine.httpClient = value;
             }
         }
+
+        /// <summary>
+        /// Proxy property that will be used for all requests.
+        /// </summary>
+        public static IWebProxy Proxy { get; set; }
 
         /// <summary>
         /// Disposes.
