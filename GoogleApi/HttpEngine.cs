@@ -35,7 +35,7 @@ namespace GoogleApi
                         AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                     };
 
-                    if (Proxy != null)
+                    if (HttpEngine.Proxy != null)
                     {
                         httpClientHandler.Proxy = HttpEngine.Proxy;
                     }
