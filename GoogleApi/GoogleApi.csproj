@@ -6,12 +6,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.9.8.0</AssemblyVersion>
+    <AssemblyVersion>3.9.9.0</AssemblyVersion>
     <FileVersion>3.9.8.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <LangVersion>latest</LangVersion>
-    <Version>3.9.8.0</Version>
+    <Version>3.9.9.0</Version>
     <Authors>Michael Vivet</Authors>
     <Owners>Michael Vivet</Owners>
     <Product>GoogleApi</Product>
@@ -19,7 +19,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
-    <PackageReleaseNotes>- Added missing places search types</PackageReleaseNotes>
+    <PackageReleaseNotes>- Added Proxy option to HttpEngine.</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/vivet/GoogleApi</PackageProjectUrl>
     <RepositoryType>GitHub</RepositoryType>
