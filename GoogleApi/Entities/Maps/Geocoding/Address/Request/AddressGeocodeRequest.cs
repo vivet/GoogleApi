@@ -44,12 +44,13 @@ namespace GoogleApi.Entities.Maps.Geocoding.Address.Request
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.Address))
-                throw new ArgumentException("Address is required");
+            if (string.IsNullOrWhiteSpace(this.Address) && (this.Components == null || !this.Components.Any()))
+                throw new ArgumentException("Address or Components is required");
 
             var parameters = base.GetQueryStringParameters();
 
-            parameters.Add("address", this.Address);
+            if (!string.IsNullOrEmpty(this.Address))
+                parameters.Add("address", this.Address);
 
             if (!string.IsNullOrEmpty(this.Region))
                 parameters.Add("region", this.Region);

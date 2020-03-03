@@ -56,7 +56,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Address is required");
+            Assert.AreEqual(exception.Message, "Address or Components is required");
         }
 
         [Test]
@@ -116,7 +116,6 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             var request = new AddressGeocodeRequest
             {
                 Key = "abc",
-                Address = "abc",
                 Components = new []
                 {
                     new KeyValuePair<Component, string>(Component.Administrative_Area, "abc"),
@@ -127,7 +126,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/geocode/json?key={request.Key}&language={request.Language.ToCode()}&address={Uri.EscapeDataString(request.Address)}&components={Uri.EscapeDataString(string.Join("|", request.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")))}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/geocode/json?key={request.Key}&language={request.Language.ToCode()}&components={Uri.EscapeDataString(string.Join("|", request.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")))}", uri.PathAndQuery);
         }
     }
 }
