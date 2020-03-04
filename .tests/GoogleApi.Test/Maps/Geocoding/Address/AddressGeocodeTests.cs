@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
@@ -143,7 +144,18 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         [Test]
         public void AddressGeocodeWhenComponentsTest()
         {
-            Assert.Inconclusive();
+            var request = new AddressGeocodeRequest
+            {
+                Key = this.ApiKey,
+                Components = new[]
+                {
+                    new KeyValuePair<Component, string>(Component.Country, "dk")  
+                }  
+            };
+            var result = GoogleMaps.AddressGeocode.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
@@ -157,7 +169,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Address is required");
+            Assert.AreEqual(innerException.Message, "Address or Components is required");
         }
     }
 }
