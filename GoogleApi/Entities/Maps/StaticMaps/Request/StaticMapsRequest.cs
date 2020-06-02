@@ -183,7 +183,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 
 					var fillColor = path.FillColor != null ? $"fillcolor:{path.Color}|" : string.Empty;
 					var geodesic = path.Geodesic ? "geodesic|" : string.Empty;
-					var points = path.Points.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
+					var points = path.Points.Aggregate(string.Empty, (x, y) => $"{x}{y}|");
 				    points = points.Substring(0, points.Length - 1);
 
 				    parameters.Add("path", $"{color}{fillColor}{geodesic}{points}");
@@ -200,7 +200,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 
 			if (this.Visibles.Any())
 			{
-				var visibles = this.Visibles.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
+				var visibles = this.Visibles.Aggregate(string.Empty, (x, y) => $"{x}{y}|");
 
 				parameters.Add("visible", $"{visibles}");
 			}
@@ -219,7 +219,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 				    var size = marker.Size.HasValue ? $"size:{marker.Size.ToString().ToLower()}|" : string.Empty;
 				    var iconUrl = marker.Icon?.Url != null ? $"icon:{marker.Icon.Url}|" : string.Empty;
 				    var iconAnchor = marker.Icon?.Anchor != null ? $"anchor:{marker.Icon?.Anchor.ToString()}|" : string.Empty;
-				    var locations = marker.Locations.Aggregate(string.Empty, (x, y) => $"{x}{y.ToString()}|");
+				    var locations = marker.Locations.Aggregate(string.Empty, (x, y) => $"{x}{y}|");
 
                     parameters.Add("markers", $"{label}{color}{size}{iconUrl}{iconAnchor}{locations}");
 				}

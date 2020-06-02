@@ -193,24 +193,31 @@ namespace GoogleApi.Entities.Maps.Directions.Request
                 parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
             }
 
-            if (this.TravelMode == TravelMode.Transit)
+            switch (this.TravelMode)
             {
-                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+                case TravelMode.Transit:
+                {
+                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
-                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
 
-                if (this.ArrivalTime != null)
-                    parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-                else
+                    if (this.ArrivalTime != null)
+                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    else
+                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
+
+                    break;
+                }
+                case TravelMode.Driving:
+                {
                     parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
-            }
-            else if (this.TravelMode == TravelMode.Driving)
-            {
-                parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
 
-                if (this.Key != null || this.ClientId != null)
-                    parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                    if (this.Key != null || this.ClientId != null)
+                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+
+                    break;
+                }
             }
 
             return parameters;

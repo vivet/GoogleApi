@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geolocation.Request;
