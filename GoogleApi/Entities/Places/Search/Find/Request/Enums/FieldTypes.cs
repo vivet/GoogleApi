@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         /// <summary>
         /// Formatted Address (billing: basic).
         /// </summary>
-        Formatted_Address = 1 << 0,
+        Formatted_Address = 0,
 
         /// <summary>
         /// Geometry (billing: basic).
@@ -27,11 +27,6 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         /// Name (billing: basic).
         /// </summary>
         Name = 1 << 4,
-
-        /// <summary>
-        /// Permanently Closed (billing: basic).
-        /// </summary>
-        Permanently_Closed = 1 << 5,
 
         /// <summary>
         /// Photos (billing: basic).
@@ -74,9 +69,14 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         User_Ratings_Total = 1 << 14,
 
         /// <summary>
+        /// Business Status.
+        /// </summary>
+        Business_Status = 1 << 15,
+
+        /// <summary>
         /// Basic (all).
         /// </summary>
-        Basic = Formatted_Address | Geometry | Icon | Name | Permanently_Closed | Photos | Place_Id | Plus_Code | Types,
+        Basic = Formatted_Address | Geometry | Icon | Name | Photos | Place_Id | Plus_Code | Types | Business_Status,
 
         /// <summary>
         /// Contact (all).

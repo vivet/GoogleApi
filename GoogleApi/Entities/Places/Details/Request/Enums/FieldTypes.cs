@@ -44,11 +44,6 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums
         Name = 1 << 8,
 
         /// <summary>
-        /// Permanently Closed (billing: basic).
-        /// </summary>
-        Permanently_Closed = 1 << 9,
-
-        /// <summary>
         /// Photo (billing: basic).
         /// </summary>
         Photo = 1 << 10,
@@ -122,11 +117,16 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums
         /// User Ratings Total (billing: atmosphere).
         /// </summary>
         User_Ratings_Total = 1 << 25,
+        
+        /// <summary>
+        /// Business Status.
+        /// </summary>
+        Business_Status = 1 << 26,
 
         /// <summary>
         /// Basic (all).
         /// </summary>
-        Basic = Address_Component| Adr_Address | Formatted_Address | Geometry | Icon | Id | Name | Permanently_Closed | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity,
+        Basic = Address_Component| Adr_Address | Formatted_Address | Geometry | Icon | Id | Name | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity | Business_Status,
 
         /// <summary>
         /// Contact (all).
