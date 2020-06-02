@@ -22,6 +22,7 @@
     <PackageReleaseNotes>- Removed permanently_closed from Places request and responses (deprecated by Google)
 - Added business_status field type for Places Details and Find
 - Added Places response business_status
+- Fixed Flags enums, having zero values.
 
 </PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

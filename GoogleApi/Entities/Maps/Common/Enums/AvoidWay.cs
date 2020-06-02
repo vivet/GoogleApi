@@ -16,21 +16,21 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         /// <summary>
         /// Avoid tolls
         /// </summary>
-        Tolls = 1 << 0,
+        Tolls = 1 << 1,
 
         /// <summary>
         /// Avoid highways
         /// </summary>
-        Highways = 1 << 1,
+        Highways = 1 << 2,
 
         /// <summary>
         /// Avoid indoor
         /// </summary>
-        Indoor = 1 << 2,
+        Indoor = 1 << 3,
 
         /// <summary>
         /// Avoid ferries
         /// </summary>
-        Ferries = 1 << 3
+        Ferries = 1 << 4
     }
 }

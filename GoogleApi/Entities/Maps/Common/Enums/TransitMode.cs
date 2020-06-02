@@ -11,22 +11,22 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         /// <summary>
         /// Indicates that the calculated route should prefer travel by subway.
         /// </summary>
-        Subway = 1 << 0,
+        Subway = 1 << 1,
 
         /// <summary>
         /// Indicates that the calculated route should prefer travel by train.
         /// </summary>
-        Train = 1 << 1,
+        Train = 1 << 2,
 
         /// <summary>
         /// Indicates that the calculated route should prefer travel by tram and light rail.
         /// </summary>
-        Tram = 1 << 2,
+        Tram = 1 << 3,
 
         /// <summary>
         /// Indicates that the calculated route should prefer travel by bus.
         /// </summary>
-        Bus = 1 << 3,
+        Bus = 1 << 4,
 
         /// <summary>
         /// Indicates that the calculated route should prefer travel by train, tram, light rail, and subway. 
