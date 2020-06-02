@@ -11,17 +11,17 @@ namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
         /// <summary>
         /// Formatted Address (billing: basic).
         /// </summary>
-        Formatted_Address = 0,
+        Formatted_Address = 1 << 1,
 
         /// <summary>
         /// Geometry (billing: basic).
         /// </summary>
-        Geometry = 1 << 1,
+        Geometry = 1 << 2,
 
         /// <summary>
         /// Icon (billing: basic).
         /// </summary>
-        Icon = 1 << 2,
+        Icon = 1 << 3,
 
         /// <summary>
         /// Name (billing: basic).
