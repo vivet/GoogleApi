@@ -16,11 +16,11 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         /// <summary>
         /// Indicates that the calculated route should prefer limited amounts of walking.
         /// </summary>
-        LessWalking = 1 << 0,
+        LessWalking = 1 << 1,
 
         /// <summary>
         /// Indicates that the calculated route should prefer a limited number of transfers.
         /// </summary>
-        FewerTransfers = 1 << 1
+        FewerTransfers = 1 << 2
     }
 }

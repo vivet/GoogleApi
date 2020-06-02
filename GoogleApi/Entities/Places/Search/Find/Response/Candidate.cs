@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
 using Newtonsoft.Json;
@@ -76,6 +77,12 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
         public virtual Scope Scope { get; set; }
 
         /// <summary>
+        /// Business Status.
+        /// </summary>
+        [JsonProperty("business_status")]
+        public virtual BusinessStatus BusinessStatus { get; set; }
+
+        /// <summary>
         /// Rating the user's overall rating for this place. This is a whole number, ranging from 1 to 5.
         /// </summary>
         [JsonProperty("rating")]
@@ -86,13 +93,6 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
         /// </summary>
         [JsonProperty("user_ratings_total")]
         public virtual int UserRatingsTotal { get; set; }
-
-        /// <summary>
-        /// PermanentlyClosed is a boolean flag indicating whether the place has permanently shut down (value true). 
-        /// If the place is not permanently closed, the flag is absent from the response.
-        /// </summary>
-        [JsonProperty("permanently_closed")]
-        public virtual bool PermanentlyClosed { get; set; }
 
         /// <summary>
         /// Photos.

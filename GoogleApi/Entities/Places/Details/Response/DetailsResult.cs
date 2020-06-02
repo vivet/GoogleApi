@@ -78,13 +78,6 @@ namespace GoogleApi.Entities.Places.Details.Response
         public virtual OpeningHours OpeningHours { get; set; }
 
         /// <summary>
-        /// PermanentlyClosed is a boolean flag indicating whether the place has permanently shut down (value true). 
-        /// If the place is not permanently closed, the flag is absent from the response.
-        /// </summary>
-        [JsonProperty("permanently_closed")]
-        public virtual bool PermanentlyClosed { get; set; }
-
-        /// <summary>
         /// A textual identifier that uniquely identifies a place. To retrieve information about the place, 
         /// pass this identifier in the placeId field of a Places API request
         /// </summary>
@@ -105,6 +98,12 @@ namespace GoogleApi.Entities.Places.Details.Response
         [JsonProperty("price_level")]
         [JsonConverter(typeof(StringEnumConverter))]
         public virtual PriceLevel PriceLevel { get; set; }
+
+        /// <summary>
+        /// Business Status.
+        /// </summary>
+        [JsonProperty("business_status")]
+        public virtual BusinessStatus BusinessStatus { get; set; }
 
         /// <summary>
         /// rating contains the Place's rating, from 0.0 to 5.0, based on user reviews. 

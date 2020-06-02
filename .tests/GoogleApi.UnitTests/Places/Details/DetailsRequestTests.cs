@@ -121,7 +121,7 @@ namespace GoogleApi.UnitTests.Places.Details
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cpermanently_closed%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status", uri.PathAndQuery);
         }
 
         [Test]
@@ -137,7 +137,7 @@ namespace GoogleApi.UnitTests.Places.Details
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cpermanently_closed%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity&sessiontoken={request.SessionToken}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status&sessiontoken={request.SessionToken}", uri.PathAndQuery);
         }
 
         [Test]
@@ -153,7 +153,7 @@ namespace GoogleApi.UnitTests.Places.Details
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cpermanently_closed%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status", uri.PathAndQuery);
         }
 
         [Test]
@@ -169,7 +169,7 @@ namespace GoogleApi.UnitTests.Places.Details
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cpermanently_closed%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity&extensions={request.Extensions.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status&extensions={request.Extensions.ToString().ToLower()}", uri.PathAndQuery);
         }
     }
 }

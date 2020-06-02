@@ -23,6 +23,7 @@ namespace GoogleApi.Test.Places.Search.Text
             };
 
             var response = GooglePlaces.TextSearch.Query(request);
+
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -34,6 +35,7 @@ namespace GoogleApi.Test.Places.Search.Text
             Assert.IsNotNull(result.Geometry.Location);
             Assert.AreEqual(51.5100913, result.Geometry.Location.Latitude, 0.01);
             Assert.AreEqual(-0.1345676, result.Geometry.Location.Longitude, 0.01);
+            Assert.AreEqual(result.BusinessStatus, BusinessStatus.Operational);
         }
 
         [Test]

@@ -32,6 +32,7 @@ namespace GoogleApi.Test.Places.Search.Find
             var candidate = response.Candidates.FirstOrDefault();
             Assert.IsNotNull(candidate);
             Assert.IsNotNull(candidate.PlaceId);
+            Assert.AreEqual(candidate.BusinessStatus, BusinessStatus.Operational);
         }
 
         [Test]
