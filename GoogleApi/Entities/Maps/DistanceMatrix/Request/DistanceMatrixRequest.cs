@@ -183,7 +183,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                 }
                 case TravelMode.Driving:
                 {
-                    parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
+                    if (this.DepartureTime != null)
+                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
 
                     if (this.Key != null || this.ClientId != null)
                         parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());

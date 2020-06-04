@@ -209,7 +209,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
