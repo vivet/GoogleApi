@@ -174,7 +174,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                     if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
                         parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
 
-                    if (this.ArrivalTime != null)
+                    if (this.ArrivalTime.HasValue)
                         parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
                     else
                         parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
@@ -183,10 +183,13 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                 }
                 case TravelMode.Driving:
                 {
-                    parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
+                    if (this.DepartureTime.HasValue)
+                    {
+                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
-                    if (this.Key != null || this.ClientId != null)
-                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                        if (this.Key != null || this.ClientId != null)
+                            parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                    }
 
                     break;
                 }

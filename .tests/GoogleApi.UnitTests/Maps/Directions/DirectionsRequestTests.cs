@@ -101,7 +101,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&region={request.Region}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&region={request.Region}", uri.PathAndQuery);
         }
 
         [Test]
@@ -136,7 +136,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&alternatives={request.Alternatives.ToString().ToLower()}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&alternatives={request.Alternatives.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]
@@ -153,7 +153,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&avoid={Uri.EscapeDataString(request.Avoid.ToEnumString('|'))}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&avoid={Uri.EscapeDataString(request.Avoid.ToEnumString('|'))}", uri.PathAndQuery);
         }
 
         [Test]
@@ -171,7 +171,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var waypoints = request.Waypoints.Select(x => x.ToString());
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
         }
 
         [Test]
@@ -190,7 +190,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var waypoints = request.Waypoints.Select(x => x.ToString());
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString("optimize:true|")}{Uri.EscapeDataString(string.Join("|", waypoints))}&departure_time=now&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString("optimize:true|")}{Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
         }
 
         [Test]
