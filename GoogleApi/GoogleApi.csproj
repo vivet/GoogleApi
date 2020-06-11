@@ -6,12 +6,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.9.12.0</AssemblyVersion>
-    <FileVersion>3.9.12.0</FileVersion>
+    <AssemblyVersion>3.9.13.0</AssemblyVersion>
+    <FileVersion>3.9.13.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <LangVersion>latest</LangVersion>
-    <Version>3.9.12.0</Version>
+    <Version>3.9.13.0</Version>
     <Authors>Michael Vivet</Authors>
     <Owners>Michael Vivet</Owners>
     <Product>GoogleApi</Product>
