@@ -766,6 +766,12 @@ namespace GoogleApi.Entities.Common.Enums
         Synagogue,
 
         /// <summary>
+        /// Tourist Attracton.
+        /// </summary>
+        [EnumMember(Value = "tourist_attraction")]
+        Tourist_Attracton,
+
+        /// <summary>
         /// Taxi Stand.
         /// </summary>
         [EnumMember(Value = "taxi_stand")]
