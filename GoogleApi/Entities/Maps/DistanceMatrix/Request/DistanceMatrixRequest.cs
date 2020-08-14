@@ -148,7 +148,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// This parameter will only influence, not fully restrict, results from the geocoder. 
         /// If more relevant results exist outside of the specified region, they may be included.
         /// </summary>
-        public virtual string Region {get;set;}
+        public virtual string Region { get; set; }
 
         /// <summary>
         /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
