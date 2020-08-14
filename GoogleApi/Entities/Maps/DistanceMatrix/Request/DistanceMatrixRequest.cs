@@ -143,6 +143,14 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
+        /// region (optional) — The region code, specified as a ccTLD (country code top-level domain - https://en.wikipedia.org/wiki/CcTLD) two-character value. 
+        /// Most ccTLD codes are identical to ISO 3166-1 codes, with some exceptions. 
+        /// This parameter will only influence, not fully restrict, results from the geocoder. 
+        /// If more relevant results exist outside of the specified region, they may be included.
+        /// </summary>
+        public virtual string Region {get;set;}
+
+        /// <summary>
         /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
@@ -194,6 +202,9 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                     break;
                 }
             }
+
+            if (!string.IsNullOrWhiteSpace(this.Region))
+                parameters.Add("region", this.Region);
 
             return parameters;
         }

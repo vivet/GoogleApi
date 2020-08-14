@@ -27,6 +27,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             Assert.AreEqual(Language.English, request.Language);
             Assert.IsNull(request.ArrivalTime);
             Assert.IsNull(request.DepartureTime);
+            Assert.IsNull(request.Region);
         }
 
         [Test]
@@ -228,6 +229,42 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
 
             Assert.IsNotNull(uri);
             Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase("  ")]
+        public void GetUriWhenWhenRegionIsNullEmptyOrWhiteSpace(string region)
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "abc",
+                Region = region,
+                Origins = new[] { new Location("test") },
+                Destinations = new[] { new Location("test") }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
+        }
+
+        public void GetUriWhenWhenRegionIsNotNullEmptyOrWhiteSpace()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "abc",
+                Region = "us",
+                Origins = new[] { new Location("test") },
+                Destinations = new[] { new Location("test") }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&region=us", uri.PathAndQuery);
         }
     }
 }
