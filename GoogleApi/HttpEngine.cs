@@ -162,7 +162,7 @@ namespace GoogleApi
                         else
                         {
                             var result = await x;
-                            var response = await this.ProcessResponseAsync(result);
+                            var response = await this.ProcessResponseAsync(result).ConfigureAwait(false);
 
                             switch (response.Status)
                             {
@@ -190,7 +190,7 @@ namespace GoogleApi
                             taskCompletion.SetException(exception);
                         }
                     }
-                }, cancellationToken);
+                }, cancellationToken).ConfigureAwait(false);
 
             return await taskCompletion.Task;
         }
@@ -233,7 +233,7 @@ namespace GoogleApi
 
             if (request is IRequestQueryString)
             {
-                return await HttpEngine.HttpClient.GetAsync(uri, cancellationToken);
+                return await HttpEngine.HttpClient.GetAsync(uri, cancellationToken).ConfigureAwait(false);
             }
 
             var settings = new JsonSerializerSettings
@@ -245,11 +245,11 @@ namespace GoogleApi
 
             using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
             {
-                var content = await stringContent.ReadAsStreamAsync();
+                var content = await stringContent.ReadAsStreamAsync().ConfigureAwait(false);
 
                 using (var streamContent = new StreamContent(content))
                 {
-                    return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken);
+                    return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken).ConfigureAwait(false);
                 }
             }
         }
@@ -305,7 +305,7 @@ namespace GoogleApi
                         break;
 
                     default:
-                        var rawJson = await httpResponse.Content.ReadAsStringAsync();
+                        var rawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                         response = JsonConvert.DeserializeObject<TResponse>(rawJson);
                         response.RawJson = rawJson;
                         break;
