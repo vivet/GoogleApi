@@ -190,7 +190,8 @@ namespace GoogleApi
                             taskCompletion.SetException(exception);
                         }
                     }
-                }, cancellationToken).ConfigureAwait(false);
+                }, cancellationToken)
+                .ConfigureAwait(false);
 
             return await taskCompletion.Task;
         }

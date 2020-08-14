@@ -251,6 +251,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
         }
 
+        [Test]
         public void GetUriWhenWhenRegionIsNotNullEmptyOrWhiteSpace()
         {
             var request = new DistanceMatrixRequest
