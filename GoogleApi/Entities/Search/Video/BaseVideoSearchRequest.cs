@@ -119,7 +119,7 @@ namespace GoogleApi.Entities.Search.Video
             var parts = Enum.GetValues(typeof(PartType))
                 .Cast<PartType>()
                 .Where(x => this.Part.HasFlag(x))
-                .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLower()},");
+                .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLowerInvariant()},");
 
             parameters.Add("part", parts.EndsWith(",") ? parts.Substring(0, parts.Length - 1) : parts);
 

@@ -70,7 +70,7 @@ namespace GoogleApi.Entities.Places.Details.Request
             var fields = Enum.GetValues(typeof(FieldTypes))
                 .Cast<FieldTypes>()
                 .Where(x => this.Fields.HasFlag(x) && x != FieldTypes.Basic && x != FieldTypes.Contact && x != FieldTypes.Atmosphere)
-                .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLower()},");
+                .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLowerInvariant()},");
 
             parameters.Add("fields", fields.EndsWith(",") ? fields.Substring(0, fields.Length - 1) : fields);
 
