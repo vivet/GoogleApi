@@ -11,6 +11,29 @@ using GoogleApi.Entities.Maps.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
+    ///// <summary>
+    ///// Waypoints (optional) specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). 
+    ///// A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded. 
+    ///// (For more information on waypoints, see Using Waypoints in Routes below.)
+    ///// If you'd like to influence the route using waypoints without adding a stopover, prefix the waypoint with via:' (deprecated On Aug 20, 2017)
+    ///// Waypoints prefixed with via: will not add an entry to the legs array, but will instead route the journey through the provided waypoint.
+    ///// The via: prefix is most effective when creating routes in response to the user dragging the waypoints on the map. 
+    ///// Doing so allows the user to see how the final route may look in real-time and helps ensure that waypoints are placed in locations that 
+    ///// are accessible to the Google Maps Directions API.
+    ///// Caution: Using the via: prefix to avoid stopovers results in directions that are very strict in their interpretation of the waypoint. 
+    ///// This may result in severe detours on the route or ZERO_RESULTS in the response status code if the Google Maps Directions API is unable to create directions 
+    ///// through that point.
+    ///// </summary>
+    //[Obsolete]
+    //public virtual Location[] Waypoints { get; set; }
+
+//    else if (this.Waypoints != null && this.Waypoints.Any())
+//{
+//var waypoints = this.Waypoints.Select(x => x.ToString());
+//parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
+//}
+
+
     /// <summary>
     /// Directions Request.
     /// </summary>
@@ -118,7 +141,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// Waypoints (optional) specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). 
         /// A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded. 
         /// (For more information on waypoints, see Using Waypoints in Routes below.)
-        /// If you'd like to influence the route using waypoints without adding a stopover, prefix the waypoint with via:' (deprecated On Aug 20, 2017)
+        /// If you'd like to influence the route using waypoints without adding a stopover, prefix the waypoint with via:'
         /// Waypoints prefixed with via: will not add an entry to the legs array, but will instead route the journey through the provided waypoint.
         /// The via: prefix is most effective when creating routes in response to the user dragging the waypoints on the map. 
         /// Doing so allows the user to see how the final route may look in real-time and helps ensure that waypoints are placed in locations that 
@@ -127,7 +150,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// This may result in severe detours on the route or ZERO_RESULTS in the response status code if the Google Maps Directions API is unable to create directions 
         /// through that point.
         /// </summary>
-        public virtual Location[] Waypoints { get; set; }
+        public virtual IEnumerable<WayPoint> WayPoints { get; set; }
 
         /// <summary>
         /// Optimize the provided route by rearranging the waypoints in a more efficient order. 
@@ -187,9 +210,11 @@ namespace GoogleApi.Entities.Maps.Directions.Request
             if (this.Avoid != AvoidWay.Nothing)
                 parameters.Add("avoid", this.Avoid.ToEnumString('|'));
 
-            if (this.Waypoints != null && this.Waypoints.Any())
+            if (this.WayPoints != null && this.WayPoints.Any())
             {
-                var waypoints = this.Waypoints.Select(x => x.ToString());
+                var waypoints = this.WayPoints
+                    .Select(x => x.IsVia ? $"via:{x.String}" : x.String);
+
                 parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
             }
 

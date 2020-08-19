@@ -99,10 +99,12 @@ namespace GoogleApi.Test.Translate.Translate
             var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Translate.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
 
+            Assert.AreEqual("One or more errors occurred. (Response status code does not indicate success: 400 (Bad Request).)", exception.Message);
+
             var innerException = exception.InnerExceptions.FirstOrDefault();
             Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
-            Assert.AreEqual("Response status code does not indicate success: 403 (Forbidden).", innerException.Message);
+            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
         }
 
         [Test]

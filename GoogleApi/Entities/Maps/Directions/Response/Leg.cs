@@ -17,6 +17,12 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         public virtual IEnumerable<Step> Steps { get; set; }
 
         /// <summary>
+        /// Via-WayPoints.
+        /// </summary>
+        [JsonProperty("via_waypoint")]
+        public virtual IEnumerable<ViaWayPoint> ViaWayPoints { get; set; }
+
+        /// <summary>
         /// distance indicates the total distance covered by this leg
         /// </summary>
         [JsonProperty("distance")]
