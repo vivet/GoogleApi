@@ -112,9 +112,9 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
             Assert.IsNotNull(element);
             Assert.AreEqual(Status.Ok, element.Status);
             Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(5857.00, element.Distance.Value, 500.00);
+            Assert.AreEqual(5857.00, element.Distance.Value, 1000.00);
             Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1509.00, element.Duration.Value, 500.00);
+            Assert.AreEqual(1509.00, element.Duration.Value, 1000.00);
         }
 
         [Test]

@@ -53,7 +53,7 @@ namespace GoogleApi.Test.Places.Details
 
             var addressComponents = result.AddressComponents?.ToArray();
             Assert.IsNotNull(addressComponents);
-            Assert.AreEqual(4, addressComponents.Length);
+            Assert.GreaterOrEqual(addressComponents.Length, 4);
         }
 
         [Test]
