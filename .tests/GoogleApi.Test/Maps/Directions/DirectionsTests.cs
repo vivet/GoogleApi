@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
@@ -276,15 +277,47 @@ namespace GoogleApi.Test.Maps.Directions
         }
 
         [Test]
-        public void DirectionsWhenhWayPointsTest()
+        public void DirectionsWhenWayPointsTest()
         {
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
                 Origin = new Location("NYC, USA"),
                 Destination = new Location("Miami, USA"),
-                Waypoints = new[] { new Location("Philadelphia, USA") },
+                WayPoints = new List<WayPoint>
+                {
+                    new WayPoint("Philadelphia, USA")
+                },
                 OptimizeWaypoints = false
+            };
+            var result = GoogleMaps.Directions.Query(request);
+
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+
+            var route = result.Routes.FirstOrDefault();
+            Assert.IsNotNull(route);
+
+            var leg = route.Legs.FirstOrDefault();
+            Assert.IsNotNull(leg);
+            Assert.AreEqual(156084, leg.Steps.Sum(s => s.Distance.Value), 15000);
+            Assert.IsTrue(leg.EndAddress.Contains("Philadelphia"));
+        }
+
+        [Test]
+        public void DirectionsWhenWayPointsAndOptimizeWaypointsTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = this.ApiKey,
+                Origin = new Location("NYC, USA"),
+                Destination = new Location("Miami, USA"),
+                WayPoints = new List<WayPoint>
+                {
+                    new WayPoint("Philadelphia, USA")
+                },
+                OptimizeWaypoints = true
             };
             var result = GoogleMaps.Directions.Query(request);
 
@@ -301,16 +334,20 @@ namespace GoogleApi.Test.Maps.Directions
         }
 
         [Test]
-        public void DirectionsWhenWay∆ointsAndOptimizeWaypointsTest()
+        public void DirectionsWhenWayPointsViaTest()
         {
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
                 Origin = new Location("NYC, USA"),
                 Destination = new Location("Miami, USA"),
-                Waypoints = new[] { new Location("Philadelphia, USA") },
-                OptimizeWaypoints = true
+                WayPoints = new List<WayPoint>
+                {
+                    new WayPoint("Philadelphia, USA", true)
+                },
+                OptimizeWaypoints = false
             };
+
             var result = GoogleMaps.Directions.Query(request);
 
             Assert.IsNotNull(result);
@@ -321,8 +358,39 @@ namespace GoogleApi.Test.Maps.Directions
 
             var leg = route.Legs.FirstOrDefault();
             Assert.IsNotNull(leg);
-            Assert.AreEqual(156084, leg.Steps.Sum(s => s.Distance.Value), 15000);
-            Assert.IsTrue(leg.EndAddress.Contains("Philadelphia"));
+            Assert.AreEqual(2069947, leg.Steps.Sum(s => s.Distance.Value), 15000);
+            Assert.IsTrue(leg.EndAddress.Contains("Miami, FL, USA"));
+            Assert.IsNotNull(leg.ViaWayPoints.FirstOrDefault());
+        }
+
+        [Test]
+        public void DirectionsWhenWayPointsViaAndOptimizeWaypointsTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = this.ApiKey,
+                Origin = new Location("NYC, USA"),
+                Destination = new Location("Miami, USA"),
+                WayPoints = new List<WayPoint>
+                {
+                    new WayPoint("Philadelphia, USA", true)
+                },
+                OptimizeWaypoints = true
+            };
+
+            var result = GoogleMaps.Directions.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+
+            var route = result.Routes.FirstOrDefault();
+            Assert.IsNotNull(route);
+
+            var leg = route.Legs.FirstOrDefault();
+            Assert.IsNotNull(leg);
+            Assert.AreEqual(2069947, leg.Steps.Sum(s => s.Distance.Value), 15000);
+            Assert.IsTrue(leg.EndAddress.Contains("Miami, FL, USA"));
+            Assert.IsNotNull(leg.ViaWayPoints.FirstOrDefault());
         }
 
         [Test]

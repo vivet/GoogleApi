@@ -164,11 +164,11 @@ namespace GoogleApi.UnitTests.Maps.Directions
                 Key = "abc",
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-                Waypoints = new [] { new Location(1, 1) }
+                WayPoints = new [] { new WayPoint(new Location(1, 1)) }
             };
 
             var uri = request.GetUri();
-            var waypoints = request.Waypoints.Select(x => x.ToString());
+            var waypoints = request.WayPoints.Select(x => x.String);
 
             Assert.IsNotNull(uri);
             Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
@@ -182,15 +182,49 @@ namespace GoogleApi.UnitTests.Maps.Directions
                 Key = "abc",
                 Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-                Waypoints = new[] { new Location(1, 1) },
+                WayPoints = new [] { new WayPoint(new Location(1, 1)) },
                 OptimizeWaypoints = true
             };
 
             var uri = request.GetUri();
-            var waypoints = request.Waypoints.Select(x => x.ToString());
+            var waypoints = request.WayPoints.Select(x => x.String);
 
             Assert.IsNotNull(uri);
             Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString("optimize:true|")}{Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenWayPointsPlaceTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "abc",
+                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
+                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
+                WayPoints = new [] { new WayPoint(new Place { Id = "abc" }) }
+            };
+            var uri = request.GetUri();
+            var waypoints = request.WayPoints.Select(x => x.String);
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenWayPointsPolyLineTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "abc",
+                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
+                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
+                WayPoints = new [] { new WayPoint(new PolyLine { Path = "abc" }) }
+            };
+            var uri = request.GetUri();
+            var waypoints = request.WayPoints.Select(x => x.String);
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
         }
 
         [Test]
