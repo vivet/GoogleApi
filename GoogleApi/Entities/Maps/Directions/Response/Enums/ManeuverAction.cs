@@ -121,10 +121,10 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums
         Roundabout_Right,
 
         /// <summary>
-        /// Kepp_Left.
+        /// Keep_Left.
         /// </summary>
         [EnumMember(Value = "keep-left")]
-        Kepp_Left,
+        Keep_Left,
 
         /// <summary>
         /// Keep_Right.
