@@ -317,6 +317,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         Khmer,
 
         /// <summary>
+        /// Kinyarwanda.
+        /// </summary>
+        [EnumMember(Value = "rw")]
+        Kinyarwanda,
+
+        /// <summary>
         /// Korean.
         /// </summary>
         [EnumMember(Value = "ko")]
@@ -429,6 +435,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         /// </summary>
         [EnumMember(Value = "no")]
         Norwegian,
+
+        /// <summary>
+        /// Odia.
+        /// </summary>
+        [EnumMember(Value = "or")]
+        Odia,
 
         /// <summary>
         /// Pashto.
@@ -569,6 +581,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         Tamil,
 
         /// <summary>
+        /// Tatar.
+        /// </summary>
+        [EnumMember(Value = "tt")]
+        Tatar,
+
+        /// <summary>
         /// Telugu.
         /// </summary>
         [EnumMember(Value = "te")]
@@ -587,6 +605,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         Turkish,
 
         /// <summary>
+        /// Turkmen.
+        /// </summary>
+        [EnumMember(Value = "tk")]
+        Turkmen,
+
+        /// <summary>
         /// Ukrainian.
         /// </summary>
         [EnumMember(Value = "uk")]
@@ -597,6 +621,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         /// </summary>
         [EnumMember(Value = "ur")]
         Urdu,
+
+        /// <summary>
+        /// Uyghur.
+        /// </summary>
+        [EnumMember(Value = "ug")]
+        Uyghur,
 
         /// <summary>
         /// Uzbek.
