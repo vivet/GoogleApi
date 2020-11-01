@@ -27,7 +27,7 @@ namespace GoogleApi.Test.Translate.Languages
 
             var languages = result.Data.Languages;
             Assert.IsNotNull(languages);
-            Assert.AreEqual(104, languages.Count());
+            Assert.AreEqual(111, languages.Count());
 
             var language = result.Data.Languages.FirstOrDefault();
             Assert.IsNotNull(language);

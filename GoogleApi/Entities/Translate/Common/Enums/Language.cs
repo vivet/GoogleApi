@@ -239,6 +239,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         Hebrew,
 
         /// <summary>
+        /// Hebrew. (2nd ISO-631-1 code)
+        /// </summary>
+        [EnumMember(Value = "he")]
+        Hebrew1 = Hebrew,
+
+        /// <summary>
         /// Hindi.
         /// </summary>
         [EnumMember(Value = "hi")]
