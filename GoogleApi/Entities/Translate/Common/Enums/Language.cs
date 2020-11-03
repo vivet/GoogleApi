@@ -233,16 +233,16 @@ namespace GoogleApi.Entities.Translate.Common.Enums
         Hawaiian,
 
         /// <summary>
-        /// Hebrew.
-        /// </summary>
-        [EnumMember(Value = "iw")]
-        Hebrew,
-
-        /// <summary>
         /// Hebrew. (2nd ISO-631-1 code)
         /// </summary>
         [EnumMember(Value = "he")]
-        Hebrew1 = Hebrew,
+        Hebrew,
+
+        /// <summary>
+        /// Hebrew.
+        /// </summary>
+        [EnumMember(Value = "iw")]
+        HebrewOld,
 
         /// <summary>
         /// Hindi.
