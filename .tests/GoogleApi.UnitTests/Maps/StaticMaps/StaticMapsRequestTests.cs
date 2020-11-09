@@ -23,15 +23,6 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
         }
 
         [Test]
-        public void SetIsSslTest()
-        {
-            Assert.DoesNotThrow(() => new StaticMapsRequest
-            {
-                IsSsl = false
-            });
-        }
-
-        [Test]
         public void GetQueryStringParametersTest()
         {
             var request = new StaticMapsRequest

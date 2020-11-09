@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 	/// <summary>
 	/// Street View Request.
 	/// </summary>
-	public class StreetViewRequest : BaseMapsRequest
+	public class StreetViewRequest : BaseMapsChannelRequest
 	{
 		/// <inheritdoc />
 		protected internal override string BaseUrl { get; } = "maps.googleapis.com/maps/api/streetview";

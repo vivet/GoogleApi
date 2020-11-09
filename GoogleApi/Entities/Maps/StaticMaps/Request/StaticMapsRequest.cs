@@ -17,7 +17,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 	/// The Google Static Maps API service creates your map based on URL parameters sent through a standard HTTP request and returns the map as an image you can 
 	/// display on your web page.
 	/// </summary>
-	public class StaticMapsRequest : BaseRequest
+	public class StaticMapsRequest : BaseMapsChannelRequest
 	{
         /// <inheritdoc />
         protected internal override string BaseUrl { get; } = "maps.googleapis.com/maps/api/staticmap";
