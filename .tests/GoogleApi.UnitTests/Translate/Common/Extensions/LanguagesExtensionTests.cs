@@ -149,7 +149,7 @@ namespace GoogleApi.UnitTests.Translate.Common.Extensions
         [Test] public void IsValidNmtWhenHausaTest() { Assert.IsFalse(Language.Hausa.IsValidNmt()); }
         [Test] public void IsValidNmtWhenHawaiianTest() { Assert.IsFalse(Language.Hawaiian.IsValidNmt()); }
         [Test] public void IsValidNmtWhenHebrewTest() { Assert.IsTrue(Language.Hebrew.IsValidNmt()); }
-        [Test] public void IsValidNmtWhenHebrewOldTest() { Assert.IsTrue(Language.HebrewOld.IsValidNmt()); }
+        [Test] public void IsValidNmtWhenHebrewOldTest() { Assert.IsFalse(Language.HebrewOld.IsValidNmt()); }
         [Test] public void IsValidNmtWhenHindiTest() { Assert.IsTrue(Language.Hindi.IsValidNmt()); }
         [Test] public void IsValidNmtWhenHmongTest() { Assert.IsFalse(Language.Hmong.IsValidNmt()); }
         [Test] public void IsValidNmtWhenHungarianTest() { Assert.IsFalse(Language.Hungarian.IsValidNmt()); }
