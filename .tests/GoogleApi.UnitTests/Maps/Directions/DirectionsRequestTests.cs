@@ -293,13 +293,13 @@ namespace GoogleApi.UnitTests.Maps.Directions
                 Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
                 TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Bus,
-                TransitRoutingPreference = TransitRoutingPreference.FewerTransfers | TransitRoutingPreference.LessWalking
+                TransitRoutingPreference = TransitRoutingPreference.FewerTransfers
             };
 
             var uri = request.GetUri();
-
+            Console.WriteLine(uri.PathAndQuery);
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&transit_routing_preference={Uri.EscapeDataString(request.TransitRoutingPreference.ToEnumString('|'))}&departure_time=now", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&transit_routing_preference=fewer_transfers&departure_time=now", uri.PathAndQuery);
         }
     }
 }

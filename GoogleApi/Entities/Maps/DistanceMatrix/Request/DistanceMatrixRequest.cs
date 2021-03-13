@@ -180,7 +180,18 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                     parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
                     if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToEnumString('|'));
+                    {
+                        switch (this.TransitRoutingPreference)
+                        {
+                            case TransitRoutingPreference.LessWalking:
+                                parameters.Add("transit_routing_preference", "less_walking");
+                                break;
+
+                            case TransitRoutingPreference.FewerTransfers:
+                                parameters.Add("transit_routing_preference", "fewer_transfers");
+                                break;
+                        }
+                    }
 
                     if (this.ArrivalTime.HasValue)
                         parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));

@@ -197,6 +197,26 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
         }
 
         [Test]
+        public void GetUriWhenTravelModeTransitAndDepartureTimeAndTransitRoutingPreferenceTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "abc",
+                Origins = new[] { new Location("test") },
+                Destinations = new[] { new Location("test") },
+                TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Bus,
+                DepartureTime = DateTime.UtcNow,
+                TransitRoutingPreference = TransitRoutingPreference.FewerTransfers
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&transit_routing_preference=fewer_transfers&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
+        }
+
+        [Test]
         public void GetUriWhenTravelModeDrivingTest()
         {
             var request = new DistanceMatrixRequest
