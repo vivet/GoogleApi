@@ -1,11 +1,8 @@
-﻿using System;
-
-namespace GoogleApi.Entities.Maps.Common.Enums
+﻿namespace GoogleApi.Entities.Maps.Common.Enums
 {
     /// <summary>
     /// Transit Routing Preference.
     /// </summary>
-    [Flags]
     public enum TransitRoutingPreference
     {
         /// <summary>
@@ -16,11 +13,11 @@ namespace GoogleApi.Entities.Maps.Common.Enums
         /// <summary>
         /// Indicates that the calculated route should prefer limited amounts of walking.
         /// </summary>
-        LessWalking = 1 << 1,
+        LessWalking = 1,
 
         /// <summary>
         /// Indicates that the calculated route should prefer a limited number of transfers.
         /// </summary>
-        FewerTransfers = 1 << 2
+        FewerTransfers = 2
     }
 }
