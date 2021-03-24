@@ -6,9 +6,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <AssemblyVersion>3.10.6.0</AssemblyVersion>
-    <FileVersion>3.10.6.0</FileVersion>
-    <Version>3.10.6.0</Version>
+    <AssemblyVersion>3.10.7.0</AssemblyVersion>
+    <FileVersion>3.10.7.0</FileVersion>
+    <Version>3.10.7.0</Version>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
     <LangVersion>latest</LangVersion>
@@ -19,7 +19,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
     <PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
-    <PackageReleaseNotes>- Fixed Transit Routing Preference, not converting enum to correct string value.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Updated common language with additional languages added by Google.</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/vivet/GoogleApi.git</RepositoryUrl>
