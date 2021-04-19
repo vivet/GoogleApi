@@ -19,7 +19,7 @@ namespace GoogleApi.Entities.Common.Enums
         Ok,
 
         /// <summary>
-        /// Indicates that the requst was successful but returned no results. This may occur if the search was passed a latlng in a remote location.
+        /// Indicates that the request was successful but returned no results. This may occur if the search was passed a latlng in a remote location.
         /// </summary>
         [EnumMember(Value = "ZERO_RESULTS")]
         ZeroResults,
