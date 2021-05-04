@@ -1,17 +1,22 @@
-﻿namespace GoogleApi.Entities.Common.Enums.Extensions
+﻿using System;
+
+namespace GoogleApi.Entities.Common.Enums.Extensions
 {
     /// <summary>
-    /// Language Helper.
+    /// String Extensions.
     /// </summary>
-    public static class LanguageHelper
+    public static class StringExtension
     {
         /// <summary>
         /// Gets the <see cref="Language"/> for the specified ISO-639-1 code.
         /// </summary>
         /// <param name="language">The ISO-639-1 code.</param>
         /// <returns>The <see cref="Language"/>.</returns>
-        public static Language? FromCode(string language)
+        public static Language? FromCode(this string language)
         {
+            if (language == null) 
+                throw new ArgumentNullException(nameof(language));
+            
             switch (language)
             {
                 case "af": return Language.Afrikaans;
