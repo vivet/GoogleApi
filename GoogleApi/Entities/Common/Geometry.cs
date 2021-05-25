@@ -13,7 +13,7 @@ namespace GoogleApi.Entities.Common
         /// For normal address lookups, this field is typically the most important.
         /// </summary>
         [JsonProperty("location")]
-        public virtual Entities.Common.Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
         /// <summary>
         /// Bounds (optionally returned) stores the bounding box which can fully contain the returned result. 

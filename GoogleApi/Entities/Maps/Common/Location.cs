@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Common
 {

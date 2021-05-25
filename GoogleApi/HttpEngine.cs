@@ -50,10 +50,7 @@ namespace GoogleApi
 
                 return HttpEngine.httpClient;
             }
-            set
-            {
-                HttpEngine.httpClient = value;
-            }
+            set => HttpEngine.httpClient = value;
         }
 
         /// <summary>

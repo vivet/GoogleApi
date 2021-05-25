@@ -77,7 +77,7 @@ namespace GoogleApi.Entities.Places.Details.Request
             if (!string.IsNullOrEmpty(this.SessionToken))
                 parameters.Add("sessiontoken", this.SessionToken);
 
-            if (this.Extensions != Enums.Extensions.None)
+            if (this.Extensions != Extensions.None)
                 parameters.Add("extensions", this.Extensions.ToString().ToLower());
 
             return parameters;
