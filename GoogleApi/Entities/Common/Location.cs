@@ -58,10 +58,10 @@ namespace GoogleApi.Entities.Common
         /// <summary>
         /// Overrdden ToString method for default conversion to Google compatible string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The location string.</returns>
         public override string ToString()
         {
-            return this.Address ?? this.Latitude.ToString(CultureInfo.InvariantCulture) + "," + this.Longitude.ToString(CultureInfo.InvariantCulture);
+            return this.Address ?? $"{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}";
         }
     }
 }

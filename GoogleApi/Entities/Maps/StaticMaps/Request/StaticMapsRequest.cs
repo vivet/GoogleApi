@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
+using Location = GoogleApi.Entities.Common.Location;
 
 namespace GoogleApi.Entities.Maps.StaticMaps.Request
 {

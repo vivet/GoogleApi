@@ -1,10 +1,10 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
@@ -87,7 +87,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Destination is required");
         }
-
+        
         [Test]
         public void GetUriTest()
         {
@@ -102,6 +102,54 @@ namespace GoogleApi.UnitTests.Maps.Directions
 
             Assert.IsNotNull(uri);
             Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenCoordinateTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "abc",
+                Origin = new Location(1, 2),
+                Destination = new Location(1, 2)
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenCoordinateAndHeadingTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "abc",
+                Origin = new Location(1, 2) { Heading = 90 },
+                Destination = new Location(1, 2) { Heading = 90 }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToStringHeading())}&destination={Uri.EscapeDataString(request.Destination.ToStringHeading())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
+        }
+
+        [Test]
+        public void GetUriWhenCoordinateAndUseSideOfRoadTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "abc",
+                Origin = new Location(1, 2) { UseSideOfRoad = true },
+                Destination = new Location(1, 2) { UseSideOfRoad = true }
+            };
+
+            var uri = request.GetUri();
+
+            Assert.IsNotNull(uri);
+            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToStringHeading())}&destination={Uri.EscapeDataString(request.Destination.ToStringHeading())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
         }
 
         [Test]
