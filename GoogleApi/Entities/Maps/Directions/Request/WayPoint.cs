@@ -1,4 +1,5 @@
-﻿using GoogleApi.Entities.Common;
+﻿
+using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
@@ -16,13 +17,13 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// This interprestation may result in severe detours on the route or ZERO_RESULTS in the response status code
         /// if the Directions API is unable to create directions through that point.
         /// </summary>
-        public virtual bool IsVia { get; protected set; }
+        public bool IsVia { get; protected set; }
 
         /// <summary>
         /// String.
         /// The address, location, polyline or place string.
         /// </summary>
-        public virtual string String { get; protected set; }
+        public string String { get; protected set; }
 
         /// <summary>
         /// Constructor.
@@ -52,11 +53,9 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// <param name="location">The <see cref="Location"/>.</param>
         /// <param name="isVia">is prefixed with 'via:'</param>
         public WayPoint(Location location, bool isVia = false)
-            : this($"placeId:{location}", isVia)
-        
+            : this(location.ToString(), isVia)
         {
-            this.String = location.ToString();
-            this.IsVia = isVia;
+            // TODO: Doesn't support "side_of_road" and heading. Then the string waypoint constructor needs to be used. Refactor.
         }
 
         /// <summary>

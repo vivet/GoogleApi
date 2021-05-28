@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using NUnit.Framework;
@@ -47,6 +47,30 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             {
                 Origins = new[] { new Location("test") },
                 Destinations = new[] { new Location("test") }
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenHeadingTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Origins = new[] { new Location(1, 2) { Heading = 90 } },
+                Destinations = new[] { new Location(1, 2) { Heading = 90 } }
+            };
+
+            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenUseSideOfRoadTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Origins = new[] { new Location(1, 2) { UseSideOfRoad = true } },
+                Destinations = new[] { new Location(1, 2) { UseSideOfRoad = true } }
             };
 
             Assert.DoesNotThrow(() => request.GetQueryStringParameters());

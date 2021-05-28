@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Common;
@@ -8,6 +7,7 @@ using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
 using NUnit.Framework;
+using Location = GoogleApi.Entities.Common.Location;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps
 {
@@ -168,7 +168,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var uri = request.GetUri();
 
             Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/staticmap?key={request.Key}&language={request.Language.ToCode()}&center={Uri.EscapeDataString(request.Center.ToString())}&zoom={request.ZoomLevel.ToString()}&size={request.Size.Width}x{request.Size.Height}&maptype={request.Type.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual($"/maps/api/staticmap?key={request.Key}&language={request.Language.ToCode()}&center={Uri.EscapeDataString(request.Center.ToString())}&zoom={request.ZoomLevel}&size={request.Size.Width}x{request.Size.Height}&maptype={request.Type?.ToString().ToLower()}", uri.PathAndQuery);
         }
 
         [Test]

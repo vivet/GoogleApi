@@ -26,7 +26,7 @@ namespace GoogleApi.Entities.Search
         /// <summary>
         /// Allowed values are web or image. If unspecified, results are limited to webpages.
         /// </summary>
-        protected virtual SearchType SearchType { get; set; } = SearchType.Web;
+        protected SearchType SearchType { get; set; } = SearchType.Web;
 
         /// <summary>
         /// Required. 

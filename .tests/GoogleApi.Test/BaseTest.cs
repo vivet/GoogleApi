@@ -18,15 +18,15 @@ namespace GoogleApi.Test
         [OneTimeSetUp]
         public virtual void Setup()
         {
-            var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.Parent?.Parent;
+            var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory ?? "").Parent?.Parent?.Parent;
             var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.json") ?? directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.default.json");
 
             if (fileInfo == null)
                 throw new NullReferenceException("fileinfo");
 
-            using (var file = File.OpenText(fileInfo.FullName))
+            using var file = File.OpenText(fileInfo.FullName);
             {
-                using (var reader = new JsonTextReader(file))
+                using var reader = new JsonTextReader(file);
                 {
                     var jsonSerializer = new JsonSerializer();
                     this.Settings = jsonSerializer.Deserialize<AppSettings>(reader);

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
+using Location = GoogleApi.Entities.Common.Location;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {

@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
@@ -68,6 +68,54 @@ namespace GoogleApi.Test.Maps.Directions
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
+        }
+
+        [Test]
+        public void DirectionsWhenCoordinatesTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = this.ApiKey,
+                Origin = new Location(55.7237480, 12.4208282),
+                Destination = new Location(55.72672682, 12.407996582)
+            };
+
+            var result = GoogleMaps.Directions.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+        }
+
+        [Test]
+        public void DirectionsWhenCoordinatesAndHeadingTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = this.ApiKey,
+                Origin = new Location(55.7237480, 12.4208282) { Heading = 90 },
+                Destination = new Location(55.72672682, 12.407996582) { Heading = 80 }
+            };
+
+            var result = GoogleMaps.Directions.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+        }
+
+        [Test]
+        public void DirectionsWhenCoordinatesAndUseSideOfRoadTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = this.ApiKey,
+                Origin = new Location(55.7237480, 12.4208282) { UseSideOfRoad = true },
+                Destination = new Location(55.72672682, 12.407996582) { UseSideOfRoad = true }
+            };
+
+            var result = GoogleMaps.Directions.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
