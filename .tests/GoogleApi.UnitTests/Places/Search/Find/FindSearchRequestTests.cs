@@ -15,18 +15,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(InputType.TextQuery, request.Type);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesFindSearchRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

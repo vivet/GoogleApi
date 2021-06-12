@@ -14,18 +14,6 @@ namespace GoogleApi.UnitTests.Maps.StreetView
         public void ConstructorDefaultTest()
         {
             var request = new StreetViewRequest();
-
-            Assert.IsTrue(request.IsSsl);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new StreetViewRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

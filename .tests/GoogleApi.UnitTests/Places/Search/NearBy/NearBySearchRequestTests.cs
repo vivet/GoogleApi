@@ -20,7 +20,6 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsNull(request.Type);
             Assert.IsNull(request.Radius);
             Assert.IsNull(request.Location);
@@ -29,16 +28,6 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             Assert.IsFalse(request.OpenNow);
             Assert.AreEqual(Language.English, request.Language);
             Assert.AreEqual(Ranking.Prominence, request.Rankby);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesNearBySearchRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

@@ -18,8 +18,6 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
         public void ConstructorDefaultTest()
         {
             var request = new StaticMapsRequest();
-
-            Assert.IsTrue(request.IsSsl);
         }
 
         [Test]

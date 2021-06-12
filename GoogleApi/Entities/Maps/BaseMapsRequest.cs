@@ -12,16 +12,5 @@ namespace GoogleApi.Entities.Maps
         /// Base Url.
         /// </summary>
         protected internal override string BaseUrl => "maps.googleapis.com/maps/api/";
-
-        /// <summary>
-        /// Always true. 
-        /// Setter is not supported.
-        /// </summary>
-        [JsonIgnore]
-        public override bool IsSsl
-        {
-            get => true;
-            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
-        }
     }
 }

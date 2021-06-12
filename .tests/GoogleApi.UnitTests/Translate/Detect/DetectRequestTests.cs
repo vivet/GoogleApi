@@ -13,18 +13,7 @@ namespace GoogleApi.UnitTests.Translate.Detect
         {
             var request = new DetectRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsNull(request.Qs);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new DetectRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

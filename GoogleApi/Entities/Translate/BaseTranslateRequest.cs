@@ -10,16 +10,6 @@ namespace GoogleApi.Entities.Translate
     public abstract class BaseTranslateRequest : BaseRequest, IRequestQueryString
     {
         /// <summary>
-        /// Always true. 
-        /// Setter is not supported.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get => true;
-            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
-        }
-
-        /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>

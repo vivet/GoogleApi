@@ -12,18 +12,6 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode
         public void ConstructorDefaultTest()
         {
             var request = new PlusCodeGeocodeRequest();
-
-            Assert.IsTrue(request.IsSsl);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlusCodeGeocodeRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

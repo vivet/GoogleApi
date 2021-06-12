@@ -15,18 +15,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
         {
             var request = new SpeedLimitsRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(Units.Kph, request.Unit);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new SpeedLimitsRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

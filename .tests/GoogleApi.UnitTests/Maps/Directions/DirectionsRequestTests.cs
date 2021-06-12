@@ -19,7 +19,6 @@ namespace GoogleApi.UnitTests.Maps.Directions
         {
             var request = new DirectionsRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(Units.Metric, request.Units);
             Assert.AreEqual(AvoidWay.Nothing, request.Avoid);
             Assert.AreEqual(TravelMode.Driving, request.TravelMode);
@@ -30,16 +29,6 @@ namespace GoogleApi.UnitTests.Maps.Directions
             Assert.IsNull(request.DepartureTime);
             Assert.IsFalse(request.Alternatives);
             Assert.IsFalse(request.OptimizeWaypoints);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new DirectionsRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

@@ -15,18 +15,6 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
         public void ConstructorDefaultTest()
         {
             var request = new LocationGeocodeRequest();
-
-            Assert.IsTrue(request.IsSsl);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new LocationGeocodeRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

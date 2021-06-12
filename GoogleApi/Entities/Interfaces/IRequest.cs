@@ -23,11 +23,6 @@ namespace GoogleApi.Entities.Interfaces
         string ClientId { get; set; }
 
         /// <summary>
-        /// Determines if htttp or htttps is used when submitting the request.
-        /// </summary>
-        bool IsSsl { get; set; }
-
-        /// <summary>
         /// Returns the Uri for the request.
         /// </summary>
         /// <returns>The <see cref="Uri"/>.</returns>

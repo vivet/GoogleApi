@@ -15,19 +15,8 @@ namespace GoogleApi.UnitTests.Places.Details
         {
             var request = new PlacesDetailsRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(Language.English, request.Language);
             Assert.AreEqual(Extensions.None, request.Extensions);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesDetailsRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

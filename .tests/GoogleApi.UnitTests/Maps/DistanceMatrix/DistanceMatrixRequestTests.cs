@@ -18,7 +18,6 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
         {
             var request = new DistanceMatrixRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(Units.Metric, request.Units);
             Assert.AreEqual(AvoidWay.Nothing, request.Avoid);
             Assert.AreEqual(TravelMode.Driving, request.TravelMode);
@@ -28,16 +27,6 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             Assert.IsNull(request.ArrivalTime);
             Assert.IsNull(request.DepartureTime);
             Assert.IsNull(request.Region);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new DistanceMatrixRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

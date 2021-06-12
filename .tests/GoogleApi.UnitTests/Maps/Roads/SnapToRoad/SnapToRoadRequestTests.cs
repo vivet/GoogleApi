@@ -13,18 +13,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
         {
             var request = new SnapToRoadsRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsFalse(request.Interpolate);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new SnapToRoadsRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

@@ -15,15 +15,6 @@ namespace GoogleApi.Entities.Places
         protected internal override string BaseUrl => "maps.googleapis.com/maps/api/place/";
 
         /// <summary>
-        /// Always true. Setter is not supported.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get => true;
-            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
-        }
-
-        /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>

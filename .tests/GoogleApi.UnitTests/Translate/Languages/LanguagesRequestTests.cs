@@ -14,19 +14,8 @@ namespace GoogleApi.UnitTests.Translate.Languages
         {
             var request = new LanguagesRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsNull(request.Target);
             Assert.AreEqual(Model.Base, request.Model);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new LanguagesRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

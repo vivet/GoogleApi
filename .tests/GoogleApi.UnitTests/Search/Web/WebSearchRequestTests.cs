@@ -14,19 +14,8 @@ namespace GoogleApi.UnitTests.Search.Web
         {
             var request = new WebSearchRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsTrue(request.PrettyPrint);
             Assert.AreEqual(request.Alt, AltType.Json);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new WebSearchRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

@@ -41,15 +41,6 @@ namespace GoogleApi.Entities.Search.Web.Request
         public virtual SearchOptions Options { get; set; } = new SearchOptions();
 
         /// <summary>
-        /// See <see cref="BaseRequest.IsSsl"/>.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get => true;
-            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
-        }
-
-        /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>

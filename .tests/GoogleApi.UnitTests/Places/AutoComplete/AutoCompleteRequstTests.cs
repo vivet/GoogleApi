@@ -17,21 +17,10 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsNull(request.Offset);
             Assert.IsNull(request.Radius);
             Assert.IsNull(request.Location);
             Assert.AreEqual(Language.English, request.Language);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesAutoCompleteRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

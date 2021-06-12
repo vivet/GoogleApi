@@ -16,21 +16,10 @@ namespace GoogleApi.UnitTests.Translate.Translate
         {
             var request = new TranslateRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsNull(request.Source);
             Assert.IsNull(request.Target);
             Assert.AreEqual(Model.Base, request.Model);
             Assert.AreEqual(Format.Html, request.Format);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new TranslateRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

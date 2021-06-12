@@ -16,19 +16,8 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
         {
             var request = new TimeZoneRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsNotNull(request.TimeStamp);
             Assert.AreEqual(Language.English, request.Language);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new TimeZoneRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

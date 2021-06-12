@@ -11,18 +11,6 @@ namespace GoogleApi.UnitTests.Places.Photos
         public void ConstructorDefaultTest()
         {
             var request = new PlacesPhotosRequest();
-
-            Assert.IsTrue(request.IsSsl);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesPhotosRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]
