@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using NUnit.Framework;
@@ -9,102 +11,202 @@ namespace GoogleApi.UnitTests.Maps.Elevation
     public class ElevationRequestTests
     {
         [Test]
-        public void ConstructorDefaultTest()
-        {
-            var request = new ElevationRequest();
-        }
-
-        [Test]
-        public void GetQueryStringParametersTest()
+        public void GetQueryStringParametersWhenLocationsTest()
         {
             var request = new ElevationRequest
             {
-                Path = new[] { new Location(40.7141289, -73.9614074) },
+                Key = "key",
+                Locations = new[]
+                {
+                    new Coordinate(1, 1)
+                }
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var locations = queryStringParameters.FirstOrDefault(x => x.Key == "locations");
+            var locationsExpected = string.Join("|", request.Locations);
+            Assert.IsNotNull(locations);
+            Assert.AreEqual(locationsExpected, locations.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenLocationsWhenMultipleCoordinatesTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Locations = new[]
+                {
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
+                }
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var locations = queryStringParameters.FirstOrDefault(x => x.Key == "locations");
+            var locationsExpected = string.Join("|", request.Locations);
+            Assert.IsNotNull(locations);
+            Assert.AreEqual(locationsExpected, locations.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPathTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Path = new[]
+                {
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
+                },
                 Samples = 2
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var path = queryStringParameters.FirstOrDefault(x => x.Key == "path");
+            var pathExpected = string.Join("|", request.Path);
+            Assert.IsNotNull(path);
+            Assert.AreEqual(pathExpected, path.Value);
+
+            var samples = queryStringParameters.FirstOrDefault(x => x.Key == "samples");
+            Assert.AreEqual(request.Samples.ToString(), samples.Value);
         }
 
         [Test]
-        public void GetQueryStringParametersWhenPathAndSamplesIsNullTest()
+        public void GetQueryStringParametersWhenKeyIsNullTest()
         {
             var request = new ElevationRequest
             {
-                Path = new[] { new Location(40.7141289, -73.9614074) },
+                Key = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = string.Empty
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenLocationsIsNullTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Locations = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenLocationsIsEmptyTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Locations = new Coordinate[0]
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPathIsNullTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Path = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPathIsEmptyTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Path = new Coordinate[0]
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPathIsNotEmptyAndLocationsIsNotEmptyTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Locations = new List<Coordinate>()
+                {
+                    new Coordinate(0, 0)
+                },
+                Path = new List<Coordinate>
+                {
+                    new Coordinate(0, 0)
+                }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Path' and 'Locations' cannot both be specified", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPathContainsLessThanTwoCoordinatesTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Path = new[]
+                {
+                    new Coordinate(1, 1)
+                }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("A minimum of two coordinates is required when using 'Path'", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPathIsNotEmptyAndSamplesIsNullTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Path = new[]
+                {
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
+                },
                 Samples = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Samples is required, when using Path");
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenPathAndLocationTest()
-        {
-            var request = new ElevationRequest
-            {
-                Path = new[] { new Location(40.7141289, -73.9614074) },
-                Locations = new[] { new Location(40.7141289, -73.9614074) }
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Path and Locations cannot both be specified");
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenPathAndLocationIsNullTest()
-        {
-            var request = new ElevationRequest();
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Locations or Path is required");
-        }
-
-        [Test]
-        public void GetUriWhenLocationsTest()
-        {
-            var request = new ElevationRequest
-            {
-                Key = "abc",
-                Locations = new[] { new Location(40.7141289, -73.9614074) }
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/elevation/json?key={request.Key}&locations={Uri.EscapeDataString(string.Join("|", request.Locations))}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenWhenPathAndSamplesTest()
-        {
-            var request = new ElevationRequest
-            {
-                Key = "abc",
-                Path = new[] { new Location(40.7141289, -73.9614074) },
-                Samples = 2
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/elevation/json?key={request.Key}&path={Uri.EscapeDataString(string.Join("|", request.Path))}&samples={request.Samples.ToString()}", uri.PathAndQuery);
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Samples' is required, when using 'Path'", exception.Message);
         }
     }
 }
