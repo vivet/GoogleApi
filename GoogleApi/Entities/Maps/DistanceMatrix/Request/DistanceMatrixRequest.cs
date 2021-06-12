@@ -204,22 +204,6 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                 }
             }
 
-            //if (this.TravelMode == TravelMode.Driving || this.TravelMode == TravelMode.Bicycling)
-            //{
-            //    var origins = this.Origins.Aggregate(string.Empty, (current, location) => current + $"{location.ToStringHeading()}|");
-            //    origins = origins.Substring(0, origins.Length - 1);
-            //    parameters.Add("origins", origins);
-
-            //    var destinations = this.Destinations.Aggregate(string.Empty, (current, location) => current + $"{location.ToStringHeading()}|");
-            //    destinations = destinations.Substring(0, destinations.Length - 1);
-            //    parameters.Add("destinations", destinations);
-            //}
-            //else
-            //{
-            //    parameters.Add("origins", string.IsNullOrEmpty(this.OriginsRaw) ? string.Join("|", this.Origins) : this.OriginsRaw);
-            //    parameters.Add("destinations", string.IsNullOrEmpty(this.DestinationsRaw) ? string.Join("|", this.Destinations) : this.DestinationsRaw);
-            //}
-
             parameters.Add("units", this.Units.ToString().ToLower());
             parameters.Add("mode", this.TravelMode.ToString().ToLower());
             parameters.Add("language", this.Language.ToCode());
