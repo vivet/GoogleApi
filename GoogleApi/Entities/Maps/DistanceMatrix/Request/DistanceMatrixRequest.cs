@@ -172,7 +172,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             {
                 if (this.TravelMode == TravelMode.Driving || this.TravelMode == TravelMode.Bicycling)
                 {
-                    var origins = this.Origins.Aggregate(string.Empty, (current, location) => current + $"{location.ToStringHeading()}|");
+                    var origins = this.Origins.Aggregate(string.Empty, (current, location) => current + $"{location}|");
                     origins = origins.Substring(0, origins.Length - 1);
                     parameters.Add("origins", origins);
                 }
@@ -192,7 +192,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
             {
                 if (this.TravelMode == TravelMode.Driving || this.TravelMode == TravelMode.Bicycling)
                 {
-                    var destinations = this.Destinations.Aggregate(string.Empty, (current, location) => current + $"{location.ToStringHeading()}|");
+                    var destinations = this.Destinations.Aggregate(string.Empty, (current, location) => current + $"{location}|");
                     destinations = destinations.Substring(0, destinations.Length - 1);
                     parameters.Add("destinations", destinations);
                 }

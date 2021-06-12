@@ -266,7 +266,7 @@ namespace GoogleApi.Test.Places.Search.Text
             {
                 Key = this.ApiKey,
                 Query = "picadelly circus",
-                Location = new Location(51.5100913, -0.1345676),
+                Location = new Coordinate(51.5100913, -0.1345676),
                 Radius = 5000
             };
 
@@ -282,7 +282,7 @@ namespace GoogleApi.Test.Places.Search.Text
             {
                 Key = this.ApiKey,
                 Query = "picadelly circus",
-                Location = new Location(0, 0)
+                Location = new Coordinate(0, 0)
             };
 
             var exception = Assert.Throws<AggregateException>(() => GooglePlaces.TextSearch.QueryAsync(request).Wait());

@@ -6,8 +6,8 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
+using Location = GoogleApi.Entities.Maps.Common.Location;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
@@ -172,17 +172,8 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 
             var parameters = base.GetQueryStringParameters();
 
-            if (this.TravelMode == TravelMode.Driving || this.TravelMode == TravelMode.Bicycling)
-            {
-                parameters.Add("origin", this.Origin.ToStringHeading());
-                parameters.Add("destination", this.Destination.ToStringHeading());
-            }
-            else
-            {
-                parameters.Add("origin", this.Origin.ToString());
-                parameters.Add("destination", this.Destination.ToString());
-            }
-
+            parameters.Add("origin", this.Origin.ToString());
+            parameters.Add("destination", this.Destination.ToString());
             parameters.Add("units", this.Units.ToString().ToLower());
             parameters.Add("mode", this.TravelMode.ToString().ToLower());
             parameters.Add("language", this.Language.ToCode());

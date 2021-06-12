@@ -26,7 +26,7 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
             var request = new TimeZoneRequest
             {
                 Key = "abc",
-                Location = new Location(40.7141289, -73.9614074)
+                Location = new Coordinate(40.7141289, -73.9614074)
             };
 
             Assert.DoesNotThrow(() => request.GetQueryStringParameters());
@@ -55,7 +55,7 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
             var request = new TimeZoneRequest
             {
                 Key = "abc",
-                Location = new Location(40.7141289, -73.9614074)
+                Location = new Coordinate(40.7141289, -73.9614074)
             };
 
             var uri = request.GetUri();

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
@@ -19,7 +20,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 1000,
                 Type = SearchPlaceType.School
             };
@@ -37,7 +38,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
@@ -54,7 +55,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
@@ -74,7 +75,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "test",
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
@@ -100,7 +101,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 1000,
                 Type = SearchPlaceType.School
             };
@@ -132,7 +133,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = null,
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = 10
             };
 
@@ -151,7 +152,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = string.Empty,
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = 10
             };
 
@@ -188,7 +189,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = null
             };
 
@@ -207,7 +208,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 0
             };
 
@@ -226,7 +227,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 50001
             };
 
@@ -245,7 +246,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 5001,
                 Rankby = Ranking.Distance
             };
@@ -265,7 +266,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Rankby = Ranking.Distance
             };
 

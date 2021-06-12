@@ -1,5 +1,5 @@
 using System;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 using NUnit.Framework;
 
@@ -24,8 +24,8 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
                 Key = "abc",
                 Path = new[]
                 {
-                    new Location(1, 1),
-                    new Location(2, 2)
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
                 }
             };
 
@@ -38,7 +38,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = null,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -56,7 +56,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = string.Empty,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -91,7 +91,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = "abc",
-                Path = new Location[0]
+                Path = new Coordinate[0]
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -109,7 +109,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = "abc",
-                Path = new Location[101]
+                Path = new Coordinate[101]
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -129,8 +129,8 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
                 Key = "abc",
                 Path = new[]
                 {
-                    new Location(1, 1),
-                    new Location(2, 2)
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
                 }
             };
 

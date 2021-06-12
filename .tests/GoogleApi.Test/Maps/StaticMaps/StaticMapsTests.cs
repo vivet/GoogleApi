@@ -3,9 +3,11 @@ using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
+using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Test.Maps.StaticMaps
 {
@@ -18,7 +20,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = this.ApiKey,
-                Center = new Location(60.170877, 24.942796),
+                Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
 
@@ -35,7 +37,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = this.ApiKey,
-                Center = new Location(60.170877, 24.942796),
+                Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
             var result = GoogleMaps.StaticMaps.QueryAsync(request).Result;
@@ -51,7 +53,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = this.ApiKey,
-                Center = new Location(60.170877, 24.942796),
+                Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
             var cancellationTokenSource = new CancellationTokenSource();
@@ -69,7 +71,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = "test",
-                Center = new Location(60.170877, 24.942796),
+                Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
 
@@ -88,7 +90,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = null,
-                Center = new Location(60.170877, 24.942796),
+                Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
 
@@ -107,7 +109,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = string.Empty,
-                Center = new Location(60.170877, 24.942796),
+                Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
 

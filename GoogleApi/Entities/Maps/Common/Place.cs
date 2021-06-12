@@ -9,5 +9,11 @@
         /// The place Id.
         /// </summary>
         public virtual string Id { get; set; }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"place_id:{this.Id}";
+        }
     }
 }

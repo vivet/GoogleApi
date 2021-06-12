@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Common;
-using Location = GoogleApi.Entities.Common.Location;
 
 namespace GoogleApi.Entities.Maps.StreetView.Request
 {

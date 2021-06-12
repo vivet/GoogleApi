@@ -24,7 +24,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var request = new PlacesFindSearchRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Input = "test"
             };
 
@@ -37,7 +37,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var request = new PlacesFindSearchRequest
             {
                 Key = null,
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Input = "test"
             };
 
@@ -55,7 +55,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             var request = new PlacesFindSearchRequest
             {
                 Key = string.Empty,
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = 5000
             };
 
@@ -106,7 +106,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             {
                 Key = "abc",
                 Input = "test",
-                Location = new Location(1, 1)
+                Location = new Coordinate(1, 1)
             };
 
             var uri = request.GetUri();
@@ -122,7 +122,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             {
                 Key = "abc",
                 Input = "test",
-                Location = new Location(1, 1),
+                Location = new Coordinate(1, 1),
                 Radius = 50
             };
 
@@ -141,8 +141,8 @@ namespace GoogleApi.UnitTests.Places.Search.Find
                 Input = "test",
                 Bounds = new ViewPort
                 {
-                    NorthEast = new Location(1, 1),
-                    SouthWest = new Location(2, 2)
+                    NorthEast = new Coordinate(1, 1),
+                    SouthWest = new Coordinate(2, 2)
                 }
             };
 

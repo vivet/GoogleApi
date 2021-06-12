@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
@@ -37,7 +38,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
         /// Latitude / Longitude.
         /// Requires key to be specified.
         /// </summary>
-        public virtual Entities.Common.Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// Local Code

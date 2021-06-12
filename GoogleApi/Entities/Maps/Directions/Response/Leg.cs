@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
-using Location = GoogleApi.Entities.Common.Location;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -60,13 +60,13 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// start_location contains the latitude/longitude coordinates of the origin of this leg. Because the Directions API calculates directions between locations by using the nearest transportation option (usually a road) at the start and end points, start_location may be different than the provided origin of this leg if, for example, a road is not near the origin.
         /// </summary>
         [JsonProperty("start_location")]
-        public virtual Location StartLocation { get; set; }
+        public virtual Coordinate StartLocation { get; set; }
 
         /// <summary>
         /// end_location contains the latitude/longitude coordinates of the given destination of this leg. Because the Directions API calculates directions between locations by using the nearest transportation option (usually a road) at the start and end points, end_location may be different than the provided destination of this leg if, for example, a road is not near the destination.
         /// </summary>
         [JsonProperty("end_location")]
-        public virtual Location EndLocation { get; set; }
+        public virtual Coordinate EndLocation { get; set; }
 
         /// <summary>
         /// start_address contains the human-readable address (typically a street address) reflecting the start_location of this leg.

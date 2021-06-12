@@ -1,389 +1,389 @@
-using System;
-using System.Linq;
-using System.Threading;
-using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Common.Enums;
-using GoogleApi.Entities.Maps.DistanceMatrix.Request;
-using GoogleApi.Exceptions;
-using NUnit.Framework;
+//using System;
+//using System.Linq;
+//using System.Threading;
+//using GoogleApi.Entities.Common.Enums;
+//using GoogleApi.Entities.Maps.Common;
+//using GoogleApi.Entities.Maps.Common.Enums;
+//using GoogleApi.Entities.Maps.DistanceMatrix.Request;
+//using GoogleApi.Exceptions;
+//using NUnit.Framework;
 
-namespace GoogleApi.Test.Maps.DistanceMatrix
-{
-    [TestFixture]
-    public class DistanceMatrixTests : BaseTest
-    {
-        [Test]
-        public void DistanceMatrixTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location("285 Bedford Ave, Brooklyn, NY 11211, United States") },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
-            };
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//namespace GoogleApi.Test.Maps.DistanceMatrix
+//{
+//    [TestFixture]
+//    public class DistanceMatrixTests : BaseTest
+//    {
+//        [Test]
+//        public void DistanceMatrixTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location("285 Bedford Ave, Brooklyn, NY 11211, United States") },
+//                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
+//            };
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
-            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
-            Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
-        }
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Text);
+//            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
+//            Assert.IsNotNull(element.Duration.Text);
+//            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenAsyncTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
-            };
-            var response = GoogleMaps.DistanceMatrix.QueryAsync(request).Result;
+//        [Test]
+//        public void DistanceMatrixWhenAsyncTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(40.7141289, -73.9614074) },
+//                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
+//            };
+//            var response = GoogleMaps.DistanceMatrix.QueryAsync(request).Result;
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenAsyncAndCancelledTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(0, 0) },
-                Destinations = new[] { new Location("test") }
-            };
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.DistanceMatrix.QueryAsync(request, cancellationTokenSource.Token);
-            cancellationTokenSource.Cancel();
+//        [Test]
+//        public void DistanceMatrixWhenAsyncAndCancelledTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(0, 0) },
+//                Destinations = new[] { new Location("test") }
+//            };
+//            var cancellationTokenSource = new CancellationTokenSource();
+//            var task = GoogleMaps.DistanceMatrix.QueryAsync(request, cancellationTokenSource.Token);
+//            cancellationTokenSource.Cancel();
 
-            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
+//            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+//            Assert.IsNotNull(exception);
+//            Assert.AreEqual(exception.Message, "The operation was canceled.");
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenCoordinatesTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location(40.71049396441609, -74.0098624305255) }
-            };
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//        [Test]
+//        public void DistanceMatrixWhenCoordinatesTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(40.7141289, -73.9614074) },
+//                Destinations = new[] { new Location(40.71049396441609, -74.0098624305255) }
+//            };
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
-            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
-            Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
-        }
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Text);
+//            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
+//            Assert.IsNotNull(element.Duration.Text);
+//            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenCoordinatesAndHeadingTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(40.7141289, -73.9614074) { Heading = 90 } },
-                Destinations = new[] { new Location(40.71049396441609, -74.0098624305255) { Heading = 90 } }
-            };
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//        [Test]
+//        public void DistanceMatrixWhenCoordinatesAndHeadingTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(40.7141289, -73.9614074) { Heading = 90 } },
+//                Destinations = new[] { new Location(40.71049396441609, -74.0098624305255) { Heading = 90 } }
+//            };
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
-            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
-            Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
-        }
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Text);
+//            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
+//            Assert.IsNotNull(element.Duration.Text);
+//            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenCoordinatesAndUseSideOfRoadTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(40.7141289, -73.9614074) { UseSideOfRoad = true} },
-                Destinations = new[] { new Location(40.71049396441609, -74.0098624305255) { UseSideOfRoad = true } }
-            };
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//        [Test]
+//        public void DistanceMatrixWhenCoordinatesAndUseSideOfRoadTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(40.7141289, -73.9614074) { UseSideOfRoad = true} },
+//                Destinations = new[] { new Location(40.71049396441609, -74.0098624305255) { UseSideOfRoad = true } }
+//            };
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
-            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
-            Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
-        }
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Text);
+//            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
+//            Assert.IsNotNull(element.Duration.Text);
+//            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenLanguageTest()
-        {
-            Assert.Inconclusive();
-        }
+//        [Test]
+//        public void DistanceMatrixWhenLanguageTest()
+//        {
+//            Assert.Inconclusive();
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenUnitsTest()
-        {
-            Assert.Inconclusive();
-        }
+//        [Test]
+//        public void DistanceMatrixWhenUnitsTest()
+//        {
+//            Assert.Inconclusive();
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenAvoidWayTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
-                Avoid = AvoidWay.Tolls | AvoidWay.Highways,
-                DepartureTime = DateTime.Now
-            };
+//        [Test]
+//        public void DistanceMatrixWhenAvoidWayTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(40.7141289, -73.9614074) },
+//                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
+//                Avoid = AvoidWay.Tolls | AvoidWay.Highways,
+//                DepartureTime = DateTime.Now
+//            };
 
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
-            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(5857.00, element.Distance.Value, 1000.00);
-            Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1509.00, element.Duration.Value, 1000.00);
-        }
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Text);
+//            Assert.AreEqual(5857.00, element.Distance.Value, 1000.00);
+//            Assert.IsNotNull(element.Duration.Text);
+//            Assert.AreEqual(1509.00, element.Duration.Value, 1000.00);
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenTravelModeTest()
-        {
-            Assert.Inconclusive();
-        }
+//        [Test]
+//        public void DistanceMatrixWhenTravelModeTest()
+//        {
+//            Assert.Inconclusive();
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenTransitModeTest()
-        {
-            Assert.Inconclusive();
-        }
+//        [Test]
+//        public void DistanceMatrixWhenTransitModeTest()
+//        {
+//            Assert.Inconclusive();
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenTransitRoutingPreferenceTest()
-        {
-            Assert.Inconclusive();
-        }
+//        [Test]
+//        public void DistanceMatrixWhenTransitRoutingPreferenceTest()
+//        {
+//            Assert.Inconclusive();
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenArrivalTimeTest()
-        {
-            Assert.Inconclusive();
-        }
+//        [Test]
+//        public void DistanceMatrixWhenArrivalTimeTest()
+//        {
+//            Assert.Inconclusive();
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenDepartureTimeTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
-                DepartureTime = DateTime.Now
-            };
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//        [Test]
+//        public void DistanceMatrixWhenDepartureTimeTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(40.7141289, -73.9614074) },
+//                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") },
+//                DepartureTime = DateTime.Now
+//            };
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Value);
-            Assert.IsNotNull(element.Duration.Value);
-            Assert.IsNotNull(element.DurationInTraffic.Value);
-        }
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Value);
+//            Assert.IsNotNull(element.Duration.Value);
+//            Assert.IsNotNull(element.DurationInTraffic.Value);
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenOriginsIsNullTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Destinations = new[] { new Location("test") }
-            };
+//        [Test]
+//        public void DistanceMatrixWhenOriginsIsNullTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Destinations = new[] { new Location("test") }
+//            };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
+//            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
+//            Assert.IsNotNull(exception);
 
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Origins is required");
-        }
+//            var innerException = exception.InnerException;
+//            Assert.IsNotNull(innerException);
+//            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+//            Assert.AreEqual(innerException.Message, "Origins is required");
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenOriginsIsEmptyTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new Location[0],
-                Destinations = new[] { new Location(0, 0) }
-            };
+//        [Test]
+//        public void DistanceMatrixWhenOriginsIsEmptyTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new Location[0],
+//                Destinations = new[] { new Location(0, 0) }
+//            };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
+//            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
+//            Assert.IsNotNull(exception);
 
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Origins is required");
-        }
+//            var innerException = exception.InnerException;
+//            Assert.IsNotNull(innerException);
+//            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+//            Assert.AreEqual(innerException.Message, "Origins is required");
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenDestinationsIsNullTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(0, 0) }
-            };
+//        [Test]
+//        public void DistanceMatrixWhenDestinationsIsNullTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(0, 0) }
+//            };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
+//            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
+//            Assert.IsNotNull(exception);
 
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Destinations is required");
-        }
+//            var innerException = exception.InnerException;
+//            Assert.IsNotNull(innerException);
+//            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+//            Assert.AreEqual(innerException.Message, "Destinations is required");
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenDestinationsIsEmptyTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Origins = new[] { new Location(0, 0) },
-                Destinations = new Location[0]
-            };
+//        [Test]
+//        public void DistanceMatrixWhenDestinationsIsEmptyTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Origins = new[] { new Location(0, 0) },
+//                Destinations = new Location[0]
+//            };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
+//            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.DistanceMatrix.QueryAsync(request).Wait());
+//            Assert.IsNotNull(exception);
 
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Destinations is required");
-        }
+//            var innerException = exception.InnerException;
+//            Assert.IsNotNull(innerException);
+//            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+//            Assert.AreEqual(innerException.Message, "Destinations is required");
+//        }
 
-        [Test]
-        public void DistanceMatrixWhenRegionIsNotNullEmptyOrWhiteSpaceTest()
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Region = "us",
-                Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
-            };
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//        [Test]
+//        public void DistanceMatrixWhenRegionIsNotNullEmptyOrWhiteSpaceTest()
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Region = "us",
+//                Origins = new[] { new Location(40.7141289, -73.9614074) },
+//                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
+//            };
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
-            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
-            Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
-        }
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Text);
+//            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
+//            Assert.IsNotNull(element.Duration.Text);
+//            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
+//        }
 
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase(" ")]
-        [TestCase("  ")]
-        public void DistanceMatrixWhenRegionIsNullEmptyOrWhiteSpace(string region)
-        {
-            var request = new DistanceMatrixRequest
-            {
-                Key = this.ApiKey,
-                Region = region,
-                Origins = new[] { new Location(40.7141289, -73.9614074) },
-                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
-            };
-            var response = GoogleMaps.DistanceMatrix.Query(request);
+//        [TestCase(null)]
+//        [TestCase("")]
+//        [TestCase(" ")]
+//        [TestCase("  ")]
+//        public void DistanceMatrixWhenRegionIsNullEmptyOrWhiteSpace(string region)
+//        {
+//            var request = new DistanceMatrixRequest
+//            {
+//                Key = this.ApiKey,
+//                Region = region,
+//                Origins = new[] { new Location(40.7141289, -73.9614074) },
+//                Destinations = new[] { new Location("185 Broadway Ave, Manhattan, NY, USA") }
+//            };
+//            var response = GoogleMaps.DistanceMatrix.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
-            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response);
+//            Assert.AreEqual(Status.Ok, response.Status);
+//            Assert.IsNotNull(response.OriginAddresses.FirstOrDefault());
+//            Assert.IsNotNull(response.DestinationAddresses.FirstOrDefault());
 
-            var row = response.Rows.FirstOrDefault();
-            Assert.IsNotNull(row);
+//            var row = response.Rows.FirstOrDefault();
+//            Assert.IsNotNull(row);
 
-            var element = row.Elements.FirstOrDefault();
-            Assert.IsNotNull(element);
-            Assert.AreEqual(Status.Ok, element.Status);
-            Assert.IsNotNull(element.Distance.Text);
-            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
-            Assert.IsNotNull(element.Duration.Text);
-            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
-        }
-    }
-}
+//            var element = row.Elements.FirstOrDefault();
+//            Assert.IsNotNull(element);
+//            Assert.AreEqual(Status.Ok, element.Status);
+//            Assert.IsNotNull(element.Distance.Text);
+//            Assert.AreEqual(8258.00, element.Distance.Value, 5000.00);
+//            Assert.IsNotNull(element.Duration.Text);
+//            Assert.AreEqual(1135.00, element.Duration.Value, 500.00);
+//        }
+//    }
+//}

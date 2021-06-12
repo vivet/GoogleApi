@@ -87,8 +87,8 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
                 Address = "abc",
                 Bounds = new ViewPort
                 {
-                    SouthWest = new Entities.Common.Location(1, 1),
-                    NorthEast = new Entities.Common.Location(1, 1)
+                    SouthWest = new Coordinate(1, 1),
+                    NorthEast = new Coordinate(1, 1)
                 }
             };
 

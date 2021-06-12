@@ -9,5 +9,11 @@
         /// The polyline path.
         /// </summary>
         public virtual string Path { get; set; }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"enc:{this.Path}";
+        }
     }
 }

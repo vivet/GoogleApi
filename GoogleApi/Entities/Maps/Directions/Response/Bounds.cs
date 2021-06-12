@@ -12,12 +12,12 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// The location of the north / east corner.
         /// </summary>
         [JsonProperty("northeast")]
-        public virtual Location NorthEast { get; set; }
+        public virtual Coordinate NorthEast { get; set; }
 
         /// <summary>
         /// The location of the south / west corner.
         /// </summary>
         [JsonProperty("southwest")]
-        public virtual Location SouthWest { get; set; }
+        public virtual Coordinate SouthWest { get; set; }
     }
 }

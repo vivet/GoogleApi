@@ -3,9 +3,11 @@ using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.StreetView.Request;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
+using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Test.Maps.StreetView
 {
@@ -18,7 +20,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796)
+                Location = new Location(new Coordinate(60.170877, 24.942796))
             };
 
             var result = GoogleMaps.StreetView.Query(request);
@@ -34,7 +36,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796)
+                Location = new Location(new Coordinate(60.170877, 24.942796))
 
             };
             var result = GoogleMaps.StreetView.QueryAsync(request).Result;
@@ -50,7 +52,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796)
+                Location = new Location(new Coordinate(60.170877, 24.942796))
             };
             var cancellationTokenSource = new CancellationTokenSource();
             var task = GoogleMaps.StreetView.QueryAsync(request, cancellationTokenSource.Token);
@@ -67,7 +69,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "test",
-                Location = new Location(60.170877, 24.942796)
+                Location = new Location(new Coordinate(60.170877, 24.942796))
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
@@ -85,7 +87,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = null,
-                Location = new Location(60.170877, 24.942796)
+                Location = new Location(new Coordinate(60.170877, 24.942796))
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
@@ -103,7 +105,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = string.Empty,
-                Location = new Location(60.170877, 24.942796)
+                Location = new Location(new Coordinate(60.170877, 24.942796))
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
@@ -137,7 +139,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796),
+                Location = new Location(new Coordinate(60.170877, 24.942796)),
                 Pitch = 80
             };
 
@@ -154,7 +156,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796),
+                Location = new Location(new Coordinate(60.170877, 24.942796)),
                 Heading = 80
             };
 
@@ -171,7 +173,7 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796),
+                Location = new Location(new Coordinate(60.170877, 24.942796)),
                 FieldOfView = 50
             };
 

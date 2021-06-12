@@ -1,4 +1,5 @@
 using System;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
 using NUnit.Framework;
@@ -64,7 +65,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode
             var request = new PlusCodeGeocodeRequest
             {
                 Key = "abc",
-                Location = new Entities.Common.Location(1, 1)
+                Location = new Coordinate(1, 1)
             };
 
             var uri = request.GetUri();

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Places.Common.Enums;
@@ -36,7 +37,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = 5000,
                 Keyword = "test"
             };
@@ -50,7 +51,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = null,
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = 5000,
                 Keyword = "test"
             };
@@ -69,7 +70,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = string.Empty,
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = 5000
             };
 
@@ -105,7 +106,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Coordinate(0, 0),
                 Radius = null
             };
 
@@ -123,7 +124,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 0
             };
 
@@ -141,7 +142,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 50001
             };
 
@@ -159,7 +160,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Radius = 5001,
                 Rankby = Ranking.Distance
             };
@@ -178,7 +179,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(51.491431, -3.16668),
+                Location = new Coordinate(51.491431, -3.16668),
                 Rankby = Ranking.Distance
             };
 
@@ -196,7 +197,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1),
+                Location = new Coordinate(1, 1),
                 Radius = 50
             };
 
@@ -212,7 +213,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1),
+                Location = new Coordinate(1, 1),
                 Radius = 50,
                 Type = SearchPlaceType.Accounting 
             };
@@ -230,7 +231,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1),
+                Location = new Coordinate(1, 1),
                 Radius = 50,
                 OpenNow = true
             };
@@ -247,7 +248,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1),
+                Location = new Coordinate(1, 1),
                 Radius = 50,
                 Minprice = PriceLevel.Expensive
             };
@@ -264,7 +265,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
             var request = new PlacesNearBySearchRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1),
+                Location = new Coordinate(1, 1),
                 Radius = 50,
                 Maxprice = PriceLevel.Free
             };

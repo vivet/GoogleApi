@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
     /// <summary>
     /// Location (Roads only). 
     /// </summary>
-    public class Location
+    public class Coordinate
     {
         /// <summary>
         /// Latitude.
@@ -23,7 +23,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// <summary>
         /// Default Constructor.
         /// </summary>
-        public Location()
+        public Coordinate()
         {
 
         }
@@ -33,7 +33,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// </summary>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
-        public Location(double latitude, double longitude)
+        public Coordinate(double latitude, double longitude)
         {
             this.Latitude = latitude;
             this.Longitude = longitude;
@@ -45,7 +45,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// <returns></returns>
         public override string ToString()
         {
-            return this.Latitude.ToString(CultureInfo.InvariantCulture) + "," + this.Longitude.ToString(CultureInfo.InvariantCulture);
+            return $"{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}";
         }
     }
 }

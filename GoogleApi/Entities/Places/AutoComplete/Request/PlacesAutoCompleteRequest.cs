@@ -50,7 +50,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// <summary>
         /// The point around which you wish to retrieve Place information.
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// The distance (in meters) within which to return Place results. 

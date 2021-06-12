@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
@@ -20,9 +20,9 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Key = this.ApiKey,
                 Path = new[]
                 {
-                    new Location(60.170880, 24.942795),
-                    new Location(60.170879, 24.942796),
-                    new Location(60.170877, 24.942796)
+                    new Coordinate(60.170880, 24.942795),
+                    new Coordinate(60.170879, 24.942796),
+                    new Coordinate(60.170877, 24.942796)
                 }
             };
             var result = GoogleMaps.SnapToRoad.Query(request);
@@ -55,9 +55,9 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Key = this.ApiKey,
                 Path = new[]
                 {
-                    new Location(60.170880, 24.942795),
-                    new Location(60.170879, 24.942796),
-                    new Location(60.170877, 24.942796)
+                    new Coordinate(60.170880, 24.942795),
+                    new Coordinate(60.170879, 24.942796),
+                    new Coordinate(60.170877, 24.942796)
                 }
             };
             var result = GoogleMaps.SnapToRoad.QueryAsync(request).Result;
@@ -88,7 +88,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = this.ApiKey,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
             var cancellationTokenSource = new CancellationTokenSource();
             var task = GoogleMaps.SnapToRoad.QueryAsync(request, cancellationTokenSource.Token);
@@ -107,9 +107,9 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
                 Key = "test",
                 Path = new[]
                 {
-                    new Location(60.170880, 24.942795),
-                    new Location(60.170879, 24.942796),
-                    new Location(60.170877, 24.942796)
+                    new Coordinate(60.170880, 24.942795),
+                    new Coordinate(60.170879, 24.942796),
+                    new Coordinate(60.170877, 24.942796)
                 }
             };
 
@@ -128,7 +128,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = null,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());
@@ -146,7 +146,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = string.Empty,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());
@@ -181,7 +181,7 @@ namespace GoogleApi.Test.Maps.Roads.SnapToRoad
             var request = new SnapToRoadsRequest
             {
                 Key = this.ApiKey,
-                Path = new Location[0]
+                Path = new Coordinate[0]
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SnapToRoad.QueryAsync(request).Wait());

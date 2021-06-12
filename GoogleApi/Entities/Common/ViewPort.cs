@@ -13,12 +13,12 @@ namespace GoogleApi.Entities.Common
         /// South West.
         /// </summary>
         [JsonProperty("southwest")]
-        public virtual Location SouthWest { get; set; }
+        public virtual Coordinate SouthWest { get; set; }
 
         /// <summary>
         /// North East.
         /// </summary>
         [JsonProperty("northeast")]
-        public virtual Location NorthEast { get; set; }
+        public virtual Coordinate NorthEast { get; set; }
     }
 }

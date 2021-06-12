@@ -21,7 +21,7 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// <summary>
         /// A comma-separated lat,lng tuple (eg. location=-33.86,151.20), representing the location to look up
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// Timestamp specifies the desired time as seconds since midnight, January 1, 1970 UTC. 

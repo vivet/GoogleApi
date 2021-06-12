@@ -116,7 +116,7 @@ namespace GoogleApi.UnitTests.Places.Search.Text
             {
                 Key = "abc",
                 Query = "picadelly circus",
-                Location = new Location(0, 0)
+                Location = new Coordinate(0, 0)
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -149,7 +149,7 @@ namespace GoogleApi.UnitTests.Places.Search.Text
             {
                 Key = "abc",
                 Query = "test",
-                Location = new Location(1, 1),
+                Location = new Coordinate(1, 1),
                 Radius = 50
             };
 

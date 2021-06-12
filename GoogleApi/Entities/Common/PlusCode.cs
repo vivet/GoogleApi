@@ -20,5 +20,11 @@ namespace GoogleApi.Entities.Common
         /// </summary>
         [JsonProperty("compound_code")]
         public virtual string LocalCode { get; set; }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"{this.GlobalCode}{this.LocalCode}";
+        }
     }
 }

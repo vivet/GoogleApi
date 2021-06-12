@@ -1,7 +1,9 @@
 using System;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
 using NUnit.Framework;
+using Coordinate = GoogleApi.Entities.Maps.Roads.Common.Coordinate;
 
 namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
 {
@@ -22,8 +24,8 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
                 Key = "abc",
                 Points = new[]
                 {
-                    new Location(1, 1),
-                    new Location(2, 2)
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
                 }
             };
 
@@ -36,7 +38,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
             var request = new NearestRoadsRequest
             {
                 Key = null,
-                Points = new[] { new Location(0, 0) }
+                Points = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -54,7 +56,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
             var request = new NearestRoadsRequest
             {
                 Key = string.Empty,
-                Points = new[] { new Location(0, 0) }
+                Points = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -89,7 +91,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
             var request = new NearestRoadsRequest
             {
                 Key = "abc",
-                Points = new Location[0]
+                Points = new Coordinate[0]
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -107,7 +109,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
             var request = new NearestRoadsRequest
             {
                 Key = "abc",
-                Points = new Location[101]
+                Points = new Coordinate[101]
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -127,8 +129,8 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
                 Key = "abc",
                 Points = new[]
                 {
-                    new Location(1, 1),
-                    new Location(2, 2) 
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2) 
                 }
             };
 

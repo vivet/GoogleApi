@@ -12,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// Location.
         /// </summary>
         [JsonProperty("location")]
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// Step Index.

@@ -60,8 +60,9 @@ namespace GoogleApi.Entities
 
             var hmac = new HMac(new Sha1Digest());
             hmac.Init(new KeyParameter(privateKey));
-            
-            var signature = new byte[hmac.GetMacSize()];
+
+            var hmacSize = hmac.GetMacSize();
+            var signature = new byte[hmacSize];
             hmac.BlockUpdate(bytes, 0, bytes.Length);
             hmac.DoFinal(signature, 0);
             

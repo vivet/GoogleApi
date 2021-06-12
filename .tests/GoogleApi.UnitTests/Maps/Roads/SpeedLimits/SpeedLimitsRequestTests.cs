@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using NUnit.Framework;
@@ -26,8 +26,8 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
                 Key = "abc",
                 Path = new[]
                 {
-                    new Location(1, 1),
-                    new Location(2, 2)
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
                 }
             };
 
@@ -40,7 +40,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = null,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -58,7 +58,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = string.Empty,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -93,7 +93,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = "abc",
-                Path = new Location[0],
+                Path = new Coordinate[0],
                 PlaceIds = new string[0]
             };
 
@@ -132,8 +132,8 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
                 Key = "abc",
                 Path = new[]
                 {
-                    new Location(1, 1),
-                    new Location(2, 2)
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
                 }
             };
 

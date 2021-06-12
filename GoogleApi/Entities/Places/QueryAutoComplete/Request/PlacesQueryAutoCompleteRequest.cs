@@ -34,7 +34,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         /// <summary>
         /// The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, 

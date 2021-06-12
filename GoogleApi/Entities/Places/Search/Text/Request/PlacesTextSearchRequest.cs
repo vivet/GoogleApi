@@ -72,7 +72,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         /// The latitude/longitude around which to retrieve place information. 
         /// If you specify a location parameter, you must also specify a radius parameter.
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// Radius (Radius).

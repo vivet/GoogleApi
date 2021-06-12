@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
@@ -20,9 +20,9 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
                 Key = this.ApiKey,
                 Path = new[]
                 {
-                    new Location(60.170880, 24.942795),
-                    new Location(60.170879, 24.942796),
-                    new Location(60.170877, 24.942796)
+                    new Coordinate(60.170880, 24.942795),
+                    new Coordinate(60.170879, 24.942796),
+                    new Coordinate(60.170877, 24.942796)
                 }
             };
 
@@ -37,7 +37,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = this.ApiKey,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
             var result = GoogleMaps.SpeedLimits.QueryAsync(request).Result;
 
@@ -51,7 +51,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 	        var request = new SpeedLimitsRequest
 	        {
 	            Key = this.ApiKey,
-	            Path = new[] { new Location(0, 0) }
+	            Path = new[] { new Coordinate(0, 0) }
 	        };
 	        var cancellationTokenSource = new CancellationTokenSource();
 	        var task = GoogleMaps.SpeedLimits.QueryAsync(request, cancellationTokenSource.Token);
@@ -70,9 +70,9 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
 	            Key = "test",
 	            Path = new[]
 	            {
-	                new Location(60.170880, 24.942795),
-	                new Location(60.170879, 24.942796),
-	                new Location(60.170877, 24.942796)
+	                new Coordinate(60.170880, 24.942795),
+	                new Coordinate(60.170879, 24.942796),
+	                new Coordinate(60.170877, 24.942796)
 	            }
 	        };
 
@@ -97,7 +97,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = null,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
@@ -115,7 +115,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = string.Empty,
-                Path = new[] { new Location(0, 0) }
+                Path = new[] { new Coordinate(0, 0) }
             };
 
             var exception = Assert.Throws<AggregateException>(() => GoogleMaps.SpeedLimits.QueryAsync(request).Wait());
@@ -150,7 +150,7 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
             var request = new SpeedLimitsRequest
             {
                 Key = this.ApiKey,
-                Path = new Location[0],
+                Path = new Coordinate[0],
                 PlaceIds = new string[0]
             };
 

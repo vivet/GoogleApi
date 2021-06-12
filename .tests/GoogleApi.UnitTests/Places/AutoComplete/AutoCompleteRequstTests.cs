@@ -191,7 +191,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
             {
                 Key = "abc",
                 Input = "abc",
-                Location = new Location(1, 1)
+                Location = new Coordinate(1, 1)
             };
 
             var uri = request.GetUri();

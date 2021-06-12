@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Common;
@@ -7,7 +8,7 @@ using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
 using NUnit.Framework;
-using Location = GoogleApi.Entities.Common.Location;
+using Location = GoogleApi.Entities.Maps.StaticMaps.Request.Location;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps
 {
@@ -26,7 +27,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = "abc",
-                Center = new Location(1, 1),
+                Center = new Location(new Coordinate(1, 1)),
                 ZoomLevel = 2,
                 Size = new MapSize(100, 100),
                 Type = MapType.Hybrid,
@@ -142,7 +143,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = "abc",
-                Center = new Location(1, 1), 
+                Center = new Location(new Coordinate(1, 1)), 
                 ZoomLevel = 1
             };
 
@@ -158,7 +159,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = "abc",
-                Center = new Location(1, 1),
+                Center = new Location(new Coordinate(1, 1)),
                 ZoomLevel = 1, 
                 Type = MapType.Hybrid
             };
@@ -175,7 +176,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = "abc",
-                Center = new Location(1, 1),
+                Center = new Location(new Coordinate(1, 1)),
                 ZoomLevel = 1,
                 Scale = MapScale.Huge
             };
@@ -192,7 +193,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = "abc",
-                Center = new Location(1, 1),
+                Center = new Location(new Coordinate(1, 1)),
                 ZoomLevel = 1,
                 Format = ImageFormat.Gif
             };
@@ -209,7 +210,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             var request = new StaticMapsRequest
             {
                 Key = "abc",
-                Center = new Location(1, 1),
+                Center = new Location(new Coordinate(1, 1)),
                 ZoomLevel = 1,
                 Region = "abc"
             };

@@ -11,17 +11,17 @@ namespace GoogleApi.Test.Functions
         private const string POLY_LINE = "chdEchdEoxgFoxgFi`vEi`vE";
         private const string POLY_LINE_2 = "cbb|@cbb|@ore}@ore}@izs|@izs|@";
 
-        private readonly Location location1 = new Location(1.0101, 1.0101);
-        private readonly Location location2 = new Location(2.20202, 2.20202);
-        private readonly Location location3 = new Location(3.30303, 3.30303);
-        private readonly Location location4 = new Location(10.0101, 10.0101);
-        private readonly Location location5 = new Location(20.20202, 20.20202);
-        private readonly Location location6 = new Location(30.30303, 30.30303);
+        private readonly Coordinate location1 = new Coordinate(1.0101, 1.0101);
+        private readonly Coordinate location2 = new Coordinate(2.20202, 2.20202);
+        private readonly Coordinate location3 = new Coordinate(3.30303, 3.30303);
+        private readonly Coordinate location4 = new Coordinate(10.0101, 10.0101);
+        private readonly Coordinate location5 = new Coordinate(20.20202, 20.20202);
+        private readonly Coordinate location6 = new Coordinate(30.30303, 30.30303);
 
         [Test]
         public void EncodePolyLineTest()
         {
-            var locations = new[] { new Location(1.0101, 1.0101), new Location(2.20202, 2.20202), new Location(3.30303, 3.30303) };
+            var locations = new[] { new Coordinate(1.0101, 1.0101), new Coordinate(2.20202, 2.20202), new Coordinate(3.30303, 3.30303) };
             var encodePolyLine = GoogleFunctions.EncodePolyLine(locations);
 
             Assert.IsNotNull(encodePolyLine.FirstOrDefault());

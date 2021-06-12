@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.Roads.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
 {
@@ -20,7 +20,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// path — The path to be snapped (required). The path parameter accepts a list of latitude/longitude pairs. Latitude and longitude values should be separated by commas. 
         /// Coordinates should be separated by the pipe character: "|". For example: path=60.170880,24.942795|60.170879,24.942796|60.170877,24.942796.
         /// </summary>
-        public virtual IEnumerable<Location> Path { get; set; }
+        public virtual IEnumerable<Coordinate> Path { get; set; }
 
         /// <summary>
         /// Interpolate — Whether to interpolate a path to include all points forming the full road-geometry. 

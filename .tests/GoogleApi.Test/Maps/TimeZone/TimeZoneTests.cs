@@ -14,7 +14,7 @@ namespace GoogleApi.Test.Maps.TimeZone
         [Test]
         public void TimeZoneTest()
         {
-            var location = new Location(40.7141289, -73.9614074);
+            var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
                 Key = this.ApiKey,
@@ -34,7 +34,7 @@ namespace GoogleApi.Test.Maps.TimeZone
         [Test]
         public void TimeZoneWhenAsyncTest()
         {
-            var location = new Location(40.7141289, -73.9614074);
+            var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
                 Key = this.ApiKey,
@@ -54,7 +54,7 @@ namespace GoogleApi.Test.Maps.TimeZone
         [Test]
         public void TimeZoneWhenAsyncAndCancelledTest()
         {
-            var location = new Location(40.7141289, -73.9614074);
+            var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
                 Key = this.ApiKey,
@@ -72,7 +72,7 @@ namespace GoogleApi.Test.Maps.TimeZone
         [Test]
         public void TimeZoneWhenLanguageTest()
         {
-            var location = new Location(40.7141289, -73.9614074);
+            var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
                 Key = this.ApiKey,
@@ -91,7 +91,7 @@ namespace GoogleApi.Test.Maps.TimeZone
         [Test]
         public void TimeZoneWhenTimeStampTest()
         {
-            var location = new Location(40.7141289, -73.9614074);
+            var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
                 Key = this.ApiKey,

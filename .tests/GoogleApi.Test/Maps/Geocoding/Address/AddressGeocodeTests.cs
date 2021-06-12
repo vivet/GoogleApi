@@ -82,8 +82,8 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
                 Bounds = new ViewPort
                 {
-                    NorthEast = new Entities.Common.Location(40.7141289, -73.9614074),
-                    SouthWest = new Entities.Common.Location(40.7141289, -73.9614074)
+                    NorthEast = new Coordinate(40.7141289, -73.9614074),
+                    SouthWest = new Coordinate(40.7141289, -73.9614074)
                 }
             };
             var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;
@@ -106,8 +106,8 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Address = "Yellow Rock",
                 Bounds = new ViewPort
                 {
-                    NorthEast = new Entities.Common.Location(37.771819, -111.603914),
-                    SouthWest = new Entities.Common.Location(37.039739, -112.514545)
+                    NorthEast = new Coordinate(37.771819, -111.603914),
+                    SouthWest = new Coordinate(37.039739, -112.514545)
                 }
             };
             var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;

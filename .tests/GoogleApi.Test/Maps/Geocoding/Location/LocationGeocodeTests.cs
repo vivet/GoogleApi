@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
@@ -19,7 +20,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.7141289, -73.9614074)
+                Location = new Coordinate(40.7141289, -73.9614074)
             };
             var response = GoogleMaps.LocationGeocode.Query(request);
             var result = response.Results.FirstOrDefault();
@@ -42,7 +43,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.7141289, -73.9614074)
+                Location = new Coordinate(40.7141289, -73.9614074)
             };
             var result = GoogleMaps.LocationGeocode.QueryAsync(request).Result;
 
@@ -55,7 +56,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Location = new Entities.Common.Location(40.7141289, -73.9614074)
+                Location = new Coordinate(40.7141289, -73.9614074)
             };
             var cancellationTokenSource = new CancellationTokenSource();
             var task = GoogleMaps.LocationGeocode.QueryAsync(request, cancellationTokenSource.Token);
@@ -78,7 +79,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.7141289, -73.9614074),
+                Location = new Coordinate(40.7141289, -73.9614074),
                 ResultTypes = new List<PlaceLocationType> { PlaceLocationType.Premise, PlaceLocationType.Accounting }
             };
             var response = GoogleMaps.LocationGeocode.Query(request);
@@ -102,7 +103,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.7141289, -73.9614074),
+                Location = new Coordinate(40.7141289, -73.9614074),
                 ResultTypes = new List<PlaceLocationType> { PlaceLocationType.Accounting }
             };
             var response = GoogleMaps.LocationGeocode.Query(request);
@@ -117,7 +118,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.7141289, -73.9614074),
+                Location = new Coordinate(40.7141289, -73.9614074),
                 LocationTypes = new List<GeometryLocationType> {  GeometryLocationType.Rooftop }
             };
             var response = GoogleMaps.LocationGeocode.Query(request);

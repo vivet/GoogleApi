@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
@@ -23,7 +24,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = "abc",
-                Location = new Entities.Common.Location(1, 1)
+                Location = new Coordinate(1, 1)
             };
 
             Assert.DoesNotThrow(() => request.GetQueryStringParameters());
@@ -52,7 +53,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = "abc",
-                Location = new Entities.Common.Location(1, 1)
+                Location = new Coordinate(1, 1)
             };
 
             var uri = request.GetUri();
@@ -67,7 +68,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = "abc",
-                Location = new Entities.Common.Location(1, 1),
+                Location = new Coordinate(1, 1),
                 ResultTypes = new[]
                 {
                     PlaceLocationType.Accounting,
@@ -87,7 +88,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
             var request = new LocationGeocodeRequest
             {
                 Key = "abc",
-                Location = new Entities.Common.Location(1, 1),
+                Location = new Coordinate(1, 1),
                 LocationTypes = new[]
                 {
                     GeometryLocationType.Rooftop

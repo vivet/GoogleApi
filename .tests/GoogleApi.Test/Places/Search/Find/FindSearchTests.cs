@@ -197,7 +197,7 @@ namespace GoogleApi.Test.Places.Search.Find
             {
                 Key = this.ApiKey,
                 Input = "picadelly circus",
-                Location = new Location(51.5100913, -0.1345676)
+                Location = new Coordinate(51.5100913, -0.1345676)
             };
 
             var response = GooglePlaces.FindSearch.Query(request);
@@ -212,7 +212,7 @@ namespace GoogleApi.Test.Places.Search.Find
             {
                 Key = this.ApiKey,
                 Input = "picadelly circus",
-                Location = new Location(51.5100913, -0.1345676),
+                Location = new Coordinate(51.5100913, -0.1345676),
                 Radius = 5000
             };
 
@@ -230,8 +230,8 @@ namespace GoogleApi.Test.Places.Search.Find
                 Input = "new york",
                 Bounds = new ViewPort
                 {
-                    NorthEast = new Location(51.5100913, -0.1345676),
-                    SouthWest = new Location(50.5100913, -0.0345676)
+                    NorthEast = new Coordinate(51.5100913, -0.1345676),
+                    SouthWest = new Coordinate(50.5100913, -0.0345676)
                 }
             };
 

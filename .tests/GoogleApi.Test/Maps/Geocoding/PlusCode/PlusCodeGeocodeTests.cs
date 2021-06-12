@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
 using GoogleApi.Exceptions;
@@ -22,7 +23,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
             var request = new PlusCodeGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.71406249999997, -73.9613125)
+                Location = new Coordinate(40.71406249999997, -73.9613125)
             };
             var result = GoogleMaps.PlusCodeGeocode.Query(request);
 
@@ -101,7 +102,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
             var request = new PlusCodeGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.71406249999997, -73.9613125)
+                Location = new Coordinate(40.71406249999997, -73.9613125)
             };
             var result = GoogleMaps.PlusCodeGeocode.QueryAsync(request).Result;
 
@@ -115,7 +116,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
             var request = new PlusCodeGeocodeRequest
             {
                 Key = this.ApiKey,
-                Location = new Entities.Common.Location(40.71406249999997, -73.9613125)
+                Location = new Coordinate(40.71406249999997, -73.9613125)
             };
             var cancellationTokenSource = new CancellationTokenSource();
             var task = GoogleMaps.PlusCodeGeocode.QueryAsync(request, cancellationTokenSource.Token);

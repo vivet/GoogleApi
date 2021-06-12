@@ -70,7 +70,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
         /// - A single lat/lng coordinate.Use the following format: 'point:lat, lng'
         /// - Circular: A string specifying radius in meters, plus lat/lng in decimal degrees. Format: 'circle:radius @lat, lng.'
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.

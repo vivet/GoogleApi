@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
@@ -90,7 +91,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// The latitude/longitude around which to retrieve place information. 
         /// If you specify a location parameter, you must also specify a radius parameter.
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// Radius (Radius).

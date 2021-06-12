@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.StreetView.Request;
 using NUnit.Framework;
-using Location = GoogleApi.Entities.Common.Location;
+using Location = GoogleApi.Entities.Maps.StreetView.Request.Location;
 
 namespace GoogleApi.UnitTests.Maps.StreetView
 {
@@ -22,7 +23,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1),
+                Location = new Location(new Coordinate(1, 1)),
                 Size = new MapSize(100, 100),
                 Pitch = 20,
                 Heading = 3,
@@ -79,7 +80,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Location(new Coordinate(0, 0)),
                 Pitch = -100
             };
 
@@ -98,7 +99,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Location(new Coordinate(0, 0)),
                 Pitch = 100
             };
 
@@ -117,7 +118,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Location(new Coordinate(0, 0)),
                 Heading = -1
             };
 
@@ -136,7 +137,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Location(new Coordinate(0, 0)),
                 Heading = 361
             };
 
@@ -155,7 +156,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Location(new Coordinate(0, 0)),
                 FieldOfView = -1
             };
 
@@ -174,7 +175,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(0, 0),
+                Location = new Location(new Coordinate(0, 0)),
                 FieldOfView = 121
             };
 
@@ -224,7 +225,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = "abc",
-                Location = new Location(1, 1)
+                Location = new Location(new Coordinate(1, 1)),
             };
 
             var uri = request.GetUri();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
@@ -17,7 +18,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
         /// The textual latitude/longitude value for which you wish to obtain the closest, human-readable address.
         /// If you pass a latlng, the geocoder performs what is known as a reverse geocode.
         /// </summary>
-        public virtual Entities.Common.Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// result_type — A filter of one or more address types, separated by a pipe (|).
