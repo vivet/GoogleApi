@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
 
@@ -56,6 +57,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// Bounds contains the viewport bounding box of the overview_polyline.
         /// </summary>
         [JsonProperty("bounds")]
-        public virtual Bounds Bounds { get; set; }
+        public virtual ViewPort Bounds { get; set; }
     }
 }

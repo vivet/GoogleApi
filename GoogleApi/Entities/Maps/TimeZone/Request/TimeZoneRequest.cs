@@ -37,10 +37,10 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
+            var parameters = base.GetQueryStringParameters();
+
             if (this.Location == null)
                 throw new ArgumentException($"'{nameof(this.Location)}' is required");
-
-            var parameters = base.GetQueryStringParameters();
 
             parameters.Add("language", this.Language.ToCode());
             parameters.Add("location", this.Location.ToString());

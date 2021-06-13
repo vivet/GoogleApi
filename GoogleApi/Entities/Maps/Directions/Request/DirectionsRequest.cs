@@ -16,9 +16,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
     /// </summary>
     public class DirectionsRequest : BaseMapsChannelRequest, IRequestQueryString
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => base.BaseUrl + "directions/json";
 
         /// <summary>
@@ -158,10 +156,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// </summary>
         public virtual bool Alternatives { get; set; } = false;
 
-        /// <summary>
-        /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();

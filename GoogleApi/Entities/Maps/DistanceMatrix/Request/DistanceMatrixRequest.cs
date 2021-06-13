@@ -16,9 +16,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
     /// </summary>
     public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
 
         /// <summary>
@@ -26,14 +24,14 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
         /// If you pass coordinates, ensure that no space exists between the latitude and longitude values.
         /// </summary>
-        public virtual IEnumerable<Location> Origins { get; set; }
+        public virtual IEnumerable<Location> Origins { get; set; } = new List<Location>();
 
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, to which to calculate distance and time. 
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
         /// If you pass coordinates, ensure that no space exists between the latitude and longitude values
         /// </summary>
-        public virtual IEnumerable<Location> Destinations { get; set; }
+        public virtual IEnumerable<Location> Destinations { get; set; } = new List<Location>();
 
         /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. 
@@ -123,10 +121,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// </summary>
         public virtual string Region { get; set; }
 
-        /// <summary>
-        /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();

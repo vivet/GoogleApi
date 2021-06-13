@@ -8,15 +8,10 @@ namespace GoogleApi.Entities.Maps
     /// </summary>
     public abstract class BaseMapsRequest : BaseRequest
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "maps.googleapis.com/maps/api/";
 
-        /// <summary>
-        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();

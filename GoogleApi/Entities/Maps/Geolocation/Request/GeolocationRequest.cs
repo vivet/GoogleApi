@@ -11,9 +11,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     /// </summary>
     public class GeolocationRequest : BaseMapsRequest, IRequestJson
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "www.googleapis.com/geolocation/v1/geolocate";
 
         /// <summary>
