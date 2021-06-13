@@ -22,33 +22,6 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         protected internal override string BaseUrl => base.BaseUrl + "distancematrix/json";
 
         /// <summary>
-        /// origins — The starting point for calculating travel distance and time. 
-        /// You can supply one or more locations separated by the pipe character (|), in the form of an address, latitude/longitude coordinates, 
-        /// or a placeID. If you pass an address, the service geocodes the string and converts it to a latitude/longitude coordinate to calculate distance.
-        /// This coordinate may be different from that returned by the Google Maps Geocoding API, for example a building entrance rather than its center. 
-        /// Example: "origins=Bobcaygeon+ON|24+Sussex+Drive+Ottawa+ON".
-        /// If you pass latitude/longitude coordinates, they are used unchanged to calculate distance.
-        /// Ensure that no space exists between the latitude and longitude values. If you supply a place ID, you must prefix it with place_id. 
-        /// Example: "origins= 41.43206,-81.38992|-33.86748,151.20699".
-        /// You can only specify a placeID if the request includes an API key or a Google Maps APIs Premium Plan client ID.
-        /// You can retrieve place IDs from the Google Maps Geocoding API and the Google Places API (including Place Autocomplete). 
-        /// For an example using place IDs from Place Autocomplete, see Place Autocomplete and Directions.For more about place IDs, see the place ID overview. 
-        /// "origins= place_id:ChIJ3S-JXmauEmsRUcIaWtf4MzE".
-        /// Alternatively, you can supply an encoded set of coordinates using the Encoded Polyline Algorithm.
-        /// This is particularly useful if you have a large number of origin points, because the URL is significantly shorter when using an encoded polyline. 
-        /// Example: Encoded polylines must be prefixed with enc: and followed by a colon (:). Example: "origins=enc:gfo}EtohhU:".
-        /// You can also include multiple encoded polylines, separated by the pipe character(|). 
-        /// Example: "origins=enc:wc ~oAwquwMdlTxiKtqLyiK:|enc:c ~vnAamswMvlTor@tjGi}L:|enc:udymA{~bxM:".
-        /// </summary>
-        public virtual string OriginsRaw { get; set; }
-
-        /// <summary>
-        /// destinations — One or more locations to use as the finishing point for calculating travel distance and time. 
-        /// The options for the destinations parameter are the same as for the <see cref="OriginsRaw"/> parameter, described above.
-        /// </summary>
-        public virtual string DestinationsRaw { get; set; }
-
-        /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, from which to calculate distance and time. 
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
         /// If you pass coordinates, ensure that no space exists between the latitude and longitude values.
@@ -156,104 +129,64 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (string.IsNullOrEmpty(this.OriginsRaw) && (this.Origins == null || !this.Origins.Any()))
-                throw new ArgumentException("Origins is required");
-
-            if (string.IsNullOrEmpty(this.DestinationsRaw) && (this.Destinations == null || !this.Destinations.Any()))
-                throw new ArgumentException("Destinations is required");
-
             var parameters = base.GetQueryStringParameters();
 
-            if (this.Origins == null)
-            {
-                parameters.Add("origins", this.OriginsRaw);
-            }
-            else
-            {
-                if (this.TravelMode == TravelMode.Driving || this.TravelMode == TravelMode.Bicycling)
-                {
-                    var origins = this.Origins.Aggregate(string.Empty, (current, location) => current + $"{location}|");
-                    origins = origins.Substring(0, origins.Length - 1);
-                    parameters.Add("origins", origins);
-                }
-                else
-                {
-                    var origins = this.Origins.Aggregate(string.Empty, (current, location) => current + $"{location}|");
-                    origins = origins.Substring(0, origins.Length - 1);
-                    parameters.Add("origins", origins);
-                }
-            }
+            if (this.Origins == null || !this.Origins.Any())
+                throw new ArgumentException($"'{nameof(this.Origins)}' is required");
 
-            if (this.Destinations == null)
-            {
-                parameters.Add("destinations", this.DestinationsRaw);
-            }
-            else
-            {
-                if (this.TravelMode == TravelMode.Driving || this.TravelMode == TravelMode.Bicycling)
-                {
-                    var destinations = this.Destinations.Aggregate(string.Empty, (current, location) => current + $"{location}|");
-                    destinations = destinations.Substring(0, destinations.Length - 1);
-                    parameters.Add("destinations", destinations);
-                }
-                else
-                {
-                    var destinations = this.Destinations.Aggregate(string.Empty, (current, location) => current + $"{location}|");
-                    destinations = destinations.Substring(0, destinations.Length - 1);
-                    parameters.Add("destinations", destinations);
-                }
-            }
+            if (this.Destinations == null || !this.Destinations.Any())
+                throw new ArgumentException($"'{nameof(this.Destinations)}' is required");
 
+            parameters.Add("origins", string.Join("|", this.Origins.Select(x => x.ToString())));
+            parameters.Add("destinations", string.Join("|", this.Destinations.Select(x => x.ToString())));
             parameters.Add("units", this.Units.ToString().ToLower());
-            parameters.Add("mode", this.TravelMode.ToString().ToLower());
             parameters.Add("language", this.Language.ToCode());
 
+            if (!string.IsNullOrWhiteSpace(this.Region))
+            {
+                parameters.Add("region", this.Region);
+            }
+
             if (this.Avoid != AvoidWay.Nothing)
+            {
                 parameters.Add("avoid", this.Avoid.ToEnumString('|'));
+            }
+
+            parameters.Add("mode", this.TravelMode.ToString().ToLower());
 
             switch (this.TravelMode)
             {
+                case TravelMode.Driving:
+                {
+                    if (this.DepartureTime.HasValue)
+                    {
+                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                    }
+
+                    break;
+                }
                 case TravelMode.Transit:
                 {
                     parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
                     if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
                     {
-                        switch (this.TransitRoutingPreference)
-                        {
-                            case TransitRoutingPreference.LessWalking:
-                                parameters.Add("transit_routing_preference", "less_walking");
-                                break;
-
-                            case TransitRoutingPreference.FewerTransfers:
-                                parameters.Add("transit_routing_preference", "fewer_transfers");
-                                break;
-                        }
+                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower());
                     }
 
                     if (this.ArrivalTime.HasValue)
-                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-                    else
-                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
-
-                    break;
-                }
-                case TravelMode.Driving:
-                {
-                    if (this.DepartureTime.HasValue)
                     {
-                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-
-                        if (this.Key != null || this.ClientId != null)
-                            parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
                     }
 
                     break;
                 }
             }
-
-            if (!string.IsNullOrWhiteSpace(this.Region))
-                parameters.Add("region", this.Region);
 
             return parameters;
         }

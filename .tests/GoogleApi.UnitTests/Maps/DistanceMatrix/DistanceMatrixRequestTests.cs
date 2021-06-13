@@ -1,304 +1,500 @@
-//using System;
-//using System.Globalization;
-//using GoogleApi.Entities.Common.Enums;
-//using GoogleApi.Entities.Common.Enums.Extensions;
-//using GoogleApi.Entities.Common.Extensions;
-//using GoogleApi.Entities.Maps.Common;
-//using GoogleApi.Entities.Maps.Common.Enums;
-//using GoogleApi.Entities.Maps.DistanceMatrix.Request;
-//using NUnit.Framework;
+using System;
+using System.Globalization;
+using System.Linq;
+using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
+using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Entities.Maps.DistanceMatrix.Request;
+using NUnit.Framework;
 
-//namespace GoogleApi.UnitTests.Maps.DistanceMatrix
-//{
-//    [TestFixture]
-//    public class DistanceMatrixRequestTests
-//    {
-//        [Test]
-//        public void ConstructorDefaultTest()
-//        {
-//            var request = new DistanceMatrixRequest();
+namespace GoogleApi.UnitTests.Maps.DistanceMatrix
+{
+    [TestFixture]
+    public class DistanceMatrixRequestTests
+    {
+        [Test]
+        public void ConstructorDefaultTest()
+        {
+            var request = new DistanceMatrixRequest();
 
-//            Assert.AreEqual(Units.Metric, request.Units);
-//            Assert.AreEqual(AvoidWay.Nothing, request.Avoid);
-//            Assert.AreEqual(TravelMode.Driving, request.TravelMode);
-//            Assert.AreEqual(TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram, request.TransitMode);
-//            Assert.AreEqual(TransitRoutingPreference.Nothing, request.TransitRoutingPreference);
-//            Assert.AreEqual(Language.English, request.Language);
-//            Assert.IsNull(request.ArrivalTime);
-//            Assert.IsNull(request.DepartureTime);
-//            Assert.IsNull(request.Region);
-//        }
+            Assert.AreEqual(Units.Metric, request.Units);
+            Assert.AreEqual(AvoidWay.Nothing, request.Avoid);
+            Assert.AreEqual(TravelMode.Driving, request.TravelMode);
+            Assert.AreEqual(TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram, request.TransitMode);
+            Assert.AreEqual(TransitRoutingPreference.Nothing, request.TransitRoutingPreference);
+            Assert.AreEqual(Language.English, request.Language);
+            Assert.IsNull(request.ArrivalTime);
+            Assert.IsNull(request.DepartureTime);
+        }
 
-//        [Test]
-//        public void GetQueryStringParametersTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") }
-//            };
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address1")),
+                    new Location(new Address("address2"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address1")),
+                    new Location(new Address("address2"))
+                }
+            };
 
-//            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetQueryStringParametersWhenHeadingTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Origins = new[] { new Location(1, 2) { Heading = 90 } },
-//                Destinations = new[] { new Location(1, 2) { Heading = 90 } }
-//            };
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
 
-//            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
-//        }
+            var origin = queryStringParameters.FirstOrDefault(x => x.Key == "origins");
+            var originExpected = string.Join("|", request.Origins.Select(x => x.ToString()));
+            Assert.IsNotNull(origin);
+            Assert.AreEqual(originExpected, origin.Value);
 
-//        [Test]
-//        public void GetQueryStringParametersWhenUseSideOfRoadTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Origins = new[] { new Location(1, 2) { UseSideOfRoad = true } },
-//                Destinations = new[] { new Location(1, 2) { UseSideOfRoad = true } }
-//            };
+            var destination = queryStringParameters.FirstOrDefault(x => x.Key == "destinations");
+            var destinationExpected = string.Join("|", request.Destinations.Select(x => x.ToString()));
+            Assert.IsNotNull(origin);
+            Assert.AreEqual(destinationExpected, destination.Value);
 
-//            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
-//        }
+            var units = queryStringParameters.FirstOrDefault(x => x.Key == "units");
+            var unitsExpected = request.Units.ToString().ToLower();
+            Assert.IsNotNull(units);
+            Assert.AreEqual(unitsExpected, units.Value);
 
-//        [Test]
-//        public void GetQueryStringParametersWhenOriginsIsNullTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Destinations = new[] { new Location("test") }
-//            };
+            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+            var languageExpected = request.Language.ToCode();
+            Assert.IsNotNull(language);
+            Assert.AreEqual(languageExpected, language.Value);
 
-//            var exception = Assert.Throws<ArgumentException>(() =>
-//            {
-//                var parameters = request.GetQueryStringParameters();
-//                Assert.IsNull(parameters);
-//            });
-//            Assert.IsNotNull(exception);
-//            Assert.AreEqual(exception.Message, "Origins is required");
-//        }
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
+        }
 
-//        [Test]
-//        public void GetQueryStringParametersWhenOriginsIsEmptyTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Origins = new Location[0],
-//                Destinations = new[] { new Location(0, 0) }
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenLanguageTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Language = Language.Afrikaans
+            };
 
-//            var exception = Assert.Throws<ArgumentException>(() =>
-//            {
-//                var parameters = request.GetQueryStringParameters();
-//                Assert.IsNull(parameters);
-//            });
-//            Assert.IsNotNull(exception);
-//            Assert.AreEqual(exception.Message, "Origins is required");
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetQueryStringParametersWhenDestinationsIsNullTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Origins = new[] { new Location(0, 0) }, 
-//                Destinations = null
-//            };
+            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+            var languageExpected = request.Language.ToCode();
+            Assert.IsNotNull(language);
+            Assert.AreEqual(languageExpected, language.Value);
+        }
 
-//            var exception = Assert.Throws<ArgumentException>(() =>
-//            {
-//                var parameters = request.GetQueryStringParameters();
-//                Assert.IsNull(parameters);
-//            });
-//            Assert.IsNotNull(exception);
-//            Assert.AreEqual(exception.Message, "Destinations is required");
-//        }
+        [Test]
+        public void GetQueryStringParametersWhenUnitsTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Units = Units.Imperial
+            };
 
-//        [Test]
-//        public void GetQueryStringParametersWhenDestinationsIsEmptyTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Origins = new[] { new Location(0, 0) },
-//                Destinations = new Location[0]
-//            };
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            var exception = Assert.Throws<ArgumentException>(() =>
-//            {
-//                var parameters = request.GetQueryStringParameters();
-//                Assert.IsNull(parameters);
-//            });
-//            Assert.IsNotNull(exception);
-//            Assert.AreEqual(exception.Message, "Destinations is required");
-//        }
+            var units = queryStringParameters.FirstOrDefault(x => x.Key == "units");
+            var unitsExpected = request.Units.ToString().ToLower();
+            Assert.IsNotNull(units);
+            Assert.AreEqual(unitsExpected, units.Value);
+        }
 
-//        [Test]
-//        public void GetUriTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") },
-//                TravelMode = TravelMode.Bicycling
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenRegionTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Region = "region"
+            };
 
-//            var uri = request.GetUri();
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
-//        }
+            var region = queryStringParameters.FirstOrDefault(x => x.Key == "region");
+            var regionExpected = request.Region;
+            Assert.IsNotNull(region);
+            Assert.AreEqual(regionExpected, region.Value);
+        }
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") },
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenAvoidTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Avoid = AvoidWay.Highways | AvoidWay.Ferries
+            };
 
-//            var uri = request.GetUri();
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time=now", uri.PathAndQuery);
-//        }
+            var avoid = queryStringParameters.FirstOrDefault(x => x.Key == "avoid");
+            var avoidExpected = request.Avoid.ToEnumString('|');
+            Assert.IsNotNull(avoid);
+            Assert.AreEqual(avoidExpected, avoid.Value);
+        }
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitAndArrivalTimeTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") },
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus,
-//                ArrivalTime = DateTime.UtcNow
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Bicycling
+            };
 
-//            var uri = request.GetUri();
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&arrival_time={request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
-//        }
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
+        }
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitAndDepartureTimeTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") },
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus,
-//                DepartureTime = DateTime.UtcNow
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Driving,
+                DepartureTime = DateTime.UtcNow.AddHours(1)
+            };
 
-//            var uri = request.GetUri();
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
-//        }
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
+        }
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitAndDepartureTimeAndTransitRoutingPreferenceTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") },
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus,
-//                DepartureTime = DateTime.UtcNow,
-//                TransitRoutingPreference = TransitRoutingPreference.FewerTransfers
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeAndTrafficModelTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Driving,
+                DepartureTime = DateTime.UtcNow.AddHours(1),
+                TrafficModel = TrafficModel.Best_Guess
+            };
 
-//            var uri = request.GetUri();
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&transit_routing_preference=fewer_transfers&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
-//        }
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
 
-//        [Test]
-//        public void GetUriWhenTravelModeDrivingTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") },
-//                TravelMode = TravelMode.Driving
-//            };
+            var trafficModel = queryStringParameters.FirstOrDefault(x => x.Key == "traffic_model");
+            var trafficModelExpected = request.TrafficModel.ToString().ToLower();
+            Assert.IsNotNull(trafficModel);
+            Assert.AreEqual(trafficModelExpected, trafficModel.Value);
+        }
 
-//            var uri = request.GetUri();
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Transit
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenTravelModeDrivingAndDepartureTimeTest()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") },
-//                TravelMode = TravelMode.Driving, 
-//                DepartureTime = DateTime.UtcNow
-//            };
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
 
-//            var uri = request.GetUri();
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}&traffic_model={request.TrafficModel.ToString().ToLower()}", uri.PathAndQuery);
-//        }
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            const string DEPARTURE_TIME_EXPECTED = "now";
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(DEPARTURE_TIME_EXPECTED, departureTime.Value);
+        }
 
-//        [TestCase(null)]
-//        [TestCase("")]
-//        [TestCase(" ")]
-//        [TestCase("  ")]
-//        public void GetUriWhenWhenRegionIsNullEmptyOrWhiteSpace(string region)
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Region = region,
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") }
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndDepartureTimeTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Transit,
+                DepartureTime = DateTime.UtcNow.AddHours(1)
+            };
 
-//            var uri = request.GetUri();
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
-//        }
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
 
-//        [Test]
-//        public void GetUriWhenWhenRegionIsNotNullEmptyOrWhiteSpace()
-//        {
-//            var request = new DistanceMatrixRequest
-//            {
-//                Key = "abc",
-//                Region = "us",
-//                Origins = new[] { new Location("test") },
-//                Destinations = new[] { new Location("test") }
-//            };
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
 
-//            var uri = request.GetUri();
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
+        }
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/distancematrix/json?key={request.Key}&origins={Uri.EscapeDataString(string.Join("|", request.Origins))}&destinations={Uri.EscapeDataString(string.Join("|", request.Destinations))}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&region=us", uri.PathAndQuery);
-//        }
-//    }
-//}
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndArrivalTimeTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Transit,
+                ArrivalTime = DateTime.UtcNow.AddHours(1)
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
+
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
+
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            Assert.IsNotNull(departureTime);
+            Assert.IsNull(departureTime.Value);
+
+            var arrivalTime = queryStringParameters.FirstOrDefault(x => x.Key == "arrival_time");
+            var arrivalTimeExpected = request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(arrivalTime);
+            Assert.AreEqual(arrivalTimeExpected, arrivalTime.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndTransitModeTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Rail
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndTransitRoutingPreferenceTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new Location(new Address("address"))
+                },
+                TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Rail,
+                TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var transitRoutingPreference = queryStringParameters.FirstOrDefault(x => x.Key == "transit_routing_preference");
+            var transitRoutingPreferenceExpected = request.TransitRoutingPreference.ToString().ToLower();
+            Assert.IsNotNull(transitRoutingPreference);
+            Assert.AreEqual(transitRoutingPreferenceExpected, transitRoutingPreference.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsNullTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = string.Empty
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenOriginIsNullTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Destinations = new []
+                {
+                    new Location(new Address("address"))
+                }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Origins' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenDestinationIsNullTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new []
+                {
+                    new Location(new Address("address"))
+                }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Destinations' is required", exception.Message);
+        }
+    }
+}
