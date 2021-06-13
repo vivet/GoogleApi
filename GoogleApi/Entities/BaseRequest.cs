@@ -19,12 +19,8 @@ namespace GoogleApi.Entities
         /// <summary>
         /// Base Url (abstract).
         /// </summary>
+        [JsonIgnore]
         protected internal abstract string BaseUrl { get; }
-
-        /// <summary>
-        /// Key Name.
-        /// </summary>
-        protected internal virtual string KeyName { get; set; } = "key";
 
         /// <summary>
         /// See <see cref="IRequest.Key"/>.
@@ -45,16 +41,21 @@ namespace GoogleApi.Entities
         public virtual Uri GetUri()
         {
             const string SCHEME = "https://";
-            var queryString = string.Join("&", this.GetQueryStringParameters().Select(x => 
-                x.Value == null
-                    ? Uri.EscapeDataString(x.Key)
-                    : Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value)));
-            var uri = new Uri(SCHEME + this.BaseUrl + "?" + queryString);
+
+            var queryStringParameters = this.GetQueryStringParameters()
+                .Select(x => 
+                    x.Value == null
+                        ? Uri.EscapeDataString(x.Key)
+                        : Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value));
+            var queryString = string.Join("&", queryStringParameters);
+            var uri = new Uri($"{SCHEME}{this.BaseUrl}?{queryString}");
 
             if (this.ClientId == null)
+            {
                 return uri;
+            }
 
-            var url = uri.LocalPath + uri.Query + "&client=" + this.ClientId;
+            var url = $"{uri.LocalPath}{uri.Query}&client={this.ClientId}";
             var bytes = Encoding.UTF8.GetBytes(url);
             var privateKey = Convert.FromBase64String(this.Key.Replace("-", "+").Replace("_", "/"));
 
@@ -65,10 +66,10 @@ namespace GoogleApi.Entities
             var signature = new byte[hmacSize];
             hmac.BlockUpdate(bytes, 0, bytes.Length);
             hmac.DoFinal(signature, 0);
-            
+
             var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
 
-            return new Uri(uri.Scheme + "://" + uri.Host + url + "&signature=" + base64Signature);
+            return new Uri($"{uri.Scheme}://{uri.Host}{url}&signature={base64Signature}");
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace GoogleApi.Entities
             if (this.ClientId == null)
             {
                 if (!string.IsNullOrWhiteSpace(this.Key))
-                    parameters.Add(this.KeyName, this.Key);
+                    parameters.Add("key", this.Key);
             }
             else
             {

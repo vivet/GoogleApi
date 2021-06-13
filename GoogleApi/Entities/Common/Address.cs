@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Common
+﻿using System;
+
+namespace GoogleApi.Entities.Common
 {
     /// <summary>
     /// Address.
@@ -8,12 +10,21 @@
         /// <summary>
         /// Address.
         /// </summary>
-        public virtual string Adr { get; set; }
+        public virtual string String { get; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="address">The address.</param>
+        public Address(string address)
+        {
+            this.String = address ?? throw new ArgumentNullException(nameof(address));
+        }
 
         /// <inheritdoc />
         public override string ToString()
         {
-            return this.Adr;
+            return this.String;
         }
     }
 }

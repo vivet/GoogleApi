@@ -16,11 +16,6 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
         protected internal override string BaseUrl => "plus.codes/api";
 
         /// <summary>
-        /// Key Name.
-        /// </summary>
-        protected internal override string KeyName { get; set; } = "ekey";
-
-        /// <summary>
         /// Address.
         /// The street address to geocode.
         /// Ignored if PlaceId or Location is specified.
