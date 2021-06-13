@@ -1,6 +1,6 @@
-﻿using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Common;
+﻿using GoogleApi.Entities.Maps.Common;
 using Newtonsoft.Json;
+using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response
 {
