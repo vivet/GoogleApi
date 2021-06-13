@@ -111,11 +111,12 @@ namespace GoogleApi
                 switch (response.Status)
                 {
                     case Status.Ok:
+                    case Status.NotFound:
                     case Status.ZeroResults:
                         return response;
 
                     default:
-                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
+                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
                 }
             }
             catch (Exception ex)
