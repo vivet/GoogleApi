@@ -2,6 +2,7 @@
 using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.Directions.Response
 {
@@ -14,7 +15,8 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// "geocoder_status" indicates the status code resulting from the geocoding operation.
         /// This field may contain the following values.
         /// </summary>
-        [JsonProperty("geocoder_status", ItemConverterType = typeof(StringEnumOrDefaultConverter<Status>))]
+        [JsonProperty("geocoder_status")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual Status Status { get; set; }
 
         /// <summary>

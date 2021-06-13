@@ -1,5 +1,4 @@
-﻿
-using GoogleApi.Entities.Maps.Common;
+﻿using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
@@ -9,6 +8,11 @@ namespace GoogleApi.Entities.Maps.Directions.Request
     public class WayPoint
     {
         /// <summary>
+        /// Location.
+        /// </summary>
+        public Location Location { get; }
+        
+        /// <summary>
         /// IsVia.
         /// The via: prefix is most effective when creating routes in response to the user dragging the waypoints on the map.
         /// Doing so allows the user to see how the final route may look in real-time and
@@ -17,35 +21,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// This interprestation may result in severe detours on the route or ZERO_RESULTS in the response status code
         /// if the Directions API is unable to create directions through that point.
         /// </summary>
-        public bool IsVia { get; protected set; }
-
-        /// <summary>
-        /// String.
-        /// The address, location, polyline or place string.
-        /// </summary>
-        public string String { get; protected set; }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="wayPoint">The way-point.</param>
-        /// <param name="isVia">Is prefixed with 'via:'</param>
-        public WayPoint(string wayPoint, bool isVia = false)
-        {
-            this.String = wayPoint;
-            this.IsVia = isVia;
-        }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="place">The <see cref="Place"/>.</param>
-        /// <param name="isVia">is prefixed with 'via:'</param>
-        public WayPoint(Place place, bool isVia = false)
-            : this($"place_id:{place?.Id}", isVia)
-        {
-
-        }
+        public bool IsVia { get; }
 
         /// <summary>
         /// Constructor.
@@ -53,20 +29,17 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// <param name="location">The <see cref="Location"/>.</param>
         /// <param name="isVia">is prefixed with 'via:'</param>
         public WayPoint(Location location, bool isVia = false)
-            : this(location.ToString(), isVia)
         {
-            // TODO: Doesn't support "side_of_road" and heading. Then the string waypoint constructor needs to be used. Refactor.
+            this.Location = location;
+            this.IsVia = isVia;
         }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="polyLine">The <see cref="PolyLine"/>.</param>
-        /// <param name="isVia">is prefixed with 'via:'</param>
-        public WayPoint(PolyLine polyLine, bool isVia = false)
-            : this($"enc:{polyLine}:", isVia)
+        /// <inheritdoc />
+        public override string ToString()
         {
-
+            return this.IsVia 
+                ? $"via:{this.Location}" 
+                : this.Location.ToString();
         }
     }
 }

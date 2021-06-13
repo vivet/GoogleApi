@@ -6,8 +6,8 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
-using Location = GoogleApi.Entities.Maps.Common.Location;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
 {
@@ -41,6 +41,20 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// The options for the destination parameter are the same as for the <see cref="Origin"/> parameter, described above.
         /// </summary>
         public virtual Location Destination { get; set; }
+
+        /// <summary>
+        /// Specifies the region code, specified as a ccTLD ("top-level domain") two-character value. (For more information see Region Biasing below.)
+        /// </summary>
+        public virtual string Region { get; set; }
+
+        /// <summary>
+        /// Language (optional) — The language in which to return results. See the supported list of domain languages. 
+        /// Note that we often update supported languages so this list may not be exhaustive. 
+        /// If language is not supplied, the Directions service will attempt to use the native language of the browser wherever possible. 
+        /// You may also explicitly bias the results by using localized domains of http://map.google.com. 
+        /// See Region Biasing for more information.
+        /// </summary>
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// Directions results contain text within distance fields to indicate the distance of the calculated route. The unit system to use can be specified:
@@ -145,95 +159,83 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         public virtual bool Alternatives { get; set; } = false;
 
         /// <summary>
-        /// Specifies the region code, specified as a ccTLD ("top-level domain") two-character value. (For more information see Region Biasing below.)
-        /// </summary>
-        public virtual string Region { get; set; }
-
-        /// <summary>
-        /// Language (optional) — The language in which to return results. See the supported list of domain languages. 
-        /// Note that we often update supported languages so this list may not be exhaustive. 
-        /// If language is not supplied, the Directions service will attempt to use the native language of the browser wherever possible. 
-        /// You may also explicitly bias the results by using localized domains of http://map.google.com. 
-        /// See Region Biasing for more information.
-        /// </summary>
-        public virtual Language Language { get; set; } = Language.English;
-
-        /// <summary>
         /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
+            var parameters = base.GetQueryStringParameters();
+
             if (this.Origin == null)
-                throw new ArgumentException("Origin is required");
+                throw new ArgumentException($"'{nameof(this.Origin)}' is required");
 
             if (this.Destination == null)
-                throw new ArgumentException("Destination is required");
-
-            var parameters = base.GetQueryStringParameters();
+                throw new ArgumentException($"'{nameof(this.Destination)}' is required");
 
             parameters.Add("origin", this.Origin.ToString());
             parameters.Add("destination", this.Destination.ToString());
             parameters.Add("units", this.Units.ToString().ToLower());
-            parameters.Add("mode", this.TravelMode.ToString().ToLower());
             parameters.Add("language", this.Language.ToCode());
 
             if (this.Region != null)
+            {
                 parameters.Add("region", this.Region);
+            }
 
             if (this.Alternatives)
+            {
                 parameters.Add("alternatives", "true");
+            }
 
             if (this.Avoid != AvoidWay.Nothing)
-                parameters.Add("avoid", this.Avoid.ToEnumString('|'));
-
-            if (this.WayPoints != null && this.WayPoints.Any())
             {
-                var waypoints = this.WayPoints
-                    .Select(x => x.IsVia ? $"via:{x.String}" : x.String);
-
-                parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
+                parameters.Add("avoid", this.Avoid.ToEnumString('|'));
             }
+
+            parameters.Add("mode", this.TravelMode.ToString().ToLower());
 
             switch (this.TravelMode)
             {
-                case TravelMode.Transit:
-                {
-                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
-
-                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                    {
-                        switch (this.TransitRoutingPreference)
-                        {
-                            case TransitRoutingPreference.LessWalking:
-                                parameters.Add("transit_routing_preference", "less_walking");
-                                break;
-
-                            case TransitRoutingPreference.FewerTransfers:
-                                parameters.Add("transit_routing_preference", "fewer_transfers");
-                                break;
-                        }
-                    }
-
-                    if (this.ArrivalTime.HasValue)
-                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-                    else
-                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
-
-                    break;
-                }
                 case TravelMode.Driving:
                 {
                     if (this.DepartureTime.HasValue)
                     {
                         parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
 
-                        if (this.Key != null || this.ClientId != null)
+                        if (this.WayPoints == null || this.WayPoints.All(x => x.IsVia))
+                        {
                             parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                        }
                     }
 
                     break;
                 }
+                case TravelMode.Transit:
+                {
+                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+
+                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                    {
+                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower());
+                    }
+
+                    if (this.ArrivalTime.HasValue)
+                    {
+                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
+                    }
+
+                    break;
+                }
+            }
+
+            if (this.WayPoints != null && this.WayPoints.Any())
+            {
+                var waypoints = this.WayPoints.Select(x => x.ToString());
+                parameters.Add("waypoints", string.Join("|", this.OptimizeWaypoints ? new[] { "optimize:true" }.Concat(waypoints) : waypoints));
             }
 
             return parameters;

@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Maps.Directions.Request
+﻿using System;
+
+namespace GoogleApi.Entities.Maps.Common
 {
     /// <summary>
     /// Place.
@@ -8,7 +10,16 @@
         /// <summary>
         /// The place Id.
         /// </summary>
-        public virtual string Id { get; set; }
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="placeId">The place id.</param>
+        public Place(string placeId)
+        {
+            this.Id = placeId ?? throw new ArgumentNullException(nameof(placeId));
+        }
 
         /// <inheritdoc />
         public override string ToString()

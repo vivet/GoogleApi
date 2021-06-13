@@ -1,6 +1,4 @@
 ﻿using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Directions.Request;
-using Coordinate = GoogleApi.Entities.Maps.Directions.Request.Coordinate;
 
 namespace GoogleApi.Entities.Maps.Common
 {
@@ -9,57 +7,51 @@ namespace GoogleApi.Entities.Maps.Common
     /// </summary>
     public class Location
     {
-        private readonly string locationString;
+        /// <summary>
+        /// Location String.
+        /// </summary>
+        public string String { get; }
 
         /// <summary>
-        /// 
+        /// Constructor.
         /// </summary>
-        /// <param name="place"></param>
+        /// <param name="place">The <see cref="Place"/>.</param>
         public Location(Place place)
         {
-            this.locationString = place.ToString();
+            this.String = place.ToString();
         }
 
         /// <summary>
-        /// 
+        /// Constructor.
         /// </summary>
-        /// <param name="address"></param>
+        /// <param name="address">The <see cref="Address"/>.</param>
         public Location(Address address)
         {
-            this.locationString = address.ToString();
+            this.String = address.ToString();
         }
 
         /// <summary>
-        /// 
+        /// Constructor.
         /// </summary>
-        /// <param name="plusCode"></param>
+        /// <param name="plusCode">The <see cref="PlusCode"/>.</param>
         public Location(PlusCode plusCode)
         {
-            this.locationString = plusCode.ToString();
+            this.String = plusCode.ToString();
         }
 
         /// <summary>
-        /// 
+        /// Constructor.
         /// </summary>
-        /// <param name="polyLine"></param>
-        public Location(PolyLine polyLine)
-        {
-            this.locationString = $"enc:{polyLine.Path}";
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="coordinate"></param>
+        /// <param name="coordinate">The <see cref="Coordinate"/>.</param>
         public Location(Coordinate coordinate)
         {
-            this.locationString = coordinate.ToString();
+            this.String = coordinate.ToString();
         }
 
         /// <inheritdoc />
         public override string ToString()
         {
-            return this.locationString;
+            return this.String;
         }
     }
 }

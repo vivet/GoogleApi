@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace GoogleApi.Entities.Maps.Directions.Request
+namespace GoogleApi.Entities.Maps.Common
 {
     /// <summary>
     /// Coordinate.

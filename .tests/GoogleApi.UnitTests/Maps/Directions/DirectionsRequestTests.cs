@@ -1,342 +1,544 @@
-//using System;
-//using System.Globalization;
-//using System.Linq;
-//using GoogleApi.Entities.Common.Enums;
-//using GoogleApi.Entities.Common.Enums.Extensions;
-//using GoogleApi.Entities.Common.Extensions;
-//using GoogleApi.Entities.Maps.Common;
-//using GoogleApi.Entities.Maps.Common.Enums;
-//using GoogleApi.Entities.Maps.Directions.Request;
-//using NUnit.Framework;
+using System;
+using System.Globalization;
+using System.Linq;
+using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
+using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Entities.Maps.Directions.Request;
+using NUnit.Framework;
 
-//namespace GoogleApi.UnitTests.Maps.Directions
-//{
-//    [TestFixture]
-//    public class DirectionsRequestTests
-//    {
-//        [Test]
-//        public void ConstructorDefaultTest()
-//        {
-//            var request = new DirectionsRequest();
+namespace GoogleApi.UnitTests.Maps.Directions
+{
+    [TestFixture]
+    public class DirectionsRequestTests
+    {
+        [Test]
+        public void ConstructorDefaultsTest()
+        {
+            var request = new DirectionsRequest();
 
-//            Assert.AreEqual(Units.Metric, request.Units);
-//            Assert.AreEqual(AvoidWay.Nothing, request.Avoid);
-//            Assert.AreEqual(TravelMode.Driving, request.TravelMode);
-//            Assert.AreEqual(TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram, request.TransitMode);
-//            Assert.AreEqual(TransitRoutingPreference.Nothing, request.TransitRoutingPreference);
-//            Assert.AreEqual(Language.English, request.Language);
-//            Assert.IsNull(request.ArrivalTime);
-//            Assert.IsNull(request.DepartureTime);
-//            Assert.IsFalse(request.Alternatives);
-//            Assert.IsFalse(request.OptimizeWaypoints);
-//        }
+            Assert.AreEqual(Units.Metric, request.Units);
+            Assert.AreEqual(AvoidWay.Nothing, request.Avoid);
+            Assert.AreEqual(TravelMode.Driving, request.TravelMode);
+            Assert.AreEqual(TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram, request.TransitMode);
+            Assert.AreEqual(TransitRoutingPreference.Nothing, request.TransitRoutingPreference);
+            Assert.AreEqual(Language.English, request.Language);
+            Assert.IsNull(request.ArrivalTime);
+            Assert.IsNull(request.DepartureTime);
+            Assert.IsFalse(request.Alternatives);
+            Assert.IsFalse(request.OptimizeWaypoints);
+        }
 
-//        [Test]
-//        public void GetQueryStringParametersTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Origin = new Location("test"),
-//                Destination = new Location("test")
-//            };
+        [Test]
+        public void GetQueryStringParametersTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address"))
+            };
 
-//            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetQueryStringParametersWhenOriginIsNullTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Destination = new Location("test")
-//            };
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
 
-//            var exception = Assert.Throws<ArgumentException>(() =>
-//            {
-//                var parameters = request.GetQueryStringParameters();
-//                Assert.IsNull(parameters);
-//            });
-//            Assert.IsNotNull(exception);
-//            Assert.AreEqual(exception.Message, "Origin is required");
-//        }
-    
-//        [Test]
-//        public void GetQueryStringParametersWhenDestinationsIsNullTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Origin = new Location(0, 0)
-//            };
+            var origin = queryStringParameters.FirstOrDefault(x => x.Key == "origin");
+            var originExpected = request.Origin.ToString();
+            Assert.IsNotNull(origin);
+            Assert.AreEqual(originExpected, origin.Value);
 
-//            var exception = Assert.Throws<ArgumentException>(() =>
-//            {
-//                var parameters = request.GetQueryStringParameters();
-//                Assert.IsNull(parameters);
-//            });
-//            Assert.IsNotNull(exception);
-//            Assert.AreEqual(exception.Message, "Destination is required");
-//        }
-        
-//        [Test]
-//        public void GetUriTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA")
-//            };
+            var destination = queryStringParameters.FirstOrDefault(x => x.Key == "destination");
+            var destinationExpected = request.Destination.ToString();
+            Assert.IsNotNull(origin);
+            Assert.AreEqual(destinationExpected, destination.Value);
 
-//            var uri = request.GetUri();
+            var units = queryStringParameters.FirstOrDefault(x => x.Key == "units");
+            var unitsExpected = request.Units.ToString().ToLower();
+            Assert.IsNotNull(units);
+            Assert.AreEqual(unitsExpected, units.Value);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
-//        }
+            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+            var languageExpected = request.Language.ToCode();
+            Assert.IsNotNull(language);
+            Assert.AreEqual(languageExpected, language.Value);
 
-//        [Test]
-//        public void GetUriWhenCoordinateTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location(1, 2),
-//                Destination = new Location(1, 2)
-//            };
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
+        }
 
-//            var uri = request.GetUri();
+        [Test]
+        public void GetQueryStringParametersWhenLanguageTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                Language = Language.Afrikaans
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenCoordinateAndHeadingTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location(1, 2) { Heading = 90 },
-//                Destination = new Location(1, 2) { Heading = 90 }
-//            };
+            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+            var languageExpected = request.Language.ToCode();
+            Assert.IsNotNull(language);
+            Assert.AreEqual(languageExpected, language.Value);
+        }
 
-//            var uri = request.GetUri();
+        [Test]
+        public void GetQueryStringParametersWhenUnitsTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                Units = Units.Imperial
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToStringHeading())}&destination={Uri.EscapeDataString(request.Destination.ToStringHeading())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenCoordinateAndUseSideOfRoadTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location(1, 2) { UseSideOfRoad = true },
-//                Destination = new Location(1, 2) { UseSideOfRoad = true }
-//            };
+            var units = queryStringParameters.FirstOrDefault(x => x.Key == "units");
+            var unitsExpected = request.Units.ToString().ToLower();
+            Assert.IsNotNull(units);
+            Assert.AreEqual(unitsExpected, units.Value);
+        }
 
-//            var uri = request.GetUri();
+        [Test]
+        public void GetQueryStringParametersWhenRegionTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                Region = "region"
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToStringHeading())}&destination={Uri.EscapeDataString(request.Destination.ToStringHeading())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenRegionTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                Region = "test"
-                
-//            };
+            var region = queryStringParameters.FirstOrDefault(x => x.Key == "region");
+            var regionExpected = request.Region;
+            Assert.IsNotNull(region);
+            Assert.AreEqual(regionExpected, region.Value);
+        }
 
-//            var uri = request.GetUri();
+        [Test]
+        public void GetQueryStringParametersWhenAlternativesTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                Alternatives = true
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&region={request.Region}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenAlternativesTrueTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                Alternatives = true
-//            };
+            var alternatives = queryStringParameters.FirstOrDefault(x => x.Key == "alternatives");
+            var alternativesExpected = request.Alternatives.ToString().ToLower();
+            Assert.IsNotNull(alternatives);
+            Assert.AreEqual(alternativesExpected, alternatives.Value);
+        }
 
-//            var uri = request.GetUri();
+        [Test]
+        public void GetQueryStringParametersWhenAvoidTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                Avoid = AvoidWay.Highways | AvoidWay.Ferries
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&alternatives={request.Alternatives.ToString().ToLower()}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenAvoidTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                Avoid = AvoidWay.Highways | AvoidWay.Indoor | AvoidWay.Ferries
-//            };
+            var avoid = queryStringParameters.FirstOrDefault(x => x.Key == "avoid");
+            var avoidExpected = request.Avoid.ToEnumString('|');
+            Assert.IsNotNull(avoid);
+            Assert.AreEqual(avoidExpected, avoid.Value);
+        }
 
-//            var uri = request.GetUri();
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Bicycling
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&avoid={Uri.EscapeDataString(request.Avoid.ToEnumString('|'))}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenWayPointsTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                WayPoints = new [] { new WayPoint(new Location(1, 1)) }
-//            };
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
+        }
 
-//            var uri = request.GetUri();
-//            var waypoints = request.WayPoints.Select(x => x.String);
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Driving,
+                DepartureTime = DateTime.UtcNow.AddHours(1)
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenWayPointsAndOptimizeTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                WayPoints = new [] { new WayPoint(new Location(1, 1)) },
-//                OptimizeWaypoints = true
-//            };
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
+        }
 
-//            var uri = request.GetUri();
-//            var waypoints = request.WayPoints.Select(x => x.String);
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeAndTrafficModelTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Driving,
+                DepartureTime = DateTime.UtcNow.AddHours(1),
+                TrafficModel = TrafficModel.Best_Guess
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString("optimize:true|")}{Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenWayPointsPlaceTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                WayPoints = new [] { new WayPoint(new Place { Id = "abc" }) }
-//            };
-//            var uri = request.GetUri();
-//            var waypoints = request.WayPoints.Select(x => x.String);
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
-//        }
+            var trafficModel = queryStringParameters.FirstOrDefault(x => x.Key == "traffic_model");
+            var trafficModelExpected = request.TrafficModel.ToString().ToLower();
+            Assert.IsNotNull(trafficModel);
+            Assert.AreEqual(trafficModelExpected, trafficModel.Value);
+        }
 
-//        [Test]
-//        public void GetUriWhenWayPointsPolyLineTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                WayPoints = new [] { new WayPoint(new PolyLine { Path = "abc" }) }
-//            };
-//            var uri = request.GetUri();
-//            var waypoints = request.WayPoints.Select(x => x.String);
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeAndTrafficModelAndWayPointsTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Driving,
+                DepartureTime = DateTime.UtcNow.AddHours(1),
+                TrafficModel = TrafficModel.Best_Guess,
+                WayPoints = new[]
+                {
+                    new WayPoint(new Location(new Address("waypoint_address")))
+                }
+            };
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&waypoints={Uri.EscapeDataString(string.Join("|", waypoints))}", uri.PathAndQuery);
-//        }
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus
-//            };
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
 
-//            var uri = request.GetUri();
+            var trafficModel = queryStringParameters.FirstOrDefault(x => x.Key == "traffic_model");
+            Assert.IsNotNull(trafficModel);
+            Assert.IsNull(trafficModel.Value);
+        }
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time=now", uri.PathAndQuery);
-//        }
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeAndTrafficModelAndWayPointsViaTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Driving,
+                DepartureTime = DateTime.UtcNow.AddHours(1),
+                TrafficModel = TrafficModel.Best_Guess,
+                WayPoints = new[]
+                {
+                    new WayPoint(new Location(new Address("waypoint_address")), true)
+                }
+            };
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitAndArrivalTimeTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus,
-//                ArrivalTime = DateTime.UtcNow
-//            };
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            var uri = request.GetUri();
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&arrival_time={request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
-//        }
+            var trafficModel = queryStringParameters.FirstOrDefault(x => x.Key == "traffic_model");
+            var trafficModelExpected = request.TrafficModel.ToString().ToLower();
+            Assert.IsNotNull(trafficModel);
+            Assert.AreEqual(trafficModelExpected, trafficModel.Value);
+        }
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitAndDepatureTtimeTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus,
-//                DepartureTime = DateTime.UtcNow
-//            };
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Transit
+            };
 
-//            var uri = request.GetUri();
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&departure_time={request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture)}", uri.PathAndQuery);
-//        }
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
 
-//        [Test]
-//        public void GetUriWhenTravelModeTransitAndTransitRoutingPreferenceTest()
-//        {
-//            var request = new DirectionsRequest
-//            {
-//                Key = "abc",
-//                Origin = new Location("285 Bedford Ave, Brooklyn, NY, USA"),
-//                Destination = new Location("185 Broadway Ave, Manhattan, NY, USA"),
-//                TravelMode = TravelMode.Transit,
-//                TransitMode = TransitMode.Subway | TransitMode.Bus,
-//                TransitRoutingPreference = TransitRoutingPreference.FewerTransfers
-//            };
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
 
-//            var uri = request.GetUri();
-//            Console.WriteLine(uri.PathAndQuery);
-//            Assert.IsNotNull(uri);
-//            Assert.AreEqual($"/maps/api/directions/json?key={request.Key}&origin={Uri.EscapeDataString(request.Origin.ToString())}&destination={Uri.EscapeDataString(request.Destination.ToString())}&units={request.Units.ToString().ToLower()}&mode={request.TravelMode.ToString().ToLower()}&language={request.Language.ToCode()}&transit_mode={Uri.EscapeDataString(request.TransitMode.ToEnumString('|'))}&transit_routing_preference=fewer_transfers&departure_time=now", uri.PathAndQuery);
-//        }
-//    }
-//}
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            const string DEPARTURE_TIME_EXPECTED = "now";
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(DEPARTURE_TIME_EXPECTED, departureTime.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndDepartureTimeTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Transit,
+                DepartureTime = DateTime.UtcNow.AddHours(1) 
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
+
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
+
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            var departureTimeExpected = request.DepartureTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(departureTime);
+            Assert.AreEqual(departureTimeExpected, departureTime.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndArrivalTimeTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Transit,
+                ArrivalTime = DateTime.UtcNow.AddHours(1)
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
+            var modeExpected = request.TravelMode.ToString().ToLower();
+            Assert.IsNotNull(mode);
+            Assert.AreEqual(modeExpected, mode.Value);
+
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
+
+            var departureTime = queryStringParameters.FirstOrDefault(x => x.Key == "departure_time");
+            Assert.IsNotNull(departureTime);
+            Assert.IsNull(departureTime.Value);
+
+            var arrivalTime = queryStringParameters.FirstOrDefault(x => x.Key == "arrival_time");
+            var arrivalTimeExpected = request.ArrivalTime.GetValueOrDefault().DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture);
+            Assert.IsNotNull(arrivalTime);
+            Assert.AreEqual(arrivalTimeExpected, arrivalTime.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndTransitModeTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Rail
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var transitMode = queryStringParameters.FirstOrDefault(x => x.Key == "transit_mode");
+            var transitModeExpected = request.TransitMode.ToEnumString('|');
+            Assert.IsNotNull(transitMode);
+            Assert.AreEqual(transitModeExpected, transitMode.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenTravelModeTransitAndTransitRoutingPreferenceTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                TravelMode = TravelMode.Transit,
+                TransitMode = TransitMode.Subway | TransitMode.Rail,
+                TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var transitRoutingPreference = queryStringParameters.FirstOrDefault(x => x.Key == "transit_routing_preference");
+            var transitRoutingPreferenceExpected = request.TransitRoutingPreference.ToString().ToLower();
+            Assert.IsNotNull(transitRoutingPreference);
+            Assert.AreEqual(transitRoutingPreferenceExpected, transitRoutingPreference.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenWayPointsTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                WayPoints = new[]
+                {
+                    new WayPoint(new Location(new Address("waypoint_address")))
+                }
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var wayPoints = queryStringParameters.FirstOrDefault(x => x.Key == "waypoints");
+            var wayPointsExpected = string.Join("|", request.WayPoints.Select(x => x.ToString()));
+            Assert.IsNotNull(wayPoints);
+            Assert.AreEqual(wayPointsExpected, wayPoints.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenWayPointsAndOptimizedTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address")),
+                Destination = new Location(new Address("address")),
+                WayPoints = new[]
+                {
+                    new WayPoint(new Location(new Address("waypoint_address")))
+                },
+                OptimizeWaypoints = true
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var wayPoints = queryStringParameters.FirstOrDefault(x => x.Key == "waypoints");
+            var wayPointsExpected = string.Join("|", new[] { "optimize:true" }.Concat(request.WayPoints.Select(x => x.ToString())));
+            Assert.IsNotNull(wayPoints);
+            Assert.AreEqual(wayPointsExpected, wayPoints.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsNullTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = string.Empty
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenOriginIsNullTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Destination = new Location(new Address("address"))
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Origin' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenDestinationIsNullTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new Location(new Address("address"))
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Destination' is required", exception.Message);
+        }
+    }
+}
