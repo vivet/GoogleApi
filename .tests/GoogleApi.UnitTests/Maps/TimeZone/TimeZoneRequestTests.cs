@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
@@ -25,11 +26,56 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
         {
             var request = new TimeZoneRequest
             {
-                Key = "abc",
+                Key = "key",
                 Location = new Coordinate(40.7141289, -73.9614074)
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+            var languageExpected = request.Language.ToCode();
+            Assert.IsNotNull(language);
+            Assert.AreEqual(languageExpected, language.Value);
+
+            var timestamp = queryStringParameters.FirstOrDefault(x => x.Key == "timestamp");
+            var timestampExpected = request.TimeStamp.DateTimeToUnixTimestamp().ToString();
+            Assert.IsNotNull(timestamp);
+            Assert.AreEqual(timestampExpected, timestamp.Value);
+
+            var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
+            var locationExpected = request.Location.ToString();
+            Assert.IsNotNull(location);
+            Assert.AreEqual(locationExpected, location.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsNullTest()
+        {
+            var request = new TimeZoneRequest
+            {
+                Key = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+        {
+            var request = new TimeZoneRequest
+            {
+                Key = string.Empty
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
         }
 
         [Test]
@@ -37,31 +83,11 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
         {
             var request = new TimeZoneRequest
             {
-                Key = "abc"
+                Key = "key"
             };
 
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Location is required");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new TimeZoneRequest
-            {
-                Key = "abc",
-                Location = new Coordinate(40.7141289, -73.9614074)
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/timezone/json?key={request.Key}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&timestamp={request.TimeStamp.DateTimeToUnixTimestamp()}", uri.PathAndQuery);
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual(exception.Message, "'Location' is required");
         }
     }
 }
