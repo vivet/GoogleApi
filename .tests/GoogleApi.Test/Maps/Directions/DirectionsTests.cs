@@ -7,7 +7,8 @@ using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
-using Coordinate = GoogleApi.Entities.Maps.Common.Coordinate;
+using Location = GoogleApi.Entities.Maps.Directions.Request.Location;
+using Coordinate = GoogleApi.Entities.Maps.Directions.Request.Coordinate;
 
 namespace GoogleApi.Test.Maps.Directions
 {

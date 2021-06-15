@@ -1,8 +1,8 @@
 using System.Globalization;
-using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.UnitTests.Maps.Common
+namespace GoogleApi.UnitTests.Maps.Directions
 {
     [TestFixture]
     public class CoordinateTests

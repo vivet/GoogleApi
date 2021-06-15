@@ -6,7 +6,8 @@ using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using NUnit.Framework;
-using Coordinate = GoogleApi.Entities.Maps.Common.Coordinate;
+using Location = GoogleApi.Entities.Maps.DistanceMatrix.Request.Location;
+using Coordinate = GoogleApi.Entities.Maps.DistanceMatrix.Request.Coordinate;
 
 namespace GoogleApi.Test.Maps.DistanceMatrix
 {

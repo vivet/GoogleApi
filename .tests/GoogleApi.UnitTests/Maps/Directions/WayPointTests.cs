@@ -1,5 +1,4 @@
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
 

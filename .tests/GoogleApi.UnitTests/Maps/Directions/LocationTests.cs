@@ -1,9 +1,10 @@
 ﻿using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using NUnit.Framework;
-using Coordinate = GoogleApi.Entities.Maps.Common.Coordinate;
+using Coordinate = GoogleApi.Entities.Maps.Directions.Request.Coordinate;
+using Location = GoogleApi.Entities.Maps.Directions.Request.Location;
 
-namespace GoogleApi.UnitTests.Maps.Common
+namespace GoogleApi.UnitTests.Maps.Directions
 {
     [TestFixture]
     public class LocationTests

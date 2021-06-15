@@ -1,5 +1,6 @@
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using NUnit.Framework;

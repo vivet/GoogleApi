@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StreetView.Request;
 using NUnit.Framework;
 

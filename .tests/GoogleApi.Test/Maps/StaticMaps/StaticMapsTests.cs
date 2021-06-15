@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using NUnit.Framework;
 using Coordinate = GoogleApi.Entities.Common.Coordinate;

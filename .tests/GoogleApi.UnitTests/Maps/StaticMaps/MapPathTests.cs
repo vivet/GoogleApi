@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using NUnit.Framework;
 

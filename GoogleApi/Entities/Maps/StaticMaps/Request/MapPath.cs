@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.StaticMaps.Request
 {

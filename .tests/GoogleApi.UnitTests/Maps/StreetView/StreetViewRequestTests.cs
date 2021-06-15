@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StreetView.Request;
 using NUnit.Framework;
-using Location = GoogleApi.Entities.Maps.StreetView.Request.Location;
 
 namespace GoogleApi.UnitTests.Maps.StreetView
 {

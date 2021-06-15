@@ -6,7 +6,6 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
