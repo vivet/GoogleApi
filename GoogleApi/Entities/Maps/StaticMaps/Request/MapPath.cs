@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Common;
+using System.Linq;
 
 namespace GoogleApi.Entities.Maps.StaticMaps.Request
 {
@@ -42,5 +42,29 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
         /// Gets or sets the collection of points for this path
         /// </summary>
         public virtual IEnumerable<Location> Points { get; set; } = new List<Location>();
+
+        /// <summary>
+        /// Returns a string representation of a <see cref="MapPath"/>.
+        /// </summary>
+        /// <returns>The string representation.</returns>
+        public override string ToString()
+        {
+            var weight = $"weight:{this.Weight}";
+            var geodesic = $"geodesic:{this.Geodesic.ToString().ToLower()}";
+            var color = this.Color != null ? $"color:{this.Color}" : null;
+            var fillColor = this.FillColor != null ? $"fillcolor:{this.FillColor}" : null;
+
+            var styles = new[]
+            {
+                weight,
+                geodesic,
+                color,
+                fillColor
+            }.Where(x => x != null);
+
+            var points = string.Join("|", this.Points.Select(x => x.ToString()));
+
+            return $"{string.Join("|", styles)}|{points}";
+        }
     }
 }

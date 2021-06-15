@@ -1,6 +1,7 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using NUnit.Framework;
 
 namespace GoogleApi.UnitTests.Common.Extensions
@@ -24,6 +25,15 @@ namespace GoogleApi.UnitTests.Common.Extensions
 
             var result = ENUM.ToEnumString('|');
             Assert.AreEqual("tolls|highways", result);
+        }
+
+        [Test]
+        public void ToEnumMemberStringTest()
+        {
+            const StyleFeature ENUM = StyleFeature.Transit;
+
+            var result = ENUM.ToEnumMemberString();
+            Assert.AreEqual("transit", result);
         }
     }
 }
