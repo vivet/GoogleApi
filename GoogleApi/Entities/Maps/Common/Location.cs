@@ -7,7 +7,10 @@ namespace GoogleApi.Entities.Maps.Common
     /// </summary>
     public class Location
     {
-        private readonly string locationString;
+        /// <summary>
+        /// Location String.
+        /// </summary>
+        public string String { get; }
 
         /// <summary>
         /// 
@@ -15,7 +18,7 @@ namespace GoogleApi.Entities.Maps.Common
         /// <param name="address"></param>
         public Location(Address address)
         {
-            this.locationString = address.ToString();
+            this.String = address.ToString();
         }
 
         /// <summary>
@@ -24,13 +27,13 @@ namespace GoogleApi.Entities.Maps.Common
         /// <param name="coordinate"></param>
         public Location(Coordinate coordinate)
         {
-            this.locationString = coordinate.ToString();
+            this.String = coordinate.ToString();
         }
 
         /// <inheritdoc />
         public override string ToString()
         {
-            return this.locationString;
+            return this.String;
         }
     }
 }
