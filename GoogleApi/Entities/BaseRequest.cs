@@ -83,7 +83,9 @@ namespace GoogleApi.Entities
             if (this.ClientId == null)
             {
                 if (!string.IsNullOrWhiteSpace(this.Key))
+                {
                     parameters.Add("key", this.Key);
+                }
             }
             else
             {

@@ -31,10 +31,7 @@ namespace GoogleApi.Entities.Common
             this.Longitude = longitude;
         }
 
-        /// <summary>
-        /// Overrdden ToString method for default conversion to Google compatible string.
-        /// </summary>
-        /// <returns>The location string.</returns>
+        /// <inheritdoc />
         public override string ToString()
         {
             return $"{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}";
