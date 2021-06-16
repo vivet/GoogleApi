@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Common
 {
@@ -13,12 +14,29 @@ namespace GoogleApi.Entities.Common
         /// South West.
         /// </summary>
         [JsonProperty("southwest")]
-        public virtual Coordinate SouthWest { get; set; }
+        public virtual Coordinate SouthWest { get; }
 
         /// <summary>
         /// North East.
         /// </summary>
         [JsonProperty("northeast")]
-        public virtual Coordinate NorthEast { get; set; }
+        public virtual Coordinate NorthEast { get; }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="northEast">The <see cref="Coordinate"/>.</param>
+        /// <param name="southWest">The <see cref="Coordinate"/>.</param>
+        public ViewPort(Coordinate southWest, Coordinate northEast)
+        {
+            this.NorthEast = northEast ?? throw new ArgumentNullException(nameof(northEast));
+            this.SouthWest = southWest ?? throw new ArgumentNullException(nameof(southWest));
+        }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"{this.SouthWest}|{this.NorthEast}";
+        }
     }
 }

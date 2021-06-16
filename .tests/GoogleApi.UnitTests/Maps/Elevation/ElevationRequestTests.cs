@@ -25,6 +25,11 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             var queryStringParameters = request.GetQueryStringParameters();
             Assert.IsNotNull(queryStringParameters);
 
+            var key = queryStringParameters.SingleOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
             var locations = queryStringParameters.FirstOrDefault(x => x.Key == "locations");
             var locationsExpected = string.Join("|", request.Locations);
             Assert.IsNotNull(locations);

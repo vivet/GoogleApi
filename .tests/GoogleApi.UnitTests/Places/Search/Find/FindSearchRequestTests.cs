@@ -139,11 +139,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             {
                 Key = "abc",
                 Input = "test",
-                Bounds = new ViewPort
-                {
-                    NorthEast = new Coordinate(1, 1),
-                    SouthWest = new Coordinate(2, 2)
-                }
+                Bounds = new ViewPort(new Coordinate(1, 1), new Coordinate(2, 2))
             };
 
             var uri = request.GetUri();

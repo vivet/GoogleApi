@@ -228,11 +228,7 @@ namespace GoogleApi.Test.Places.Search.Find
             {
                 Key = this.ApiKey,
                 Input = "new york",
-                Bounds = new ViewPort
-                {
-                    NorthEast = new Coordinate(51.5100913, -0.1345676),
-                    SouthWest = new Coordinate(50.5100913, -0.0345676)
-                }
+                Bounds = new ViewPort(new Coordinate(51.5100913, -0.1345676), new Coordinate(50.5100913, -0.0345676))
             };
 
             var response = GooglePlaces.FindSearch.Query(request);
