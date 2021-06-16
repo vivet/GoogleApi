@@ -11,9 +11,7 @@ namespace GoogleApi.Entities.Maps.Geocoding
     /// </summary>
     public abstract class BaseGeocodeRequest : BaseMapsChannelRequest, IRequestQueryString
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => base.BaseUrl + "geocode/json";
 
         /// <summary>
@@ -23,10 +21,7 @@ namespace GoogleApi.Entities.Maps.Geocoding
         /// </summary>
         public virtual Language Language { get; set; } = Language.English;
 
-        /// <summary>
-        /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{T}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();

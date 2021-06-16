@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 
-namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
+namespace GoogleApi.Entities.Maps.Common
 {
     /// <summary>
-    /// Coordinate.
+    /// CoordinateEx.
     /// </summary>
-    public class Coordinate : Entities.Common.Coordinate
+    public class CoordinateEx : Entities.Common.Coordinate
     {
         /// <summary>
         /// Heading.
@@ -22,7 +22,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// </summary>
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
-        public Coordinate(double latitude, double longitude)
+        public CoordinateEx(double latitude, double longitude)
             : base(latitude, longitude)
         {
 

@@ -5,6 +5,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
@@ -37,8 +38,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address"))
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address"))
             };
 
             var queryStringParameters = request.GetQueryStringParameters();
@@ -76,13 +77,33 @@ namespace GoogleApi.UnitTests.Maps.Directions
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new DirectionsRequest
+            {
+                Key = "key",
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenLanguageTest()
         {
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 Language = Language.Afrikaans
             };
 
@@ -101,8 +122,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 Units = Units.Imperial
             };
 
@@ -121,8 +142,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 Region = "region"
             };
 
@@ -141,8 +162,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 Alternatives = true
             };
 
@@ -161,8 +182,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 Avoid = AvoidWay.Highways | AvoidWay.Ferries
             };
 
@@ -181,8 +202,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Bicycling
             };
 
@@ -201,8 +222,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1)
             };
@@ -222,8 +243,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1),
                 TrafficModel = TrafficModel.Best_Guess
@@ -249,14 +270,14 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1),
                 TrafficModel = TrafficModel.Best_Guess,
                 WayPoints = new[]
                 {
-                    new WayPoint(new Location(new Address("waypoint_address")))
+                    new WayPoint(new LocationEx(new Address("waypoint_address")))
                 }
             };
 
@@ -279,14 +300,14 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1),
                 TrafficModel = TrafficModel.Best_Guess,
                 WayPoints = new[]
                 {
-                    new WayPoint(new Location(new Address("waypoint_address")), true)
+                    new WayPoint(new LocationEx(new Address("waypoint_address")), true)
                 }
             };
 
@@ -310,8 +331,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Transit
             };
 
@@ -340,8 +361,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Transit,
                 DepartureTime = DateTime.UtcNow.AddHours(1) 
             };
@@ -371,8 +392,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Transit,
                 ArrivalTime = DateTime.UtcNow.AddHours(1)
             };
@@ -406,8 +427,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Rail
             };
@@ -427,8 +448,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Rail,
                 TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
@@ -449,11 +470,11 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 WayPoints = new[]
                 {
-                    new WayPoint(new Location(new Address("waypoint_address")))
+                    new WayPoint(new LocationEx(new Address("waypoint_address")))
                 }
             };
 
@@ -472,11 +493,11 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address")),
-                Destination = new Location(new Address("address")),
+                Origin = new LocationEx(new Address("address")),
+                Destination = new LocationEx(new Address("address")),
                 WayPoints = new[]
                 {
-                    new WayPoint(new Location(new Address("waypoint_address")))
+                    new WayPoint(new LocationEx(new Address("waypoint_address")))
                 },
                 OptimizeWaypoints = true
             };
@@ -520,7 +541,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Destination = new Location(new Address("address"))
+                Destination = new LocationEx(new Address("address"))
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
@@ -533,7 +554,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = "key",
-                Origin = new Location(new Address("address"))
+                Origin = new LocationEx(new Address("address"))
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());

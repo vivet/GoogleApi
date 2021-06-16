@@ -113,6 +113,25 @@ namespace GoogleApi.UnitTests.Maps.StreetView
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new StreetViewRequest
+            {
+                Key = "key",
+                Location = new Location(new Coordinate(1, 1)),
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenHeadingTest()
         {
             var request = new StreetViewRequest

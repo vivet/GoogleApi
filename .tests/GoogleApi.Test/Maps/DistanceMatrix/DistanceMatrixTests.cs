@@ -6,8 +6,6 @@ using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using NUnit.Framework;
-using Location = GoogleApi.Entities.Maps.DistanceMatrix.Request.Location;
-using Coordinate = GoogleApi.Entities.Maps.DistanceMatrix.Request.Coordinate;
 
 namespace GoogleApi.Test.Maps.DistanceMatrix
 {
@@ -27,13 +25,13 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin1),
-                    new Location(origin2)
+                    new LocationEx(origin1),
+                    new LocationEx(origin2)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination1),
-                    new Location(destination2)
+                    new LocationEx(destination1),
+                    new LocationEx(destination2)
                 }
             };
 
@@ -53,11 +51,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 }
             };
 
@@ -69,18 +67,18 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         [Test]
         public void DistanceMatrixWhenCoordinateTest()
         {
-            var origin = new Coordinate(55.7237480, 12.4208282);
-            var destination = new Coordinate(55.72672682, 12.407996582);
+            var origin = new CoordinateEx(55.7237480, 12.4208282);
+            var destination = new CoordinateEx(55.72672682, 12.407996582);
             var request = new DistanceMatrixRequest
             {
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 }
             };
 
@@ -92,11 +90,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         [Test]
         public void DistanceMatrixWhenCoordinateAndHeadingTest()
         {
-            var origin = new Coordinate(55.7237480, 12.4208282)
+            var origin = new CoordinateEx(55.7237480, 12.4208282)
             {
                 Heading = 90
             };
-            var destination = new Coordinate(55.72672682, 12.407996582)
+            var destination = new CoordinateEx(55.72672682, 12.407996582)
             {
                 Heading = 90
             };
@@ -105,11 +103,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 }
             };
 
@@ -121,11 +119,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
         [Test]
         public void DistanceMatrixWhenCoordinateAndUseSideOfRoadTest()
         {
-            var origin = new Coordinate(55.7237480, 12.4208282)
+            var origin = new CoordinateEx(55.7237480, 12.4208282)
             {
                 UseSideOfRoad = true
             };
-            var destination = new Coordinate(55.72672682, 12.407996582)
+            var destination = new CoordinateEx(55.72672682, 12.407996582)
             {
                 UseSideOfRoad = true
             };
@@ -134,11 +132,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 }
             };
 
@@ -157,11 +155,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 }
             };
 
@@ -180,11 +178,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 },
                 Avoid = AvoidWay.Highways
             };
@@ -204,11 +202,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 },
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1)
@@ -229,11 +227,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 },
                 TravelMode = TravelMode.Driving,
                 ArrivalTime = DateTime.UtcNow.AddHours(1),
@@ -255,11 +253,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 }
             };
 
@@ -278,11 +276,11 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Key = this.ApiKey,
                 Origins = new[]
                 {
-                    new Location(origin)
+                    new LocationEx(origin)
                 },
                 Destinations = new[]
                 {
-                    new Location(destination)
+                    new LocationEx(destination)
                 }
             };
             var cancellationTokenSource = new CancellationTokenSource();

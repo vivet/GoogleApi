@@ -40,10 +40,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
         /// </summary>
         public virtual IEnumerable<GeometryLocationType> LocationTypes { get; set; } = new List<GeometryLocationType>();
 
-        /// <summary>
-        /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();

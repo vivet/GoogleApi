@@ -40,10 +40,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Address.Request
         /// </summary>
         public virtual IEnumerable<KeyValuePair<Component, string>> Components { get; set; } = new List<KeyValuePair<Component, string>>();
 
-        /// <summary>
-        /// See <see cref="BaseGeocodeRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();

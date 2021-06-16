@@ -1,28 +1,26 @@
 ﻿using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using NUnit.Framework;
-using Coordinate = GoogleApi.Entities.Maps.Directions.Request.Coordinate;
-using Location = GoogleApi.Entities.Maps.Directions.Request.Location;
 
-namespace GoogleApi.UnitTests.Maps.Directions
+namespace GoogleApi.UnitTests.Maps.Common
 {
     [TestFixture]
-    public class LocationTests
+    public class LocationExTests
     {
         [Test]
         public void ConstructorWhenPlaceTest()
         {
             var place = new Place("id");
-            var location = new Location(place);
+            var location = new LocationEx(place);
 
-            Assert.AreEqual(place.ToString(), location.String);
+            Assert.AreEqual($"place_id:{place}", location.String);
         }
 
         [Test]
         public void ConstructorWhenAddressTest()
         {
             var address = new Address("address");
-            var location = new Location(address);
+            var location = new LocationEx(address);
 
             Assert.AreEqual(address.ToString(), location.String);
         }
@@ -31,7 +29,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         public void ConstructorWhenPlusCodeTest()
         {
             var plusCode = new PlusCode("global", "local");
-            var location = new Location(plusCode);
+            var location = new LocationEx(plusCode);
 
             Assert.AreEqual(plusCode.ToString(), location.String);
         }
@@ -39,8 +37,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ConstructorWhenCoordinateTest()
         {
-            var coordinate = new Coordinate(1, 1);
-            var location = new Location(coordinate);
+            var coordinate = new CoordinateEx(1, 1);
+            var location = new LocationEx(coordinate);
 
             Assert.AreEqual(coordinate.ToString(), location.String);
         }
@@ -48,8 +46,8 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ToStringTest()
         {
-            var coordinate = new Coordinate(1, 1);
-            var location = new Location(coordinate);
+            var coordinate = new CoordinateEx(1, 1);
+            var location = new LocationEx(coordinate);
 
             var toString = location.ToString();
 

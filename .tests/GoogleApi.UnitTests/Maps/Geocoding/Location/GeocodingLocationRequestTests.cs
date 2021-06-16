@@ -47,6 +47,25 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = "key",
+                Location = new Coordinate(1, 1),
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenResultTypeTest()
         {
             var request = new LocationGeocodeRequest
@@ -61,6 +80,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
             };
 
             var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
             var resultType = queryStringParameters.SingleOrDefault(x => x.Key == "result_type");
             var resultTypeExpected = string.Join("|", request.ResultTypes.Select(x => x.ToString().ToLower()));
@@ -82,6 +102,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
             };
 
             var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
             var locationType = queryStringParameters.SingleOrDefault(x => x.Key == "location_type");
             var locationTypeExpected = string.Join("|", request.LocationTypes.Select(x => x.ToString().ToUpper()));

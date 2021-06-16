@@ -11,9 +11,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
     /// </summary>
     public class PlusCodeGeocodeRequest : BaseRequest
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "plus.codes/api";
 
         /// <summary>

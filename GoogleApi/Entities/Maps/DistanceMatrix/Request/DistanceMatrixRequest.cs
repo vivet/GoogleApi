@@ -6,6 +6,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
@@ -23,14 +24,14 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
         /// If you pass coordinates, ensure that no space exists between the latitude and longitude values.
         /// </summary>
-        public virtual IEnumerable<Location> Origins { get; set; } = new List<Location>();
+        public virtual IEnumerable<LocationEx> Origins { get; set; } = new List<LocationEx>();
 
         /// <summary>
         /// One or more addresses and/or textual latitude/longitude values, separated with the pipe (|) character, to which to calculate distance and time. 
         /// If you pass an address as a string, the service will geocode the string and convert it to a latitude/longitude coordinate to calculate directions. 
         /// If you pass coordinates, ensure that no space exists between the latitude and longitude values
         /// </summary>
-        public virtual IEnumerable<Location> Destinations { get; set; } = new List<Location>();
+        public virtual IEnumerable<LocationEx> Destinations { get; set; } = new List<LocationEx>();
 
         /// <summary>
         /// Distance Matrix results contain text within distance fields to indicate the distance of the calculated route. 

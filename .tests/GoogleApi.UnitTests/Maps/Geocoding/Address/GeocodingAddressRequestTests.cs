@@ -29,6 +29,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             };
 
             var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
             var key = queryStringParameters.SingleOrDefault(x => x.Key == "key");
             var keyExpected = request.Key;
@@ -47,6 +48,25 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new AddressGeocodeRequest
+            {
+                Key = "key",
+                Address = "address",
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenRegionTest()
         {
             var request = new AddressGeocodeRequest
@@ -57,6 +77,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             };
 
             var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
             var region = queryStringParameters.SingleOrDefault(x => x.Key == "region");
             var regionExpected = request.Region;
@@ -75,6 +96,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             };
 
             var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
             var bounds = queryStringParameters.SingleOrDefault(x => x.Key == "bounds");
             var boundsExpected = request.Bounds.ToString();
@@ -96,6 +118,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             };
 
             var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
 
             var components = queryStringParameters.SingleOrDefault(x => x.Key == "components");
             var componentsExpected = string.Join("|", request.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}"));

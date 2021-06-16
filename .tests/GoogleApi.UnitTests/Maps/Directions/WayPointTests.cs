@@ -1,4 +1,5 @@
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
 
@@ -10,7 +11,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ConstructorTest()
         {
-            var wayPoint = new WayPoint(new Location(new Address("address")));
+            var wayPoint = new WayPoint(new LocationEx(new Address("address")));
 
             Assert.AreEqual("address", wayPoint.Location.String);
             Assert.IsFalse(wayPoint.IsVia);
@@ -19,7 +20,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ConstructorWhenIsViaTest()
         {
-            var wayPoint = new WayPoint(new Location(new Address("address")), true);
+            var wayPoint = new WayPoint(new LocationEx(new Address("address")), true);
 
             Assert.AreEqual("address", wayPoint.Location.String);
             Assert.IsTrue(wayPoint.IsVia);
@@ -28,7 +29,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ToStringTest()
         {
-            var wayPoint = new WayPoint(new Location(new Address("address")));
+            var wayPoint = new WayPoint(new LocationEx(new Address("address")));
 
             var toString = wayPoint.ToString();
             Assert.AreEqual(wayPoint.Location.ToString(), toString);
@@ -37,7 +38,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ToStringWhenIsViaTest()
         {
-            var wayPoint = new WayPoint(new Location(new Address("address")), true);
+            var wayPoint = new WayPoint(new LocationEx(new Address("address")), true);
 
             var toString = wayPoint.ToString();
             Assert.AreEqual($"via:{wayPoint.Location}", toString);

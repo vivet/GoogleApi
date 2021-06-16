@@ -6,6 +6,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Directions.Request
@@ -31,13 +32,13 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// You can retrieve place IDs from the Google Maps Geocoding API and the Google Places API (including Place Autocomplete). 
         /// For an example using place IDs from Place Autocomplete, see Place Autocomplete and Directions.For more about place IDs, see the place ID overview. "origins= place_id:ChIJ3S-JXmauEmsRUcIaWtf4MzE".
         /// </summary>
-        public virtual Location Origin { get; set; }
+        public virtual LocationEx Origin { get; set; }
 
         /// <summary>
         /// The address, textual latitude/longitude value, or place ID to which you wish to calculate directions. 
         /// The options for the destination parameter are the same as for the <see cref="Origin"/> parameter, described above.
         /// </summary>
-        public virtual Location Destination { get; set; }
+        public virtual LocationEx Destination { get; set; }
 
         /// <summary>
         /// Specifies the region code, specified as a ccTLD ("top-level domain") two-character value. (For more information see Region Biasing below.)

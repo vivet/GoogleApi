@@ -24,7 +24,18 @@ namespace GoogleApi.Entities.Maps.Common
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"place_id:{this.Id}";
+            return this.Id;
+        }
+
+        /// <summary>
+        /// Tostring with added prefix.
+        /// "{prefix}:{placeid}"
+        /// </summary>
+        /// <param name="prefix">The prefix.</param>
+        /// <returns>The prefixed placeid.</returns>
+        public virtual string ToString(string prefix)
+        {
+            return $"{prefix}:{this}";
         }
     }
 }

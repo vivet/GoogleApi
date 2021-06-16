@@ -76,6 +76,26 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new StaticMapsRequest
+            {
+                Key = "key",
+                Center = new Location(new Coordinate(1, 1)),
+                ZoomLevel = 1,
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenCenterIsNullTest()
         {
             var request = new StaticMapsRequest

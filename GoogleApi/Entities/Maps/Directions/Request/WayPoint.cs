@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// <summary>
         /// Location.
         /// </summary>
-        public Location Location { get; }
+        public LocationEx Location { get; }
         
         /// <summary>
         /// IsVia.
@@ -28,7 +28,7 @@ namespace GoogleApi.Entities.Maps.Directions.Request
         /// </summary>
         /// <param name="location">The <see cref="Location"/>.</param>
         /// <param name="isVia">is prefixed with 'via:'</param>
-        public WayPoint(Location location, bool isVia = false)
+        public WayPoint(LocationEx location, bool isVia = false)
         {
             this.Location = location;
             this.IsVia = isVia;

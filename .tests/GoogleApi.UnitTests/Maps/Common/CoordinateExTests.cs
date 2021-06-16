@@ -1,16 +1,16 @@
 using System.Globalization;
-using GoogleApi.Entities.Maps.Directions.Request;
+using GoogleApi.Entities.Maps.Common;
 using NUnit.Framework;
 
-namespace GoogleApi.UnitTests.Maps.Directions
+namespace GoogleApi.UnitTests.Maps.Common
 {
     [TestFixture]
-    public class CoordinateTests
+    public class CoordinateExTests
     {
         [Test]
         public void ConstructorTest()
         {
-            var coordinate = new Coordinate(1, 1);
+            var coordinate = new CoordinateEx(1, 1);
 
             Assert.AreEqual(1, coordinate.Latitude);
             Assert.AreEqual(1, coordinate.Longitude);
@@ -21,7 +21,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ToStringTest()
         {
-            var coordinate = new Coordinate(1, 1);
+            var coordinate = new CoordinateEx(1, 1);
 
             var toString = coordinate.ToString();
             Assert.AreEqual($"{coordinate.Latitude.ToString(CultureInfo.InvariantCulture)},{coordinate.Longitude.ToString(CultureInfo.InvariantCulture)}", toString);
@@ -30,7 +30,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ToStringWhenHeadingTest()
         {
-            var coordinate = new Coordinate(1, 1)
+            var coordinate = new CoordinateEx(1, 1)
             {
                 Heading = 90
             };
@@ -42,7 +42,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ToStringWhenHeadingAndSideOfRoadTest()
         {
-            var coordinate = new Coordinate(1, 1)
+            var coordinate = new CoordinateEx(1, 1)
             {
                 Heading = 90,
                 UseSideOfRoad = true
@@ -55,7 +55,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
         [Test]
         public void ToStringWhenSideOfRoadTest()
         {
-            var coordinate = new Coordinate(1, 1)
+            var coordinate = new CoordinateEx(1, 1)
             {
                 UseSideOfRoad = true
             };

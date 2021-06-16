@@ -45,6 +45,25 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Place
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new PlaceGeocodeRequest
+            {
+                Key = "key",
+                PlaceId = "place_id",
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenKeyIsNullTest()
         {
             var request = new PlaceGeocodeRequest

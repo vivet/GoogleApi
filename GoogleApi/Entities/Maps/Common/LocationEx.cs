@@ -1,12 +1,11 @@
 ﻿using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Common;
 
-namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
+namespace GoogleApi.Entities.Maps.Common
 {
     /// <summary>
-    /// Location.
+    /// Location Ex.
     /// </summary>
-    public class Location
+    public class LocationEx
     {
         /// <summary>
         /// Location String.
@@ -16,17 +15,17 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="place">The <see cref="Common.Place"/>.</param>
-        public Location(Place place)
+        /// <param name="place">The <see cref="Place"/>.</param>
+        public LocationEx(Place place)
         {
-            this.String = place.ToString();
+            this.String = place.ToString("place_id");
         }
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="address">The <see cref="Address"/>.</param>
-        public Location(Address address)
+        public LocationEx(Address address)
         {
             this.String = address.ToString();
         }
@@ -35,7 +34,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// Constructor.
         /// </summary>
         /// <param name="plusCode">The <see cref="PlusCode"/>.</param>
-        public Location(PlusCode plusCode)
+        public LocationEx(PlusCode plusCode)
         {
             this.String = plusCode.ToString();
         }
@@ -43,8 +42,8 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="coordinate">The <see cref="Entities.Common.Coordinate"/>.</param>
-        public Location(Coordinate coordinate)
+        /// <param name="coordinate">The <see cref="CoordinateEx"/>.</param>
+        public LocationEx(CoordinateEx coordinate)
         {
             this.String = coordinate.ToString();
         }

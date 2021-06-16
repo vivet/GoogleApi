@@ -31,7 +31,17 @@ namespace GoogleApi.UnitTests.Maps.Common
             var place = new Place("id");
 
             var toString = place.ToString();
-            Assert.AreEqual($"place_id:{place.Id}", toString);
+            Assert.AreEqual(place.Id, toString);
+        }
+
+        [Test]
+        public void ToStringWhenPrefixTest()
+        {
+            var place = new Place("id");
+            var prefix = "place_id";
+
+            var toString = place.ToString(prefix);
+            Assert.AreEqual($"{prefix}:{place.Id}", toString);
         }
     }
 }

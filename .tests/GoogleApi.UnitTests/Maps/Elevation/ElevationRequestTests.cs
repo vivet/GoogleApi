@@ -85,6 +85,28 @@ namespace GoogleApi.UnitTests.Maps.Elevation
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new ElevationRequest
+            {
+                Key = "key",
+                Locations = new[]
+                {
+                    new Coordinate(1, 1)
+                },
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenKeyIsNullTest()
         {
             var request = new ElevationRequest

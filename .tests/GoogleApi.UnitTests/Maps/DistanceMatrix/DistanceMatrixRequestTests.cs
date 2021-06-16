@@ -5,6 +5,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using NUnit.Framework;
@@ -37,13 +38,13 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address1")),
-                    new Location(new Address("address2"))
+                    new LocationEx(new Address("address1")),
+                    new LocationEx(new Address("address2"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address1")),
-                    new Location(new Address("address2"))
+                    new LocationEx(new Address("address1")),
+                    new LocationEx(new Address("address2"))
                 }
             };
 
@@ -82,6 +83,32 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
         }
 
         [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new DistanceMatrixRequest
+            {
+                Key = "key",
+                Origins = new[]
+                {
+                    new LocationEx(new Address("address"))
+                },
+                Destinations = new[]
+                {
+                    new LocationEx(new Address("address"))
+                },
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
         public void GetQueryStringParametersWhenLanguageTest()
         {
             var request = new DistanceMatrixRequest
@@ -89,11 +116,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Language = Language.Afrikaans
             };
@@ -115,11 +142,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Units = Units.Imperial
             };
@@ -141,11 +168,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Region = "region"
             };
@@ -167,11 +194,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Avoid = AvoidWay.Highways | AvoidWay.Ferries
             };
@@ -193,11 +220,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Bicycling
             };
@@ -219,11 +246,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1)
@@ -246,11 +273,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1),
@@ -279,11 +306,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Transit
             };
@@ -315,11 +342,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Transit,
                 DepartureTime = DateTime.UtcNow.AddHours(1)
@@ -352,11 +379,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Transit,
                 ArrivalTime = DateTime.UtcNow.AddHours(1)
@@ -393,11 +420,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Rail
@@ -420,11 +447,11 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 Destinations = new[]
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 },
                 TravelMode = TravelMode.Transit,
                 TransitMode = TransitMode.Subway | TransitMode.Rail,
@@ -472,7 +499,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Destinations = new []
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 }
             };
 
@@ -488,7 +515,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
                 Key = "key",
                 Origins = new []
                 {
-                    new Location(new Address("address"))
+                    new LocationEx(new Address("address"))
                 }
             };
 

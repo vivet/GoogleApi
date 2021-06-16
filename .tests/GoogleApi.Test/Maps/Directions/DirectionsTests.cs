@@ -7,8 +7,6 @@ using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
-using Location = GoogleApi.Entities.Maps.Directions.Request.Location;
-using Coordinate = GoogleApi.Entities.Maps.Directions.Request.Coordinate;
 
 namespace GoogleApi.Test.Maps.Directions
 {
@@ -23,8 +21,8 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(origin),
-                Destination = new Location(destination)
+                Origin = new LocationEx(origin),
+                Destination = new LocationEx(destination)
             };
 
             var result = GoogleMaps.Directions.Query(request);
@@ -35,13 +33,13 @@ namespace GoogleApi.Test.Maps.Directions
         [Test]
         public void DirectionsWhenCoordinateTest()
         {
-            var origin = new Coordinate(55.7237480, 12.4208282);
-            var destination = new Coordinate(55.72672682, 12.407996582);
+            var origin = new CoordinateEx(55.7237480, 12.4208282);
+            var destination = new CoordinateEx(55.72672682, 12.407996582);
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(origin),
-                Destination = new Location(destination)
+                Origin = new LocationEx(origin),
+                Destination = new LocationEx(destination)
             };
 
             var result = GoogleMaps.Directions.Query(request);
@@ -52,19 +50,19 @@ namespace GoogleApi.Test.Maps.Directions
         [Test]
         public void DirectionsWhenCoordinateAndHeadingTest()
         {
-            var origin = new Coordinate(55.7237480, 12.4208282)
+            var origin = new CoordinateEx(55.7237480, 12.4208282)
             {
                 Heading = 90
             };
-            var destination = new Coordinate(55.72672682, 12.407996582)
+            var destination = new CoordinateEx(55.72672682, 12.407996582)
             {
                 Heading = 90
             };
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(origin),
-                Destination = new Location(destination)
+                Origin = new LocationEx(origin),
+                Destination = new LocationEx(destination)
             };
 
             var result = GoogleMaps.Directions.Query(request);
@@ -75,19 +73,19 @@ namespace GoogleApi.Test.Maps.Directions
         [Test]
         public void DirectionsWhenCoordinateAndUseSideOfRoadTest()
         {
-            var origin = new Coordinate(55.7237480, 12.4208282)
+            var origin = new CoordinateEx(55.7237480, 12.4208282)
             {
                 UseSideOfRoad = true
             };
-            var destination = new Coordinate(55.72672682, 12.407996582)
+            var destination = new CoordinateEx(55.72672682, 12.407996582)
             {
                 UseSideOfRoad = true
             };
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(origin),
-                Destination = new Location(destination)
+                Origin = new LocationEx(origin),
+                Destination = new LocationEx(destination)
             };
 
             var result = GoogleMaps.Directions.Query(request);
@@ -103,8 +101,8 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(origin),
-                Destination = new Location(destination)
+                Origin = new LocationEx(origin),
+                Destination = new LocationEx(destination)
             };
 
             var result = GoogleMaps.Directions.Query(request);
@@ -118,8 +116,8 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
-                Destination = new Location(new Address("185 Broadway Ave, Manhattan, NY, USA")),
+                Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
+                Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
                 Avoid = AvoidWay.Highways
             };
 
@@ -134,8 +132,8 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
-                Destination = new Location(new Address("185 Broadway Ave, Manhattan, NY, USA")),
+                Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
+                Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
                 TravelMode = TravelMode.Driving,
                 DepartureTime = DateTime.UtcNow.AddHours(1)
             };
@@ -151,8 +149,8 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
-                Destination = new Location(new Address("185 Broadway Ave, Manhattan, NY, USA")),
+                Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
+                Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
                 TravelMode = TravelMode.Driving,
                 ArrivalTime = DateTime.UtcNow.AddHours(1),
                 TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
@@ -169,11 +167,11 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(new Address("NYC, USA")),
-                Destination = new Location(new Address("Miami, USA")),
+                Origin = new LocationEx(new Address("NYC, USA")),
+                Destination = new LocationEx(new Address("Miami, USA")),
                 WayPoints = new List<WayPoint>
                 {
-                    new WayPoint(new Location(new Address("Philadelphia, USA")))
+                    new WayPoint(new LocationEx(new Address("Philadelphia, USA")))
                 },
                 OptimizeWaypoints = false
             };
@@ -189,11 +187,11 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(new Address("NYC, USA")),
-                Destination = new Location(new Address("Miami, USA")),
+                Origin = new LocationEx(new Address("NYC, USA")),
+                Destination = new LocationEx(new Address("Miami, USA")),
                 WayPoints = new List<WayPoint>
                 {
-                    new WayPoint(new Location(new Address("Philadelphia, USA")), true)
+                    new WayPoint(new LocationEx(new Address("Philadelphia, USA")), true)
                 },
                 OptimizeWaypoints = true
             };
@@ -209,8 +207,8 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
-                Destination = new Location(new Address("185 Broadway Ave, Manhattan, NY, USA"))
+                Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
+                Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA"))
             };
 
             var result = GoogleMaps.Directions.QueryAsync(request).Result;
@@ -224,8 +222,8 @@ namespace GoogleApi.Test.Maps.Directions
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
-                Origin = new Location(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
-                Destination = new Location(new Address("185 Broadway Ave, Manhattan, NY, USA"))
+                Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
+                Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA"))
             };
             var cancellationTokenSource = new CancellationTokenSource();
             var task = GoogleMaps.Directions.QueryAsync(request, cancellationTokenSource.Token);
