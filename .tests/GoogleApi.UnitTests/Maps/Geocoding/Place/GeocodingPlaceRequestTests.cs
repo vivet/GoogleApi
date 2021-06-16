@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
 using NUnit.Framework;
@@ -12,6 +14,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Place
         public void ConstructorDefaultTest()
         {
             var request = new PlaceGeocodeRequest();
+            Assert.AreEqual(Language.English, request.Language);
         }
 
         [Test]
@@ -19,11 +22,26 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Place
         {
             var request = new PlaceGeocodeRequest
             {
-                Key = "abc",
-                PlaceId= "abc"
+                Key = "key",
+                PlaceId = "place_id"
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+
+            var key = queryStringParameters.SingleOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var language = queryStringParameters.SingleOrDefault(x => x.Key == "language");
+            var languageExpected = request.Language.ToCode();
+            Assert.IsNotNull(language);
+            Assert.AreEqual(languageExpected, language.Value);
+
+            var location = queryStringParameters.SingleOrDefault(x => x.Key == "place_id");
+            var locationExpected = request.PlaceId;
+            Assert.IsNotNull(location);
+            Assert.AreEqual(locationExpected, location.Value);
         }
 
         [Test]
@@ -34,13 +52,20 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Place
                 Key = null
             };
 
-            var exception = Assert.Throws<ArgumentException>(() =>
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+        {
+            var request = new PlaceGeocodeRequest
             {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+                Key = string.Empty
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
         }
 
         [Test]
@@ -48,7 +73,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Place
         {
             var request = new PlaceGeocodeRequest
             {
-                Key = "abc"
+                Key = "key"
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -57,22 +82,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Place
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "PlaceId is required");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new PlaceGeocodeRequest
-            {
-                Key = "abc",
-                PlaceId = "abc"
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/geocode/json?key={request.Key}&language={request.Language.ToCode()}&place_id={Uri.EscapeDataString(request.PlaceId)}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'PlaceId' is required");
         }
     }
 }

@@ -23,20 +23,11 @@ namespace GoogleApi.Entities.Common
         public string LocalCode { get; protected set; }
 
         /// <summary>
-        /// Constructor (default)
-        /// </summary>
-        protected PlusCode()
-        {
-
-        }
-
-        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="globalCode">The global code.</param>
         /// <param name="localCode">The local code.</param>
         public PlusCode(string globalCode, string localCode)
-            : this()
         {
             this.GlobalCode = globalCode ?? throw new ArgumentNullException(nameof(globalCode));
             this.LocalCode = localCode ?? throw new ArgumentNullException(nameof(localCode));

@@ -28,7 +28,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
         /// then discards those results that do not match the specified address type(s).
         /// Note: This parameter is available only for requests that include an API key or a client ID. 
         /// </summary>
-        public virtual IEnumerable<PlaceLocationType> ResultTypes { get; set; }
+        public virtual IEnumerable<PlaceLocationType> ResultTypes { get; set; } = new List<PlaceLocationType>();
 
         /// <summary>
         /// location_type — A filter of one or more location types, separated by a pipe (|).
@@ -38,7 +38,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
         /// then discards those results that do not match the specified location type(s).
         /// Note: This parameter is available only for requests that include an API key or a client ID. 
         /// </summary>
-        public virtual IEnumerable<GeometryLocationType> LocationTypes { get; set; }
+        public virtual IEnumerable<GeometryLocationType> LocationTypes { get; set; } = new List<GeometryLocationType>();
 
         /// <summary>
         /// See <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>.
@@ -46,18 +46,22 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Location == null)
-                throw new ArgumentException("Location is required");
-
             var parameters = base.GetQueryStringParameters();
+
+            if (this.Location == null)
+                throw new ArgumentException($"'{nameof(this.Location)}' is required");
 
             parameters.Add("latlng", this.Location.ToString());
 
             if (this.ResultTypes != null && this.ResultTypes.Any())
-                parameters.Add("result_type", string.Join("|", this.ResultTypes.Select(x => x.ToString().ToLower()).AsEnumerable()));
+            {
+                parameters.Add("result_type", string.Join("|", this.ResultTypes.Select(x => x.ToString().ToLower())));
+            }
 
             if (this.LocationTypes != null && this.LocationTypes.Any())
-                parameters.Add("location_type", string.Join("|", this.LocationTypes.Select(x => x.ToString().ToUpper()).AsEnumerable()));
+            {
+                parameters.Add("location_type", string.Join("|", this.LocationTypes.Select(x => x.ToString().ToUpper())));
+            }
 
             return parameters;
         }

@@ -24,13 +24,10 @@ namespace GoogleApi.Entities.Maps.Geocoding.Place.Request
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Key == null)
-                throw new ArgumentException("Key is required");
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.PlaceId))
-                throw new ArgumentException("PlaceId is required");
-
-            var parameters = base.GetQueryStringParameters();
+                throw new ArgumentException($"'{nameof(this.PlaceId)}' is required");
 
             parameters.Add("place_id", this.PlaceId);
 

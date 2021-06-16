@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
@@ -8,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
     /// <summary>
     /// Plus Code Request.
     /// </summary>
-    public class PlusCodeGeocodeRequest : BaseGeocodeRequest
+    public class PlusCodeGeocodeRequest : BaseRequest
     {
         /// <summary>
         /// Base Url.
@@ -16,38 +17,21 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
         protected internal override string BaseUrl => "plus.codes/api";
 
         /// <summary>
-        /// Address.
-        /// The street address to geocode.
-        /// Ignored if PlaceId or Location is specified.
+        /// The Address.
+        /// The address to encode. This can be any of the following (if the ekey parameter is also provided):
+        /// - A latitude/longitude
+        /// - A street address
+        /// - A global code
+        /// - A local code and locality
         /// </summary>
-        public virtual string Address { get; set; }
+        public virtual Location Address { get; set; }
 
         /// <summary>
-        /// Place Id.
-        /// Google's unique place identifier.
+        /// language (optional) — The language in which to return results. 
+        /// See the supported list of domain languages. Note that we often update supported languages so this list may not be exhaustive. 
+        /// If language is not supplied, the geocoder will attempt to use the native language of the domain from which the request is sent wherever possible.
         /// </summary>
-        public virtual string PlaceId { get; set; }
-
-        /// <summary>
-        /// Location.
-        /// Latitude / Longitude.
-        /// Requires key to be specified.
-        /// </summary>
-        public virtual Coordinate Location { get; set; }
-
-        /// <summary>
-        /// Local Code
-        /// The local code relative to the locality.
-        /// Only used in conjuction with Address and Location. Ignored if geocoding using Global Code.
-        /// </summary>
-        public virtual string LocalCode { get; set; }
-
-        /// <summary>
-        /// Global Code.
-        /// The global code for the latitude/longitude.
-        /// Ignored if PlaceId, Location or address is specified.
-        /// </summary>
-        public virtual string GlobalCode { get; set; }
+        public virtual Language Language { get; set; } = Language.English;
 
         /// <summary>
         /// Email.
@@ -56,28 +40,35 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
         public virtual string Email { get; set; }
 
         /// <summary>
+        /// Use Encrypted Key.
+        /// The request will send the 'ekey' parameter instead of 'key'.
+        /// See https://github.com/google/open-location-code/wiki/Plus-codes-API#securing-your-api-key
+        /// </summary>
+        public virtual bool UseEncryptedKey { get; set; } = false;
+
+        /// <summary>
         /// See <see cref="BaseGeocodeRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            var parameters = base.GetQueryStringParameters();
+            var parameters = new List<KeyValuePair<string, string>>();
 
-            if (this.PlaceId == null && this.Location == null && string.IsNullOrEmpty(this.Address) && string.IsNullOrEmpty(this.GlobalCode))
-                throw new ArgumentException("PlaceId, Location, Address or GlobalCode is required");
+            if (!string.IsNullOrEmpty(this.Key))
+            {
+                parameters.Add(this.UseEncryptedKey ? "ekey" : "key", this.Key);
+            }
 
-            var address = !string.IsNullOrEmpty(this.PlaceId)
-                ? this.PlaceId
-                : this.Location != null
-                    ? $"{this.LocalCode} {this.Location}".Trim()
-                    : !string.IsNullOrEmpty(this.Address)
-                        ? $"{this.LocalCode} {this.Address}".Trim()
-                        : this.GlobalCode;
-
-            parameters.Add("address", address);
+            if (this.Address == null)
+                throw new ArgumentException($"{nameof(this.Address)} is required");
+            
+            parameters.Add("address", this.Address.ToString());
+            parameters.Add("language", this.Language.ToCode());
 
             if (!string.IsNullOrEmpty(this.Email))
+            {
                 parameters.Add("email", this.Email);
+            }
 
             return parameters;
         }
