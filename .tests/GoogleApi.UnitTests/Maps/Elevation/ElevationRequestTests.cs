@@ -188,7 +188,7 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             var request = new ElevationRequest
             {
                 Key = "key",
-                Locations = new List<Coordinate>()
+                Locations = new List<Coordinate>
                 {
                     new Coordinate(0, 0)
                 },

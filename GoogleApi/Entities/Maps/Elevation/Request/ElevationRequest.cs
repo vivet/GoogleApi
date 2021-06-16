@@ -53,7 +53,7 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
             if (this.Locations != null && this.Locations.Any() && this.Path != null && this.Path.Any())
                 throw new ArgumentException($"'{nameof(this.Path)}' and '{nameof(this.Locations)}' cannot both be specified");
 
-            if (this.Locations == null || !this.Locations.Any())
+            if (this.Path != null && this.Path.Any())
             {
                 if (this.Path.Count() <= 1)
                     throw new ArgumentException($"A minimum of two coordinates is required when using '{nameof(this.Path)}'");
@@ -64,7 +64,8 @@ namespace GoogleApi.Entities.Maps.Elevation.Request
                 parameters.Add("path", string.Join("|", this.Path));
                 parameters.Add("samples", this.Samples.ToString());
             }
-            else
+
+            if (this.Locations != null && this.Locations.Any())
             {
                 parameters.Add("locations", string.Join("|", this.Locations));
             }

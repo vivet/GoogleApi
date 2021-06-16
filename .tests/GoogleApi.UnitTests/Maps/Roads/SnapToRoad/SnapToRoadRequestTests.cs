@@ -44,8 +44,8 @@ namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad
 
             var interpolate = queryStringParameters.FirstOrDefault(x => x.Key == "interpolate");
             var interpolateExpected = request.Interpolate.ToString().ToLower();
-            Assert.IsNotNull(points);
-            Assert.AreEqual(pointsExpected, points.Value);
+            Assert.IsNotNull(interpolate);
+            Assert.AreEqual(interpolateExpected, interpolate.Value);
         }
 
         [Test]

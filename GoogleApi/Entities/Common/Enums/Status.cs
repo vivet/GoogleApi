@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Common.Enums
 {

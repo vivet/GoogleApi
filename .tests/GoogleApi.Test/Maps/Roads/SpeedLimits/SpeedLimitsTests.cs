@@ -1,7 +1,5 @@
 using System;
 using System.Threading;
-using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using NUnit.Framework;

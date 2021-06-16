@@ -225,6 +225,12 @@ namespace GoogleApi.Entities.Maps.Directions.Request
 
                     break;
                 }
+                case TravelMode.Walking:
+                case TravelMode.Bicycling:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             if (this.WayPoints != null && this.WayPoints.Any())

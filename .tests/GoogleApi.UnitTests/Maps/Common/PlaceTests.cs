@@ -38,10 +38,10 @@ namespace GoogleApi.UnitTests.Maps.Common
         public void ToStringWhenPrefixTest()
         {
             var place = new Place("id");
-            var prefix = "place_id";
+            const string PREFIX = "place_id";
 
-            var toString = place.ToString(prefix);
-            Assert.AreEqual($"{prefix}:{place.Id}", toString);
+            var toString = place.ToString(PREFIX);
+            Assert.AreEqual($"{PREFIX}:{place.Id}", toString);
         }
     }
 }

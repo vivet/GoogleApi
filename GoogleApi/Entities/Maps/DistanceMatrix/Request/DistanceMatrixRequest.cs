@@ -181,6 +181,12 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
 
                     break;
                 }
+                case TravelMode.Walking:
+                case TravelMode.Bicycling:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             return parameters;

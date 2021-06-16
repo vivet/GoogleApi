@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocoding.Address

@@ -119,6 +119,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Extensions
                 case Language.Yiddish: return "yi";
                 case Language.Yoruba: return "yo";
                 case Language.Zulu: return "zu";
+                case Language.HebrewOld: return "iw";
+                case Language.Kinyarwanda: return "rw";
+                case Language.Odia: return "or";
+                case Language.Tatar: return "tt";
+                case Language.Turkmen: return "tk";
+                case Language.Uyghur: return "ug";
 
                 default:
                     return string.Empty;
@@ -241,6 +247,12 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Extensions
                 case Language.Yiddish:
                 case Language.Yoruba:
                 case Language.Zulu:
+                case Language.HebrewOld:
+                case Language.Kinyarwanda:
+                case Language.Odia: 
+                case Language.Tatar:
+                case Language.Turkmen:
+                case Language.Uyghur:
                     return false;
 
                 default:
