@@ -4,6 +4,7 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Location.Request
     /// <summary>
     /// Reverse Geocoding Request.
     /// </summary>
-    public class LocationGeocodeRequest : BaseGeocodeRequest
+    public class LocationGeocodeRequest : BaseGeocodeRequest, IRequestQueryString
     {
         /// <summary>
         /// Latlng (required).

@@ -4,13 +4,14 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Address.Request
 {
     /// <summary>
     /// Geocoding Request.
     /// </summary>
-    public class AddressGeocodeRequest : BaseGeocodeRequest
+    public class AddressGeocodeRequest : BaseGeocodeRequest, IRequestQueryString
     {
         /// <summary>
         /// Address (required).

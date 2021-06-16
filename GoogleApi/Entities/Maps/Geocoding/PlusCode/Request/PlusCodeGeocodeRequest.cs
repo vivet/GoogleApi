@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Request
 {
     /// <summary>
     /// Plus Code Request.
     /// </summary>
-    public class PlusCodeGeocodeRequest : BaseRequest
+    public class PlusCodeGeocodeRequest : BaseRequest, IRequestQueryString
     {
         /// <inheritdoc />
         protected internal override string BaseUrl => "plus.codes/api";

@@ -4,6 +4,7 @@ using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
@@ -16,7 +17,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 	/// The Google Static Maps API service creates your map based on URL parameters sent through a standard HTTP request and returns the map as an image you can 
 	/// display on your web page.
 	/// </summary>
-	public class StaticMapsRequest : BaseMapsChannelRequest
+	public class StaticMapsRequest : BaseMapsChannelRequest, IRequestQueryString
 	{
         /// <inheritdoc />
         protected internal override string BaseUrl => base.BaseUrl + "staticmap";

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StreetView.Request.Enums;
 
@@ -9,7 +10,7 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
     /// <summary>
 	/// Street View Request.
 	/// </summary>
-	public class StreetViewRequest : BaseMapsChannelRequest
+	public class StreetViewRequest : BaseMapsChannelRequest, IRequestQueryString
 	{
         /// <inheritdoc />
         protected internal override string BaseUrl => base.BaseUrl + "streetview";

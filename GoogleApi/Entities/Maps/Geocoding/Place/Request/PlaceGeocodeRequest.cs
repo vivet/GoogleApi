@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Place.Request
 {
     /// <summary>
     /// Place Geocoding Request.
     /// </summary>
-    public class PlaceGeocodeRequest : BaseGeocodeRequest
+    public class PlaceGeocodeRequest : BaseGeocodeRequest, IRequestQueryString
     {
         /// <summary>
         /// PlaceId (required).

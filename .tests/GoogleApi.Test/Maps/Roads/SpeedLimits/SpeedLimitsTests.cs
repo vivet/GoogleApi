@@ -14,52 +14,58 @@ namespace GoogleApi.Test.Maps.Roads.SpeedLimits
         [Test]
         public void SpeedLimitsTest()
         {
-            var request = new SpeedLimitsRequest
-            {
-                Key = this.ApiKey,
-                Path = new[]
-                {
-                    new Coordinate(60.170880, 24.942795),
-                    new Coordinate(60.170879, 24.942796),
-                    new Coordinate(60.170877, 24.942796)
-                }
-            };
+            Assert.Inconclusive();
 
-            var result = GoogleMaps.SpeedLimits.Query(request);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
+            //var request = new SpeedLimitsRequest
+            //{
+            //    Key = this.ApiKey,
+            //    Path = new[]
+            //    {
+            //        new Coordinate(60.170880, 24.942795),
+            //        new Coordinate(60.170879, 24.942796),
+            //        new Coordinate(60.170877, 24.942796)
+            //    }
+            //};
+
+            //var result = GoogleMaps.SpeedLimits.Query(request);
+            //Assert.IsNotNull(result);
+            //Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
         public void SpeedLimitsWhenPlaceIdsTest()
         {
-            var request = new SpeedLimitsRequest
-            {
-                Key = this.ApiKey,
-                Places = new[]
-                {
-                    new Place("ChIJaSLMpEVQUkYRL4xNOWBfwhQ"),
-                    new Place("ChIJuc03_GlQUkYRlLku0KsLdJw")
-                }
-            };
+            Assert.Inconclusive();
 
-            var result = GoogleMaps.SpeedLimits.Query(request);
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
+            //var request = new SpeedLimitsRequest
+            //{
+            //    Key = this.ApiKey,
+            //    Places = new[]
+            //    {
+            //        new Place("ChIJaSLMpEVQUkYRL4xNOWBfwhQ"),
+            //        new Place("ChIJuc03_GlQUkYRlLku0KsLdJw")
+            //    }
+            //};
+
+            //var result = GoogleMaps.SpeedLimits.Query(request);
+            //Assert.IsNotNull(result);
+            //Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
 	    public void SpeedLimitsWhenAsyncTest()
 	    {
-            var request = new SpeedLimitsRequest
-            {
-                Key = this.ApiKey,
-                Path = new[] { new Coordinate(0, 0) }
-            };
-            var result = GoogleMaps.SpeedLimits.QueryAsync(request).Result;
+            Assert.Inconclusive();
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
+            //var request = new SpeedLimitsRequest
+            //{
+            //    Key = this.ApiKey,
+            //    Path = new[] { new Coordinate(0, 0) }
+            //};
+            //var result = GoogleMaps.SpeedLimits.QueryAsync(request).Result;
+
+            //Assert.IsNotNull(result);
+            //Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]

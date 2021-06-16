@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
 
@@ -11,7 +12,7 @@ namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Request
     /// <summary>
     /// Speed limits request.
     /// </summary>
-    public class SpeedLimitsRequest : BaseMapsRequest
+    public class SpeedLimitsRequest : BaseMapsRequest, IRequestQueryString
     {
         /// <inheritdoc />
         protected internal override string BaseUrl => "roads.googleapis.com/v1/speedLimits";

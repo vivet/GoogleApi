@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
 {
     /// <summary>
     /// NearestRoads request.
     /// </summary>
-    public class NearestRoadsRequest : BaseMapsRequest
+    public class NearestRoadsRequest : BaseMapsRequest, IRequestQueryString
     {
         /// <inheritdoc />
         protected internal override string BaseUrl => "roads.googleapis.com/v1/nearestRoads";

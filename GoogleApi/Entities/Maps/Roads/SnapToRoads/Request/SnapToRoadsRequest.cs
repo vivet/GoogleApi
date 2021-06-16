@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Roads.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
@@ -9,7 +10,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
     /// <summary>
     /// SnapToRoads request.
     /// </summary>
-    public class SnapToRoadsRequest : BaseMapsRequest
+    public class SnapToRoadsRequest : BaseMapsRequest, IRequestQueryString
     {
         /// <inheritdoc />
         protected internal override string BaseUrl => "roads.googleapis.com/v1/snapToRoads";
