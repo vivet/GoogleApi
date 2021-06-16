@@ -1,6 +1,5 @@
 using System;
-using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Maps.Roads.Common;
+using System.Linq;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
 using NUnit.Framework;
 using Coordinate = GoogleApi.Entities.Maps.Roads.Common.Coordinate;
@@ -11,17 +10,11 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
     public class NearestRoadsRequestTests
     {
         [Test]
-        public void ConstructorDefaultTest()
-        {
-            var request = new NearestRoadsRequest();
-        }
-
-        [Test]
         public void GetQueryStringParametersTest()
         {
             var request = new NearestRoadsRequest
             {
-                Key = "abc",
+                Key = "key",
                 Points = new[]
                 {
                     new Coordinate(1, 1),
@@ -29,7 +22,18 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
                 }
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.SingleOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var points = queryStringParameters.FirstOrDefault(x => x.Key == "points");
+            var pointsExpected = string.Join("|", request.Points);
+            Assert.IsNotNull(points);
+            Assert.AreEqual(pointsExpected, points.Value);
         }
 
         [Test]
@@ -37,8 +41,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
         {
             var request = new NearestRoadsRequest
             {
-                Key = null,
-                Points = new[] { new Coordinate(0, 0) }
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -47,7 +50,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -55,8 +58,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
         {
             var request = new NearestRoadsRequest
             {
-                Key = string.Empty,
-                Points = new[] { new Coordinate(0, 0) }
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -65,7 +67,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -73,7 +75,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
         {
             var request = new NearestRoadsRequest
             {
-                Key = "abc"
+                Key = "key"
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -82,25 +84,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Points is required");
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenPointsIsEmptyTest()
-        {
-            var request = new NearestRoadsRequest
-            {
-                Key = "abc",
-                Points = new Coordinate[0]
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Points is required");
+            Assert.AreEqual(exception.Message, "'Points' is required");
         }
 
         [Test]
@@ -118,26 +102,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Path must contain less than 100 locations");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new NearestRoadsRequest
-            {
-                Key = "abc",
-                Points = new[]
-                {
-                    new Coordinate(1, 1),
-                    new Coordinate(2, 2) 
-                }
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/v1/nearestRoads?key={request.Key}&points={Uri.EscapeDataString(string.Join("|", request.Points))}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'Points' must contain equal or less than 100 coordinates");
         }
     }
 }
