@@ -8,6 +8,19 @@ Google Maps, Places, Roads, Search and Translate.
 
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 
+```diff
++++ The implementation for GoogleApi 4.0 is now in progress.  
++++ https://github.com/vivet/GoogleApi/tree/VERSION_4
+
++++ All requests and responses will be aligned with Google, and generic implementations will be improved. 
++++ If you have any good ideas or feedback, feel free to create and issue, 
++++ and I will consider including it.
+
++++ Additionally, location and coordinate implementation will be greatly refactored, in order to better 
++++ support the the different ways it's supported by Google (Place, Coordinate, Address, PlusCode, etc).
+
++++ I expect to release it sometime in July.
+```
 *** 
 
 ### Getting started...

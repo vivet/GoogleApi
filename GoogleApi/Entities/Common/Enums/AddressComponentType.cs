@@ -6,13 +6,13 @@ namespace GoogleApi.Entities.Common.Enums
     /// Location types.
     /// </summary>
     public enum AddressComponentType
-    {        
+    {
         /// <summary>
         /// Unknown is set when unmapped place location types is returned.
         /// </summary>
         [EnumMember(Value = "unknown")]
         Uknown,
-        
+
         /// <summary>
         /// Indicates a precise street address.
         /// </summary>
@@ -44,35 +44,35 @@ namespace GoogleApi.Entities.Common.Enums
         Country,
 
         /// <summary>
-        /// Indicates a first-order civil entity below the country level. Within the United States, these administrative levels are states. 
+        /// Indicates a first-order civil entity below the country level. Within the United States, these administrative levels are states.
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_1")]
         Administrative_Area_Level_1,
 
         /// <summary>
-        /// Indicates a second-order civil entity below the country level. Within the United States, these administrative levels are counties. 
+        /// Indicates a second-order civil entity below the country level. Within the United States, these administrative levels are counties.
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_2")]
         Administrative_Area_Level_2,
 
         /// <summary>
-        /// Indicates a third-order civil entity below the country level. This type indicates a minor civil division. 
+        /// Indicates a third-order civil entity below the country level. This type indicates a minor civil division.
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_3")]
         Administrative_Area_Level_3,
 
         /// <summary>
-        /// Indicates a fourth-order civil entity below the country level. This type indicates a minor civil division. 
+        /// Indicates a fourth-order civil entity below the country level. This type indicates a minor civil division.
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_4")]
         Administrative_Area_Level_4,
 
         /// <summary>
-        /// Indicates a fifth-order civil entity below the country level. This type indicates a minor civil division. 
+        /// Indicates a fifth-order civil entity below the country level. This type indicates a minor civil division.
         /// Not all nations exhibit these administrative levels.
         /// </summary>
         [EnumMember(Value = "administrative_area_level_5")]
@@ -95,7 +95,7 @@ namespace GoogleApi.Entities.Common.Enums
         /// </summary>
         [EnumMember(Value = "ward")]
         Ward,
-        
+
         /// <summary>
         /// indicates an first-order civil entity below a locality
         /// </summary>
@@ -254,6 +254,17 @@ namespace GoogleApi.Entities.Common.Enums
         /// Postal code suffix.
         /// </summary>
         [EnumMember(Value = "postal_code_suffix")]
-        Postal_Code_Suffix
+        Postal_Code_Suffix,
+
+        /// <summary>
+        /// Indicates an encoded location reference, derived from latitude and longitude.
+        /// <para/>
+        /// Plus codes can be used as a replacement for street addresses in places where they do not exist
+        /// (where buildings are not numbered or streets are not named).
+        /// <para/>
+        /// See <see href="https://plus.codes"/> for details.
+        /// </summary>
+        [EnumMember(Value = "plus_code")]
+        Plus_Code,
     }
 }
