@@ -13,9 +13,7 @@ namespace GoogleApi.Entities.Translate.Translate.Request
     /// </summary>
     public class TranslateRequest : BaseTranslateRequest
     {
-        /// <summary>
-        /// Base url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2";
 
         /// <summary>
@@ -54,14 +52,13 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// </summary>
         public virtual IEnumerable<string> Qs { get; set; }
 
-        /// <summary>
-        /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
+            var parameters = base.GetQueryStringParameters();
+
             if (this.Target == null)
-                throw new ArgumentException("Target is required");
+                throw new ArgumentException($"'{nameof(this.Target)}' is required");
 
             if (this.Qs == null || !this.Qs.Any())
                 throw new ArgumentException("Qs is required");
@@ -69,16 +66,14 @@ namespace GoogleApi.Entities.Translate.Translate.Request
             if (this.Model == Model.Nmt)
             {
                 if (this.Source != null && !this.Source.Value.IsValidNmt())
-                    throw new ArgumentException("Source is not compatible with model 'nmt'");
+                    throw new ArgumentException($"'{nameof(this.Source)}' is not compatible with model 'nmt'");
 
                 if (!this.Target.Value.IsValidNmt())
-                    throw new ArgumentException("Target is not compatible with model 'nmt'");
+                    throw new ArgumentException($"'{nameof(this.Target)}' is not compatible with model 'nmt'");
 
                 if (this.Source != null && this.Source != Language.English && this.Target != Language.English)
-                    throw new ArgumentException("Source or Target must be english");
+                    throw new ArgumentException($"'{nameof(this.Source)}' or Target must be english");
             }
-
-            var parameters = base.GetQueryStringParameters();
 
             parameters.Add("target", this.Target?.ToCode());
             parameters.Add("model", this.Model.ToString().ToLower());

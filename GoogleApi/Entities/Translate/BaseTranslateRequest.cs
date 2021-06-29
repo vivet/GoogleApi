@@ -9,14 +9,11 @@ namespace GoogleApi.Entities.Translate
     /// </summary>
     public abstract class BaseTranslateRequest : BaseRequest, IRequestQueryString
     {
-        /// <summary>
-        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Key))
-                throw new ArgumentException("Key is required");
+                throw new ArgumentException($"'{nameof(this.Key)}' is required");
 
             var parameters = base.GetQueryStringParameters();
 

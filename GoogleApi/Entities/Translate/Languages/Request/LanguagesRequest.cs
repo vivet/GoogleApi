@@ -6,14 +6,14 @@ using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities.Translate.Languages.Request
 {
+    // TODO: VERIFY THAT SERIALIZATION WORKS WHERE NO DEFAULT CONSTRUCTOR. MAYBE JUST MAKE THE DEFAULT CONSTRUCTORS PROTECTED.
+
     /// <summary>
     /// Languages Request.
     /// </summary>
     public class LanguagesRequest : BaseTranslateRequest
     {
-        /// <summary>
-        /// Base url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2/languages";
 
         /// <summary>
@@ -31,16 +31,19 @@ namespace GoogleApi.Entities.Translate.Languages.Request
         /// </summary>
         public virtual Model Model { get; set; } = Model.Base;
 
-        /// <summary>
-        /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Target == null)
-                throw new ArgumentException("Target is required");
-
             var parameters = base.GetQueryStringParameters();
+
+            if (this.Target == null)
+                throw new ArgumentException($"'{nameof(this.Target)}' is required");
+
+            // TODO: Check docs.
+            //if (!this.Target.Value.IsValidNmt())
+            //    throw new ArgumentException($"'{nameof(this.Target)}' is not compatible with model 'nmt'");
+
+            // TODO: Seems it should be posted Json, all of the translate endpoints.
 
             parameters.Add("target", this.Target?.ToCode());
             parameters.Add("model", this.Model.ToString().ToLower());

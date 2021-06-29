@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Languages.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
@@ -74,80 +73,6 @@ namespace GoogleApi.Test.Translate.Languages
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
-
-        [Test]
-        public void LanguagesWhenInvalidKeyTest()
-        {
-            var request = new LanguagesRequest
-            {
-                Key = "test",
-                Target = Language.Danish
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Languages.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            Assert.AreEqual("One or more errors occurred. (Response status code does not indicate success: 400 (Bad Request).)", exception.Message);
-
-            var innerException = exception.InnerExceptions.FirstOrDefault();
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual("Response status code does not indicate success: 400 (Bad Request).", innerException.Message);
-        }
-
-        [Test]
-        public void LanguagesWhenKeyIsNullTest()
-        {
-            var request = new LanguagesRequest
-            {
-                Key = null,
-                Target = Language.English
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Languages.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void LanguagesWhenKeyIsStringEmptyTest()
-        {
-            var request = new LanguagesRequest
-            {
-                Key = string.Empty,
-                Target = Language.English
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Languages.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void LanguagesWhenTargetIsNullTest()
-        {
-            var request = new LanguagesRequest
-            {
-                Key = this.ApiKey,
-                Target = null
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleTranslate.Languages.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Target is required");
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Languages.Request;
@@ -13,8 +14,6 @@ namespace GoogleApi.UnitTests.Translate.Languages
         public void ConstructorDefaultTest()
         {
             var request = new LanguagesRequest();
-
-            Assert.IsNull(request.Target);
             Assert.AreEqual(Model.Base, request.Model);
         }
 
@@ -23,11 +22,27 @@ namespace GoogleApi.UnitTests.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = "abc",
+                Key = "key",
                 Target = Language.Afrikaans
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var target = queryStringParameters.FirstOrDefault(x => x.Key == "target");
+            var targetExpected = request.Target.GetValueOrDefault().ToCode();
+            Assert.IsNotNull(target);
+            Assert.AreEqual(targetExpected, target.Value);
+
+            var model = queryStringParameters.FirstOrDefault(x => x.Key == "model");
+            var modelExpected = request.Model.ToString().ToLower();
+            Assert.IsNotNull(model);
+            Assert.AreEqual(modelExpected, model.Value);
         }
 
         [Test]
@@ -35,8 +50,7 @@ namespace GoogleApi.UnitTests.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = null,
-                Target = Language.Afrikaans
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -44,7 +58,7 @@ namespace GoogleApi.UnitTests.Translate.Languages
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -52,8 +66,7 @@ namespace GoogleApi.UnitTests.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = string.Empty,
-                Target = Language.Afrikaans
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -61,7 +74,7 @@ namespace GoogleApi.UnitTests.Translate.Languages
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -69,7 +82,7 @@ namespace GoogleApi.UnitTests.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = "abc",
+                Key = "key",
                 Target = null
             };
 
@@ -78,22 +91,7 @@ namespace GoogleApi.UnitTests.Translate.Languages
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Target is required");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new LanguagesRequest
-            {
-                Key = "abc",
-                Target = Language.Afrikaans
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/language/translate/v2/languages?key={request.Key}&target={request.Target.GetValueOrDefault().ToCode()}&model={request.Model.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'Target' is required");
         }
     }
 }
