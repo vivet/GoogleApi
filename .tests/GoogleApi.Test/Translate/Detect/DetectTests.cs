@@ -92,6 +92,5 @@ namespace GoogleApi.Test.Translate.Detect
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
         }
-
     }
 }

@@ -11,14 +11,24 @@ namespace GoogleApi.UnitTests.Translate.Languages
     public class LanguagesRequestTests
     {
         [Test]
-        public void ConstructorDefaultTest()
+        public void GetQueryStringParametersTest()
         {
-            var request = new LanguagesRequest();
-            Assert.AreEqual(Model.Base, request.Model);
+            var request = new LanguagesRequest
+            {
+                Key = "key"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
         }
 
         [Test]
-        public void GetQueryStringParametersTest()
+        public void GetQueryStringParametersWhenTargetTest()
         {
             var request = new LanguagesRequest
             {
@@ -38,11 +48,6 @@ namespace GoogleApi.UnitTests.Translate.Languages
             var targetExpected = request.Target.GetValueOrDefault().ToCode();
             Assert.IsNotNull(target);
             Assert.AreEqual(targetExpected, target.Value);
-
-            var model = queryStringParameters.FirstOrDefault(x => x.Key == "model");
-            var modelExpected = request.Model.ToString().ToLower();
-            Assert.IsNotNull(model);
-            Assert.AreEqual(modelExpected, model.Value);
         }
 
         [Test]
@@ -75,23 +80,6 @@ namespace GoogleApi.UnitTests.Translate.Languages
                 Assert.IsNull(parameters);
             });
             Assert.AreEqual(exception.Message, "'Key' is required");
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenTargetIsNullTest()
-        {
-            var request = new LanguagesRequest
-            {
-                Key = "key",
-                Target = null
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.AreEqual(exception.Message, "'Target' is required");
         }
     }
 }

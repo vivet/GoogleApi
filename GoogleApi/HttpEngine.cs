@@ -165,6 +165,7 @@ namespace GoogleApi
                             switch (response.Status)
                             {
                                 case Status.Ok:
+                                case Status.NotFound:
                                 case Status.ZeroResults:
                                     taskCompletion.SetResult(response);
                                     break;

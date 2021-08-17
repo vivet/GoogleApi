@@ -27,15 +27,41 @@ namespace GoogleApi.UnitTests.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = "abc",
+                Key = "key",
                 Target = Language.Afrikaans,
                 Qs = new[]
                 {
-                    "abc"
+                    "query"
                 }
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var target = queryStringParameters.FirstOrDefault(x => x.Key == "target");
+            var targetExpected = request.Target.GetValueOrDefault().ToCode();
+            Assert.IsNotNull(target);
+            Assert.AreEqual(targetExpected, target.Value);
+
+            var qs = queryStringParameters.FirstOrDefault(x => x.Key == "q");
+            var qsExpected = request.Qs.FirstOrDefault();
+            Assert.IsNotNull(qs);
+            Assert.AreEqual(qsExpected, qs.Value);
+
+            var model = queryStringParameters.FirstOrDefault(x => x.Key == "model");
+            var modelExpected = request.Model.ToString().ToLower();
+            Assert.IsNotNull(model);
+            Assert.AreEqual(modelExpected, model.Value);
+
+            var format = queryStringParameters.FirstOrDefault(x => x.Key == "format");
+            var formatExpected = request.Format.ToString().ToLower();
+            Assert.IsNotNull(format);
+            Assert.AreEqual(formatExpected, format.Value);
         }
 
         [Test]
@@ -43,9 +69,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = null,
-                Qs = new[] { "Hej Verden" },
-                Target = Language.Afrikaans
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -53,7 +77,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -61,9 +85,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = string.Empty,
-                Qs = new[] { "Hej Verden" },
-                Target = Language.Afrikaans
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -71,7 +93,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -79,7 +101,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = "abc",
+                Key = "key",
                 Target = null
             };
 
@@ -88,7 +110,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Target is required");
+            Assert.AreEqual(exception.Message, "'Target' is required");
         }
 
         [Test]
@@ -96,7 +118,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = "abc",
+                Key = "key",
                 Target = Language.Danish,
                 Qs = null
             };
@@ -106,7 +128,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Qs is required");
+            Assert.AreEqual(exception.Message, "'Qs' is required");
         }
 
         [Test]
@@ -114,7 +136,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = "abc",
+                Key = "key",
                 Target = Language.Danish,
                 Qs = new string[0]
             };
@@ -124,48 +146,67 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Qs is required");
+            Assert.AreEqual(exception.Message, "'Qs' is required");
         }
 
         [Test]
-        public void GetUriTest()
+        public void GetQueryStringParametersWhenSourceIsNotValidNmtTest()
         {
             var request = new TranslateRequest
             {
-                Key = "abc",
-                Target = Language.Afrikaans,
-                Qs = new[]
-                {
-                    "abc",
-                    "def"
-                }
+                Key = "key",
+                Source = Language.Amharic,
+                Target = Language.English,
+                Qs = new[] { "Hej Verden" },
+                Model = Model.Nmt
             };
 
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/language/translate/v2?key={request.Key}&target={request.Target.GetValueOrDefault().ToCode()}&model={request.Model.ToString().ToLower()}&format={request.Format.ToString().ToLower()}&q={request.Qs.First()}&q={request.Qs.Last()}", uri.PathAndQuery);
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                var parameters = request.GetQueryStringParameters();
+                Assert.IsNull(parameters);
+            });
+            Assert.AreEqual(exception.Message, "'Source' is not compatible with model 'Nmt'");
         }
 
         [Test]
-        public void GetUriWhenSourceTest()
+        public void GetQueryStringParametersWhenTargetIsNotValidNmtTest()
         {
             var request = new TranslateRequest
             {
-                Key = "abc",
-                Target = Language.Afrikaans,
-                Qs = new[]
-                {
-                    "abc",
-                    "def"
-                },
-                Source = Language.Albanian
+                Key = "key",
+                Source = Language.English,
+                Target = Language.Amharic,
+                Qs = new[] { "Hej Verden" },
+                Model = Model.Nmt
             };
 
-            var uri = request.GetUri();
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                var parameters = request.GetQueryStringParameters();
+                Assert.IsNull(parameters);
+            });
+            Assert.AreEqual(exception.Message, "'Target' is not compatible with model 'Nmt'");
+        }
 
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/language/translate/v2?key={request.Key}&target={request.Target.GetValueOrDefault().ToCode()}&model={request.Model.ToString().ToLower()}&format={request.Format.ToString().ToLower()}&source={request.Source.GetValueOrDefault().ToCode()}&q={request.Qs.First()}&q={request.Qs.Last()}", uri.PathAndQuery);
+        [Test]
+        public void GetQueryStringParametersWhenModelIsNmtAndSourceOrTargetIsNotEnglishTest()
+        {
+            var request = new TranslateRequest
+            {
+                Key = "key",
+                Source = Language.Danish,
+                Target = Language.Danish,
+                Model = Model.Nmt,
+                Qs = new[] { "Hej Verden" }
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                var parameters = request.GetQueryStringParameters();
+                Assert.IsNull(parameters);
+            });
+            Assert.AreEqual(exception.Message, "'Source' or 'Target' must be english");
         }
     }
 }

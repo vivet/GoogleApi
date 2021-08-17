@@ -16,6 +16,23 @@ namespace GoogleApi.Test.Translate.Languages
         {
             var request = new LanguagesRequest
             {
+                Key = this.ApiKey
+            };
+
+            var result = GoogleTranslate.Languages.Query(request);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+
+            var languages = result.Data.Languages;
+            Assert.IsNotNull(languages);
+            Assert.AreEqual(111, languages.Count());
+        }
+
+        [Test]
+        public void LanguagesWhenTargetTest()
+        {
+            var request = new LanguagesRequest
+            {
                 Key = this.ApiKey,
                 Target = Language.English
             };
@@ -27,11 +44,6 @@ namespace GoogleApi.Test.Translate.Languages
             var languages = result.Data.Languages;
             Assert.IsNotNull(languages);
             Assert.AreEqual(111, languages.Count());
-
-            var language = result.Data.Languages.FirstOrDefault();
-            Assert.IsNotNull(language);
-            Assert.AreEqual("Afrikaans", language.Name);
-            Assert.AreEqual(Language.Afrikaans, language.Language);
         }
 
         [Test]
@@ -46,15 +58,6 @@ namespace GoogleApi.Test.Translate.Languages
             var result = GoogleTranslate.Languages.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
-
-            var languages = result.Data.Languages;
-            Assert.IsNotNull(languages);
-            Assert.AreEqual(104, languages.Count());
-
-            var language = result.Data.Languages.FirstOrDefault();
-            Assert.IsNotNull(language);
-            Assert.AreEqual("Afrikaans", language.Name);
-            Assert.AreEqual(Language.Afrikaans, language.Language);
         }
 
         [Test]

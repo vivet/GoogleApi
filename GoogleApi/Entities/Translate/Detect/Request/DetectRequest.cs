@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Translate.Detect.Request
     public class DetectRequest : BaseTranslateRequest
     {
         /// <inheritdoc />
-        protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2/detect";
+        protected internal override string BaseUrl => $"{base.BaseUrl}detect";
 
         /// <summary>
         /// Required. The input text upon which to perform language detection. 

@@ -49,8 +49,19 @@
 			- Updated Roads
 				- Updated requests, and fixed issue with Bad request for some requests.
 				- Changed place string to use Place class
-			- Translate Updated
+			- Updated Translate
 				- Error handling improved for NMT model.
+			- Updated Detect
+			- Updated Lanugages
+				- Removed parameter 'nmt', not supported.
+
+
+			- Updated Places Auto-Complete
+			- Updated Places Query Auto-Complete
+			- Updated Places Details
+			- Updated Places Search
+			- Updated Places Photos
+
 				
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

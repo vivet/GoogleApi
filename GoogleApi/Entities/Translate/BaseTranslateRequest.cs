@@ -10,6 +10,9 @@ namespace GoogleApi.Entities.Translate
     public abstract class BaseTranslateRequest : BaseRequest, IRequestQueryString
     {
         /// <inheritdoc />
+        protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2/";
+
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             if (string.IsNullOrWhiteSpace(this.Key))
