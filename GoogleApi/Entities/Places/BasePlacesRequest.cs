@@ -20,10 +20,10 @@ namespace GoogleApi.Entities.Places
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.Key))
-                throw new ArgumentException("Key is required");
-
             var parameters = base.GetQueryStringParameters();
+
+            if (string.IsNullOrWhiteSpace(this.Key))
+                throw new ArgumentException($"'{nameof(this.Key)}' is required");
 
             return parameters;
         }

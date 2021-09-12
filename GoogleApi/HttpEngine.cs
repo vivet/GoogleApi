@@ -139,9 +139,6 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            if (cancellationToken == null)
-                throw new ArgumentNullException(nameof(cancellationToken));
-
             var taskCompletion = new TaskCompletionSource<TResponse>();
 
             await this.ProcessRequestAsync(request, cancellationToken)
@@ -274,6 +271,10 @@ namespace GoogleApi
                     default:
                         var rawJson = httpResponse.Content.ReadAsStringAsync().Result;
                         response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+
+                        if (response == null)
+                            throw new NullReferenceException(nameof(response));
+                        
                         response.RawJson = rawJson;
                         break;
                 }
@@ -307,6 +308,10 @@ namespace GoogleApi
                     default:
                         var rawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                         response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+
+                        if (response == null)
+                            throw new NullReferenceException(nameof(response));
+
                         response.RawJson = rawJson;
                         break;
                 }

@@ -23,7 +23,7 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// <summary>
         /// Base Url.
         /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "autocomplete/json";
+        protected internal override string BaseUrl => $"{base.BaseUrl}autocomplete/json";
 
         /// <summary>
         /// The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
@@ -51,6 +51,13 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// The point around which you wish to retrieve Place information.
         /// </summary>
         public virtual Coordinate Location { get; set; }
+
+        /// <summary>
+        /// The origin point from which to calculate straight-line distance to the destination (returned as distance_meters).
+        /// If this value is omitted, straight-line distance will not be returned.
+        /// Must be specified as latitude,longitude.
+        /// </summary>
+        public virtual Coordinate Origin { get; set; }
 
         /// <summary>
         /// The distance (in meters) within which to return Place results. 
@@ -86,19 +93,16 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
         /// </summary>
         public virtual IEnumerable<KeyValuePair<Component, string>> Components { get; set; }
 
-        /// <summary>
-        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/>.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrEmpty(this.Input))
-                throw new ArgumentException("Input is required");
+                throw new ArgumentException($"'{nameof(this.Input)}' is required");
 
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
+                throw new ArgumentException($"'{nameof(this.Radius)}' must be greater than or equal to 1 and less than or equal to 50.000");
 
             parameters.Add("input", this.Input);
             parameters.Add("language", this.Language.ToCode());
@@ -108,9 +112,12 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
 
             if (!string.IsNullOrEmpty(this.SessionToken))
                 parameters.Add("sessiontoken", this.SessionToken);
-                
+
             if (this.Location != null)
                 parameters.Add("location", this.Location.ToString());
+
+            if (this.Origin != null)
+                parameters.Add("origin", this.Origin.ToString());
 
             if (this.Radius.HasValue)
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));

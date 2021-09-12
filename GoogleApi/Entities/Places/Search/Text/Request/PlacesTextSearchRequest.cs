@@ -21,13 +21,20 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         /// <summary>
         /// Base Url.
         /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "textsearch/json";
+        protected internal override string BaseUrl => $"{base.BaseUrl}textsearch/json";
 
         /// <summary>
         /// Query — The text string on which to search, for example: "restaurant". 
         /// The Google Places service will return candidate matches based on this string and order the results based on their perceived relevance.
         /// </summary>
         public virtual string Query { get; set; }
+
+        /// <summary>
+        /// The region code, specified as a ccTLD ("top-level domain") two-character value.
+        /// Most ccTLD codes are identical to ISO 3166-1 codes, with some notable exceptions.
+        /// For example, the United Kingdom's ccTLD is "uk" (.co.uk) while its ISO 3166-1 code is "gb" (technically for the entity of "The United Kingdom of Great Britain and Northern Ireland").
+        /// </summary>
+        public virtual string Region { get; set; }
 
         /// <summary>
         /// opennow (optional). 
@@ -89,10 +96,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
         /// </summary>
         public virtual string PageToken { get; set; }
 
-        /// <summary>
-        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
@@ -104,16 +108,19 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
             else
             {
                 if (string.IsNullOrWhiteSpace(this.Query))
-                    throw new ArgumentException("Query is required");
+                    throw new ArgumentException($"'{nameof(this.Query)}' is required");
 
                 if (this.Location != null && this.Radius == null)
-                    throw new ArgumentException("Radius is required when Location is specified");
+                    throw new ArgumentException($"'{nameof(this.Radius)}' is required when '{nameof(this.Location)}' is specified");
 
                 if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
+                    throw new ArgumentException($"'{nameof(this.Radius)}' must be greater than or equal to 1 and less than or equal to 50.000");
 
                 parameters.Add("query", this.Query);
                 parameters.Add("language", Language.ToCode());
+
+                if (!string.IsNullOrEmpty(this.Region))
+                    parameters.Add("region", this.Region);
 
                 if (this.Location != null)
                     parameters.Add("location", this.Location.ToString());
@@ -139,6 +146,7 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
                 if (this.Maxprice.HasValue)
                     parameters.Add("maxprice", ((int)this.Maxprice.Value).ToString());
             }
+
             return parameters;
         }
     }

@@ -5,7 +5,6 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Details
@@ -23,10 +22,12 @@ namespace GoogleApi.Test.Places.Details
             };
 
             var response = GooglePlaces.AutoComplete.Query(request);
+
+            var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
             {
                 Key = ApiKey,
-                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault()
+                PlaceId = placeId
             };
 
             var response2 = GooglePlaces.Details.Query(request2);
@@ -97,27 +98,29 @@ namespace GoogleApi.Test.Places.Details
         }
 
         [Test]
-        public void PlacesDetailsWhenInvalidKeyTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = "test",
-                PlaceId = "abc"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerExceptions.FirstOrDefault();
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual("RequestDenied: The provided API key is invalid.", innerException.Message);
-        }
-
-        [Test]
         public void PlacesDetailsWhenLanguageTest()
         {
-            Assert.Inconclusive();
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = ApiKey,
+                Input = "jagtvej 2200 København"
+            };
+
+            var response = GooglePlaces.AutoComplete.Query(request);
+
+            var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
+            var request2 = new PlacesDetailsRequest
+            {
+                Key = ApiKey,
+                PlaceId = placeId,
+                Language = Language.Danish
+            };
+
+            var response2 = GooglePlaces.Details.Query(request2);
+            Assert.IsNotNull(response2);
+            Assert.AreEqual(Status.Ok, response2.Status);
+
+            Assert.IsNotNull(response2.Result.PlaceId);
         }
 
         [Test]
@@ -130,96 +133,20 @@ namespace GoogleApi.Test.Places.Details
             };
 
             var response = GooglePlaces.AutoComplete.Query(request);
+
+            var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
             {
                 Key = ApiKey,
-                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
+                PlaceId = placeId,
                 Fields = FieldTypes.Place_Id
             };
 
             var response2 = GooglePlaces.Details.Query(request2);
             Assert.IsNotNull(response2);
             Assert.AreEqual(Status.Ok, response2.Status);
+
             Assert.IsNotNull(response2.Result.PlaceId);
-
-        }
-
-        [Test]
-        public void PlacesDetailsWhenExtensionsTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void PlacesDetailsWhenKeyIsNullTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = null,
-                PlaceId = "test"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void PlacesDetailsWhenKeyIsStringEmptyTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = string.Empty,
-                PlaceId = "test"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void PlacesDetailsWhenPlaceIdIsNullTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = ApiKey,
-                PlaceId = null
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "PlaceId is required");
-        }
-
-        [Test]
-        public void PlacesDetailsWhenPlaceIdIsStringEmptyTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = ApiKey,
-                PlaceId = string.Empty
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Details.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "PlaceId is required");
         }
     }
 }

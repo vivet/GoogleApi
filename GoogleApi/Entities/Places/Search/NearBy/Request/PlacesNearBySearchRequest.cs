@@ -22,7 +22,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// <summary>
         /// Base Url.
         /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "nearbysearch/json";
+        protected internal override string BaseUrl => $"{base.BaseUrl}nearbysearch/json";
 
         /// <summary>
         /// name — One or more terms to be matched against the names of places, separated with a space character. 
@@ -108,10 +108,7 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
         /// </summary>
         public virtual string PageToken { get; set; }
 
-        /// <summary>
-        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
@@ -123,23 +120,23 @@ namespace GoogleApi.Entities.Places.Search.NearBy.Request
             else
             {
                 if (this.Location == null)
-                    throw new ArgumentException("Location is required");
+                    throw new ArgumentException($"'{nameof(this.Location)}' is required");
 
                 if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                    throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
+                    throw new ArgumentException($"'{nameof(this.Radius)}' must be greater than or equal to 1 and less than or equal to 50.000");
 
                 if (this.Rankby == Ranking.Distance)
                 {
                     if (this.Radius.HasValue)
-                        throw new ArgumentException("Radius cannot be specified, when using RankBy distance");
+                        throw new ArgumentException($"'{nameof(this.Radius)}' cannot be specified, when using '{nameof(this.Rankby)}' is distance");
 
                     if (string.IsNullOrWhiteSpace(this.Name) && string.IsNullOrWhiteSpace(this.Keyword) && !this.Type.HasValue)
-                        throw new ArgumentException("Keyword, Name or Type is required, If rank by distance");
+                        throw new ArgumentException($"'{nameof(this.Keyword)}', '{nameof(this.Name)}' or '{nameof(this.Type)}' is required, If '{nameof(this.Rankby)}' is distance");
                 }
                 else
                 {
                     if (!this.Radius.HasValue)
-                        throw new ArgumentException("Radius is required, when RankBy is not Distance");
+                        throw new ArgumentException($"'{nameof(this.Radius)}' is required, when '{nameof(this.Rankby)}' is not Distance");
                 }
 
                 if (!string.IsNullOrWhiteSpace(this.Name))

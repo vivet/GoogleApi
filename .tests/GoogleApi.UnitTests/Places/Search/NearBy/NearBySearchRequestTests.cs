@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
@@ -36,13 +35,181 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = "abc",
+                Key = "key",
                 Location = new Coordinate(0, 0),
-                Radius = 5000,
-                Keyword = "test"
+                Radius = 100
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var keyword = queryStringParameters.FirstOrDefault(x => x.Key == "keyword");
+            var keywordExpected = request.Keyword;
+            Assert.IsNotNull(keyword);
+            Assert.AreEqual(keywordExpected, keyword.Value);
+
+            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+            Assert.IsNotNull(language);
+            Assert.AreEqual("en", language.Value);
+
+            var rankby = queryStringParameters.FirstOrDefault(x => x.Key == "rankby");
+            var rankbyExpected = Ranking.Prominence.ToString().ToLower();
+            Assert.IsNotNull(rankby);
+            Assert.AreEqual(rankbyExpected, rankby.Value);
+
+            var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
+            var locationExpected = request.Location.ToString();
+            Assert.IsNotNull(location);
+            Assert.AreEqual(locationExpected, location.Value);
+
+            var radius = queryStringParameters.FirstOrDefault(x => x.Key == "radius");
+            var radiusExpected = request.Radius.ToString();
+            Assert.IsNotNull(radius);
+            Assert.AreEqual(radiusExpected, radius.Value);
+
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenNameTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "key",
+                Location = new Coordinate(0, 0),
+                Radius = 100,
+                Name = "name"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var name = queryStringParameters.FirstOrDefault(x => x.Key == "name");
+            var nameExpected = request.Name;
+            Assert.IsNotNull(name);
+            Assert.AreEqual(nameExpected, name.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeywordTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "key",
+                Location = new Coordinate(0, 0),
+                Radius = 100,
+                Keyword = "keyword"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var keyword = queryStringParameters.FirstOrDefault(x => x.Key == "keyword");
+            var keywordExpected = request.Keyword;
+            Assert.IsNotNull(keyword);
+            Assert.AreEqual(keywordExpected, keyword.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenTypeTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "key",
+                Location = new Coordinate(0, 0),
+                Radius = 100,
+                Type = SearchPlaceType.Accounting
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var type = queryStringParameters.FirstOrDefault(x => x.Key == "type");
+            var typeAttribute = request.Type?.GetType().GetMembers().FirstOrDefault(x => x.Name == request.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
+            var typeExpected = typeAttribute?.Value.ToLower();
+            Assert.IsNotNull(type);
+            Assert.AreEqual(typeExpected, type.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenOpenNowTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "key",
+                Location = new Coordinate(0, 0),
+                Radius = 100,
+                OpenNow = true
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var radius = queryStringParameters.FirstOrDefault(x => x.Key == "opennow");
+            Assert.IsNotNull(radius);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenMinpriceTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "key",
+                Location = new Coordinate(0, 0),
+                Radius = 100,
+                Minprice = PriceLevel.Expensive
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var minprice = queryStringParameters.FirstOrDefault(x => x.Key == "minprice");
+            var minpriceExpected = ((int)request.Minprice.GetValueOrDefault()).ToString();
+            Assert.IsNotNull(minprice);
+            Assert.AreEqual(minpriceExpected, minprice.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenMaxpriceTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "key",
+                Location = new Coordinate(0, 0),
+                Radius = 100,
+                Maxprice = PriceLevel.Free
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var maxprice = queryStringParameters.FirstOrDefault(x => x.Key == "maxprice");
+            var maxpriceExpected = ((int)request.Maxprice.GetValueOrDefault()).ToString();
+            Assert.IsNotNull(maxprice);
+            Assert.AreEqual(maxpriceExpected, maxprice.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPageTokenTest()
+        {
+            var request = new PlacesNearBySearchRequest
+            {
+                Key = "key",
+                PageToken = "pagetoken"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var pagetoken = queryStringParameters.FirstOrDefault(x => x.Key == "pagetoken");
+            var pagetokenExpected = request.PageToken;
+            Assert.IsNotNull(pagetoken);
+            Assert.AreEqual(pagetokenExpected, pagetoken.Value);
+
         }
 
         [Test]
@@ -50,10 +217,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = null,
-                Location = new Coordinate(0, 0),
-                Radius = 5000,
-                Keyword = "test"
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -61,7 +225,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -69,9 +233,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = string.Empty,
-                Location = new Coordinate(0, 0),
-                Radius = 5000
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -79,7 +241,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -87,9 +249,8 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = "abc",
-                Location = null,
-                Radius = 5000
+                Key = "key",
+                Location = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -97,7 +258,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Location is required");
+            Assert.AreEqual(exception.Message, "'Location' is required");
         }
 
         [Test]
@@ -105,7 +266,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = "abc",
+                Key = "key",
                 Location = new Coordinate(0, 0),
                 Radius = null
             };
@@ -115,7 +276,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Radius is required, when RankBy is not Distance");
+            Assert.AreEqual(exception.Message, "'Radius' is required, when 'Rankby' is not Distance");
         }
 
         [Test]
@@ -123,8 +284,8 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = "abc",
-                Location = new Coordinate(51.491431, -3.16668),
+                Key = "key",
+                Location = new Coordinate(1, 1),
                 Radius = 0
             };
 
@@ -133,7 +294,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
+            Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
         [Test]
@@ -141,8 +302,8 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = "abc",
-                Location = new Coordinate(51.491431, -3.16668),
+                Key = "key",
+                Location = new Coordinate(1, 1),
                 Radius = 50001
             };
 
@@ -151,7 +312,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
+            Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
         [Test]
@@ -159,8 +320,8 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = "abc",
-                Location = new Coordinate(51.491431, -3.16668),
+                Key = "key",
+                Location = new Coordinate(1, 1),
                 Radius = 5001,
                 Rankby = Ranking.Distance
             };
@@ -170,7 +331,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Radius cannot be specified, when using RankBy distance");
+            Assert.AreEqual(exception.Message, "'Radius' cannot be specified, when using 'Rankby' is distance");
         }
 
         [Test]
@@ -188,107 +349,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Keyword, Name or Type is required, If rank by distance");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = "abc",
-                Location = new Coordinate(1, 1),
-                Radius = 50
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenTypeTest()
-        {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = "abc",
-                Location = new Coordinate(1, 1),
-                Radius = 50,
-                Type = SearchPlaceType.Accounting 
-            };
-
-            var uri = request.GetUri();
-            var attribute = request.Type?.GetType().GetMembers().FirstOrDefault(x => x.Name == request.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&type={attribute?.Value.ToLower()}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenOpenNowTest()
-        {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = "abc",
-                Location = new Coordinate(1, 1),
-                Radius = 50,
-                OpenNow = true
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&opennow", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenMinpriceTest()
-        {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = "abc",
-                Location = new Coordinate(1, 1),
-                Radius = 50,
-                Minprice = PriceLevel.Expensive
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&minprice={((int)request.Minprice.GetValueOrDefault()).ToString()}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenMaxpriceTest()
-        {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = "abc",
-                Location = new Coordinate(1, 1),
-                Radius = 50,
-                Maxprice = PriceLevel.Free
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&rankby={request.Rankby.ToString().ToLower()}&language={request.Language.ToCode()}&location={Uri.EscapeDataString(request.Location.ToString())}&radius={request.Radius}&maxprice={((int)request.Maxprice.GetValueOrDefault()).ToString()}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenPageTokenTest()
-        {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = "abc",
-                PageToken = "abc"
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/nearbysearch/json?key={request.Key}&pagetoken={request.PageToken}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'Keyword', 'Name' or 'Type' is required, If 'Rankby' is distance");
         }
     }
 }

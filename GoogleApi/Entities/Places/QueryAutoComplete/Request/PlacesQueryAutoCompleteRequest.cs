@@ -16,7 +16,7 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         /// <summary>
         /// Base Url.
         /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "queryautocomplete/json";
+        protected internal override string BaseUrl => $"{base.BaseUrl}queryautocomplete/json";
 
         /// <summary>
         /// The text string on which to search. 
@@ -48,19 +48,16 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
         /// </summary>
         public virtual Language Language { get; set; } = Language.English;
 
-        /// <summary>
-        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
+            var parameters = base.GetQueryStringParameters();
+
             if (string.IsNullOrEmpty(this.Input))
-                throw new ArgumentException("Input is required");
+                throw new ArgumentException($"'{nameof(this.Input)}' is required");
 
             if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
-                throw new ArgumentException("Radius must be greater than or equal to 1 and less than or equal to 50.000");
-
-            var parameters = base.GetQueryStringParameters();
+                throw new ArgumentException($"'{nameof(this.Radius)}' must be greater than or equal to 1 and less than or equal to 50.000");
 
             parameters.Add("input", this.Input);
             parameters.Add("language", this.Language.ToCode());

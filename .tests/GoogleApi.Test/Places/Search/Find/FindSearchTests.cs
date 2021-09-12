@@ -5,7 +5,6 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Search.Find
@@ -33,6 +32,22 @@ namespace GoogleApi.Test.Places.Search.Find
             Assert.IsNotNull(candidate);
             Assert.IsNotNull(candidate.PlaceId);
             Assert.AreEqual(candidate.BusinessStatus, BusinessStatus.Operational);
+        }
+
+        [Test]
+        public void PlacesFindSearchWhenTypeIsPhoneNumberTest()
+        {
+            var request = new PlacesFindSearchRequest
+            {
+                Key = this.ApiKey,
+                Input = "+4533333333",
+                Type = InputType.PhoneNumber
+            };
+
+            var response = GooglePlaces.FindSearch.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
         }
 
         [Test]
@@ -66,102 +81,6 @@ namespace GoogleApi.Test.Places.Search.Find
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
-
-        [Test]
-        public void PlacesNearBySearchWhenInvalidKeyTest()
-        {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = "test",
-                Input = "test"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.FindSearch.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerExceptions.FirstOrDefault();
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual("RequestDenied: The provided API key is invalid.", innerException.Message);
-        }
-
-        [Test]
-        public void PlacesFindSearchWhenKeyIsNullTest()
-        {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = null,
-                Input = "picadelly circus"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.FindSearch.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void PlacesFindSearchWhenKeyIsStringEmptyTest()
-        {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = string.Empty,
-                Input = "picadelly circus"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.FindSearch.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void PlacesFindSearchWhenInputIsNullTest()
-        {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.ApiKey,
-                Input = null
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.FindSearch.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Input is required");
-        }
-
-        [Test]
-        public void PlacesFindSearchWhenQueryIsStringEmptyTest()
-        {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.ApiKey,
-                Input = string.Empty
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.FindSearch.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Input is required");
-        }
-
-        [Test]
-        public void PlacesFindSearchWhenTypeIsPhoneNumberTest()
-        {
-            Assert.Inconclusive();
         }
 
         [Test]
