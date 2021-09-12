@@ -79,6 +79,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<DocumentationFile>$(MSBuildThisFileDirectory)\bin\$(Configuration)\GoogleApi.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -89,12 +90,10 @@
 		<Optimize>false</Optimize>
 		<OutputPath>bin\Debug\</OutputPath>
 		<DefineConstants>DEBUG</DefineConstants>
-		<DocumentationFile>bin\Debug\netstandard1.1\GoogleApi.xml</DocumentationFile>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<Optimize>true</Optimize>
 		<OutputPath>bin\Release\</OutputPath>
-		<DocumentationFile>bin\Release\netstandard1.1\GoogleApi.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
 		<Reference Include="System.Net.Http" />
