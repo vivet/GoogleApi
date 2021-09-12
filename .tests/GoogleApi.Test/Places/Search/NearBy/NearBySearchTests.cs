@@ -48,6 +48,8 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 PageToken = response.NextPageToken
             };
 
+            Thread.Sleep(1500);
+
             var responseNextPage = GooglePlaces.NearBySearch.Query(requestNextPage);
             Assert.IsNotNull(responseNextPage);
             Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);

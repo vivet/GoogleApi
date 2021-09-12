@@ -56,6 +56,8 @@ namespace GoogleApi.Test.Places.Search.Text
                 PageToken = response.NextPageToken
             };
 
+            Thread.Sleep(1500);
+
             var responseNextPage = GooglePlaces.TextSearch.Query(requestNextPage);
             Assert.IsNotNull(responseNextPage);
             Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
