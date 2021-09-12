@@ -16,7 +16,7 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// <summary>
         /// Base Url.
         /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "details/json";
+        protected internal override string BaseUrl => $"{base.BaseUrl}details/json";
 
         /// <summary>
         /// A textual identifier that uniquely identifies a place, returned from a Place Search.
@@ -24,8 +24,21 @@ namespace GoogleApi.Entities.Places.Details.Request
         public virtual string PlaceId { get; set; }
 
         /// <summary>
+        /// The region code, specified as a ccTLD ("top-level domain") two-character value.
+        /// Most ccTLD codes are identical to ISO 3166-1 codes, with some notable exceptions.
+        /// For example, the United Kingdom's ccTLD is "uk" (.co.uk) while its ISO 3166-1 code is "gb"
+        /// (technically for the entity of "The United Kingdom of Great Britain and Northern Ireland").
+        /// </summary>
+        public virtual string Region { get; set; }
+
+        /// <summary>
         /// A random string which identifies an autocomplete session for billing purposes.
-        /// Use this for Place Details requests that are called following an autocomplete request in the same user session
+        /// The session begins when the user starts typing a query, and concludes when they select a place and a
+        /// call to Place Details is made.Each session can have multiple queries,
+        /// followed by one place selection.The API key(s) used for each request within a session must belong to the same Google Cloud Console project.
+        /// Once a session has concluded, the token is no longer valid; your app must generate a fresh token for each session.
+        /// If the sessiontoken parameter is omitted, or if you reuse a session token,
+        /// the session is charged as if no session token was provided (each request is billed separately).
         /// </summary>
         public virtual string SessionToken { get; set; }
 
@@ -46,23 +59,13 @@ namespace GoogleApi.Entities.Places.Details.Request
         /// </summary>
         public virtual FieldTypes Fields { get; set; } = FieldTypes.Basic;
 
-        /// <summary>
-        /// Extensions (optional) — Indicates if the Place Details response should include additional fields. 
-        /// Additional fields may include Premium data, requiring an additional license, or values that are not commonly requested. 
-        /// Supported values for the extensions parameter are: ◦review_summary includes a rich and concise review curated by Google's editorial staff.
-        /// </summary>
-        public virtual Extensions Extensions { get; set; } = Extensions.None;
-
-        /// <summary>
-        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.PlaceId))
-                throw new ArgumentException("PlaceId is required");
-
             var parameters = base.GetQueryStringParameters();
+
+            if (string.IsNullOrWhiteSpace(this.PlaceId))
+                throw new ArgumentException($"'{nameof(this.PlaceId)}' is required");
 
             parameters.Add("placeid", this.PlaceId);
             parameters.Add("language", this.Language.ToCode());
@@ -74,11 +77,11 @@ namespace GoogleApi.Entities.Places.Details.Request
 
             parameters.Add("fields", fields.EndsWith(",") ? fields.Substring(0, fields.Length - 1) : fields);
 
+            if (!string.IsNullOrEmpty(this.Region))
+                parameters.Add("region", this.Region);
+
             if (!string.IsNullOrEmpty(this.SessionToken))
                 parameters.Add("sessiontoken", this.SessionToken);
-
-            if (this.Extensions != Extensions.None)
-                parameters.Add("extensions", this.Extensions.ToString().ToLower());
 
             return parameters;
         }

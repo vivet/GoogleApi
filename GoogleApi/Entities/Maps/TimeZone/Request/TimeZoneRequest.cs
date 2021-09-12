@@ -13,15 +13,13 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
     /// </summary>
     public class TimeZoneRequest : BaseMapsChannelRequest, IRequestQueryString
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "maps.googleapis.com/maps/api/timezone/json";
 
         /// <summary>
         /// A comma-separated lat,lng tuple (eg. location=-33.86,151.20), representing the location to look up
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// Timestamp specifies the desired time as seconds since midnight, January 1, 1970 UTC. 
@@ -36,16 +34,13 @@ namespace GoogleApi.Entities.Maps.TimeZone.Request
         /// </summary>
         public virtual Language Language { get; set; } = Language.English;
 
-        /// <summary>
-        /// <see cref="BaseMapsChannelRequest.GetQueryStringParameters()"/>
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Location == null)
-                throw new ArgumentException("Location is required");
-
             var parameters = base.GetQueryStringParameters();
+
+            if (this.Location == null)
+                throw new ArgumentException($"'{nameof(this.Location)}' is required");
 
             parameters.Add("language", this.Language.ToCode());
             parameters.Add("location", this.Location.ToString());

@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.QueryAutoComplete
@@ -81,173 +81,52 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
         }
 
         [Test]
-        public void PlacesQueryAutoCompleteWhenInvalidKeyTest()
-        {
-            var request = new PlacesQueryAutoCompleteRequest
-            {
-                Key = "test",
-                Input = "jagtvej 2200 København"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerExceptions.FirstOrDefault();
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual("RequestDenied: The provided API key is invalid.", innerException.Message);
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenLanguageTest()
+        public void PlacesAutoCompleteWhenOffsetTest()
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
                 Key = this.ApiKey,
                 Input = "jagtvej 2200 København",
-                Language = Language.Danish
+                Offset = "offset"
             };
 
             var response = GooglePlaces.QueryAutoComplete.Query(request);
+
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
-
-            var results = response.Predictions.ToArray();
-            Assert.IsNotNull(results);
-            Assert.IsNotEmpty(results);
-            Assert.GreaterOrEqual(results.Length, 3);
-
-            var result = results.FirstOrDefault();
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result.Description, "Jagtvej, 2200 København, Danmark");
         }
 
         [Test]
-        public void PlacesQueryAutoCompleteWhenOffsetTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenLocationTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenLocationAndRadiusTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenKeyIsNullTest()
-        {
-            var request = new PlacesQueryAutoCompleteRequest
-            {
-                Key = null,
-                Input = "test"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenKeyIsStringEmptyTest()
-        {
-            var request = new PlacesQueryAutoCompleteRequest
-            {
-                Key = string.Empty,
-                Input = "test"
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenInputIsNullTest()
+        public void PlacesAutoCompleteWhenLocationTest()
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = null
+                Input = "jagtvej 2200 København",
+                Location = new Coordinate(1, 1)
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
+            var response = GooglePlaces.QueryAutoComplete.Query(request);
 
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Input is required");
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
         }
 
         [Test]
-        public void PlacesQueryAutoCompleteWhenInputIsStringEmptyTest()
+        public void PlacesAutoCompleteWhenLocationAndRadiusTest()
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
                 Key = this.ApiKey,
-                Input = string.Empty
+                Input = "jagtvej 2200 København",
+                Radius = 100
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
+            var response = GooglePlaces.QueryAutoComplete.Query(request);
 
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Input is required");
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
         }
 
-        [Test]
-        public void PlacesQueryAutoCompleteWhenRadiusIsLessThanOneTest()
-        {
-            var request = new PlacesQueryAutoCompleteRequest
-            {
-                Key = this.ApiKey,
-                Input = "abc",
-                Radius = 0
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
-        }
-
-        [Test]
-        public void PlacesQueryAutoCompleteWhenRadiusIsGereaterThanFiftyThousandTest()
-        {
-            var request = new PlacesQueryAutoCompleteRequest
-            {
-                Key = this.ApiKey,
-                Input = "abc",
-                Radius = 50001
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GooglePlaces.QueryAutoComplete.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Radius must be greater than or equal to 1 and less than or equal to 50.000");
-        }
     }
 }

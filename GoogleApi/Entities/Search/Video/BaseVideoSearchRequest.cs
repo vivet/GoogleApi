@@ -36,7 +36,7 @@ namespace GoogleApi.Entities.Search.Video
         /// the video to still be included in the search results.  The API returns an error if your request specifies a value for the location parameter but does not
         /// also specify a value for the locationRadius parameter.
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// The locationRadius parameter, in conjunction with the location parameter, defines a circular geographic area.

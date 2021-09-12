@@ -111,11 +111,12 @@ namespace GoogleApi
                 switch (response.Status)
                 {
                     case Status.Ok:
+                    case Status.NotFound:
                     case Status.ZeroResults:
                         return response;
 
                     default:
-                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
+                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
                 }
             }
             catch (Exception ex)
@@ -137,9 +138,6 @@ namespace GoogleApi
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
-
-            if (cancellationToken == null)
-                throw new ArgumentNullException(nameof(cancellationToken));
 
             var taskCompletion = new TaskCompletionSource<TResponse>();
 
@@ -164,6 +162,7 @@ namespace GoogleApi
                             switch (response.Status)
                             {
                                 case Status.Ok:
+                                case Status.NotFound:
                                 case Status.ZeroResults:
                                     taskCompletion.SetResult(response);
                                     break;
@@ -272,6 +271,10 @@ namespace GoogleApi
                     default:
                         var rawJson = httpResponse.Content.ReadAsStringAsync().Result;
                         response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+
+                        if (response == null)
+                            throw new NullReferenceException(nameof(response));
+                        
                         response.RawJson = rawJson;
                         break;
                 }
@@ -305,6 +308,10 @@ namespace GoogleApi
                     default:
                         var rawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                         response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+
+                        if (response == null)
+                            throw new NullReferenceException(nameof(response));
+
                         response.RawJson = rawJson;
                         break;
                 }

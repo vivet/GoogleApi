@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GoogleApi.Entities.Places.Photos.Request;
 using NUnit.Framework;
 
@@ -8,34 +9,65 @@ namespace GoogleApi.UnitTests.Places.Photos
     public class PhotosRequestTests 
     {
         [Test]
-        public void ConstructorDefaultTest()
-        {
-            var request = new PlacesPhotosRequest();
-
-            Assert.IsTrue(request.IsSsl);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesPhotosRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
-        }
-
-        [Test]
         public void GetQueryStringParametersTest()
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
-                PhotoReference = "test",
+                Key = "key",
+                PhotoReference = "photoreference",
                 MaxHeight = 10
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var photoreference = queryStringParameters.FirstOrDefault(x => x.Key == "photoreference");
+            var photoreferenceExpected = request.PhotoReference;
+            Assert.IsNotNull(photoreference);
+            Assert.AreEqual(photoreferenceExpected, photoreference.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenMaxWidthTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = "key",
+                PhotoReference = "photoreference",
+                MaxWidth = 10
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var maxwidth = queryStringParameters.FirstOrDefault(x => x.Key == "maxwidth");
+            var maxwidthExpected = request.MaxWidth.ToString();
+            Assert.IsNotNull(maxwidth);
+            Assert.AreEqual(maxwidthExpected, maxwidth.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenMaxHeightTest()
+        {
+            var request = new PlacesPhotosRequest
+            {
+                Key = "key",
+                PhotoReference = "photoreference",
+                MaxHeight = 10
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var maxheight = queryStringParameters.FirstOrDefault(x => x.Key == "maxheight");
+            var maxheightExpected = request.MaxHeight.ToString();
+            Assert.IsNotNull(maxheight);
+            Assert.AreEqual(maxheightExpected, maxheight.Value);
         }
 
         [Test]
@@ -43,9 +75,7 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = null,
-                PhotoReference = "test",
-                MaxHeight = 10
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -53,7 +83,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -61,9 +91,7 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = string.Empty,
-                PhotoReference = "test",
-                MaxHeight = 10
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -71,7 +99,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -79,7 +107,7 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
+                Key = "key",
                 PhotoReference = null
             };
 
@@ -88,7 +116,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "PhotoReference is required");
+            Assert.AreEqual(exception.Message, "'PhotoReference' is required");
         }
 
         [Test]
@@ -96,7 +124,7 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
+                Key = "key",
                 PhotoReference = string.Empty
             };
 
@@ -105,7 +133,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "PhotoReference is required");
+            Assert.AreEqual(exception.Message, "'PhotoReference' is required");
         }
 
         [Test]
@@ -113,8 +141,8 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
-                PhotoReference = "abc"
+                Key = "key",
+                PhotoReference = "photoReference"
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -122,7 +150,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "MaxHeight or MaxWidth is required");
+            Assert.AreEqual(exception.Message, "'MaxHeight' or 'MaxWidth' is required");
         }
 
         [Test]
@@ -130,8 +158,8 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
-                PhotoReference = "abc",
+                Key = "key",
+                PhotoReference = "photoReference",
                 MaxHeight = 0
             };
 
@@ -140,7 +168,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
+            Assert.AreEqual(exception.Message, "'MaxHeight' must be greater than or equal to 1 and less than or equal to 1.600");
         }
 
         [Test]
@@ -148,8 +176,8 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
-                PhotoReference = "abc",
+                Key = "key",
+                PhotoReference = "photoReference",
                 MaxHeight = 1601
             };
 
@@ -158,7 +186,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "MaxHeight must be greater than or equal to 1 and less than or equal to 1.600");
+            Assert.AreEqual(exception.Message, "'MaxHeight' must be greater than or equal to 1 and less than or equal to 1.600");
         }
 
         [Test]
@@ -166,8 +194,8 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
-                PhotoReference = "abc",
+                Key = "key",
+                PhotoReference = "photoReference",
                 MaxWidth = 0
             };
 
@@ -176,7 +204,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
+            Assert.AreEqual(exception.Message, "'MaxWidth' must be greater than or equal to 1 and less than or equal to 1.600");
         }
 
         [Test]
@@ -184,8 +212,8 @@ namespace GoogleApi.UnitTests.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = "abc",
-                PhotoReference = "abc",
+                Key = "key",
+                PhotoReference = "photoReference",
                 MaxWidth = 1601
             };
 
@@ -194,24 +222,7 @@ namespace GoogleApi.UnitTests.Places.Photos
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "MaxWidth must be greater than or equal to 1 and less than or equal to 1.600");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new PlacesPhotosRequest
-            {
-                Key = "abc",
-                PhotoReference = "test",
-                MaxHeight = 10, 
-                MaxWidth =  10
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/photo?key={request.Key}&photoreference={request.PhotoReference}&maxheight={request.MaxHeight}&maxwidth={request.MaxWidth}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'MaxWidth' must be greater than or equal to 1 and less than or equal to 1.600");
         }
     }
 }

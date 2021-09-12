@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Common;
+using System.Linq;
+using System.Text;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 
 namespace GoogleApi.Entities.Maps.StaticMaps.Request
@@ -19,20 +21,13 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 
         /// <summary>
         /// Color (optional).
-        /// Specifies a predefined color from the set {black, brown, green, purple, yellow, blue, gray, orange, red, white}.
-        /// If no value is provided, the value for <see cref="ColorHex"/> is used.
-        /// </summary>
-        public virtual MapColor? Color { get; set; }
-
-        /// <summary>
-        /// Color (optional).
         /// Specifies a color either as a 24-bit (example: color=0xFFFFCC) or 32-bit hexadecimal value (example: color=0xFFFFCCFF), 
         /// or from the set {black, brown, green, purple, yellow, blue, gray, orange, red, white}.  
         /// When a 32-bit hex value is specified, the last two characters specify the 8-bit alpha transparency value.
         /// This value varies between 00 (completely transparent) and FF (completely opaque). 
         /// Note that transparencies are supported in paths, though they are not supported for markers.
         /// </summary>
-        public virtual string ColorHex { get; set; }
+        public virtual string Color { get; set; }
 
         /// <summary>
         /// Size: (optional) specifies the size of marker from the set {tiny, mid, small}. 
@@ -56,5 +51,51 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
         /// construct an image which contains the supplied markers.
         /// </summary>
         public virtual IEnumerable<Location> Locations { get; set; } = new List<Location>();
+
+        /// <summary>
+        /// Returns a string representation of a <see cref="MapMarker"/>.
+        /// </summary>
+        /// <returns>The string representation.</returns>
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+
+            if (!this.Locations.Any())
+                return null;
+
+            var hasLabel = !string.IsNullOrEmpty(this.Label) && !(this.Size == MarkerSize.Tiny || this.Size == MarkerSize.Small);
+            if (hasLabel)
+            {
+                builder
+                    .Append($"label:{this.Label}|");
+            }
+
+            if (this.Color != null)
+            {
+                builder
+                    .Append($"color:{this.Color}|");
+            }
+
+            if (this.Size != null)
+            {
+                builder
+                    .Append($"size:{this.Size.ToString().ToLower()}|");
+            }
+
+            if (this.Icon != null)
+            {
+                builder
+                    .Append($"{this.Icon}|");
+            }
+
+            builder
+                .Append(string.Join("|", this.Locations.Select(x => x.ToString())));
+
+            if (builder.Length == 0)
+                return null;
+
+            return builder
+                .ToString();
+        }
     }
 }

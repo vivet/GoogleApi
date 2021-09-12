@@ -9,37 +9,29 @@ namespace GoogleApi.UnitTests.Translate.Detect
     public class DetectRequestTests
     {
         [Test]
-        public void ConstructorDefaultTest()
-        {
-            var request = new DetectRequest();
-
-            Assert.IsTrue(request.IsSsl);
-            Assert.IsNull(request.Qs);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new DetectRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
-        }
-
-        [Test]
         public void GetQueryStringParametersTest()
         {
             var request = new DetectRequest
             {
-                Key = "abc",
+                Key = "key",
                 Qs = new[]
                 {
-                    "abc"
+                    "qs"
                 }
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var qs = queryStringParameters.FirstOrDefault(x => x.Key == "q");
+            var qsExpected = request.Qs.First();
+            Assert.IsNotNull(qs);
+            Assert.AreEqual(qsExpected, qs.Value);
         }
 
         [Test]
@@ -47,8 +39,7 @@ namespace GoogleApi.UnitTests.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = null,
-                Qs = new[] { "Hej Verden" }
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -56,7 +47,7 @@ namespace GoogleApi.UnitTests.Translate.Detect
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -64,8 +55,7 @@ namespace GoogleApi.UnitTests.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = string.Empty,
-                Qs = new[] { "Hej Verden" }
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -73,7 +63,7 @@ namespace GoogleApi.UnitTests.Translate.Detect
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -90,43 +80,7 @@ namespace GoogleApi.UnitTests.Translate.Detect
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Qs is required");
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenQsIsEmptyTest()
-        {
-            var request = new DetectRequest
-            {
-                Key = "abc",
-                Qs = new string[0]
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.AreEqual(exception.Message, "Qs is required");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new DetectRequest
-            {
-                Key = "abc",
-                Qs = new[]
-                {
-                    "abc",
-                    "def"
-                }
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/language/translate/v2/detect?key={request.Key}&q={request.Qs.First()}&q={request.Qs.Last()}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'Qs' is required");
         }
     }
 }

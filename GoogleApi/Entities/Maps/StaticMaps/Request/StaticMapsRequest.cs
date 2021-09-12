@@ -4,10 +4,10 @@ using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
-using Location = GoogleApi.Entities.Common.Location;
 
 namespace GoogleApi.Entities.Maps.StaticMaps.Request
 {
@@ -17,10 +17,10 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 	/// The Google Static Maps API service creates your map based on URL parameters sent through a standard HTTP request and returns the map as an image you can 
 	/// display on your web page.
 	/// </summary>
-	public class StaticMapsRequest : BaseMapsChannelRequest
+	public class StaticMapsRequest : BaseMapsChannelRequest, IRequestQueryString
 	{
         /// <inheritdoc />
-        protected internal override string BaseUrl { get; } = "maps.googleapis.com/maps/api/staticmap";
+        protected internal override string BaseUrl => base.BaseUrl + "staticmap";
 
 		/// <summary>
 		/// center (required if markers not present) defines the center of the map, equidistant from all edges of the map. 
@@ -57,20 +57,20 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 		/// </summary>
 		public virtual MapSize Size { get; set; } = new MapSize(640, 640);
 
-	    /// <summary>
-	    /// Defines the type of map to construct. There are several possible
-	    /// maptype values, including roadmap, satellite, hybrid, and terrain. (optional)
-	    /// </summary>
-	    /// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#MapTypes</remarks>
-	    public virtual MapType? Type { get; set; }
+        /// <summary>
+        /// Defines the type of map to construct. There are several possible
+        /// maptype values, including roadmap, satellite, hybrid, and terrain. (optional)
+        /// </summary>
+        /// <remarks>http://code.google.com/apis/maps/documentation/staticmaps/#MapTypes</remarks>
+        public virtual MapType Type { get; set; } = MapType.Roadmap;
 
-	    /// <summary>
-	    /// Scale (optional) affects the number of pixels that are returned. scale=2 returns twice as many pixels as scale=1 while retaining the same coverage area and 
-	    /// level of detail (i.e. the contents of the map don't change). This is useful when developing for high-resolution displays, or when generating a map for printing. 
-	    /// The default value is 1. Accepted values are 2 and 4 (4 is only available to Google Maps APIs Premium Plan customers.) 
-	    /// See Scale Values for more information: https://developers.google.com/maps/documentation/static-maps/intro#scale_values
-	    /// </summary>
-	    public virtual MapScale? Scale { get; set; }
+        /// <summary>
+        /// Scale (optional) affects the number of pixels that are returned. scale=2 returns twice as many pixels as scale=1 while retaining the same coverage area and 
+        /// level of detail (i.e. the contents of the map don't change). This is useful when developing for high-resolution displays, or when generating a map for printing. 
+        /// The default value is 1. Accepted values are 2 and 4 (4 is only available to Google Maps APIs Premium Plan customers.) 
+        /// See Scale Values for more information: https://developers.google.com/maps/documentation/static-maps/intro#scale_values
+        /// </summary>
+        public virtual MapScale Scale { get; set; } = MapScale.Normal;
 
         /// <summary>
         /// Format (optional) defines the format of the resulting image. By default, the Google Static Maps API creates PNG images. 
@@ -78,7 +78,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
         /// JPEG typically provides greater compression, while GIF and PNG provide greater detail. For more information, see Image Formats.
         /// greater compression, while GIF and PNG provide greater detail. (optional)
         /// </summary>
-        public virtual ImageFormat? Format { get; set; }
+        public virtual ImageFormat Format { get; set; } = ImageFormat.Png;
 
 	    /// <summary>
 	    /// Language (optional) defines the language to use for display of labels on map tiles. 
@@ -131,62 +131,51 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 		{
 		    var parameters = base.GetQueryStringParameters();
 
-		    if (string.IsNullOrEmpty(this.Key))
-		        throw new ArgumentException("Key is required");
-
             if (this.Center == null || !this.ZoomLevel.HasValue)
 		    {
 		        var hasMarkers = this.Markers.Any() && this.Markers.SelectMany(x => x.Locations).Any();
 		        var hasPaths = this.Paths.Any() && this.Paths.SelectMany(x => x.Points).Any();
-		        var hasVisible = this.Visibles.Any();
+		        var hasVisibles = this.Visibles.Any();
 
-		        if (!hasMarkers && !hasPaths && !hasVisible)
+		        if (!hasMarkers && !hasPaths && !hasVisibles)
 		        {
                     if (this.Center == null)
-    		            throw new ArgumentException("Center is required, unless Markers, Path or Visibles is defined");
+    		            throw new ArgumentException($"{nameof(this.Center)} is required, unless {nameof(this.Markers)}, {nameof(this.Paths)} or {nameof(this.Visibles)} is defined");
 
                     if (!this.ZoomLevel.HasValue)
-                        throw new ArgumentException("Zoom Level is required, unless Markers, Path or Visibles is defined");
+                        throw new ArgumentException($"{nameof(this.ZoomLevel)} is required, unless {nameof(this.Markers)}, {nameof(this.Paths)} or {nameof(this.Visibles)} is defined");
                 }
             }
 
-		    parameters.Add("language", this.Language.ToCode());
-
             if (this.Center != null)
+            {
                 parameters.Add("center", this.Center.ToString());
+            }
 
             if (this.ZoomLevel.HasValue)
+            {
                 parameters.Add("zoom", this.ZoomLevel.ToString());
+            }
 
+            parameters.Add("language", this.Language.ToCode());
 		    parameters.Add("size", $"{this.Size.Width}x{this.Size.Height}");
-
-			if (this.Type.HasValue)
-				parameters.Add("maptype", this.Type.ToString().ToLower());
-
-			if (this.Scale.HasValue)
-		        parameters.Add("scale", ((int)this.Scale.Value).ToString());
-
-		    if (this.Format.HasValue)
-		        parameters.Add("format", this.Format.Value.GetParameterName());
+			parameters.Add("maptype", this.Type.ToString().ToLower());
+		    parameters.Add("scale", ((int)this.Scale).ToString());
+		    parameters.Add("format", this.Format.GetParameterName());
 
             if (this.Region != null)
-    		    parameters.Add("region", this.Region);
+            {
+                parameters.Add("region", this.Region);
+            }
 
 			if (this.Paths.Any())
 			{
 				foreach (var path in this.Paths)
 				{
-					if (!path.Points.Any())
-						continue;
+					if (path.Points.Count() <= 1)
+                        throw new ArgumentException($"{nameof(this.Paths)} must contain two or more locations");
 
-					var color = path.Color != null ? $"color:{path.Color}|" : string.Empty;
-
-					var fillColor = path.FillColor != null ? $"fillcolor:{path.Color}|" : string.Empty;
-					var geodesic = path.Geodesic ? "geodesic|" : string.Empty;
-					var points = path.Points.Aggregate(string.Empty, (x, y) => $"{x}{y}|");
-				    points = points.Substring(0, points.Length - 1);
-
-				    parameters.Add("path", $"{color}{fillColor}{geodesic}{points}");
+				    parameters.Add("path", path.ToString());
 				}
 			}
 
@@ -194,15 +183,14 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 			{
 				foreach (var style in this.Styles)
 				{
-					parameters.Add("style", $"{style.Element}|{style.Feature}|{style.Style}");
+					parameters.Add("style", style.ToString());
 				}
 			}
 
 			if (this.Visibles.Any())
-			{
-				var visibles = this.Visibles.Aggregate(string.Empty, (x, y) => $"{x}{y}|");
-
-				parameters.Add("visible", $"{visibles}");
+            {
+                var visibles = string.Join("|", this.Visibles.Select(x => x.ToString()));
+				parameters.Add("visible", visibles);
 			}
 
 			if (this.Markers.Any())
@@ -210,18 +198,9 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 				foreach (var marker in this.Markers)
 				{
                     if (!marker.Locations.Any())
-                        continue;
+                        throw new ArgumentException($"{nameof(this.Markers)} must contain at least one location");
 
-				    var isLabel = !string.IsNullOrEmpty(marker.Label) && !(marker.Size == MarkerSize.Tiny || marker.Size == MarkerSize.Small);
-
-				    var label = isLabel ? $"label:{marker.Label}|" : string.Empty;
-				    var color = marker.Color.HasValue ? $"color:{marker.Color.ToString().ToLower()}|" : marker.ColorHex;
-				    var size = marker.Size.HasValue ? $"size:{marker.Size.ToString().ToLower()}|" : string.Empty;
-				    var iconUrl = marker.Icon?.Url != null ? $"icon:{marker.Icon.Url}|" : string.Empty;
-				    var iconAnchor = marker.Icon?.Anchor != null ? $"anchor:{marker.Icon?.Anchor.ToString()}|" : string.Empty;
-				    var locations = marker.Locations.Aggregate(string.Empty, (x, y) => $"{x}{y}|");
-
-                    parameters.Add("markers", $"{label}{color}{size}{iconUrl}{iconAnchor}{locations}");
+                    parameters.Add("markers", marker.ToString());
 				}
 			}
 

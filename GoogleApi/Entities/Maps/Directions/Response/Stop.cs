@@ -18,6 +18,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// The location of the transit station/stop, represented as lattitude and longitude.
         /// </summary>
         [JsonProperty("location")]
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
     }
 }

@@ -14,7 +14,9 @@ namespace GoogleApi.Entities.Maps.Geocoding.Address.Request
     {
         /// <summary>
         /// Address (required).
-        /// The address that you want to geocode.
+        /// The street address or plus code that you want to geocode.
+        /// Specify addresses in accordance with the format used by the national postal service of the country concerned.
+        /// Additional address elements such as business names and unit, suite or floor numbers should be avoided
         /// </summary>
         public virtual string Address { get; set; }
 
@@ -36,30 +38,35 @@ namespace GoogleApi.Entities.Maps.Geocoding.Address.Request
         /// Each component filter consists of a component:value pair and will fully restrict the results from the geocoder.
         /// For more information see Component Filtering: https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
         /// </summary>
-        public virtual IEnumerable<KeyValuePair<Component, string>> Components { get; set; }
+        public virtual IEnumerable<KeyValuePair<Component, string>> Components { get; set; } = new List<KeyValuePair<Component, string>>();
 
-        /// <summary>
-        /// See <see cref="BaseGeocodeRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (string.IsNullOrWhiteSpace(this.Address) && (this.Components == null || !this.Components.Any()))
-                throw new ArgumentException("Address or Components is required");
-
             var parameters = base.GetQueryStringParameters();
 
+            if (string.IsNullOrWhiteSpace(this.Address) && (this.Components == null || !this.Components.Any()))
+                throw new ArgumentException($"'{nameof(this.Address)}' or '{nameof(this.Components)}' is required");
+
             if (!string.IsNullOrEmpty(this.Address))
+            {
                 parameters.Add("address", this.Address);
+            }
 
             if (!string.IsNullOrEmpty(this.Region))
+            {
                 parameters.Add("region", this.Region);
+            }
 
             if (this.Bounds != null)
-                parameters.Add("bounds", $"{this.Bounds.SouthWest}|{this.Bounds.NorthEast}");
+            {
+                parameters.Add("bounds", this.Bounds.ToString());
+            }
 
             if (this.Components != null && this.Components.Any())
+            {
                 parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
+            }
 
             return parameters;
         }

@@ -1,10 +1,9 @@
 using System;
-using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StreetView.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.StreetView
@@ -13,106 +12,18 @@ namespace GoogleApi.Test.Maps.StreetView
     public class StreetViewTests : BaseTest
     {
         [Test]
-        public void StreetViewTest()
+        public void StreetViewWhenLocationTest()
         {
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796)
+                Location = new Location(new Coordinate(60.170877, 24.942796))
             };
 
             var result = GoogleMaps.StreetView.Query(request);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Buffer);
             Assert.AreEqual(Status.Ok, result.Status);
-        }
-
-        [Test]
-        public void StreetViewWhenAsyncTest()
-        {
-            var request = new StreetViewRequest
-            {
-                Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796)
-
-            };
-            var result = GoogleMaps.StreetView.QueryAsync(request).Result;
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Buffer);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
-
-        [Test]
-        public void StreetViewWhenAsyncAndCancelledTest()
-        {
-            var request = new StreetViewRequest
-            {
-                Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796)
-            };
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.StreetView.QueryAsync(request, cancellationTokenSource.Token);
-            cancellationTokenSource.Cancel();
-
-            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
-
-        [Test]
-        public void StreetViewWhenInvalidKeyTest()
-        {
-            var request = new StreetViewRequest
-            {
-                Key = "test",
-                Location = new Location(60.170877, 24.942796)
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerExceptions.FirstOrDefault();
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
-            Assert.AreEqual("Response status code does not indicate success: 403 (Forbidden).", innerException.Message);
-        }
-
-        [Test]
-        public void StreetViewWhenKeyIsNullTest()
-        {
-            var request = new StreetViewRequest
-            {
-                Key = null,
-                Location = new Location(60.170877, 24.942796)
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
-        }
-
-        [Test]
-        public void StreetViewWhenKeyIsStringEmptyTest()
-        {
-            var request = new StreetViewRequest
-            {
-                Key = string.Empty,
-                Location = new Location(60.170877, 24.942796)
-            };
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.StreetView.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
         }
 
         [Test]
@@ -127,24 +38,6 @@ namespace GoogleApi.Test.Maps.StreetView
             var result = GoogleMaps.StreetView.Query(request);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Buffer);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
-
-        [Test]
-        public void StreetViewWhenPitchTest()
-        {
-            var request = new StreetViewRequest
-            {
-                Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796),
-                Pitch = 80
-            };
-
-            var result = GoogleMaps.StreetView.Query(request);
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Buffer);
             Assert.AreEqual(Status.Ok, result.Status);
         }
 
@@ -154,32 +47,46 @@ namespace GoogleApi.Test.Maps.StreetView
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796),
-                Heading = 80
+                Location = new Location(new Coordinate(60.170877, 24.942796)),
+                Heading = 90
             };
 
             var result = GoogleMaps.StreetView.Query(request);
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Buffer);
             Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
-        public void StreetViewWhenFieldOfViewTest()
+        public void StreetViewWhenAsyncTest()
         {
             var request = new StreetViewRequest
             {
                 Key = this.ApiKey,
-                Location = new Location(60.170877, 24.942796),
-                FieldOfView = 50
-            };
+                Location = new Location(new Coordinate(60.170877, 24.942796))
 
-            var result = GoogleMaps.StreetView.Query(request);
+            };
+            var result = GoogleMaps.StreetView.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Buffer);
             Assert.AreEqual(Status.Ok, result.Status);
+        }
+
+        [Test]
+        public void StreetViewWhenAsyncAndCancelledTest()
+        {
+            var request = new StreetViewRequest
+            {
+                Key = this.ApiKey,
+                Location = new Location(new Coordinate(60.170877, 24.942796))
+            };
+            var cancellationTokenSource = new CancellationTokenSource();
+            var task = GoogleMaps.StreetView.QueryAsync(request, cancellationTokenSource.Token);
+            cancellationTokenSource.Cancel();
+
+            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "The operation was canceled.");
         }
     }
 }

@@ -22,6 +22,6 @@ namespace GoogleApi.Entities.Maps.Directions.Response
         /// An array of Location objects representing the points in the encoded overview polyline.
         /// </summary>
         [JsonIgnore]
-        public virtual IEnumerable<Location> Line => GoogleFunctions.DecodePolyLine(this.Points);
+        public virtual IEnumerable<Coordinate> Line => GoogleFunctions.DecodePolyLine(this.Points);
     }
 }

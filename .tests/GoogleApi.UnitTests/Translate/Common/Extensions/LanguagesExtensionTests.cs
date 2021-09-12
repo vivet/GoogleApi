@@ -111,6 +111,12 @@ namespace GoogleApi.UnitTests.Translate.Common.Extensions
         [Test] public void ToCodeWhenYiddishTest() { Assert.AreEqual("yi", Language.Yiddish.ToCode()); }
         [Test] public void ToCodeWhenYorubaTest() { Assert.AreEqual("yo", Language.Yoruba.ToCode()); }
         [Test] public void ToCodeWhenZuluTest() { Assert.AreEqual("zu", Language.Zulu.ToCode()); }
+        [Test] public void ToCodeWhenHebrewOldTest() { Assert.AreEqual("iw", Language.HebrewOld.ToCode()); }
+        [Test] public void ToCodeWhenKinyarwandaTest() { Assert.AreEqual("rw", Language.Kinyarwanda.ToCode()); }
+        [Test] public void ToCodeWhenOdiaTest() { Assert.AreEqual("or", Language.Odia.ToCode()); }
+        [Test] public void ToCodeWhenTatarTest() { Assert.AreEqual("tt", Language.Tatar.ToCode()); }
+        [Test] public void ToCodeWhenTurkmenTest() { Assert.AreEqual("tk", Language.Turkmen.ToCode()); }
+        [Test] public void ToCodeWhenUyghurTest() { Assert.AreEqual("ug", Language.Uyghur.ToCode()); }
 
         [Test] public void IsValidNmtWhenAfrikaansTest() { Assert.IsTrue(Language.Afrikaans.IsValidNmt()); }
         [Test] public void IsValidNmtWhenAlbanianTest() { Assert.IsFalse(Language.Albanian.IsValidNmt()); }
@@ -217,5 +223,10 @@ namespace GoogleApi.UnitTests.Translate.Common.Extensions
         [Test] public void IsValidNmtWhenYiddishTest() { Assert.IsFalse(Language.Yiddish.IsValidNmt()); }
         [Test] public void IsValidNmtWhenYorubaTest() { Assert.IsFalse(Language.Yoruba.IsValidNmt()); }
         [Test] public void IsValidNmtWhenZuluTest() { Assert.IsFalse(Language.Zulu.IsValidNmt()); }
+        [Test] public void IsValidNmtWhenKinyarwandaTest() { Assert.IsFalse(Language.Kinyarwanda.IsValidNmt()); }
+        [Test] public void IsValidNmtWhenOdiaTest() { Assert.IsFalse(Language.Odia.IsValidNmt()); }
+        [Test] public void IsValidNmtWhenTatarTest() { Assert.IsFalse(Language.Tatar.IsValidNmt()); }
+        [Test] public void IsValidNmtWhenTurkmenTest() { Assert.IsFalse(Language.Turkmen.IsValidNmt()); }
+        [Test] public void IsValidNmtWhenUyghurTest() { Assert.IsFalse(Language.Uyghur.IsValidNmt()); }
     }
 }

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
 {
     /// <summary>
     /// NearestRoads request.
     /// </summary>
-    public class NearestRoadsRequest : BaseRoadsRequest
+    public class NearestRoadsRequest : BaseMapsRequest, IRequestQueryString
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "roads.googleapis.com/v1/nearestRoads";
 
         /// <summary>
@@ -21,21 +20,18 @@ namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Request
         /// Coordinates should be separated by the pipe character: "|". 
         /// For example: points=60.170880,24.942795|60.170879,24.942796|60.170877,24.942796.
         /// </summary>
-        public virtual IEnumerable<Location> Points { get; set; }
+        public virtual IEnumerable<Coordinate> Points { get; set; } = new List<Coordinate>();
 
-        /// <summary>
-        /// See <see cref="BaseRoadsRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
+            var parameters = base.GetQueryStringParameters();
+
             if (this.Points == null || !this.Points.Any())
-                throw new ArgumentException("Points is required");
+                throw new ArgumentException($"'{nameof(this.Points)}' is required");
 
             if (this.Points.Count() > 100)
-                throw new ArgumentException("Path must contain less than 100 locations");
-
-            var parameters = base.GetQueryStringParameters();
+                throw new ArgumentException($"'{nameof(this.Points)}' must contain equal or less than 100 coordinates");
 
             parameters.Add("points", string.Join("|", this.Points));
 

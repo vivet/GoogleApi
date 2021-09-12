@@ -18,19 +18,13 @@ namespace GoogleApi.Entities.Maps.Geocoding.Place.Request
         /// </summary>
         public virtual string PlaceId { get; set; }
 
-        /// <summary>
-        /// See <see cref="BaseGeocodeRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Key == null)
-                throw new ArgumentException("Key is required");
+            var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.PlaceId))
-                throw new ArgumentException("PlaceId is required");
-
-            var parameters = base.GetQueryStringParameters();
+                throw new ArgumentException($"'{nameof(this.PlaceId)}' is required");
 
             parameters.Add("place_id", this.PlaceId);
 

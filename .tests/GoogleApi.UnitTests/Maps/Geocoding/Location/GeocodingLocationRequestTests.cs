@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
@@ -15,18 +16,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
         public void ConstructorDefaultTest()
         {
             var request = new LocationGeocodeRequest();
-
-            Assert.IsTrue(request.IsSsl);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new LocationGeocodeRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
+            Assert.AreEqual(Language.English, request.Language);
         }
 
         [Test]
@@ -34,11 +24,114 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = "abc",
-                Location = new Entities.Common.Location(1, 1)
+                Key = "key",
+                Location = new Coordinate(1, 1)
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+
+            var key = queryStringParameters.SingleOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var language = queryStringParameters.SingleOrDefault(x => x.Key == "language");
+            var languageExpected = request.Language.ToCode();
+            Assert.IsNotNull(language);
+            Assert.AreEqual(languageExpected, language.Value);
+
+            var location = queryStringParameters.SingleOrDefault(x => x.Key == "latlng");
+            var locationExpected = request.Location.ToString();
+            Assert.IsNotNull(location);
+            Assert.AreEqual(locationExpected, location.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenChannelTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = "key",
+                Location = new Coordinate(1, 1),
+                Channel = "channel"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var channel = queryStringParameters.FirstOrDefault(x => x.Key == "channel");
+            var channelExpected = request.Channel;
+            Assert.IsNotNull(channel);
+            Assert.AreEqual(channelExpected, channel.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenResultTypeTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = "key",
+                Location = new Coordinate(1, 1),
+                ResultTypes = new[]
+                {
+                    PlaceLocationType.Accounting,
+                    PlaceLocationType.Administrative_Area_Level_1 
+                }
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var resultType = queryStringParameters.SingleOrDefault(x => x.Key == "result_type");
+            var resultTypeExpected = string.Join("|", request.ResultTypes.Select(x => x.ToString().ToLower()));
+            Assert.IsNotNull(resultType);
+            Assert.AreEqual(resultTypeExpected, resultType.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenLocationTypeTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = "key",
+                Location = new Coordinate(1, 1),
+                LocationTypes = new[]
+                {
+                    GeometryLocationType.Rooftop
+                }
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var locationType = queryStringParameters.SingleOrDefault(x => x.Key == "location_type");
+            var locationTypeExpected = string.Join("|", request.LocationTypes.Select(x => x.ToString().ToUpper()));
+            Assert.IsNotNull(locationType);
+            Assert.AreEqual(locationTypeExpected, locationType.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsNullTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = null
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = string.Empty
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.AreEqual("'Key' is required", exception.Message);
         }
 
         [Test]
@@ -46,7 +139,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = "abc"
+                Key = "key"
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -55,61 +148,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Location
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Location is required");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new LocationGeocodeRequest
-            {
-                Key = "abc",
-                Location = new Entities.Common.Location(1, 1)
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/geocode/json?key={request.Key}&language={request.Language.ToCode()}&latlng={Uri.EscapeDataString(request.Location.ToString())}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenResultTypeTest()
-        {
-            var request = new LocationGeocodeRequest
-            {
-                Key = "abc",
-                Location = new Entities.Common.Location(1, 1),
-                ResultTypes = new[]
-                {
-                    PlaceLocationType.Accounting,
-                    PlaceLocationType.Administrative_Area_Level_1 
-                }
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/geocode/json?key={request.Key}&language={request.Language.ToCode()}&latlng={Uri.EscapeDataString(request.Location.ToString())}&result_type={Uri.EscapeDataString(string.Join("|", request.ResultTypes.Select(x => x.ToString().ToLower()).AsEnumerable()))}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenLocationTypeTest()
-        {
-            var request = new LocationGeocodeRequest
-            {
-                Key = "abc",
-                Location = new Entities.Common.Location(1, 1),
-                LocationTypes = new[]
-                {
-                    GeometryLocationType.Rooftop
-                }
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/geocode/json?key={request.Key}&language={request.Language.ToCode()}&latlng={Uri.EscapeDataString(request.Location.ToString())}&location_type={Uri.EscapeDataString(string.Join("|", request.LocationTypes.Select(x => x.ToString().ToUpper()).AsEnumerable()))}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'Location' is required");
         }
     }
 }

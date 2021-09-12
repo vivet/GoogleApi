@@ -14,11 +14,6 @@ namespace GoogleApi.Entities.Translate.Translate.Request
     public class TranslateRequest : BaseTranslateRequest
     {
         /// <summary>
-        /// Base url.
-        /// </summary>
-        protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2";
-
-        /// <summary>
         /// The language of the source text, set to one of the language codes listed in Language Support. 
         /// If the source language is not specified, the API will attempt to detect the source language automatically and 
         /// return it within the response.
@@ -30,6 +25,12 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// set to one of the language codes listed in Language Support.
         /// </summary>
         public virtual Language? Target { get; set; }
+
+        /// <summary>
+        /// Required. The input text to translate. 
+        /// Repeat this parameter to perform translation operations on multiple text inputs.
+        /// </summary>
+        public virtual IEnumerable<string> Qs { get; set; }
 
         /// <summary>
         /// The translation model. 
@@ -48,37 +49,28 @@ namespace GoogleApi.Entities.Translate.Translate.Request
         /// </summary>
         public virtual Format Format { get; set; } = Format.Html;
 
-        /// <summary>
-        /// Required. The input text to translate. 
-        /// Repeat this parameter to perform translation operations on multiple text inputs.
-        /// </summary>
-        public virtual IEnumerable<string> Qs { get; set; }
-
-        /// <summary>
-        /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
+            var parameters = base.GetQueryStringParameters();
+
             if (this.Target == null)
-                throw new ArgumentException("Target is required");
+                throw new ArgumentException($"'{nameof(this.Target)}' is required");
 
             if (this.Qs == null || !this.Qs.Any())
-                throw new ArgumentException("Qs is required");
+                throw new ArgumentException($"'{nameof(this.Qs)}' is required");
 
             if (this.Model == Model.Nmt)
             {
                 if (this.Source != null && !this.Source.Value.IsValidNmt())
-                    throw new ArgumentException("Source is not compatible with model 'nmt'");
+                    throw new ArgumentException($"'{nameof(this.Source)}' is not compatible with model '{nameof(Model.Nmt)}'");
 
                 if (!this.Target.Value.IsValidNmt())
-                    throw new ArgumentException("Target is not compatible with model 'nmt'");
+                    throw new ArgumentException($"'{nameof(this.Target)}' is not compatible with model '{nameof(Model.Nmt)}'");
 
                 if (this.Source != null && this.Source != Language.English && this.Target != Language.English)
-                    throw new ArgumentException("Source or Target must be english");
+                    throw new ArgumentException($"'{nameof(this.Source)}' or '{nameof(this.Target)}' must be english");
             }
-
-            var parameters = base.GetQueryStringParameters();
 
             parameters.Add("target", this.Target?.ToCode());
             parameters.Add("model", this.Model.ToString().ToLower());

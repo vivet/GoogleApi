@@ -15,7 +15,6 @@ namespace GoogleApi.UnitTests.Search.Image
         {
             var request = new ImageSearchRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.IsTrue(request.PrettyPrint);
             Assert.AreEqual(request.Alt, AltType.Json);
 
@@ -24,16 +23,6 @@ namespace GoogleApi.UnitTests.Search.Image
             Assert.IsNull(request.ImageOptions.ImageType);
             Assert.IsNull(request.ImageOptions.ImageColorType);
             Assert.IsNull(request.ImageOptions.ImageDominantColor);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new ImageSearchRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]

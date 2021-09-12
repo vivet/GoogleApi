@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Maps.Geocoding.Address
@@ -25,16 +23,53 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
+        }
 
-            var geocodeResult = result.Results.FirstOrDefault();
-            Assert.IsNotNull(geocodeResult);
-            Assert.AreEqual(40.7140415, geocodeResult.Geometry.Location.Latitude, 0.001);
-            Assert.AreEqual(-73.9613119, geocodeResult.Geometry.Location.Longitude, 0.001);
+        [Test]
+        public void AddressGeocodeWhenRegionTest()
+        {
+            var request = new AddressGeocodeRequest
+            {
+                Key = this.ApiKey,
+                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
+                Region = "Bedford"
+            };
+            var result = GoogleMaps.AddressGeocode.Query(request);
 
-            var types = geocodeResult.Types?.ToArray();
-            Assert.IsNotNull(types);
-            Assert.IsNotEmpty(types);
-            Assert.Contains(PlaceLocationType.Premise, types);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+        }
+
+        [Test]
+        public void AddressGeocodeWhenBoundsTest()
+        {
+            var request = new AddressGeocodeRequest
+            {
+                Key = this.ApiKey,
+                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
+                Bounds = new ViewPort(new Coordinate(40.7141289, -73.9614074), new Coordinate(40.7141289, -73.9614074))
+            };
+            var result = GoogleMaps.AddressGeocode.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
+        }
+
+        [Test]
+        public void AddressGeocodeWhenComponentsTest()
+        {
+            var request = new AddressGeocodeRequest
+            {
+                Key = this.ApiKey,
+                Components = new[]
+                {
+                    new KeyValuePair<Component, string>(Component.Country, "dk")  
+                }  
+            };
+            var result = GoogleMaps.AddressGeocode.Query(request);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Status.Ok, result.Status);
         }
 
         [Test]
@@ -56,6 +91,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
         {
             var request = new AddressGeocodeRequest
             {
+                Key = this.ApiKey,
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
             };
             var cancellationTokenSource = new CancellationTokenSource();
@@ -65,111 +101,6 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
-
-        [Test]
-        public void AddressGeocodeAndLanguageTest()
-        {
-            Assert.Inconclusive();
-        }
-
-        [Test]
-        public void AddressGeocodeWhenBoundsTest()
-        {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.ApiKey,
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
-                Bounds = new ViewPort
-                {
-                    NorthEast = new Entities.Common.Location(40.7141289, -73.9614074),
-                    SouthWest = new Entities.Common.Location(40.7141289, -73.9614074)
-                }
-            };
-            var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-
-            var geocodeResult = result.Results.FirstOrDefault();
-            Assert.IsNotNull(geocodeResult);
-            Assert.AreEqual(40.7140415, geocodeResult.Geometry.Location.Latitude, 0.001);
-            Assert.AreEqual(-73.9613119, geocodeResult.Geometry.Location.Longitude, 0.001);
-        }
-
-        [Test]
-        public void AddressGeocodeWhenBoundsAmbiguousTest()
-        {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.ApiKey,
-                Address = "Yellow Rock",
-                Bounds = new ViewPort
-                {
-                    NorthEast = new Entities.Common.Location(37.771819, -111.603914),
-                    SouthWest = new Entities.Common.Location(37.039739, -112.514545)
-                }
-            };
-            var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-
-            var geocodeResult = result.Results.FirstOrDefault();
-            Assert.IsNotNull(geocodeResult);
-            Assert.AreEqual(37.2583855, geocodeResult.Geometry.Location.Latitude, 0.001);
-            Assert.AreEqual(-111.9221377, geocodeResult.Geometry.Location.Longitude, 0.001);
-        }
-
-        [Test]
-        public void AddressGeocodeWhenRegionTest()
-        {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.ApiKey,
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
-                Region = "Bedford"
-            };
-            var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-
-            var geocodeResult = result.Results.FirstOrDefault();
-            Assert.IsNotNull(geocodeResult);
-            Assert.AreEqual(40.7140415, geocodeResult.Geometry.Location.Latitude, 0.001);
-            Assert.AreEqual(-73.9613119, geocodeResult.Geometry.Location.Longitude, 0.001);
-        }
-
-        [Test]
-        public void AddressGeocodeWhenComponentsTest()
-        {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.ApiKey,
-                Components = new[]
-                {
-                    new KeyValuePair<Component, string>(Component.Country, "dk")  
-                }  
-            };
-            var result = GoogleMaps.AddressGeocode.Query(request);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
-
-        [Test]
-        public void AddressGeocodeWhenAddressIsNullTest()
-        {
-            var request = new AddressGeocodeRequest();
-
-            var exception = Assert.Throws<AggregateException>(() => GoogleMaps.AddressGeocode.QueryAsync(request).Wait());
-            Assert.IsNotNull(exception);
-
-            var innerException = exception.InnerException;
-            Assert.IsNotNull(innerException);
-            Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Address or Components is required");
         }
     }
 }

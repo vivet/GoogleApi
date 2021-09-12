@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using NUnit.Framework;
@@ -14,35 +15,97 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
         public void ConstructorDefaultTest()
         {
             var request = new SpeedLimitsRequest();
-
-            Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(Units.Kph, request.Unit);
         }
 
         [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new SpeedLimitsRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
-        }
-
-        [Test]
-        public void GetQueryStringParametersTest()
+        public void GetQueryStringParametersWhenPathTest()
         {
             var request = new SpeedLimitsRequest
             {
-                Key = "abc",
+                Key = "key",
                 Path = new[]
                 {
-                    new Location(1, 1),
-                    new Location(2, 2)
+                    new Coordinate(1, 1),
+                    new Coordinate(2, 2)
                 }
             };
 
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.SingleOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var path = queryStringParameters.FirstOrDefault(x => x.Key == "path");
+            var pathExpected = string.Join("|", request.Path);
+            Assert.IsNotNull(path);
+            Assert.AreEqual(pathExpected, path.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPathAndTooManyTest()
+        {
+            var request = new SpeedLimitsRequest
+            {
+                Key = "key",
+                Path = new Coordinate[101]
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                var parameters = request.GetQueryStringParameters();
+                Assert.IsNull(parameters);
+            });
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "'Path' must contain equal or less than 100 coordinates");
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPlacesTest()
+        {
+            var request = new SpeedLimitsRequest
+            {
+                Key = "key",
+                Places = new[]
+                {
+                    new Place("place1"),
+                    new Place("place2")
+                }
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var place1 = queryStringParameters.FirstOrDefault(x => x.Key == "placeId");
+            var place1Expected = request.Places.First().ToString();
+            Assert.IsNotNull(place1);
+            Assert.AreEqual(place1Expected, place1.Value);
+
+            var place2 = queryStringParameters.LastOrDefault(x => x.Key == "placeId");
+            var place2Expected = request.Places.Last().ToString();
+            Assert.IsNotNull(place2);
+            Assert.AreEqual(place2Expected, place2.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenPlacesAndTooManyTest()
+        {
+            var request = new SpeedLimitsRequest
+            {
+                Key = "key",
+                Places = new Place[101]
+            };
+
+            var exception = Assert.Throws<ArgumentException>(() =>
+            {
+                var parameters = request.GetQueryStringParameters();
+                Assert.IsNull(parameters);
+            });
+            Assert.IsNotNull(exception);
+            Assert.AreEqual(exception.Message, "'Places' must contain equal or less than 100 places");
         }
 
         [Test]
@@ -50,8 +113,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
         {
             var request = new SpeedLimitsRequest
             {
-                Key = null,
-                Path = new[] { new Location(0, 0) }
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -60,7 +122,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -68,8 +130,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
         {
             var request = new SpeedLimitsRequest
             {
-                Key = string.Empty,
-                Path = new[] { new Location(0, 0) }
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -78,15 +139,15 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
-        public void GetQueryStringParametersWhenPathIsNullAndPlaceIdsIsNullTest()
+        public void GetQueryStringParametersWhenPathIsNullAndPlacesIsNullTest()
         {
             var request = new SpeedLimitsRequest
             {
-                Key = "abc"
+                Key = "key"
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -95,82 +156,7 @@ namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits
                 Assert.IsNull(parameters);
             });
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Path or PlaceId's is required");
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenPathIsEmptyAndPlaceIdsIsEmptyTest()
-        {
-            var request = new SpeedLimitsRequest
-            {
-                Key = "abc",
-                Path = new Location[0],
-                PlaceIds = new string[0]
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Path or PlaceId's is required");
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenPlaceIdsCountIsGreaterThanAllowedTest()
-        {
-            var request = new SpeedLimitsRequest
-            {
-                Key = "abc",
-                PlaceIds = new string[101]
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() =>
-            {
-                var parameters = request.GetQueryStringParameters();
-                Assert.IsNull(parameters);
-            });
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "Max PlaceId's exceeded");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new SpeedLimitsRequest
-            {
-                Key = "abc",
-                Path = new[]
-                {
-                    new Location(1, 1),
-                    new Location(2, 2)
-                }
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/v1/speedLimits?key={request.Key}&path={Uri.EscapeDataString(string.Join("|", request.Path))}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenPlaceIdsTest()
-        {
-            var request = new SpeedLimitsRequest
-            {
-                Key = "abc",
-                PlaceIds = new[]
-                {
-                    "abc",
-                    "def"
-                }
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/v1/speedLimits?key={request.Key}&placeId={Uri.EscapeDataString(request.PlaceIds.First())}&placeId={Uri.EscapeDataString(request.PlaceIds.Last())}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'Path' or 'Places' is required");
         }
     }
 }

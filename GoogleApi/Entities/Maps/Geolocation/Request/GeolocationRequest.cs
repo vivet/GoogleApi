@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 using Newtonsoft.Json;
@@ -12,9 +11,7 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
     /// </summary>
     public class GeolocationRequest : BaseMapsRequest, IRequestJson
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
+        /// <inheritdoc />
         protected internal override string BaseUrl => "www.googleapis.com/geolocation/v1/geolocate";
 
         /// <summary>
@@ -64,19 +61,5 @@ namespace GoogleApi.Entities.Maps.Geolocation.Request
         /// </summary>
         [JsonProperty("wifiAccessPoints")]
         public virtual IEnumerable<WifiAccessPoint> WifiAccessPoints { get; set; }
-
-        /// <summary>
-        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
-        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
-        {
-            if (string.IsNullOrWhiteSpace(this.Key))
-                throw new ArgumentException("Key is required");
-
-            var parameters = base.GetQueryStringParameters();
-
-            return parameters;
-        }
     }
 }

@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common
         /// Location — Contains a latitude and longitude value.
         /// </summary>
         [JsonProperty("location")]
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
         /// <summary>
         /// OriginalIndex — An integer that indicates the corresponding value in the original request. 

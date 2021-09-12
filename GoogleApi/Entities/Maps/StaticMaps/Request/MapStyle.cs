@@ -1,4 +1,7 @@
-﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request
+﻿using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
+
+namespace GoogleApi.Entities.Maps.StaticMaps.Request
 {
 	/// <summary>
 	/// Customize the presentation of the standard Google map by applying your own styles when using the Google Static Maps API.
@@ -14,20 +17,37 @@
         /// Features include things on the map, like roads, parks, or other points of interest.
         /// If no features is present, the specified style applies to all features.
         /// </summary>
-        public virtual string Feature { get; set; }
+        public virtual StyleFeature Feature { get; set; } = StyleFeature.All;
 
         /// <summary>
         /// element(optional) indicates the element(s) of the specified feature to select for this style modification. 
         /// Elements are characteristics of a feature, such as geometry or labels.
         /// If no element argument is present, the style applies to all elements of the specified feature.
         /// </summary>
-        public virtual string Element { get; set; }
+        public virtual StyleElement Element { get; set; } = StyleElement.All;
 
         /// <summary>
         /// A set of style rules (mandatory) to apply to the specified feature(s) and element(s). 
         /// The API applies the rules in the order in which they appear in the style declaration.
         /// You can include any number of rules, within the normal URL-length constraints of the Google Static Maps API.
         /// </summary>
-        public virtual string Style { get; set; }
+        public virtual StyleRule Style { get; set; }
+
+        /// <summary>
+        /// Returns a string representation of a <see cref="MapStyle"/>.
+        /// </summary>
+        /// <returns>The string representation.</returns>
+        public override string ToString()
+        {
+            var style = this.Style?.ToString();
+
+            if (style == null) 
+                return null;
+            
+            var featureValue = this.Feature.ToEnumMemberString();
+            var elementValue = this.Element.ToEnumMemberString();
+
+            return $"feature:{featureValue}|element:{elementValue}|{this.Style}";
+        }
     }
 }

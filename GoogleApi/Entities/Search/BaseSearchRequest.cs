@@ -73,15 +73,6 @@ namespace GoogleApi.Entities.Search
         public virtual string QuotaUser { get; set; }
 
         /// <summary>
-        /// See <see cref="BaseRequest.IsSsl"/>.
-        /// </summary>
-        public override bool IsSsl
-        {
-            get => true;
-            set => throw new NotSupportedException("This operation is not supported, Request must use SSL");
-        }
-
-        /// <summary>
         /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
         /// </summary>
         /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>

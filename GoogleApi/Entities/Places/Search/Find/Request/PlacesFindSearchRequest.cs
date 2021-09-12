@@ -17,7 +17,7 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
         /// <summary>
         /// Base Url.
         /// </summary>
-        protected internal override string BaseUrl => base.BaseUrl + "findplacefromtext/json";
+        protected internal override string BaseUrl => $"{base.BaseUrl}findplacefromtext/json";
 
         /// <summary>
         /// Input.
@@ -32,14 +32,6 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
         public virtual InputType Type { get; set; } = InputType.TextQuery;
 
         /// <summary>
-        /// Fields (optional).
-        /// Defaults to 'place_id'.
-        /// The fields specifying the types of place data to return, separated by a comma.
-        /// Note, if you omit the fields parameter from a Find Place request, only the place_id for the result will be returned.
-        /// </summary>
-        public virtual FieldTypes Fields { get; set; } = FieldTypes.Place_Id;
-
-        /// <summary>
         /// Language (optional).
         /// The language code, indicating in which language the results should be returned, if possible.
         /// Searches are also biased to the selected language; results in the selected language may be given a higher ranking.
@@ -47,6 +39,14 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
         /// Note that we often update supported languages so this list may not be exhaustive.
         /// </summary>
         public virtual Language Language { get; set; } = Language.English;
+
+        /// <summary>
+        /// Fields (optional).
+        /// Defaults to 'place_id'.
+        /// The fields specifying the types of place data to return, separated by a comma.
+        /// Note, if you omit the fields parameter from a Find Place request, only the place_id for the result will be returned.
+        /// </summary>
+        public virtual FieldTypes Fields { get; set; } = FieldTypes.Place_Id;
 
         /// <summary>
         /// Radius (optional).
@@ -70,21 +70,19 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
         /// - A single lat/lng coordinate.Use the following format: 'point:lat, lng'
         /// - Circular: A string specifying radius in meters, plus lat/lng in decimal degrees. Format: 'circle:radius @lat, lng.'
         /// </summary>
-        public virtual Location Location { get; set; }
+        public virtual Coordinate Location { get; set; }
 
-        /// <summary>
-        /// See <see cref="BasePlacesRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrWhiteSpace(this.Input))
-                throw new ArgumentException("Input is required");
+                throw new ArgumentException($"'{nameof(this.Input)}' is required");
 
             parameters.Add("input", this.Input);
             parameters.Add("inputtype", this.Type.ToString().ToLower());
+            parameters.Add("language", this.Language.ToCode());
 
             var fields = Enum.GetValues(typeof(FieldTypes))
                 .Cast<FieldTypes>()
@@ -92,11 +90,14 @@ namespace GoogleApi.Entities.Places.Search.Find.Request
                 .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLowerInvariant()},");
 
             parameters.Add("fields", fields.EndsWith(",") ? fields.Substring(0, fields.Length - 1) : fields);
-            parameters.Add("language", this.Language.ToCode());
 
             if (this.Location != null)
             {
-                parameters.Add("locationbias", this.Radius.HasValue ? $"circle:{this.Radius}@{this.Location}" : $"point:{this.Location}");
+                var locationBias = this.Radius.HasValue
+                    ? $"circle:{this.Radius}@{this.Location}"
+                    : $"point:{this.Location}";
+
+                parameters.Add("locationbias", locationBias);
             }
             else if (this.Bounds != null)
             {

@@ -1,5 +1,8 @@
 using System;
 using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace GoogleApi.Entities.Common.Extensions
 {
@@ -20,6 +23,23 @@ namespace GoogleApi.Entities.Common.Extensions
             where T : struct 
         {
             return Convert.ToString(@enum, CultureInfo.InvariantCulture)?.ToLower().Replace(',', delimeter).Replace(" ", "");
+        }
+
+        /// <summary>
+        /// Converts the enum into a string, by getting the <see cref="EnumMemberAttribute"/> value.
+        /// </summary>
+        /// <typeparam name="T">The <see cref="Enum"/> type.</typeparam>
+        /// <param name="enum">The enum value.</param>
+        /// <returns>A <see cref="string"/> representation of the enum value.</returns>
+        public static string ToEnumMemberString<T>(this T @enum)
+            where T : struct
+        {
+            return typeof(T)
+                .GetTypeInfo()
+                .DeclaredMembers
+                .SingleOrDefault(x => x.Name == @enum.ToString())?
+                .GetCustomAttribute<EnumMemberAttribute>(false)?
+                .Value;
         }
     }
 }

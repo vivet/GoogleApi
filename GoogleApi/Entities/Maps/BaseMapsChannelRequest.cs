@@ -23,16 +23,15 @@ namespace GoogleApi.Entities.Maps
         /// </summary>
         public virtual string Channel { get; set; }
 
-        /// <summary>
-        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>A <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
             var parameters = base.GetQueryStringParameters();
 
             if (!string.IsNullOrEmpty(this.Channel))
+            {
                 parameters.Add("channel", this.Channel);
+            }
 
             return parameters;
         }

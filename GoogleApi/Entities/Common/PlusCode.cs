@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Common
 {
@@ -8,17 +9,34 @@ namespace GoogleApi.Entities.Common
     public class PlusCode
     {
         /// <summary>
-        /// Global Code
-        /// A 4 character area code and 6 character or longer local code(849VCWC8+R9).
+        /// Global Code.
+        /// A 4 character area code.
         /// </summary>
         [JsonProperty("global_code")]
-        public virtual string GlobalCode { get; set; }
+        public string GlobalCode { get; protected set; }
 
         /// <summary>
-        /// Global Code
+        /// Global Code.
         /// A 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA).
         /// </summary>
         [JsonProperty("compound_code")]
-        public virtual string LocalCode { get; set; }
+        public string LocalCode { get; protected set; }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="globalCode">The global code.</param>
+        /// <param name="localCode">The local code.</param>
+        public PlusCode(string globalCode, string localCode)
+        {
+            this.GlobalCode = globalCode ?? throw new ArgumentNullException(nameof(globalCode));
+            this.LocalCode = localCode ?? throw new ArgumentNullException(nameof(localCode));
+        }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"{this.GlobalCode}{this.LocalCode}";
+        }
     }
 }

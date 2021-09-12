@@ -20,7 +20,7 @@ namespace GoogleApi
         /// </summary>
         /// <param name="locations"></param>
         /// <returns></returns>
-        public static string EncodePolyLine(IEnumerable<Location> locations)
+        public static string EncodePolyLine(IEnumerable<Coordinate> locations)
         {
             if (locations == null)
                 throw new ArgumentNullException(nameof(locations));
@@ -76,7 +76,7 @@ namespace GoogleApi
                 throw new ArgumentNullException(nameof(encodedLocations));
 
             var length = encodedLocations.Length;
-            var locations = new Location[length];
+            var locations = new Coordinate[length];
 
             locations = encodedLocations.Where(x => !string.IsNullOrEmpty(x))
                 .Aggregate(locations,
@@ -91,7 +91,7 @@ namespace GoogleApi
         /// </summary>
         /// <param name="encodedLocations"></param>
         /// <returns></returns>
-        public static IEnumerable<Location> DecodePolyLine(string encodedLocations)
+        public static IEnumerable<Coordinate> DecodePolyLine(string encodedLocations)
         {
             if (string.IsNullOrEmpty(encodedLocations))
                 throw new ArgumentNullException(nameof(encodedLocations));
@@ -136,7 +136,7 @@ namespace GoogleApi
                     break;
 
                 currentLng += (sum & 1) == 1 ? ~(sum >> 1) : sum >> 1;
-                yield return new Location(Convert.ToDouble(currentLat) / 1E5, Convert.ToDouble(currentLng) / 1E5);
+                yield return new Coordinate(Convert.ToDouble(currentLat) / 1E5, Convert.ToDouble(currentLng) / 1E5);
             }
         }
     }

@@ -1,6 +1,6 @@
 using System;
+using System.Linq;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
 using NUnit.Framework;
@@ -15,19 +15,7 @@ namespace GoogleApi.UnitTests.Places.Details
         {
             var request = new PlacesDetailsRequest();
 
-            Assert.IsTrue(request.IsSsl);
             Assert.AreEqual(Language.English, request.Language);
-            Assert.AreEqual(Extensions.None, request.Extensions);
-        }
-
-        [Test]
-        public void SetIsSslTest()
-        {
-            var exception = Assert.Throws<NotSupportedException>(() => new PlacesDetailsRequest
-            {
-                IsSsl = false
-            });
-            Assert.AreEqual("This operation is not supported, Request must use SSL", exception.Message);
         }
 
         [Test]
@@ -35,10 +23,88 @@ namespace GoogleApi.UnitTests.Places.Details
         {
             var request = new PlacesDetailsRequest
             {
-                Key = "abc",
-                PlaceId = "test"
+                Key = "key",
+                PlaceId = "placeId"
             };
-            Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+            var keyExpected = request.Key;
+            Assert.IsNotNull(key);
+            Assert.AreEqual(keyExpected, key.Value);
+
+            var placeId = queryStringParameters.FirstOrDefault(x => x.Key == "placeid");
+            var placeIdExpected = request.PlaceId;
+            Assert.IsNotNull(placeId);
+            Assert.AreEqual(placeIdExpected, placeId.Value);
+
+            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+            Assert.IsNotNull(language);
+            Assert.AreEqual("en", language.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenFieldsTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = "key",
+                PlaceId = "placeId",
+                Fields = FieldTypes.Basic
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var fields = queryStringParameters.FirstOrDefault(x => x.Key == "fields");
+            var fieldsExpected = Enum.GetValues(typeof(FieldTypes))
+                .Cast<FieldTypes>()
+                .Where(x => request.Fields.HasFlag(x) && x != FieldTypes.Basic && x != FieldTypes.Contact && x != FieldTypes.Atmosphere)
+                .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLowerInvariant()},");
+            fieldsExpected = fieldsExpected.EndsWith(",") ? fieldsExpected.Substring(0, fieldsExpected.Length - 1) : fieldsExpected;
+
+            Assert.IsNotNull(fields);
+            Assert.AreEqual(fieldsExpected, fields.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenRegionTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = "key",
+                PlaceId = "placeId",
+                Region = "region"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var region = queryStringParameters.FirstOrDefault(x => x.Key == "region");
+            var regionExpected = request.Region;
+            Assert.IsNotNull(region);
+            Assert.AreEqual(regionExpected, region.Value);
+        }
+
+        [Test]
+        public void GetQueryStringParametersWhenSessionTokenTest()
+        {
+            var request = new PlacesDetailsRequest
+            {
+                Key = "key",
+                PlaceId = "placeId",
+                SessionToken = "sessiontoken"
+            };
+
+            var queryStringParameters = request.GetQueryStringParameters();
+            Assert.IsNotNull(queryStringParameters);
+
+            var sessiontoken = queryStringParameters.FirstOrDefault(x => x.Key == "sessiontoken");
+            var sessiontokenExpected = request.SessionToken;
+            Assert.IsNotNull(sessiontoken);
+            Assert.AreEqual(sessiontokenExpected, sessiontoken.Value);
         }
 
         [Test]
@@ -46,8 +112,7 @@ namespace GoogleApi.UnitTests.Places.Details
         {
             var request = new PlacesDetailsRequest
             {
-                Key = null,
-                PlaceId = "test"
+                Key = null
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -55,7 +120,7 @@ namespace GoogleApi.UnitTests.Places.Details
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -63,8 +128,7 @@ namespace GoogleApi.UnitTests.Places.Details
         {
             var request = new PlacesDetailsRequest
             {
-                Key = string.Empty,
-                PlaceId = "test"
+                Key = string.Empty
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -72,7 +136,7 @@ namespace GoogleApi.UnitTests.Places.Details
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "Key is required");
+            Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
         [Test]
@@ -80,7 +144,7 @@ namespace GoogleApi.UnitTests.Places.Details
         {
             var request = new PlacesDetailsRequest
             {
-                Key = "abc",
+                Key = "key",
                 PlaceId = null
             };
 
@@ -89,7 +153,7 @@ namespace GoogleApi.UnitTests.Places.Details
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "PlaceId is required");
+            Assert.AreEqual(exception.Message, "'PlaceId' is required");
         }
 
         [Test]
@@ -97,7 +161,7 @@ namespace GoogleApi.UnitTests.Places.Details
         {
             var request = new PlacesDetailsRequest
             {
-                Key = "abc",
+                Key = "key",
                 PlaceId = string.Empty
             };
 
@@ -106,70 +170,7 @@ namespace GoogleApi.UnitTests.Places.Details
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
-            Assert.AreEqual(exception.Message, "PlaceId is required");
-        }
-
-        [Test]
-        public void GetUriTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = "abc",
-                PlaceId = "abc"
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenSessionTokenTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = "abc",
-                PlaceId = "abc",
-                SessionToken = "abc"
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status&sessiontoken={request.SessionToken}", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenFieldsTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = "abc",
-                PlaceId = "test",
-                Fields = FieldTypes.Basic
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status", uri.PathAndQuery);
-        }
-
-        [Test]
-        public void GetUriWhenExtensionsTest()
-        {
-            var request = new PlacesDetailsRequest
-            {
-                Key = "abc",
-                PlaceId = "abc",
-                Extensions = Extensions.ReviewSummary
-            };
-
-            var uri = request.GetUri();
-
-            Assert.IsNotNull(uri);
-            Assert.AreEqual($"/maps/api/place/details/json?key={request.Key}&placeid={request.PlaceId}&language={request.Language.ToCode()}&fields=address_component%2Cadr_address%2Cformatted_address%2Cgeometry%2Cicon%2Cid%2Cname%2Cphoto%2Cplace_id%2Cplus_code%2Ctype%2Curl%2Cutc_offset%2Cvicinity%2Cbusiness_status&extensions={request.Extensions.ToString().ToLower()}", uri.PathAndQuery);
+            Assert.AreEqual(exception.Message, "'PlaceId' is required");
         }
     }
 }

@@ -10,10 +10,8 @@ namespace GoogleApi.Entities.Translate.Detect.Request
     /// </summary>
     public class DetectRequest : BaseTranslateRequest
     {
-        /// <summary>
-        /// Base url.
-        /// </summary>
-        protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2/detect";
+        /// <inheritdoc />
+        protected internal override string BaseUrl => $"{base.BaseUrl}detect";
 
         /// <summary>
         /// Required. The input text upon which to perform language detection. 
@@ -21,16 +19,13 @@ namespace GoogleApi.Entities.Translate.Detect.Request
         /// </summary>
         public virtual IEnumerable<string> Qs { get; set; }
 
-        /// <summary>
-        /// See <see cref="BaseTranslateRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+        /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
         {
-            if (this.Qs == null || !this.Qs.Any())
-                throw new ArgumentException("Qs is required");
-
             var parameters = base.GetQueryStringParameters();
+
+            if (this.Qs == null || !this.Qs.Any())
+                throw new ArgumentException($"'{nameof(this.Qs)}' is required");
 
             foreach (var q in this.Qs)
             {

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common;
-using Location = GoogleApi.Entities.Common.Location;
+using GoogleApi.Entities.Maps.StreetView.Request.Enums;
 
 namespace GoogleApi.Entities.Maps.StreetView.Request
 {
-	/// <summary>
+    /// <summary>
 	/// Street View Request.
 	/// </summary>
-	public class StreetViewRequest : BaseMapsChannelRequest
+	public class StreetViewRequest : BaseMapsChannelRequest, IRequestQueryString
 	{
-		/// <inheritdoc />
-		protected internal override string BaseUrl { get; } = "maps.googleapis.com/maps/api/streetview";
+        /// <inheritdoc />
+        protected internal override string BaseUrl => base.BaseUrl + "streetview";
 
 		/// <summary>
 		/// location can be either a text string (such as Chagrin Falls, OH) or a lat/lng value (40.457375,-80.009353). 
@@ -58,16 +59,33 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 		/// field of view in essence represents zoom, with smaller numbers indicating a higher level of zoom.
 		/// </summary>
 		public virtual short FieldOfView { get; set; } = 90;
-	
+
+		/// <summary>
+		/// radius(default is 50) sets a radius, specified in meters, in which to search for a panorama,
+		/// centered on the given latitude and longitude.Valid values are non-negative integers.
+		/// </summary>
+		public virtual int Radius { get; set; } = 50;
+
+		/// <summary>
+		/// return_error_code indicates whether the API should return an error code when no image is found(404 NOT FOUND),
+		/// or in response to an invalid request(400 BAD REQUEST). Valid values are true and false.
+		/// If set to true, an error message is returned in place of the generic gray image.
+		/// This eliminates the need to make a separate call to check for image availability.
+		/// </summary>
+		public virtual bool ReturnErrorCode { get; set; } = false;
+
+        /// <summary>
+        /// source (default is default) limits Street View searches to selected sources. Valid values are
+        /// </summary>
+        /// <returns></returns>
+        public virtual Source Source { get; set; } = Source.Default;
+
 		/// <inheritdoc />
 		public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
 		{
 			var parameters = base.GetQueryStringParameters();
 
-		    if (string.IsNullOrEmpty(this.Key))
-		        throw new ArgumentException("Key is required");
-
-            if (this.PanoramaId != null)
+            if (!string.IsNullOrEmpty(this.PanoramaId))
 		    {
 		        parameters.Add("pano", this.PanoramaId);
 		    }
@@ -75,32 +93,46 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 		    {
 		        parameters.Add("location", this.Location.ToString());
 		    }
-			else
-				throw new ArgumentException("Location or PanoramaId is required");
+            else
+            {
+                throw new ArgumentException($"'{nameof(this.Location)}' or '{nameof(this.PanoramaId)}' is required");
+            }
 
-			parameters.Add("size", $"{this.Size.Width}x{this.Size.Height}");
+			parameters.Add("size", this.Size.ToString());
 
 		    if (this.Pitch >= -90 && this.Pitch <= 90)
 		    {
 		        parameters.Add("pitch", this.Pitch.ToString());
 		    }
-			else
-				throw new ArgumentException("Pitch must be greater than -90 and less than 90");
-
-            if (this.Heading.HasValue)
+            else
             {
-                if (this.Heading >= 0 && this.Heading <= 360)
-				    parameters.Add("heading", this.Heading.ToString());
-			    else
-				    throw new ArgumentException("Heading must be greater than 0 and less than 360");
+                throw new ArgumentException($"'{nameof(this.Pitch)}' must be greater than -90 and less than 90");
             }
 
 		    if (this.FieldOfView >= 0 && this.FieldOfView <= 120)
 		    {
 		        parameters.Add("fov", this.FieldOfView.ToString());
 		    }
-			else
-				throw new ArgumentException("Field of view must be greater than 0 and less than 120");
+            else
+            {
+                throw new ArgumentException($"'{nameof(this.FieldOfView)}' must be greater than 0 and less than 120");
+            }
+
+            if (this.Heading.HasValue)
+            {
+                if (this.Heading >= 0 && this.Heading <= 360)
+                {
+                    parameters.Add("heading", this.Heading.ToString());
+                }
+                else
+                {
+                    throw new ArgumentException($"'{nameof(this.Heading)}' must be greater than 0 and less than 360");
+                }
+            }
+
+            parameters.Add("radius", this.Radius.ToString());
+            parameters.Add("return_error_code", this.ReturnErrorCode.ToString().ToLower());
+            parameters.Add("source", this.Source.ToString().ToLower());
 
 			return parameters;
 		}

@@ -88,6 +88,5 @@ namespace GoogleApi.UnitTests.Common.Enums.Extensions
         [Test] public void FromCodeWhenUzbekTest() { Assert.AreEqual(Language.Uzbek, "uz".FromCode()); }
         [Test] public void FromCodeWhenVietnameseTest() { Assert.AreEqual(Language.Vietnamese, "vi".FromCode()); }
         [Test] public void FromCodeWhenZuluTest() { Assert.AreEqual(Language.Zulu, "zu".FromCode()); }
-
     }
 }
