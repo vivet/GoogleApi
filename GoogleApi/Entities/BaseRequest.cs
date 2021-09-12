@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using GoogleApi.Entities.Interfaces;
 using Newtonsoft.Json;
+using GoogleApi.Entities.Common.Extensions;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;
 using Org.BouncyCastle.Crypto.Parameters;
-using GoogleApi.Entities.Common.Extensions;
 
 namespace GoogleApi.Entities
 {

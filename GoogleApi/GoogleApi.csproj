@@ -99,9 +99,23 @@
 		<Reference Include="System.Net.Http" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<None Remove="GoogleApi.csproj.DotSettings" />
 		<None Include="icon.jpg" Pack="true" PackagePath="icon.jpg" />
