@@ -55,6 +55,12 @@ namespace GoogleApi.Entities.Common.Enums
         MaxWaypointsExceeded,
 
         /// <summary>
+        /// Indicates the requested route is too long and cannot be processed. This error occurs when more complex directions are returned. Try reducing the number of waypoints, turns, or instructions.	
+        /// </summary>
+        [EnumMember(Value = "MAX_ROUTE_LENGTH_EXCEEDED")]
+        MaxRouteLengthExceeded,
+
+        /// <summary>
         /// Indicates at least one of the locations specified in the requests's origin, destination, or waypoints could not be geocoded.
         /// </summary>
         [EnumMember(Value = "NOT_FOUND")]
