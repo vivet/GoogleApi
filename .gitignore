@@ -10,4 +10,3 @@ packages
 project.lock.json
 TestResults*
 application.json
-.idea/**/*
