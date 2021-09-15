@@ -29,9 +29,9 @@ namespace GoogleApi.UnitTests.Common
         [Test]
         public void ConstructorWhenLocalCodeIsNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() =>
+            Assert.DoesNotThrow(() =>
             {
-                var plusCode = new PlusCode("global", null);
+                var plusCode = new PlusCode("global");
                 Assert.IsNotNull(plusCode);
             });
         }

@@ -28,6 +28,21 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         }
 
         [Test]
+        public void LocationGeocodeWhenNoLocalCodeTest()
+        {
+            var request = new LocationGeocodeRequest
+            {
+                Key = this.ApiKey,
+                Location = new Coordinate(27.0675, -40.808)
+            };
+
+            var response = GoogleMaps.LocationGeocode.Query(request);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(Status.Ok, response.Status);
+        }
+
+        [Test]
         public void LocationGeocodeWhenResultTypesTest()
         {
             var request = new LocationGeocodeRequest
