@@ -97,11 +97,14 @@ namespace GoogleApi
         /// Query.
         /// </summary>
         /// <param name="request">The request that will be sent.</param>
+        /// <param name="httpEngineOptions">The <see cref="HttpEngineOptions"/>.</param>
         /// <returns>The <see cref="IResponse"/>.</returns>
-        public TResponse Query(TRequest request)
+        public TResponse Query(TRequest request, HttpEngineOptions httpEngineOptions = null)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
+
+            httpEngineOptions = httpEngineOptions ?? new HttpEngineOptions();
 
             try
             {
@@ -114,6 +117,14 @@ namespace GoogleApi
                     case Status.NotFound:
                     case Status.ZeroResults:
                         return response;
+
+                    case Status.InvalidRequest:
+                        if (!httpEngineOptions.ThrowOnInvalidRequest)
+                        {
+                            return response;
+                        }
+
+                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
 
                     default:
                         throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
@@ -169,6 +180,81 @@ namespace GoogleApi
 
                                 default:
                                     throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is GoogleApiException)
+                        {
+                            taskCompletion.SetException(ex);
+                        }
+                        else
+                        {
+                            var baseException = ex.GetBaseException();
+                            var exception = new GoogleApiException(baseException.Message, baseException);
+
+                            taskCompletion.SetException(exception);
+                        }
+                    }
+                }, cancellationToken)
+                .ConfigureAwait(false);
+
+            return await taskCompletion.Task;
+        }
+
+        /// <summary>
+        /// Query Async.
+        /// </summary>
+        /// <param name="request">The request that will be sent.</param>
+        /// <param name="httpEngineOptions">The <see cref="HttpEngineOptions"/></param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
+        /// <returns>The <see cref="Task{T}"/>.</returns>
+        public async Task<TResponse> QueryAsync(TRequest request, HttpEngineOptions httpEngineOptions, CancellationToken cancellationToken = default)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            httpEngineOptions = httpEngineOptions ?? new HttpEngineOptions();
+
+            var taskCompletion = new TaskCompletionSource<TResponse>();
+
+            await this.ProcessRequestAsync(request, cancellationToken)
+                .ContinueWith(async x =>
+                {
+                    try
+                    {
+                        if (x.IsCanceled)
+                        {
+                            taskCompletion.SetCanceled();
+                        }
+                        else if (x.IsFaulted)
+                        {
+                            throw x.Exception ?? new Exception();
+                        }
+                        else
+                        {
+                            var result = await x;
+                            var response = await this.ProcessResponseAsync(result).ConfigureAwait(false);
+
+                            switch (response.Status)
+                            {
+                                case Status.Ok:
+                                case Status.NotFound:
+                                case Status.ZeroResults:
+                                    taskCompletion.SetResult(response);
+                                    break;
+
+                                case Status.InvalidRequest:
+                                    if (!httpEngineOptions.ThrowOnInvalidRequest)
+                                    {
+                                        taskCompletion.SetResult(response);
+                                    }
+
+                                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
+
+                                default:
+                                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
                             }
                         }
                     }
