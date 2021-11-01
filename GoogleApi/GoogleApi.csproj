@@ -103,7 +103,7 @@
 		<Reference Include="System.Net.Http" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
