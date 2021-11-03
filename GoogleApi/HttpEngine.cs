@@ -249,6 +249,7 @@ namespace GoogleApi
                                     if (!httpEngineOptions.ThrowOnInvalidRequest)
                                     {
                                         taskCompletion.SetResult(response);
+                                        break;
                                     }
 
                                     throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
