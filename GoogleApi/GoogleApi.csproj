@@ -8,9 +8,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>4.0.2.0</AssemblyVersion>
-		<FileVersion>4.0.2.0</FileVersion>
-		<Version>4.0.2.0</Version>
+		<AssemblyVersion>4.0.3.0</AssemblyVersion>
+		<FileVersion>4.0.3.0</FileVersion>
+		<Version>4.0.3.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -31,39 +31,39 @@
 			- All Maps requests now throw exception when key is not specified.
 			- Updated error handling for all endpoints, also improving the messages.
 			- Updated Directions
-				- Origin and Destination Location support for Address, Coordinate, Place and PlusCode.
-				- When using Heading / Side Of Road for Locations, they are no longer removed when invalid due to Travel Mode. Google will complain, and I didnt't want to secretly alter the request.
-				- Transit Routing Preference enum rename, to follow the Google naming.
+			- Origin and Destination Location support for Address, Coordinate, Place and PlusCode.
+			- When using Heading / Side Of Road for Locations, they are no longer removed when invalid due to Travel Mode. Google will complain, and I didnt't want to secretly alter the request.
+			- Transit Routing Preference enum rename, to follow the Google naming.
 			- Updated Distance Matrix
-				- Origins and Destinations support for Address, Coordinate, Place and PlusCode (PolyLine not supported).
-				- Removed support for specifying Origns and Destinations Raw. Shouldn't be needed anymore, when improved Location support.
-				- When using Heading / Side Of Road for Locations, they are no longer removed when invalid due to Travel Mode, and I didnt't want to secretly alter the request.
-				- Transit Routing Preference enum rename, to follow the Google naming.
+			- Origins and Destinations support for Address, Coordinate, Place and PlusCode (PolyLine not supported).
+			- Removed support for specifying Origns and Destinations Raw. Shouldn't be needed anymore, when improved Location support.
+			- When using Heading / Side Of Road for Locations, they are no longer removed when invalid due to Travel Mode, and I didnt't want to secretly alter the request.
+			- Transit Routing Preference enum rename, to follow the Google naming.
 			- Updated Elevation
 			- Updated Geolocation
 			- Updated TimeZone
 			- Updated Street View.
-				- Request support for Radius, ReturnErrorCode and Source.
+			- Request support for Radius, ReturnErrorCode and Source.
 			- Updated Static Maps
-				- Type-safe implementation for specifying Styles and Markers.
-				- Improved Error handling, for invalid or missing request parameters.
+			- Type-safe implementation for specifying Styles and Markers.
+			- Improved Error handling, for invalid or missing request parameters.
 			- Updated Geocoding
-				- Plus Code improved with better handling for key vs. ekey
-				- Plus Code Location handling refactored, and made more accurate.
+			- Plus Code improved with better handling for key vs. ekey
+			- Plus Code Location handling refactored, and made more accurate.
 			- Updated Roads
-				- Updated requests, and fixed issue with Bad request for some requests.
-				- Changed place string to use Place class
+			- Updated requests, and fixed issue with Bad request for some requests.
+			- Changed place string to use Place class
 			- Updated Translate
-				- Error handling improved for NMT model.
+			- Error handling improved for NMT model.
 			- Updated Detect
 			- Updated Lanugages
-				- Removed parameter 'nmt', not supported.
+			- Removed parameter 'nmt', not supported.
 			- Updated Places Auto-Complete
-                - Added Origin to requrst parameters.
+			- Added Origin to requrst parameters.
 			- Updated Places Query Auto-Complete
 			- Updated Places Details
-                - Add Region request parameter.
-			    - Removed extensions request parameter.
+			- Add Region request parameter.
+			- Removed extensions request parameter.
 			- Updated Places Photos
 			- Updated Places Search Find
 			- Updated Places Search NearBy
@@ -72,6 +72,9 @@
 			- v4.0.1 Fixed issue with Location Geocode, where results may be returned without PlusCode.LocalCode.
 
 			- v4.0.2 Added option to not throw exception on invalid request.
+
+			- v4.0.3 Fixed issue for async query, where an exception was thrown even though HttpEngineOptions had it disabled.
+
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
