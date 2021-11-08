@@ -8,9 +8,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>4.0.3.0</AssemblyVersion>
-		<FileVersion>4.0.3.0</FileVersion>
-		<Version>4.0.3.0</Version>
+		<AssemblyVersion>4.0.4.0</AssemblyVersion>
+		<FileVersion>4.0.4.0</FileVersion>
+		<Version>4.0.4.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -22,6 +22,8 @@
 		<Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReleaseNotes>
+			- Upgraded dependency for Portable.BouncyCastle for supported frameworks.
+			- Added missing 'Types' array on Places Candidate response.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
@@ -53,21 +55,15 @@
 		<Reference Include="System.Net.Http" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
 	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
-	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
-	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-		<PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
+		<PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
 	</ItemGroup>
 
 	<ItemGroup>
