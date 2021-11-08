@@ -22,59 +22,6 @@
 		<Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReleaseNotes>
-			- Added .net 5 build
-			- Updated all Nugets, and fixed issues with dependencies for .net framework 4.5
-			- Complete review and general improvements of all Google Api endpoints.
-			- Removed outdated option for using non SSL requests.
-			- Response Status.NotFound will now return an empty response, and no longer throw an exception.
-			- Greatly refactored Location classes all over the solution, for a more precise definition and meaning of Location in different Api's.
-			- All Maps requests now throw exception when key is not specified.
-			- Updated error handling for all endpoints, also improving the messages.
-			- Updated Directions
-			- Origin and Destination Location support for Address, Coordinate, Place and PlusCode.
-			- When using Heading / Side Of Road for Locations, they are no longer removed when invalid due to Travel Mode. Google will complain, and I didnt't want to secretly alter the request.
-			- Transit Routing Preference enum rename, to follow the Google naming.
-			- Updated Distance Matrix
-			- Origins and Destinations support for Address, Coordinate, Place and PlusCode (PolyLine not supported).
-			- Removed support for specifying Origns and Destinations Raw. Shouldn't be needed anymore, when improved Location support.
-			- When using Heading / Side Of Road for Locations, they are no longer removed when invalid due to Travel Mode, and I didnt't want to secretly alter the request.
-			- Transit Routing Preference enum rename, to follow the Google naming.
-			- Updated Elevation
-			- Updated Geolocation
-			- Updated TimeZone
-			- Updated Street View.
-			- Request support for Radius, ReturnErrorCode and Source.
-			- Updated Static Maps
-			- Type-safe implementation for specifying Styles and Markers.
-			- Improved Error handling, for invalid or missing request parameters.
-			- Updated Geocoding
-			- Plus Code improved with better handling for key vs. ekey
-			- Plus Code Location handling refactored, and made more accurate.
-			- Updated Roads
-			- Updated requests, and fixed issue with Bad request for some requests.
-			- Changed place string to use Place class
-			- Updated Translate
-			- Error handling improved for NMT model.
-			- Updated Detect
-			- Updated Lanugages
-			- Removed parameter 'nmt', not supported.
-			- Updated Places Auto-Complete
-			- Added Origin to requrst parameters.
-			- Updated Places Query Auto-Complete
-			- Updated Places Details
-			- Add Region request parameter.
-			- Removed extensions request parameter.
-			- Updated Places Photos
-			- Updated Places Search Find
-			- Updated Places Search NearBy
-			- Updated Places Search Text
-
-			- v4.0.1 Fixed issue with Location Geocode, where results may be returned without PlusCode.LocalCode.
-
-			- v4.0.2 Added option to not throw exception on invalid request.
-
-			- v4.0.3 Fixed issue for async query, where an exception was thrown even though HttpEngineOptions had it disabled.
-
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
