@@ -100,5 +100,11 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
         /// </summary>
         [JsonProperty("photos")]
         public virtual IEnumerable<Photo> Photos { get; set; }
+
+        /// <summary>
+        /// An array of types for this place
+        /// </summary>
+        [JsonProperty("types")]
+        public IEnumerable<PlaceLocationType> Types { get; set; }
     }
 }
