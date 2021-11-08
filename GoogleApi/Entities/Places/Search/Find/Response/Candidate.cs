@@ -105,6 +105,6 @@ namespace GoogleApi.Entities.Places.Search.Find.Response
         /// An array of types for this place
         /// </summary>
         [JsonProperty("types")]
-        public IEnumerable<PlaceLocationType> Types { get; set; }
+        public virtual IEnumerable<PlaceLocationType> Types { get; set; } = new List<PlaceLocationType>();
     }
 }
