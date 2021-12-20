@@ -82,6 +82,16 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates the request has none or an invalid key set.
         /// </summary>
         [EnumMember(Value = "NO_API_KEY")]
-        InvalidKey
+        InvalidKey,
+
+        /// <summary>
+        /// Indicates any of the following:
+        ///     The API key is missing or invalid.
+        ///     Billing has not been enabled on your account.
+        ///     A self-imposed usage cap has been exceeded.
+        ///     The provided method of payment is no longer valid (for example, a credit card has expired).
+        /// </summary>
+        [EnumMember(Value = "OVER_DAILY_LIMIT")]
+        OverDailyLimit,
     }
 }
