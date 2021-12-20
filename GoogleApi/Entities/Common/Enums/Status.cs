@@ -86,12 +86,12 @@ namespace GoogleApi.Entities.Common.Enums
 
         /// <summary>
         /// Indicates any of the following:
-        ///     The API key is missing or invalid.
-        ///     Billing has not been enabled on your account.
-        ///     A self-imposed usage cap has been exceeded.
-        ///     The provided method of payment is no longer valid (for example, a credit card has expired).
+        /// The API key is missing or invalid.
+        /// Billing has not been enabled on your account.
+        /// A self-imposed usage cap has been exceeded.
+        /// The provided method of payment is no longer valid (for example, a credit card has expired).
         /// </summary>
         [EnumMember(Value = "OVER_DAILY_LIMIT")]
-        OverDailyLimit,
+        OverDailyLimit
     }
 }
