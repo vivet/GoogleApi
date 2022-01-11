@@ -98,6 +98,6 @@ namespace GoogleApi.Entities.Common.Enums
         /// Indicates that the number of origins or destinations exceeds the per-query limit.
         /// </summary>
         [EnumMember(Value = "MAX_DIMENSIONS_EXCEEDED")]
-        MaxDimensionsExceeded,
+        MaxDimensionsExceeded
     }
 }
