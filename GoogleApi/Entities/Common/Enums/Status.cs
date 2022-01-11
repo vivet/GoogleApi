@@ -92,6 +92,12 @@ namespace GoogleApi.Entities.Common.Enums
         /// The provided method of payment is no longer valid (for example, a credit card has expired).
         /// </summary>
         [EnumMember(Value = "OVER_DAILY_LIMIT")]
-        OverDailyLimit
+        OverDailyLimit,
+
+        /// <summary>
+        /// Indicates that the number of origins or destinations exceeds the per-query limit.
+        /// </summary>
+        [EnumMember(Value = "MAX_DIMENSIONS_EXCEEDED")]
+        MaxDimensionsExceeded,
     }
 }
