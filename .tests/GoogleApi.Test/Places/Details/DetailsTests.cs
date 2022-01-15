@@ -1,17 +1,29 @@
-using System;
-using System.Linq;
-using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace GoogleApi.Test.Places.Details
 {
     [TestFixture]
-    public class DetailsTests : BaseTest
+    public class DetailsTests : BaseTest<GooglePlaces.DetailsApi>
     {
+        protected override GooglePlaces.DetailsApi GetClient() => new(_httpClient);
+        protected override GooglePlaces.DetailsApi GetClientStatic() => GooglePlaces.Details;
+
+        private GooglePlaces.AutoCompleteApi GetAutoCompleteApi()
+        {
+            if (Settings.UseGlobalStaticHttpClients)
+                return GooglePlaces.AutoComplete;
+
+            return new GooglePlaces.AutoCompleteApi(_httpClient);
+        }
+
+
         [Test]
         public void PlacesDetailsTest()
         {
@@ -21,7 +33,7 @@ namespace GoogleApi.Test.Places.Details
                 Input = "jagtvej 2200 København"
             };
 
-            var response = GooglePlaces.AutoComplete.Query(request);
+            var response = GetAutoCompleteApi().Query(request);
 
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
@@ -30,7 +42,7 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = placeId
             };
 
-            var response2 = GooglePlaces.Details.Query(request2);
+            var response2 = Sut.Query(request2);
             Assert.IsNotNull(response2);
             Assert.AreEqual(Status.Ok, response2.Status);
 
@@ -54,7 +66,7 @@ namespace GoogleApi.Test.Places.Details
 
             var addressComponents = result.AddressComponents?.ToArray();
             Assert.IsNotNull(addressComponents);
-            Assert.GreaterOrEqual(addressComponents.Length, 4);
+            Assert.GreaterOrEqual(addressComponents!.Length, 4);
         }
 
         [Test]
@@ -66,7 +78,8 @@ namespace GoogleApi.Test.Places.Details
                 Input = "jagtvej 2200"
             };
 
-            var response = GooglePlaces.AutoComplete.QueryAsync(request).Result;
+            var response = GetAutoCompleteApi().Query(request);
+
             var results = response.Predictions.ToArray();
             var result = results.First();
 
@@ -76,7 +89,7 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = result.PlaceId
             };
 
-            var response2 = GooglePlaces.Details.Query(request2);
+            var response2 = Sut.Query(request2);
             Assert.AreEqual(Status.Ok, response2.Status);
         }
 
@@ -89,12 +102,12 @@ namespace GoogleApi.Test.Places.Details
                 PlaceId = Guid.NewGuid().ToString("N")
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.Details.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
 
         [Test]
@@ -106,8 +119,7 @@ namespace GoogleApi.Test.Places.Details
                 Input = "jagtvej 2200 København"
             };
 
-            var response = GooglePlaces.AutoComplete.Query(request);
-
+            var response = GetAutoCompleteApi().Query(request);
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
             {
@@ -116,7 +128,7 @@ namespace GoogleApi.Test.Places.Details
                 Language = Language.Danish
             };
 
-            var response2 = GooglePlaces.Details.Query(request2);
+            var response2 = Sut.Query(request2);
             Assert.IsNotNull(response2);
             Assert.AreEqual(Status.Ok, response2.Status);
 
@@ -132,8 +144,7 @@ namespace GoogleApi.Test.Places.Details
                 Input = "jagtvej 2200 København"
             };
 
-            var response = GooglePlaces.AutoComplete.Query(request);
-
+            var response = GetAutoCompleteApi().Query(request);
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
             {
@@ -142,7 +153,7 @@ namespace GoogleApi.Test.Places.Details
                 Fields = FieldTypes.Place_Id
             };
 
-            var response2 = GooglePlaces.Details.Query(request2);
+            var response2 = Sut.Query(request2);
             Assert.IsNotNull(response2);
             Assert.AreEqual(Status.Ok, response2.Status);
 

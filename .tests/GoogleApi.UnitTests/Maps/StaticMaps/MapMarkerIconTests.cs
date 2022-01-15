@@ -1,7 +1,7 @@
-using System;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using NUnit.Framework;
+using System;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps
 {
@@ -16,7 +16,12 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var markerIcon = new MapMarkerIcon(null);
                 Assert.IsNull(markerIcon);
             });
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual("Value cannot be null. (Parameter 'url')", exception.Message);
+#else
+            Assert.AreEqual("Value cannot be null.\r\nParameter name: url", exception.Message);
+#endif
         }
 
         [Test]
@@ -24,7 +29,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
         {
             var mapMarkerIcon = new MapMarkerIcon("url")
             {
-                Anchor = Anchor.Bottom 
+                Anchor = Anchor.Bottom
             };
 
             var toString = mapMarkerIcon.ToString();

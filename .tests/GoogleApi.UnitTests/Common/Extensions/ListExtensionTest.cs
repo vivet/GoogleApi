@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using GoogleApi.Entities.Common.Extensions;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace GoogleApi.UnitTests.Common.Extensions
 {
@@ -27,7 +27,11 @@ namespace GoogleApi.UnitTests.Common.Extensions
             var queryStringParameters = new List<KeyValuePair<string, string>>();
 
             var exception = Assert.Throws<ArgumentNullException>(() => queryStringParameters.Add(null, VALUE));
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual("Value cannot be null. (Parameter 'key')", exception.Message);
+#else
+            Assert.AreEqual("Value cannot be null.\r\nParameter name: key", exception.Message);
+#endif
         }
     }
 }

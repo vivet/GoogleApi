@@ -1,15 +1,18 @@
-using System;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
 using NUnit.Framework;
+using System;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.Geocoding.PlusCode
 {
     [TestFixture]
-    public class PlusCodeGeocodeTests : BaseTest
+    public class PlusCodeGeocodeTests : BaseTest<GoogleMaps.PlusCodeGeocodeApi>
     {
+        protected override GoogleMaps.PlusCodeGeocodeApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.PlusCodeGeocodeApi GetClientStatic() => GoogleMaps.PlusCodeGeocode;
+
         [Test]
         public void PlusCodeGeocodeWhenLocationTest()
         {
@@ -19,7 +22,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -34,7 +37,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
             {
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -52,7 +55,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Entities.Common.Address("285 Bedford Ave, Brooklyn, NY 11211, USA"))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -67,7 +70,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new GlobalCode("796RWF8Q+WF"))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -82,7 +85,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new LocalCodeAndLocality("WF8Q+WF Praia", "Cape Verde"))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -96,7 +99,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
                 Key = this.ApiKey,
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
-            var result = GoogleMaps.PlusCodeGeocode.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -111,12 +114,12 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.PlusCodeGeocode.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

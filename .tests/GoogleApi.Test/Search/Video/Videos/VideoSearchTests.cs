@@ -1,16 +1,18 @@
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Search.Video.Videos.Request;
+using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Threading;
-using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Search.Video.Common.Enums;
-using GoogleApi.Entities.Search.Video.Videos.Request;
-using NUnit.Framework;
 
 namespace GoogleApi.Test.Search.Video.Videos
 {
     [TestFixture]
-    public class VideoSearchTests : BaseTest
+    public class VideoSearchTests : BaseTest<GoogleSearch.VideoSearch.VideosApi>
     {
+        protected override GoogleSearch.VideoSearch.VideosApi GetClient() => new(_httpClient);
+        protected override GoogleSearch.VideoSearch.VideosApi GetClientStatic() => GoogleSearch.VideoSearch.Videos;
+
         [Test]
         public void VideoSearchTest()
         {
@@ -21,22 +23,24 @@ namespace GoogleApi.Test.Search.Video.Videos
                 MaxResults = 1
             };
 
-            var response = GoogleSearch.VideoSearch.Videos.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
-            Assert.AreEqual(response.Kind, "youtube#searchListResponse");
+            Assert.AreEqual("youtube#searchListResponse", response.Kind);
             Assert.IsNotNull(response.ETag);
             Assert.IsNotNull(response.PageToken);
-            Assert.AreEqual(response.Region, Country.Denmark);
-            Assert.AreEqual(response.PageInfo.TotalResults, 1000000);
-            Assert.AreEqual(response.PageInfo.ResultsPerPage, 1);
+
+            ////Assert.AreEqual(response.Region, Country.Denmark);  //#Flaky depends where you run it from...
+
+            Assert.AreEqual(1000000, response.PageInfo.TotalResults);
+            Assert.AreEqual(1, response.PageInfo.ResultsPerPage);
 
             Assert.IsNotNull(response.Items);
             Assert.AreEqual(1, response.Items.Count());
         }
-            
+
         [Test]
         public void VideoSearchAsyncTest()
         {
@@ -47,7 +51,7 @@ namespace GoogleApi.Test.Search.Video.Videos
                 MaxResults = 1
             };
 
-            var response = GoogleSearch.VideoSearch.Videos.QueryAsync(request).Result;
+            var response = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
@@ -64,12 +68,12 @@ namespace GoogleApi.Test.Search.Video.Videos
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleSearch.VideoSearch.Videos.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

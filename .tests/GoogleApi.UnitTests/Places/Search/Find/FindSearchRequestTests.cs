@@ -1,10 +1,10 @@
-using System;
-using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace GoogleApi.UnitTests.Places.Search.Find
 {
@@ -61,6 +61,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
 
         }
 
+#if NETCOREAPP3_1_OR_GREATER
         [Test]
         public void GetQueryStringParametersWhenFieldsTest()
         {
@@ -83,6 +84,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
             Assert.IsNotNull(fields);
             Assert.AreEqual(fieldsExpected, fields.Value);
         }
+#endif
 
         [Test]
         public void GetQueryStringParametersWhenLocationTest()

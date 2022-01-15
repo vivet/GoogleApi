@@ -1,17 +1,20 @@
-using System;
-using System.Linq;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace GoogleApi.Test.Places.Search.Find
 {
     [TestFixture]
-    public class FindSearchTests : BaseTest
+    public class FindSearchTests : BaseTest<GooglePlaces.FindSearchApi>
     {
+        protected override GooglePlaces.FindSearchApi GetClient() => new(_httpClient);
+        protected override GooglePlaces.FindSearchApi GetClientStatic() => GooglePlaces.FindSearch;
+
         [Test]
         public void PlacesFindSearchTest()
         {
@@ -23,7 +26,7 @@ namespace GoogleApi.Test.Places.Search.Find
                 Fields = FieldTypes.Basic
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -44,7 +47,7 @@ namespace GoogleApi.Test.Places.Search.Find
                 Type = InputType.PhoneNumber
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -59,7 +62,7 @@ namespace GoogleApi.Test.Places.Search.Find
                 Input = "picadelly circus"
             };
 
-            var response = GooglePlaces.FindSearch.QueryAsync(request).Result;
+            var response = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -75,12 +78,12 @@ namespace GoogleApi.Test.Places.Search.Find
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.FindSearch.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
 
         [Test]
@@ -94,7 +97,7 @@ namespace GoogleApi.Test.Places.Search.Find
                 Fields = FieldTypes.Basic
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -119,7 +122,7 @@ namespace GoogleApi.Test.Places.Search.Find
                 Location = new Coordinate(51.5100913, -0.1345676)
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -135,7 +138,7 @@ namespace GoogleApi.Test.Places.Search.Find
                 Radius = 5000
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -150,7 +153,7 @@ namespace GoogleApi.Test.Places.Search.Find
                 Bounds = new ViewPort(new Coordinate(51.5100913, -0.1345676), new Coordinate(50.5100913, -0.0345676))
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }

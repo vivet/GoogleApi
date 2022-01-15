@@ -1,18 +1,21 @@
-using System;
-using System.Linq;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace GoogleApi.Test.Places.Search.NearBy
 {
     [TestFixture]
-    public class NearBySearchTests : BaseTest
+    public class NearBySearchTests : BaseTest<GooglePlaces.NearBySearchApi>
     {
+        protected override GooglePlaces.NearBySearchApi GetClient() => new(_httpClient);
+        protected override GooglePlaces.NearBySearchApi GetClientStatic() => GooglePlaces.NearBySearch;
+
         [Test]
         public void PlacesNearBySearchTest()
         {
@@ -23,7 +26,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Radius = 1000
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -38,7 +41,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Radius = 1000
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.NextPageToken);
 
@@ -50,7 +53,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
 
             Thread.Sleep(1500);
 
-            var responseNextPage = GooglePlaces.NearBySearch.Query(requestNextPage);
+            var responseNextPage = Sut.Query(requestNextPage);
             Assert.IsNotNull(responseNextPage);
             Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
         }
@@ -66,7 +69,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Name = "cafe"
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -82,7 +85,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Keyword = "cafe"
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -98,7 +101,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Type = SearchPlaceType.Cafe
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -114,7 +117,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Minprice = PriceLevel.Free
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -137,7 +140,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Maxprice = PriceLevel.Expensive
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -160,7 +163,7 @@ namespace GoogleApi.Test.Places.Search.NearBy
                 Type = SearchPlaceType.School
             };
 
-            var response = GooglePlaces.NearBySearch.QueryAsync(request).Result;
+            var response = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -178,12 +181,12 @@ namespace GoogleApi.Test.Places.Search.NearBy
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.NearBySearch.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

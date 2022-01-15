@@ -1,16 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.Geocoding.Address
 {
     [TestFixture]
-    public class AddressGeocodeTests : BaseTest
+    public class AddressGeocodeTests : BaseTest<GoogleMaps.AddressGeocodeApi>
     {
+        protected override GoogleMaps.AddressGeocodeApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.AddressGeocodeApi GetClientStatic() => GoogleMaps.AddressGeocode;
+
         [Test]
         public void AddressGeocodeTest()
         {
@@ -19,7 +22,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Key = this.ApiKey,
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
             };
-            var result = GoogleMaps.AddressGeocode.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -34,7 +37,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
                 Region = "Bedford"
             };
-            var result = GoogleMaps.AddressGeocode.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -49,7 +52,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
                 Bounds = new ViewPort(new Coordinate(40.7141289, -73.9614074), new Coordinate(40.7141289, -73.9614074))
             };
-            var result = GoogleMaps.AddressGeocode.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -63,10 +66,10 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Key = this.ApiKey,
                 Components = new[]
                 {
-                    new KeyValuePair<Component, string>(Component.Country, "dk")  
-                }  
+                    new KeyValuePair<Component, string>(Component.Country, "dk")
+                }
             };
-            var result = GoogleMaps.AddressGeocode.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -80,7 +83,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Key = this.ApiKey,
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
             };
-            var result = GoogleMaps.AddressGeocode.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -95,12 +98,12 @@ namespace GoogleApi.Test.Maps.Geocoding.Address
                 Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.AddressGeocode.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

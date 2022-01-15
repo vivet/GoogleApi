@@ -1,16 +1,19 @@
-using System;
-using System.Linq;
-using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Languages.Request;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi.Test.Translate.Languages
 {
     [TestFixture]
-    public class LanguagesTests : BaseTest
+    public class LanguagesTests : BaseTest<GoogleTranslate.LanguagesApi>
     {
+        protected override GoogleTranslate.LanguagesApi GetClient() => new(_httpClient);
+        protected override GoogleTranslate.LanguagesApi GetClientStatic() => GoogleTranslate.Languages;
+
         [Test]
         public void LanguagesTest()
         {
@@ -19,7 +22,7 @@ namespace GoogleApi.Test.Translate.Languages
                 Key = this.ApiKey
             };
 
-            var result = GoogleTranslate.Languages.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
 
@@ -37,7 +40,7 @@ namespace GoogleApi.Test.Translate.Languages
                 Target = Language.English
             };
 
-            var result = GoogleTranslate.Languages.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
 
@@ -55,7 +58,7 @@ namespace GoogleApi.Test.Translate.Languages
                 Target = Language.English
             };
 
-            var result = GoogleTranslate.Languages.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -70,12 +73,12 @@ namespace GoogleApi.Test.Translate.Languages
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleTranslate.Languages.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

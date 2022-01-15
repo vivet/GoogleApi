@@ -6,8 +6,24 @@
     public class HttpEngineOptions
     {
         /// <summary>
+        ///
+        /// </summary>
+        public HttpEngineOptions()
+        {
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="throwsOnInvalid"></param>
+        public HttpEngineOptions(bool throwsOnInvalid)
+        {
+            ThrowOnInvalidRequest = throwsOnInvalid;
+        }
+
+        /// <summary>
         /// Throw On Bad Request.
         /// </summary>
-        public virtual bool ThrowOnInvalidRequest { get; set; } = true;
+        public bool ThrowOnInvalidRequest { get; set; } = true;
     }
 }

@@ -2,74 +2,49 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Exceptions;
-using Newtonsoft.Json;
 using System;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace GoogleApi
 {
     /// <summary>
-    /// Http Engine (abstract).
-    /// </summary>
-    public abstract class HttpEngine
-    {
-        private static HttpClient httpClient;
-        private static readonly TimeSpan httpTimeout = new TimeSpan(0, 0, 30);
-
-        /// <summary>
-        /// Http Client.
-        /// </summary>
-        protected internal static HttpClient HttpClient
-        {
-            get
-            {
-                if (HttpEngine.httpClient == null)
-                {
-                    var httpClientHandler = new HttpClientHandler
-                    {
-                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-                    };
-
-                    if (HttpEngine.Proxy != null)
-                    {
-                        httpClientHandler.Proxy = HttpEngine.Proxy;
-                    }
-
-                    HttpEngine.httpClient = new HttpClient(httpClientHandler)
-                    {
-                        Timeout = HttpEngine.httpTimeout
-                    };
-
-                    HttpEngine.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                }
-
-                return HttpEngine.httpClient;
-            }
-            set => HttpEngine.httpClient = value;
-        }
-
-        /// <summary>
-        /// Proxy property that will be used for all requests.
-        /// </summary>
-        public static IWebProxy Proxy { get; set; }
-    }
-
-    /// <summary>
     /// Http Engine.
-    /// Manges the http connections, and is responsible for invoking requst and handling responses.
+    /// Manages the http connections, and is responsible for invoking request and handling responses.
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public sealed class HttpEngine<TRequest, TResponse> : HttpEngine
+    public abstract class HttpEngine<TRequest, TResponse>
         where TRequest : IRequest, new()
         where TResponse : IResponse, new()
     {
-        internal static readonly HttpEngine<TRequest, TResponse> instance = new HttpEngine<TRequest, TResponse>();
+        private HttpClient HttpClient { get; }
+
+        private static Newtonsoft.Json.JsonSerializerSettings _settings = new Newtonsoft.Json.JsonSerializerSettings
+        {
+            Formatting = Newtonsoft.Json.Formatting.None,
+            NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+            ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore,
+            ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
+            Converters = { new Newtonsoft.Json.Converters.StringEnumConverter() }
+        };
+
+        /// <summary>
+        ///
+        /// </summary>
+        protected HttpEngine() : this(HttpClientFactory.GlobalHttpClient)
+        {
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="client"></param>
+        protected HttpEngine(HttpClient client)
+        {
+            HttpClient = client;
+        }
 
         /// <summary>
         /// Query.
@@ -82,38 +57,17 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            httpEngineOptions = httpEngineOptions ?? new HttpEngineOptions();
-
             try
             {
-                var result = this.ProcessRequest(request);
-                var response = this.ProcessResponse(result);
-
-                switch (response.Status)
-                {
-                    case Status.Ok:
-                    case Status.NotFound:
-                    case Status.ZeroResults:
-                        return response;
-
-                    case Status.InvalidRequest:
-                        if (!httpEngineOptions.ThrowOnInvalidRequest)
-                        {
-                            return response;
-                        }
-
-                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
-
-                    default:
-                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
-                }
+                return Task.Run(async () => await QueryAsync(request, httpEngineOptions, CancellationToken.None))
+                    .Result;
             }
-            catch (Exception ex)
+            catch (AggregateException ex)
             {
-                if (ex is GoogleApiException)
-                    throw;
+                if (ex.InnerException is GoogleApiException inner)
+                    throw inner;
 
-                throw new GoogleApiException(ex.Message, ex);
+                throw;
             }
         }
 
@@ -123,62 +77,9 @@ namespace GoogleApi
         /// <param name="request">The request that will be sent.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
         /// <returns>The <see cref="Task{T}"/>.</returns>
-        public async Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
+        public Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            var taskCompletion = new TaskCompletionSource<TResponse>();
-
-            await this.ProcessRequestAsync(request, cancellationToken)
-                .ContinueWith(async x =>
-                {
-                    try
-                    {
-                        if (x.IsCanceled)
-                        {
-                            taskCompletion.SetCanceled();
-                        }
-                        else if (x.IsFaulted)
-                        {
-                            throw x.Exception ?? new Exception();
-                        }
-                        else
-                        {
-                            var result = await x;
-                            var response = await this.ProcessResponseAsync(result).ConfigureAwait(false);
-
-                            switch (response.Status)
-                            {
-                                case Status.Ok:
-                                case Status.NotFound:
-                                case Status.ZeroResults:
-                                    taskCompletion.SetResult(response);
-                                    break;
-
-                                default:
-                                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ex is GoogleApiException)
-                        {
-                            taskCompletion.SetException(ex);
-                        }
-                        else
-                        {
-                            var baseException = ex.GetBaseException();
-                            var exception = new GoogleApiException(baseException.Message, baseException);
-
-                            taskCompletion.SetException(exception);
-                        }
-                    }
-                }, cancellationToken)
-                .ConfigureAwait(false);
-
-            return await taskCompletion.Task;
+            return QueryAsync(request, null, cancellationToken);
         }
 
         /// <summary>
@@ -190,10 +91,9 @@ namespace GoogleApi
         /// <returns>The <see cref="Task{T}"/>.</returns>
         public async Task<TResponse> QueryAsync(TRequest request, HttpEngineOptions httpEngineOptions, CancellationToken cancellationToken = default)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            GuardAgainstNull(request, nameof(request));
 
-            httpEngineOptions = httpEngineOptions ?? new HttpEngineOptions();
+            httpEngineOptions ??= new HttpEngineOptions();
 
             var taskCompletion = new TaskCompletionSource<TResponse>();
 
@@ -205,51 +105,28 @@ namespace GoogleApi
                         if (x.IsCanceled)
                         {
                             taskCompletion.SetCanceled();
+                            return;
                         }
-                        else if (x.IsFaulted)
+                        if (x.IsFaulted)
                         {
                             throw x.Exception ?? new Exception();
                         }
-                        else
-                        {
-                            var result = await x;
-                            var response = await this.ProcessResponseAsync(result).ConfigureAwait(false);
 
-                            switch (response.Status)
-                            {
-                                case Status.Ok:
-                                case Status.NotFound:
-                                case Status.ZeroResults:
-                                    taskCompletion.SetResult(response);
-                                    break;
+                        var result = await x;
+                        var response = await ProcessResponseAsync(result, httpEngineOptions, cancellationToken).ConfigureAwait(false);
 
-                                case Status.InvalidRequest:
-                                    if (!httpEngineOptions.ThrowOnInvalidRequest)
-                                    {
-                                        taskCompletion.SetResult(response);
-                                        break;
-                                    }
-
-                                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
-
-                                default:
-                                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
-                            }
-                        }
+                        taskCompletion.SetResult(response);
+                    }
+                    catch (GoogleApiException ex)
+                    {
+                        taskCompletion.SetException(ex);
                     }
                     catch (Exception ex)
                     {
-                        if (ex is GoogleApiException)
-                        {
-                            taskCompletion.SetException(ex);
-                        }
-                        else
-                        {
-                            var baseException = ex.GetBaseException();
-                            var exception = new GoogleApiException(baseException.Message, baseException);
+                        var baseException = ex.GetBaseException();
+                        var exception = new GoogleApiException(baseException.Message, baseException);
 
-                            taskCompletion.SetException(exception);
-                        }
+                        taskCompletion.SetException(exception);
                     }
                 }, cancellationToken)
                 .ConfigureAwait(false);
@@ -257,105 +134,31 @@ namespace GoogleApi
             return await taskCompletion.Task;
         }
 
-        private HttpResponseMessage ProcessRequest(TRequest request)
-        {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
-
-            var uri = request.GetUri();
-
-            if (request is IRequestQueryString)
-            {
-                return HttpEngine.HttpClient.GetAsync(uri).Result;
-            }
-
-            var settings = new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
-            var serializeObject = JsonConvert.SerializeObject(request, settings);
-
-            using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
-            {
-                var content = stringContent.ReadAsStreamAsync().Result;
-
-                using (var streamContent = new StreamContent(content))
-                {
-                    return HttpEngine.HttpClient.PostAsync(uri, streamContent).Result;
-                }
-            }
-        }
         private async Task<HttpResponseMessage> ProcessRequestAsync(TRequest request, CancellationToken cancellationToken = default)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            GuardAgainstNull(request, nameof(request));
 
             var uri = request.GetUri();
 
             if (request is IRequestQueryString)
             {
-                return await HttpEngine.HttpClient.GetAsync(uri, cancellationToken).ConfigureAwait(false);
+                return await HttpClient.GetAsync(uri, cancellationToken).ConfigureAwait(false);
             }
 
-            var settings = new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
-            var serializeObject = JsonConvert.SerializeObject(request, settings);
+            var serializeObject = Newtonsoft.Json.JsonConvert.SerializeObject(request, _settings);
+            using var stringContent = new StringContent(serializeObject, System.Text.Encoding.UTF8, "application/json");
 
-            using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
-            {
-                var content = await stringContent.ReadAsStreamAsync().ConfigureAwait(false);
+            var content = await stringContent.ReadAsStreamAsync().ConfigureAwait(false);
 
-                using (var streamContent = new StreamContent(content))
-                {
-                    return await HttpEngine.HttpClient.PostAsync(uri, streamContent, cancellationToken).ConfigureAwait(false);
-                }
-            }
+            using var streamContent = new StreamContent(content);
+            return await HttpClient.PostAsync(uri, streamContent, cancellationToken).ConfigureAwait(false);
         }
-        private TResponse ProcessResponse(HttpResponseMessage httpResponse)
+
+        private async Task<TResponse> ProcessResponseAsync(HttpResponseMessage httpResponse, HttpEngineOptions httpEngineOptions = null, CancellationToken cancellationToken = default)
         {
-            if (httpResponse == null)
-                throw new ArgumentNullException(nameof(httpResponse));
+            GuardAgainstNull(httpResponse, nameof(httpResponse));
 
-            using (httpResponse)
-            {
-                httpResponse.EnsureSuccessStatusCode();
-
-                var response = new TResponse();
-
-                switch (response)
-                {
-                    case BaseResponseStream streamResponse:
-                        streamResponse.Buffer = httpResponse.Content.ReadAsByteArrayAsync().Result;
-                        response = (TResponse)(IResponse)streamResponse;
-                        break;
-
-                    default:
-                        var rawJson = httpResponse.Content.ReadAsStringAsync().Result;
-                        response = JsonConvert.DeserializeObject<TResponse>(rawJson);
-
-                        if (response == null)
-                            throw new NullReferenceException(nameof(response));
-                        
-                        response.RawJson = rawJson;
-                        break;
-                }
-
-                response.RawQueryString = httpResponse.RequestMessage.RequestUri.PathAndQuery;
-                response.Status = httpResponse.IsSuccessStatusCode
-                    ? response.Status ?? Status.Ok
-                    : Status.HttpError;
-
-                return response;
-            }
-        }
-        private async Task<TResponse> ProcessResponseAsync(HttpResponseMessage httpResponse)
-        {
-            if (httpResponse == null)
-                throw new ArgumentNullException(nameof(httpResponse));
+            httpEngineOptions ??= new HttpEngineOptions();
 
             using (httpResponse)
             {
@@ -371,11 +174,13 @@ namespace GoogleApi
                         break;
 
                     default:
+
                         var rawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        response = JsonConvert.DeserializeObject<TResponse>(rawJson);
+
+                        response = Newtonsoft.Json.JsonConvert.DeserializeObject<TResponse>(rawJson, _settings);
 
                         if (response == null)
-                            throw new NullReferenceException(nameof(response));
+                            throw new InvalidOperationException($"The {nameof(response)} was null");
 
                         response.RawJson = rawJson;
                         break;
@@ -386,8 +191,39 @@ namespace GoogleApi
                     ? response.Status ?? Status.Ok
                     : Status.HttpError;
 
+                switch (response.Status)
+                {
+                    case Status.Ok:
+                    case Status.NotFound:
+                    case Status.ZeroResults:
+                        break;
+
+                    case Status.InvalidRequest:
+                        if (httpEngineOptions.ThrowOnInvalidRequest)
+                        {
+                            throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
+                            {
+                                Status = response.Status
+                            };
+                        }
+                        break;
+
+                    default:
+                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
+                        {
+                            Status = response.Status
+                        };
+                }
+
                 return response;
             }
+        }
+
+        private void GuardAgainstNull(object subject, string name)
+        {
+            if (subject == null)
+                throw new ArgumentNullException(name);
+
         }
     }
 }

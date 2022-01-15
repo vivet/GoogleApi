@@ -1,14 +1,17 @@
-using System;
-using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
 using NUnit.Framework;
+using System;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.Geocoding.Place
 {
     [TestFixture]
-    public class PlaceGeocodeTests : BaseTest
+    public class PlaceGeocodeTests : BaseTest<GoogleMaps.PlaceGeoCodeApi>
     {
+        protected override GoogleMaps.PlaceGeoCodeApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.PlaceGeoCodeApi GetClientStatic() => GoogleMaps.PlaceGeocode;
+
         [Test]
         public void PlaceGeocodeTest()
         {
@@ -18,7 +21,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
                 PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
             };
 
-            var response = GoogleMaps.PlaceGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -32,7 +35,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
                 Key = this.ApiKey,
                 PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
             };
-            var result = GoogleMaps.PlaceGeocode.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -47,12 +50,12 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
                 PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.PlaceGeocode.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

@@ -1,13 +1,13 @@
-using System;
-using System.Linq;
 using GoogleApi.Entities.Common;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
-namespace GoogleApi.Test.Functions
+namespace GoogleApi.UnitTests.Functions
 {
     [TestFixture]
-    public class FunctionsTests : BaseTest
-	{
+    public class FunctionsTests
+    {
         private const string POLY_LINE = "chdEchdEoxgFoxgFi`vEi`vE";
         private const string POLY_LINE_2 = "cbb|@cbb|@ore}@ore}@izs|@izs|@";
 

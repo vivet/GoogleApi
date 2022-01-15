@@ -1,14 +1,17 @@
-using System;
-using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using NUnit.Framework;
+using System;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.Geolocation
 {
     [TestFixture]
-    public class GeolocationTests : BaseTest
+    public class GeolocationTests : BaseTest<GoogleMaps.GeolocationApi>
     {
+        protected override GoogleMaps.GeolocationApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.GeolocationApi GetClientStatic() => GoogleMaps.Geolocation;
+
         [Test]
         public void GeolocationTest()
         {
@@ -17,7 +20,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 Key = this.ApiKey
             };
 
-            var result = GoogleMaps.Geolocation.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -31,7 +34,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 Carrier = "Vodafone"
             };
 
-            var result = GoogleMaps.Geolocation.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -45,7 +48,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 HomeMobileCountryCode = "310"
             };
 
-            var result = GoogleMaps.Geolocation.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -59,7 +62,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 HomeMobileNetworkCode = "410"
             };
 
-            var result = GoogleMaps.Geolocation.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -73,7 +76,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 ConsiderIp = true
             };
 
-            var result = GoogleMaps.Geolocation.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -106,7 +109,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                     }
                 }
             };
-            var result = GoogleMaps.Geolocation.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -120,7 +123,7 @@ namespace GoogleApi.Test.Maps.Geolocation
                 Key = this.ApiKey
             };
 
-            var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -133,12 +136,12 @@ namespace GoogleApi.Test.Maps.Geolocation
                 Key = this.ApiKey
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.Geolocation.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

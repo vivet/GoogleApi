@@ -1,17 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.Geocoding.Location
 {
     [TestFixture]
-    public class LocationGeocodeTests : BaseTest
+    public class LocationGeocodeTests : BaseTest<GoogleMaps.LocationGeocodeApi>
     {
+        protected override GoogleMaps.LocationGeocodeApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.LocationGeocodeApi GetClientStatic() => GoogleMaps.LocationGeocode;
+
         [Test]
         public void LocationGeocodeTest()
         {
@@ -21,7 +24,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                 Location = new Coordinate(40.7141289, -73.9614074)
             };
 
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -36,7 +39,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                 Location = new Coordinate(27.0675, -40.808)
             };
 
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -51,11 +54,11 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                 Location = new Coordinate(40.7141289, -73.9614074),
                 ResultTypes = new List<PlaceLocationType>
                 {
-                    PlaceLocationType.Premise, 
+                    PlaceLocationType.Premise,
                     PlaceLocationType.Accounting
                 }
             };
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -73,7 +76,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                     PlaceLocationType.Accounting
                 }
             };
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.ZeroResults, response.Status);
@@ -92,7 +95,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                 }
             };
 
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -106,7 +109,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                 Key = this.ApiKey,
                 Location = new Coordinate(40.7141289, -73.9614074)
             };
-            var result = GoogleMaps.LocationGeocode.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -121,12 +124,12 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                 Location = new Coordinate(40.7141289, -73.9614074)
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.LocationGeocode.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

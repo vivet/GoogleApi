@@ -1,18 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Test.Maps.StaticMaps
 {
     [TestFixture]
-    public class StaticMapsTests : BaseTest
+    public class StaticMapsTests : BaseTest<GoogleMaps.StaticMapsApi>
     {
+        protected override GoogleMaps.StaticMapsApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.StaticMapsApi GetClientStatic() => GoogleMaps.StaticMaps;
+
         [Test]
         public void StaticMapsTest()
         {
@@ -23,7 +26,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 ZoomLevel = 1
             };
 
-            var result = GoogleMaps.StaticMaps.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -40,7 +43,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 Region = "us"
             };
 
-            var result = GoogleMaps.StaticMaps.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -81,7 +84,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 }
             };
 
-            var result = GoogleMaps.StaticMaps.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -132,7 +135,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 }
             };
 
-            var result = GoogleMaps.StaticMaps.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -151,7 +154,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 }
             };
 
-            var result = GoogleMaps.StaticMaps.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -190,7 +193,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 }
             };
 
-            var result = GoogleMaps.StaticMaps.Query(request);
+            var result = Sut.Query(request);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -205,7 +208,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
-            var result = GoogleMaps.StaticMaps.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -221,12 +224,12 @@ namespace GoogleApi.Test.Maps.StaticMaps
                 ZoomLevel = 1
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.StaticMaps.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

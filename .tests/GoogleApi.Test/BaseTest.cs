@@ -1,52 +1,85 @@
-using System;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
+using AutoFixture;
+using AutoFixture.AutoNSubstitute;
+using GoogleApi.UnitTests;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
+using System.Net.Http;
 
 namespace GoogleApi.Test
 {
     [TestFixture]
+    public abstract class BaseTest<T> : BaseTest
+    {
+        /// <summary>
+        ///  System Under Test
+        /// </summary>
+        protected T Sut { get; set; }
+
+        [OneTimeSetUp]
+        public void BeforeAll()
+        {
+            if (Settings.UseGlobalStaticHttpClients)
+                Sut = GetClientStatic();
+            else
+                Sut = GetClient();
+        }
+
+        protected abstract T GetClientStatic();
+        protected abstract T GetClient();
+    }
+
+
+    [TestFixture]
     public abstract class BaseTest
     {
-        protected virtual AppSettings Settings { get; private set; }
-        protected virtual string ApiKey => this.Settings.ApiKey;
-        protected virtual string CryptoKey => this.Settings.CryptoKey;
-        protected virtual string ClientId => this.Settings.ClientId;
-        protected virtual string SearchEngineId => this.Settings.SearchEngineId;
+        protected static AppSettings Settings;
+
+        protected string ApiKey => Settings.ApiKey;
+        protected string CryptoKey => Settings.CryptoKey;
+        protected string ClientId => Settings.ClientId;
+        protected string SearchEngineId => Settings.SearchEngineId;
+
+        protected IFixture _fixture;
+        protected static HttpClient _httpClient;
 
         [OneTimeSetUp]
         public virtual void Setup()
         {
-            var directoryInfo = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory ?? "").Parent?.Parent?.Parent;
-            var fileInfo = directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.json") ?? directoryInfo?.GetFiles().FirstOrDefault(x => x.Name == "application.default.json");
+            var builder = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .AddJsonFile("application.default.json", optional: true)
+                .AddJsonFile("application.json", optional: true)
+                .AddUserSecrets<BaseTest>();
+            var config = builder.Build();
 
-            if (fileInfo == null)
-                throw new NullReferenceException("fileinfo");
+            Settings = config.Get<AppSettings>();
 
-            using var file = File.OpenText(fileInfo.FullName);
-            {
-                using var reader = new JsonTextReader(file);
-                {
-                    var jsonSerializer = new JsonSerializer();
-                    this.Settings = jsonSerializer.Deserialize<AppSettings>(reader);
-                }
-            }
+            var handler = new TraceLogRequestHandler();
+
+            _httpClient = handler.ToHttpClient();
+        }
+
+        [SetUp]
+        public void Init()
+        {
+            _fixture = new Fixture();
+            _fixture.Customize(new AutoNSubstituteCustomization { ConfigureMembers = true });
+            _fixture.Customize(new ApiKeyInterneSpecimenBuilder().ToCustomization());
+
+            _fixture.Inject(Settings);
         }
 
         public class AppSettings
         {
-            [JsonProperty("ApiKey")]
             public string ApiKey { get; set; }
 
-            [JsonProperty("CryptoKey")]
             public string CryptoKey { get; set; }
 
-            [JsonProperty("ClientId")]
             public string ClientId { get; set; }
 
-            [JsonProperty("SearchEngineId")]
             public string SearchEngineId { get; set; }
+
+            public bool UseGlobalStaticHttpClients { get; set; } = true;
         }
     }
 }

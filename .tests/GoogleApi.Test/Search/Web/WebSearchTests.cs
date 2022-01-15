@@ -1,20 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Web.Request;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
 namespace GoogleApi.Test.Search.Web
 {
     [TestFixture]
-    public class WebSearchTests : BaseTest
+    public class WebSearchTests : BaseTest<GoogleSearch.WebSearchApi>
     {
+        protected override GoogleSearch.WebSearchApi GetClient() => new(_httpClient);
+        protected override GoogleSearch.WebSearchApi GetClientStatic() => GoogleSearch.WebSearch;
+
         [Test]
         public void WebSearchTest()
         {
@@ -25,19 +28,19 @@ namespace GoogleApi.Test.Search.Web
                 Query = "google"
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
-            Assert.AreEqual(response.Kind, "customsearch#search");
+            Assert.AreEqual("customsearch#search", response.Kind);
 
             Assert.IsNotNull(response.Url);
-            Assert.AreEqual(response.Url.Type, "application/json");
-            Assert.AreEqual(response.Url.Template, "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json");
+            Assert.AreEqual("application/json", response.Url.Type);
+            Assert.AreEqual("https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json", response.Url.Template);
 
             Assert.IsNotNull(response.Context);
             Assert.IsNull(response.Context.Facets);
-            Assert.AreEqual(response.Context.Title, "Google Web");
+            Assert.AreEqual("Google Web", response.Context.Title);
 
             Assert.IsNull(response.Spelling);
 
@@ -54,8 +57,8 @@ namespace GoogleApi.Test.Search.Web
             var item = response.Items.FirstOrDefault();
             Assert.IsNotNull(item);
             Assert.IsNotNull(item.Link);
-            Assert.AreEqual(item.Title, "Google");
-            Assert.AreEqual(item.DisplayLink, "www.google.com");
+            Assert.AreEqual("Google", item.Title);
+            Assert.AreEqual("www.google.com", item.DisplayLink);
 
             Assert.IsNull(response.Promotions);
 
@@ -140,7 +143,7 @@ namespace GoogleApi.Test.Search.Web
                 Query = "google"
             };
 
-            var response = GoogleSearch.WebSearch.QueryAsync(request).Result;
+            var response = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.IsNotEmpty(response.Items);
@@ -161,12 +164,12 @@ namespace GoogleApi.Test.Search.Web
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleSearch.WebSearch.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
 
         [Test]
@@ -180,10 +183,10 @@ namespace GoogleApi.Test.Search.Web
                 Fields = "kind"
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
-            Assert.AreEqual(response.Status, Status.Ok);
-            Assert.AreEqual(response.Kind, "customsearch#search");
+            Assert.AreEqual(Status.Ok, response.Status);
+            Assert.AreEqual("customsearch#search", response.Kind);
 
             Assert.IsNull(response.Url);
             Assert.IsNull(response.Context);
@@ -228,7 +231,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -262,7 +265,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -293,7 +296,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -337,7 +340,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -374,7 +377,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -413,7 +416,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -458,7 +461,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -510,7 +513,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            Assert.DoesNotThrow(() => GoogleSearch.WebSearch.Query(request));
+            Assert.DoesNotThrow(() => Sut.Query(request));
         }
 
         [Test]
@@ -528,7 +531,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
+            var exception = Assert.Throws<AggregateException>(() => Sut.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
 
             var innerException = exception.InnerException;
@@ -555,7 +558,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -589,7 +592,7 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(response.Status, Status.Ok);
 
@@ -621,10 +624,10 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var response = GoogleSearch.WebSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
-            Assert.AreEqual(response.Status, Status.Ok);
-            Assert.AreEqual(response.Kind, "customsearch#search");
+            Assert.AreEqual(Status.Ok, response.Status);
+            Assert.AreEqual("customsearch#search", response.Kind);
 
             var items = response.Items;
             Assert.IsNotNull(items);
@@ -654,13 +657,13 @@ namespace GoogleApi.Test.Search.Web
                 Key = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
+            var exception = Assert.Throws<AggregateException>(() => Sut.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Key is required");
+            Assert.AreEqual("Key is required", innerException.Message);
         }
 
         [Test]
@@ -672,13 +675,13 @@ namespace GoogleApi.Test.Search.Web
                 Query = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
+            var exception = Assert.Throws<AggregateException>(() => Sut.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Query is required");
+            Assert.AreEqual("Query is required", innerException.Message);
         }
 
         [Test]
@@ -691,13 +694,13 @@ namespace GoogleApi.Test.Search.Web
                 SearchEngineId = null
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
+            var exception = Assert.Throws<AggregateException>(() => Sut.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "SearchEngineId is required");
+            Assert.AreEqual("SearchEngineId is required", innerException.Message);
         }
 
         [Test]
@@ -714,13 +717,13 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
+            var exception = Assert.Throws<AggregateException>(() => Sut.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Number must be between 1 and 10");
+            Assert.AreEqual("Number must be between 1 and 10", innerException.Message);
         }
 
         [Test]
@@ -737,13 +740,13 @@ namespace GoogleApi.Test.Search.Web
                 }
             };
 
-            var exception = Assert.Throws<AggregateException>(() => GoogleSearch.WebSearch.QueryAsync(request).Wait());
+            var exception = Assert.Throws<AggregateException>(() => Sut.QueryAsync(request).Wait());
             Assert.IsNotNull(exception);
 
             var innerException = exception.InnerException;
             Assert.IsNotNull(innerException);
             Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-            Assert.AreEqual(innerException.Message, "Number must be between 1 and 10");
+            Assert.AreEqual("Number must be between 1 and 10", innerException.Message);
         }
     }
 }

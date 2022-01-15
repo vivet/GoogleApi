@@ -7,41 +7,42 @@ using GoogleApi.Entities.Search.Video.Playlists.Response;
 using GoogleApi.Entities.Search.Video.Videos.Request;
 using GoogleApi.Entities.Search.Video.Videos.Response;
 using GoogleApi.Entities.Search.Web.Request;
+using System.Net.Http;
 
 namespace GoogleApi
 {
     /// <summary>
-    /// The JSON/Atom Custom Search API lets you develop websites and applications to retrieve and display search results from Google Custom Search programmatically. 
-    /// With this API, you can use RESTful requests to get either web search or image search results in JSON or Atom format. 
+    /// The JSON/Atom Custom Search API lets you develop websites and applications to retrieve and display search results from Google Custom Search programmatically.
+    /// With this API, you can use RESTful requests to get either web search or image search results in JSON or Atom format.
     /// https://developers.google.com/custom-search/docs/overview
-    /// By calling the API user issues requests against an existing instance of a Custom Search Engine. 
+    /// By calling the API user issues requests against an existing instance of a Custom Search Engine.
     /// Therefore, before using the API, you need to create one in the Control Panel (https://cse.google.com/cse/all).
     /// Follow the tutorial to learn more about different configuration options. You can find the engine's ID in the Setup > Basics > Details section of the Control Panel.
     /// REST Api: https://developers.google.com/custom-search/json-api/v1/overview
-    /// There are also two external documents that are helpful resources for using this API: 
+    /// There are also two external documents that are helpful resources for using this API:
     /// - Google WebSearch Protocol(XML): The JSON/Atom Custom Search API provides a subset of the functionality provided by the XML API, but it instead returns data in JSON or Atom format. (https://developers.google.com/custom-search/docs/xml_results)
     /// - OpenSearch 1.1 Specification: This API uses the OpenSearch specification to describe the search engine and provide data regarding the results.Because of this, you can write your code so that it can support any OpenSearch engine, not just Google's custom search engine. There is currently no other JSON implementation of OpenSearch, so all the examples in the OpenSearch spec are in XML. (http://www.opensearch.org/Specifications/OpenSearch/1.1)
     /// </summary>
-    public class GoogleSearch
+    public partial class GoogleSearch
     {
         /// <summary>
         /// Web Search.
-        /// You can retrieve results for a particular search by sending an HTTP GET request to its URI. 
-        /// You pass in the details of the search request as query parameters. 
+        /// You can retrieve results for a particular search by sending an HTTP GET request to its URI.
+        /// You pass in the details of the search request as query parameters.
         /// </summary>
-        public static HttpEngine<WebSearchRequest, BaseSearchResponse> WebSearch => HttpEngine<WebSearchRequest, BaseSearchResponse>.instance;
+        public static WebSearchApi WebSearch => new();
 
         /// <summary>
         /// Image Search.
         /// You can retrieve results for a particular search by sending an HTTP GET request to its URI.
-        /// You pass in the details of the search request as query parameters. 
+        /// You pass in the details of the search request as query parameters.
         /// </summary>
-        public static HttpEngine<ImageSearchRequest, BaseSearchResponse> ImageSearch => HttpEngine<ImageSearchRequest, BaseSearchResponse>.instance;
+        public static ImageSearchApi ImageSearch => new();
 
         /// <summary>
         /// Video Search (nested class).
         /// </summary>
-        public static class VideoSearch
+        public static partial class VideoSearch
         {
             /// <summary>
             /// Video Search.
@@ -49,7 +50,7 @@ namespace GoogleApi
             /// You pass in the details of the search request as query parameters.
             /// Docs: https://developers.google.com/youtube/v3/getting-started
             /// </summary>
-            public static HttpEngine<VideoSearchRequest, VideoSearchResponse> Videos => HttpEngine<VideoSearchRequest, VideoSearchResponse>.instance;
+            public static VideosApi Videos => new();
 
             /// <summary>
             /// Video Channel Search
@@ -57,7 +58,7 @@ namespace GoogleApi
             /// You pass in the details of the search request as query parameters.
             /// Docs: https://developers.google.com/youtube/v3/getting-started
             /// </summary>
-            public static HttpEngine<ChannelSearchRequest, ChannelSearchResponse> Channels => HttpEngine<ChannelSearchRequest, ChannelSearchResponse>.instance;
+            public static ChannelsApi Channels => new();
 
             /// <summary>
             /// Video Playlist Search
@@ -65,7 +66,101 @@ namespace GoogleApi
             /// You pass in the details of the search request as query parameters.
             /// Docs: https://developers.google.com/youtube/v3/getting-started
             /// </summary>
-            public static HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse> Playlists => HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse>.instance;
+            public static PlaylistsApi Playlists => new();
+        }
+    }
+
+    public partial class GoogleSearch
+    {
+        /// <summary>
+        ///
+        /// </summary>
+        public sealed class WebSearchApi : HttpEngine<WebSearchRequest, BaseSearchResponse>
+        {
+            /// <summary>
+            ///
+            /// </summary>
+            public WebSearchApi() { }
+
+            /// <summary>
+            ///
+            /// </summary>
+            /// <param name="client"></param>
+            public WebSearchApi(HttpClient client) : base(client) { }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public sealed class ImageSearchApi : HttpEngine<ImageSearchRequest, BaseSearchResponse>
+        {
+            /// <summary>
+            ///
+            /// </summary>
+            public ImageSearchApi() { }
+
+            /// <summary>
+            ///
+            /// </summary>
+            /// <param name="client"></param>
+            public ImageSearchApi(HttpClient client) : base(client) { }
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public static partial class VideoSearch
+        {
+            /// <summary>
+            ///
+            /// </summary>
+            public sealed class ChannelsApi : HttpEngine<ChannelSearchRequest, ChannelSearchResponse>
+            {
+                /// <summary>
+                ///
+                /// </summary>
+                public ChannelsApi() { }
+
+                /// <summary>
+                ///
+                /// </summary>
+                /// <param name="client"></param>
+                public ChannelsApi(HttpClient client) : base(client) { }
+            }
+
+            /// <summary>
+            ///
+            /// </summary>
+            public sealed class PlaylistsApi : HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse>
+            {
+                /// <summary>
+                ///
+                /// </summary>
+                public PlaylistsApi() { }
+
+                /// <summary>
+                ///
+                /// </summary>
+                /// <param name="client"></param>
+                public PlaylistsApi(HttpClient client) : base(client) { }
+            }
+
+            /// <summary>
+            ///
+            /// </summary>
+            public sealed class VideosApi : HttpEngine<VideoSearchRequest, VideoSearchResponse>
+            {
+                /// <summary>
+                ///
+                /// </summary>
+                public VideosApi() { }
+
+                /// <summary>
+                ///
+                /// </summary>
+                /// <param name="client"></param>
+                public VideosApi(HttpClient client) : base(client) { }
+            }
         }
     }
 }

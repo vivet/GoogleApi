@@ -1,16 +1,19 @@
-using System;
-using System.Linq;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.Elevation
 {
     [TestFixture]
-    public class ElevationTests : BaseTest
+    public class ElevationTests : BaseTest<GoogleMaps.ElevationApi>
     {
+        protected override GoogleMaps.ElevationApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.ElevationApi GetClientStatic() => GoogleMaps.Elevation;
+
         [Test]
         public void ElevationWhenLocationsTest()
         {
@@ -23,7 +26,7 @@ namespace GoogleApi.Test.Maps.Elevation
                     coordinate
                 }
             };
-            var response = GoogleMaps.Elevation.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -51,7 +54,7 @@ namespace GoogleApi.Test.Maps.Elevation
                     coordinate2
                 }
             };
-            var response = GoogleMaps.Elevation.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -87,7 +90,7 @@ namespace GoogleApi.Test.Maps.Elevation
                 },
                 Samples = 2
             };
-            var response = GoogleMaps.Elevation.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -116,7 +119,7 @@ namespace GoogleApi.Test.Maps.Elevation
                 Key = this.ApiKey,
                 Locations = new[] { new Coordinate(40.7141289, -73.9614074) }
             };
-            var response = GoogleMaps.Elevation.QueryAsync(request).Result;
+            var response = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -134,12 +137,12 @@ namespace GoogleApi.Test.Maps.Elevation
                 }
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.Elevation.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

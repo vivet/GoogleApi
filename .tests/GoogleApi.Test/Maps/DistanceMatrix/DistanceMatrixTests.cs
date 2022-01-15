@@ -1,17 +1,20 @@
-using System;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using NUnit.Framework;
+using System;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.DistanceMatrix
 {
     [TestFixture]
-    public class DistanceMatrixTests : BaseTest
+    public class DistanceMatrixTests : BaseTest<GoogleMaps.DistanceMatrixApi>
     {
+        protected override GoogleMaps.DistanceMatrixApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.DistanceMatrixApi GetClientStatic() => GoogleMaps.DistanceMatrix;
+
         [Test]
         public void DistanceMatrixTest()
         {
@@ -35,7 +38,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -59,7 +62,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -82,7 +85,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -111,7 +114,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -140,7 +143,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -163,7 +166,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -187,7 +190,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 Avoid = AvoidWay.Highways
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -212,7 +215,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 DepartureTime = DateTime.UtcNow.AddHours(1)
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -238,7 +241,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
             };
 
-            var result = GoogleMaps.DistanceMatrix.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -261,7 +264,7 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
 
-            var result = GoogleMaps.DistanceMatrix.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -284,12 +287,12 @@ namespace GoogleApi.Test.Maps.DistanceMatrix
                 }
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.DistanceMatrix.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

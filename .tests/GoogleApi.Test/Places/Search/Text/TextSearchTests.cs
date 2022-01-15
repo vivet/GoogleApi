@@ -1,19 +1,21 @@
-using System;
-using System.Linq;
-using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
 
 namespace GoogleApi.Test.Places.Search.Text
 {
     [TestFixture]
-    public class TextSearchTests : BaseTest
+    public class TextSearchTests : BaseTest<GooglePlaces.TextSearchApi>
     {
+        protected override GooglePlaces.TextSearchApi GetClient() => new(_httpClient);
+        protected override GooglePlaces.TextSearchApi GetClientStatic() => GooglePlaces.TextSearch;
+
         [Test]
         public void PlacesTextSearchTest()
         {
@@ -23,7 +25,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = "picadelly circus"
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -43,10 +45,11 @@ namespace GoogleApi.Test.Places.Search.Text
             var request = new PlacesTextSearchRequest
             {
                 Key = this.ApiKey,
-                Query = "street"
+                Query = "restaurants",
+                Radius = 1000,
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.NextPageToken);
 
@@ -58,7 +61,7 @@ namespace GoogleApi.Test.Places.Search.Text
 
             Thread.Sleep(1500);
 
-            var responseNextPage = GooglePlaces.TextSearch.Query(requestNextPage);
+            var responseNextPage = Sut.Query(requestNextPage);
             Assert.IsNotNull(responseNextPage);
             Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
         }
@@ -73,7 +76,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Region = "London"
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -88,7 +91,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Radius = 5000
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -104,7 +107,8 @@ namespace GoogleApi.Test.Places.Search.Text
                 Radius = 5000
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -115,11 +119,13 @@ namespace GoogleApi.Test.Places.Search.Text
             var request = new PlacesTextSearchRequest
             {
                 Key = this.ApiKey,
-                Query = "picadelly circus",
-                Type = SearchPlaceType.Cafe
+                Query = "piccadilly circus",
+                Type = SearchPlaceType.Cafe,
+                Language = Language.English
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+
+            var response = Sut.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -134,7 +140,8 @@ namespace GoogleApi.Test.Places.Search.Text
                 Minprice = PriceLevel.Expensive
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -156,7 +163,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Maxprice = PriceLevel.Expensive
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = Sut.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -177,7 +184,7 @@ namespace GoogleApi.Test.Places.Search.Text
                 Query = "picadelly circus"
             };
 
-            var response = GooglePlaces.TextSearch.QueryAsync(request).Result;
+            var response = Sut.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -193,12 +200,12 @@ namespace GoogleApi.Test.Places.Search.Text
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.TextSearch.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
 
     }

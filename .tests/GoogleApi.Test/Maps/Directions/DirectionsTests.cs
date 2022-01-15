@@ -1,31 +1,36 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
+using AutoFixture;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace GoogleApi.Test.Maps.Directions
 {
     [TestFixture]
-    public class DirectionsTests : BaseTest
+    public class DirectionsTests : BaseTest<GoogleMaps.DirectionsApi>
     {
+        protected override GoogleMaps.DirectionsApi GetClient() => new(_httpClient);
+        protected override GoogleMaps.DirectionsApi GetClientStatic() => GoogleMaps.Directions;
+
         [Test]
         public void DirectionsWhenAddressTest()
         {
             var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");
             var destination = new Address("185 Broadway Ave, Manhattan, NY, USA");
-            var request = new DirectionsRequest
-            {
-                Key = this.ApiKey,
-                Origin = new LocationEx(origin),
-                Destination = new LocationEx(destination)
-            };
+            var request = _fixture.Build<DirectionsRequest>()
+                .With(_ => _.Key)
+                .With(_ => _.Origin, new LocationEx(origin))
+                .With(_ => _.Destination, new LocationEx(destination))
+                .OmitAutoProperties()
+                .Create();
 
-            var result = GoogleMaps.Directions.Query(request);
+
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -42,7 +47,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(destination)
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -65,7 +70,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(destination)
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -88,7 +93,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(destination)
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -96,8 +101,8 @@ namespace GoogleApi.Test.Maps.Directions
         [Test]
         public void DirectionsWhenPlaceIdTest()
         {
-            var origin = new Place("ChIJaSLMpEVQUkYRL4xNOWBfwhQ");
-            var destination = new Place("ChIJuc03_GlQUkYRlLku0KsLdJw");
+            var origin = new Place("ChIJo9YpQWBZwokR7OeY0hiWh8g");
+            var destination = new Place("ChIJx2ypzRlawokRrtKq2wZKitw");
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
@@ -105,7 +110,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(destination)
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -121,7 +126,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Avoid = AvoidWay.Highways
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -138,7 +143,7 @@ namespace GoogleApi.Test.Maps.Directions
                 DepartureTime = DateTime.UtcNow.AddHours(1)
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -156,7 +161,7 @@ namespace GoogleApi.Test.Maps.Directions
                 TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -176,7 +181,7 @@ namespace GoogleApi.Test.Maps.Directions
                 OptimizeWaypoints = false
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -196,7 +201,7 @@ namespace GoogleApi.Test.Maps.Directions
                 OptimizeWaypoints = true
             };
 
-            var result = GoogleMaps.Directions.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -211,7 +216,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA"))
             };
 
-            var result = GoogleMaps.Directions.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -226,12 +231,12 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA"))
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.Directions.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

@@ -1,17 +1,19 @@
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Translate.Detect.Request;
+using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Threading;
-using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Translate.Detect.Request;
-using GoogleApi.Exceptions;
-using NUnit.Framework;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi.Test.Translate.Detect
 {
     [TestFixture]
-    public class DetectTests : BaseTest
+    public class DetectTests : BaseTest<GoogleTranslate.DetectApi>
     {
+        protected override GoogleTranslate.DetectApi GetClient() => new(_httpClient);
+        protected override GoogleTranslate.DetectApi GetClientStatic() => GoogleTranslate.Detect;
+
         [Test]
         public void DetectTest()
         {
@@ -21,7 +23,7 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hello World" }
             };
 
-            var result = GoogleTranslate.Detect.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
 
@@ -32,6 +34,8 @@ namespace GoogleApi.Test.Translate.Detect
             var detection = detections.FirstOrDefault();
             Assert.IsNotNull(detection);
             Assert.AreEqual(Language.English, detection[0].Language);
+
+            Console.WriteLine(result.ToJson());
         }
 
         [Test]
@@ -43,11 +47,11 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hello World", "Der var engang" }
             };
 
-            var result = GoogleTranslate.Detect.Query(request);
+            var result = Sut.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
 
-            var detections = result.Data.Detections?.ToArray();
+            var detections = result.Data.Detections.ToArray();
             Assert.IsNotNull(detections);
             Assert.IsNotEmpty(detections);
             Assert.AreEqual(2, detections.Length);
@@ -70,7 +74,7 @@ namespace GoogleApi.Test.Translate.Detect
                 Qs = new[] { "Hello World" }
             };
 
-            var result = GoogleTranslate.Detect.QueryAsync(request).Result;
+            var result = Sut.QueryAsync(request).Result;
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -85,12 +89,12 @@ namespace GoogleApi.Test.Translate.Detect
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleTranslate.Detect.QueryAsync(request, cancellationTokenSource.Token);
+            var task = Sut.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
             Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
+            Assert.AreEqual("The operation was canceled.", exception.Message);
         }
     }
 }

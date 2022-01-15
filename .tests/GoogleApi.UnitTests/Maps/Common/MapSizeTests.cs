@@ -1,6 +1,6 @@
-using System;
 using GoogleApi.Entities.Maps.Common;
 using NUnit.Framework;
+using System;
 
 namespace GoogleApi.UnitTests.Maps.Common
 {
@@ -25,7 +25,11 @@ namespace GoogleApi.UnitTests.Maps.Common
                 Assert.IsNotNull(size);
             });
 
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual("'width' must be greater than 1 and less than 4096. (Parameter 'width')\r\nActual value was 0.", exception.Message);
+#else
+            Assert.AreEqual("'width' must be greater than 1 and less than 4096.\r\nParameter name: width\r\nActual value was 0.", exception.Message);
+#endif
         }
 
         [Test]
@@ -37,7 +41,11 @@ namespace GoogleApi.UnitTests.Maps.Common
                 Assert.IsNotNull(size);
             });
 
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual("'width' must be greater than 1 and less than 4096. (Parameter 'width')\r\nActual value was 4097.", exception.Message);
+#else
+            Assert.AreEqual("'width' must be greater than 1 and less than 4096.\r\nParameter name: width\r\nActual value was 4097.", exception.Message);
+#endif
         }
 
         [Test]
@@ -49,7 +57,11 @@ namespace GoogleApi.UnitTests.Maps.Common
                 Assert.IsNotNull(size);
             });
 
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual("'height' must be greater than 1 and less than 4096. (Parameter 'height')\r\nActual value was 0.", exception.Message);
+#else
+            Assert.AreEqual("'height' must be greater than 1 and less than 4096.\r\nParameter name: height\r\nActual value was 0.", exception.Message);
+#endif
         }
 
         [Test]
@@ -61,7 +73,12 @@ namespace GoogleApi.UnitTests.Maps.Common
                 Assert.IsNotNull(size);
             });
 
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual("'height' must be greater than 1 and less than 4096. (Parameter 'height')\r\nActual value was 4097.", exception.Message);
+#else
+            Assert.AreEqual("'height' must be greater than 1 and less than 4096.\r\nParameter name: height\r\nActual value was 4097.", exception.Message);
+#endif
         }
 
         [Test]
