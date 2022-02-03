@@ -8,9 +8,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>4.0.6.0</AssemblyVersion>
-		<FileVersion>4.0.6.0</FileVersion>
-		<Version>4.0.6.0</Version>
+		<AssemblyVersion>4.1.0.0</AssemblyVersion>
+		<FileVersion>4.1.0.0</FileVersion>
+		<Version>4.1.0.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -24,6 +24,7 @@
 		<PackageReleaseNotes>
 			- Removed support for netstandard 1.1 and 1.4.
 			- Added support for net6.0.
+			- Removed unused instance dispose method from disposing static HttpEngine.HttpClient.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>

@@ -16,7 +16,7 @@ namespace GoogleApi
     /// <summary>
     /// Http Engine (abstract).
     /// </summary>
-    public abstract class HttpEngine : IDisposable
+    public abstract class HttpEngine
     {
         private static HttpClient httpClient;
         private static readonly TimeSpan httpTimeout = new TimeSpan(0, 0, 30);
@@ -57,28 +57,6 @@ namespace GoogleApi
         /// Proxy property that will be used for all requests.
         /// </summary>
         public static IWebProxy Proxy { get; set; }
-
-        /// <summary>
-        /// Disposes.
-        /// </summary>
-        public virtual void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Disposes of the <see cref="HttpClient"/>, if <paramref name="disposing"/> is true.
-        /// </summary>
-        /// <param name="disposing">Whether to dispose resources or not.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposing)
-                return;
-
-            HttpEngine.HttpClient?.Dispose();
-            HttpEngine.httpClient = null;
-        }
     }
 
     /// <summary>
