@@ -533,6 +533,12 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums
         /// <summary>
         /// Train Station.
         /// </summary>
+        [EnumMember(Value = "tourist_attraction")]
+        TouristAttraction,
+
+        /// <summary>
+        /// Train Station.
+        /// </summary>
         [EnumMember(Value = "train_station")]
         TrainStation,
 
