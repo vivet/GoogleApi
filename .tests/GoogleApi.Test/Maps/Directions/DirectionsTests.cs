@@ -96,8 +96,8 @@ namespace GoogleApi.Test.Maps.Directions
         [Test]
         public void DirectionsWhenPlaceIdTest()
         {
-            var origin = new Place("ChIJaSLMpEVQUkYRL4xNOWBfwhQ");
-            var destination = new Place("ChIJuc03_GlQUkYRlLku0KsLdJw");
+            var origin = new Place("ChIJo9YpQWBZwokR7OeY0hiWh8g");
+            var destination = new Place("ChIJo9YpQWBZwokR7OeY0hiWh8g");
             var request = new DirectionsRequest
             {
                 Key = this.ApiKey,
