@@ -1,7 +1,7 @@
-version: 4.0.7.{build}
+version: 4.1.0.{build}
 skip_tags: true
 max_jobs: 1
-image: Visual Studio 2019
+image: Visual Studio 2022
 configuration: Release
 platform: Any CPU
 force_https_clone: true

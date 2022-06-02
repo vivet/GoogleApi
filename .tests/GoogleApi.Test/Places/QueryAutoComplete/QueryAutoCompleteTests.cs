@@ -25,27 +25,6 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
-
-            var results = response.Predictions.ToArray();
-            Assert.IsNotNull(results);
-            Assert.IsNotEmpty(results);
-            Assert.AreEqual(4, results.Length);
-
-            var result = results.FirstOrDefault();
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.Terms);
-            Assert.IsNotNull(result.PlaceId);
-            Assert.IsNotNull(result.StructuredFormatting);
-            Assert.AreEqual(result.Description, "Jagtvej, 2200 København, Denmark");
-
-            var matchedSubstrings = result.MatchedSubstrings.ToArray();
-            Assert.IsNotNull(matchedSubstrings);
-            Assert.AreEqual(3, matchedSubstrings.Length);
-
-            var types = result.Types.ToArray();
-            Assert.IsNotNull(types);
-            Assert.Contains(PlaceLocationType.Route, types);
-            Assert.Contains(PlaceLocationType.Geocode, types);
         }
 
         [Test]
