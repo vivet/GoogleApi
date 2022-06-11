@@ -17,13 +17,13 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "picadelly circus",
                 Type = InputType.TextQuery,
                 Fields = FieldTypes.Basic
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = GooglePlaces.Search.FindSearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -39,12 +39,12 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "+4533333333",
                 Type = InputType.PhoneNumber
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = GooglePlaces.Search.FindSearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -55,11 +55,11 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "picadelly circus"
             };
 
-            var response = GooglePlaces.FindSearch.QueryAsync(request).Result;
+            var response = GooglePlaces.Search.FindSearch.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -70,12 +70,12 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "picadelly circus"
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.FindSearch.QueryAsync(request, cancellationTokenSource.Token);
+            var task = GooglePlaces.Search.FindSearch.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
@@ -88,13 +88,13 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "picadelly circus",
                 Type = InputType.TextQuery,
                 Fields = FieldTypes.Basic
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = GooglePlaces.Search.FindSearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -114,12 +114,12 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "picadelly circus",
                 Location = new Coordinate(51.5100913, -0.1345676)
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = GooglePlaces.Search.FindSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -129,13 +129,13 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "picadelly circus",
                 Location = new Coordinate(51.5100913, -0.1345676),
                 Radius = 5000
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = GooglePlaces.Search.FindSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -145,12 +145,12 @@ namespace GoogleApi.Test.Places.Search.Find
         {
             var request = new PlacesFindSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "new york",
                 Bounds = new ViewPort(new Coordinate(51.5100913, -0.1345676), new Coordinate(50.5100913, -0.0345676))
             };
 
-            var response = GooglePlaces.FindSearch.Query(request);
+            var response = GooglePlaces.Search.FindSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }

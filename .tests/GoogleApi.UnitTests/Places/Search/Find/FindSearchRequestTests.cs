@@ -79,7 +79,8 @@ namespace GoogleApi.UnitTests.Places.Search.Find
                 .Cast<FieldTypes>()
                 .Where(x => request.Fields.HasFlag(x) && x != FieldTypes.Basic && x != FieldTypes.Contact && x != FieldTypes.Atmosphere)
                 .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLowerInvariant()},");
-            var fieldsExpected = requestedFields.EndsWith(",") ? requestedFields[..^1] : requestedFields;
+
+            var fieldsExpected = requestedFields.EndsWith(",") ? requestedFields.Substring(0, requestedFields.Length -1) : requestedFields;
             Assert.IsNotNull(fields);
             Assert.AreEqual(fieldsExpected, fields.Value);
         }

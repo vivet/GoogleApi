@@ -16,7 +16,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = location
             };
 
@@ -32,7 +32,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = location,
                 Language = Language.German
             };
@@ -49,7 +49,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = location,
                 TimeStamp = DateTime.Now.AddMonths(6)
             };
@@ -66,7 +66,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = location
             };
 
@@ -82,7 +82,7 @@ namespace GoogleApi.Test.Maps.TimeZone
             var location = new Coordinate(40.7141289, -73.9614074);
             var request = new TimeZoneRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = location
             };
             var cancellationTokenSource = new CancellationTokenSource();

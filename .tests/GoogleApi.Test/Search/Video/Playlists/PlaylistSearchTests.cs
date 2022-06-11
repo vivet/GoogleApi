@@ -14,7 +14,7 @@ namespace GoogleApi.Test.Search.Video.Playlists
         {
             var request = new PlaylistSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
                 MaxResults = 1
             };
@@ -30,7 +30,7 @@ namespace GoogleApi.Test.Search.Video.Playlists
         {
             var request = new PlaylistSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
                 MaxResults = 1
             };
@@ -47,7 +47,7 @@ namespace GoogleApi.Test.Search.Video.Playlists
         {
             var request = new PlaylistSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google"
             };
 

@@ -17,7 +17,7 @@ namespace GoogleApi.Test.Places.Details
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = ApiKey,
+                Key = Settings.ApiKey,
                 Input = "jagtvej 2200 København"
             };
 
@@ -26,7 +26,7 @@ namespace GoogleApi.Test.Places.Details
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
             {
-                Key = ApiKey,
+                Key = Settings.ApiKey,
                 PlaceId = placeId
             };
 
@@ -62,7 +62,7 @@ namespace GoogleApi.Test.Places.Details
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = ApiKey,
+                Key = Settings.ApiKey,
                 Input = "jagtvej 2200"
             };
 
@@ -72,7 +72,7 @@ namespace GoogleApi.Test.Places.Details
 
             var request2 = new PlacesDetailsRequest
             {
-                Key = ApiKey,
+                Key = Settings.ApiKey,
                 PlaceId = result.PlaceId
             };
 
@@ -85,7 +85,7 @@ namespace GoogleApi.Test.Places.Details
         {
             var request = new PlacesDetailsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = Guid.NewGuid().ToString("N")
             };
             var cancellationTokenSource = new CancellationTokenSource();
@@ -102,7 +102,7 @@ namespace GoogleApi.Test.Places.Details
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København"
             };
 
@@ -111,7 +111,7 @@ namespace GoogleApi.Test.Places.Details
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
             {
-                Key = ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = placeId,
                 Language = Language.Danish
             };
@@ -128,7 +128,7 @@ namespace GoogleApi.Test.Places.Details
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København"
             };
 
@@ -137,7 +137,7 @@ namespace GoogleApi.Test.Places.Details
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var request2 = new PlacesDetailsRequest
             {
-                Key = ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = placeId,
                 Fields = FieldTypes.Place_Id
             };

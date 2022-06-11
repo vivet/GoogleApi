@@ -17,7 +17,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World" }
             };
 
@@ -39,7 +39,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World", "Der var engang" }
             };
 
@@ -66,7 +66,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World" }
             };
 
@@ -80,7 +80,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World" }
             };
 

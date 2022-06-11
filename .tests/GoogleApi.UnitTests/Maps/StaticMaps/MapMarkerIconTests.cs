@@ -16,7 +16,10 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var markerIcon = new MapMarkerIcon(null);
                 Assert.IsNull(markerIcon);
             });
-            Assert.AreEqual("Value cannot be null. (Parameter 'url')", exception.Message);
+
+            Assert.IsNotNull(exception);
+            Assert.IsTrue(exception.Message.StartsWith("Value cannot be null"));
+            Assert.IsTrue(exception.Message.Contains("url"));
         }
 
         [Test]

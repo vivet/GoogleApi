@@ -16,7 +16,7 @@ namespace GoogleApi.Test.Maps.StreetView
         {
             var request = new StreetViewRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Location(new Coordinate(60.170877, 24.942796))
             };
 
@@ -31,7 +31,7 @@ namespace GoogleApi.Test.Maps.StreetView
         {
             var request = new StreetViewRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PanoramaId = "-gVtvWrACv2k/Vnh0Vg8Z8YI/AAAAAAABLWA/a-AT4Wb8M"
             };
 
@@ -46,7 +46,7 @@ namespace GoogleApi.Test.Maps.StreetView
         {
             var request = new StreetViewRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Location(new Coordinate(60.170877, 24.942796)),
                 Heading = 90
             };
@@ -62,7 +62,7 @@ namespace GoogleApi.Test.Maps.StreetView
         {
             var request = new StreetViewRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Location(new Coordinate(60.170877, 24.942796))
 
             };
@@ -77,7 +77,7 @@ namespace GoogleApi.Test.Maps.StreetView
         {
             var request = new StreetViewRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Location(new Coordinate(60.170877, 24.942796))
             };
             var cancellationTokenSource = new CancellationTokenSource();

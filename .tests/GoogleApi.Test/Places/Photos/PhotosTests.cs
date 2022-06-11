@@ -18,21 +18,21 @@ namespace GoogleApi.Test.Places.Photos
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "det kongelige teater"
             });
 
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = placeId
             });
 
             var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
             var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PhotoReference = photoReference,
                 MaxWidth = 1600
             });
@@ -49,21 +49,21 @@ namespace GoogleApi.Test.Places.Photos
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "det kongelige teater"
             });
 
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = placeId
             });
 
             var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
             var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PhotoReference = photoReference,
                 MaxWidth = 1600
             });
@@ -78,7 +78,7 @@ namespace GoogleApi.Test.Places.Photos
         {
             var request = new PlacesPhotosRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PhotoReference = Guid.NewGuid().ToString("N"),
                 MaxWidth = 1600
             };
@@ -115,21 +115,21 @@ namespace GoogleApi.Test.Places.Photos
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "det kongelige teater"
             });
 
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = placeId
             });
 
             var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
             var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PhotoReference = photoReference,
                 MaxWidth = 1600
             });
@@ -144,21 +144,21 @@ namespace GoogleApi.Test.Places.Photos
         {
             var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "det kongelige teater"
             });
 
             var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
             var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = placeId
             });
 
             var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
             var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PhotoReference = photoReference,
                 MaxHeight = 1600
             });

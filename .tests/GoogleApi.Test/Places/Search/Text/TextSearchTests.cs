@@ -6,7 +6,6 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Search.Text
@@ -19,11 +18,11 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "picadelly circus"
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -42,23 +41,23 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "street"
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.NextPageToken);
 
             var requestNextPage = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PageToken = response.NextPageToken
             };
 
             Thread.Sleep(1500);
 
-            var responseNextPage = GooglePlaces.TextSearch.Query(requestNextPage);
+            var responseNextPage = GooglePlaces.Search.TextSearch.Query(requestNextPage);
             Assert.IsNotNull(responseNextPage);
             Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
         }
@@ -68,12 +67,12 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "picadelly circus",
                 Region = "London"
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -83,12 +82,12 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "picadelly circus",
                 Radius = 5000
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -98,13 +97,13 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "picadelly circus",
                 Location = new Coordinate(51.5100913, -0.1345676),
                 Radius = 5000
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -114,12 +113,12 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "picadelly circus",
                 Type = SearchPlaceType.Cafe
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -129,12 +128,12 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "Copenhagen",
                 Minprice = PriceLevel.Expensive
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -151,12 +150,12 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "Copenhagen",
                 Maxprice = PriceLevel.Expensive
             };
 
-            var response = GooglePlaces.TextSearch.Query(request);
+            var response = GooglePlaces.Search.TextSearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -173,11 +172,11 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "picadelly circus"
             };
 
-            var response = GooglePlaces.TextSearch.QueryAsync(request).Result;
+            var response = GooglePlaces.Search.TextSearch.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -188,12 +187,12 @@ namespace GoogleApi.Test.Places.Search.Text
         {
             var request = new PlacesTextSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "picadelly circus"
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.TextSearch.QueryAsync(request, cancellationTokenSource.Token);
+            var task = GooglePlaces.Search.TextSearch.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));

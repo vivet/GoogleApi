@@ -20,8 +20,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google"
             };
 
@@ -71,7 +71,7 @@ namespace GoogleApi.Test.Search.Web
             Assert.AreEqual(EncodingType.Utf8, query.InputEncoding);
             Assert.AreEqual(EncodingType.Utf8, query.OutputEncoding);
             Assert.AreEqual(SafetyLevel.Off, query.SafetyLevel);
-            Assert.AreEqual(this.SearchEngineId, query.SearchEngineId);
+            Assert.AreEqual(this.Settings.SearchEngineId, query.SearchEngineId);
             Assert.IsFalse(query.Filter);
             Assert.IsTrue(query.DisableCnTwTranslation);
             Assert.AreEqual(Language.English, query.InterfaceLanguage);
@@ -88,7 +88,7 @@ namespace GoogleApi.Test.Search.Web
             Assert.AreEqual(EncodingType.Utf8, nextPage.InputEncoding);
             Assert.AreEqual(EncodingType.Utf8, nextPage.OutputEncoding);
             Assert.AreEqual(SafetyLevel.Off, nextPage.SafetyLevel);
-            Assert.AreEqual(this.SearchEngineId, nextPage.SearchEngineId);
+            Assert.AreEqual(this.Settings.SearchEngineId, nextPage.SearchEngineId);
             Assert.IsFalse(nextPage.Filter);
             Assert.IsTrue(nextPage.DisableCnTwTranslation);
             Assert.AreEqual(Language.English, nextPage.InterfaceLanguage);
@@ -135,8 +135,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google"
             };
 
@@ -155,8 +155,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google"
             };
 
@@ -174,8 +174,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Fields = "kind"
             };
@@ -219,8 +219,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -246,8 +246,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -280,8 +280,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -324,8 +324,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -365,8 +365,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -404,8 +404,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -449,8 +449,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -500,9 +500,9 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
-                SearchEngineId = this.SearchEngineId,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Options =
                 {
                     InterfaceLanguage = Language.Danish,
@@ -518,9 +518,9 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
-                SearchEngineId = this.SearchEngineId,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Options =
                 {
                     InterfaceLanguage = Language.Danish,
@@ -542,8 +542,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -575,8 +575,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -612,8 +612,8 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google",
                 Options =
                 {
@@ -668,7 +668,7 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = null
             };
 
@@ -686,7 +686,7 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
                 SearchEngineId = null
             };
@@ -705,9 +705,9 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
-                SearchEngineId = this.SearchEngineId,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Options =
                 {
                     Number = 0
@@ -728,9 +728,9 @@ namespace GoogleApi.Test.Search.Web
         {
             var request = new WebSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
-                SearchEngineId = this.SearchEngineId,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Options =
                 {
                     Number = 11

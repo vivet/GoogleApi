@@ -14,7 +14,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey
+                Key = this.Settings.ApiKey
             };
 
             var result = GoogleMaps.Geolocation.Query(request);
@@ -27,7 +27,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Carrier = "Vodafone"
             };
 
@@ -41,7 +41,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 HomeMobileCountryCode = "310"
             };
 
@@ -55,7 +55,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 HomeMobileNetworkCode = "410"
             };
 
@@ -69,7 +69,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 ConsiderIp = true
             };
 
@@ -89,7 +89,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 WifiAccessPoints = new[]
                 {
                     new WifiAccessPoint
@@ -117,7 +117,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey
+                Key = this.Settings.ApiKey
             };
 
             var result = GoogleMaps.Geolocation.QueryAsync(request).Result;
@@ -130,7 +130,7 @@ namespace GoogleApi.Test.Maps.Geolocation
         {
             var request = new GeolocationRequest
             {
-                Key = this.ApiKey
+                Key = this.Settings.ApiKey
             };
             var cancellationTokenSource = new CancellationTokenSource();
             var task = GoogleMaps.Geolocation.QueryAsync(request, cancellationTokenSource.Token);

@@ -15,11 +15,11 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         {
             var request = new PlusCodeGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = GoogleMaps.Geocode.PlusCodeGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -34,7 +34,7 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
             {
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = GoogleMaps.Geocode.PlusCodeGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -48,11 +48,11 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         {
             var request = new PlusCodeGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Entities.Common.Address("285 Bedford Ave, Brooklyn, NY 11211, USA"))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = GoogleMaps.Geocode.PlusCodeGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -63,11 +63,11 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         {
             var request = new PlusCodeGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new GlobalCode("796RWF8Q+WF"))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = GoogleMaps.Geocode.PlusCodeGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -78,11 +78,11 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         {
             var request = new PlusCodeGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new LocalCodeAndLocality("WF8Q+WF Praia", "Cape Verde"))
             };
 
-            var response = GoogleMaps.PlusCodeGeocode.Query(request);
+            var response = GoogleMaps.Geocode.PlusCodeGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -93,10 +93,10 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         {
             var request = new PlusCodeGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
-            var result = GoogleMaps.PlusCodeGeocode.QueryAsync(request).Result;
+            var result = GoogleMaps.Geocode.PlusCodeGeocode.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -107,11 +107,11 @@ namespace GoogleApi.Test.Maps.Geocoding.PlusCode
         {
             var request = new PlusCodeGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(40.71406249999997, -73.9613125))
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.PlusCodeGeocode.QueryAsync(request, cancellationTokenSource.Token);
+            var task = GoogleMaps.Geocode.PlusCodeGeocode.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));

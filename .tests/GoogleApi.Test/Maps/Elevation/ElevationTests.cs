@@ -17,7 +17,7 @@ namespace GoogleApi.Test.Maps.Elevation
             var coordinate = new Coordinate(40.7141289, -73.9614074);
             var request = new ElevationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Locations = new[]
                 {
                     coordinate
@@ -44,7 +44,7 @@ namespace GoogleApi.Test.Maps.Elevation
             var coordinate2 = new Coordinate(40.714128899999999, -73.961407399999999);
             var request = new ElevationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Locations = new[]
                 {
                     coordinate1,
@@ -79,7 +79,7 @@ namespace GoogleApi.Test.Maps.Elevation
             var coordinate2 = new Coordinate(40.714128899999999, -73.961407399999999);
             var request = new ElevationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Path = new[]
                 {
                     coordinate1,
@@ -113,7 +113,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Locations = new[] { new Coordinate(40.7141289, -73.9614074) }
             };
             var response = GoogleMaps.Elevation.QueryAsync(request).Result;
@@ -127,7 +127,7 @@ namespace GoogleApi.Test.Maps.Elevation
         {
             var request = new ElevationRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Locations = new[]
                 {
                     new Coordinate(40.7141289, -73.9614074)

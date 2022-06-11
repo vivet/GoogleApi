@@ -14,11 +14,11 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
         {
             var request = new PlaceGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
             };
 
-            var response = GoogleMaps.PlaceGeocode.Query(request);
+            var response = GoogleMaps.Geocode.PlaceGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -29,10 +29,10 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
         {
             var request = new PlaceGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
             };
-            var result = GoogleMaps.PlaceGeocode.QueryAsync(request).Result;
+            var result = GoogleMaps.Geocode.PlaceGeocode.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -43,11 +43,11 @@ namespace GoogleApi.Test.Maps.Geocoding.Place
         {
             var request = new PlaceGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.PlaceGeocode.QueryAsync(request, cancellationTokenSource.Token);
+            var task = GoogleMaps.Geocode.PlaceGeocode.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));

@@ -18,7 +18,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
@@ -34,7 +34,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1,
                 Region = "us"
@@ -51,7 +51,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Paths = new List<MapPath>
                 {
                     new MapPath
@@ -92,7 +92,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1,
                 Styles = new List<MapStyle>
@@ -143,7 +143,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Visibles = new[]
                 {
                     new Location(new Coordinate(60.170877, 24.942796)),
@@ -162,7 +162,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Markers = new[]
                 {
                     new MapMarker
@@ -201,7 +201,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
@@ -216,7 +216,7 @@ namespace GoogleApi.Test.Maps.StaticMaps
         {
             var request = new StaticMapsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Center = new Location(new Coordinate(60.170877, 24.942796)),
                 ZoomLevel = 1
             };
