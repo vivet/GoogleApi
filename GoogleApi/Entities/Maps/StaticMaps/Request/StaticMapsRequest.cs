@@ -55,7 +55,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 		/// Maps smaller than 180 pixels in width will display a reduced-size Google logo. 
 		/// This parameter is affected by the scale parameter, described below; the final output size is the product of the size and scale values.
 		/// </summary>
-		public virtual MapSize Size { get; set; } = new MapSize(640, 640);
+		public virtual MapSize Size { get; set; } = new(640, 640);
 
         /// <summary>
         /// Defines the type of map to construct. There are several possible

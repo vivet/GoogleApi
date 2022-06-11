@@ -171,7 +171,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(new Address("Miami, USA")),
                 WayPoints = new List<WayPoint>
                 {
-                    new WayPoint(new LocationEx(new Address("Philadelphia, USA")))
+                    new(new LocationEx(new Address("Philadelphia, USA")))
                 },
                 OptimizeWaypoints = false
             };
@@ -191,7 +191,7 @@ namespace GoogleApi.Test.Maps.Directions
                 Destination = new LocationEx(new Address("Miami, USA")),
                 WayPoints = new List<WayPoint>
                 {
-                    new WayPoint(new LocationEx(new Address("Philadelphia, USA")), true)
+                    new(new LocationEx(new Address("Philadelphia, USA")), true)
                 },
                 OptimizeWaypoints = true
             };

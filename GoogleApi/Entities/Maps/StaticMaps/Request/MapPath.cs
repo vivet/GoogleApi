@@ -21,7 +21,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
         /// When false, the path is rendered as a straight line in screen space. 
         /// Defaults to false.
         /// </summary>
-        public virtual bool Geodesic { get; set; } = false;
+        public virtual bool Geodesic { get; set; }
 
         /// <summary>
         /// Color (optional) specifies a color either as a 24-bit (example: color=0xFFFFCC) or 32-bit hexadecimal value (example: color=0xFFFFCCFF), 

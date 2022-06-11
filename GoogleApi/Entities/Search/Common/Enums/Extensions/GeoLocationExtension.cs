@@ -12,254 +12,252 @@
         /// <returns>The <see cref="string"/> representation of the <see cref="Country"/> as 'gl' request parameter.</returns>
         public static string ToGl(this GeoLocation geoLocation)
         {
-            switch (geoLocation)
+            return geoLocation switch
             {
-                case GeoLocation.Afghanistan: return "af";
-                case GeoLocation.Albania: return "al";
-                case GeoLocation.Algeria: return "dz";
-                case GeoLocation.AmericanSamoa: return "as";
-                case GeoLocation.Andorra: return "ad";
-                case GeoLocation.Angola: return "ao";
-                case GeoLocation.Anguilla: return "ai";
-                case GeoLocation.Antarctica: return "aq";
-                case GeoLocation.AntiguaAndBarbuda: return "ag";
-                case GeoLocation.Argentina: return "ar";
-                case GeoLocation.Armenia: return "am";
-                case GeoLocation.Aruba: return "aw";
-                case GeoLocation.Australia: return "au";
-                case GeoLocation.Austria: return "at";
-                case GeoLocation.Azerbaijan: return "az";
-                case GeoLocation.Bahamas: return "bs";
-                case GeoLocation.Bahrain: return "bh";
-                case GeoLocation.Bangladesh: return "bd";
-                case GeoLocation.Barbados: return "bb";
-                case GeoLocation.Belarus: return "by";
-                case GeoLocation.Belgium: return "be";
-                case GeoLocation.Belize: return "bz";
-                case GeoLocation.Benin: return "bj";
-                case GeoLocation.Bermuda: return "bm";
-                case GeoLocation.Bhutan: return "bt";
-                case GeoLocation.Bolivia: return "bo";
-                case GeoLocation.BosniaAndHerzegovina: return "ba";
-                case GeoLocation.Botswana: return "bw";
-                case GeoLocation.BouvetIsland: return "bv";
-                case GeoLocation.Brazil: return "br";
-                case GeoLocation.BritishIndianOceanTerritory: return "io";
-                case GeoLocation.BruneiDarussalam: return "bn";
-                case GeoLocation.Bulgaria: return "bg";
-                case GeoLocation.BurkinaFaso: return "bf";
-                case GeoLocation.Burundi: return "bi";
-                case GeoLocation.Cambodia: return "kh";
-                case GeoLocation.Cameroon: return "cm";
-                case GeoLocation.Canada: return "ca";
-                case GeoLocation.CapeVerde: return "cv";
-                case GeoLocation.CaymanIslands: return "ky";
-                case GeoLocation.CentralAfricanRepublic: return "cf";
-                case GeoLocation.Chad: return "td";
-                case GeoLocation.Chile: return "cl";
-                case GeoLocation.China: return "cn";
-                case GeoLocation.ChristmasIsland: return "cx";
-                case GeoLocation.CocosIslands: return "cc";
-                case GeoLocation.Colombia: return "co";
-                case GeoLocation.Comoros: return "km";
-                case GeoLocation.Congo: return "cg";
-                case GeoLocation.TheDemocraticRepublicOfCongo: return "cd";
-                case GeoLocation.CookIslands: return "ck";
-                case GeoLocation.CostaRica: return "cr";
-                case GeoLocation.CoteDivoire: return "ci";
-                case GeoLocation.Croatia: return "hr";
-                case GeoLocation.Cuba: return "cu";
-                case GeoLocation.Cyprus: return "cy";
-                case GeoLocation.CzechRepublic: return "cz";
-                case GeoLocation.Denmark: return "dk";
-                case GeoLocation.Djibouti: return "dj";
-                case GeoLocation.Dominica: return "dm";
-                case GeoLocation.DominicanRepublic: return "do";
-                case GeoLocation.EastTimor: return "tp";
-                case GeoLocation.Ecuador: return "ec";
-                case GeoLocation.Egypt: return "eg";
-                case GeoLocation.ElSalvador: return "sv";
-                case GeoLocation.EquatorialGuinea: return "gq";
-                case GeoLocation.Eritrea: return "er";
-                case GeoLocation.Estonia: return "ee";
-                case GeoLocation.Ethiopia: return "et";
-                case GeoLocation.EuropeanUnion: return "en";
-                case GeoLocation.FalklandIslAndsMalvinas: return "fk";
-                case GeoLocation.FaroeIslands: return "fo";
-                case GeoLocation.Fiji: return "fj";
-                case GeoLocation.Finland: return "fi";
-                case GeoLocation.France: return "fr";
-                case GeoLocation.FranceMetropolitan: return "fr";
-                case GeoLocation.FrenchGuiana: return "gf";
-                case GeoLocation.FrenchPolynesia: return "pf";
-                case GeoLocation.FrenchSouthernTerritories: return "tf";
-                case GeoLocation.Gabon: return "ga";
-                case GeoLocation.Gambia: return "gm";
-                case GeoLocation.Georgia: return "ge";
-                case GeoLocation.Germany: return "de";
-                case GeoLocation.Ghana: return "gh";
-                case GeoLocation.Gibraltar: return "gi";
-                case GeoLocation.Greece: return "gr";
-                case GeoLocation.Greenland: return "gl";
-                case GeoLocation.Grenada: return "gd";
-                case GeoLocation.Guadeloupe: return "gp";
-                case GeoLocation.Guam: return "gu";
-                case GeoLocation.Guatemala: return "gt";
-                case GeoLocation.Guinea: return "gn";
-                case GeoLocation.GuineaBissau: return "gw";
-                case GeoLocation.Guyana: return "gy";
-                case GeoLocation.Haiti: return "ht";
-                case GeoLocation.HeardIslandAndMcdonaldIslands: return "hm";
-                case GeoLocation.VaticanCityState: return "va";
-                case GeoLocation.Honduras: return "hn";
-                case GeoLocation.HongKong: return "hk";
-                case GeoLocation.Hungary: return "hu";
-                case GeoLocation.Iceland: return "is";
-                case GeoLocation.India: return "in";
-                case GeoLocation.Indonesia: return "id";
-                case GeoLocation.Iran: return "ir";
-                case GeoLocation.Iraq: return "iq";
-                case GeoLocation.Ireland: return "ie";
-                case GeoLocation.Israel: return "il";
-                case GeoLocation.Italy: return "it";
-                case GeoLocation.Jamaica: return "jm";
-                case GeoLocation.Japan: return "jp";
-                case GeoLocation.Jordan: return "jo";
-                case GeoLocation.Kazakhstan: return "kz";
-                case GeoLocation.Kenya: return "ke";
-                case GeoLocation.Kiribati: return "ki";
-                case GeoLocation.DemocraticPeoplesRepublicOfKorea: return "kp";
-                case GeoLocation.RepublicOfKorea: return "kr";
-                case GeoLocation.Kuwait: return "kw";
-                case GeoLocation.Kyrgyzstan: return "kg";
-                case GeoLocation.LaoPeoplesDemocraticRepublic: return "la";
-                case GeoLocation.Latvia: return "lv";
-                case GeoLocation.Lebanon: return "lb";
-                case GeoLocation.Lesotho: return "ls";
-                case GeoLocation.Liberia: return "lr";
-                case GeoLocation.LibyanArabJamahiriya: return "ly";
-                case GeoLocation.Liechtenstein: return "li";
-                case GeoLocation.Lithuania: return "lt";
-                case GeoLocation.Luxembourg: return "lu";
-                case GeoLocation.Macao: return "mo";
-                case GeoLocation.Macedonia: return "mk";
-                case GeoLocation.Madagascar: return "mg";
-                case GeoLocation.Malawi: return "mw";
-                case GeoLocation.Malaysia: return "my";
-                case GeoLocation.Maldives: return "mv";
-                case GeoLocation.Mali: return "ml";
-                case GeoLocation.Malta: return "mt";
-                case GeoLocation.MarshallIslands: return "mh";
-                case GeoLocation.Martinique: return "mq";
-                case GeoLocation.Mauritania: return "mr";
-                case GeoLocation.Mauritius: return "mu";
-                case GeoLocation.Mayotte: return "yt";
-                case GeoLocation.Mexico: return "mx";
-                case GeoLocation.Micronesia: return "fm";
-                case GeoLocation.Moldova: return "md";
-                case GeoLocation.Monaco: return "mc";
-                case GeoLocation.Mongolia: return "mn";
-                case GeoLocation.Montserrat: return "ms";
-                case GeoLocation.Morocco: return "ma";
-                case GeoLocation.Mozambique: return "mz";
-                case GeoLocation.Myanmar: return "mm";
-                case GeoLocation.Namibia: return "na";
-                case GeoLocation.Nauru: return "nr";
-                case GeoLocation.Nepal: return "np";
-                case GeoLocation.Netherlands: return "nl";
-                case GeoLocation.NetherlandsAntilles: return "an";
-                case GeoLocation.NewCaledonia: return "nc";
-                case GeoLocation.NewZealand: return "nz";
-                case GeoLocation.Nicaragua: return "ni";
-                case GeoLocation.Niger: return "ne";
-                case GeoLocation.Nigeria: return "ng";
-                case GeoLocation.Niue: return "nu";
-                case GeoLocation.NorfolkIsland: return "nf";
-                case GeoLocation.NorthernMarianaIslands: return "mp";
-                case GeoLocation.Norway: return "no";
-                case GeoLocation.Oman: return "om";
-                case GeoLocation.Pakistan: return "pk";
-                case GeoLocation.Palau: return "pw";
-                case GeoLocation.PalestinianTerritory: return "ps";
-                case GeoLocation.Panama: return "pa";
-                case GeoLocation.PapuaNewGuinea: return "pg";
-                case GeoLocation.Paraguay: return "py";
-                case GeoLocation.Peru: return "pe";
-                case GeoLocation.Philippines: return "ph";
-                case GeoLocation.Pitcairn: return "pn";
-                case GeoLocation.Poland: return "pl";
-                case GeoLocation.Portugal: return "pt";
-                case GeoLocation.PuertoRico: return "pr";
-                case GeoLocation.Qatar: return "qa";
-                case GeoLocation.Reunion: return "re";
-                case GeoLocation.Romania: return "ro";
-                case GeoLocation.RussianFederation: return "ru";
-                case GeoLocation.Rwanda: return "rw";
-                case GeoLocation.SaintHelena: return "sh";
-                case GeoLocation.SaintKittsAndNevis: return "kn";
-                case GeoLocation.SaintLucia: return "lc";
-                case GeoLocation.SaintPierreAndMiquelon: return "pm";
-                case GeoLocation.SaintVincentAndtheGrenadines: return "vc";
-                case GeoLocation.Samoa: return "ws";
-                case GeoLocation.SanMarino: return "sm";
-                case GeoLocation.SaoTomeAndPrincipe: return "st";
-                case GeoLocation.SaudiArabia: return "sa";
-                case GeoLocation.Senegal: return "sn";
-                case GeoLocation.SerbiaAndMontenegro: return "cs";
-                case GeoLocation.Seychelles: return "sc";
-                case GeoLocation.SierraLeone: return "sl";
-                case GeoLocation.Singapore: return "sg";
-                case GeoLocation.Slovakia: return "sk";
-                case GeoLocation.Slovenia: return "si";
-                case GeoLocation.SolomonIslands: return "sb";
-                case GeoLocation.Somalia: return "so";
-                case GeoLocation.SouthAfrica: return "za";
-                case GeoLocation.SouthGeorgiaAndTheSouthSAndwichIslands: return "gs";
-                case GeoLocation.Spain: return "es";
-                case GeoLocation.SriLanka: return "lk";
-                case GeoLocation.Sudan: return "sd";
-                case GeoLocation.Suriname: return "sr";
-                case GeoLocation.SvalbardAndJanMayen: return "sj";
-                case GeoLocation.Swaziland: return "sz";
-                case GeoLocation.Sweden: return "se";
-                case GeoLocation.Switzerland: return "ch";
-                case GeoLocation.SyrianArabRepublic: return "sy";
-                case GeoLocation.Taiwan: return "tw";
-                case GeoLocation.Tajikistan: return "tj";
-                case GeoLocation.Tanzania: return "tz";
-                case GeoLocation.Thailand: return "th";
-                case GeoLocation.Togo: return "tg";
-                case GeoLocation.Tokelau: return "tk";
-                case GeoLocation.Tonga: return "to";
-                case GeoLocation.TrinidadAndTobago: return "tt";
-                case GeoLocation.Tunisia: return "tn";
-                case GeoLocation.Turkey: return "tr";
-                case GeoLocation.Turkmenistan: return "tm";
-                case GeoLocation.TurksAndCaicosIslands: return "tc";
-                case GeoLocation.Tuvalu: return "tv";
-                case GeoLocation.Uganda: return "ug";
-                case GeoLocation.Ukraine: return "ua";
-                case GeoLocation.UnitedArabEmirates: return "ae";
-                case GeoLocation.UnitedKingdom: return "uk";
-                case GeoLocation.UnitedStates: return "us";
-                case GeoLocation.UnitedStatesMinorOutlyingIslands: return "um";
-                case GeoLocation.Uruguay: return "uy";
-                case GeoLocation.Uzbekistan: return "uz";
-                case GeoLocation.Vanuatu: return "vu";
-                case GeoLocation.Venezuela: return "ve";
-                case GeoLocation.Vietnam: return "vn";
-                case GeoLocation.VirginIslandsBritish: return "vg";
-                case GeoLocation.VirginIslandsUs: return "vi";
-                case GeoLocation.WallisandFutuna: return "wf";
-                case GeoLocation.WesternSahara: return "eh";
-                case GeoLocation.Yemen: return "ye";
-                case GeoLocation.Yugoslavia: return "yo";
-                case GeoLocation.Zambia: return "zm";
-                case GeoLocation.Zimbabwe: return "zw";
-
-                default:
-                    return string.Empty;
-            }
+                GeoLocation.Afghanistan => "af",
+                GeoLocation.Albania => "al",
+                GeoLocation.Algeria => "dz",
+                GeoLocation.AmericanSamoa => "as",
+                GeoLocation.Andorra => "ad",
+                GeoLocation.Angola => "ao",
+                GeoLocation.Anguilla => "ai",
+                GeoLocation.Antarctica => "aq",
+                GeoLocation.AntiguaAndBarbuda => "ag",
+                GeoLocation.Argentina => "ar",
+                GeoLocation.Armenia => "am",
+                GeoLocation.Aruba => "aw",
+                GeoLocation.Australia => "au",
+                GeoLocation.Austria => "at",
+                GeoLocation.Azerbaijan => "az",
+                GeoLocation.Bahamas => "bs",
+                GeoLocation.Bahrain => "bh",
+                GeoLocation.Bangladesh => "bd",
+                GeoLocation.Barbados => "bb",
+                GeoLocation.Belarus => "by",
+                GeoLocation.Belgium => "be",
+                GeoLocation.Belize => "bz",
+                GeoLocation.Benin => "bj",
+                GeoLocation.Bermuda => "bm",
+                GeoLocation.Bhutan => "bt",
+                GeoLocation.Bolivia => "bo",
+                GeoLocation.BosniaAndHerzegovina => "ba",
+                GeoLocation.Botswana => "bw",
+                GeoLocation.BouvetIsland => "bv",
+                GeoLocation.Brazil => "br",
+                GeoLocation.BritishIndianOceanTerritory => "io",
+                GeoLocation.BruneiDarussalam => "bn",
+                GeoLocation.Bulgaria => "bg",
+                GeoLocation.BurkinaFaso => "bf",
+                GeoLocation.Burundi => "bi",
+                GeoLocation.Cambodia => "kh",
+                GeoLocation.Cameroon => "cm",
+                GeoLocation.Canada => "ca",
+                GeoLocation.CapeVerde => "cv",
+                GeoLocation.CaymanIslands => "ky",
+                GeoLocation.CentralAfricanRepublic => "cf",
+                GeoLocation.Chad => "td",
+                GeoLocation.Chile => "cl",
+                GeoLocation.China => "cn",
+                GeoLocation.ChristmasIsland => "cx",
+                GeoLocation.CocosIslands => "cc",
+                GeoLocation.Colombia => "co",
+                GeoLocation.Comoros => "km",
+                GeoLocation.Congo => "cg",
+                GeoLocation.TheDemocraticRepublicOfCongo => "cd",
+                GeoLocation.CookIslands => "ck",
+                GeoLocation.CostaRica => "cr",
+                GeoLocation.CoteDivoire => "ci",
+                GeoLocation.Croatia => "hr",
+                GeoLocation.Cuba => "cu",
+                GeoLocation.Cyprus => "cy",
+                GeoLocation.CzechRepublic => "cz",
+                GeoLocation.Denmark => "dk",
+                GeoLocation.Djibouti => "dj",
+                GeoLocation.Dominica => "dm",
+                GeoLocation.DominicanRepublic => "do",
+                GeoLocation.EastTimor => "tp",
+                GeoLocation.Ecuador => "ec",
+                GeoLocation.Egypt => "eg",
+                GeoLocation.ElSalvador => "sv",
+                GeoLocation.EquatorialGuinea => "gq",
+                GeoLocation.Eritrea => "er",
+                GeoLocation.Estonia => "ee",
+                GeoLocation.Ethiopia => "et",
+                GeoLocation.EuropeanUnion => "en",
+                GeoLocation.FalklandIslAndsMalvinas => "fk",
+                GeoLocation.FaroeIslands => "fo",
+                GeoLocation.Fiji => "fj",
+                GeoLocation.Finland => "fi",
+                GeoLocation.France => "fr",
+                GeoLocation.FranceMetropolitan => "fr",
+                GeoLocation.FrenchGuiana => "gf",
+                GeoLocation.FrenchPolynesia => "pf",
+                GeoLocation.FrenchSouthernTerritories => "tf",
+                GeoLocation.Gabon => "ga",
+                GeoLocation.Gambia => "gm",
+                GeoLocation.Georgia => "ge",
+                GeoLocation.Germany => "de",
+                GeoLocation.Ghana => "gh",
+                GeoLocation.Gibraltar => "gi",
+                GeoLocation.Greece => "gr",
+                GeoLocation.Greenland => "gl",
+                GeoLocation.Grenada => "gd",
+                GeoLocation.Guadeloupe => "gp",
+                GeoLocation.Guam => "gu",
+                GeoLocation.Guatemala => "gt",
+                GeoLocation.Guinea => "gn",
+                GeoLocation.GuineaBissau => "gw",
+                GeoLocation.Guyana => "gy",
+                GeoLocation.Haiti => "ht",
+                GeoLocation.HeardIslandAndMcdonaldIslands => "hm",
+                GeoLocation.VaticanCityState => "va",
+                GeoLocation.Honduras => "hn",
+                GeoLocation.HongKong => "hk",
+                GeoLocation.Hungary => "hu",
+                GeoLocation.Iceland => "is",
+                GeoLocation.India => "in",
+                GeoLocation.Indonesia => "id",
+                GeoLocation.Iran => "ir",
+                GeoLocation.Iraq => "iq",
+                GeoLocation.Ireland => "ie",
+                GeoLocation.Israel => "il",
+                GeoLocation.Italy => "it",
+                GeoLocation.Jamaica => "jm",
+                GeoLocation.Japan => "jp",
+                GeoLocation.Jordan => "jo",
+                GeoLocation.Kazakhstan => "kz",
+                GeoLocation.Kenya => "ke",
+                GeoLocation.Kiribati => "ki",
+                GeoLocation.DemocraticPeoplesRepublicOfKorea => "kp",
+                GeoLocation.RepublicOfKorea => "kr",
+                GeoLocation.Kuwait => "kw",
+                GeoLocation.Kyrgyzstan => "kg",
+                GeoLocation.LaoPeoplesDemocraticRepublic => "la",
+                GeoLocation.Latvia => "lv",
+                GeoLocation.Lebanon => "lb",
+                GeoLocation.Lesotho => "ls",
+                GeoLocation.Liberia => "lr",
+                GeoLocation.LibyanArabJamahiriya => "ly",
+                GeoLocation.Liechtenstein => "li",
+                GeoLocation.Lithuania => "lt",
+                GeoLocation.Luxembourg => "lu",
+                GeoLocation.Macao => "mo",
+                GeoLocation.Macedonia => "mk",
+                GeoLocation.Madagascar => "mg",
+                GeoLocation.Malawi => "mw",
+                GeoLocation.Malaysia => "my",
+                GeoLocation.Maldives => "mv",
+                GeoLocation.Mali => "ml",
+                GeoLocation.Malta => "mt",
+                GeoLocation.MarshallIslands => "mh",
+                GeoLocation.Martinique => "mq",
+                GeoLocation.Mauritania => "mr",
+                GeoLocation.Mauritius => "mu",
+                GeoLocation.Mayotte => "yt",
+                GeoLocation.Mexico => "mx",
+                GeoLocation.Micronesia => "fm",
+                GeoLocation.Moldova => "md",
+                GeoLocation.Monaco => "mc",
+                GeoLocation.Mongolia => "mn",
+                GeoLocation.Montserrat => "ms",
+                GeoLocation.Morocco => "ma",
+                GeoLocation.Mozambique => "mz",
+                GeoLocation.Myanmar => "mm",
+                GeoLocation.Namibia => "na",
+                GeoLocation.Nauru => "nr",
+                GeoLocation.Nepal => "np",
+                GeoLocation.Netherlands => "nl",
+                GeoLocation.NetherlandsAntilles => "an",
+                GeoLocation.NewCaledonia => "nc",
+                GeoLocation.NewZealand => "nz",
+                GeoLocation.Nicaragua => "ni",
+                GeoLocation.Niger => "ne",
+                GeoLocation.Nigeria => "ng",
+                GeoLocation.Niue => "nu",
+                GeoLocation.NorfolkIsland => "nf",
+                GeoLocation.NorthernMarianaIslands => "mp",
+                GeoLocation.Norway => "no",
+                GeoLocation.Oman => "om",
+                GeoLocation.Pakistan => "pk",
+                GeoLocation.Palau => "pw",
+                GeoLocation.PalestinianTerritory => "ps",
+                GeoLocation.Panama => "pa",
+                GeoLocation.PapuaNewGuinea => "pg",
+                GeoLocation.Paraguay => "py",
+                GeoLocation.Peru => "pe",
+                GeoLocation.Philippines => "ph",
+                GeoLocation.Pitcairn => "pn",
+                GeoLocation.Poland => "pl",
+                GeoLocation.Portugal => "pt",
+                GeoLocation.PuertoRico => "pr",
+                GeoLocation.Qatar => "qa",
+                GeoLocation.Reunion => "re",
+                GeoLocation.Romania => "ro",
+                GeoLocation.RussianFederation => "ru",
+                GeoLocation.Rwanda => "rw",
+                GeoLocation.SaintHelena => "sh",
+                GeoLocation.SaintKittsAndNevis => "kn",
+                GeoLocation.SaintLucia => "lc",
+                GeoLocation.SaintPierreAndMiquelon => "pm",
+                GeoLocation.SaintVincentAndtheGrenadines => "vc",
+                GeoLocation.Samoa => "ws",
+                GeoLocation.SanMarino => "sm",
+                GeoLocation.SaoTomeAndPrincipe => "st",
+                GeoLocation.SaudiArabia => "sa",
+                GeoLocation.Senegal => "sn",
+                GeoLocation.SerbiaAndMontenegro => "cs",
+                GeoLocation.Seychelles => "sc",
+                GeoLocation.SierraLeone => "sl",
+                GeoLocation.Singapore => "sg",
+                GeoLocation.Slovakia => "sk",
+                GeoLocation.Slovenia => "si",
+                GeoLocation.SolomonIslands => "sb",
+                GeoLocation.Somalia => "so",
+                GeoLocation.SouthAfrica => "za",
+                GeoLocation.SouthGeorgiaAndTheSouthSAndwichIslands => "gs",
+                GeoLocation.Spain => "es",
+                GeoLocation.SriLanka => "lk",
+                GeoLocation.Sudan => "sd",
+                GeoLocation.Suriname => "sr",
+                GeoLocation.SvalbardAndJanMayen => "sj",
+                GeoLocation.Swaziland => "sz",
+                GeoLocation.Sweden => "se",
+                GeoLocation.Switzerland => "ch",
+                GeoLocation.SyrianArabRepublic => "sy",
+                GeoLocation.Taiwan => "tw",
+                GeoLocation.Tajikistan => "tj",
+                GeoLocation.Tanzania => "tz",
+                GeoLocation.Thailand => "th",
+                GeoLocation.Togo => "tg",
+                GeoLocation.Tokelau => "tk",
+                GeoLocation.Tonga => "to",
+                GeoLocation.TrinidadAndTobago => "tt",
+                GeoLocation.Tunisia => "tn",
+                GeoLocation.Turkey => "tr",
+                GeoLocation.Turkmenistan => "tm",
+                GeoLocation.TurksAndCaicosIslands => "tc",
+                GeoLocation.Tuvalu => "tv",
+                GeoLocation.Uganda => "ug",
+                GeoLocation.Ukraine => "ua",
+                GeoLocation.UnitedArabEmirates => "ae",
+                GeoLocation.UnitedKingdom => "uk",
+                GeoLocation.UnitedStates => "us",
+                GeoLocation.UnitedStatesMinorOutlyingIslands => "um",
+                GeoLocation.Uruguay => "uy",
+                GeoLocation.Uzbekistan => "uz",
+                GeoLocation.Vanuatu => "vu",
+                GeoLocation.Venezuela => "ve",
+                GeoLocation.Vietnam => "vn",
+                GeoLocation.VirginIslandsBritish => "vg",
+                GeoLocation.VirginIslandsUs => "vi",
+                GeoLocation.WallisandFutuna => "wf",
+                GeoLocation.WesternSahara => "eh",
+                GeoLocation.Yemen => "ye",
+                GeoLocation.Yugoslavia => "yo",
+                GeoLocation.Zambia => "zm",
+                GeoLocation.Zimbabwe => "zw",
+                _ => string.Empty
+            };
         }
     }
 }

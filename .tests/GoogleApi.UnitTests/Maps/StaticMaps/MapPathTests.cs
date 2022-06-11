@@ -19,8 +19,8 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 Geodesic = true,
                 Points = new List<Location>
                 {
-                    new Location(new Coordinate(1, 1)),
-                    new Location(new Coordinate(2, 2))
+                    new(new Coordinate(1, 1)),
+                    new(new Coordinate(2, 2))
                 }
             };
 
@@ -39,8 +39,8 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 Color = "red",
                 Points = new List<Location>
                 {
-                    new Location(new Coordinate(1, 1)),
-                    new Location(new Coordinate(2, 2))
+                    new(new Coordinate(1, 1)),
+                    new(new Coordinate(2, 2))
                 }
             };
 
@@ -59,8 +59,8 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 FillColor = "blue",
                 Points = new List<Location>
                 {
-                    new Location(new Coordinate(1, 1)),
-                    new Location(new Coordinate(2, 2))
+                    new(new Coordinate(1, 1)),
+                    new(new Coordinate(2, 2))
                 }
             };
 

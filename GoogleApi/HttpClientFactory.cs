@@ -2,8 +2,9 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+#if NETCOREAPP3_1_OR_GREATER
 using System.Security.Authentication;
-
+#endif
 namespace GoogleApi
 {
     /// <summary>

@@ -12,17 +12,12 @@ namespace GoogleApi.Entities.Search.Common.Enums.Extensions
         /// <returns>The <see cref="string"/> representation of the <see cref="Operator"/>.</returns>
         public static string ToStringOperator(this Operator @operator)
         {
-            switch (@operator)
+            return @operator switch
             {
-                case Operator.And:
-                    return ".";
-
-                case Operator.Or:
-                    return "|";
-
-                default:
-                    return string.Empty;
-            }
+                Operator.And => ".",
+                Operator.Or => "|",
+                _ => string.Empty
+            };
         }
     }
 }

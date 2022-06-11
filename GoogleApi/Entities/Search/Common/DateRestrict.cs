@@ -39,29 +39,14 @@ namespace GoogleApi.Entities.Search.Common
             var indexOf = @string.LastIndexOf('[');
             int.TryParse(@string.Substring(indexOf + 1, @string.Length - indexOf - 2), out var number);
 
-            DateRestrictType type;
-            switch (@string.Substring(0, indexOf))
+            var type = @string.Substring(0, indexOf) switch
             {
-                case "d":
-                    type = DateRestrictType.Days;
-                    break;
-
-                case "w":
-                    type = DateRestrictType.Weeks;
-                    break;
-
-                case "m":
-                    type = DateRestrictType.Months;
-                    break;
-
-                case "y":
-                    type = DateRestrictType.Years;
-                    break;
-
-                default:
-                    type = DateRestrictType.Days;
-                    break;
-            }
+                "d" => DateRestrictType.Days,
+                "w" => DateRestrictType.Weeks,
+                "m" => DateRestrictType.Months,
+                "y" => DateRestrictType.Years,
+                _ => DateRestrictType.Days
+            };
 
             return new DateRestrict
             {

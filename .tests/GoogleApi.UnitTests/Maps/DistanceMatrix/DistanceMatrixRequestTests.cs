@@ -476,6 +476,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -488,6 +489,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -504,6 +506,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Origins' is required", exception.Message);
         }
 
@@ -520,6 +523,7 @@ namespace GoogleApi.UnitTests.Maps.DistanceMatrix
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Destinations' is required", exception.Message);
         }
     }

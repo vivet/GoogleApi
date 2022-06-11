@@ -46,7 +46,7 @@ namespace GoogleApi.Entities.Search.Video.Videos.Request
         /// Options.
         /// Additional video options.
         /// </summary>
-        public virtual VideoOptions Options { get; set; } = new VideoOptions();
+        public virtual VideoOptions Options { get; set; } = new();
 
         /// <summary>
         /// Default Constructor.

@@ -225,6 +225,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -241,6 +242,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -258,6 +260,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Location' is required");
         }
 
@@ -276,6 +279,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' is required, when 'Rankby' is not Distance");
         }
 
@@ -294,6 +298,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
@@ -312,6 +317,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
@@ -331,6 +337,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' cannot be specified, when using 'Rankby' is distance");
         }
 
@@ -349,6 +356,7 @@ namespace GoogleApi.UnitTests.Places.Search.NearBy
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Keyword', 'Name' or 'Type' is required, If 'Rankby' is distance");
         }
     }

@@ -12,17 +12,12 @@ namespace GoogleApi.Entities.Search.Common.Enums.Extensions
         /// <returns>The string representation of the enum value for the search request.</returns>
         public static string ToFilterString(this SiteSearchFilter siteSearch)
         {
-            switch (siteSearch)
+            return siteSearch switch
             {
-                case SiteSearchFilter.Include:
-                    return "i";
-
-                case SiteSearchFilter.Exclude:
-                    return "e";
-
-                default:
-                    return "i";
-            }
+                SiteSearchFilter.Include => "i",
+                SiteSearchFilter.Exclude => "e",
+                _ => "i"
+            };
         }
     }
 }

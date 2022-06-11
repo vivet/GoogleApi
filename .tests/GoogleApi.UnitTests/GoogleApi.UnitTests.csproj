@@ -4,6 +4,7 @@
 	<TargetFrameworks>net461;net48;netcoreapp3.1;net6.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
+	<Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

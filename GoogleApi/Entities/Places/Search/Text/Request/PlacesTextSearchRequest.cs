@@ -108,25 +108,37 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
             else
             {
                 if (string.IsNullOrWhiteSpace(this.Query))
+                {
                     throw new ArgumentException($"'{nameof(this.Query)}' is required");
+                }
 
                 if (this.Location != null && this.Radius == null)
+                {
                     throw new ArgumentException($"'{nameof(this.Radius)}' is required when '{nameof(this.Location)}' is specified");
+                }
 
-                if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+                if (this.Radius is > 50000 or < 1)
+                {
                     throw new ArgumentException($"'{nameof(this.Radius)}' must be greater than or equal to 1 and less than or equal to 50.000");
+                }
 
                 parameters.Add("query", this.Query);
                 parameters.Add("language", Language.ToCode());
 
                 if (!string.IsNullOrEmpty(this.Region))
+                {
                     parameters.Add("region", this.Region);
+                }
 
                 if (this.Location != null)
+                {
                     parameters.Add("location", this.Location.ToString());
+                }
 
                 if (this.Radius != null)
+                {
                     parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+                }
 
                 if (this.Type.HasValue)
                 {
@@ -138,13 +150,19 @@ namespace GoogleApi.Entities.Places.Search.Text.Request
                 }
 
                 if (this.OpenNow)
+                {
                     parameters.Add("opennow");
+                }
 
                 if (this.Minprice.HasValue)
+                {
                     parameters.Add("minprice", ((int)this.Minprice.Value).ToString());
+                }
 
                 if (this.Maxprice.HasValue)
+                {
                     parameters.Add("maxprice", ((int)this.Maxprice.Value).ToString());
+                }
             }
 
             return parameters;

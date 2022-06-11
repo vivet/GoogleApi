@@ -36,17 +36,12 @@ namespace GoogleApi.Entities.Maps.Common
         /// <returns>The location string.</returns>
         public override string ToString()
         {
-            if (this.UseSideOfRoad)
-            {
-                return $"side_of_road:{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}";
-            }
-
-            if (this.Heading.HasValue)
-            {
-                return $"heading={Heading}:{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}";
-            }
-
-            return base.ToString();
+            return this.UseSideOfRoad
+                ?
+                $"side_of_road:{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}"
+                : this.Heading.HasValue
+                    ? $"heading={Heading}:{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}"
+                    : base.ToString();
         }
     }
 }

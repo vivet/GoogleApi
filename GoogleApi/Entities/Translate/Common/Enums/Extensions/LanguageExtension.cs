@@ -12,123 +12,121 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Extensions
         /// <returns>The ISO-639-1 code matching the passed <paramref name="language"/>.</returns>
         public static string ToCode(this Language language)
         {
-            switch (language)
+            return language switch
             {
-                case Language.Afrikaans: return "af";
-                case Language.Albanian: return "sq";
-                case Language.Amharic: return "am";
-                case Language.Arabic: return "ar";
-                case Language.Armenian: return "hy";
-                case Language.Azeerbaijani: return "az";
-                case Language.Basque: return "eu";
-                case Language.Belarusian: return "be";
-                case Language.Bengali: return "bn";
-                case Language.Bosnian: return "bs";
-                case Language.Bulgarian: return "bg";
-                case Language.Catalan: return "ca";
-                case Language.Cebuano: return "ceb";
-                case Language.Chichewa: return "ny";
-                case Language.Chinese: return "zh-CN";
-                case Language.Chinese_Simplified: return "zh-CN";
-                case Language.Chinese_Traditional: return "zh-TW";
-                case Language.Corsican: return "co";
-                case Language.Croatian: return "hr";
-                case Language.Czech: return "cs";
-                case Language.Danish: return "da";
-                case Language.Dutch: return "nl";
-                case Language.English: return "en";
-                case Language.Esperanto: return "eo";
-                case Language.Estonian: return "et";
-                case Language.Filipino: return "tl";
-                case Language.Finnish: return "fi";
-                case Language.French: return "fr";
-                case Language.Frisian: return "fy";
-                case Language.Galician: return "gl";
-                case Language.Georgian: return "ka";
-                case Language.German: return "de";
-                case Language.Greek: return "el";
-                case Language.Gujarati: return "gu";
-                case Language.Haitian_Creole: return "ht";
-                case Language.Hausa: return "ha";
-                case Language.Hawaiian: return "haw";
-                case Language.Hebrew: return "iw";
-                case Language.Hindi: return "hi";
-                case Language.Hmong: return "hmn";
-                case Language.Hungarian: return "hu";
-                case Language.Icelandic: return "is";
-                case Language.Igbo: return "ig";
-                case Language.Indonesian: return "id";
-                case Language.Irish: return "ga";
-                case Language.Italian: return "it";
-                case Language.Japanese: return "ja";
-                case Language.Javanese: return "jw";
-                case Language.Kannada: return "kn";
-                case Language.Kazakh: return "kk";
-                case Language.Khmer: return "km";
-                case Language.Korean: return "ko";
-                case Language.Kurdish: return "ku";
-                case Language.Kyrgyz: return "ky";
-                case Language.Lao: return "lo";
-                case Language.Latin: return "la";
-                case Language.Latvian: return "lv";
-                case Language.Lithuanian: return "lt";
-                case Language.Luxembourgish: return "lb";
-                case Language.Macedonian: return "mk";
-                case Language.Malagasy: return "mg";
-                case Language.Malay: return "ms";
-                case Language.Malayalam: return "ml";
-                case Language.Maltese: return "mt";
-                case Language.Maori: return "mi";
-                case Language.Marathi: return "mr";
-                case Language.Mongolian: return "mn";
-                case Language.Burmese: return "my";
-                case Language.Nepali: return "ne";
-                case Language.Norwegian: return "no";
-                case Language.Pashto: return "ps";
-                case Language.Persian: return "fa";
-                case Language.Polish: return "pl";
-                case Language.Portuguese: return "pt";
-                case Language.Punjabi: return "ma";
-                case Language.Romanian: return "ro";
-                case Language.Russian: return "ru";
-                case Language.Samoan: return "sm";
-                case Language.Scots_Gaelic: return "gd";
-                case Language.Serbian: return "sr";
-                case Language.Sesotho: return "st";
-                case Language.Shona: return "sn";
-                case Language.Sindhi: return "sd";
-                case Language.Sinhala: return "si";
-                case Language.Slovak: return "sk";
-                case Language.Slovenian: return "sl";
-                case Language.Somali: return "so";
-                case Language.Spanish: return "es";
-                case Language.Sundanese: return "su";
-                case Language.Swahili: return "sw";
-                case Language.Swedish: return "sv";
-                case Language.Tajik: return "tg";
-                case Language.Tamil: return "ta";
-                case Language.Telugu: return "te";
-                case Language.Thai: return "th";
-                case Language.Turkish: return "tr";
-                case Language.Ukrainian: return "uk";
-                case Language.Urdu: return "ur";
-                case Language.Uzbek: return "uz";
-                case Language.Vietnamese: return "vi";
-                case Language.Welsh: return "cy";
-                case Language.Xhosa: return "xh";
-                case Language.Yiddish: return "yi";
-                case Language.Yoruba: return "yo";
-                case Language.Zulu: return "zu";
-                case Language.HebrewOld: return "iw";
-                case Language.Kinyarwanda: return "rw";
-                case Language.Odia: return "or";
-                case Language.Tatar: return "tt";
-                case Language.Turkmen: return "tk";
-                case Language.Uyghur: return "ug";
-
-                default:
-                    return string.Empty;
-            }
+                Language.Afrikaans => "af",
+                Language.Albanian => "sq",
+                Language.Amharic => "am",
+                Language.Arabic => "ar",
+                Language.Armenian => "hy",
+                Language.Azeerbaijani => "az",
+                Language.Basque => "eu",
+                Language.Belarusian => "be",
+                Language.Bengali => "bn",
+                Language.Bosnian => "bs",
+                Language.Bulgarian => "bg",
+                Language.Catalan => "ca",
+                Language.Cebuano => "ceb",
+                Language.Chichewa => "ny",
+                Language.Chinese => "zh-CN",
+                Language.Chinese_Simplified => "zh-CN",
+                Language.Chinese_Traditional => "zh-TW",
+                Language.Corsican => "co",
+                Language.Croatian => "hr",
+                Language.Czech => "cs",
+                Language.Danish => "da",
+                Language.Dutch => "nl",
+                Language.English => "en",
+                Language.Esperanto => "eo",
+                Language.Estonian => "et",
+                Language.Filipino => "tl",
+                Language.Finnish => "fi",
+                Language.French => "fr",
+                Language.Frisian => "fy",
+                Language.Galician => "gl",
+                Language.Georgian => "ka",
+                Language.German => "de",
+                Language.Greek => "el",
+                Language.Gujarati => "gu",
+                Language.Haitian_Creole => "ht",
+                Language.Hausa => "ha",
+                Language.Hawaiian => "haw",
+                Language.Hebrew => "iw",
+                Language.Hindi => "hi",
+                Language.Hmong => "hmn",
+                Language.Hungarian => "hu",
+                Language.Icelandic => "is",
+                Language.Igbo => "ig",
+                Language.Indonesian => "id",
+                Language.Irish => "ga",
+                Language.Italian => "it",
+                Language.Japanese => "ja",
+                Language.Javanese => "jw",
+                Language.Kannada => "kn",
+                Language.Kazakh => "kk",
+                Language.Khmer => "km",
+                Language.Korean => "ko",
+                Language.Kurdish => "ku",
+                Language.Kyrgyz => "ky",
+                Language.Lao => "lo",
+                Language.Latin => "la",
+                Language.Latvian => "lv",
+                Language.Lithuanian => "lt",
+                Language.Luxembourgish => "lb",
+                Language.Macedonian => "mk",
+                Language.Malagasy => "mg",
+                Language.Malay => "ms",
+                Language.Malayalam => "ml",
+                Language.Maltese => "mt",
+                Language.Maori => "mi",
+                Language.Marathi => "mr",
+                Language.Mongolian => "mn",
+                Language.Burmese => "my",
+                Language.Nepali => "ne",
+                Language.Norwegian => "no",
+                Language.Pashto => "ps",
+                Language.Persian => "fa",
+                Language.Polish => "pl",
+                Language.Portuguese => "pt",
+                Language.Punjabi => "ma",
+                Language.Romanian => "ro",
+                Language.Russian => "ru",
+                Language.Samoan => "sm",
+                Language.Scots_Gaelic => "gd",
+                Language.Serbian => "sr",
+                Language.Sesotho => "st",
+                Language.Shona => "sn",
+                Language.Sindhi => "sd",
+                Language.Sinhala => "si",
+                Language.Slovak => "sk",
+                Language.Slovenian => "sl",
+                Language.Somali => "so",
+                Language.Spanish => "es",
+                Language.Sundanese => "su",
+                Language.Swahili => "sw",
+                Language.Swedish => "sv",
+                Language.Tajik => "tg",
+                Language.Tamil => "ta",
+                Language.Telugu => "te",
+                Language.Thai => "th",
+                Language.Turkish => "tr",
+                Language.Ukrainian => "uk",
+                Language.Urdu => "ur",
+                Language.Uzbek => "uz",
+                Language.Vietnamese => "vi",
+                Language.Welsh => "cy",
+                Language.Xhosa => "xh",
+                Language.Yiddish => "yi",
+                Language.Yoruba => "yo",
+                Language.Zulu => "zu",
+                Language.HebrewOld => "iw",
+                Language.Kinyarwanda => "rw",
+                Language.Odia => "or",
+                Language.Tatar => "tt",
+                Language.Turkmen => "tk",
+                Language.Uyghur => "ug",
+                _ => string.Empty
+            };
         }
 
         /// <summary>

@@ -17,13 +17,13 @@ namespace GoogleApi.UnitTests.Search.Common
             {
                 Expressions = new List<CountryRestrictExpression>
                 {
-                    new CountryRestrictExpression
+                    new()
                     {
                         Not = true,
                         Operator = Operator.And,
                         Country = Country.Italy
                     },
-                    new CountryRestrictExpression
+                    new()
                     {
                         Country = Country.Afghanistan
                     }
@@ -45,7 +45,7 @@ namespace GoogleApi.UnitTests.Search.Common
             {
                 Expressions = new List<CountryRestrictExpression>
                 {
-                    new CountryRestrictExpression
+                    new()
                     {
                         Not = true,
                         Operator = Operator.And,
@@ -54,20 +54,20 @@ namespace GoogleApi.UnitTests.Search.Common
                         {
                             Expressions = new List<CountryRestrictExpression>
                             {
-                                new CountryRestrictExpression
+                                new()
                                 {
                                     Not = true,
                                     Operator = Operator.Or,
                                     Country = Country.Spain
                                 },
-                                new CountryRestrictExpression
+                                new()
                                 {
                                     Country = Country.Portugal
                                 }
                             }
                         }
                     },
-                    new CountryRestrictExpression
+                    new()
                     {
                         Country = Country.Afghanistan
                     }

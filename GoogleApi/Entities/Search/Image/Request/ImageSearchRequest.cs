@@ -14,7 +14,7 @@ namespace GoogleApi.Entities.Search.Image.Request
         /// <summary>
         /// Search Image Options.
         /// </summary>
-        public virtual SearchImageOptions ImageOptions { get; set; } = new SearchImageOptions();
+        public virtual SearchImageOptions ImageOptions { get; set; } = new();
 
         /// <summary>
         /// Default Constructor.

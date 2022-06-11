@@ -54,22 +54,32 @@ namespace GoogleApi.Entities.Places.QueryAutoComplete.Request
             var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrEmpty(this.Input))
+            {
                 throw new ArgumentException($"'{nameof(this.Input)}' is required");
+            }
 
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+            if (this.Radius is > 50000 or < 1)
+            {
                 throw new ArgumentException($"'{nameof(this.Radius)}' must be greater than or equal to 1 and less than or equal to 50.000");
+            }
 
             parameters.Add("input", this.Input);
             parameters.Add("language", this.Language.ToCode());
 
             if (!string.IsNullOrEmpty(this.Offset))
+            {
                 parameters.Add("offset", this.Offset);
+            }
 
             if (this.Location != null)
+            {
                 parameters.Add("location", this.Location.ToString());
+            }
 
             if (this.Radius.HasValue)
+            {
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+            }
 
             return parameters;
         }

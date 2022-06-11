@@ -255,8 +255,8 @@ namespace GoogleApi.Test.Search.Web
                     {
                         Expressions = new List<CountryRestrictExpression>
                         {
-                            new CountryRestrictExpression { Country = Country.Denmark},
-                            new CountryRestrictExpression { Country = Country.Italy }
+                            new() { Country = Country.Denmark},
+                            new() { Country = Country.Italy }
                         }
                     }
                 }

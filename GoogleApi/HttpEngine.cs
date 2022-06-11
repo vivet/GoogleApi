@@ -56,7 +56,7 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            httpEngineOptions = httpEngineOptions ?? new HttpEngineOptions();
+            httpEngineOptions ??= new HttpEngineOptions();
 
             try
             {
@@ -76,10 +76,16 @@ namespace GoogleApi
                             return response;
                         }
 
-                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
+                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
+                        {
+                            Status = response.Status
+                        };
 
                     default:
-                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}");
+                        throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
+                        {
+                            Status = response.Status
+                        };
                 }
             }
             catch (Exception ex)
@@ -167,7 +173,7 @@ namespace GoogleApi
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            httpEngineOptions = httpEngineOptions ?? new HttpEngineOptions();
+            httpEngineOptions ??= new HttpEngineOptions();
 
             var taskCompletion = new TaskCompletionSource<TResponse>();
 
@@ -256,11 +262,11 @@ namespace GoogleApi
             };
             var serializeObject = JsonConvert.SerializeObject(request, settings);
 
-            using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
+            using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
             {
                 var content = stringContent.ReadAsStreamAsync().Result;
 
-                using (var streamContent = new StreamContent(content))
+                using var streamContent = new StreamContent(content);
                 {
                     return this.httpClient.PostAsync(uri, streamContent).Result;
                 }
@@ -323,11 +329,11 @@ namespace GoogleApi
             };
             var serializeObject = JsonConvert.SerializeObject(request, settings);
 
-            using (var stringContent = new StringContent(serializeObject, Encoding.UTF8))
+            using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
             {
                 var content = await stringContent.ReadAsStreamAsync().ConfigureAwait(false);
 
-                using (var streamContent = new StreamContent(content))
+                using var streamContent = new StreamContent(content);
                 {
                     return await this.httpClient.PostAsync(uri, streamContent, cancellationToken).ConfigureAwait(false);
                 }

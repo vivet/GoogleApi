@@ -156,6 +156,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -172,6 +173,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -189,6 +191,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Input' is required");
         }
 
@@ -206,6 +209,7 @@ namespace GoogleApi.UnitTests.Places.Search.Find
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Input' is required");
         }
     }

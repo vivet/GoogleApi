@@ -105,6 +105,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("Center is required, unless Markers, Paths or Visibles is defined", exception.Message);
         }
 
@@ -118,6 +119,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("ZoomLevel is required, unless Markers, Paths or Visibles is defined", exception.Message);
         }
 
@@ -151,7 +153,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 ZoomLevel = 1,
                 Paths = new List<MapPath> 
                 {
-                    new MapPath
+                    new()
                     {
                         Weight = 10,
                         Geodesic = false,
@@ -159,8 +161,8 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                         FillColor = "fillcolor",
                         Points = new List<Location>
                         {
-                            new Location(new Coordinate(1, 1)),
-                            new Location(new Coordinate(2, 2))
+                            new(new Coordinate(1, 1)),
+                            new(new Coordinate(2, 2))
                         }
                     }
                 }
@@ -185,7 +187,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 ZoomLevel = 1,
                 Paths = new List<MapPath>
                 {
-                    new MapPath
+                    new()
                     {
                         Weight = 10,
                         Geodesic = false,
@@ -193,11 +195,11 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                         FillColor = "fillcolor1",
                         Points = new List<Location>
                         {
-                            new Location(new Coordinate(1, 1)),
-                            new Location(new Coordinate(2, 2))
+                            new(new Coordinate(1, 1)),
+                            new(new Coordinate(2, 2))
                         }
                     },
-                    new MapPath
+                    new()
                     {
                         Weight = 11,
                         Geodesic = true,
@@ -205,8 +207,8 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                         FillColor = "fillcolor2",
                         Points = new List<Location>
                         {
-                            new Location(new Coordinate(3, 3)),
-                            new Location(new Coordinate(4, 4))
+                            new(new Coordinate(3, 3)),
+                            new(new Coordinate(4, 4))
                         }
                     }
                 }
@@ -236,7 +238,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 ZoomLevel = 1,
                 Paths = new List<MapPath>
                 {
-                    new MapPath
+                    new()
                     {
                         Color = "color"
                     }
@@ -244,6 +246,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("Paths must contain two or more locations", exception.Message);
         }
 
@@ -257,7 +260,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 ZoomLevel = 1,
                 Styles = new List<MapStyle>
                 {
-                    new MapStyle
+                    new()
                     {
                         Feature = StyleFeature.Administrative_Country,
                         Element = StyleElement.Geometry_Fill,
@@ -295,7 +298,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 ZoomLevel = 1,
                 Styles = new List<MapStyle>
                 {
-                    new MapStyle
+                    new()
                     {
                         Feature = StyleFeature.Administrative_Country,
                         Element = StyleElement.Geometry_Fill,
@@ -311,7 +314,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                             Weight = 1
                         }
                     },
-                    new MapStyle
+                    new()
                     {
                         Feature = StyleFeature.Administrative_Country,
                         Element = StyleElement.Geometry_Fill,
@@ -491,6 +494,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("Markers must contain at least one location", exception.Message);
         }
 
@@ -503,6 +507,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -515,6 +520,7 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
     }

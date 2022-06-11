@@ -159,6 +159,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -171,6 +172,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -185,6 +187,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Location' or 'PanoramaId' is required", exception.Message);
         }
 
@@ -199,6 +202,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Location' or 'PanoramaId' is required", exception.Message);
         }
 
@@ -213,6 +217,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Pitch' must be greater than -90 and less than 90");
         }
 
@@ -227,6 +232,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Pitch' must be greater than -90 and less than 90");
         }
 
@@ -241,6 +247,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Heading' must be greater than 0 and less than 360");
         }
 
@@ -255,6 +262,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Heading' must be greater than 0 and less than 360");
         }
 
@@ -269,6 +277,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'FieldOfView' must be greater than 0 and less than 120");
         }
 
@@ -283,6 +292,7 @@ namespace GoogleApi.UnitTests.Maps.StreetView
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'FieldOfView' must be greater than 0 and less than 120");
         }
     }

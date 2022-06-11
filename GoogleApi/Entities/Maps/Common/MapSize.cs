@@ -29,12 +29,12 @@ namespace GoogleApi.Entities.Maps.Common
 		/// <param name="height">The height.</param>
 		public MapSize(int width, int height)
 		{
-            if (width < 1 || width > 4096)
+            if (width is < 1 or > 4096)
             {
                 throw new ArgumentOutOfRangeException(nameof(width), width, $"'{nameof(width)}' must be greater than {MapSize.MIN_WIDTH} and less than {MapSize.MAX_WIDTH}.");
             }
 
-            if (height < 1 || height > 4096)
+            if (height is < 1 or > 4096)
             {
                 throw new ArgumentOutOfRangeException(nameof(height), height, $"'{nameof(height)}' must be greater than {MapSize.MIN_HEIGHT} and less than {MapSize.MAX_HEIGHT}.");
             }

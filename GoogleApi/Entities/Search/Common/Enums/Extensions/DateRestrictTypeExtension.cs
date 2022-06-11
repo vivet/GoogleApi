@@ -12,23 +12,14 @@ namespace GoogleApi.Entities.Search.Common.Enums.Extensions
         /// <returns>The string representation of the enum value for the search request.</returns>
         public static string ToTypeString(this DateRestrictType dateRestrictType)
         {
-            switch (dateRestrictType)
+            return dateRestrictType switch
             {
-                case DateRestrictType.Days:
-                    return "d";
-
-                case DateRestrictType.Weeks:
-                    return "w";
-
-                case DateRestrictType.Months:
-                    return "m";
-
-                case DateRestrictType.Years:
-                    return "y";
-
-                default:
-                    return "d";
-            }
+                DateRestrictType.Days => "d",
+                DateRestrictType.Weeks => "w",
+                DateRestrictType.Months => "m",
+                DateRestrictType.Years => "y",
+                _ => "d"
+            };
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Detect.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 

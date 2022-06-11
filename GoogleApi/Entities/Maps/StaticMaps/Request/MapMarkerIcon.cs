@@ -60,7 +60,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
             }
 
             if (builder.Length == 0)
-                return null;
+                return null!;
 
             return builder
                 .ToString(0, builder.Length - 1);

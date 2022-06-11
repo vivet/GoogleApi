@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Common.Extensions
         /// <summary>
         /// Unix Epoch value.
         /// </summary>
-        public static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public static readonly DateTime epoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         /// <summary>
         /// Converts a DateTime to a Unix timestamp.

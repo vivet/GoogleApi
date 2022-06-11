@@ -135,6 +135,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -147,6 +148,7 @@ namespace GoogleApi.UnitTests.Maps.Geocoding.Address
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
