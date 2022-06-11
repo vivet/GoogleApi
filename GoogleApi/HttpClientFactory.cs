@@ -15,7 +15,7 @@ namespace GoogleApi
         /// <summary>
         /// Proxy property that will be used for all requests.
         /// </summary>
-        public static IWebProxy Proxy { get; set; } // TODO: Consider to remove. Depends on how the user can call "CreateDefaultHttpClient" to set the Proxy through param
+        public static IWebProxy Proxy { get; set; }
 
         /// <summary>
         /// Create Default Http Client.
