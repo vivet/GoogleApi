@@ -1,4 +1,5 @@
 using System;
+using GoogleApi.Entities.Common.Enums;
 
 namespace GoogleApi.Exceptions
 {
@@ -7,6 +8,11 @@ namespace GoogleApi.Exceptions
     /// </summary>
     public class GoogleApiException : Exception
     {
+        /// <summary>
+        /// Status.
+        /// </summary>
+        public virtual Status? Status { get; set; }
+
         /// <summary>
         /// Constructor, accepting a error message and a optional status.
         /// </summary>

@@ -186,7 +186,7 @@ namespace GoogleApi.Entities.Maps.DistanceMatrix.Request
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(this.TravelMode));
             }
 
             return parameters;
