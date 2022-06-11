@@ -11,10 +11,6 @@ using System.Threading.Tasks;
 
 namespace GoogleApi
 {
-    // TODO: Rewrite change log
-    // TODO: Resharper code issues after commit
-    // TODO: Update readme for AddGoogleApis()
-
     /// <summary>
     /// Http Engine.
     /// Manges the http connections, and is responsible for invoking requst and handling responses.
