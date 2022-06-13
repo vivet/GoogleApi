@@ -36,6 +36,7 @@
               - GooglePlaces.TextSearch to GooglePlaces.Search.TextSearch
 			  - GooglePlaces.NearBySearch to GooglePlaces.Search.NearBySearch
 			- Updated test projects and added all frameworks suppoorted.
+			- Upgraded C# to version 10.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
