@@ -58,48 +58,48 @@ See below for a full list of supported Api's and actions.
 *** 
 
 ### Supported Api's
-The following operations are supported.
+The following api's are supported.
 
 ##### Google Maps
-  * Directions
-  * Distance Matrix
-  * Elevation
+  * Directions (```GoogleMaps.Directions```)
+  * Distance Matrix (```GoogleMaps.DistanceMatrix```)
+  * Elevation (```GoogleMaps.Elevation```)
   * Geocode
-    * Place
-    * Address
-    * Location (reverse)
-    * Plus Code
-  * Geolocation
+    * Place (```GoogleMaps.Geocode.PlaceGeocode```)
+    * Address (```GoogleMaps.Geocode.AddressGeocode```)
+    * Location (reverse) (```GoogleMaps.Geocode.```)
+    * Plus Code (```GoogleMaps.Geocode.LocationGeocode```)
+  * Geolocation (```GoogleMaps.Geolocation.PlusCodeGeocode```)
   * Roads
-    * Nearest Roads
-    * Snap To Roads
-    * Speed Limits
+    * Nearest Roads (```GoogleMaps.Roads.NearestRoads```)
+    * Snap To Roads (```GoogleMaps.Roads.SnapToRoad```)
+    * Speed Limits (```GoogleMaps.Roads.SpeedLimits```)
   * Time Zone
   * Street View
   * Static Maps
 
 ##### Google Places
   * Place Search
-    * Find
-    * Near By
-    * Text
-  * Place Details
-  * Place Photos
-  * Place Autocomplete
-  * Query Autocomplete
+    * Find (```GooglePlaces.Search.FindSearch```)
+    * Near By (```GooglePlaces.Search.NearBySearch```)
+    * Text (```GooglePlaces.Search.TextSearch```)
+  * Place Details (```GooglePlaces.Details```)
+  * Place Photos (```GooglePlaces.Photos```)
+  * Place Autocomplete (```GooglePlaces.AutoComplete```)
+  * Query Autocomplete (```GooglePlaces.QueryAutoComplete```)
 
 ##### Google Search
-  * Web
-  * Image
+  * Web (```GoogleSearch.WebSearch```)
+  * Image (```GoogleSearch.ImageSearch```)
   * Video (*beta*)
-    * Channels
-	* Playlists
-	* Vidoes
+    * Channels (```GoogleSearch.VideoSearch.Channels```)
+    * Playlists (```GoogleSearch.VideoSearch.Playlists```)
+    * Vidoes (```GoogleSearch.VideoSearch.Vidoes```)
 
 ##### Google Translate
-  * Detect
-  * Languages
-  * Translate
+  * Detect (```GoogleTranslate.Detect```)
+  * Languages (```GoogleTranslate.Languages```)
+  * Translate (```GoogleTranslate.Translate```)
 
 ##### Google Functions
   * MergePolyLine
