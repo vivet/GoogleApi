@@ -7,74 +7,99 @@ Seamless Google Api integrations.
 Google Maps, Places, Roads, Search and Translate.  
 
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
+Do you need support for an additional .Net framework?, let me know.  
 
-### Getting started...
-The library is extremely easy to consume and use.  
-Each api implementation consists of a request and a response, as well as a generic facade operation to execute the request and return the response. The request has properties reflecting the parameters supported, and the response represents the object model for the returned json.  
-
-The example below, simply populates a request, invokes the facade operation, and recieves the response in return.  
-```csharp
-TRequest request = new TRequest();
-TResponse response = await {Api}.{Action}.QueryAsync<TRequest, TResponse>(request);
-```
+### Using the Library
+The library may be consumed, either by using the individual facede implementations or by depdendency injecting the individual api's.  
+Each api implementation consists of a request and a response. The request has properties reflecting the parameters supported, and the response represents the object model for the returned json.  
 
 A few other noteworthy members.
-##### Request
+
 ```csharp
 var uri = request.GetUri(); // Gets the full request uri, including query parameters.
 var params = request.GetQUeryStringParameters(); // Gets a list of all the added parameters.
 ```
-##### Response
 ```csharp
 response.RawJson // The raw json returned by Google.
 response.RawQueryString // The querystring sent to Google when invoking the request.
 ```
 
+#### Facade
+Each api has a generic facade operation to execute the request and return the response.  
+The example below, simply populates a request, invokes the facade operation, and recieves the response in return.  
+```csharp
+TRequest request = new TRequest();
+TResponse response = await {Api}.[{SubGroup}].{Action}.QueryAsync<TRequest, TResponse>(request);
+```
+See below for a full list of supported Api's and actions.  
+
+
+#### Dependency Injection
+If injecting the api's as dependencies is preffered register the services during startup, as shown below.  
+
+```csharp
+services
+    .AddGoogleApis();
+```
+Then, inject the individual Api's in constructors as needed
+```csharp
+public class MyClass
+{
+    private {Api}.[{SubGroup}].{Action} api;
+    
+    public MyClass({Api}.[{SubGroup}].{Action} api)
+    {
+        this.api = api
+    }
+}
+```
+See below for a full list of supported Api's and actions.  
+
 *** 
 
-### Supported Operations
-The following operations are supported.
+### Supported Api's
+The following api's are supported.
 
 ##### Google Maps
-  * Directions
-  * Distance Matrix
-  * Elevation
+  * Directions (```GoogleMaps.Directions```)
+  * Distance Matrix (```GoogleMaps.DistanceMatrix```)
+  * Elevation (```GoogleMaps.Elevation```)
   * Geocode
-    * Place
-    * Address
-    * Location (reverse)
-    * Plus Code
-  * Geolocation
+    * Place (```GoogleMaps.Geocode.PlaceGeocode```)
+    * Address (```GoogleMaps.Geocode.AddressGeocode```)
+    * Location (reverse) (```GoogleMaps.Geocode.```)
+    * Plus Code (```GoogleMaps.Geocode.LocationGeocode```)
+  * Geolocation (```GoogleMaps.Geolocation.PlusCodeGeocode```)
   * Roads
-    * Nearest Roads
-    * Snap To Roads
-    * Speed Limits
+    * Nearest Roads (```GoogleMaps.Roads.NearestRoads```)
+    * Snap To Roads (```GoogleMaps.Roads.SnapToRoad```)
+    * Speed Limits (```GoogleMaps.Roads.SpeedLimits```)
   * Time Zone
   * Street View
   * Static Maps
 
 ##### Google Places
   * Place Search
-    * Find
-    * Near By
-    * Text
-  * Place Details
-  * Place Photos
-  * Place Autocomplete
-  * Query Autocomplete
+    * Find (```GooglePlaces.Search.FindSearch```)
+    * Near By (```GooglePlaces.Search.NearBySearch```)
+    * Text (```GooglePlaces.Search.TextSearch```)
+  * Place Details (```GooglePlaces.Details```)
+  * Place Photos (```GooglePlaces.Photos```)
+  * Place Autocomplete (```GooglePlaces.AutoComplete```)
+  * Query Autocomplete (```GooglePlaces.QueryAutoComplete```)
 
 ##### Google Search
-  * Web
-  * Image
+  * Web (```GoogleSearch.WebSearch```)
+  * Image (```GoogleSearch.ImageSearch```)
   * Video (*beta*)
-    * Channels
-	* Playlists
-	* Vidoes
+    * Channels (```GoogleSearch.VideoSearch.Channels```)
+    * Playlists (```GoogleSearch.VideoSearch.Playlists```)
+    * Vidoes (```GoogleSearch.VideoSearch.Vidoes```)
 
 ##### Google Translate
-  * Detect
-  * Languages
-  * Translate
+  * Detect (```GoogleTranslate.Detect```)
+  * Languages (```GoogleTranslate.Languages```)
+  * Translate (```GoogleTranslate.Translate```)
 
 ##### Google Functions
   * MergePolyLine
@@ -86,12 +111,11 @@ The following operations are supported.
 ### Running Test Suite
 Running the test suite is simple.  
 
-The test project stores settings related to your Google subscription (free or paid) in `application.default.json`. Most importantly, the ```ApiKey```, used to identify the Google subscription.  
+The test project stores settings related to your Google subscription (free or paid) in `application.default.json`.  
+Most importantly, the ```ApiKey```, used to identify the Google subscription.  
 ```json
 { 
   "ApiKey": "",
-  "CryptoKey": "",
-  "ClientId": "",
   "SearchEngineId": "",
 }
 ```
