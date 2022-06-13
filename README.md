@@ -29,10 +29,10 @@ Each api has a generic facade operation to execute the request and return the re
 The example below, simply populates a request, invokes the facade operation, and recieves the response in return.  
 ```csharp
 TRequest request = new TRequest();
-TResponse response = await {Api}.{Action}.QueryAsync<TRequest, TResponse>(request);
+TResponse response = await {Api}.[{SubGroup}].{Action}.QueryAsync<TRequest, TResponse>(request);
 ```
-In the aboce, the ```{Api}``` could be ```GoogleMaps``` and the ```{Action}``` could be ```Geocode.AddressGeocode```. 
 See below for a full list of supported Api's and actions.  
+
 
 #### Dependency Injection
 If injecting the api's as dependencies is preffered register the services during startup, as shown below.  
@@ -45,18 +45,15 @@ Then, inject the individual Api's in constructors as needed
 ```csharp
 public class MyClass
 {
-    private {Api}.{Action} googleApi;
+    private {Api}.[{SubGroup}].{Action} api;
     
-    public MyClass({Api}.{Action} googleApi)
+    public MyClass({Api}.[{SubGroup}].{Action} api)
     {
-        this.googleApi = googleApi
+        this.api = api
     }
 }
 ```
 See below for a full list of supported Api's and actions.  
-
-
-
 
 *** 
 
