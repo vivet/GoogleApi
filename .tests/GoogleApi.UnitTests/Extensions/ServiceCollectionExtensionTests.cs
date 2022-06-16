@@ -60,7 +60,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Authentication;
 using GoogleApi.Extensions;
 
 namespace GoogleApi.UnitTests.Extensions
