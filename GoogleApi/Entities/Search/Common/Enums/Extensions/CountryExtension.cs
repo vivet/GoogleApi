@@ -12,254 +12,252 @@
         /// <returns>The <see cref="string"/> representation of the <see cref="Country"/> as 'cr' request parameter.</returns>
         public static string ToCr(this Country country)
         {
-            switch (country)
+            return country switch
             {
-                case Country.Afghanistan: return "countryAF";
-                case Country.Albania: return "countryAL";
-                case Country.Algeria: return "countryDZ";
-                case Country.AmericanSamoa: return "countryAS";
-                case Country.Andorra: return "countryAD";
-                case Country.Angola: return "countryAO";
-                case Country.Anguilla: return "countryAI";
-                case Country.Antarctica: return "countryAQ";
-                case Country.AntiguaAndBarbuda: return "countryAG";
-                case Country.Argentina: return "countryAR";
-                case Country.Armenia: return "countryAM";
-                case Country.Aruba: return "countryAW";
-                case Country.Australia: return "countryAU";
-                case Country.Austria: return "countryAT";
-                case Country.Azerbaijan: return "countryAZ";
-                case Country.Bahamas: return "countryBS";
-                case Country.Bahrain: return "countryBH";
-                case Country.Bangladesh: return "countryBD";
-                case Country.Barbados: return "countryBB";
-                case Country.Belarus: return "countryBY";
-                case Country.Belgium: return "countryBE";
-                case Country.Belize: return "countryBZ";
-                case Country.Benin: return "countryBJ";
-                case Country.Bermuda: return "countryBM";
-                case Country.Bhutan: return "countryBT";
-                case Country.Bolivia: return "countryBO";
-                case Country.BosniaAndHerzegovina: return "countryBA";
-                case Country.Botswana: return "countryBW";
-                case Country.BouvetIsland: return "countryBV";
-                case Country.Brazil: return "countryBR";
-                case Country.BritishIndianOceanTerritory: return "countryIO";
-                case Country.BruneiDarussalam: return "countryBN";
-                case Country.Bulgaria: return "countryBG";
-                case Country.BurkinaFaso: return "countryBF";
-                case Country.Burundi: return "countryBI";
-                case Country.Cambodia: return "countryKH";
-                case Country.Cameroon: return "countryCM";
-                case Country.Canada: return "countryCA";
-                case Country.CapeVerde: return "countryCV";
-                case Country.CaymanIslands: return "countryKY";
-                case Country.CentralAfricanRepublic: return "countryCF";
-                case Country.Chad: return "countryTD";
-                case Country.Chile: return "countryCL";
-                case Country.China: return "countryCN";
-                case Country.ChristmasIsland: return "countryCX";
-                case Country.CocosIslands: return "countryCC";
-                case Country.Colombia: return "countryCO";
-                case Country.Comoros: return "countryKM";
-                case Country.Congo: return "countryCG";
-                case Country.TheDemocraticRepublicOfCongo: return "countryCD";
-                case Country.CookIslands: return "countryCK";
-                case Country.CostaRica: return "countryCR";
-                case Country.CoteDivoire: return "countryCI";
-                case Country.Croatia: return "countryHR";
-                case Country.Cuba: return "countryCU";
-                case Country.Cyprus: return "countryCY";
-                case Country.CzechRepublic: return "countryCZ";
-                case Country.Denmark: return "countryDK";
-                case Country.Djibouti: return "countryDJ";
-                case Country.Dominica: return "countryDM";
-                case Country.DominicanRepublic: return "countryDO";
-                case Country.EastTimor: return "countryTP";
-                case Country.Ecuador: return "countryEC";
-                case Country.Egypt: return "countryEG";
-                case Country.ElSalvador: return "countrySV";
-                case Country.EquatorialGuinea: return "countryGQ";
-                case Country.Eritrea: return "countryER";
-                case Country.Estonia: return "countryEE";
-                case Country.Ethiopia: return "countryET";
-                case Country.EuropeanUnion: return "countryEU";
-                case Country.FalklandIslAndsMalvinas: return "countryFK";
-                case Country.FaroeIslands: return "countryFO";
-                case Country.Fiji: return "countryFJ";
-                case Country.Finland: return "countryFI";
-                case Country.France: return "countryFR";
-                case Country.FranceMetropolitan: return "countryFX";
-                case Country.FrenchGuiana: return "countryGF";
-                case Country.FrenchPolynesia: return "countryPF";
-                case Country.FrenchSouthernTerritories: return "countryTF";
-                case Country.Gabon: return "countryGA";
-                case Country.Gambia: return "countryGM";
-                case Country.Georgia: return "countryGE";
-                case Country.Germany: return "countryDE";
-                case Country.Ghana: return "countryGH";
-                case Country.Gibraltar: return "countryGI";
-                case Country.Greece: return "countryGR";
-                case Country.Greenland: return "countryGL";
-                case Country.Grenada: return "countryGD";
-                case Country.Guadeloupe: return "countryGP";
-                case Country.Guam: return "countryGU";
-                case Country.Guatemala: return "countryGT";
-                case Country.Guinea: return "countryGN";
-                case Country.GuineaBissau: return "countryGW";
-                case Country.Guyana: return "countryGY";
-                case Country.Haiti: return "countryHT";
-                case Country.HeardIslandAndMcdonaldIslands: return "countryHM";
-                case Country.VaticanCityState: return "countryVA";
-                case Country.Honduras: return "countryHN";
-                case Country.HongKong: return "countryHK";
-                case Country.Hungary: return "countryHU";
-                case Country.Iceland: return "countryIS";
-                case Country.India: return "countryIN";
-                case Country.Indonesia: return "countryID";
-                case Country.Iran: return "countryIR";
-                case Country.Iraq: return "countryIQ";
-                case Country.Ireland: return "countryIE";
-                case Country.Israel: return "countryIL";
-                case Country.Italy: return "countryIT";
-                case Country.Jamaica: return "countryJM";
-                case Country.Japan: return "countryJP";
-                case Country.Jordan: return "countryJO";
-                case Country.Kazakhstan: return "countryKZ";
-                case Country.Kenya: return "countryKE";
-                case Country.Kiribati: return "countryKI";
-                case Country.DemocraticPeoplesRepublicOfKorea: return "countryKP";
-                case Country.RepublicOfKorea: return "countryKR";
-                case Country.Kuwait: return "countryKW";
-                case Country.Kyrgyzstan: return "countryKG";
-                case Country.LaoPeoplesDemocraticRepublic: return "countryLA";
-                case Country.Latvia: return "countryLV";
-                case Country.Lebanon: return "countryLB";
-                case Country.Lesotho: return "countryLS";
-                case Country.Liberia: return "countryLR";
-                case Country.LibyanArabJamahiriya: return "countryLY";
-                case Country.Liechtenstein: return "countryLI";
-                case Country.Lithuania: return "countryLT";
-                case Country.Luxembourg: return "countryLU";
-                case Country.Macao: return "countryMO";
-                case Country.Macedonia: return "countryMK";
-                case Country.Madagascar: return "countryMG";
-                case Country.Malawi: return "countryMW";
-                case Country.Malaysia: return "countryMY";
-                case Country.Maldives: return "countryMV";
-                case Country.Mali: return "countryML";
-                case Country.Malta: return "countryMT";
-                case Country.MarshallIslands: return "countryMH";
-                case Country.Martinique: return "countryMQ";
-                case Country.Mauritania: return "countryMR";
-                case Country.Mauritius: return "countryMU";
-                case Country.Mayotte: return "countryYT";
-                case Country.Mexico: return "countryMX";
-                case Country.Micronesia: return "countryFM";
-                case Country.Moldova: return "countryMD";
-                case Country.Monaco: return "countryMC";
-                case Country.Mongolia: return "countryMN";
-                case Country.Montserrat: return "countryMS";
-                case Country.Morocco: return "countryMA";
-                case Country.Mozambique: return "countryMZ";
-                case Country.Myanmar: return "countryMM";
-                case Country.Namibia: return "countryNA";
-                case Country.Nauru: return "countryNR";
-                case Country.Nepal: return "countryNP";
-                case Country.Netherlands: return "countryNL";
-                case Country.NetherlandsAntilles: return "countryAN";
-                case Country.NewCaledonia: return "countryNC";
-                case Country.NewZealand: return "countryNZ";
-                case Country.Nicaragua: return "countryNI";
-                case Country.Niger: return "countryNE";
-                case Country.Nigeria: return "countryNG";
-                case Country.Niue: return "countryNU";
-                case Country.NorfolkIsland: return "countryNF";
-                case Country.NorthernMarianaIslands: return "countryMP";
-                case Country.Norway: return "countryNO";
-                case Country.Oman: return "countryOM";
-                case Country.Pakistan: return "countryPK";
-                case Country.Palau: return "countryPW";
-                case Country.PalestinianTerritory: return "countryPS";
-                case Country.Panama: return "countryPA";
-                case Country.PapuaNewGuinea: return "countryPG";
-                case Country.Paraguay: return "countryPY";
-                case Country.Peru: return "countryPE";
-                case Country.Philippines: return "countryPH";
-                case Country.Pitcairn: return "countryPN";
-                case Country.Poland: return "countryPL";
-                case Country.Portugal: return "countryPT";
-                case Country.PuertoRico: return "countryPR";
-                case Country.Qatar: return "countryQA";
-                case Country.Reunion: return "countryRE";
-                case Country.Romania: return "countryRO";
-                case Country.RussianFederation: return "countryRU";
-                case Country.Rwanda: return "countryRW";
-                case Country.SaintHelena: return "countrySH";
-                case Country.SaintKittsAndNevis: return "countryKN";
-                case Country.SaintLucia: return "countryLC";
-                case Country.SaintPierreAndMiquelon: return "countryPM";
-                case Country.SaintVincentAndtheGrenadines: return "countryVC";
-                case Country.Samoa: return "countryWS";
-                case Country.SanMarino: return "countrySM";
-                case Country.SaoTomeAndPrincipe: return "countryST";
-                case Country.SaudiArabia: return "countrySA";
-                case Country.Senegal: return "countrySN";
-                case Country.SerbiaAndMontenegro: return "countryCS";
-                case Country.Seychelles: return "countrySC";
-                case Country.SierraLeone: return "countrySL";
-                case Country.Singapore: return "countrySG";
-                case Country.Slovakia: return "countrySK";
-                case Country.Slovenia: return "countrySI";
-                case Country.SolomonIslands: return "countrySB";
-                case Country.Somalia: return "countrySO";
-                case Country.SouthAfrica: return "countryZA";
-                case Country.SouthGeorgiaAndTheSouthSAndwichIslands: return "countryGS";
-                case Country.Spain: return "countryES";
-                case Country.SriLanka: return "countryLK";
-                case Country.Sudan: return "countrySD";
-                case Country.Suriname: return "countrySR";
-                case Country.SvalbardAndJanMayen: return "countrySJ";
-                case Country.Swaziland: return "countrySZ";
-                case Country.Sweden: return "countrySE";
-                case Country.Switzerland: return "countryCH";
-                case Country.SyrianArabRepublic: return "countrySY";
-                case Country.Taiwan: return "countryTW";
-                case Country.Tajikistan: return "countryTJ";
-                case Country.Tanzania: return "countryTZ";
-                case Country.Thailand: return "countryTH";
-                case Country.Togo: return "countryTG";
-                case Country.Tokelau: return "countryTK";
-                case Country.Tonga: return "countryTO";
-                case Country.TrinidadAndTobago: return "countryTT";
-                case Country.Tunisia: return "countryTN";
-                case Country.Turkey: return "countryTR";
-                case Country.Turkmenistan: return "countryTM";
-                case Country.TurksAndCaicosIslands: return "countryTC";
-                case Country.Tuvalu: return "countryTV";
-                case Country.Uganda: return "countryUG";
-                case Country.Ukraine: return "countryUA";
-                case Country.UnitedArabEmirates: return "countryAE";
-                case Country.UnitedKingdom: return "countryUK";
-                case Country.UnitedStates: return "countryUS";
-                case Country.UnitedStatesMinorOutlyingIslands: return "countryUM";
-                case Country.Uruguay: return "countryUY";
-                case Country.Uzbekistan: return "countryUZ";
-                case Country.Vanuatu: return "countryVU";
-                case Country.Venezuela: return "countryVE";
-                case Country.Vietnam: return "countryVN";
-                case Country.VirginIslandsBritish: return "countryVG";
-                case Country.VirginIslandsUs: return "countryVI";
-                case Country.WallisandFutuna: return "countryWF";
-                case Country.WesternSahara: return "countryEH";
-                case Country.Yemen: return "countryYE";
-                case Country.Yugoslavia: return "countryYU";
-                case Country.Zambia: return "countryZM";
-                case Country.Zimbabwe: return "countryZW";
-
-                default:
-                    return string.Empty;
-            }
+                Country.Afghanistan => "countryAF",
+                Country.Albania => "countryAL",
+                Country.Algeria => "countryDZ",
+                Country.AmericanSamoa => "countryAS",
+                Country.Andorra => "countryAD",
+                Country.Angola => "countryAO",
+                Country.Anguilla => "countryAI",
+                Country.Antarctica => "countryAQ",
+                Country.AntiguaAndBarbuda => "countryAG",
+                Country.Argentina => "countryAR",
+                Country.Armenia => "countryAM",
+                Country.Aruba => "countryAW",
+                Country.Australia => "countryAU",
+                Country.Austria => "countryAT",
+                Country.Azerbaijan => "countryAZ",
+                Country.Bahamas => "countryBS",
+                Country.Bahrain => "countryBH",
+                Country.Bangladesh => "countryBD",
+                Country.Barbados => "countryBB",
+                Country.Belarus => "countryBY",
+                Country.Belgium => "countryBE",
+                Country.Belize => "countryBZ",
+                Country.Benin => "countryBJ",
+                Country.Bermuda => "countryBM",
+                Country.Bhutan => "countryBT",
+                Country.Bolivia => "countryBO",
+                Country.BosniaAndHerzegovina => "countryBA",
+                Country.Botswana => "countryBW",
+                Country.BouvetIsland => "countryBV",
+                Country.Brazil => "countryBR",
+                Country.BritishIndianOceanTerritory => "countryIO",
+                Country.BruneiDarussalam => "countryBN",
+                Country.Bulgaria => "countryBG",
+                Country.BurkinaFaso => "countryBF",
+                Country.Burundi => "countryBI",
+                Country.Cambodia => "countryKH",
+                Country.Cameroon => "countryCM",
+                Country.Canada => "countryCA",
+                Country.CapeVerde => "countryCV",
+                Country.CaymanIslands => "countryKY",
+                Country.CentralAfricanRepublic => "countryCF",
+                Country.Chad => "countryTD",
+                Country.Chile => "countryCL",
+                Country.China => "countryCN",
+                Country.ChristmasIsland => "countryCX",
+                Country.CocosIslands => "countryCC",
+                Country.Colombia => "countryCO",
+                Country.Comoros => "countryKM",
+                Country.Congo => "countryCG",
+                Country.TheDemocraticRepublicOfCongo => "countryCD",
+                Country.CookIslands => "countryCK",
+                Country.CostaRica => "countryCR",
+                Country.CoteDivoire => "countryCI",
+                Country.Croatia => "countryHR",
+                Country.Cuba => "countryCU",
+                Country.Cyprus => "countryCY",
+                Country.CzechRepublic => "countryCZ",
+                Country.Denmark => "countryDK",
+                Country.Djibouti => "countryDJ",
+                Country.Dominica => "countryDM",
+                Country.DominicanRepublic => "countryDO",
+                Country.EastTimor => "countryTP",
+                Country.Ecuador => "countryEC",
+                Country.Egypt => "countryEG",
+                Country.ElSalvador => "countrySV",
+                Country.EquatorialGuinea => "countryGQ",
+                Country.Eritrea => "countryER",
+                Country.Estonia => "countryEE",
+                Country.Ethiopia => "countryET",
+                Country.EuropeanUnion => "countryEU",
+                Country.FalklandIslAndsMalvinas => "countryFK",
+                Country.FaroeIslands => "countryFO",
+                Country.Fiji => "countryFJ",
+                Country.Finland => "countryFI",
+                Country.France => "countryFR",
+                Country.FranceMetropolitan => "countryFX",
+                Country.FrenchGuiana => "countryGF",
+                Country.FrenchPolynesia => "countryPF",
+                Country.FrenchSouthernTerritories => "countryTF",
+                Country.Gabon => "countryGA",
+                Country.Gambia => "countryGM",
+                Country.Georgia => "countryGE",
+                Country.Germany => "countryDE",
+                Country.Ghana => "countryGH",
+                Country.Gibraltar => "countryGI",
+                Country.Greece => "countryGR",
+                Country.Greenland => "countryGL",
+                Country.Grenada => "countryGD",
+                Country.Guadeloupe => "countryGP",
+                Country.Guam => "countryGU",
+                Country.Guatemala => "countryGT",
+                Country.Guinea => "countryGN",
+                Country.GuineaBissau => "countryGW",
+                Country.Guyana => "countryGY",
+                Country.Haiti => "countryHT",
+                Country.HeardIslandAndMcdonaldIslands => "countryHM",
+                Country.VaticanCityState => "countryVA",
+                Country.Honduras => "countryHN",
+                Country.HongKong => "countryHK",
+                Country.Hungary => "countryHU",
+                Country.Iceland => "countryIS",
+                Country.India => "countryIN",
+                Country.Indonesia => "countryID",
+                Country.Iran => "countryIR",
+                Country.Iraq => "countryIQ",
+                Country.Ireland => "countryIE",
+                Country.Israel => "countryIL",
+                Country.Italy => "countryIT",
+                Country.Jamaica => "countryJM",
+                Country.Japan => "countryJP",
+                Country.Jordan => "countryJO",
+                Country.Kazakhstan => "countryKZ",
+                Country.Kenya => "countryKE",
+                Country.Kiribati => "countryKI",
+                Country.DemocraticPeoplesRepublicOfKorea => "countryKP",
+                Country.RepublicOfKorea => "countryKR",
+                Country.Kuwait => "countryKW",
+                Country.Kyrgyzstan => "countryKG",
+                Country.LaoPeoplesDemocraticRepublic => "countryLA",
+                Country.Latvia => "countryLV",
+                Country.Lebanon => "countryLB",
+                Country.Lesotho => "countryLS",
+                Country.Liberia => "countryLR",
+                Country.LibyanArabJamahiriya => "countryLY",
+                Country.Liechtenstein => "countryLI",
+                Country.Lithuania => "countryLT",
+                Country.Luxembourg => "countryLU",
+                Country.Macao => "countryMO",
+                Country.Macedonia => "countryMK",
+                Country.Madagascar => "countryMG",
+                Country.Malawi => "countryMW",
+                Country.Malaysia => "countryMY",
+                Country.Maldives => "countryMV",
+                Country.Mali => "countryML",
+                Country.Malta => "countryMT",
+                Country.MarshallIslands => "countryMH",
+                Country.Martinique => "countryMQ",
+                Country.Mauritania => "countryMR",
+                Country.Mauritius => "countryMU",
+                Country.Mayotte => "countryYT",
+                Country.Mexico => "countryMX",
+                Country.Micronesia => "countryFM",
+                Country.Moldova => "countryMD",
+                Country.Monaco => "countryMC",
+                Country.Mongolia => "countryMN",
+                Country.Montserrat => "countryMS",
+                Country.Morocco => "countryMA",
+                Country.Mozambique => "countryMZ",
+                Country.Myanmar => "countryMM",
+                Country.Namibia => "countryNA",
+                Country.Nauru => "countryNR",
+                Country.Nepal => "countryNP",
+                Country.Netherlands => "countryNL",
+                Country.NetherlandsAntilles => "countryAN",
+                Country.NewCaledonia => "countryNC",
+                Country.NewZealand => "countryNZ",
+                Country.Nicaragua => "countryNI",
+                Country.Niger => "countryNE",
+                Country.Nigeria => "countryNG",
+                Country.Niue => "countryNU",
+                Country.NorfolkIsland => "countryNF",
+                Country.NorthernMarianaIslands => "countryMP",
+                Country.Norway => "countryNO",
+                Country.Oman => "countryOM",
+                Country.Pakistan => "countryPK",
+                Country.Palau => "countryPW",
+                Country.PalestinianTerritory => "countryPS",
+                Country.Panama => "countryPA",
+                Country.PapuaNewGuinea => "countryPG",
+                Country.Paraguay => "countryPY",
+                Country.Peru => "countryPE",
+                Country.Philippines => "countryPH",
+                Country.Pitcairn => "countryPN",
+                Country.Poland => "countryPL",
+                Country.Portugal => "countryPT",
+                Country.PuertoRico => "countryPR",
+                Country.Qatar => "countryQA",
+                Country.Reunion => "countryRE",
+                Country.Romania => "countryRO",
+                Country.RussianFederation => "countryRU",
+                Country.Rwanda => "countryRW",
+                Country.SaintHelena => "countrySH",
+                Country.SaintKittsAndNevis => "countryKN",
+                Country.SaintLucia => "countryLC",
+                Country.SaintPierreAndMiquelon => "countryPM",
+                Country.SaintVincentAndtheGrenadines => "countryVC",
+                Country.Samoa => "countryWS",
+                Country.SanMarino => "countrySM",
+                Country.SaoTomeAndPrincipe => "countryST",
+                Country.SaudiArabia => "countrySA",
+                Country.Senegal => "countrySN",
+                Country.SerbiaAndMontenegro => "countryCS",
+                Country.Seychelles => "countrySC",
+                Country.SierraLeone => "countrySL",
+                Country.Singapore => "countrySG",
+                Country.Slovakia => "countrySK",
+                Country.Slovenia => "countrySI",
+                Country.SolomonIslands => "countrySB",
+                Country.Somalia => "countrySO",
+                Country.SouthAfrica => "countryZA",
+                Country.SouthGeorgiaAndTheSouthSAndwichIslands => "countryGS",
+                Country.Spain => "countryES",
+                Country.SriLanka => "countryLK",
+                Country.Sudan => "countrySD",
+                Country.Suriname => "countrySR",
+                Country.SvalbardAndJanMayen => "countrySJ",
+                Country.Swaziland => "countrySZ",
+                Country.Sweden => "countrySE",
+                Country.Switzerland => "countryCH",
+                Country.SyrianArabRepublic => "countrySY",
+                Country.Taiwan => "countryTW",
+                Country.Tajikistan => "countryTJ",
+                Country.Tanzania => "countryTZ",
+                Country.Thailand => "countryTH",
+                Country.Togo => "countryTG",
+                Country.Tokelau => "countryTK",
+                Country.Tonga => "countryTO",
+                Country.TrinidadAndTobago => "countryTT",
+                Country.Tunisia => "countryTN",
+                Country.Turkey => "countryTR",
+                Country.Turkmenistan => "countryTM",
+                Country.TurksAndCaicosIslands => "countryTC",
+                Country.Tuvalu => "countryTV",
+                Country.Uganda => "countryUG",
+                Country.Ukraine => "countryUA",
+                Country.UnitedArabEmirates => "countryAE",
+                Country.UnitedKingdom => "countryUK",
+                Country.UnitedStates => "countryUS",
+                Country.UnitedStatesMinorOutlyingIslands => "countryUM",
+                Country.Uruguay => "countryUY",
+                Country.Uzbekistan => "countryUZ",
+                Country.Vanuatu => "countryVU",
+                Country.Venezuela => "countryVE",
+                Country.Vietnam => "countryVN",
+                Country.VirginIslandsBritish => "countryVG",
+                Country.VirginIslandsUs => "countryVI",
+                Country.WallisandFutuna => "countryWF",
+                Country.WesternSahara => "countryEH",
+                Country.Yemen => "countryYE",
+                Country.Yugoslavia => "countryYU",
+                Country.Zambia => "countryZM",
+                Country.Zimbabwe => "countryZW",
+                _ => string.Empty
+            };
         }
     }
 }

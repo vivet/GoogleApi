@@ -61,9 +61,11 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
             var builder = new StringBuilder();
 
             if (!this.Locations.Any())
-                return null;
+            {
+                return null!;
+            }
 
-            var hasLabel = !string.IsNullOrEmpty(this.Label) && !(this.Size == MarkerSize.Tiny || this.Size == MarkerSize.Small);
+            var hasLabel = !string.IsNullOrEmpty(this.Label) && this.Size is not (MarkerSize.Tiny or MarkerSize.Small);
             if (hasLabel)
             {
                 builder
@@ -92,7 +94,9 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
                 .Append(string.Join("|", this.Locations.Select(x => x.ToString())));
 
             if (builder.Length == 0)
-                return null;
+            {
+                return null!;
+            }
 
             return builder
                 .ToString();

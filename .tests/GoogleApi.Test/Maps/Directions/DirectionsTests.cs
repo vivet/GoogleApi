@@ -20,7 +20,7 @@ namespace GoogleApi.Test.Maps.Directions
             var destination = new Address("185 Broadway Ave, Manhattan, NY, USA");
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(origin),
                 Destination = new LocationEx(destination)
             };
@@ -37,7 +37,7 @@ namespace GoogleApi.Test.Maps.Directions
             var destination = new CoordinateEx(55.72672682, 12.407996582);
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(origin),
                 Destination = new LocationEx(destination)
             };
@@ -60,7 +60,7 @@ namespace GoogleApi.Test.Maps.Directions
             };
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(origin),
                 Destination = new LocationEx(destination)
             };
@@ -83,7 +83,7 @@ namespace GoogleApi.Test.Maps.Directions
             };
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(origin),
                 Destination = new LocationEx(destination)
             };
@@ -100,7 +100,7 @@ namespace GoogleApi.Test.Maps.Directions
             var destination = new Place("ChIJo9YpQWBZwokR7OeY0hiWh8g");
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(origin),
                 Destination = new LocationEx(destination)
             };
@@ -115,7 +115,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
                 Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
                 Avoid = AvoidWay.Highways
@@ -131,7 +131,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
                 Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
                 TravelMode = TravelMode.Driving,
@@ -148,7 +148,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
                 Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
                 TravelMode = TravelMode.Driving,
@@ -166,12 +166,12 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(new Address("NYC, USA")),
                 Destination = new LocationEx(new Address("Miami, USA")),
                 WayPoints = new List<WayPoint>
                 {
-                    new WayPoint(new LocationEx(new Address("Philadelphia, USA")))
+                    new(new LocationEx(new Address("Philadelphia, USA")))
                 },
                 OptimizeWaypoints = false
             };
@@ -186,12 +186,12 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(new Address("NYC, USA")),
                 Destination = new LocationEx(new Address("Miami, USA")),
                 WayPoints = new List<WayPoint>
                 {
-                    new WayPoint(new LocationEx(new Address("Philadelphia, USA")), true)
+                    new(new LocationEx(new Address("Philadelphia, USA")), true)
                 },
                 OptimizeWaypoints = true
             };
@@ -206,7 +206,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
                 Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA"))
             };
@@ -221,7 +221,7 @@ namespace GoogleApi.Test.Maps.Directions
         {
             var request = new DirectionsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
                 Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA"))
             };

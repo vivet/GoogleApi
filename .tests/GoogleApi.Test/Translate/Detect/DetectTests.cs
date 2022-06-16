@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Detect.Request;
-using GoogleApi.Exceptions;
 using NUnit.Framework;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
@@ -17,7 +16,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World" }
             };
 
@@ -39,7 +38,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World", "Der var engang" }
             };
 
@@ -66,7 +65,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World" }
             };
 
@@ -80,7 +79,7 @@ namespace GoogleApi.Test.Translate.Detect
         {
             var request = new DetectRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Qs = new[] { "Hello World" }
             };
 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace GoogleApi.Entities
 {
@@ -15,6 +16,6 @@ namespace GoogleApi.Entities
         /// <summary>
         /// Stream.
         /// </summary>
-        public virtual MemoryStream Stream => new MemoryStream(this.Buffer ?? new byte[0]);
+        public virtual MemoryStream Stream => new(this.Buffer ?? Array.Empty<byte>());
     }
 }

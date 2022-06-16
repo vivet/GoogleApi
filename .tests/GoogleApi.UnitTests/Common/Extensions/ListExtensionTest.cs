@@ -27,7 +27,10 @@ namespace GoogleApi.UnitTests.Common.Extensions
             var queryStringParameters = new List<KeyValuePair<string, string>>();
 
             var exception = Assert.Throws<ArgumentNullException>(() => queryStringParameters.Add(null, VALUE));
-            Assert.AreEqual("Value cannot be null. (Parameter 'key')", exception.Message);
+
+            Assert.IsNotNull(exception);
+            Assert.IsTrue(exception.Message.StartsWith("Value cannot be null"));
+            Assert.IsTrue(exception.Message.Contains("key"));
         }
     }
 }

@@ -16,8 +16,8 @@ namespace GoogleApi.Test.Search.Image
         {
             var request = new ImageSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google"
             };
 
@@ -56,8 +56,8 @@ namespace GoogleApi.Test.Search.Image
         {
             var request = new ImageSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google"
             };
 
@@ -74,8 +74,8 @@ namespace GoogleApi.Test.Search.Image
         {
             var request = new ImageSearchRequest
             {
-                Key = this.ApiKey,
-                SearchEngineId = this.SearchEngineId,
+                Key = this.Settings.ApiKey,
+                SearchEngineId = this.Settings.SearchEngineId,
                 Query = "google"
             };
 
@@ -134,7 +134,7 @@ namespace GoogleApi.Test.Search.Image
         {
             var request = new ImageSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = null
             };
 
@@ -152,7 +152,7 @@ namespace GoogleApi.Test.Search.Image
         {
             var request = new ImageSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
                 SearchEngineId = null
             };

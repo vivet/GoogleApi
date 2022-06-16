@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
@@ -16,7 +15,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Language = Language.English
             };
@@ -32,7 +31,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200"
             };
             var response = GooglePlaces.QueryAutoComplete.QueryAsync(request).Result;
@@ -46,7 +45,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200"
             };
 
@@ -64,7 +63,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Offset = "offset"
             };
@@ -80,7 +79,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Location = new Coordinate(1, 1)
             };
@@ -96,7 +95,7 @@ namespace GoogleApi.Test.Places.QueryAutoComplete
         {
             var request = new PlacesQueryAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Radius = 100
             };

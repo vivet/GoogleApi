@@ -21,7 +21,7 @@ namespace GoogleApi.Entities.Search
         /// Valid values: json, atom
         /// Default value: json
         /// </summary>
-        public virtual AltType Alt { get; } = AltType.Json;
+        public virtual AltType Alt => AltType.Json;
 
         /// <summary>
         /// Allowed values are web or image. If unspecified, results are limited to webpages.

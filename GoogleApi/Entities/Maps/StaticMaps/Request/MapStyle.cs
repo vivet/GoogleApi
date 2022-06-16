@@ -41,8 +41,10 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
         {
             var style = this.Style?.ToString();
 
-            if (style == null) 
-                return null;
+            if (style == null)
+            {
+                return null!;
+            }
             
             var featureValue = this.Feature.ToEnumMemberString();
             var elementValue = this.Element.ToEnumMemberString();

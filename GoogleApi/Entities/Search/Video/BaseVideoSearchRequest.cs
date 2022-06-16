@@ -25,7 +25,7 @@ namespace GoogleApi.Entities.Search.Video
         /// The part parameter specifies a comma-separated list of one or more search resource properties that the API response will include.
         /// Cannot be set. Currently, the implementation only support response part 'snippet'.
         /// </summary>
-        public virtual PartType Part { get; } = PartType.Snippet;
+        public virtual PartType Part => PartType.Snippet;
 
         /// <summary>
         /// The location parameter, in conjunction with the locationRadius parameter, defines a circular geographic area and also restricts a search to videos that specify,
@@ -111,8 +111,10 @@ namespace GoogleApi.Entities.Search.Video
         {
             var parameters = base.GetQueryStringParameters();
 
-            if (this.MaxResults <= 0 || this.MaxResults > 50)
+            if (this.MaxResults is <= 0 or > 50)
+            {
                 throw new ArgumentOutOfRangeException(nameof(this.MaxResults));
+            }
 
             parameters.Add("type", this.SearchType.ToString().ToLower());
 
@@ -136,24 +138,36 @@ namespace GoogleApi.Entities.Search.Video
             parameters.Add("order", this.Order.ToString().ToLower());
 
             if (this.PageToken != null)
+            {
                 parameters.Add("nextPageToken", this.PageToken);
+            }
 
             if (this.PublishedAfter.HasValue)
+            {
                 parameters.Add("publishedAfter", this.PublishedAfter.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+            }
 
             if (this.PublishedBefore.HasValue)
+            {
                 parameters.Add("publishedBefore", this.PublishedBefore.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+            }
 
             if (this.Region.HasValue)
+            {
                 parameters.Add("regionCode", this.Region.Value.ToCode());
+            }
 
             if (this.RelevanceLanguage.HasValue)
+            {
                 parameters.Add("relevanceLanguage", this.RelevanceLanguage.Value.ToCode());
+            }
 
             parameters.Add("safeSearch", this.SafeSearch.ToString().ToLower());
 
             if (this.TopicId != null)
+            {
                 parameters.Add("topicId", this.TopicId);
+            }
 
             return parameters;
         }

@@ -115,6 +115,7 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -127,6 +128,7 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -140,6 +142,7 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
         }
 
@@ -149,10 +152,11 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             var request = new ElevationRequest
             {
                 Key = "key",
-                Locations = new Coordinate[0]
+                Locations = Array.Empty<Coordinate>()
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
         }
 
@@ -166,6 +170,7 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
         }
 
@@ -175,10 +180,11 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             var request = new ElevationRequest
             {
                 Key = "key",
-                Path = new Coordinate[0]
+                Path = Array.Empty<Coordinate>()
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Locations' or 'Path' is required", exception.Message);
         }
 
@@ -190,15 +196,16 @@ namespace GoogleApi.UnitTests.Maps.Elevation
                 Key = "key",
                 Locations = new List<Coordinate>
                 {
-                    new Coordinate(0, 0)
+                    new(0, 0)
                 },
                 Path = new List<Coordinate>
                 {
-                    new Coordinate(0, 0)
+                    new(0, 0)
                 }
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Path' and 'Locations' cannot both be specified", exception.Message);
         }
 
@@ -215,6 +222,7 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("A minimum of two coordinates is required when using 'Path'", exception.Message);
         }
 
@@ -233,6 +241,7 @@ namespace GoogleApi.UnitTests.Maps.Elevation
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Samples' is required, when using 'Path'", exception.Message);
         }
     }

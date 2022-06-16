@@ -12,26 +12,15 @@
         /// <returns>The parameter name.</returns>
         public static string GetParameterName(this ImageFormat format)
         {
-            switch (format)
+            return format switch
             {
-                case ImageFormat.Png:
-                    return "png";
-
-                case ImageFormat.Png32:
-                    return "png32";
-
-                case ImageFormat.Gif:
-                    return "gif";
-
-                case ImageFormat.Jpg:
-                    return "jpg";
-
-                case ImageFormat.JpgBaseline:
-                    return "jpg-baseline";
-
-                default:
-                    return "png";
-            }
+                ImageFormat.Png => "png",
+                ImageFormat.Png32 => "png32",
+                ImageFormat.Gif => "gif",
+                ImageFormat.Jpg => "jpg",
+                ImageFormat.JpgBaseline => "jpg-baseline",
+                _ => "png"
+            };
         }
     }
 }

@@ -12,117 +12,115 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Extensions
         /// <returns>the <see cref="Language"/> matching the passed <paramref name="code"/>.</returns>
         public static Language? FromCode(this string code)
         {
-            switch (code)
+            return code switch
             {
-                case "af": return Language.Afrikaans;
-                case "sq": return Language.Albanian;
-                case "am": return Language.Amharic;
-                case "ar": return Language.Arabic;
-                case "hy": return Language.Armenian;
-                case "az": return Language.Azeerbaijani;
-                case "eu": return Language.Basque;
-                case "be": return Language.Belarusian;
-                case "bn": return Language.Bengali;
-                case "bs": return Language.Bosnian;
-                case "bg": return Language.Bulgarian;
-                case "ca": return Language.Catalan;
-                case "ceb": return Language.Cebuano;
-                case "ny": return Language.Chichewa;
-                case "zh": return Language.Chinese_Simplified;
-                case "zh-CN": return Language.Chinese_Simplified;
-                case "zh-TW": return Language.Chinese_Traditional;
-                case "co": return Language.Corsican;
-                case "hr": return Language.Croatian;
-                case "cs": return Language.Czech;
-                case "da": return Language.Danish;
-                case "nl": return Language.Dutch;
-                case "en": return Language.English;
-                case "eo": return Language.Esperanto;
-                case "et": return Language.Estonian;
-                case "tl": return Language.Filipino;
-                case "fi": return Language.Finnish;
-                case "fr": return Language.French;
-                case "fy": return Language.Frisian;
-                case "gl": return Language.Galician;
-                case "ka": return Language.Georgian;
-                case "de": return Language.German;
-                case "el": return Language.Greek;
-                case "gu": return Language.Gujarati;
-                case "ht": return Language.Haitian_Creole;
-                case "ha": return Language.Hausa;
-                case "haw": return Language.Hawaiian;
-                case "iw": return Language.Hebrew;
-                case "hi": return Language.Hindi;
-                case "hmn": return Language.Hmong;
-                case "hu": return Language.Hungarian;
-                case "is": return Language.Icelandic;
-                case "ig": return Language.Igbo;
-                case "id": return Language.Indonesian;
-                case "ga": return Language.Irish;
-                case "it": return Language.Italian;
-                case "ja": return Language.Japanese;
-                case "jw": return Language.Javanese;
-                case "kn": return Language.Kannada;
-                case "kk": return Language.Kazakh;
-                case "km": return Language.Khmer;
-                case "ko": return Language.Korean;
-                case "ku": return Language.Kurdish;
-                case "ky": return Language.Kyrgyz;
-                case "lo": return Language.Lao;
-                case "la": return Language.Latin;
-                case "lv": return Language.Latvian;
-                case "lt": return Language.Lithuanian;
-                case "lb": return Language.Luxembourgish;
-                case "mk": return Language.Macedonian;
-                case "mg": return Language.Malagasy;
-                case "ms": return Language.Malay;
-                case "ml": return Language.Malayalam;
-                case "mt": return Language.Maltese;
-                case "mi": return Language.Maori;
-                case "mr": return Language.Marathi;
-                case "mn": return Language.Mongolian;
-                case "my": return Language.Burmese;
-                case "ne": return Language.Nepali;
-                case "no": return Language.Norwegian;
-                case "ps": return Language.Pashto;
-                case "fa": return Language.Persian;
-                case "pl": return Language.Polish;
-                case "pt": return Language.Portuguese;
-                case "ma": return Language.Punjabi;
-                case "ro": return Language.Romanian;
-                case "ru": return Language.Russian;
-                case "sm": return Language.Samoan;
-                case "gd": return Language.Scots_Gaelic;
-                case "sr": return Language.Serbian;
-                case "st": return Language.Sesotho;
-                case "sn": return Language.Shona;
-                case "sd": return Language.Sindhi;
-                case "si": return Language.Sinhala;
-                case "sk": return Language.Slovak;
-                case "sl": return Language.Slovenian;
-                case "so": return Language.Somali;
-                case "es": return Language.Spanish;
-                case "su": return Language.Sundanese;
-                case "sw": return Language.Swahili;
-                case "sv": return Language.Swedish;
-                case "tg": return Language.Tajik;
-                case "ta": return Language.Tamil;
-                case "te": return Language.Telugu;
-                case "th": return Language.Thai;
-                case "tr": return Language.Turkish;
-                case "uk": return Language.Ukrainian;
-                case "ur": return Language.Urdu;
-                case "uz": return Language.Uzbek;
-                case "vi": return Language.Vietnamese;
-                case "cy": return Language.Welsh;
-                case "xh": return Language.Xhosa;
-                case "yi": return Language.Yiddish;
-                case "yo": return Language.Yoruba;
-                case "zu": return Language.Zulu;
-
-                default:
-                    return Language.English;
-            }
+                "af" => Language.Afrikaans,
+                "sq" => Language.Albanian,
+                "am" => Language.Amharic,
+                "ar" => Language.Arabic,
+                "hy" => Language.Armenian,
+                "az" => Language.Azeerbaijani,
+                "eu" => Language.Basque,
+                "be" => Language.Belarusian,
+                "bn" => Language.Bengali,
+                "bs" => Language.Bosnian,
+                "bg" => Language.Bulgarian,
+                "ca" => Language.Catalan,
+                "ceb" => Language.Cebuano,
+                "ny" => Language.Chichewa,
+                "zh" => Language.Chinese_Simplified,
+                "zh-CN" => Language.Chinese_Simplified,
+                "zh-TW" => Language.Chinese_Traditional,
+                "co" => Language.Corsican,
+                "hr" => Language.Croatian,
+                "cs" => Language.Czech,
+                "da" => Language.Danish,
+                "nl" => Language.Dutch,
+                "en" => Language.English,
+                "eo" => Language.Esperanto,
+                "et" => Language.Estonian,
+                "tl" => Language.Filipino,
+                "fi" => Language.Finnish,
+                "fr" => Language.French,
+                "fy" => Language.Frisian,
+                "gl" => Language.Galician,
+                "ka" => Language.Georgian,
+                "de" => Language.German,
+                "el" => Language.Greek,
+                "gu" => Language.Gujarati,
+                "ht" => Language.Haitian_Creole,
+                "ha" => Language.Hausa,
+                "haw" => Language.Hawaiian,
+                "iw" => Language.Hebrew,
+                "hi" => Language.Hindi,
+                "hmn" => Language.Hmong,
+                "hu" => Language.Hungarian,
+                "is" => Language.Icelandic,
+                "ig" => Language.Igbo,
+                "id" => Language.Indonesian,
+                "ga" => Language.Irish,
+                "it" => Language.Italian,
+                "ja" => Language.Japanese,
+                "jw" => Language.Javanese,
+                "kn" => Language.Kannada,
+                "kk" => Language.Kazakh,
+                "km" => Language.Khmer,
+                "ko" => Language.Korean,
+                "ku" => Language.Kurdish,
+                "ky" => Language.Kyrgyz,
+                "lo" => Language.Lao,
+                "la" => Language.Latin,
+                "lv" => Language.Latvian,
+                "lt" => Language.Lithuanian,
+                "lb" => Language.Luxembourgish,
+                "mk" => Language.Macedonian,
+                "mg" => Language.Malagasy,
+                "ms" => Language.Malay,
+                "ml" => Language.Malayalam,
+                "mt" => Language.Maltese,
+                "mi" => Language.Maori,
+                "mr" => Language.Marathi,
+                "mn" => Language.Mongolian,
+                "my" => Language.Burmese,
+                "ne" => Language.Nepali,
+                "no" => Language.Norwegian,
+                "ps" => Language.Pashto,
+                "fa" => Language.Persian,
+                "pl" => Language.Polish,
+                "pt" => Language.Portuguese,
+                "ma" => Language.Punjabi,
+                "ro" => Language.Romanian,
+                "ru" => Language.Russian,
+                "sm" => Language.Samoan,
+                "gd" => Language.Scots_Gaelic,
+                "sr" => Language.Serbian,
+                "st" => Language.Sesotho,
+                "sn" => Language.Shona,
+                "sd" => Language.Sindhi,
+                "si" => Language.Sinhala,
+                "sk" => Language.Slovak,
+                "sl" => Language.Slovenian,
+                "so" => Language.Somali,
+                "es" => Language.Spanish,
+                "su" => Language.Sundanese,
+                "sw" => Language.Swahili,
+                "sv" => Language.Swedish,
+                "tg" => Language.Tajik,
+                "ta" => Language.Tamil,
+                "te" => Language.Telugu,
+                "th" => Language.Thai,
+                "tr" => Language.Turkish,
+                "uk" => Language.Ukrainian,
+                "ur" => Language.Urdu,
+                "uz" => Language.Uzbek,
+                "vi" => Language.Vietnamese,
+                "cy" => Language.Welsh,
+                "xh" => Language.Xhosa,
+                "yi" => Language.Yiddish,
+                "yo" => Language.Yoruba,
+                "zu" => Language.Zulu,
+                _ => Language.English
+            };
         }
     }
 }

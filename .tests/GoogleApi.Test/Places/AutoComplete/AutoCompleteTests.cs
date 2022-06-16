@@ -18,7 +18,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Types = new List<RestrictPlaceType> { RestrictPlaceType.Address }
             };
@@ -58,7 +58,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København"
             };
 
@@ -72,7 +72,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København"
             };
 
@@ -90,7 +90,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Language = Language.Danish
             };
@@ -117,7 +117,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Offset = "offset"
             };
@@ -133,7 +133,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Location = new Coordinate(1, 1)
             };
@@ -149,7 +149,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Radius = 100
             };
@@ -165,7 +165,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "jagtvej 2200 København",
                 Types = new List<RestrictPlaceType> { RestrictPlaceType.Address }
             };
@@ -181,7 +181,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "København",
                 Types = new List<RestrictPlaceType> { RestrictPlaceType.Cities }
             };
@@ -197,7 +197,7 @@ namespace GoogleApi.Test.Places.AutoComplete
         {
             var request = new PlacesAutoCompleteRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Input = "Denmark",
                 Types = new List<RestrictPlaceType> { RestrictPlaceType.Regions }
             };

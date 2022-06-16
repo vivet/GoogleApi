@@ -15,7 +15,7 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
         {
             var request = new NearestRoadsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Points = new[]
                 {
                     new Coordinate(60.170880, 24.942795),
@@ -24,7 +24,7 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
                 }
             };
 
-            var result = GoogleMaps.NearestRoads.Query(request);
+            var result = GoogleMaps.Roads.NearestRoads.Query(request);
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
         }
@@ -34,7 +34,7 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
         {
             var request = new NearestRoadsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Points = new[]
                 {
                     new Coordinate(60.170880, 24.942795),
@@ -42,7 +42,7 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
                     new Coordinate(60.170877, 24.942796)
                 }
             };
-            var result = GoogleMaps.NearestRoads.QueryAsync(request).Result;
+            var result = GoogleMaps.Roads.NearestRoads.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -53,11 +53,11 @@ namespace GoogleApi.Test.Maps.Roads.NearestRoads
         {
             var request = new NearestRoadsRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Points = new[] { new Coordinate(0, 0) }
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.NearestRoads.QueryAsync(request, cancellationTokenSource.Token);
+            var task = GoogleMaps.Roads.NearestRoads.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));

@@ -51,6 +51,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Key is required");
         }
 
@@ -67,6 +68,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Key is required");
         }
 
@@ -84,6 +86,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Query is required");
         }
 
@@ -101,6 +104,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Query is required");
         }
 
@@ -119,6 +123,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "SearchEngineId is required");
         }
 
@@ -137,6 +142,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "SearchEngineId is required");
         }
 
@@ -159,6 +165,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
         }
 
@@ -181,6 +188,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
         }
 
@@ -204,6 +212,7 @@ namespace GoogleApi.UnitTests.Search.Image
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, $"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}");
         }
 

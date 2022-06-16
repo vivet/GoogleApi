@@ -63,6 +63,7 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -75,6 +76,7 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -87,6 +89,7 @@ namespace GoogleApi.UnitTests.Maps.TimeZone
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Location' is required");
         }
     }

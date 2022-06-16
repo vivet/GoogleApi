@@ -162,7 +162,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
             Assert.IsNotNull(queryStringParameters);
 
             var types1 = queryStringParameters.FirstOrDefault(x => x.Key == "types");
-            var types1Expected = string.Join("|", request.Types.Select(x => x == RestrictPlaceType.Cities || x == RestrictPlaceType.Regions ? $"({x.ToString().ToLower()})" : $"{x.ToString().ToLower()}"));
+            var types1Expected = string.Join("|", request.Types.Select(x => x is RestrictPlaceType.Cities or RestrictPlaceType.Regions ? $"({x.ToString().ToLower()})" : $"{x.ToString().ToLower()}"));
             Assert.IsNotNull(types1);
             Assert.AreEqual(types1Expected, types1.Value);
         }
@@ -203,6 +203,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -219,6 +220,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -236,6 +238,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Input' is required");
         }
 
@@ -253,6 +256,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Input' is required");
         }
 
@@ -271,6 +275,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
@@ -289,6 +294,7 @@ namespace GoogleApi.UnitTests.Places.AutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
     }

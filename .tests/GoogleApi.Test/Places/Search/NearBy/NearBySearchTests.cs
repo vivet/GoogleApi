@@ -18,12 +18,12 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 1000
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = GooglePlaces.Search.NearBySearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -33,24 +33,24 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 1000
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = GooglePlaces.Search.NearBySearch.Query(request);
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.NextPageToken);
 
             var requestNextPage = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 PageToken = response.NextPageToken
             };
 
             Thread.Sleep(1500);
 
-            var responseNextPage = GooglePlaces.NearBySearch.Query(requestNextPage);
+            var responseNextPage = GooglePlaces.Search.NearBySearch.Query(requestNextPage);
             Assert.IsNotNull(responseNextPage);
             Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
         }
@@ -60,13 +60,13 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 25000,
                 Name = "cafe"
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = GooglePlaces.Search.NearBySearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -76,13 +76,13 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 25000,
                 Keyword = "cafe"
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = GooglePlaces.Search.NearBySearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -92,13 +92,13 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 25000,
                 Type = SearchPlaceType.Cafe
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = GooglePlaces.Search.NearBySearch.Query(request);
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
         }
@@ -108,13 +108,13 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, 40.16668),
                 Radius = 25000,
                 Minprice = PriceLevel.Free
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = GooglePlaces.Search.NearBySearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -131,13 +131,13 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 25000,
                 Maxprice = PriceLevel.Expensive
             };
 
-            var response = GooglePlaces.NearBySearch.Query(request);
+            var response = GooglePlaces.Search.NearBySearch.Query(request);
 
             Assert.IsNotNull(response);
             Assert.IsEmpty(response.HtmlAttributions);
@@ -154,13 +154,13 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
 
-            var response = GooglePlaces.NearBySearch.QueryAsync(request).Result;
+            var response = GooglePlaces.Search.NearBySearch.QueryAsync(request).Result;
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -171,14 +171,14 @@ namespace GoogleApi.Test.Places.Search.NearBy
         {
             var request = new PlacesNearBySearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(51.491431, -3.16668),
                 Radius = 500,
                 Type = SearchPlaceType.School
             };
 
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.NearBySearch.QueryAsync(request, cancellationTokenSource.Token);
+            var task = GooglePlaces.Search.NearBySearch.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));

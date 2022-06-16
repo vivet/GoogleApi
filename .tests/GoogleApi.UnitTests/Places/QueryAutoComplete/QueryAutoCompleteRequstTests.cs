@@ -118,6 +118,7 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -134,6 +135,7 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -151,6 +153,7 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Input' is required");
         }
 
@@ -168,6 +171,7 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Input' is required");
         }
 
@@ -186,6 +190,7 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
 
@@ -204,6 +209,7 @@ namespace GoogleApi.UnitTests.Places.QueryAutoComplete
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
         }
     }

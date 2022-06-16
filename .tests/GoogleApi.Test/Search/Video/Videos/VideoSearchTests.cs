@@ -16,7 +16,7 @@ namespace GoogleApi.Test.Search.Video.Videos
         {
             var request = new VideoSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
                 MaxResults = 1
             };
@@ -42,7 +42,7 @@ namespace GoogleApi.Test.Search.Video.Videos
         {
             var request = new VideoSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google",
                 MaxResults = 1
             };
@@ -59,7 +59,7 @@ namespace GoogleApi.Test.Search.Video.Videos
         {
             var request = new VideoSearchRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Query = "google"
             };
 

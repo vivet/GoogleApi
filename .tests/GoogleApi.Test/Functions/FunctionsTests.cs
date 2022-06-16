@@ -11,12 +11,12 @@ namespace GoogleApi.Test.Functions
         private const string POLY_LINE = "chdEchdEoxgFoxgFi`vEi`vE";
         private const string POLY_LINE_2 = "cbb|@cbb|@ore}@ore}@izs|@izs|@";
 
-        private readonly Coordinate location1 = new Coordinate(1.0101, 1.0101);
-        private readonly Coordinate location2 = new Coordinate(2.20202, 2.20202);
-        private readonly Coordinate location3 = new Coordinate(3.30303, 3.30303);
-        private readonly Coordinate location4 = new Coordinate(10.0101, 10.0101);
-        private readonly Coordinate location5 = new Coordinate(20.20202, 20.20202);
-        private readonly Coordinate location6 = new Coordinate(30.30303, 30.30303);
+        private readonly Coordinate location1 = new(1.0101, 1.0101);
+        private readonly Coordinate location2 = new(2.20202, 2.20202);
+        private readonly Coordinate location3 = new(3.30303, 3.30303);
+        private readonly Coordinate location4 = new(10.0101, 10.0101);
+        private readonly Coordinate location5 = new(20.20202, 20.20202);
+        private readonly Coordinate location6 = new(30.30303, 30.30303);
 
         [Test]
         public void EncodePolyLineTest()
@@ -32,6 +32,7 @@ namespace GoogleApi.Test.Functions
         public void EncodePolyLineWhenLocationsIsNullTest()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => GoogleFunctions.EncodePolyLine(null));
+            Assert.IsNotNull(exception);
             Assert.AreEqual("locations", exception.ParamName);
         }
 
@@ -59,6 +60,7 @@ namespace GoogleApi.Test.Functions
         public void MergePolyLineWhenEncdodedLocationsIsNullTest()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => GoogleFunctions.MergePolyLine(null));
+            Assert.IsNotNull(exception);
             Assert.AreEqual("encodedLocations", exception.ParamName);
         }
 
@@ -84,6 +86,7 @@ namespace GoogleApi.Test.Functions
                 var decodePolyLine = GoogleFunctions.DecodePolyLine(null);
                 Assert.IsNull(decodePolyLine);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual("encodedLocations", exception.ParamName);
         }
     }

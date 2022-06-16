@@ -77,6 +77,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -93,6 +94,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Key' is required");
         }
 
@@ -110,6 +112,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Target' is required");
         }
 
@@ -128,6 +131,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Qs' is required");
         }
 
@@ -138,7 +142,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
             {
                 Key = "key",
                 Target = Language.Danish,
-                Qs = new string[0]
+                Qs = Array.Empty<string>()
             };
 
             var exception = Assert.Throws<ArgumentException>(() =>
@@ -146,6 +150,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Qs' is required");
         }
 
@@ -166,6 +171,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Source' is not compatible with model 'Nmt'");
         }
 
@@ -186,6 +192,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Target' is not compatible with model 'Nmt'");
         }
 
@@ -206,6 +213,7 @@ namespace GoogleApi.UnitTests.Translate.Translate
                 var parameters = request.GetQueryStringParameters();
                 Assert.IsNull(parameters);
             });
+            Assert.IsNotNull(exception);
             Assert.AreEqual(exception.Message, "'Source' or 'Target' must be english");
         }
     }

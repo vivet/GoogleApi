@@ -816,6 +816,6 @@ namespace GoogleApi.Entities.Common.Enums
         /// See <see href="https://plus.codes"/> for details.
         /// </summary>
         [EnumMember(Value = "plus_code")]
-        Plus_Code,
+        Plus_Code
     }
 }

@@ -47,19 +47,29 @@ namespace GoogleApi.Entities.Places.Photos.Request
             parameters.Add("photoreference", this.PhotoReference);
 
             if (!this.MaxHeight.HasValue && !this.MaxWidth.HasValue)
+            {
                 throw new ArgumentException($"'{nameof(this.MaxHeight)}' or '{nameof(this.MaxWidth)}' is required");
+            }
 
-            if (this.MaxHeight.HasValue && (this.MaxHeight > 1600 || this.MaxHeight < 1))
+            if (this.MaxHeight is > 1600 or < 1)
+            {
                 throw new ArgumentException($"'{nameof(this.MaxHeight)}' must be greater than or equal to 1 and less than or equal to 1.600");
+            }
 
-            if (this.MaxWidth.HasValue && (this.MaxWidth > 1600 || this.MaxWidth < 1))
+            if (this.MaxWidth is > 1600 or < 1)
+            {
                 throw new ArgumentException($"'{nameof(this.MaxWidth)}' must be greater than or equal to 1 and less than or equal to 1.600");
+            }
 
             if (this.MaxWidth.HasValue)
+            {
                 parameters.Add("maxwidth", this.MaxWidth.Value.ToString());
+            }
 
             if (this.MaxHeight.HasValue)
+            {
                 parameters.Add("maxheight", this.MaxHeight.Value.ToString());
+            }
 
             return parameters;
         }

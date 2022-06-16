@@ -92,8 +92,10 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 
             if (this.Lightness != null)
             {
-                if (this.Lightness < -100 || this.Lightness > 100)
+                if (this.Lightness is < -100 or > 100)
+                {
                     throw new ArgumentOutOfRangeException(nameof(this.Lightness), this.Lightness, $"The {nameof(this.Lightness)} must be between -100 and 100.");
+                }
 
                 builder
                     .Append($"lightness:{this.Lightness}|");
@@ -101,7 +103,7 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
 
             if (this.Saturation != null)
             {
-                if (this.Saturation < -100 || this.Saturation > 100)
+                if (this.Saturation is < -100 or > 100)
                     throw new ArgumentOutOfRangeException(nameof(this.Saturation), this.Saturation, $"The {nameof(this.Saturation)} must be between -100 and 100.");
 
                 builder
@@ -142,7 +144,9 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request
             }
 
             if (builder.Length == 0)
-                return null;
+            {
+                return null!;
+            }
 
             return builder
                 .ToString(0, builder.Length - 1);

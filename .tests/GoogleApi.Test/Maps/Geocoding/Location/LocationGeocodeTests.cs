@@ -17,11 +17,11 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(40.7141289, -73.9614074)
             };
 
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -32,11 +32,11 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(27.0675, -40.808)
             };
 
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -47,7 +47,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(40.7141289, -73.9614074),
                 ResultTypes = new List<PlaceLocationType>
                 {
@@ -55,7 +55,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                     PlaceLocationType.Accounting
                 }
             };
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -66,14 +66,14 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(40.7141289, -73.9614074),
                 ResultTypes = new List<PlaceLocationType>
                 {
                     PlaceLocationType.Accounting
                 }
             };
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.ZeroResults, response.Status);
@@ -84,7 +84,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(40.7141289, -73.9614074),
                 LocationTypes = new List<GeometryLocationType>
                 {
@@ -92,7 +92,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
                 }
             };
 
-            var response = GoogleMaps.LocationGeocode.Query(request);
+            var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(Status.Ok, response.Status);
@@ -103,10 +103,10 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(40.7141289, -73.9614074)
             };
-            var result = GoogleMaps.LocationGeocode.QueryAsync(request).Result;
+            var result = GoogleMaps.Geocode.LocationGeocode.QueryAsync(request).Result;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Status.Ok, result.Status);
@@ -117,11 +117,11 @@ namespace GoogleApi.Test.Maps.Geocoding.Location
         {
             var request = new LocationGeocodeRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Location = new Coordinate(40.7141289, -73.9614074)
             };
             var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.LocationGeocode.QueryAsync(request, cancellationTokenSource.Token);
+            var task = GoogleMaps.Geocode.LocationGeocode.QueryAsync(request, cancellationTokenSource.Token);
             cancellationTokenSource.Cancel();
 
             var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));

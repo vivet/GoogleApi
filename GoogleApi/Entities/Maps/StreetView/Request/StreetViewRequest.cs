@@ -35,14 +35,14 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 		/// Size specifies the output size of the image in pixels. Required.
 		/// Size is specified as {width}x{height} - for example, size=600x400 returns an image 600 pixels wide, and 400 high.
 		/// </summary>
-		public virtual MapSize Size { get; set; } = new MapSize(600, 400);
+		public virtual MapSize Size { get; set; } = new(600, 400);
 
 		/// <summary>
 		/// Pitch (default is 0) specifies the up or down angle of the camera relative to the Street View vehicle. 
 		/// This is often, but not always, flat horizontal. Positive values angle the camera up (with 90 degrees indicating straight up); 
 		/// negative values angle the camera down (with -90 indicating straight down).
 		/// </summary>
-		public virtual short Pitch { get; set; } = 0;
+		public virtual short Pitch { get; set; }
 
 		/// <summary>
 		/// Heading indicates the compass heading of the camera. 
@@ -72,7 +72,7 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 		/// If set to true, an error message is returned in place of the generic gray image.
 		/// This eliminates the need to make a separate call to check for image availability.
 		/// </summary>
-		public virtual bool ReturnErrorCode { get; set; } = false;
+		public virtual bool ReturnErrorCode { get; set; }
 
         /// <summary>
         /// source (default is default) limits Street View searches to selected sources. Valid values are
@@ -100,7 +100,7 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 
 			parameters.Add("size", this.Size.ToString());
 
-		    if (this.Pitch >= -90 && this.Pitch <= 90)
+		    if (this.Pitch is >= -90 and <= 90)
 		    {
 		        parameters.Add("pitch", this.Pitch.ToString());
 		    }
@@ -109,7 +109,7 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
                 throw new ArgumentException($"'{nameof(this.Pitch)}' must be greater than -90 and less than 90");
             }
 
-		    if (this.FieldOfView >= 0 && this.FieldOfView <= 120)
+		    if (this.FieldOfView is >= 0 and <= 120)
 		    {
 		        parameters.Add("fov", this.FieldOfView.ToString());
 		    }
@@ -120,7 +120,7 @@ namespace GoogleApi.Entities.Maps.StreetView.Request
 
             if (this.Heading.HasValue)
             {
-                if (this.Heading >= 0 && this.Heading <= 360)
+                if (this.Heading is >= 0 and <= 360)
                 {
                     parameters.Add("heading", this.Heading.ToString());
                 }

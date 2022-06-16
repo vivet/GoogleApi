@@ -17,7 +17,7 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Source = Language.English,
                 Target = Language.Danish,
                 Qs = new[] { "Hello World" }
@@ -37,7 +37,7 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Source = Language.English,
                 Target = Language.Danish,
                 Qs = new[] { "Hello World", "Once upon a time" }
@@ -66,7 +66,7 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Target = Language.Albanian,
                 Qs = new[] { "Hej med dig min ven" }
             };
@@ -83,7 +83,7 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Source = Language.English,
                 Target = Language.Danish,
                 Model = Model.Nmt,
@@ -102,7 +102,7 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Source = Language.English,
                 Target = Language.Danish,
                 Qs = new[] { "Hello World" }
@@ -118,7 +118,7 @@ namespace GoogleApi.Test.Translate.Translate
         {
             var request = new TranslateRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Source = Language.English,
                 Target = Language.Danish,
                 Qs = new[] { "Hello World" }

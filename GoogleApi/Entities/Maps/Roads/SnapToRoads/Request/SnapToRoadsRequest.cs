@@ -26,7 +26,7 @@ namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request
         /// When true, additional interpolated points will also be returned, resulting in a path that smoothly follows the geometry of the road, even around corners and through tunnels. 
         /// Interpolated paths will most likely contain more points than the original path. Defaults to false.
         /// </summary>
-        public virtual bool Interpolate { get; set; } = false;
+        public virtual bool Interpolate { get; set; }
 
         /// <inheritdoc />
         public override IList<KeyValuePair<string, string>> GetQueryStringParameters()

@@ -54,7 +54,13 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var toString = styleRule.ToString();
                 Assert.IsNull(toString);
             });
+            Assert.IsNotNull(exception);
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual($"The {nameof(styleRule.Lightness)} must be between -100 and 100. (Parameter '{nameof(styleRule.Lightness)}')\r\nActual value was {styleRule.Lightness}.", exception.Message);
+#else
+            Assert.AreEqual($"The {nameof(styleRule.Lightness)} must be between -100 and 100.\r\nParameter name: {nameof(styleRule.Lightness)}\r\nActual value was {styleRule.Lightness}.", exception.Message);
+#endif
         }
 
         [Test]
@@ -70,7 +76,14 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var toString = styleRule.ToString();
                 Assert.IsNull(toString);
             });
+
+            Assert.IsNotNull(exception);
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual($"The {nameof(styleRule.Lightness)} must be between -100 and 100. (Parameter '{nameof(styleRule.Lightness)}')\r\nActual value was {styleRule.Lightness}.", exception.Message);
+#else
+            Assert.AreEqual($"The {nameof(styleRule.Lightness)} must be between -100 and 100.\r\nParameter name: {nameof(styleRule.Lightness)}\r\nActual value was {styleRule.Lightness}.", exception.Message);
+#endif
         }
 
         [Test]
@@ -98,7 +111,15 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var toString = styleRule.ToString();
                 Assert.IsNull(toString);
             });
+
+            Assert.IsNotNull(exception);
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual($"The {nameof(styleRule.Saturation)} must be between -100 and 100. (Parameter '{nameof(styleRule.Saturation)}')\r\nActual value was {styleRule.Saturation}.", exception.Message);
+#else
+            Assert.AreEqual($"The {nameof(styleRule.Saturation)} must be between -100 and 100.\r\nParameter name: {nameof(styleRule.Saturation)}\r\nActual value was {styleRule.Saturation}.", exception.Message);
+#endif
+
         }
 
         [Test]
@@ -114,7 +135,14 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var toString = styleRule.ToString();
                 Assert.IsNull(toString);
             });
+
+            Assert.IsNotNull(exception);
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual($"The {nameof(styleRule.Saturation)} must be between -100 and 100. (Parameter '{nameof(styleRule.Saturation)}')\r\nActual value was {styleRule.Saturation}.", exception.Message);
+#else
+            Assert.AreEqual($"The {nameof(styleRule.Saturation)} must be between -100 and 100.\r\nParameter name: {nameof(styleRule.Saturation)}\r\nActual value was {styleRule.Saturation}.", exception.Message);
+#endif
         }
 
         [Test]
@@ -142,7 +170,14 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var toString = styleRule.ToString();
                 Assert.IsNull(toString);
             });
+
+            Assert.IsNotNull(exception);
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00. (Parameter '{nameof(styleRule.Gamma)}')\r\nActual value was {styleRule.Gamma}.", exception.Message);
+#else
+            Assert.AreEqual($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00.\r\nParameter name: {nameof(styleRule.Gamma)}\r\nActual value was {styleRule.Gamma}.", exception.Message);
+#endif
         }
 
         [Test]
@@ -158,7 +193,14 @@ namespace GoogleApi.UnitTests.Maps.StaticMaps
                 var toString = styleRule.ToString();
                 Assert.IsNull(toString);
             });
+
+            Assert.IsNotNull(exception);
+
+#if NETCOREAPP3_1_OR_GREATER
             Assert.AreEqual($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00. (Parameter '{nameof(styleRule.Gamma)}')\r\nActual value was {styleRule.Gamma}.", exception.Message);
+#else
+            Assert.AreEqual($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00.\r\nParameter name: {nameof(styleRule.Gamma)}\r\nActual value was {styleRule.Gamma}.", exception.Message);
+#endif
         }
 
         [Test]

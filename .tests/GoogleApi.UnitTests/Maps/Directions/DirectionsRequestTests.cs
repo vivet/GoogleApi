@@ -520,6 +520,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -532,6 +533,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Key' is required", exception.Message);
         }
 
@@ -545,6 +547,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Origin' is required", exception.Message);
         }
 
@@ -558,6 +561,7 @@ namespace GoogleApi.UnitTests.Maps.Directions
             };
 
             var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+            Assert.IsNotNull(exception);
             Assert.AreEqual("'Destination' is required", exception.Message);
         }
     }

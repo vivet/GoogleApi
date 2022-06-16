@@ -16,7 +16,7 @@ namespace GoogleApi.Test.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = this.ApiKey
+                Key = this.Settings.ApiKey
             };
 
             var result = GoogleTranslate.Languages.Query(request);
@@ -33,7 +33,7 @@ namespace GoogleApi.Test.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Target = Language.English
             };
 
@@ -51,7 +51,7 @@ namespace GoogleApi.Test.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Target = Language.English
             };
 
@@ -65,7 +65,7 @@ namespace GoogleApi.Test.Translate.Languages
         {
             var request = new LanguagesRequest
             {
-                Key = this.ApiKey,
+                Key = this.Settings.ApiKey,
                 Target = Language.English
             };
 

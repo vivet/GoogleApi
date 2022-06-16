@@ -167,7 +167,9 @@ namespace GoogleApi.Entities.Search.Common
         /// <summary>
         /// Specifies all search results should be pages either included or excluded, from a given site.
         /// </summary>
-        public virtual SiteSearch SiteSearch => string.IsNullOrEmpty(this.SiteSearchStr ) ? null : new SiteSearch { Site = SiteSearchStr, Filter = SiteSearchFilterEnum };
+        public virtual SiteSearch SiteSearch => string.IsNullOrEmpty(this.SiteSearchStr) 
+            ? null 
+            : new SiteSearch { Site = SiteSearchStr, Filter = SiteSearchFilterEnum };
 
         /// <summary>
         /// Identifies a phrase that all documents in the search results must contain.

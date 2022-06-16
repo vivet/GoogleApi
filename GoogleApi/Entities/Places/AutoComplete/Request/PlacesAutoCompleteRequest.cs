@@ -99,45 +99,59 @@ namespace GoogleApi.Entities.Places.AutoComplete.Request
             var parameters = base.GetQueryStringParameters();
 
             if (string.IsNullOrEmpty(this.Input))
+            {
                 throw new ArgumentException($"'{nameof(this.Input)}' is required");
+            }
 
-            if (this.Radius.HasValue && (this.Radius > 50000 || this.Radius < 1))
+            if (this.Radius is > 50000 or < 1)
+            {
                 throw new ArgumentException($"'{nameof(this.Radius)}' must be greater than or equal to 1 and less than or equal to 50.000");
+            }
 
             parameters.Add("input", this.Input);
             parameters.Add("language", this.Language.ToCode());
 
             if (!string.IsNullOrEmpty(this.Offset))
+            {
                 parameters.Add("offset", this.Offset);
+            }
 
             if (!string.IsNullOrEmpty(this.SessionToken))
+            {
                 parameters.Add("sessiontoken", this.SessionToken);
+            }
 
             if (this.Location != null)
+            {
                 parameters.Add("location", this.Location.ToString());
+            }
 
             if (this.Origin != null)
+            {
                 parameters.Add("origin", this.Origin.ToString());
+            }
 
             if (this.Radius.HasValue)
+            {
                 parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+            }
 
             if (this.Strictbounds)
+            {
                 parameters.Add("strictbounds");
+            }
 
             if (this.Types != null && this.Types.Any())
             {
-                parameters.Add("types", string.Join("|", this.Types.Select(x =>
-                {
-                    if (x == RestrictPlaceType.Cities || x == RestrictPlaceType.Regions)
-                        return $"({x.ToString().ToLower()})";
-
-                    return $"{x.ToString().ToLower()}";
-                })));
+                parameters.Add("types", string.Join("|", this.Types.Select(x => x is RestrictPlaceType.Cities or RestrictPlaceType.Regions 
+                    ? $"({x.ToString().ToLower()})" 
+                    : $"{x.ToString().ToLower()}")));
             }
 
             if (this.Components != null && this.Components.Any())
+            {
                 parameters.Add("components", string.Join("|", this.Components.Select(x => $"{x.Key.ToString().ToLower()}:{x.Value}")));
+            }
 
             return parameters;
         }
