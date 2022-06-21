@@ -7,152 +7,151 @@ using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places.Search.Find
+namespace GoogleApi.Test.Places.Search.Find;
+
+[TestFixture]
+public class FindSearchTests : BaseTest
 {
-    [TestFixture]
-    public class FindSearchTests : BaseTest
+    [Test]
+    public void PlacesFindSearchTest()
     {
-        [Test]
-        public void PlacesFindSearchTest()
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "picadelly circus",
-                Type = InputType.TextQuery,
-                Fields = FieldTypes.Basic
-            };
+            Key = this.Settings.ApiKey,
+            Input = "picadelly circus",
+            Type = InputType.TextQuery,
+            Fields = FieldTypes.Basic
+        };
 
-            var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = GooglePlaces.Search.FindSearch.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
 
-            var candidate = response.Candidates.FirstOrDefault();
-            Assert.IsNotNull(candidate);
-            Assert.IsNotNull(candidate.PlaceId);
-            Assert.AreEqual(candidate.BusinessStatus, BusinessStatus.Operational);
-        }
+        var candidate = response.Candidates.FirstOrDefault();
+        Assert.IsNotNull(candidate);
+        Assert.IsNotNull(candidate.PlaceId);
+        Assert.AreEqual(candidate.BusinessStatus, BusinessStatus.Operational);
+    }
 
-        [Test]
-        public void PlacesFindSearchWhenTypeIsPhoneNumberTest()
+    [Test]
+    public void PlacesFindSearchWhenTypeIsPhoneNumberTest()
+    {
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "+4533333333",
-                Type = InputType.PhoneNumber
-            };
+            Key = this.Settings.ApiKey,
+            Input = "+4533333333",
+            Type = InputType.PhoneNumber
+        };
 
-            var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = GooglePlaces.Search.FindSearch.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void PlacesFindSearchAsyncTest()
+    [Test]
+    public void PlacesFindSearchAsyncTest()
+    {
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "picadelly circus"
-            };
+            Key = this.Settings.ApiKey,
+            Input = "picadelly circus"
+        };
 
-            var response = GooglePlaces.Search.FindSearch.QueryAsync(request).Result;
+        var response = GooglePlaces.Search.FindSearch.QueryAsync(request).Result;
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void PlacesFindSearchWhenAsyncAndCancelledTest()
+    [Test]
+    public void PlacesFindSearchWhenAsyncAndCancelledTest()
+    {
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "picadelly circus"
-            };
+            Key = this.Settings.ApiKey,
+            Input = "picadelly circus"
+        };
 
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.Search.FindSearch.QueryAsync(request, cancellationTokenSource.Token);
-            cancellationTokenSource.Cancel();
+        var cancellationTokenSource = new CancellationTokenSource();
+        var task = GooglePlaces.Search.FindSearch.QueryAsync(request, cancellationTokenSource.Token);
+        cancellationTokenSource.Cancel();
 
-            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
+        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+        Assert.IsNotNull(exception);
+        Assert.AreEqual(exception.Message, "The operation was canceled.");
+    }
 
-        [Test]
-        public void PlacesFindSearchWhenFieldsTest()
+    [Test]
+    public void PlacesFindSearchWhenFieldsTest()
+    {
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "picadelly circus",
-                Type = InputType.TextQuery,
-                Fields = FieldTypes.Basic
-            };
+            Key = this.Settings.ApiKey,
+            Input = "picadelly circus",
+            Type = InputType.TextQuery,
+            Fields = FieldTypes.Basic
+        };
 
-            var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = GooglePlaces.Search.FindSearch.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
 
-            var candidate = response.Candidates.FirstOrDefault();
-            Assert.IsNotNull(candidate);
-            Assert.IsNotNull(candidate.Name);
-            Assert.IsNotNull(candidate.Icon);
-            Assert.IsNotNull(candidate.PlaceId);
-            Assert.IsNotNull(candidate.Geometry);
-            Assert.IsNotNull(candidate.Geometry.Location);
-            Assert.IsNotNull(candidate.Geometry.ViewPort);
-        }
+        var candidate = response.Candidates.FirstOrDefault();
+        Assert.IsNotNull(candidate);
+        Assert.IsNotNull(candidate.Name);
+        Assert.IsNotNull(candidate.Icon);
+        Assert.IsNotNull(candidate.PlaceId);
+        Assert.IsNotNull(candidate.Geometry);
+        Assert.IsNotNull(candidate.Geometry.Location);
+        Assert.IsNotNull(candidate.Geometry.ViewPort);
+    }
 
-        [Test]
-        public void PlacesFindSearchWhenLocationTest()
+    [Test]
+    public void PlacesFindSearchWhenLocationTest()
+    {
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "picadelly circus",
-                Location = new Coordinate(51.5100913, -0.1345676)
-            };
+            Key = this.Settings.ApiKey,
+            Input = "picadelly circus",
+            Location = new Coordinate(51.5100913, -0.1345676)
+        };
 
-            var response = GooglePlaces.Search.FindSearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        var response = GooglePlaces.Search.FindSearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void PlacesFindSearchWhenLocationAndRadiusTest()
+    [Test]
+    public void PlacesFindSearchWhenLocationAndRadiusTest()
+    {
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "picadelly circus",
-                Location = new Coordinate(51.5100913, -0.1345676),
-                Radius = 5000
-            };
+            Key = this.Settings.ApiKey,
+            Input = "picadelly circus",
+            Location = new Coordinate(51.5100913, -0.1345676),
+            Radius = 5000
+        };
 
-            var response = GooglePlaces.Search.FindSearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        var response = GooglePlaces.Search.FindSearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void PlacesFindSearchWhenBoundsTest()
+    [Test]
+    public void PlacesFindSearchWhenBoundsTest()
+    {
+        var request = new PlacesFindSearchRequest
         {
-            var request = new PlacesFindSearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Input = "new york",
-                Bounds = new ViewPort(new Coordinate(51.5100913, -0.1345676), new Coordinate(50.5100913, -0.0345676))
-            };
+            Key = this.Settings.ApiKey,
+            Input = "new york",
+            Bounds = new ViewPort(new Coordinate(51.5100913, -0.1345676), new Coordinate(50.5100913, -0.0345676))
+        };
 
-            var response = GooglePlaces.Search.FindSearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        var response = GooglePlaces.Search.FindSearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
     }
 }

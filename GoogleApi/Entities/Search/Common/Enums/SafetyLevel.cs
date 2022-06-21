@@ -1,23 +1,22 @@
-﻿namespace GoogleApi.Entities.Search.Common.Enums
+﻿namespace GoogleApi.Entities.Search.Common.Enums;
+
+/// <summary>
+/// Search safety level.
+/// </summary>
+public enum SafetyLevel
 {
     /// <summary>
-    /// Search safety level.
+    /// Disables SafeSearch filtering. (default)
     /// </summary>
-    public enum SafetyLevel
-    {
-        /// <summary>
-        /// Disables SafeSearch filtering. (default)
-        /// </summary>
-        Off,
+    Off,
 
-        /// <summary>
-        /// Enables moderate SafeSearch filtering.
-        /// </summary>
-        Medium,
+    /// <summary>
+    /// Enables moderate SafeSearch filtering.
+    /// </summary>
+    Medium,
 
-        /// <summary>
-        /// Enables highest level of SafeSearch filtering.
-        /// </summary>
-        High
-    }
+    /// <summary>
+    /// Enables highest level of SafeSearch filtering.
+    /// </summary>
+    High
 }

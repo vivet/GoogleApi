@@ -2,25 +2,24 @@ using System;
 using System.Collections.Generic;
 using GoogleApi.Entities.Interfaces;
 
-namespace GoogleApi.Entities.Translate
+namespace GoogleApi.Entities.Translate;
+
+/// <summary>
+/// Base abstract translate request.
+/// </summary>
+public abstract class BaseTranslateRequest : BaseRequest, IRequestQueryString
 {
-    /// <summary>
-    /// Base abstract translate request.
-    /// </summary>
-    public abstract class BaseTranslateRequest : BaseRequest, IRequestQueryString
+    /// <inheritdoc />
+    protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2/";
+
+    /// <inheritdoc />
+    public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
     {
-        /// <inheritdoc />
-        protected internal override string BaseUrl => "translation.googleapis.com/language/translate/v2/";
+        if (string.IsNullOrWhiteSpace(this.Key))
+            throw new ArgumentException($"'{nameof(this.Key)}' is required");
 
-        /// <inheritdoc />
-        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
-        {
-            if (string.IsNullOrWhiteSpace(this.Key))
-                throw new ArgumentException($"'{nameof(this.Key)}' is required");
+        var parameters = base.GetQueryStringParameters();
 
-            var parameters = base.GetQueryStringParameters();
-
-            return parameters;
-        }
+        return parameters;
     }
 }

@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using GoogleApi.Entities.Interfaces;
 
-namespace GoogleApi.Entities.Places
+namespace GoogleApi.Entities.Places;
+
+/// <summary>
+/// Base abstract class for Places requests.
+/// </summary>
+public abstract class BasePlacesRequest : BaseRequest, IRequestQueryString
 {
     /// <summary>
-    /// Base abstract class for Places requests.
+    /// Base Url.
     /// </summary>
-    public abstract class BasePlacesRequest : BaseRequest, IRequestQueryString
+    protected internal override string BaseUrl => "maps.googleapis.com/maps/api/place/";
+
+    /// <summary>
+    /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
+    /// </summary>
+    /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+    public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
     {
-        /// <summary>
-        /// Base Url.
-        /// </summary>
-        protected internal override string BaseUrl => "maps.googleapis.com/maps/api/place/";
+        var parameters = base.GetQueryStringParameters();
 
-        /// <summary>
-        /// See <see cref="BaseRequest.GetQueryStringParameters()"/>.
-        /// </summary>
-        /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
-        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
-        {
-            var parameters = base.GetQueryStringParameters();
+        if (string.IsNullOrWhiteSpace(this.Key))
+            throw new ArgumentException($"'{nameof(this.Key)}' is required");
 
-            if (string.IsNullOrWhiteSpace(this.Key))
-                throw new ArgumentException($"'{nameof(this.Key)}' is required");
-
-            return parameters;
-        }
+        return parameters;
     }
 }

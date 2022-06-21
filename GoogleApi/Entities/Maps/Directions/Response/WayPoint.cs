@@ -4,42 +4,41 @@ using GoogleApi.Entities.Common.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace GoogleApi.Entities.Maps.Directions.Response
+namespace GoogleApi.Entities.Maps.Directions.Response;
+
+/// <summary>
+/// Way Point.
+/// </summary>
+public class WayPoint
 {
     /// <summary>
-    /// Way Point.
+    /// "geocoder_status" indicates the status code resulting from the geocoding operation.
+    /// This field may contain the following values.
     /// </summary>
-    public class WayPoint
-    {
-        /// <summary>
-        /// "geocoder_status" indicates the status code resulting from the geocoding operation.
-        /// This field may contain the following values.
-        /// </summary>
-        [JsonProperty("geocoder_status")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public virtual Status Status { get; set; }
+    [JsonProperty("geocoder_status")]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public virtual Status Status { get; set; }
 
-        /// <summary>
-        /// "partial_match" indicates that the geocoder did not return an exact match for the original request,
-        /// though it was able to match part of the requested address.
-        /// You may wish to examine the original request for misspellings and/or an incomplete address. Partial matches most often occur
-        /// for street addresses that do not exist within the locality you pass in the request.
-        /// Partial matches may also be returned when a request matches two or more locations in the same locality.For example, "21 Henr St, Bristol, UK" will return a partial match for both Henry Street and Henrietta Street. Note that if a request includes a misspelled address component, the geocoding service may suggest an alternative address. Suggestions triggered in this way will also be marked as a partial match.
-        /// </summary>
-        [JsonProperty("partial_match")]
-        public virtual string PartialMatch { get; set; }
+    /// <summary>
+    /// "partial_match" indicates that the geocoder did not return an exact match for the original request,
+    /// though it was able to match part of the requested address.
+    /// You may wish to examine the original request for misspellings and/or an incomplete address. Partial matches most often occur
+    /// for street addresses that do not exist within the locality you pass in the request.
+    /// Partial matches may also be returned when a request matches two or more locations in the same locality.For example, "21 Henr St, Bristol, UK" will return a partial match for both Henry Street and Henrietta Street. Note that if a request includes a misspelled address component, the geocoding service may suggest an alternative address. Suggestions triggered in this way will also be marked as a partial match.
+    /// </summary>
+    [JsonProperty("partial_match")]
+    public virtual string PartialMatch { get; set; }
 
-        /// <summary>
-        /// is a unique identifier that can be used with other Google APIs.
-        /// For example, you can use the place_id from a Google Place Autocomplete response to calculate directions to a local business.
-        /// </summary>
-        [JsonProperty("place_id")]
-        public virtual string PlaceId { get; set; }
+    /// <summary>
+    /// is a unique identifier that can be used with other Google APIs.
+    /// For example, you can use the place_id from a Google Place Autocomplete response to calculate directions to a local business.
+    /// </summary>
+    [JsonProperty("place_id")]
+    public virtual string PlaceId { get; set; }
 
-        /// <summary>
-        /// "types" indicates the address type of the geocoding result used for calculating directions.
-        /// </summary>
-        [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<PlaceLocationType>))]
-        public virtual IEnumerable<PlaceLocationType> Types { get; set; }
-    }
+    /// <summary>
+    /// "types" indicates the address type of the geocoding result used for calculating directions.
+    /// </summary>
+    [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<PlaceLocationType>))]
+    public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 }

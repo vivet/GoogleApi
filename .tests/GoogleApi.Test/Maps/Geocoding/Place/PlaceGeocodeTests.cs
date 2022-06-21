@@ -4,55 +4,54 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Maps.Geocoding.Place
+namespace GoogleApi.Test.Maps.Geocoding.Place;
+
+[TestFixture]
+public class PlaceGeocodeTests : BaseTest
 {
-    [TestFixture]
-    public class PlaceGeocodeTests : BaseTest
+    [Test]
+    public void PlaceGeocodeTest()
     {
-        [Test]
-        public void PlaceGeocodeTest()
+        var request = new PlaceGeocodeRequest
         {
-            var request = new PlaceGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
-            };
+            Key = this.Settings.ApiKey,
+            PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
+        };
 
-            var response = GoogleMaps.Geocode.PlaceGeocode.Query(request);
+        var response = GoogleMaps.Geocode.PlaceGeocode.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void LocationGeocodeWhenAsyncTest()
+    [Test]
+    public void LocationGeocodeWhenAsyncTest()
+    {
+        var request = new PlaceGeocodeRequest
         {
-            var request = new PlaceGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
-            };
-            var result = GoogleMaps.Geocode.PlaceGeocode.QueryAsync(request).Result;
+            Key = this.Settings.ApiKey,
+            PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
+        };
+        var result = GoogleMaps.Geocode.PlaceGeocode.QueryAsync(request).Result;
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
 
-        [Test]
-        public void LocationGeocodeWhenAsyncAndCancelledTest()
+    [Test]
+    public void LocationGeocodeWhenAsyncAndCancelledTest()
+    {
+        var request = new PlaceGeocodeRequest
         {
-            var request = new PlaceGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
-            };
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.Geocode.PlaceGeocode.QueryAsync(request, cancellationTokenSource.Token);
-            cancellationTokenSource.Cancel();
+            Key = this.Settings.ApiKey,
+            PlaceId = "ChIJo9YpQWBZwokR7OeY0hiWh8g"
+        };
+        var cancellationTokenSource = new CancellationTokenSource();
+        var task = GoogleMaps.Geocode.PlaceGeocode.QueryAsync(request, cancellationTokenSource.Token);
+        cancellationTokenSource.Cancel();
 
-            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
+        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+        Assert.IsNotNull(exception);
+        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

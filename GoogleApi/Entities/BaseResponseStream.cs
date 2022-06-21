@@ -1,21 +1,20 @@
 ﻿using System;
 using System.IO;
 
-namespace GoogleApi.Entities
+namespace GoogleApi.Entities;
+
+/// <summary>
+/// Base Response Stream.
+/// </summary>
+public class BaseResponseStream : BaseResponse
 {
     /// <summary>
-    /// Base Response Stream.
+    /// Buffer.
     /// </summary>
-    public class BaseResponseStream : BaseResponse
-    {
-        /// <summary>
-        /// Buffer.
-        /// </summary>
-        public virtual byte[] Buffer { get; set; }
+    public virtual byte[] Buffer { get; set; }
 
-        /// <summary>
-        /// Stream.
-        /// </summary>
-        public virtual MemoryStream Stream => new(this.Buffer ?? Array.Empty<byte>());
-    }
+    /// <summary>
+    /// Stream.
+    /// </summary>
+    public virtual MemoryStream Stream => new(this.Buffer ?? Array.Empty<byte>());
 }

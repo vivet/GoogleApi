@@ -1,43 +1,42 @@
-namespace GoogleApi.Entities.Search.Common.Enums
+namespace GoogleApi.Entities.Search.Common.Enums;
+
+/// <summary>
+/// Image Type
+/// </summary>
+public enum ImageSize
 {
     /// <summary>
-    /// Image Type
+    /// Icon.
     /// </summary>
-    public enum ImageSize
-    {
-        /// <summary>
-        /// Icon.
-        /// </summary>
-        Icon,
+    Icon,
 
-        /// <summary>
-        /// Small.
-        /// </summary>
-        Small,
-        
-        /// <summary>
-        /// Medium.
-        /// </summary>
-        Medium,
-        
-        /// <summary>
-        /// Large.
-        /// </summary>
-        Large,
-        
-        /// <summary>
-        /// Xlarge.
-        /// </summary>
-        Xlarge,
-        
-        /// <summary>
-        /// Xxlarge.
-        /// </summary>
-        Xxlarge,
-        
-        /// <summary>
-        /// Huge.
-        /// </summary>
-        Huge
-    }
+    /// <summary>
+    /// Small.
+    /// </summary>
+    Small,
+
+    /// <summary>
+    /// Medium.
+    /// </summary>
+    Medium,
+
+    /// <summary>
+    /// Large.
+    /// </summary>
+    Large,
+
+    /// <summary>
+    /// Xlarge.
+    /// </summary>
+    Xlarge,
+
+    /// <summary>
+    /// Xxlarge.
+    /// </summary>
+    Xxlarge,
+
+    /// <summary>
+    /// Huge.
+    /// </summary>
+    Huge
 }

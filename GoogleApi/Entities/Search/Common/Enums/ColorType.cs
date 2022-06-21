@@ -1,23 +1,22 @@
-namespace GoogleApi.Entities.Search.Common.Enums
+namespace GoogleApi.Entities.Search.Common.Enums;
+
+/// <summary>
+/// Color Type
+/// </summary>
+public enum ColorType
 {
     /// <summary>
-    /// Color Type
+    /// Color.
     /// </summary>
-    public enum ColorType
-    {
-        /// <summary>
-        /// Color.
-        /// </summary>
-        Color,
+    Color,
 
-        /// <summary>
-        /// Grayscale.
-        /// </summary>
+    /// <summary>
+    /// Grayscale.
+    /// </summary>
 
-        Grey,
-        /// <summary>
-        /// Black and white.
-        /// </summary>
-        Mono
-    }
+    Grey,
+    /// <summary>
+    /// Black and white.
+    /// </summary>
+    Mono
 }

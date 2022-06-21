@@ -1,28 +1,27 @@
-﻿namespace GoogleApi.Entities.Search.Common.Enums
+﻿namespace GoogleApi.Entities.Search.Common.Enums;
+
+/// <summary>
+/// Date restriction type.
+/// </summary>
+public enum DateRestrictType
 {
     /// <summary>
-    /// Date restriction type.
+    /// Days restriction.
     /// </summary>
-    public enum DateRestrictType
-    {
-        /// <summary>
-        /// Days restriction.
-        /// </summary>
-        Days,
+    Days,
 
-        /// <summary>
-        /// Weeks restriction.
-        /// </summary>
-        Weeks,
+    /// <summary>
+    /// Weeks restriction.
+    /// </summary>
+    Weeks,
 
-        /// <summary>
-        /// Months restriction.
-        /// </summary>
-        Months,
+    /// <summary>
+    /// Months restriction.
+    /// </summary>
+    Months,
 
-        /// <summary>
-        /// Years restriction.
-        /// </summary>
-        Years
-    }
+    /// <summary>
+    /// Years restriction.
+    /// </summary>
+    Years
 }

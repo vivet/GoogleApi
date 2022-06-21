@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Maps.Roads.Common
+namespace GoogleApi.Entities.Maps.Roads.Common;
+
+/// <summary>
+/// Error Detail.
+/// </summary>
+public class ErrorDetail
 {
     /// <summary>
-    /// Error Detail.
+    /// The type of error.
     /// </summary>
-    public class ErrorDetail
-    {
-        /// <summary>
-        /// The type of error.
-        /// </summary>
-        [JsonProperty("@type")]
-        public virtual string Type { get; set; }
+    [JsonProperty("@type")]
+    public virtual string Type { get; set; }
 
-        /// <summary>
-        /// Links associated with the errors.
-        /// </summary>
-        [JsonProperty("links")]
-        public virtual IEnumerable<Link> Links { get; set; }
-    }
+    /// <summary>
+    /// Links associated with the errors.
+    /// </summary>
+    [JsonProperty("links")]
+    public virtual IEnumerable<Link> Links { get; set; }
 }

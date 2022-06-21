@@ -1,9 +1,8 @@
-﻿namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Response
+﻿namespace GoogleApi.Entities.Maps.Roads.NearestRoads.Response;
+
+/// <summary>
+/// NearestRoads Response.
+/// </summary>
+public class NearestRoadsResponse : BaseRoadsResponse
 {
-    /// <summary>
-    /// NearestRoads Response.
-    /// </summary>
-    public class NearestRoadsResponse : BaseRoadsResponse
-    {
-    }
 }

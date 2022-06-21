@@ -1,23 +1,22 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Places.Common.Enums
+namespace GoogleApi.Entities.Places.Common.Enums;
+
+/// <summary>
+/// Scope.
+/// </summary>
+public enum Scope
 {
     /// <summary>
-    /// Scope.
+    /// The place ID is recognised by your application only.
+    /// This is because your application added the place, and the place has not yet passed the moderation process.
     /// </summary>
-    public enum Scope
-    {
-        /// <summary>
-        /// The place ID is recognised by your application only. 
-        /// This is because your application added the place, and the place has not yet passed the moderation process.
-        /// </summary>
-        [EnumMember(Value = "APP")]
-        App,
+    [EnumMember(Value = "APP")]
+    App,
 
-        /// <summary>
-        /// The place ID is available to other applications and on Google Maps
-        /// </summary>
-        [EnumMember(Value = "GOOGLE")]
-        Google
-    }
+    /// <summary>
+    /// The place ID is available to other applications and on Google Maps
+    /// </summary>
+    [EnumMember(Value = "GOOGLE")]
+    Google
 }

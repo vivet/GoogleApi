@@ -1,20 +1,19 @@
-﻿namespace GoogleApi.Entities.Search.Video.Common.Enums
+﻿namespace GoogleApi.Entities.Search.Video.Common.Enums;
+
+/// <summary>
+/// Channel Type.
+/// </summary>
+public enum ChannelType
 {
     /// <summary>
-    /// Channel Type.
+    /// Any.
+    /// Return all channels.
     /// </summary>
-    public enum ChannelType
-    {
-        /// <summary>
-        /// Any.
-        /// Return all channels.
-        /// </summary>
-        Any,
+    Any,
 
-        /// <summary>
-        /// Show.
-        /// Only retrieve shows.
-        /// </summary>
-        Show
-    }
+    /// <summary>
+    /// Show.
+    /// Only retrieve shows.
+    /// </summary>
+    Show
 }

@@ -6,101 +6,100 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Maps.Geocoding.Address
+namespace GoogleApi.Test.Maps.Geocoding.Address;
+
+[TestFixture]
+public class AddressGeocodeTests : BaseTest
 {
-    [TestFixture]
-    public class AddressGeocodeTests : BaseTest
+    [Test]
+    public void AddressGeocodeTest()
     {
-        [Test]
-        public void AddressGeocodeTest()
+        var request = new AddressGeocodeRequest
         {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
-            };
-            var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
+            Key = this.Settings.ApiKey,
+            Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
+        };
+        var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
 
-        [Test]
-        public void AddressGeocodeWhenRegionTest()
+    [Test]
+    public void AddressGeocodeWhenRegionTest()
+    {
+        var request = new AddressGeocodeRequest
         {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
-                Region = "Bedford"
-            };
-            var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
+            Key = this.Settings.ApiKey,
+            Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
+            Region = "Bedford"
+        };
+        var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
 
-        [Test]
-        public void AddressGeocodeWhenBoundsTest()
+    [Test]
+    public void AddressGeocodeWhenBoundsTest()
+    {
+        var request = new AddressGeocodeRequest
         {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
-                Bounds = new ViewPort(new Coordinate(40.7141289, -73.9614074), new Coordinate(40.7141289, -73.9614074))
-            };
-            var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
+            Key = this.Settings.ApiKey,
+            Address = "285 Bedford Ave, Brooklyn, NY 11211, USA",
+            Bounds = new ViewPort(new Coordinate(40.7141289, -73.9614074), new Coordinate(40.7141289, -73.9614074))
+        };
+        var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
 
-        [Test]
-        public void AddressGeocodeWhenComponentsTest()
+    [Test]
+    public void AddressGeocodeWhenComponentsTest()
+    {
+        var request = new AddressGeocodeRequest
         {
-            var request = new AddressGeocodeRequest
+            Key = this.Settings.ApiKey,
+            Components = new[]
             {
-                Key = this.Settings.ApiKey,
-                Components = new[]
-                {
-                    new KeyValuePair<Component, string>(Component.Country, "dk")  
-                }  
-            };
-            var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
+                new KeyValuePair<Component, string>(Component.Country, "dk")
+            }
+        };
+        var result = GoogleMaps.Geocode.AddressGeocode.Query(request);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
 
-        [Test]
-        public void AddressGeocodeWhenAsyncTest()
+    [Test]
+    public void AddressGeocodeWhenAsyncTest()
+    {
+        var request = new AddressGeocodeRequest
         {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
-            };
-            var result = GoogleMaps.Geocode.AddressGeocode.QueryAsync(request).Result;
+            Key = this.Settings.ApiKey,
+            Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
+        };
+        var result = GoogleMaps.Geocode.AddressGeocode.QueryAsync(request).Result;
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Status.Ok, result.Status);
-        }
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
 
-        [Test]
-        public void AddressGeocodeWhenAsyncAndCancelledTest()
+    [Test]
+    public void AddressGeocodeWhenAsyncAndCancelledTest()
+    {
+        var request = new AddressGeocodeRequest
         {
-            var request = new AddressGeocodeRequest
-            {
-                Key = this.Settings.ApiKey,
-                Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
-            };
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.Geocode.AddressGeocode.QueryAsync(request, cancellationTokenSource.Token);
-            cancellationTokenSource.Cancel();
+            Key = this.Settings.ApiKey,
+            Address = "285 Bedford Ave, Brooklyn, NY 11211, USA"
+        };
+        var cancellationTokenSource = new CancellationTokenSource();
+        var task = GoogleMaps.Geocode.AddressGeocode.QueryAsync(request, cancellationTokenSource.Token);
+        cancellationTokenSource.Cancel();
 
-            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
+        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+        Assert.IsNotNull(exception);
+        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

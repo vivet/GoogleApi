@@ -1,18 +1,17 @@
-namespace GoogleApi.Entities.Translate.Translate.Request.Enums
+namespace GoogleApi.Entities.Translate.Translate.Request.Enums;
+
+/// <summary>
+/// The format of the source text, in either HTML (default) or plain-text.
+/// </summary>
+public enum Format
 {
     /// <summary>
-    /// The format of the source text, in either HTML (default) or plain-text.
+    /// Html format.
     /// </summary>
-    public enum Format
-    {
-        /// <summary>
-        /// Html format.
-        /// </summary>
-        Html,
+    Html,
 
-        /// <summary>
-        /// Plain text format.
-        /// </summary>
-        Text
-    }
+    /// <summary>
+    /// Plain text format.
+    /// </summary>
+    Text
 }

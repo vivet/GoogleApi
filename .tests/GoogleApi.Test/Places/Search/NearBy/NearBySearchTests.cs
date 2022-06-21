@@ -8,182 +8,181 @@ using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Places.Search.NearBy
+namespace GoogleApi.Test.Places.Search.NearBy;
+
+[TestFixture]
+public class NearBySearchTests : BaseTest
 {
-    [TestFixture]
-    public class NearBySearchTests : BaseTest
+    [Test]
+    public void PlacesNearBySearchTest()
     {
-        [Test]
-        public void PlacesNearBySearchTest()
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 1000
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 1000
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void PlacesTextSearchWhenPageTokenTest()
+    [Test]
+    public void PlacesTextSearchWhenPageTokenTest()
+    {
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 1000
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 1000
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.IsNotNull(response.NextPageToken);
+        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.IsNotNull(response.NextPageToken);
 
-            var requestNextPage = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                PageToken = response.NextPageToken
-            };
-
-            Thread.Sleep(1500);
-
-            var responseNextPage = GooglePlaces.Search.NearBySearch.Query(requestNextPage);
-            Assert.IsNotNull(responseNextPage);
-            Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
-        }
-
-        [Test]
-        public void PlacesTextSearchWhenNameTest()
+        var requestNextPage = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 25000,
-                Name = "cafe"
-            };
+            Key = this.Settings.ApiKey,
+            PageToken = response.NextPageToken
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Thread.Sleep(1500);
 
-        [Test]
-        public void PlacesTextSearchWhenKeywordTest()
+        var responseNextPage = GooglePlaces.Search.NearBySearch.Query(requestNextPage);
+        Assert.IsNotNull(responseNextPage);
+        Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
+    }
+
+    [Test]
+    public void PlacesTextSearchWhenNameTest()
+    {
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 25000,
-                Keyword = "cafe"
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 25000,
+            Name = "cafe"
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void PlacesTextSearchWhenTypeTest()
+    [Test]
+    public void PlacesTextSearchWhenKeywordTest()
+    {
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 25000,
-                Type = SearchPlaceType.Cafe
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 25000,
+            Keyword = "cafe"
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.Query(request);
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void PlacesTextSearchWhenPriceLevelMinTest()
+    [Test]
+    public void PlacesTextSearchWhenTypeTest()
+    {
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, 40.16668),
-                Radius = 25000,
-                Minprice = PriceLevel.Free
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 25000,
+            Type = SearchPlaceType.Cafe
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-            Assert.IsNotNull(response);
-            Assert.IsEmpty(response.HtmlAttributions);
-            Assert.AreEqual(Status.Ok, response.Status);
-
-            var result = response.Results.FirstOrDefault();
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.PlaceId);
-            Assert.GreaterOrEqual(result.PriceLevel, request.Minprice);
-        }
-
-        [Test]
-        public void PlacesTextSearchWhenPriceLevelMaxTest()
+    [Test]
+    public void PlacesTextSearchWhenPriceLevelMinTest()
+    {
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 25000,
-                Maxprice = PriceLevel.Expensive
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, 40.16668),
+            Radius = 25000,
+            Minprice = PriceLevel.Free
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = GooglePlaces.Search.NearBySearch.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.IsEmpty(response.HtmlAttributions);
-            Assert.AreEqual(Status.Ok, response.Status);
+        Assert.IsNotNull(response);
+        Assert.IsEmpty(response.HtmlAttributions);
+        Assert.AreEqual(Status.Ok, response.Status);
 
-            var result = response.Results.FirstOrDefault();
-            Assert.IsNotNull(result);
-            Assert.IsNotNull(result.PlaceId);
-            Assert.LessOrEqual(result.PriceLevel, request.Maxprice);
-        }
+        var result = response.Results.FirstOrDefault();
+        Assert.IsNotNull(result);
+        Assert.IsNotNull(result.PlaceId);
+        Assert.GreaterOrEqual(result.PriceLevel, request.Minprice);
+    }
 
-        [Test]
-        public void PlacesNearBySearchWhenAsyncTest()
+    [Test]
+    public void PlacesTextSearchWhenPriceLevelMaxTest()
+    {
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 500,
-                Type = SearchPlaceType.School
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 25000,
+            Maxprice = PriceLevel.Expensive
+        };
 
-            var response = GooglePlaces.Search.NearBySearch.QueryAsync(request).Result;
+        var response = GooglePlaces.Search.NearBySearch.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.IsEmpty(response.HtmlAttributions);
+        Assert.AreEqual(Status.Ok, response.Status);
 
-        [Test]
-        public void PlacesNearBySearchWhenAsyncAndCancelledTest()
+        var result = response.Results.FirstOrDefault();
+        Assert.IsNotNull(result);
+        Assert.IsNotNull(result.PlaceId);
+        Assert.LessOrEqual(result.PriceLevel, request.Maxprice);
+    }
+
+    [Test]
+    public void PlacesNearBySearchWhenAsyncTest()
+    {
+        var request = new PlacesNearBySearchRequest
         {
-            var request = new PlacesNearBySearchRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = new Coordinate(51.491431, -3.16668),
-                Radius = 500,
-                Type = SearchPlaceType.School
-            };
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 500,
+            Type = SearchPlaceType.School
+        };
 
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = GooglePlaces.Search.NearBySearch.QueryAsync(request, cancellationTokenSource.Token);
-            cancellationTokenSource.Cancel();
+        var response = GooglePlaces.Search.NearBySearch.QueryAsync(request).Result;
 
-            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesNearBySearchWhenAsyncAndCancelledTest()
+    {
+        var request = new PlacesNearBySearchRequest
+        {
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(51.491431, -3.16668),
+            Radius = 500,
+            Type = SearchPlaceType.School
+        };
+
+        var cancellationTokenSource = new CancellationTokenSource();
+        var task = GooglePlaces.Search.NearBySearch.QueryAsync(request, cancellationTokenSource.Token);
+        cancellationTokenSource.Cancel();
+
+        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+        Assert.IsNotNull(exception);
+        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

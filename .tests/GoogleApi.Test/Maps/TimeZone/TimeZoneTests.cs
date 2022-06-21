@@ -5,93 +5,92 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.Test.Maps.TimeZone
+namespace GoogleApi.Test.Maps.TimeZone;
+
+[TestFixture]
+public class TimeZoneTests : BaseTest
 {
-    [TestFixture]
-    public class TimeZoneTests : BaseTest
+    [Test]
+    public void TimeZoneTest()
     {
-        [Test]
-        public void TimeZoneTest()
+        var location = new Coordinate(40.7141289, -73.9614074);
+        var request = new TimeZoneRequest
         {
-            var location = new Coordinate(40.7141289, -73.9614074);
-            var request = new TimeZoneRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = location
-            };
+            Key = this.Settings.ApiKey,
+            Location = location
+        };
 
-            var response = GoogleMaps.TimeZone.Query(request);
+        var response = GoogleMaps.TimeZone.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void TimeZoneWhenLanguageTest()
+    [Test]
+    public void TimeZoneWhenLanguageTest()
+    {
+        var location = new Coordinate(40.7141289, -73.9614074);
+        var request = new TimeZoneRequest
         {
-            var location = new Coordinate(40.7141289, -73.9614074);
-            var request = new TimeZoneRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = location,
-                Language = Language.German
-            };
+            Key = this.Settings.ApiKey,
+            Location = location,
+            Language = Language.German
+        };
 
-            var response = GoogleMaps.TimeZone.Query(request);
+        var response = GoogleMaps.TimeZone.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void TimeZoneWhenTimeStampTest()
+    [Test]
+    public void TimeZoneWhenTimeStampTest()
+    {
+        var location = new Coordinate(40.7141289, -73.9614074);
+        var request = new TimeZoneRequest
         {
-            var location = new Coordinate(40.7141289, -73.9614074);
-            var request = new TimeZoneRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = location,
-                TimeStamp = DateTime.Now.AddMonths(6)
-            };
+            Key = this.Settings.ApiKey,
+            Location = location,
+            TimeStamp = DateTime.Now.AddMonths(6)
+        };
 
-            var response = GoogleMaps.TimeZone.Query(request);
+        var response = GoogleMaps.TimeZone.Query(request);
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void TimeZoneWhenAsyncTest()
+    [Test]
+    public void TimeZoneWhenAsyncTest()
+    {
+        var location = new Coordinate(40.7141289, -73.9614074);
+        var request = new TimeZoneRequest
         {
-            var location = new Coordinate(40.7141289, -73.9614074);
-            var request = new TimeZoneRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = location
-            };
+            Key = this.Settings.ApiKey,
+            Location = location
+        };
 
-            var response = GoogleMaps.TimeZone.QueryAsync(request).Result;
+        var response = GoogleMaps.TimeZone.QueryAsync(request).Result;
 
-            Assert.IsNotNull(response);
-            Assert.AreEqual(Status.Ok, response.Status);
-        }
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
 
-        [Test]
-        public void TimeZoneWhenAsyncAndCancelledTest()
+    [Test]
+    public void TimeZoneWhenAsyncAndCancelledTest()
+    {
+        var location = new Coordinate(40.7141289, -73.9614074);
+        var request = new TimeZoneRequest
         {
-            var location = new Coordinate(40.7141289, -73.9614074);
-            var request = new TimeZoneRequest
-            {
-                Key = this.Settings.ApiKey,
-                Location = location
-            };
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = GoogleMaps.TimeZone.QueryAsync(request, cancellationTokenSource.Token);
-            cancellationTokenSource.Cancel();
+            Key = this.Settings.ApiKey,
+            Location = location
+        };
+        var cancellationTokenSource = new CancellationTokenSource();
+        var task = GoogleMaps.TimeZone.QueryAsync(request, cancellationTokenSource.Token);
+        cancellationTokenSource.Cancel();
 
-            var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "The operation was canceled.");
-        }
+        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
+        Assert.IsNotNull(exception);
+        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

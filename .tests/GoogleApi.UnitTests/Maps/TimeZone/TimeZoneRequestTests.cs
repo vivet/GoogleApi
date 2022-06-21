@@ -7,90 +7,89 @@ using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.UnitTests.Maps.TimeZone
+namespace GoogleApi.UnitTests.Maps.TimeZone;
+
+[TestFixture]
+public class TimeZoneRequestTests
 {
-    [TestFixture]
-    public class TimeZoneRequestTests
+    [Test]
+    public void ConstructorDefaultTest()
     {
-        [Test]
-        public void ConstructorDefaultTest()
+        var request = new TimeZoneRequest();
+
+        Assert.IsNotNull(request.TimeStamp);
+        Assert.AreEqual(Language.English, request.Language);
+    }
+
+    [Test]
+    public void GetQueryStringParametersTest()
+    {
+        var request = new TimeZoneRequest
         {
-            var request = new TimeZoneRequest();
+            Key = "key",
+            Location = new Coordinate(40.7141289, -73.9614074)
+        };
 
-            Assert.IsNotNull(request.TimeStamp);
-            Assert.AreEqual(Language.English, request.Language);
-        }
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
 
-        [Test]
-        public void GetQueryStringParametersTest()
+        var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
+        var keyExpected = request.Key;
+        Assert.IsNotNull(key);
+        Assert.AreEqual(keyExpected, key.Value);
+
+        var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
+        var languageExpected = request.Language.ToCode();
+        Assert.IsNotNull(language);
+        Assert.AreEqual(languageExpected, language.Value);
+
+        var timestamp = queryStringParameters.FirstOrDefault(x => x.Key == "timestamp");
+        var timestampExpected = request.TimeStamp.DateTimeToUnixTimestamp().ToString();
+        Assert.IsNotNull(timestamp);
+        Assert.AreEqual(timestampExpected, timestamp.Value);
+
+        var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
+        var locationExpected = request.Location.ToString();
+        Assert.IsNotNull(location);
+        Assert.AreEqual(locationExpected, location.Value);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenKeyIsNullTest()
+    {
+        var request = new TimeZoneRequest
         {
-            var request = new TimeZoneRequest
-            {
-                Key = "key",
-                Location = new Coordinate(40.7141289, -73.9614074)
-            };
+            Key = null
+        };
 
-            var queryStringParameters = request.GetQueryStringParameters();
-            Assert.IsNotNull(queryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        Assert.IsNotNull(exception);
+        Assert.AreEqual("'Key' is required", exception.Message);
+    }
 
-            var key = queryStringParameters.FirstOrDefault(x => x.Key == "key");
-            var keyExpected = request.Key;
-            Assert.IsNotNull(key);
-            Assert.AreEqual(keyExpected, key.Value);
-
-            var language = queryStringParameters.FirstOrDefault(x => x.Key == "language");
-            var languageExpected = request.Language.ToCode();
-            Assert.IsNotNull(language);
-            Assert.AreEqual(languageExpected, language.Value);
-
-            var timestamp = queryStringParameters.FirstOrDefault(x => x.Key == "timestamp");
-            var timestampExpected = request.TimeStamp.DateTimeToUnixTimestamp().ToString();
-            Assert.IsNotNull(timestamp);
-            Assert.AreEqual(timestampExpected, timestamp.Value);
-
-            var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
-            var locationExpected = request.Location.ToString();
-            Assert.IsNotNull(location);
-            Assert.AreEqual(locationExpected, location.Value);
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenKeyIsNullTest()
+    [Test]
+    public void GetQueryStringParametersWhenKeyIsEmptyTest()
+    {
+        var request = new TimeZoneRequest
         {
-            var request = new TimeZoneRequest
-            {
-                Key = null
-            };
+            Key = string.Empty
+        };
 
-            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("'Key' is required", exception.Message);
-        }
+        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        Assert.IsNotNull(exception);
+        Assert.AreEqual("'Key' is required", exception.Message);
+    }
 
-        [Test]
-        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+    [Test]
+    public void GetQueryStringParametersWhenLocationIsNullTest()
+    {
+        var request = new TimeZoneRequest
         {
-            var request = new TimeZoneRequest
-            {
-                Key = string.Empty
-            };
+            Key = "key"
+        };
 
-            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("'Key' is required", exception.Message);
-        }
-
-        [Test]
-        public void GetQueryStringParametersWhenLocationIsNullTest()
-        {
-            var request = new TimeZoneRequest
-            {
-                Key = "key"
-            };
-
-            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(exception.Message, "'Location' is required");
-        }
+        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        Assert.IsNotNull(exception);
+        Assert.AreEqual(exception.Message, "'Location' is required");
     }
 }

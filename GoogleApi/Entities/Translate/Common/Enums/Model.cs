@@ -1,22 +1,21 @@
 using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Translate.Common.Enums
+namespace GoogleApi.Entities.Translate.Common.Enums;
+
+/// <summary>
+/// The translation model.
+/// </summary>
+public enum Model
 {
     /// <summary>
-    /// The translation model. 
+    /// Base, Phrase-Based Machine Translation (PBMT) model
     /// </summary>
-    public enum Model
-    {
-        /// <summary>
-        /// Base, Phrase-Based Machine Translation (PBMT) model
-        /// </summary>
-        [EnumMember(Value = "base")]
-        Base,
+    [EnumMember(Value = "base")]
+    Base,
 
-        /// <summary>
-        /// Nmt, Neural Machine Translation (NMT) model.
-        /// </summary>
-        [EnumMember(Value = "nmt")]
-        Nmt
-    }
+    /// <summary>
+    /// Nmt, Neural Machine Translation (NMT) model.
+    /// </summary>
+    [EnumMember(Value = "nmt")]
+    Nmt
 }

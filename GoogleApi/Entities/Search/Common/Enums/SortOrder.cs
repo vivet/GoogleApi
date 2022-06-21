@@ -1,18 +1,17 @@
-﻿namespace GoogleApi.Entities.Search.Common.Enums
+﻿namespace GoogleApi.Entities.Search.Common.Enums;
+
+/// <summary>
+/// The direction to sort the search results, either Ascending or Descending.
+/// </summary>
+public enum SortOrder
 {
     /// <summary>
-    /// The direction to sort the search results, either Ascending or Descending.
+    /// Ascending.
     /// </summary>
-    public enum SortOrder
-    {
-        /// <summary>
-        /// Ascending.
-        /// </summary>
-        Ascending,
+    Ascending,
 
-        /// <summary>
-        /// Descending.
-        /// </summary>
-        Descending
-    }
+    /// <summary>
+    /// Descending.
+    /// </summary>
+    Descending
 }

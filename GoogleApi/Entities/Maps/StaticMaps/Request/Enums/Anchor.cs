@@ -1,53 +1,52 @@
-﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request.Enums
+﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
+
+/// <summary>
+/// Anchor.
+/// </summary>
+public enum Anchor
 {
     /// <summary>
-    /// Anchor.
+    /// Top.
     /// </summary>
-    public enum Anchor
-    {
-        /// <summary>
-        /// Top.
-        /// </summary>
-        Top,
+    Top,
 
-        /// <summary>
-        /// Bottom.
-        /// </summary>
-        Bottom,
+    /// <summary>
+    /// Bottom.
+    /// </summary>
+    Bottom,
 
-        /// <summary>
-        /// Left.
-        /// </summary>
-        Left,
+    /// <summary>
+    /// Left.
+    /// </summary>
+    Left,
 
-        /// <summary>
-        /// Right.
-        /// </summary>
-        Right,
+    /// <summary>
+    /// Right.
+    /// </summary>
+    Right,
 
-        /// <summary>
-        /// Center.
-        /// </summary>
-        Center,
+    /// <summary>
+    /// Center.
+    /// </summary>
+    Center,
 
-        /// <summary>
-        /// Top Left.
-        /// </summary>
-        TopLeft,
+    /// <summary>
+    /// Top Left.
+    /// </summary>
+    TopLeft,
 
-        /// <summary>
-        /// Top Right.
-        /// </summary>
-        TopRight,
+    /// <summary>
+    /// Top Right.
+    /// </summary>
+    TopRight,
 
-        /// <summary>
-        /// Bottom Left.
-        /// </summary>
-        BottomLeft,
+    /// <summary>
+    /// Bottom Left.
+    /// </summary>
+    BottomLeft,
 
-        /// <summary>
-        /// Bottom Right.
-        /// </summary>
-        BottomRight
-    }
+    /// <summary>
+    /// Bottom Right.
+    /// </summary>
+    BottomRight
 }

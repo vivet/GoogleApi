@@ -1,23 +1,22 @@
-﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request.Enums
+﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
+
+/// <summary>
+/// Style Visibility.
+/// </summary>
+public enum StyleVisibility
 {
     /// <summary>
-    /// Style Visibility.
+    /// On.
     /// </summary>
-    public enum StyleVisibility
-    {
-        /// <summary>
-        /// On.
-        /// </summary>
-        On,
+    On,
 
-        /// <summary>
-        /// Off.
-        /// </summary>
-        Off,
+    /// <summary>
+    /// Off.
+    /// </summary>
+    Off,
 
-        /// <summary>
-        /// Simplified.
-        /// </summary>
-        Simplified
-    }
+    /// <summary>
+    /// Simplified.
+    /// </summary>
+    Simplified
 }

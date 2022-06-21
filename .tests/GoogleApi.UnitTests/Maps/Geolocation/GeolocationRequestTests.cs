@@ -2,35 +2,34 @@ using System;
 using GoogleApi.Entities.Maps.Geolocation.Request;
 using NUnit.Framework;
 
-namespace GoogleApi.UnitTests.Maps.Geolocation
+namespace GoogleApi.UnitTests.Maps.Geolocation;
+
+[TestFixture]
+public class GeolocationRequestTests
 {
-    [TestFixture]
-    public class GeolocationRequestTests
+    [Test]
+    public void GetQueryStringParametersWhenKeyIsNullTest()
     {
-        [Test]
-        public void GetQueryStringParametersWhenKeyIsNullTest()
+        var request = new GeolocationRequest
         {
-            var request = new GeolocationRequest
-            {
-                Key = null
-            };
+            Key = null
+        };
 
-            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("'Key' is required", exception.Message);
-        }
+        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        Assert.IsNotNull(exception);
+        Assert.AreEqual("'Key' is required", exception.Message);
+    }
 
-        [Test]
-        public void GetQueryStringParametersWhenKeyIsEmptyTest()
+    [Test]
+    public void GetQueryStringParametersWhenKeyIsEmptyTest()
+    {
+        var request = new GeolocationRequest
         {
-            var request = new GeolocationRequest
-            {
-                Key = string.Empty
-            };
+            Key = string.Empty
+        };
 
-            var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("'Key' is required", exception.Message);
-        }
+        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        Assert.IsNotNull(exception);
+        Assert.AreEqual("'Key' is required", exception.Message);
     }
 }

@@ -3,36 +3,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GoogleApi.Entities.Translate.Detect.Request
+namespace GoogleApi.Entities.Translate.Detect.Request;
+
+/// <summary>
+/// Detect Request.
+/// </summary>
+public class DetectRequest : BaseTranslateRequest
 {
+    /// <inheritdoc />
+    protected internal override string BaseUrl => $"{base.BaseUrl}detect";
+
     /// <summary>
-    /// Detect Request.
+    /// Required. The input text upon which to perform language detection.
+    /// Repeat this parameter to perform language detection on multiple text inputs.
     /// </summary>
-    public class DetectRequest : BaseTranslateRequest
+    public virtual IEnumerable<string> Qs { get; set; }
+
+    /// <inheritdoc />
+    public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
     {
-        /// <inheritdoc />
-        protected internal override string BaseUrl => $"{base.BaseUrl}detect";
+        var parameters = base.GetQueryStringParameters();
 
-        /// <summary>
-        /// Required. The input text upon which to perform language detection. 
-        /// Repeat this parameter to perform language detection on multiple text inputs.
-        /// </summary>
-        public virtual IEnumerable<string> Qs { get; set; }
+        if (this.Qs == null || !this.Qs.Any())
+            throw new ArgumentException($"'{nameof(this.Qs)}' is required");
 
-        /// <inheritdoc />
-        public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
+        foreach (var q in this.Qs)
         {
-            var parameters = base.GetQueryStringParameters();
-
-            if (this.Qs == null || !this.Qs.Any())
-                throw new ArgumentException($"'{nameof(this.Qs)}' is required");
-
-            foreach (var q in this.Qs)
-            {
-                parameters.Add("q", q);
-            }
-
-            return parameters;
+            parameters.Add("q", q);
         }
+
+        return parameters;
     }
 }

@@ -1,33 +1,32 @@
-﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request.Enums
+﻿namespace GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
+
+/// <summary>
+/// Image Format.
+/// </summary>
+public enum ImageFormat
 {
     /// <summary>
-    /// Image Format.
+    /// Specifies the 8-bit PNG format (default).
     /// </summary>
-    public enum ImageFormat
-    {
-        /// <summary>
-        /// Specifies the 8-bit PNG format (default).
-        /// </summary>
-        Png,
+    Png,
 
-        /// <summary>
-        /// specifies the 32-bit PNG format.
-        /// </summary>
-        Png32,
-		
-        /// <summary>
-        /// specifies the GIF format.
-        /// </summary>
-        Gif,
-		
-        /// <summary>
-        /// specifies the JPEG compression format.
-        /// </summary>
-        Jpg,
+    /// <summary>
+    /// specifies the 32-bit PNG format.
+    /// </summary>
+    Png32,
 
-        /// <summary>
-        /// specifies a non-progressive JPEG compression format.
-        /// </summary>
-        JpgBaseline
-    }
+    /// <summary>
+    /// specifies the GIF format.
+    /// </summary>
+    Gif,
+
+    /// <summary>
+    /// specifies the JPEG compression format.
+    /// </summary>
+    Jpg,
+
+    /// <summary>
+    /// specifies a non-progressive JPEG compression format.
+    /// </summary>
+    JpgBaseline
 }

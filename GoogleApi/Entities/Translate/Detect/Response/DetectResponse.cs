@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 
-namespace GoogleApi.Entities.Translate.Detect.Response
+namespace GoogleApi.Entities.Translate.Detect.Response;
+
+/// <summary>
+/// Detect Response.
+/// </summary>
+public class DetectResponse : BaseResponse
 {
     /// <summary>
-    /// Detect Response.
+    /// Container for the detected results.
     /// </summary>
-    public class DetectResponse : BaseResponse
-    {
-        /// <summary>
-        /// Container for the detected results.
-        /// </summary>
-        [JsonProperty("data")]
-        public virtual Data Data { get; set; }
-    }
+    [JsonProperty("data")]
+    public virtual Data Data { get; set; }
 }

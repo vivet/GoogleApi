@@ -1,18 +1,17 @@
-﻿namespace GoogleApi.Entities.Places.Search.Find.Request.Enums
+﻿namespace GoogleApi.Entities.Places.Search.Find.Request.Enums;
+
+/// <summary>
+/// Input Type.
+/// </summary>
+public enum InputType
 {
     /// <summary>
-    /// Input Type.
+    /// Text Query.
     /// </summary>
-    public enum InputType
-    {
-        /// <summary>
-        /// Text Query.
-        /// </summary>
-        TextQuery,
+    TextQuery,
 
-        /// <summary>
-        /// Phone Number.
-        /// </summary>
-        PhoneNumber
-    }
+    /// <summary>
+    /// Phone Number.
+    /// </summary>
+    PhoneNumber
 }

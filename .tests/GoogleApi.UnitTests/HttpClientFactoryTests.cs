@@ -5,70 +5,69 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using NUnit.Framework;
 
-namespace GoogleApi.UnitTests
+namespace GoogleApi.UnitTests;
+
+[TestFixture]
+public class HttpClientFactoryTests
 {
-    [TestFixture]
-    public class HttpClientFactoryTests
+    [Test]
+    public void CreateDefaultHttpClientTest()
     {
-        [Test]
-        public void CreateDefaultHttpClientTest()
-        {
-            var httpClient = HttpClientFactory.CreateDefaultHttpClient();
-            var defaultHttpClientHandler = HttpClientFactory.GetDefaultHttpClientHandler();
+        var httpClient = HttpClientFactory.CreateDefaultHttpClient();
+        var defaultHttpClientHandler = HttpClientFactory.GetDefaultHttpClientHandler();
 
-            var expected = new MediaTypeWithQualityHeaderValue("application/json");
-            Assert.Contains(expected, httpClient.DefaultRequestHeaders.Accept.ToArray());
+        var expected = new MediaTypeWithQualityHeaderValue("application/json");
+        Assert.Contains(expected, httpClient.DefaultRequestHeaders.Accept.ToArray());
 
-            Assert.AreEqual(httpClient.Timeout, TimeSpan.FromSeconds(30));
+        Assert.AreEqual(httpClient.Timeout, TimeSpan.FromSeconds(30));
 
-            var hasGZip = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.GZip);
-            Assert.True(hasGZip);
+        var hasGZip = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.GZip);
+        Assert.True(hasGZip);
 
-            var hasDeflate = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.Deflate);
-            Assert.True(hasDeflate);
+        var hasDeflate = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.Deflate);
+        Assert.True(hasDeflate);
 
 //#if NETCOREAPP3_1_OR_GREATER
 //            var hasGSslProtocolsNone = defaultHttpClientHandler.SslProtocols.HasFlag(SslProtocols.None);
 //            Assert.True(hasGSslProtocolsNone);
 //#endif
-        }
+    }
 
-        [Test]
-        public void CreateDefaultHttpClientWhenWebProxyTest()
-        {
-            Assert.Inconclusive();
-        }
+    [Test]
+    public void CreateDefaultHttpClientWhenWebProxyTest()
+    {
+        Assert.Inconclusive();
+    }
 
-        [Test]
-        public void ConfigureDefaultHttpClientTest()
-        {
-            var httpClient = new HttpClient();
+    [Test]
+    public void ConfigureDefaultHttpClientTest()
+    {
+        var httpClient = new HttpClient();
 
-            HttpClientFactory.ConfigureDefaultHttpClient(httpClient);
+        HttpClientFactory.ConfigureDefaultHttpClient(httpClient);
 
-            var expected = new MediaTypeWithQualityHeaderValue("application/json");
-            Assert.Contains(expected, httpClient.DefaultRequestHeaders.Accept.ToArray());
+        var expected = new MediaTypeWithQualityHeaderValue("application/json");
+        Assert.Contains(expected, httpClient.DefaultRequestHeaders.Accept.ToArray());
 
-            Assert.AreEqual(httpClient.Timeout, TimeSpan.FromSeconds(30));
-        }
+        Assert.AreEqual(httpClient.Timeout, TimeSpan.FromSeconds(30));
+    }
 
-        [Test]
-        public void GetDefaultHttpClientHandlerTest()
-        {
-            var defaultHttpClientHandler = HttpClientFactory.GetDefaultHttpClientHandler();
+    [Test]
+    public void GetDefaultHttpClientHandlerTest()
+    {
+        var defaultHttpClientHandler = HttpClientFactory.GetDefaultHttpClientHandler();
 
-            Assert.IsInstanceOf<HttpClientHandler>(defaultHttpClientHandler);
+        Assert.IsInstanceOf<HttpClientHandler>(defaultHttpClientHandler);
 
-            var hasGZip = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.GZip);
-            Assert.True(hasGZip);
+        var hasGZip = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.GZip);
+        Assert.True(hasGZip);
 
-            var hasDeflate = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.Deflate);
-            Assert.True(hasDeflate);
+        var hasDeflate = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.Deflate);
+        Assert.True(hasDeflate);
 
 //#if NETCOREAPP3_1_OR_GREATER
 //            var hasGSslProtocolsNone = defaultHttpClientHandler.SslProtocols.HasFlag(SslProtocols.None);
 //            Assert.True(hasGSslProtocolsNone);
 //#endif
-        }
     }
 }

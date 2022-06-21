@@ -1,18 +1,17 @@
-﻿namespace GoogleApi.Entities.Search.Common.Enums
+﻿namespace GoogleApi.Entities.Search.Common.Enums;
+
+/// <summary>
+/// Data format for the response.
+/// </summary>
+public enum AltType
 {
     /// <summary>
-    /// Data format for the response.
+    /// Json format.
     /// </summary>
-    public enum AltType
-    {
-        /// <summary>
-        /// Json format.
-        /// </summary>
-        Json,
+    Json,
 
-        /// <summary>
-        /// Atom format.
-        /// </summary>
-        Atom
-    }
+    /// <summary>
+    /// Atom format.
+    /// </summary>
+    Atom
 }

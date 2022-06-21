@@ -1,23 +1,22 @@
-namespace GoogleApi.Entities.Search.Common.Enums
+namespace GoogleApi.Entities.Search.Common.Enums;
+
+/// <summary>
+/// Search Type.
+/// </summary>
+public enum SearchType
 {
     /// <summary>
-    /// Search Type.
+    /// Web.
     /// </summary>
-    public enum SearchType
-    {
-        /// <summary>
-        /// Web.
-        /// </summary>
-        Web,
+    Web,
 
-        /// <summary>
-        /// Image.
-        /// </summary>
-        Image,
+    /// <summary>
+    /// Image.
+    /// </summary>
+    Image,
 
-        /// <summary>
-        /// Video.
-        /// </summary>
-        Video
-    }
+    /// <summary>
+    /// Video.
+    /// </summary>
+    Video
 }

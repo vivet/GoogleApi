@@ -1,27 +1,26 @@
-﻿namespace GoogleApi.Entities.Search.Video.Videos.Request.Enums
+﻿namespace GoogleApi.Entities.Search.Video.Videos.Request.Enums;
+
+/// <summary>
+/// Video License Type.
+/// </summary>
+public enum VideoLicenseType
 {
     /// <summary>
-    /// Video License Type.
+    /// Any.
+    /// Return all videos, regardless of which license they have, that match the query parameters.
+    /// This is the default value.
     /// </summary>
-    public enum VideoLicenseType
-    {
-        /// <summary>
-        /// Any.
-        /// Return all videos, regardless of which license they have, that match the query parameters.
-        /// This is the default value.
-        /// </summary>
-        Any,
+    Any,
 
-        /// <summary>
-        /// Creative Common.
-        /// Only return videos that have a Creative Commons license.Users can reuse videos with this license in other videos that they create.Learn more.
-        /// </summary>
-        CreativeCommon,
+    /// <summary>
+    /// Creative Common.
+    /// Only return videos that have a Creative Commons license.Users can reuse videos with this license in other videos that they create.Learn more.
+    /// </summary>
+    CreativeCommon,
 
-        /// <summary>
-        /// YouTube.
-        /// Only return videos that have the standard YouTube license.
-        /// </summary>
-        YouTube
-    }
+    /// <summary>
+    /// YouTube.
+    /// Only return videos that have the standard YouTube license.
+    /// </summary>
+    YouTube
 }

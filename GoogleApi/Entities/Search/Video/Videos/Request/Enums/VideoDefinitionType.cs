@@ -1,27 +1,26 @@
-﻿namespace GoogleApi.Entities.Search.Video.Videos.Request.Enums
+﻿namespace GoogleApi.Entities.Search.Video.Videos.Request.Enums;
+
+/// <summary>
+/// Video Definition Type.
+/// </summary>
+public enum VideoDefinitionType
 {
     /// <summary>
-    /// Video Definition Type.
+    /// Any.
+    /// Return all videos, regardless of their resolution.
+    /// This is the default value.
     /// </summary>
-    public enum VideoDefinitionType
-    {
-        /// <summary>
-        /// Any.
-        /// Return all videos, regardless of their resolution.
-        /// This is the default value.
-        /// </summary>
-        Any,
+    Any,
 
-        /// <summary>
-        /// High.
-        /// Only retrieve HD videos.
-        /// </summary>
-        High,
+    /// <summary>
+    /// High.
+    /// Only retrieve HD videos.
+    /// </summary>
+    High,
 
-        /// <summary>
-        /// Standard.
-        /// Only retrieve videos in standard definition.
-        /// </summary>
-        Standard
-    }
+    /// <summary>
+    /// Standard.
+    /// Only retrieve videos in standard definition.
+    /// </summary>
+    Standard
 }

@@ -1,22 +1,21 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.Maps.Roads.Common.Enums
+namespace GoogleApi.Entities.Maps.Roads.Common.Enums;
+
+/// <summary>
+/// Speed Units.
+/// </summary>
+public enum Units
 {
     /// <summary>
-    /// Speed Units.
+    /// Miles per hour.
     /// </summary>
-    public enum Units
-    {
-        /// <summary>
-        /// Miles per hour.
-        /// </summary>
-        [EnumMember(Value = "MPH")]
-        Mph,
+    [EnumMember(Value = "MPH")]
+    Mph,
 
-        /// <summary>
-        /// Kilometers per hour.
-        /// </summary>
-        [EnumMember(Value = "KPH")]
-        Kph
-    }
+    /// <summary>
+    /// Kilometers per hour.
+    /// </summary>
+    [EnumMember(Value = "KPH")]
+    Kph
 }
