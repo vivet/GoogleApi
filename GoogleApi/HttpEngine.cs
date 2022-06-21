@@ -13,7 +13,7 @@ namespace GoogleApi;
 
 /// <summary>
 /// Http Engine.
-/// Manges the http connections, and is responsible for invoking requst and handling responses.
+    /// Manges the http connections, and is responsible for invoking requst and handling responses.
 /// </summary>
 /// <typeparam name="TRequest"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
@@ -49,8 +49,7 @@ public class HttpEngine<TRequest, TResponse>
     /// <returns>The <see cref="IResponse"/>.</returns>
     public TResponse Query(TRequest request, HttpEngineOptions httpEngineOptions = null)
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
+        request = request ?? throw new ArgumentNullException(nameof(request));
 
         httpEngineOptions ??= new HttpEngineOptions();
 
@@ -101,9 +100,7 @@ public class HttpEngine<TRequest, TResponse>
     /// <returns>The <see cref="Task{T}"/>.</returns>
     public async Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
+        request = request ?? throw new ArgumentNullException(nameof(request));
         var taskCompletion = new TaskCompletionSource<TResponse>();
 
         await this.ProcessRequestAsync(request, cancellationToken)
@@ -166,8 +163,7 @@ public class HttpEngine<TRequest, TResponse>
     /// <returns>The <see cref="Task{T}"/>.</returns>
     public async Task<TResponse> QueryAsync(TRequest request, HttpEngineOptions httpEngineOptions, CancellationToken cancellationToken = default)
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
+        request = request ?? throw new ArgumentNullException(nameof(request));
 
         httpEngineOptions ??= new HttpEngineOptions();
 
@@ -241,8 +237,7 @@ public class HttpEngine<TRequest, TResponse>
 
     private HttpResponseMessage ProcessRequest(TRequest request)
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
+        request = request ?? throw new ArgumentNullException(nameof(request));
 
         var uri = request.GetUri();
 
@@ -270,8 +265,7 @@ public class HttpEngine<TRequest, TResponse>
     }
     private TResponse ProcessResponse(HttpResponseMessage httpResponse)
     {
-        if (httpResponse == null)
-            throw new ArgumentNullException(nameof(httpResponse));
+        httpResponse = httpResponse ?? throw new ArgumentNullException(nameof(httpResponse));
 
         using (httpResponse)
         {
@@ -288,10 +282,8 @@ public class HttpEngine<TRequest, TResponse>
 
                 default:
                     var rawJson = httpResponse.Content.ReadAsStringAsync().Result;
-                    response = JsonConvert.DeserializeObject<TResponse>(rawJson);
-
-                    if (response == null)
-                        throw new NullReferenceException(nameof(response));
+                    response = JsonConvert.DeserializeObject<TResponse>(rawJson)
+                        ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
                     response.RawJson = rawJson;
                     break;
@@ -308,8 +300,7 @@ public class HttpEngine<TRequest, TResponse>
 
     private async Task<HttpResponseMessage> ProcessRequestAsync(TRequest request, CancellationToken cancellationToken = default)
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
+        request = request ?? throw new ArgumentNullException(nameof(request));
 
         var uri = request.GetUri();
 
@@ -337,8 +328,7 @@ public class HttpEngine<TRequest, TResponse>
     }
     private async Task<TResponse> ProcessResponseAsync(HttpResponseMessage httpResponse)
     {
-        if (httpResponse == null)
-            throw new ArgumentNullException(nameof(httpResponse));
+        httpResponse = httpResponse ?? throw new ArgumentNullException(nameof(httpResponse));
 
         using (httpResponse)
         {
@@ -355,10 +345,8 @@ public class HttpEngine<TRequest, TResponse>
 
                 default:
                     var rawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    response = JsonConvert.DeserializeObject<TResponse>(rawJson);
-
-                    if (response == null)
-                        throw new NullReferenceException(nameof(response));
+                    response = JsonConvert.DeserializeObject<TResponse>(rawJson)
+                        ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
                     response.RawJson = rawJson;
                     break;
