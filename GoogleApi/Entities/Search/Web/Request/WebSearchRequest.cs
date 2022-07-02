@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
@@ -113,7 +114,7 @@ public class WebSearchRequest : BaseSearchRequest
         if (this.Options.Number != null)
         {
             if (this.Options.Number is > 10 or < 1)
-                throw new InvalidOperationException("Number must be between 1 and 10");
+                throw new ArgumentOutOfRangeException(nameof(SearchOptions.Number), this.Options.Number, "Number must be between 1 and 10");
 
             parameters.Add("num", this.Options.Number.ToString());
         }
@@ -132,7 +133,7 @@ public class WebSearchRequest : BaseSearchRequest
 
         if (this.Options.SafetyLevel != SafetyLevel.Off && !this.Options.InterfaceLanguage.AllowSafeSearch())
         {
-            throw new InvalidOperationException($"SafetyLevel is not allowed for specified InterfaceLanguage: {this.Options.InterfaceLanguage}");
+            throw new ArgumentOutOfRangeException(nameof(SearchOptions.SafetyLevel), this.Options.SafetyLevel, $"SafetyLevel is not allowed for specified InterfaceLanguage: {this.Options.InterfaceLanguage}");
         }
 
         parameters.Add("safe", this.Options.SafetyLevel.ToString().ToLower());
