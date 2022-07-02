@@ -50,7 +50,7 @@ public class WebSearchRequest : BaseSearchRequest
         var parameters = base.GetQueryStringParameters();
 
         if (string.IsNullOrEmpty(this.SearchEngineId))
-            throw new ArgumentException("SearchEngineId is required");
+            throw new ArgumentException($"{nameof(this.SearchEngineId)} is required");
 
         parameters.Add("cx", this.SearchEngineId);
 

@@ -100,7 +100,9 @@ public class HttpEngine<TRequest, TResponse>
     /// <returns>The <see cref="Task{T}"/>.</returns>
     public async Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
     {
-        request = request ?? throw new ArgumentNullException(nameof(request));
+        if (request == null)
+            throw new ArgumentNullException(nameof(request));
+
         var taskCompletion = new TaskCompletionSource<TResponse>();
 
         await this.ProcessRequestAsync(request, cancellationToken)
@@ -163,7 +165,8 @@ public class HttpEngine<TRequest, TResponse>
     /// <returns>The <see cref="Task{T}"/>.</returns>
     public async Task<TResponse> QueryAsync(TRequest request, HttpEngineOptions httpEngineOptions, CancellationToken cancellationToken = default)
     {
-        request = request ?? throw new ArgumentNullException(nameof(request));
+        if (request == null)
+            throw new ArgumentNullException(nameof(request));
 
         httpEngineOptions ??= new HttpEngineOptions();
 
@@ -237,7 +240,8 @@ public class HttpEngine<TRequest, TResponse>
 
     private HttpResponseMessage ProcessRequest(TRequest request)
     {
-        request = request ?? throw new ArgumentNullException(nameof(request));
+        if (request == null)
+            throw new ArgumentNullException(nameof(request));
 
         var uri = request.GetUri();
 
@@ -265,7 +269,8 @@ public class HttpEngine<TRequest, TResponse>
     }
     private TResponse ProcessResponse(HttpResponseMessage httpResponse)
     {
-        httpResponse = httpResponse ?? throw new ArgumentNullException(nameof(httpResponse));
+        if (httpResponse == null)
+            throw new ArgumentNullException(nameof(httpResponse));
 
         using (httpResponse)
         {
@@ -297,10 +302,10 @@ public class HttpEngine<TRequest, TResponse>
             return response;
         }
     }
-
     private async Task<HttpResponseMessage> ProcessRequestAsync(TRequest request, CancellationToken cancellationToken = default)
     {
-        request = request ?? throw new ArgumentNullException(nameof(request));
+        if (request == null)
+            throw new ArgumentNullException(nameof(request));
 
         var uri = request.GetUri();
 
@@ -328,7 +333,8 @@ public class HttpEngine<TRequest, TResponse>
     }
     private async Task<TResponse> ProcessResponseAsync(HttpResponseMessage httpResponse)
     {
-        httpResponse = httpResponse ?? throw new ArgumentNullException(nameof(httpResponse));
+        if (httpResponse == null)
+            throw new ArgumentNullException(nameof(httpResponse));
 
         using (httpResponse)
         {

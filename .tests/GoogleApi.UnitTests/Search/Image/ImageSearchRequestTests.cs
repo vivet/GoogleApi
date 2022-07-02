@@ -160,13 +160,12 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(() =>
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var parameters = request.GetQueryStringParameters();
             Assert.IsNull(parameters);
         });
         Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
     }
 
     [Test]
@@ -183,13 +182,12 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(() =>
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var parameters = request.GetQueryStringParameters();
             Assert.IsNull(parameters);
         });
         Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "Number must be between 1 and 10");
     }
 
     [Test]
@@ -207,13 +205,13 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<InvalidOperationException>(() =>
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var parameters = request.GetQueryStringParameters();
             Assert.IsNull(parameters);
         });
+
         Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, $"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}");
     }
 
     [Test]
