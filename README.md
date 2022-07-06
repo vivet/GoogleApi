@@ -39,7 +39,7 @@ If injecting the api's as dependencies is preffered register the services during
 
 ```csharp
 services
-    .AddGoogleApis();
+    .AddGoogleApiClients();
 ```
 Then, inject the individual Api's in constructors as needed
 ```csharp
