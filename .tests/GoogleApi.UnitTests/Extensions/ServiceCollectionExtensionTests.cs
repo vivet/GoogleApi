@@ -103,11 +103,6 @@ public class ServiceCollectionExtensionTests
 
         var hasDeflate = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.Deflate);
         Assert.True(hasDeflate);
-
-//#if NETCOREAPP3_1_OR_GREATER
-//            var hasGSslProtocolsNone = defaultHttpClientHandler.SslProtocols.HasFlag(SslProtocols.None);
-//            Assert.True(hasGSslProtocolsNone);
-//#endif
     }
 
 

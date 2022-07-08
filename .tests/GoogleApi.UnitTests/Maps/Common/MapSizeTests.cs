@@ -26,12 +26,7 @@ public class MapSizeTests
         });
 
         Assert.IsNotNull(exception);
-
-#if NETCOREAPP3_1_OR_GREATER
-        Assert.AreEqual("'width' must be greater than 1 and less than 4096. (Parameter 'width')\r\nActual value was 0.", exception.Message);
-#else
-            Assert.AreEqual("'width' must be greater than 1 and less than 4096.\r\nParameter name: width\r\nActual value was 0.", exception.Message);
-#endif
+        Assert.True(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
     }
 
     [Test]
@@ -44,13 +39,7 @@ public class MapSizeTests
         });
 
         Assert.IsNotNull(exception);
-
-#if NETCOREAPP3_1_OR_GREATER
-        Assert.AreEqual("'width' must be greater than 1 and less than 4096. (Parameter 'width')\r\nActual value was 4097.", exception.Message);
-#else
-            Assert.AreEqual("'width' must be greater than 1 and less than 4096.\r\nParameter name: width\r\nActual value was 4097.", exception.Message);
-#endif
-
+        Assert.True(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
     }
 
     [Test]
@@ -63,12 +52,7 @@ public class MapSizeTests
         });
 
         Assert.IsNotNull(exception);
-
-#if NETCOREAPP3_1_OR_GREATER
-        Assert.AreEqual("'height' must be greater than 1 and less than 4096. (Parameter 'height')\r\nActual value was 0.", exception.Message);
-#else
-            Assert.AreEqual("'height' must be greater than 1 and less than 4096.\r\nParameter name: height\r\nActual value was 0.", exception.Message);
-#endif
+        Assert.True(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));
     }
 
     [Test]
@@ -81,12 +65,7 @@ public class MapSizeTests
         });
 
         Assert.IsNotNull(exception);
-
-#if NETCOREAPP3_1_OR_GREATER
-        Assert.AreEqual("'height' must be greater than 1 and less than 4096. (Parameter 'height')\r\nActual value was 4097.", exception.Message);
-#else
-            Assert.AreEqual("'height' must be greater than 1 and less than 4096.\r\nParameter name: height\r\nActual value was 4097.", exception.Message);
-#endif
+        Assert.True(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));
     }
 
     [Test]
