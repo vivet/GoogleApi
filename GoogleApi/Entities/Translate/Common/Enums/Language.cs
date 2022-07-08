@@ -674,5 +674,101 @@ public enum Language
     /// Zulu.
     /// </summary>
     [EnumMember(Value = "zu")]
-    Zulu
+    Zulu,
+
+    /// <summary>
+    /// Bihari.
+    /// </summary>
+    [EnumMember(Value = "bh")]
+    Bihari,
+
+    /// <summary>
+    /// Akan.
+    /// </summary>
+    [EnumMember(Value = "ak")]
+    Akan,
+
+    /// <summary>
+    /// Assamese.
+    /// </summary>
+    [EnumMember(Value = "as")]
+    Assamese,
+
+    /// <summary>
+    /// Aymara.
+    /// </summary>
+    [EnumMember(Value = "ay")]
+    Aymara,
+
+    /// <summary>
+    /// Divehi, Dhivehi, Maldivian.
+    /// </summary>
+    [EnumMember(Value = "dv")]
+    DivehiDhivehiMaldivian,
+
+    /// <summary>
+    /// Dutch Middle Age.
+    /// </summary>
+    [EnumMember(Value = "ee")]
+    DutchMiddleAge,
+
+    /// <summary>
+    /// Ganda.
+    /// </summary>
+    [EnumMember(Value = "lg")]
+    Ganda,
+
+    /// <summary>
+    /// Guarani.
+    /// </summary>
+    [EnumMember(Value = "gn")]
+    Guarani,
+
+    /// <summary>
+    /// Krio.
+    /// </summary>
+    [EnumMember(Value = "kri")]
+    Krio,
+
+    /// <summary>
+    /// Lingala.
+    /// </summary>
+    [EnumMember(Value = "ln")]
+    Lingala,
+
+    /// <summary>
+    /// Sepedi.
+    /// </summary>
+    [EnumMember(Value = "nso")]
+    Sepedi,
+
+    /// <summary>
+    /// Oromo.
+    /// </summary>
+    [EnumMember(Value = "om")]
+    Oromo,
+
+    /// <summary>
+    /// Quechua.
+    /// </summary>
+    [EnumMember(Value = "qu")]
+    Quechua,
+
+    /// <summary>
+    /// Sanskrit.
+    /// </summary>
+    [EnumMember(Value = "sa")]
+    Sanskrit,
+
+    /// <summary>
+    /// Tigrinya.
+    /// </summary>
+    [EnumMember(Value = "ti")]
+    Tigrinya,
+
+    /// <summary>
+    /// Zulu.
+    /// </summary>
+    [EnumMember(Value = "ts")]
+    Tsonga
 }

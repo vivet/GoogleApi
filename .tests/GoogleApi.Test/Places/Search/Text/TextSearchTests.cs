@@ -129,7 +129,7 @@ public class TextSearchTests : BaseTest
         var request = new PlacesTextSearchRequest
         {
             Key = this.Settings.ApiKey,
-            Query = "Copenhagen",
+            Query = "Noma, Copenhagen",
             Minprice = PriceLevel.Expensive
         };
 

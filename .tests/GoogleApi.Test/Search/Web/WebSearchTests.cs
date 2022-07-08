@@ -534,7 +534,7 @@ public class WebSearchTests : BaseTest
         var innerException = exception.InnerException;
         Assert.IsNotNull(innerException);
         Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-        Assert.AreEqual(innerException.Message, $"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}");
+        Assert.True(innerException.Message.Contains($"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}"));
     }
 
     [Test]
@@ -720,7 +720,7 @@ public class WebSearchTests : BaseTest
         var innerException = exception.InnerException;
         Assert.IsNotNull(innerException);
         Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-        Assert.AreEqual(innerException.Message, "Number must be between 1 and 10");
+        Assert.True(innerException.Message.Contains("Number must be between 1 and 10"));
     }
 
     [Test]
@@ -743,6 +743,6 @@ public class WebSearchTests : BaseTest
         var innerException = exception.InnerException;
         Assert.IsNotNull(innerException);
         Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-        Assert.AreEqual(innerException.Message, "Number must be between 1 and 10");
+        Assert.True(innerException.Message.Contains("Number must be between 1 and 10"));
     }
 }
