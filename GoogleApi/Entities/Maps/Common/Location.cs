@@ -13,7 +13,7 @@ public class Location
     public string String { get; }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="address"></param>
     public Location(Address address)
@@ -22,7 +22,7 @@ public class Location
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="coordinate"></param>
     public Location(Coordinate coordinate)

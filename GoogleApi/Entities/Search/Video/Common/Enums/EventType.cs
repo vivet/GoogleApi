@@ -3,6 +3,7 @@
 /// <summary>
 /// Event Type.
 /// </summary>
+
 public enum EventType
 {
     /// <summary>

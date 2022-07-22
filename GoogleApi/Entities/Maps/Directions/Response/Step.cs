@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using GoogleApi.Entities.Common.Converters;
+using System.Text.Json.Serialization;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
-using Newtonsoft.Json;
+
 using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Entities.Maps.Directions.Response;
@@ -16,31 +16,29 @@ public class Step
     /// <summary>
     /// html_instructions contains formatted instructions for this step, presented as an HTML text string.
     /// </summary>
-    [JsonProperty("html_instructions")]
+    [JsonPropertyName("html_instructions")]
     public virtual string HtmlInstructions { get; set; }
 
     /// <summary>
     /// distance contains the distance covered by this step until the next step. (See the discussion of this field in Directions Legs above.) This field may be undefined if the distance is unknown.
     /// </summary>
-    [JsonProperty("distance")]
     public virtual Distance Distance { get; set; }
 
     /// <summary>
     /// duration contains the typical time required to perform the step, until the next step (See the description in Directions Legs above.) This field may be undefined if the duration is unknown.
     /// </summary>
-    [JsonProperty("duration")]
     public virtual Duration Duration { get; set; }
 
     /// <summary>
     /// start_location contains the location of the starting point of this step, as a single set of lat and lng fields.
     /// </summary>
-    [JsonProperty("start_location")]
+    [JsonPropertyName("start_location")]
     public virtual Coordinate StartLocation { get; set; }
 
     /// <summary>
     /// end_location contains the location of the starting point of this step, as a single set of lat and lng fields.
     /// </summary>
-    [JsonProperty("end_location")]
+    [JsonPropertyName("end_location")]
     public virtual Coordinate EndLocation { get; set; }
 
     /// <summary>
@@ -50,33 +48,28 @@ public class Step
     /// fork-right, ferry, ferry-train, roundabout-left, roundabout-right.
     /// Values in this list are subject to change.
     /// </summary>
-    [JsonProperty("maneuver")]
-    [JsonConverter(typeof(StringEnumOrDefaultConverter<ManeuverAction>))]
     public virtual ManeuverAction Maneuver { get; set; }
 
     /// <summary>
     /// TravelMode. The mode of transport to use when calculating directions.
     /// </summary>
-    [JsonProperty("travel_mode")]
-    [JsonConverter(typeof(StringEnumOrDefaultConverter<TravelMode>))]
+    [JsonPropertyName("travel_mode")]
     public virtual TravelMode TravelMode { get; set; }
 
     /// <summary>
     /// Contains an object holding an array of encoded points that represent an approximate (smoothed) path of the resulting directions.
     /// </summary>
-    [JsonProperty("polyline")]
     public virtual OverviewPolyline PolyLine { get; set; }
 
     /// <summary>
     /// More information about the step. Only avaliable when TravelMode = Transit
     /// </summary>
-    [JsonProperty("transit_details")]
+    [JsonPropertyName("transit_details")]
     public virtual TransitDetails TransitDetails { get; set; }
 
     /// <summary>
     /// steps contains detailed directions for walking or driving steps in transit directions. Substeps are only available when travel_mode is set to "transit".
     /// The inner steps array is of the same type as steps.
     /// </summary>
-    [JsonProperty("steps")]
     public virtual IEnumerable<Step> Steps { get; set; }
 }

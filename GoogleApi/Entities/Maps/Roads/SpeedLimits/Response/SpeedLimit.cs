@@ -1,6 +1,6 @@
-﻿using GoogleApi.Entities.Maps.Roads.Common.Enums;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
+
+using GoogleApi.Entities.Maps.Roads.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Roads.SpeedLimits.Response;
 
@@ -18,19 +18,17 @@ public class SpeedLimit
     /// Google Places API or the Google Maps Geocoding API. Within the Google Maps Roads API, you can pass the placeId to the speedLimit method to
     /// determine the speed limit along that road segment.
     /// </summary>
-    [JsonProperty("PlaceId")]
+    [JsonPropertyName("PlaceId")]
     public virtual string PlaceId { get; set; }
 
     /// <summary>
     /// SpeedLimit — The speed limit for that road segment.
     /// </summary>
-    [JsonProperty("speedLimit")]
+    [JsonPropertyName("speedLimit")]
     public virtual double? Limit { get; set; }
 
     /// <summary>
     /// units — Returns either KPH or MPH.
     /// </summary>
-    [JsonProperty("units")]
-    [JsonConverter(typeof(StringEnumConverter))]
     public virtual Units Units { get; set; }
 }
