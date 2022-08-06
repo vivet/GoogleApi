@@ -1,4 +1,5 @@
-﻿using GoogleApi.Entities.Common;
+﻿using System;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Common;
 
@@ -13,20 +14,26 @@ public class Location
     public string String { get; }
 
     /// <summary>
-    /// 
+    /// Constructor.
     /// </summary>
-    /// <param name="address"></param>
+    /// <param name="address">The address string.</param>
     public Location(Address address)
     {
+        if (address == null) 
+            throw new ArgumentNullException(nameof(address));
+
         this.String = address.ToString();
     }
 
     /// <summary>
-    /// 
+    /// Constructor.
     /// </summary>
     /// <param name="coordinate"></param>
     public Location(Coordinate coordinate)
     {
+        if (coordinate == null) 
+            throw new ArgumentNullException(nameof(coordinate));
+
         this.String = coordinate.ToString();
     }
 
