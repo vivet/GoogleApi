@@ -88,6 +88,47 @@ public class StaticMapsTests : BaseTest
     }
 
     [Test]
+    public void StaticMapsWhenPathsAsEncodedPolylineTest()
+    {
+        var request = new StaticMapsRequest
+        {
+            Key = this.Settings.ApiKey,
+            Paths = new List<MapPath>
+            {
+                new()
+                {
+                    Weight = 10,
+                    Geodesic = false,
+                    Color = "color1",
+                    FillColor = "fillcolor1",
+                    EncodedPoints = GoogleFunctions.EncodePolyLine(new List<Coordinate>
+                    {
+                        new(60.170877, 24.942796),
+                        new(60.180877, 24.952796)
+                    })
+                },
+                new()
+                {
+                    Weight = 11,
+                    Geodesic = true,
+                    Color = "color1",
+                    FillColor = "fillcolor2",
+                    Points = new List<Location>
+                    {
+                        new(new Coordinate(60.170877, 24.942796)),
+                        new(new Coordinate(60.180877, 24.952796))
+                    }
+                }
+            }
+        };
+
+        var result = GoogleMaps.StaticMaps.Query(request);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
+
+    [Test]
     public void StaticMapsWhenStylesTest()
     {
         var request = new StaticMapsRequest

@@ -134,7 +134,7 @@ public class StaticMapsRequest : BaseMapsChannelRequest, IRequestQueryString
         if (this.Center == null || !this.ZoomLevel.HasValue)
         {
             var hasMarkers = this.Markers.Any() && this.Markers.SelectMany(x => x.Locations).Any();
-            var hasPaths = this.Paths.Any() && this.Paths.SelectMany(x => x.Points).Any();
+            var hasPaths = this.Paths.Any() && (this.Paths.SelectMany(x => x.Points).Any() || this.Paths.SelectMany(x => x.EncodedPoints).Any());
             var hasVisibles = this.Visibles.Any();
 
             if (!hasMarkers && !hasPaths && !hasVisibles)
@@ -172,7 +172,7 @@ public class StaticMapsRequest : BaseMapsChannelRequest, IRequestQueryString
         {
             foreach (var path in this.Paths)
             {
-                if (path.Points.Count() <= 1)
+                if (path.Points.Count() <= 1 && path.EncodedPoints == null)
                     throw new ArgumentException($"{nameof(this.Paths)} must contain two or more locations");
 
                 parameters.Add("path", path.ToString());

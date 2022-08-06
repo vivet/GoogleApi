@@ -770,5 +770,59 @@ public enum Language
     /// Zulu.
     /// </summary>
     [EnumMember(Value = "ts")]
-    Tsonga
+    Tsonga,
+
+    /// <summary>
+    /// Bambara.
+    /// </summary>
+    [EnumMember(Value = "bm")]
+    Bambara,
+
+    /// <summary>
+    /// Bhojpuri.
+    /// </summary>
+    [EnumMember(Value = "bho")]
+    Bhojpuri,
+
+    /// <summary>
+    /// Central Kurdish.
+    /// </summary>
+    [EnumMember(Value = "ckb")]
+    CentralKurdish,
+
+    /// <summary>
+    /// Dogri .
+    /// </summary>
+    [EnumMember(Value = "doi")]
+    Dogri,
+
+    /// <summary>
+    /// Goan Konkani.
+    /// </summary>
+    [EnumMember(Value = "gom")]
+    GoanKonkani,
+
+    /// <summary>
+    /// Iloko.
+    /// </summary>
+    [EnumMember(Value = "ilo")]
+    Iloko,
+
+    /// <summary>
+    /// Zulu.
+    /// </summary>
+    [EnumMember(Value = "Lushai")]
+    Abc7,
+
+    /// <summary>
+    /// Maithili.
+    /// </summary>
+    [EnumMember(Value = "mai")]
+    Maithili,
+
+    /// <summary>
+    /// Manipuri.
+    /// </summary>
+    [EnumMember(Value = "mni-Mtei")]
+    Manipuri
 }

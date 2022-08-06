@@ -178,6 +178,40 @@ public class StaticMapsRequestTests
     }
 
     [Test]
+    public void GetQueryStringParametersWhenPathsAndEncodedPointsTest()
+    {
+        var request = new StaticMapsRequest
+        {
+            Key = "key",
+            Center = new Location(new Coordinate(1, 1)),
+            ZoomLevel = 1,
+            Paths = new List<MapPath>
+            {
+                new()
+                {
+                    Weight = 10,
+                    Geodesic = false,
+                    Color = "color",
+                    FillColor = "fillcolor",
+                    EncodedPoints = GoogleFunctions.EncodePolyLine(new List<Coordinate>
+                    {
+                        new(1, 1),
+                        new(2, 2)
+                    })
+                }
+            }
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var path = queryStringParameters.FirstOrDefault(x => x.Key == "path");
+        var pathExpected = request.Paths.First().ToString();
+        Assert.IsNotNull(path);
+        Assert.AreEqual(pathExpected, path.Value);
+    }
+
+    [Test]
     public void GetQueryStringParametersWhenPathsMultipleTest()
     {
         var request = new StaticMapsRequest
@@ -229,7 +263,28 @@ public class StaticMapsRequestTests
     }
 
     [Test]
-    public void GetQueryStringParametersWhenPathsWhenPointsIsEmptyTest()
+    public void GetQueryStringParametersWhenPathsWhenPointsIsEmptyAndEncodedPointsIsNotNullTest()
+    {
+        var request = new StaticMapsRequest
+        {
+            Key = "key",
+            Center = new Location(new Coordinate(1, 1)),
+            ZoomLevel = 1,
+            Paths = new List<MapPath>
+            {
+                new()
+                {
+                    Color = "color",
+                    EncodedPoints = "encoded-points"
+                }
+            }
+        };
+
+        Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenPathsWhenPointsIsEmptyAndEncodedPointsIsNullTest()
     {
         var request = new StaticMapsRequest
         {
