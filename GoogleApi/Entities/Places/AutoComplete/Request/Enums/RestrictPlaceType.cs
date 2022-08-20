@@ -7,6 +7,7 @@
 /// but note that this will have the same effect as specifying no types.
 /// https://developers.google.com/places/supported_types#table3
 /// </summary>
+
 public enum RestrictPlaceType
 {
     /// <summary>

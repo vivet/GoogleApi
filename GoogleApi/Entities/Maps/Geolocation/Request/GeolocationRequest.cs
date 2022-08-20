@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
+
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request;
 
@@ -17,19 +16,16 @@ public class GeolocationRequest : BaseMapsRequest, IRequestJson
     /// <summary>
     /// The carrier name.
     /// </summary>
-    [JsonProperty("carrier")]
     public virtual string Carrier { get; set; }
 
     /// <summary>
     /// The mobile country code (MCC) for the device's home network.
     /// </summary>
-    [JsonProperty("homeMobileCountryCode")]
     public virtual string HomeMobileCountryCode { get; set; }
 
     /// <summary>
     /// The mobile network code (MNC) for the device's home network.
     /// </summary>
-    [JsonProperty("homeMobileNetworkCode")]
     public virtual string HomeMobileNetworkCode { get; set; }
 
     /// <summary>
@@ -37,8 +33,6 @@ public class GeolocationRequest : BaseMapsRequest, IRequestJson
     /// Supported values are lte, gsm, cdma, and wcdma. While this field is optional, it should be included if a value is available,
     /// for more accurate results.
     /// </summary>
-    [JsonProperty("radioType")]
-    [JsonConverter(typeof(StringEnumConverter))]
     public virtual RadioType? RadioType { get; set; }
 
     /// <summary>
@@ -47,18 +41,15 @@ public class GeolocationRequest : BaseMapsRequest, IRequestJson
     /// Defaults to true.
     /// Set considerIp to false to disable fallback.
     /// </summary>
-    [JsonProperty("considerIp")]
     public virtual bool ConsiderIp { get; set; } = true;
 
     /// <summary>
     /// An array of cell tower objects. See <see cref="CellTower"/>.
     /// </summary>
-    [JsonProperty("cellTowers")]
     public virtual IEnumerable<CellTower> CellTowers { get; set; }
 
     /// <summary>
     /// An array of WiFi access point objects. See  <see cref="WifiAccessPoint"/>.
     /// </summary>
-    [JsonProperty("wifiAccessPoints")]
     public virtual IEnumerable<WifiAccessPoint> WifiAccessPoints { get; set; }
 }

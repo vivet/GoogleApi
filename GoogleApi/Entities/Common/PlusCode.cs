@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleApi.Entities.Common;
 
@@ -12,14 +12,14 @@ public class PlusCode
     /// Global Code.
     /// A 4 character area code.
     /// </summary>
-    [JsonProperty("global_code")]
+    [JsonPropertyName("global_code")]
     public string GlobalCode { get; protected set; }
 
     /// <summary>
     /// Global Code.
     /// A 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA).
     /// </summary>
-    [JsonProperty("compound_code")]
+    [JsonPropertyName("compound_code")]
     public string LocalCode { get; protected set; }
 
     /// <summary>

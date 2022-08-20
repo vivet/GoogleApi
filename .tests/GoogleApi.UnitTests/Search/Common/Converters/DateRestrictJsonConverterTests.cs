@@ -1,8 +1,8 @@
 using System;
 using System.IO;
+using System.Text.Json;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Converters;
-using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace GoogleApi.UnitTests.Search.Common.Converters;
@@ -37,10 +37,9 @@ public class DateRestrictJsonConverterTests
     [Test]
     public void WriteJsonTest()
     {
-        var writer = new JsonTextWriter(TextWriter.Null);
-        var serializer = new JsonSerializer();
-        var converter = new DateRestrictJsonConverter();
+        var writer = new Utf8JsonWriter(new MemoryStream());
+        var sut = new DateRestrictJsonConverter();
 
-        Assert.Throws<NotImplementedException>(() => converter.WriteJson(writer, new object(), serializer));
+        Assert.Throws<NotImplementedException>(() => sut.Write(writer, new DateRestrict(), new JsonSerializerOptions()));
     }
 }

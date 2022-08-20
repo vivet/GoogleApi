@@ -1,4 +1,6 @@
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Places.Search.Common.Enums;
 
@@ -6,6 +8,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums;
 /// Place Types
 /// https://developers.google.com/places/supported_types#table1
 /// </summary>
+[JsonConverter(typeof(CustomJsonStringEnumConverter))]
 public enum SearchPlaceType
 {
     /// <summary>

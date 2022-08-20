@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\GoogleApi\GoogleApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Converters\" />
+  </ItemGroup>
+
 </Project>
