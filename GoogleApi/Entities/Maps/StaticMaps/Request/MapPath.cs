@@ -40,9 +40,16 @@ public class MapPath
     public virtual string FillColor { get; set; }
 
     /// <summary>
-    /// Gets or sets the collection of points for this path
+    /// Gets or sets the collection of points for this path.
     /// </summary>
     public virtual IEnumerable<Location> Points { get; set; } = new List<Location>();
+
+    /// <summary>
+    /// Encoded Points.
+    /// Instead of using points, Encoded Points can be set. This will override Points.
+    /// Use when having a lot of locations, where the url otherwise would get too long.
+    /// </summary>
+    public virtual string EncodedPoints { get; set; }
 
     /// <summary>
     /// Returns a string representation of a <see cref="MapPath"/>.
@@ -52,8 +59,12 @@ public class MapPath
     {
         var weight = $"weight:{this.Weight}";
         var geodesic = $"geodesic:{this.Geodesic.ToString().ToLower()}";
-        var color = this.Color != null ? $"color:{this.Color}" : null;
-        var fillColor = this.FillColor != null ? $"fillcolor:{this.FillColor}" : null;
+        var color = this.Color != null
+            ? $"color:{this.Color}"
+            : null;
+        var fillColor = this.FillColor != null
+            ? $"fillcolor:{this.FillColor}"
+            : null;
 
         var styles = new[]
         {
@@ -63,7 +74,9 @@ public class MapPath
             fillColor
         }.Where(x => x != null);
 
-        var points = string.Join("|", this.Points.Select(x => x.ToString()));
+        var points = this.EncodedPoints == null
+            ? string.Join("|", this.Points.Select(x => x.ToString()))
+            : $"enc:{this.EncodedPoints}";
 
         return $"{string.Join("|", styles)}|{points}";
     }
