@@ -1,13 +1,10 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Search.Common.Enums;
 
 /// <summary>
 /// Country.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
 public enum Country
 {
     /// <summary>

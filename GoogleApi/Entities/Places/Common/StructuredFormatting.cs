@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common;
 
@@ -12,7 +12,7 @@ public class StructuredFormatting
     /// Main text.
     /// Contains the main text of a prediction, usually the name of the place.
     /// </summary>
-    [JsonPropertyName("main_text")]
+    [JsonProperty("main_text")]
     public virtual string MainText { get; set; }
 
     /// <summary>
@@ -20,19 +20,19 @@ public class StructuredFormatting
     /// Contains an array with offset value and length.
     /// These describe the location of the entered term in the prediction result text, so that the term can be highlighted if desired.
     /// </summary>
-    [JsonPropertyName("main_text_matched_substrings")]
+    [JsonProperty("main_text_matched_substrings")]
     public virtual IEnumerable<MatchedSubstring> MainTextMatchedSubstrings { get; set; }
 
     /// <summary>
     /// Secondary text.
     /// Contains the secondary text of a prediction, usually the location of the place.
     /// </summary>
-    [JsonPropertyName("secondary_text")]
+    [JsonProperty("secondary_text")]
     public virtual string SecondaryText { get; set; }
 
     /// <summary>
     /// Secondary text matched substrings.
     /// </summary>
-    [JsonPropertyName("secondary_text_matched_substrings")]
+    [JsonProperty("secondary_text_matched_substrings")]
     public virtual IEnumerable<MatchedSubstring> SecondaryTextMatchedSubstrings { get; set; }
 }

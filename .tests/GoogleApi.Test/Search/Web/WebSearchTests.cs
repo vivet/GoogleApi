@@ -101,7 +101,7 @@ public class WebSearchTests : BaseTest
         Assert.IsFalse(query.Filter);
         Assert.IsNull(query.GeoLocation);
         Assert.IsNull(query.CountryRestrict);
-        Assert.IsNull(query.GoogleHost);
+        Assert.IsNull(query.Googlehost);
         Assert.IsTrue(query.DisableCnTwTranslation);
         Assert.IsNull(query.AndTerms);
         Assert.AreEqual(Language.English, query.InterfaceLanguage);

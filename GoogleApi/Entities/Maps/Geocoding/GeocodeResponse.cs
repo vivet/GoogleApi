@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Maps.Geocoding.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geocoding;
 
@@ -15,6 +14,6 @@ public class GeocodeResponse : BaseResponse
     /// When the geocoder returns results, it places them within a (JSON) results array.
     /// Even if the geocoder returns no results (such as if the address doesn't exist) it still returns an empty results array.
     /// </summary>
-    [JsonPropertyName("results")]
+    [JsonProperty("results")]
     public virtual IEnumerable<Result> Results { get; set; }
 }

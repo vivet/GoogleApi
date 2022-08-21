@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Details.Response;
 
@@ -12,6 +12,6 @@ public class Aspect
     /// Aspects contains a collection of AspectRating objects, each of which provides a rating of a single attribute of the establishment.
     /// The first object in the collection is considered the primary aspect. Each AspectRating is described as:
     /// </summary>
-    [JsonPropertyName("aspects")]
+    [JsonProperty("aspects")]
     public virtual IEnumerable<AspectRating> AspectRatings { get; set; }
 }

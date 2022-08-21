@@ -1,19 +1,26 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GoogleApi.Entities.Search.Common.Converters;
+namespace GoogleApi.Entities.Common.Converters;
 
 /// <summary>
-/// Date Restrict Json Converter.
-/// Converter for <see cref="DateRestrict"/>.
+/// String Enum List Json Converter.
+/// Converter for a comma separated <see cref="string"/> of items, to a <see cref="List{T}"/>.
 /// </summary>
-public class DateRestrictJsonConverter : JsonConverter
+/// <typeparam name="T"></typeparam>
+public class StringEnumListConverter<T> : JsonConverter
+    where T: struct
 {
     /// <inheritdoc />
-    public override bool CanConvert(Type objectType)
+    public override bool CanConvert(Type type)
     {
-        return objectType == typeof(DateRestrict);
+        if (type == null)
+            throw new ArgumentNullException(nameof(type));
+
+        return type == typeof(T);
     }
 
     /// <inheritdoc />
@@ -29,8 +36,18 @@ public class DateRestrictJsonConverter : JsonConverter
             throw new ArgumentNullException(nameof(serializer));
 
         var token = JToken.Load(reader);
+        var @string = token.ToString();
 
-        return new DateRestrict().FromString(token.ToString());
+        if (string.IsNullOrEmpty(@string))
+            return null;
+
+        return @string
+            .Split(',')
+            .Select(x =>
+            {
+                var success = Enum.TryParse(x, true, out T type);
+                return success ? type : default;
+            });
     }
 
     /// <inheritdoc />

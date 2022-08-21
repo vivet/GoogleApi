@@ -1,40 +1,56 @@
 using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GoogleApi.Entities.Common.Converters;
 
 /// <summary>
 /// String Boolean Json Converter.
-/// Converter for a <see cref="string"/> to a <see cref="string"/>.
+/// Converter for a <see cref="string"/> to a <see cref="bool"/>.
 /// If the string value is "1" then true, otherwise false.
 /// </summary>
-public class BooleanJsonConverter : JsonConverter<bool>
+public class StringBooleanConverter : JsonConverter
 {
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="reader"></param>
-    /// <param name="typeToConvert"></param>
-    /// <param name="options"></param>
-    /// <returns></returns>
-    public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    /// <inheritdoc />
+    public override bool CanConvert(Type type)
     {
-        bool.TryParse(reader.GetString() == "0" ? bool.FalseString : bool.TrueString, out var result);
+        if (type == null)
+            throw new ArgumentNullException(nameof(type));
+
+        return type == typeof(string);
+    }
+
+    /// <inheritdoc />
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    {
+        if (reader == null)
+            throw new ArgumentNullException(nameof(reader));
+
+        if (objectType == null)
+            throw new ArgumentNullException(nameof(objectType));
+
+        if (serializer == null)
+            throw new ArgumentNullException(nameof(serializer));
+
+        var token = JToken.Load(reader);
+
+        bool.TryParse(token.ToString() == "0" ? "false" : "true", out var result);
 
         return result;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="writer"></param>
-    /// <param name="value"></param>
-    /// <param name="options"></param>
-    public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
+    /// <inheritdoc />
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        var result = value ? "1" : "0";
-        writer.WriteStringValue(result);
-    }
+        if (writer == null)
+            throw new ArgumentNullException(nameof(writer));
 
+        if (value == null)
+            throw new ArgumentNullException(nameof(value));
+
+        if (serializer == null)
+            throw new ArgumentNullException(nameof(serializer));
+
+        throw new NotImplementedException();
+    }
 }

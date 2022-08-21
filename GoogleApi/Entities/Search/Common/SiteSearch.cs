@@ -1,6 +1,6 @@
-using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Search.Common.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Search.Common;
 
@@ -12,7 +12,7 @@ public class SiteSearch
     /// <summary>
     /// Site - Specifies all search results should be pages from a given site.
     /// </summary>
-    [JsonPropertyName("siteSearch")]
+    [JsonProperty("siteSearch")]
     public virtual string Site { get; set; }
 
     /// <summary>
@@ -21,5 +21,7 @@ public class SiteSearch
     /// - "e": exclude
     /// - "i": include
     /// </summary>
+    [JsonProperty("siteSearchFilter")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public virtual SiteSearchFilter Filter { get; set; } = SiteSearchFilter.Include;
 }

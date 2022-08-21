@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Common;
 
@@ -11,23 +11,25 @@ public class Photo
     /// <summary>
     /// PhotoReference — a string used to identify the photo when you perform a Photo request.
     /// </summary>
-    [JsonPropertyName("photo_reference")]
+    [JsonProperty("photo_reference")]
     public virtual string PhotoReference { get; set; }
 
     /// <summary>
     /// Height — the maximum height of the image.
     /// </summary>
+    [JsonProperty("height")]
     public virtual int Height { get; set; }
 
     /// <summary>
     /// Width — the maximum width of the image.
     /// </summary>
+    [JsonProperty("width")]
     public virtual int Width { get; set; }
 
     /// <summary>
     /// HtmlAttributions — contains any required attributions.
     /// This field will always be present, but may be empty.
     /// </summary>
-    [JsonPropertyName("html_attributions")]
+    [JsonProperty("html_attributions")]
     public virtual IEnumerable<string> HtmlAttributions { get; set; }
 }

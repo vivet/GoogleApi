@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Common;
 
@@ -11,13 +11,13 @@ public class Coordinate
     /// <summary>
     /// Latitude.
     /// </summary>
-    [JsonPropertyName("lat")]
+    [JsonProperty("lat")]
     public double Latitude { get; set; }
 
     /// <summary>
     /// Longitude.
     /// </summary>
-    [JsonPropertyName("lng")]
+    [JsonProperty("lng")]
     public double Longitude { get; set; }
 
     /// <summary>

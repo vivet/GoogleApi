@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Response;
 
@@ -13,12 +13,13 @@ public class PlacesNearbySearchResponse : BasePlacesResponse
     /// The Places API returns up to 20 establishment results per query. Additionally, political results may be returned
     /// which serve to identify the area of the request.
     /// </summary>
+    [JsonProperty("results")]
     public virtual IEnumerable<NearByResult> Results { get; set; }
 
     /// <summary>
     /// Contains a token that can be used to return up to 20 additional results. A next_page_token will not be returned if there are no additional results to display.
     /// The maximum number of results that can be returned is 60. There is a short delay between when a next_page_token is issued, and when it will become valid.
     /// </summary>
-    [JsonPropertyName("next_page_token")]
+    [JsonProperty("next_page_token")]
     public virtual string NextPageToken { get; set; }
 }

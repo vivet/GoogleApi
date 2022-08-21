@@ -1,6 +1,4 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Search.Common.Enums;
 
@@ -11,7 +9,6 @@ namespace GoogleApi.Entities.Search.Common.Enums;
 /// The following list identifies all of the interface languages that Google supports.
 /// https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
 public enum Language
 {
     /// <summary>

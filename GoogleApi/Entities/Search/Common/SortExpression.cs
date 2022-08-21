@@ -38,7 +38,7 @@ public class SortExpression
     /// </summary>
     /// <param name="string">The <see cref="string"/> formatted as a valid <see cref="SortExpression"/>.</param>
     /// <returns>The converted <see cref="SortExpression"/></returns>
-    public static SortExpression FromString(string @string)
+    public virtual SortExpression FromString(string @string)
     {
         if (@string == null)
             return new SortExpression();

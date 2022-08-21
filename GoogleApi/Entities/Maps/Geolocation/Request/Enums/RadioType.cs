@@ -1,14 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 
 /// <summary>
 /// Radio Type.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
 public enum RadioType
 {
     /// <summary>

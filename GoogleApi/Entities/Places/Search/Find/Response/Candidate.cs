@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Common.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GoogleApi.Entities.Places.Search.Find.Response;
 
@@ -16,17 +17,19 @@ public class Candidate
     /// Name contains the human-readable name for the returned result.
     /// For establishment results, this is usually the canonicalized business name.
     /// </summary>
+    [JsonProperty("name")]
     public virtual string Name { get; set; }
 
     /// <summary>
     /// icon contains the URL of a suggested icon which may be displayed to the user when indicating this result on a map
     /// </summary>
+    [JsonProperty("icon")]
     public virtual string Icon { get; set; }
 
     /// <summary>
     /// A textual identifier that uniquely identifies a place.
     /// </summary>
-    [JsonPropertyName("place_id")]
+    [JsonProperty("place_id")]
     public virtual string PlaceId { get; set; }
 
     /// <summary>
@@ -34,18 +37,19 @@ public class Candidate
     /// Often this address is equivalent to the "postal address".
     /// The formatted_address property is only returned for a Text Search.
     /// </summary>
-    [JsonPropertyName("formatted_address")]
+    [JsonProperty("formatted_address")]
     public virtual string FormattedAddress { get; set; }
 
     /// <summary>
     /// Geometry contains a location.
     /// </summary>
+    [JsonProperty("geometry")]
     public virtual Geometry Geometry { get; set; }
 
     /// <summary>
     /// opening_hours may contain information about the place opening hours.
     /// </summary>
-    [JsonPropertyName("opening_hours")]
+    [JsonProperty("opening_hours")]
     public virtual OpeningHours OpeningHours { get; set; }
 
     /// <summary>
@@ -59,7 +63,7 @@ public class Candidate
     /// only the global code may be returned.
     /// See further details about pkus codes here: https://en.wikipedia.org/wiki/Open_Location_Code and https://plus.codes.
     /// </summary>
-    [JsonPropertyName("plus_code")]
+    [JsonProperty("plus_code")]
     public virtual PlusCode PlusCode { get; set; }
 
     /// <summary>
@@ -68,34 +72,38 @@ public class Candidate
     /// You can only retrieve app-scoped places via the Nearby Search and the Place Details requests.
     /// If the scope field is not present in a response, it is safe to assume the scope is GOOGLE
     /// </summary>
+    [JsonProperty("scope")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public virtual Scope Scope { get; set; }
 
     /// <summary>
     /// Business Status.
     /// </summary>
-    [JsonPropertyName("business_status")]
+    [JsonProperty("business_status")]
     public virtual BusinessStatus BusinessStatus { get; set; }
 
     /// <summary>
     /// Rating the user's overall rating for this place. This is a whole number, ranging from 1 to 5.
     /// </summary>
-    [JsonPropertyName("rating")]
+    [JsonProperty("rating")]
     public virtual double Rating { get; set; }
 
     /// <summary>
     /// The total number of user ratings.
     /// </summary>
-    [JsonPropertyName("user_ratings_total")]
+    [JsonProperty("user_ratings_total")]
     public virtual int UserRatingsTotal { get; set; }
 
     /// <summary>
     /// Photos.
     /// An array of photo objects, each containing a reference to an image. A Place Details request may return up to ten photos.
     /// </summary>
+    [JsonProperty("photos")]
     public virtual IEnumerable<Photo> Photos { get; set; }
 
     /// <summary>
     /// An array of types for this place
     /// </summary>
+    [JsonProperty("types")]
     public virtual IEnumerable<PlaceLocationType> Types { get; set; } = new List<PlaceLocationType>();
 }

@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Search.Common.Converters;
 using GoogleApi.Entities.Search.Common.Enums;
 
 namespace GoogleApi.Entities.Search.Common;
@@ -7,7 +5,6 @@ namespace GoogleApi.Entities.Search.Common;
 /// <summary>
 /// Date Restrict.
 /// </summary>
-[JsonConverter(typeof(DateRestrictJsonConverter))]
 public class DateRestrict
 {
     /// <summary>
@@ -34,7 +31,7 @@ public class DateRestrict
     /// </summary>
     /// <param name="string">The <see cref="string"/> formatted as a valid <see cref="DateRestrict"/>.</param>
     /// <returns>The converted <see cref="DateRestrict"/></returns>
-    public static DateRestrict FromString(string @string)
+    public virtual DateRestrict FromString(string @string)
     {
         if (@string == null)
             return new DateRestrict();

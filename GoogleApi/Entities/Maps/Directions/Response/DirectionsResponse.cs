@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response;
 
@@ -11,6 +11,7 @@ public class DirectionsResponse : BaseResponse
     /// <summary>
     /// "routes" contains an array of routes from the origin to the destination. See Routes below.
     /// </summary>
+    [JsonProperty("routes")]
     public virtual IEnumerable<Route> Routes { get; set; }
 
     /// <summary>
@@ -20,6 +21,6 @@ public class DirectionsResponse : BaseResponse
     /// by their zero-based position, to the origin, the waypoints in the order they are specified, and the destination.Each element includes the following
     /// details about the geocoding operation for the corresponding waypoint
     /// </summary>
-    [JsonPropertyName("geocoded_waypoints")]
+    [JsonProperty("geocoded_waypoints")]
     public virtual IEnumerable<WayPoint> WayPoints { get; set; }
 }

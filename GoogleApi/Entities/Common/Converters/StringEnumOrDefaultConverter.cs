@@ -1,19 +1,24 @@
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Converters;
 
-namespace GoogleApi.Entities.Search.Common.Converters;
+namespace GoogleApi.Entities.Common.Converters;
 
 /// <summary>
-/// Date Restrict Json Converter.
-/// Converter for <see cref="DateRestrict"/>.
+/// Converts a <see cref="string"/> to an <see cref="Enum"/> of type <typeparamref name="T"/>.
+/// If no enum member is found, default(T) it returned.
 /// </summary>
-public class DateRestrictJsonConverter : JsonConverter
+/// <typeparam name="T"><see cref="Enum"/> type.</typeparam>
+public class StringEnumOrDefaultConverter<T> : StringEnumConverter
+    where T : struct
 {
     /// <inheritdoc />
-    public override bool CanConvert(Type objectType)
+    public override bool CanConvert(Type type)
     {
-        return objectType == typeof(DateRestrict);
+        if (type == null)
+            throw new ArgumentNullException(nameof(type));
+
+        return base.CanConvert(typeof(T));
     }
 
     /// <inheritdoc />
@@ -28,9 +33,14 @@ public class DateRestrictJsonConverter : JsonConverter
         if (serializer == null)
             throw new ArgumentNullException(nameof(serializer));
 
-        var token = JToken.Load(reader);
-
-        return new DateRestrict().FromString(token.ToString());
+        try
+        {
+            return base.ReadJson(reader, objectType, existingValue, serializer);
+        }
+        catch
+        {
+            return default(T);
+        }
     }
 
     /// <inheritdoc />
@@ -45,6 +55,6 @@ public class DateRestrictJsonConverter : JsonConverter
         if (serializer == null)
             throw new ArgumentNullException(nameof(serializer));
 
-        throw new NotImplementedException();
+        base.WriteJson(writer, value, serializer);
     }
 }

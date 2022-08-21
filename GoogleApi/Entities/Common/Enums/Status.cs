@@ -1,13 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Common.Enums;
 
 /// <summary>
 /// Response status.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
 public enum Status
 {
     /// <summary>

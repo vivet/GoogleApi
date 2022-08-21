@@ -2,14 +2,12 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Exceptions;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi;
 
@@ -24,16 +22,6 @@ public class HttpEngine<TRequest, TResponse>
     where TResponse : IResponse, new()
 {
     private readonly HttpClient httpClient;
-
-    private static System.Text.Json.JsonSerializerOptions _options = new System.Text.Json.JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true,
-                        MaxDepth = 100,
-                        DefaultIgnoreCondition =  JsonIgnoreCondition.Always,
-                        Converters = { new BooleanJsonConverter(), new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
-                        ReferenceHandler = ReferenceHandler.Preserve,
-
-                    };
 
     /// <summary>
     /// Constructor.
@@ -262,7 +250,12 @@ public class HttpEngine<TRequest, TResponse>
             return this.httpClient.GetAsync(uri).Result;
         }
 
-        var serializeObject = JsonSerializer.Serialize(request, _options);
+        var settings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+        var serializeObject = JsonConvert.SerializeObject(request, settings);
 
         using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
         {
@@ -293,11 +286,11 @@ public class HttpEngine<TRequest, TResponse>
                     break;
 
                 default:
-                    var rawJson = (httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)).GetAwaiter().GetResult();
-                    response = JsonSerializer.DeserializeAsync<TResponse>(rawJson, _options).ConfigureAwait(false).GetAwaiter().GetResult()
+                    var rawJson = httpResponse.Content.ReadAsStringAsync().Result;
+                    response = JsonConvert.DeserializeObject<TResponse>(rawJson)
                         ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
-                    response.RawJson = httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                    response.RawJson = rawJson;
                     break;
             }
 
@@ -321,7 +314,12 @@ public class HttpEngine<TRequest, TResponse>
             return await this.httpClient.GetAsync(uri, cancellationToken).ConfigureAwait(false);
         }
 
-        var serializeObject = JsonSerializer.Serialize(request, _options);
+        var settings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+        var serializeObject = JsonConvert.SerializeObject(request, settings);
 
         using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
         {
@@ -352,12 +350,11 @@ public class HttpEngine<TRequest, TResponse>
                     break;
 
                 default:
-
-                    var rawJson = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                    response = await JsonSerializer.DeserializeAsync<TResponse>(rawJson, _options)
+                    var rawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    response = JsonConvert.DeserializeObject<TResponse>(rawJson)
                         ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
-                    response.RawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    response.RawJson = rawJson;
                     break;
             }
 

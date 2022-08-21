@@ -1,6 +1,5 @@
-﻿using System.Text.Json.Serialization;
-
-using GoogleApi.Entities.Places.Search.Common;
+﻿using GoogleApi.Entities.Places.Search.Common;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Text.Response;
 
@@ -14,6 +13,6 @@ public class TextResult : BaseResult
     /// Often this address is equivalent to the "postal address".
     /// The formatted_address property is only returned for a Text Search.
     /// </summary>
-    [JsonPropertyName("formatted_address")]
+    [JsonProperty("formatted_address")]
     public virtual string FormattedAddress { get; set; }
 }

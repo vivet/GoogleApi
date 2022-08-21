@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Common;
 
@@ -13,13 +13,13 @@ public class ViewPort
     /// <summary>
     /// South West.
     /// </summary>
-    [JsonPropertyName("southwest")]
+    [JsonProperty("southwest")]
     public virtual Coordinate SouthWest { get; }
 
     /// <summary>
     /// North East.
     /// </summary>
-    [JsonPropertyName("northeast")]
+    [JsonProperty("northeast")]
     public virtual Coordinate NorthEast { get; }
 
     /// <summary>

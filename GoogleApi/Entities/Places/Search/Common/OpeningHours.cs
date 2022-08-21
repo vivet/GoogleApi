@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Places.Search.Common;
 
@@ -10,6 +10,6 @@ public class OpeningHours
     /// <summary>
     /// OpenNow is a boolean value indicating if the place is open at the current time.
     /// </summary>
-    [JsonPropertyName("open_now")]
+    [JsonProperty("open_now")]
     public virtual bool OpenNow { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Common;
 
@@ -8,19 +8,20 @@ namespace GoogleApi.Entities.Maps.Common;
 public class ErrorDetail
 {
     /// <summary>
-    /// The domain associated with the error.
+    /// The domain assocaited with the error.
     /// </summary>
-    [JsonPropertyName("domain")]
-    public virtual string Doamin { get; set; }  //NOTE:  is this a typo?
+    [JsonProperty("domain")]
+    public virtual string Doamin { get; set; }
 
     /// <summary>
     /// The error reason.
     /// </summary>
+    [JsonProperty("reason")]
     public virtual string Reason { get; set; }
 
     /// <summary>
     /// A short description of the error.
     /// </summary>
-    [JsonPropertyName("message")]
+    [JsonProperty("message")]
     public virtual string ErrorMessage { get; set; }
 }

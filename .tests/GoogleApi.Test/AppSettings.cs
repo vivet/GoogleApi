@@ -1,12 +1,12 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GoogleApi.Test;
 
 public class AppSettings
 {
-    [JsonPropertyName("ApiKey")]
+    [JsonProperty("ApiKey")]
     public string ApiKey { get; set; }
 
-    [JsonPropertyName("SearchEngineId")]
+    [JsonProperty("SearchEngineId")]
     public string SearchEngineId { get; set; }
 }

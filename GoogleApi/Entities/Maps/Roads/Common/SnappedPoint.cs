@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Roads.Common;
 
@@ -10,6 +10,7 @@ public class SnappedPoint
     /// <summary>
     /// Location — Contains a latitude and longitude value.
     /// </summary>
+    [JsonProperty("location")]
     public virtual Coordinate Location { get; set; }
 
     /// <summary>
@@ -18,6 +19,7 @@ public class SnappedPoint
     /// Interpolated values will not have an originalIndex.
     /// These values are indexed from 0, so a point with an originalIndex of 4 will be the snapped value of the 5th latitude/longitude passed to the path parameter.
     /// </summary>
+    [JsonProperty("originalIndex")]
     public virtual int? OriginalIndex { get; set; }
 
     /// <summary>
@@ -28,6 +30,6 @@ public class SnappedPoint
     /// Google Places API or the Google Maps Geocoding API. Within the Google Maps Roads API, you can pass the placeId to the speedLimit method to
     /// determine the speed limit along that road segment.
     /// </summary>
-    [JsonPropertyName("PlaceId")]
+    [JsonProperty("PlaceId")]
     public virtual string PlaceId { get; set; }
 }
