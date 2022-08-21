@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Response;
 
@@ -10,12 +10,12 @@ public class Locality
     /// <summary>
     /// Address.
     /// </summary>
-    [JsonProperty("local_address")]
+    [JsonPropertyName("local_address")]
     public virtual string Address { get; set; }
 
     /// <summary>
     /// Place Id.
     /// </summary>
-    [JsonProperty("locality_place_id")]
+    [JsonPropertyName("locality_place_id")]
     public virtual string PlaceId { get; set; }
 }

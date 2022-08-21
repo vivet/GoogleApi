@@ -14,8 +14,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="RichardSzalay.MockHttp" Version="6.0.0" />
@@ -24,6 +24,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\GoogleApi\GoogleApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Converters\" />
   </ItemGroup>
 
 </Project>

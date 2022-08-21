@@ -2,18 +2,22 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Exceptions;
-using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Common.Converters;
+using GoogleApi.Entities.Search.Common.Converters;
 
 namespace GoogleApi;
 
 /// <summary>
 /// Http Engine.
-    /// Manges the http connections, and is responsible for invoking requst and handling responses.
+/// Manages the http connections, and is responsible for invoking request and handling responses.
 /// </summary>
 /// <typeparam name="TRequest"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
@@ -22,6 +26,20 @@ public class HttpEngine<TRequest, TResponse>
     where TResponse : IResponse, new()
 {
     private readonly HttpClient httpClient;
+
+    private static JsonSerializerOptions _options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                MaxDepth = 100,
+                DefaultIgnoreCondition =  JsonIgnoreCondition.WhenWritingDefault,
+                Converters = {
+                    new BooleanJsonConverter(),
+                    new CustomJsonStringEnumConverter(JsonNamingPolicy.CamelCase, true),
+                    new SortExpressionJsonConverter()
+                },
+                ReferenceHandler = ReferenceHandler.Preserve,
+                NumberHandling = JsonNumberHandling.AllowReadingFromString
+            };
 
     /// <summary>
     /// Constructor.
@@ -77,9 +95,9 @@ public class HttpEngine<TRequest, TResponse>
                     };
 
                 default:
-                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
+                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"} | {request.GetUri().StripApiKey()}")
                     {
-                        Status = response.Status
+                        Status = response.Status,
                     };
             }
         }
@@ -88,7 +106,7 @@ public class HttpEngine<TRequest, TResponse>
             if (ex is GoogleApiException)
                 throw;
 
-            throw new GoogleApiException(ex.Message, ex);
+            throw new GoogleApiException($"{ex.Message}|{request.GetUri().StripApiKey()}", ex);
         }
     }
 
@@ -250,12 +268,7 @@ public class HttpEngine<TRequest, TResponse>
             return this.httpClient.GetAsync(uri).Result;
         }
 
-        var settings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        };
-        var serializeObject = JsonConvert.SerializeObject(request, settings);
+        var serializeObject = JsonSerializer.Serialize(request, _options);
 
         using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
         {
@@ -286,8 +299,10 @@ public class HttpEngine<TRequest, TResponse>
                     break;
 
                 default:
-                    var rawJson = httpResponse.Content.ReadAsStringAsync().Result;
-                    response = JsonConvert.DeserializeObject<TResponse>(rawJson)
+                    var rawJson = httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+
+                    var rawStream = (httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)).GetAwaiter().GetResult();
+                    response = JsonSerializer.DeserializeAsync<TResponse>(rawStream, _options).ConfigureAwait(false).GetAwaiter().GetResult()
                         ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
                     response.RawJson = rawJson;
@@ -314,12 +329,7 @@ public class HttpEngine<TRequest, TResponse>
             return await this.httpClient.GetAsync(uri, cancellationToken).ConfigureAwait(false);
         }
 
-        var settings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        };
-        var serializeObject = JsonConvert.SerializeObject(request, settings);
+        var serializeObject = JsonSerializer.Serialize(request, _options);
 
         using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
         {
@@ -350,8 +360,11 @@ public class HttpEngine<TRequest, TResponse>
                     break;
 
                 default:
-                    var rawJson = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    response = JsonConvert.DeserializeObject<TResponse>(rawJson)
+
+                    var rawJson = httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+
+                    var rawStream = (httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)).GetAwaiter().GetResult();
+                    response = JsonSerializer.DeserializeAsync<TResponse>(rawStream, _options).ConfigureAwait(false).GetAwaiter().GetResult()
                         ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
                     response.RawJson = rawJson;
@@ -365,5 +378,14 @@ public class HttpEngine<TRequest, TResponse>
 
             return response;
         }
+    }
+}
+
+internal static class UriExtensions
+{
+    internal static Uri StripApiKey(this Uri subject)
+    {
+        subject = new Uri(Regex.Replace(subject.AbsoluteUri, "(key=([^&]*))", "key=[redacted]", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Singleline | RegexOptions.Compiled));
+        return subject;
     }
 }

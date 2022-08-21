@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using GoogleApi.Entities.Interfaces;
-using Newtonsoft.Json;
+
 using GoogleApi.Entities.Common.Extensions;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Macs;

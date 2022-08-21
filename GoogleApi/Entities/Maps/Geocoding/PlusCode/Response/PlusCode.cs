@@ -1,5 +1,6 @@
-﻿using GoogleApi.Entities.Common;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Response;
 
@@ -11,30 +12,28 @@ public class PlusCode
     /// <summary>
     /// Global Code.
     /// </summary>
-    [JsonProperty("global_code")]
+    [JsonPropertyName("global_code")]
     public virtual string GlobalCode { get; set; }
 
     /// <summary>
     /// Local Code.
     /// </summary>
-    [JsonProperty("local_code")]
+    [JsonPropertyName("local_code")]
     public virtual string LocalCode { get; set; }
 
     /// <summary>
     /// Best Street Address.
     /// </summary>
-    [JsonProperty("best_street_address")]
+    [JsonPropertyName("best_street_address")]
     public virtual string BestStreetAddress { get; set; }
 
     /// <summary>
     /// Locality.
     /// </summary>
-    [JsonProperty("locality")]
     public virtual Locality Locality { get; set; }
 
     /// <summary>
     /// Locality.
     /// </summary>
-    [JsonProperty("geometry")]
     public virtual Geometry Geometry { get; set; }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 using GoogleApi.Entities.Common;
-using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Directions.Response;
 
@@ -13,7 +14,6 @@ public class OverviewPolyline
     /// Points.
     /// The encoded string containing the raw overview polyline.
     /// </summary>
-    [JsonProperty("points")]
     public virtual string Points { get; set; }
 
     /// <summary>

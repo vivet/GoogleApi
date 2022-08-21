@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Response;
 
@@ -10,6 +10,6 @@ public class PlusCodeGeocodeResponse : BaseResponse
     /// <summary>
     /// Plus Code.
     /// </summary>
-    [JsonProperty("plus_code")]
+    [JsonPropertyName("plus_code")]
     public virtual PlusCode PlusCode { get; set; }
 }

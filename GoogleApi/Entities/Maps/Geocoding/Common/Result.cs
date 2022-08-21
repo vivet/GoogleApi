@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
-using Newtonsoft.Json;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Common;
 
@@ -16,13 +16,12 @@ public class Result
     /// For example, you can use the place_id in a Google Places API request to get details of a local business, such as phone number,
     /// opening hours, user reviews, and more. See the place ID overview.
     /// </summary>
-    [JsonProperty("place_id")]
+    [JsonPropertyName("place_id")]
     public virtual string PlaceId { get; set; }
 
     /// <summary>
     /// Geometry.
     /// </summary>
-    [JsonProperty("geometry")]
     public virtual Geometry Geometry { get; set; }
 
     /// <summary>
@@ -34,7 +33,7 @@ public class Result
     /// (the street number, "8th Avenue" (the route), "New York" (the city) and "NY" (the US state). These address components contain
     /// additional information as noted below.
     /// </summary>
-    [JsonProperty("formatted_address")]
+    [JsonPropertyName("formatted_address")]
     public virtual string FormattedAddress { get; set; }
 
     /// <summary>
@@ -45,7 +44,7 @@ public class Result
     /// For example, "21 Henr St, Bristol, UK" will return a partial match for both Henry Street and Henrietta Street.
     /// Note that if a request includes a misspelled address component, the geocoding service may suggest an alternative address. Suggestions triggered in this way will also be marked as a partial match.
     /// </summary>
-    [JsonProperty("partial_match")]
+    [JsonPropertyName("partial_match")]
     public virtual bool PartialMatch { get; set; }
 
     /// <summary>
@@ -59,14 +58,14 @@ public class Result
     /// only the global code may be returned.
     /// See further details about pkus codes here: https://en.wikipedia.org/wiki/Open_Location_Code and https://plus.codes.
     /// </summary>
-    [JsonProperty("plus_code")]
+    [JsonPropertyName("plus_code")]
     public virtual Entities.Common.PlusCode PlusCode { get; set; }
 
     /// <summary>
     /// postcode_localities[] is an array denoting all the localities contained in a postal code.
     /// This is only present when the result is a postal code that contains multiple localities.
     /// </summary>
-    [JsonProperty("postcode_localities")]
+    [JsonPropertyName("postcode_localities")]
     public virtual IEnumerable<string> PostcodeLocalities { get; set; }
 
     /// <summary>
@@ -75,12 +74,11 @@ public class Result
     /// For example, a geocode of "Chicago" returns "locality" which indicates that "Chicago" is a city,
     /// and also returns "political" which indicates it is a political entity.
     /// </summary>
-    [JsonProperty("types", ItemConverterType = typeof(StringEnumOrDefaultConverter<PlaceLocationType>))]
     public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 
     /// <summary>
     /// address_components[] is an array containing the separate address components
     /// </summary>
-    [JsonProperty("address_components")]
+    [JsonPropertyName("address_components")]
     public virtual IEnumerable<AddressComponent> AddressComponents { get; set; }
 }
