@@ -251,6 +251,31 @@ public static class LanguageExtension
             case Language.Tatar:
             case Language.Turkmen:
             case Language.Uyghur:
+            case Language.Bihari:
+            case Language.Akan:
+            case Language.Assamese:
+            case Language.Aymara:
+            case Language.DivehiDhivehiMaldivian:
+            case Language.DutchMiddleAge:
+            case Language.Ganda:
+            case Language.Guarani:
+            case Language.Krio:
+            case Language.Lingala:
+            case Language.Sepedi:
+            case Language.Oromo:
+            case Language.Quechua:
+            case Language.Sanskrit:
+            case Language.Tigrinya:
+            case Language.Tsonga:
+            case Language.Bambara:
+            case Language.Bhojpuri:
+            case Language.CentralKurdish:
+            case Language.Dogri:
+            case Language.GoanKonkani:
+            case Language.Iloko:
+            case Language.Abc7:
+            case Language.Maithili:
+            case Language.Manipuri:
                 return false;
 
             default:

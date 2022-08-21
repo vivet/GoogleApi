@@ -19,7 +19,7 @@ public class Location
     /// <param name="address">The address string.</param>
     public Location(Address address)
     {
-        if (address == null) 
+        if (address == null)
             throw new ArgumentNullException(nameof(address));
 
         this.String = address.ToString();
@@ -31,7 +31,7 @@ public class Location
     /// <param name="coordinate"></param>
     public Location(Coordinate coordinate)
     {
-        if (coordinate == null) 
+        if (coordinate == null)
             throw new ArgumentNullException(nameof(coordinate));
 
         this.String = coordinate.ToString();
