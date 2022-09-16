@@ -80,6 +80,7 @@ public static class LanguageExtension
             Language.Maltese => "mt",
             Language.Maori => "mi",
             Language.Marathi => "mr",
+            Language.Mizo => "lus",
             Language.Mongolian => "mn",
             Language.Burmese => "my",
             Language.Nepali => "ne",
@@ -139,70 +140,58 @@ public static class LanguageExtension
     {
         switch (language)
         {
-            case Language.Afrikaans: return true;
-            case Language.Arabic: return true;
-            case Language.Bulgarian: return true;
-            case Language.Chinese_Simplified: return true;
-            case Language.Chinese_Traditional: return true;
-            case Language.Croatian: return true;
-            case Language.Czech: return true;
-            case Language.Danish: return true;
-            case Language.Dutch: return true;
-            case Language.English: return true;
-            case Language.French: return true;
-            case Language.German: return true;
-            case Language.Greek: return true;
-            case Language.Hebrew: return true;
-            case Language.Hindi: return true;
-            case Language.Icelandic: return true;
-            case Language.Indonesian: return true;
-            case Language.Italian: return true;
-            case Language.Japanese: return true;
-            case Language.Korean: return true;
-            case Language.Norwegian: return true;
-            case Language.Polish: return true;
-            case Language.Portuguese: return true;
-            case Language.Romanian: return true;
-            case Language.Russian: return true;
-            case Language.Slovak: return true;
-            case Language.Spanish: return true;
-            case Language.Swedish: return true;
-            case Language.Thai: return true;
-            case Language.Turkish: return true;
-            case Language.Vietnamese: return true;
-
+            case Language.Afrikaans:
             case Language.Albanian:
             case Language.Amharic:
+            case Language.Arabic:
             case Language.Armenian:
             case Language.Azeerbaijani:
             case Language.Basque:
             case Language.Belarusian:
             case Language.Bengali:
             case Language.Bosnian:
+            case Language.Bulgarian:
+            case Language.Burmese:
             case Language.Catalan:
             case Language.Cebuano:
-            case Language.Chichewa:
             case Language.Chinese:
+            case Language.Chinese_Simplified:
+            case Language.Chinese_Traditional:
             case Language.Corsican:
+            case Language.Croatian:
+            case Language.Czech:
+            case Language.Danish:
+            case Language.Dutch:
+            case Language.English:
             case Language.Esperanto:
             case Language.Estonian:
-            case Language.Filipino:
             case Language.Finnish:
+            case Language.French:
             case Language.Frisian:
             case Language.Galician:
             case Language.Georgian:
+            case Language.German:
+            case Language.Greek:
             case Language.Gujarati:
             case Language.Haitian_Creole:
             case Language.Hausa:
             case Language.Hawaiian:
+            case Language.Hebrew:
+            case Language.Hindi:
             case Language.Hmong:
             case Language.Hungarian:
+            case Language.Icelandic:
             case Language.Igbo:
+            case Language.Indonesian:
             case Language.Irish:
+            case Language.Italian:
+            case Language.Japanese:
             case Language.Javanese:
             case Language.Kannada:
             case Language.Kazakh:
             case Language.Khmer:
+            case Language.Kinyarwanda:
+            case Language.Korean:
             case Language.Kurdish:
             case Language.Kyrgyz:
             case Language.Lao:
@@ -218,11 +207,16 @@ public static class LanguageExtension
             case Language.Maori:
             case Language.Marathi:
             case Language.Mongolian:
-            case Language.Burmese:
             case Language.Nepali:
+            case Language.Norwegian:
+            case Language.Odia:
             case Language.Pashto:
             case Language.Persian:
+            case Language.Polish:
+            case Language.Portuguese:
             case Language.Punjabi:
+            case Language.Romanian:
+            case Language.Russian:
             case Language.Samoan:
             case Language.Scots_Gaelic:
             case Language.Serbian:
@@ -230,28 +224,34 @@ public static class LanguageExtension
             case Language.Shona:
             case Language.Sindhi:
             case Language.Sinhala:
+            case Language.Slovak:
             case Language.Slovenian:
             case Language.Somali:
+            case Language.Spanish:
             case Language.Sundanese:
             case Language.Swahili:
+            case Language.Swedish:
             case Language.Tajik:
             case Language.Tamil:
+            case Language.Tatar:
             case Language.Telugu:
+            case Language.Thai:
+            case Language.Turkish:
+            case Language.Turkmen:
             case Language.Ukrainian:
             case Language.Urdu:
+            case Language.Uyghur:
             case Language.Uzbek:
+            case Language.Vietnamese:
             case Language.Welsh:
             case Language.Xhosa:
             case Language.Yiddish:
             case Language.Yoruba:
             case Language.Zulu:
+                return true;
+            case Language.Chichewa:
+            case Language.Filipino:
             case Language.HebrewOld:
-            case Language.Kinyarwanda:
-            case Language.Odia:
-            case Language.Tatar:
-            case Language.Turkmen:
-            case Language.Uyghur:
-            case Language.Bihari:
             case Language.Akan:
             case Language.Assamese:
             case Language.Aymara:
@@ -273,9 +273,9 @@ public static class LanguageExtension
             case Language.Dogri:
             case Language.GoanKonkani:
             case Language.Iloko:
-            case Language.Abc7:
             case Language.Maithili:
             case Language.Manipuri:
+            case Language.Mizo:
                 return false;
 
             default:
