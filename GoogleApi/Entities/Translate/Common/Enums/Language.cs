@@ -824,5 +824,12 @@ public enum Language
     /// Manipuri.
     /// </summary>
     [EnumMember(Value = "mni-Mtei")]
-    Manipuri
+    Manipuri,
+
+    /// <summary>
+    /// Mizo.
+    /// </summary>
+    [EnumMember(Value = "lus")]
+    Mizo
+
 }
