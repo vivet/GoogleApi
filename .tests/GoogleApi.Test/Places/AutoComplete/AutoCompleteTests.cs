@@ -45,7 +45,7 @@ public class AutoCompleteTests : BaseTest
 
         var matchedSubstrings = result.MatchedSubstrings.ToArray();
         Assert.IsNotNull(matchedSubstrings);
-        Assert.AreEqual(2, matchedSubstrings.Length);
+        Assert.AreEqual(3, matchedSubstrings.Length);
 
         var types = result.Types.ToArray();
         Assert.IsNotNull(types);

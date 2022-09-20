@@ -831,5 +831,4 @@ public enum Language
     /// </summary>
     [EnumMember(Value = "lus")]
     Mizo
-
 }
