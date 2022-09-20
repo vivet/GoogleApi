@@ -160,7 +160,7 @@ public class TranslateRequestTests
         var request = new TranslateRequest
         {
             Key = "key",
-            Source = Language.Amharic,
+            Source = Language.Filipino,
             Target = Language.English,
             Qs = new[] { "Hej Verden" },
             Model = Model.Nmt
@@ -182,7 +182,7 @@ public class TranslateRequestTests
         {
             Key = "key",
             Source = Language.English,
-            Target = Language.Amharic,
+            Target = Language.Filipino,
             Qs = new[] { "Hej Verden" },
             Model = Model.Nmt
         };
