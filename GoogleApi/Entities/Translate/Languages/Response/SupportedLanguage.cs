@@ -1,4 +1,5 @@
 using GoogleApi.Entities.Translate.Common.Enums;
+using GoogleApi.Entities.Translate.Common.Enums.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -20,6 +21,6 @@ public class SupportedLanguage
     /// including language + region identifiers are returned(e.g. 'zh-TW' and 'zh-CH')
     /// </summary>
     [JsonProperty("language")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(LanguageEnumConverter))]
     public virtual Language? Language { get; set; }
 }
