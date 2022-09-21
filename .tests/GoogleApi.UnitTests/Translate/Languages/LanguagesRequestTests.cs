@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Languages.Request;
@@ -10,6 +11,21 @@ namespace GoogleApi.UnitTests.Translate.Languages;
 [TestFixture]
 public class LanguagesRequestTests
 {
+    [Test]
+    public async Task Should_Get_Language_List()
+    {
+        //var request = new LanguagesRequest
+        //{
+        //    Key = "KEY"
+        //};
+
+        //var api = new GoogleTranslate.LanguagesApi();
+
+        //var response = await api.QueryAsync(request);
+
+        //Assert.AreEqual(response.Status, GoogleApi.Entities.Common.Enums.Status.Ok);
+    }
+
     [Test]
     public void GetQueryStringParametersTest()
     {

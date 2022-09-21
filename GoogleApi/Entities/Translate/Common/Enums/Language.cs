@@ -830,5 +830,11 @@ public enum Language
     /// Mizo.
     /// </summary>
     [EnumMember(Value = "lus")]
-    Mizo
+    Mizo,
+
+    /// <summary>
+    /// Unsupported.
+    /// </summary>
+    [EnumMember(Value = "XX")]
+    Unsupported,
 }
