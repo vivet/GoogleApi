@@ -1,80 +1,49 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Utilities;
-using System.Reflection;
-using System.Runtime.Serialization;
 using System;
-using System.Globalization;
 using System.Linq;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 
-namespace GoogleApi.Entities.Translate.Common.Enums.Converters
+namespace GoogleApi.Entities.Translate.Common.Enums.Converters;
+
+/// <summary>
+/// Custom Language Enum converter to avoid breaking changes when Google adds a new language to the list.
+/// </summary>
+public class LanguageEnumConverter : StringEnumConverter
 {
-    /// <summary>
-    /// Custom Language Enum converter to avoid breaking changes when Google adds a new language to the list.
-    /// </summary>
-    public class LanguageEnumConverter : StringEnumConverter
+    /// <inheritdoc />
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-        /// <summary>
-        /// Determines whether this instance can convert the specified object type.
-        /// </summary>
-        /// <param name="objectType">Type of the object.</param>
-        /// <returns>
-        /// <c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool CanConvert(Type objectType)
-        {
-            return base.CanConvert(objectType);
-        }
+        if (reader == null)
+            throw new ArgumentNullException(nameof(reader));
 
-        /// <summary>
-        /// Attempts to convert the object into a Language. If it can't find the object, it returns Language.Unsupported.
-        /// </summary>
-        /// <param name="reader">The <see cref="JsonReader"/> to read from.</param>
-        /// <param name="objectType">Type of the object.</param>
-        /// <param name="existingValue">The existing value of object being read.</param>
-        /// <param name="serializer">The calling serializer.</param>
-        /// <returns>The enum object representing the language or Language.Unsupported.</returns>
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            var enumString = (string)reader.Value;
-            
-            var list = Enum.GetValues(typeof(Language)).Cast<Language>().Select(s => new LanguageDetails
+        if (objectType == null)
+            throw new ArgumentNullException(nameof(objectType));
+
+        if (serializer == null)
+            throw new ArgumentNullException(nameof(serializer));
+
+        var enumString = (string)reader.Value;
+
+        var values = Enum.GetValues(typeof(Language))
+            .Cast<Language>()
+            .Select(x => new
             {
-                Name = s.ToString(),
-                Language = s,
-                Code = s.GetEnumMemberValue()
-            }).ToList();
+                Name = x.ToString(),
+                Language = x,
+                Code = x.GetEnumMemberValue()
+            });
 
-            try
-            {
-                return list.Where(w => string.Equals(w.Code, enumString, StringComparison.InvariantCultureIgnoreCase))
-                .Select(s => s.Language)
-                .First();
-            }
-            catch(InvalidOperationException)
-            {
-                //if the list does not contain the language code in question.
-                return Language.Unsupported;
-            }
-        }
-
-        private struct LanguageDetails
+        try
         {
-            public string Name { get; set; }
-            public string Code { get; set; }
-            public Language Language { get; set; }
+            return values
+                .Where(x => string.Equals(x.Code, enumString, StringComparison.InvariantCultureIgnoreCase))
+                .Select(x => x.Language)
+                .FirstOrDefault();
         }
-
-        /// <summary>
-        /// Writes the JSON representation of the object.
-        /// </summary>
-        /// <param name="writer">The <see cref="JsonWriter"/> to write to.</param>
-        /// <param name="value">The value.</param>
-        /// <param name="serializer">The calling serializer.</param>
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        catch (InvalidOperationException)
         {
-            base.WriteJson(writer, value, serializer);
+            return Language.Unsupported;
         }
     }
 }
