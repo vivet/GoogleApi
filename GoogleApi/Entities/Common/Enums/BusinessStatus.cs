@@ -18,5 +18,11 @@ public enum BusinessStatus
     /// <summary>
     /// Closed Permanently
     /// </summary>
-    Closed_Permanently = 2
+    Closed_Permanently = 2,
+
+    //https://github.com/vivet/GoogleApi/issues/305
+    /// <summary>
+    /// Future Opening. 
+    /// </summary>
+    Future_Opening = 3
 }
