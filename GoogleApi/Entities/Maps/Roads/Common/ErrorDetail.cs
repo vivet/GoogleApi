@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleApi.Entities.Maps.Roads.Common;
 
@@ -11,12 +11,11 @@ public class ErrorDetail
     /// <summary>
     /// The type of error.
     /// </summary>
-    [JsonProperty("@type")]
+    [JsonPropertyName("@type")]
     public virtual string Type { get; set; }
 
     /// <summary>
     /// Links associated with the errors.
     /// </summary>
-    [JsonProperty("links")]
     public virtual IEnumerable<Link> Links { get; set; }
 }

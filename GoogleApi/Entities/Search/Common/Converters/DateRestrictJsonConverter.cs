@@ -1,6 +1,6 @@
 using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GoogleApi.Entities.Search.Common.Converters;
 
@@ -8,43 +8,24 @@ namespace GoogleApi.Entities.Search.Common.Converters;
 /// Date Restrict Json Converter.
 /// Converter for <see cref="DateRestrict"/>.
 /// </summary>
-public class DateRestrictJsonConverter : JsonConverter
-{
-    /// <inheritdoc />
-    public override bool CanConvert(Type objectType)
+public class DateRestrictJsonConverter : JsonConverter<DateRestrict>
     {
-        return objectType == typeof(DateRestrict);
+        /// <inheritdoc />
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(DateRestrict);
+        }
+
+        /// <inheritdoc />
+        public override DateRestrict Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            return DateRestrict.FromString(reader.GetString());
+        }
+
+        /// <inheritdoc />
+        public override void Write(Utf8JsonWriter writer, DateRestrict value, JsonSerializerOptions options)
+        {
+            ////writer.WriteStringValue(value.ToString());
+            throw new NotImplementedException();
+        }
     }
-
-    /// <inheritdoc />
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-    {
-        if (reader == null)
-            throw new ArgumentNullException(nameof(reader));
-
-        if (objectType == null)
-            throw new ArgumentNullException(nameof(objectType));
-
-        if (serializer == null)
-            throw new ArgumentNullException(nameof(serializer));
-
-        var token = JToken.Load(reader);
-
-        return new DateRestrict().FromString(token.ToString());
-    }
-
-    /// <inheritdoc />
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-    {
-        if (writer == null)
-            throw new ArgumentNullException(nameof(writer));
-
-        if (value == null)
-            throw new ArgumentNullException(nameof(value));
-
-        if (serializer == null)
-            throw new ArgumentNullException(nameof(serializer));
-
-        throw new NotImplementedException();
-    }
-}

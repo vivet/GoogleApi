@@ -1,4 +1,6 @@
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Common.Enums;
 
@@ -7,13 +9,14 @@ namespace GoogleApi.Entities.Common.Enums;
 /// https://developers.google.com/places/supported_types#table1
 /// https://developers.google.com/places/supported_types#table2
 /// </summary>
+[JsonConverter(typeof(CustomJsonStringEnumConverter))]
 public enum PlaceLocationType
 {
     /// <summary>
     /// Unknown is set when unmapped place location types is returned.
     /// </summary>
     [EnumMember(Value = "unknown")]
-    Uknown,
+    Unknown,
 
     /// <summary>
     /// Geocode instructs the Place Autocomplete service to return only geocoding results,
@@ -716,6 +719,12 @@ public enum PlaceLocationType
     /// </summary>
     [EnumMember(Value = "school")]
     School,
+
+    /// <summary>
+    /// School.
+    /// </summary>
+    [EnumMember(Value = "primary_school")]
+    Primary_School,
 
     /// <summary>
     ///

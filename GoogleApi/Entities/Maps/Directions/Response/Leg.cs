@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
 using GoogleApi.Entities.Maps.Common;
-using Newtonsoft.Json;
+
 using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Entities.Maps.Directions.Response;
@@ -13,25 +15,22 @@ public class Leg
     /// <summary>
     /// steps[] contains an array of steps denoting information about each separate step of the leg of the journey. (See Directions Steps below.)
     /// </summary>
-    [JsonProperty("steps")]
     public virtual IEnumerable<Step> Steps { get; set; }
 
     /// <summary>
     /// Via-WayPoints.
     /// </summary>
-    [JsonProperty("via_waypoint")]
+    [JsonPropertyName("via_waypoint")]
     public virtual IEnumerable<ViaWayPoint> ViaWayPoints { get; set; }
 
     /// <summary>
     /// distance indicates the total distance covered by this leg
     /// </summary>
-    [JsonProperty("distance")]
     public virtual Distance Distance { get; set; }
 
     /// <summary>
     /// duration indicates the total duration of this leg,
     /// </summary>
-    [JsonProperty("duration")]
     public virtual Duration Duration { get; set; }
 
     /// <summary>
@@ -41,42 +40,42 @@ public class Leg
     /// 3.Traffic conditions are available for the requested route.
     /// 4.The directions request does not include stopover waypoints.
     /// </summary>
-    [JsonProperty("duration_in_traffic")]
+    [JsonPropertyName("duration_in_traffic")]
     public virtual Duration DurationInTraffic { get; set; }
 
     /// <summary>
     /// The time of arrival. Only avaliable when using TravelMode = Transit
     /// </summary>
-    [JsonProperty("arrival_time")]
+    [JsonPropertyName("arrival_time")]
     public virtual Duration ArrivalTime { get; set; }
 
     /// <summary>
     /// The time of departure. Only avaliable when using TravelMode = Transit
     /// </summary>
-    [JsonProperty("departure_time")]
+    [JsonPropertyName("departure_time")]
     public virtual Duration DepartureTime { get; set; }
 
     /// <summary>
     /// start_location contains the latitude/longitude coordinates of the origin of this leg. Because the Directions API calculates directions between locations by using the nearest transportation option (usually a road) at the start and end points, start_location may be different than the provided origin of this leg if, for example, a road is not near the origin.
     /// </summary>
-    [JsonProperty("start_location")]
+    [JsonPropertyName("start_location")]
     public virtual Coordinate StartLocation { get; set; }
 
     /// <summary>
     /// end_location contains the latitude/longitude coordinates of the given destination of this leg. Because the Directions API calculates directions between locations by using the nearest transportation option (usually a road) at the start and end points, end_location may be different than the provided destination of this leg if, for example, a road is not near the destination.
     /// </summary>
-    [JsonProperty("end_location")]
+    [JsonPropertyName("end_location")]
     public virtual Coordinate EndLocation { get; set; }
 
     /// <summary>
     /// start_address contains the human-readable address (typically a street address) reflecting the start_location of this leg.
     /// </summary>
-    [JsonProperty("start_address")]
+    [JsonPropertyName("start_address")]
     public virtual string StartAddress { get; set; }
 
     /// <summary>
     /// end_addresss contains the human-readable address (typically a street address) reflecting the end_location of this leg.
     /// </summary>
-    [JsonProperty("end_address")]
+    [JsonPropertyName("end_address")]
     public virtual string EndAddress { get; set; }
 }

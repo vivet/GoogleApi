@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
 
 namespace GoogleApi.Entities;
 
@@ -24,19 +24,17 @@ public abstract class BaseResponse : IResponse
     /// <summary>
     /// See <see cref="IResponse.Status"/>.
     /// </summary>
-    [JsonProperty("status")]
-    [JsonConverter(typeof(StringEnumConverter))]
     public virtual Status? Status { get; set; }
 
     /// <summary>
     /// See <see cref="IResponse.ErrorMessage"/>.
     /// </summary>
-    [JsonProperty("error_message")]
+    [JsonPropertyName("error_message")]
     public virtual string ErrorMessage { get; set; }
 
     /// <summary>
     /// See <see cref="IResponse.HtmlAttributions"/>.
     /// </summary>
-    [JsonProperty("html_attributions")]
+    [JsonPropertyName("html_attributions")]
     public virtual IEnumerable<string> HtmlAttributions { get; set; }
 }

@@ -1,5 +1,6 @@
-﻿using GoogleApi.Entities.Common;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Directions.Response;
 
@@ -11,18 +12,17 @@ public class ViaWayPoint
     /// <summary>
     /// Location.
     /// </summary>
-    [JsonProperty("location")]
     public virtual Coordinate Location { get; set; }
 
     /// <summary>
     /// Step Index.
     /// </summary>
-    [JsonProperty("step_index")]
+    [JsonPropertyName("step_index")]
     public virtual int StepIndex { get; set; }
 
     /// <summary>
     /// Step Interpolation.
     /// </summary>
-    [JsonProperty("step_interpolation")]
+    [JsonPropertyName("step_interpolation")]
     public virtual decimal StepInterpolation { get; set; }
 }

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-
+﻿
 namespace GoogleApi.Entities.Maps.Common;
 
 /// <summary>
@@ -10,7 +9,6 @@ public class Distance
     /// <summary>
     /// Value indicates the distance in meters
     /// </summary>
-    [JsonProperty("value")]
     public virtual int Value { get; set; }
 
     /// <summary>
@@ -18,6 +16,5 @@ public class Distance
     /// (For example, miles and feet will be used for any origin within the United States.) Note that regardless of what unit system is displayed as text,
     /// the distance.value field always contains a value expressed in meters.
     /// </summary>
-    [JsonProperty("text")]
     public virtual string Text { get; set; }
 }

@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
 	<Nullable>disable</Nullable>
+	<UserSecretsId>acb265c9-a443-4053-87c7-632b01a0e70d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="nunit" Version="3.13.3" />
   </ItemGroup>

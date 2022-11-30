@@ -279,6 +279,11 @@ public enum Language
     Marathi,
 
     /// <summary>
+    /// Mizo
+    /// </summary>
+    Mizo,
+
+    /// <summary>
     /// Mongolian
     /// </summary>
     Mongolian,

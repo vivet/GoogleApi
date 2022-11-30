@@ -47,7 +47,9 @@ public class TextSearchTests : BaseTest
 
         var response = GooglePlaces.Search.TextSearch.Query(request);
         Assert.IsNotNull(response);
-        Assert.IsNotNull(response.NextPageToken);
+
+        //NOTE: this can yield different responses depending on origin test runner
+        Assert.IsNotNull(response.NextPageToken, request.GetUri().ToString());
 
         var requestNextPage = new PlacesTextSearchRequest
         {
