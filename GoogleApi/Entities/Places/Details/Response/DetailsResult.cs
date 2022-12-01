@@ -66,6 +66,14 @@ public class DetailsResult
     /// name contains the human-readable name for the returned result. For establishment results, this is usually the canonicalized business name.
     /// </summary>
     public virtual string Name { get; set; }
+    
+    /// <summary>
+    /// Contains a summary of the place. A summary is comprised of a textual overview, and also includes the language code for these if applicable. Summary text must be presented as-is and can not be modified or altered.
+    ///
+    /// See PlaceEditorialSummary for more information.
+    /// </summary>
+    [JsonPropertyName("editorial_summary")]
+    public virtual EditorialSummary EditorialSummary { get; set; }
 
     /// <summary>
     /// opening_hours may contain information about the place opening hours.

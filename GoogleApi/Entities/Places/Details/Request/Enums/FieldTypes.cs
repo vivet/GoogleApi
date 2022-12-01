@@ -99,29 +99,34 @@ public enum FieldTypes
     Website = 1 << 18,
 
     /// <summary>
+    /// Editorial Summary (billing: atmosphere)
+    /// </summary>
+    Editorial_Summary = 1 << 19,
+    
+    /// <summary>
     /// Price Level (billing: atmosphere)
     /// </summary>
-    Price_Level = 1 << 19,
+    Price_Level = 1 << 20,
 
     /// <summary>
     /// Rating (billing: atmosphere).
     /// </summary>
-    Rating = 1 << 20,
+    Rating = 1 << 21,
 
     /// <summary>
     /// Review (billing: atmosphere).
     /// </summary>
-    Review = 1 << 21,
+    Review = 1 << 22,
 
     /// <summary>
     /// User Ratings Total (billing: atmosphere).
     /// </summary>
-    User_Ratings_Total = 1 << 22,
+    User_Ratings_Total = 1 << 23,
 
     /// <summary>
     /// Business Status.
     /// </summary>
-    Business_Status = 1 << 23,
+    Business_Status = 1 << 24,
 
     /// <summary>
     /// Basic (all).
@@ -136,5 +141,5 @@ public enum FieldTypes
     /// <summary>
     /// Atmosphere (all).
     /// </summary>
-    Atmosphere = Price_Level | Rating | User_Ratings_Total | Review
+    Atmosphere = Editorial_Summary | Price_Level | Rating | User_Ratings_Total | Review
 }
