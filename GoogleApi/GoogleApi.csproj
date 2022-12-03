@@ -7,9 +7,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>4.2.6.0</AssemblyVersion>
-		<FileVersion>4.2.6.0</FileVersion>
-		<Version>4.2.6.0</Version>
+		<AssemblyVersion>4.3.0.0</AssemblyVersion>
+		<FileVersion>4.3.0.0</FileVersion>
+		<Version>4.3.0.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -28,7 +28,9 @@
 			- Added Language.Mizo
 			- Fixed typo in PlaceLocationType.Unknown
 			- Fixed typo in Maps.ErrorDetail.Domain
-			- Cosmetics code quality fixes.
+			- Cosmetics code quality fixes
+			- Added editorial summary field in places detail response
+			- Added missing RadipType.Nr
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
