@@ -5,6 +5,7 @@ using GoogleApi.Entities.Translate.Languages.Response;
 using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Response;
 using System.Net.Http;
+using GoogleApi.Interfaces.Translate;
 
 namespace GoogleApi;
 
@@ -39,7 +40,7 @@ public partial class GoogleTranslate
     /// <summary>
     /// Translate Api.
     /// </summary>
-    public sealed class TranslateApi : HttpEngine<TranslateRequest, TranslateResponse>
+    public sealed class TranslateApi : HttpEngine<TranslateRequest, TranslateResponse>, ITranslateApi
     {
         /// <summary>
         /// Constructor.
@@ -63,7 +64,7 @@ public partial class GoogleTranslate
     /// <summary>
     /// Detect Api.
     /// </summary>
-    public sealed class DetectApi : HttpEngine<DetectRequest, DetectResponse>
+    public sealed class DetectApi : HttpEngine<DetectRequest, DetectResponse>, IDetectApi
     {
         /// <summary>
         /// Constructor.
@@ -87,7 +88,7 @@ public partial class GoogleTranslate
     /// <summary>
     /// Languages Api.
     /// </summary>
-    public sealed class LanguagesApi : HttpEngine<LanguagesRequest, LanguagesResponse>
+    public sealed class LanguagesApi : HttpEngine<LanguagesRequest, LanguagesResponse>, ILanguagesApi
     {
         /// <summary>
         /// Constructor.

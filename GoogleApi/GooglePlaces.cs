@@ -13,6 +13,8 @@ using GoogleApi.Entities.Places.Search.NearBy.Response;
 using GoogleApi.Entities.Places.Search.Text.Request;
 using GoogleApi.Entities.Places.Search.Text.Response;
 using System.Net.Http;
+using GoogleApi.Interfaces.Places;
+using GoogleApi.Interfaces.Places.Search;
 
 namespace GoogleApi;
 
@@ -87,7 +89,7 @@ public partial class GooglePlaces
     /// <summary>
     /// Auto Complete Api.
     /// </summary>
-    public sealed class AutoCompleteApi : HttpEngine<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>
+    public sealed class AutoCompleteApi : HttpEngine<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>, IAutoCompleteApi
     {
         /// <summary>
         /// Constructor.
@@ -110,7 +112,7 @@ public partial class GooglePlaces
     /// <summary>
     /// Details Api.
     /// </summary>
-    public sealed class DetailsApi : HttpEngine<PlacesDetailsRequest, PlacesDetailsResponse>
+    public sealed class DetailsApi : HttpEngine<PlacesDetailsRequest, PlacesDetailsResponse>, IDetailsApi
     {
         /// <summary>
         /// Constructor.
@@ -134,7 +136,7 @@ public partial class GooglePlaces
     /// <summary>
     /// Photos Api.
     /// </summary>
-    public sealed class PhotosApi : HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse>
+    public sealed class PhotosApi : HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse>, IPhotosApi
     {
         /// <summary>
         /// Constructor.
@@ -158,7 +160,7 @@ public partial class GooglePlaces
     /// <summary>
     /// Query Auto Complete Api.
     /// </summary>
-    public sealed class QueryAutoCompleteApi : HttpEngine<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>
+    public sealed class QueryAutoCompleteApi : HttpEngine<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>, IQueryAutoCompleteApi
     {
         /// <summary>
         /// Constructor.
@@ -184,7 +186,7 @@ public partial class GooglePlaces
         /// <summary>
         /// Find Search Api.
         /// </summary>
-        public sealed class FindSearchApi : HttpEngine<PlacesFindSearchRequest, PlacesFindSearchResponse>
+        public sealed class FindSearchApi : HttpEngine<PlacesFindSearchRequest, PlacesFindSearchResponse>, IFindSearchApi
         {
             /// <summary>
             /// Constructor.
@@ -208,7 +210,7 @@ public partial class GooglePlaces
         /// <summary>
         /// Near By Search Api.
         /// </summary>
-        public sealed class NearBySearchApi : HttpEngine<PlacesNearBySearchRequest, PlacesNearbySearchResponse>
+        public sealed class NearBySearchApi : HttpEngine<PlacesNearBySearchRequest, PlacesNearbySearchResponse>, INearBySearchApi
         {
             /// <summary>
             /// Constructor.
@@ -232,7 +234,7 @@ public partial class GooglePlaces
         /// <summary>
         /// Text Search Api
         /// </summary>
-        public sealed class TextSearchApi : HttpEngine<PlacesTextSearchRequest, PlacesTextSearchResponse>
+        public sealed class TextSearchApi : HttpEngine<PlacesTextSearchRequest, PlacesTextSearchResponse>, ITextSearchApi
         {
             /// <summary>
             /// Constructor.

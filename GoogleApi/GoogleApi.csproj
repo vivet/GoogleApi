@@ -7,9 +7,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>4.3.0.0</AssemblyVersion>
-		<FileVersion>4.3.0.0</FileVersion>
-		<Version>4.3.0.0</Version>
+		<AssemblyVersion>4.3.1.0</AssemblyVersion>
+		<FileVersion>4.3.1.0</FileVersion>
+		<Version>4.3.1.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -31,6 +31,7 @@
 			- Cosmetics code quality fixes
 			- Added editorial summary field in places detail response
 			- Added missing RadipType.Nr
+			- Added Interfaces for each api for mocks and dependency injection. 
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>

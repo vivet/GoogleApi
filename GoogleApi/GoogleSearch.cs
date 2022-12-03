@@ -8,6 +8,8 @@ using GoogleApi.Entities.Search.Video.Videos.Request;
 using GoogleApi.Entities.Search.Video.Videos.Response;
 using GoogleApi.Entities.Search.Web.Request;
 using System.Net.Http;
+using GoogleApi.Interfaces.Search;
+using GoogleApi.Interfaces.Search.Video;
 
 namespace GoogleApi;
 
@@ -75,7 +77,7 @@ public partial class GoogleSearch
     /// <summary>
     /// Web Search Api.
     /// </summary>
-    public sealed class WebSearchApi : HttpEngine<WebSearchRequest, BaseSearchResponse>
+    public sealed class WebSearchApi : HttpEngine<WebSearchRequest, BaseSearchResponse>, IWebSearchApi
     {
         /// <summary>
         /// Constructor.
@@ -99,7 +101,7 @@ public partial class GoogleSearch
     /// <summary>
     /// Image Search Api.
     /// </summary>
-    public sealed class ImageSearchApi : HttpEngine<ImageSearchRequest, BaseSearchResponse>
+    public sealed class ImageSearchApi : HttpEngine<ImageSearchRequest, BaseSearchResponse>, IImageSearchApi
     {
         /// <summary>
         /// Constructor.
@@ -125,7 +127,7 @@ public partial class GoogleSearch
         /// <summary>
         /// Channels Api.
         /// </summary>
-        public sealed class ChannelsApi : HttpEngine<ChannelSearchRequest, ChannelSearchResponse>
+        public sealed class ChannelsApi : HttpEngine<ChannelSearchRequest, ChannelSearchResponse>, IChannelsApi
         {
             /// <summary>
             /// Constructor.
@@ -149,7 +151,7 @@ public partial class GoogleSearch
         /// <summary>
         /// Playlists Api.
         /// </summary>
-        public sealed class PlaylistsApi : HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse>
+        public sealed class PlaylistsApi : HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse>, IPlaylistsApi
         {
             /// <summary>
             /// Constructor.
@@ -173,7 +175,7 @@ public partial class GoogleSearch
         /// <summary>
         /// Videos Api.
         /// </summary>
-        public sealed class VideosApi : HttpEngine<VideoSearchRequest, VideoSearchResponse>
+        public sealed class VideosApi : HttpEngine<VideoSearchRequest, VideoSearchResponse>, IVideosApi
         {
             /// <summary>
             /// Constructor.

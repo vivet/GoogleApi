@@ -61,6 +61,14 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using GoogleApi.Extensions;
+using GoogleApi.Interfaces.Maps;
+using GoogleApi.Interfaces.Maps.Geocode;
+using GoogleApi.Interfaces.Maps.Roads;
+using GoogleApi.Interfaces.Places;
+using GoogleApi.Interfaces.Places.Search;
+using GoogleApi.Interfaces.Search;
+using GoogleApi.Interfaces.Search.Video;
+using GoogleApi.Interfaces.Translate;
 
 namespace GoogleApi.UnitTests.Extensions;
 
@@ -76,14 +84,14 @@ public class ServiceCollectionExtensionTests
         services
             .AddGoogleApiClients();
 
-        provider = services
+        this.provider = services
             .BuildServiceProvider();
     }
 
     [Test]
     public void ResolveGoogleApiClientTest()
     {
-        var httpClientFactory = provider
+        var httpClientFactory = this.provider
             .GetRequiredService<IHttpClientFactory>();
 
         var httpClient = httpClientFactory
@@ -107,266 +115,556 @@ public class ServiceCollectionExtensionTests
 
 
     [Test]
-    public void ResolveMapsDirectionsApi()
+    public void ResolveMapsDirectionsApiTest()
     {
-        var result = provider
+        var result = this.provider
             .GetRequiredService<GoogleMaps.DirectionsApi>();
 
         Assert.IsInstanceOf<HttpEngine<DirectionsRequest, DirectionsResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsDistanceMatrixApi()
+    public void ResolveMapsDirectionsApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IDirectionsApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.DirectionsApi>(result);
+        Assert.IsInstanceOf<HttpEngine<DirectionsRequest, DirectionsResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsDistanceMatrixApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.DistanceMatrixApi>();
 
         Assert.IsInstanceOf<HttpEngine<DistanceMatrixRequest, DistanceMatrixResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsElevationApi()
+    public void ResolveMapsDistanceMatrixApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IDistanceMatrixApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.DistanceMatrixApi>(result);
+        Assert.IsInstanceOf<HttpEngine<DistanceMatrixRequest, DistanceMatrixResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsElevationApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.ElevationApi>();
 
         Assert.IsInstanceOf<HttpEngine<ElevationRequest, ElevationResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsGeolocationApi()
+    public void ResolveMapsElevationApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IElevationApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.ElevationApi>(result);
+        Assert.IsInstanceOf<HttpEngine<ElevationRequest, ElevationResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsGeolocationApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.GeolocationApi>();
 
         Assert.IsInstanceOf<HttpEngine<GeolocationRequest, GeolocationResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsGeocodeAddressGeocodeApi()
+    public void ResolveMapsGeolocationApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IGeolocationApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.GeolocationApi>(result);
+        Assert.IsInstanceOf<HttpEngine<GeolocationRequest, GeolocationResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsGeocodeAddressGeocodeApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.Geocode.AddressGeocodeApi>();
 
         Assert.IsInstanceOf<HttpEngine<AddressGeocodeRequest, GeocodeResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsGeocodeLocationGeocodeApi()
+    public void ResolveMapsGeocodeAddressGeocodeApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IAddressGeocodeApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.Geocode.AddressGeocodeApi>(result);
+        Assert.IsInstanceOf<HttpEngine<AddressGeocodeRequest, GeocodeResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsGeocodeLocationGeocodeApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.Geocode.LocationGeocodeApi>();
 
         Assert.IsInstanceOf<HttpEngine<LocationGeocodeRequest, GeocodeResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsGeocodePlaceGeoCodeApi()
+    public void ResolveMapsGeocodeLocationGeocodeApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<ILocationGeocodeApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.Geocode.LocationGeocodeApi>(result);
+        Assert.IsInstanceOf<HttpEngine<LocationGeocodeRequest, GeocodeResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsGeocodePlaceGeoCodeApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.Geocode.PlaceGeocodeApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlaceGeocodeRequest, GeocodeResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsGeocodePlusCodeGeocodeApi()
+    public void ResolveMapsGeocodePlaceGeoCodeApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IPlaceGeocodeApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.Geocode.PlaceGeocodeApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlaceGeocodeRequest, GeocodeResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsGeocodePlusCodeGeocodeApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.Geocode.PlusCodeGeocodeApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlusCodeGeocodeRequest, PlusCodeGeocodeResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsRoadsNearestRoadsApi()
+    public void ResolveMapsGeocodePlusCodeGeocodeApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IPlusCodeGeocodeApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.Geocode.PlusCodeGeocodeApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlusCodeGeocodeRequest, PlusCodeGeocodeResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsRoadsNearestRoadsApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.Roads.NearestRoadsApi>();
 
         Assert.IsInstanceOf<HttpEngine<NearestRoadsRequest, NearestRoadsResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsRoadsSnapToRoadApi()
+    public void ResolveMapsRoadsNearestRoadsApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<INearestRoadsApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.Roads.NearestRoadsApi>(result);
+        Assert.IsInstanceOf<HttpEngine<NearestRoadsRequest, NearestRoadsResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsRoadsSnapToRoadApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.Roads.SnapToRoadApi>();
 
         Assert.IsInstanceOf<HttpEngine<SnapToRoadsRequest, SnapToRoadsResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsRoadsSpeedLimitsApi()
+    public void ResolveMapsRoadsSnapToRoadApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<ISnapToRoadApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.Roads.SnapToRoadApi>(result);
+        Assert.IsInstanceOf<HttpEngine<SnapToRoadsRequest, SnapToRoadsResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsRoadsSpeedLimitsApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.Roads.SpeedLimitsApi>();
 
         Assert.IsInstanceOf<HttpEngine<SpeedLimitsRequest, SpeedLimitsResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsStreetViewApi()
+    public void ResolveMapsRoadsSpeedLimitsApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<ISpeedLimitsApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.Roads.SpeedLimitsApi>(result);
+        Assert.IsInstanceOf<HttpEngine<SpeedLimitsRequest, SpeedLimitsResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsStreetViewApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.StreetViewApi>();
 
         Assert.IsInstanceOf<HttpEngine<StreetViewRequest, StreetViewResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsStaticMapsApi()
+    public void ResolveMapsStreetViewApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IStreetViewApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.StreetViewApi>(result);
+        Assert.IsInstanceOf<HttpEngine<StreetViewRequest, StreetViewResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsStaticMapsApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.StaticMapsApi>();
 
         Assert.IsInstanceOf<HttpEngine<StaticMapsRequest, StaticMapsResponse>>(result);
     }
 
     [Test]
-    public void ResolveMapsTimeZoneApi()
+    public void ResolveMapsStaticMapsApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IStaticMapsApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.StaticMapsApi>(result);
+        Assert.IsInstanceOf<HttpEngine<StaticMapsRequest, StaticMapsResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveMapsTimeZoneApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleMaps.TimeZoneApi>();
 
         Assert.IsInstanceOf<HttpEngine<TimeZoneRequest, TimeZoneResponse>>(result);
     }
 
+    [Test]
+    public void ResolveMapsTimeZoneApiInterfaceTest()
+    {
+        var result = this.provider
+            .GetRequiredService<ITimeZoneApi>();
+
+        Assert.IsInstanceOf<GoogleMaps.TimeZoneApi>(result);
+        Assert.IsInstanceOf<HttpEngine<TimeZoneRequest, TimeZoneResponse>>(result);
+    }
+
 
     [Test]
-    public void ResolvePlacesAutoCompleteApi()
+    public void ResolvePlacesAutoCompleteApiTest()
     {
-        var result = provider
+        var result = this.provider
             .GetRequiredService<GooglePlaces.AutoCompleteApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>>(result);
     }
 
     [Test]
-    public void ResolvePlacesDetailsApi()
+    public void ResolvePlacesAutoCompleteApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IAutoCompleteApi>();
+
+        Assert.IsInstanceOf<GooglePlaces.AutoCompleteApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlacesAutoCompleteRequest, PlacesAutoCompleteResponse>>(result);
+    }
+
+    [Test]
+    public void ResolvePlacesDetailsApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GooglePlaces.DetailsApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlacesDetailsRequest, PlacesDetailsResponse>>(result);
     }
 
     [Test]
-    public void ResolvePlacesPhotosApi()
+    public void ResolvePlacesDetailsApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IDetailsApi>();
+
+        Assert.IsInstanceOf<GooglePlaces.DetailsApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlacesDetailsRequest, PlacesDetailsResponse>>(result);
+    }
+
+    [Test]
+    public void ResolvePlacesPhotosApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GooglePlaces.PhotosApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse>>(result);
     }
 
     [Test]
-    public void ResolvePlacesQueryAutoCompleteApi()
+    public void ResolvePlacesPhotosApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IPhotosApi>();
+
+        Assert.IsInstanceOf<GooglePlaces.PhotosApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlacesPhotosRequest, PlacesPhotosResponse>>(result);
+    }
+
+    [Test]
+    public void ResolvePlacesQueryAutoCompleteApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GooglePlaces.QueryAutoCompleteApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>>(result);
     }
 
     [Test]
-    public void ResolvePlacesSearchFindSearchApi()
+    public void ResolvePlacesQueryAutoCompleteApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IQueryAutoCompleteApi>();
+
+        Assert.IsInstanceOf<GooglePlaces.QueryAutoCompleteApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlacesQueryAutoCompleteRequest, PlacesQueryAutoCompleteResponse>>(result);
+    }
+
+    [Test]
+    public void ResolvePlacesSearchFindSearchApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GooglePlaces.Search.FindSearchApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlacesFindSearchRequest, PlacesFindSearchResponse>>(result);
     }
 
     [Test]
-    public void ResolvePlacesSearchNearBySearchApi()
+    public void ResolvePlacesSearchFindSearchApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IFindSearchApi>();
+
+        Assert.IsInstanceOf<GooglePlaces.Search.FindSearchApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlacesFindSearchRequest, PlacesFindSearchResponse>>(result);
+    }
+
+    [Test]
+    public void ResolvePlacesSearchNearBySearchApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GooglePlaces.Search.NearBySearchApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlacesNearBySearchRequest, PlacesNearbySearchResponse>>(result);
     }
 
     [Test]
-    public void ResolvePlacesSearchTextSearchApi()
+    public void ResolvePlacesSearchNearBySearchApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<INearBySearchApi>();
+
+        Assert.IsInstanceOf<GooglePlaces.Search.NearBySearchApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlacesNearBySearchRequest, PlacesNearbySearchResponse>>(result);
+    }
+
+    [Test]
+    public void ResolvePlacesSearchTextSearchApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GooglePlaces.Search.TextSearchApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlacesTextSearchRequest, PlacesTextSearchResponse>>(result);
     }
 
+    [Test]
+    public void ResolvePlacesSearchTextSearchApiInterfaceTest()
+    {
+        var result = this.provider
+            .GetRequiredService<ITextSearchApi>();
+
+        Assert.IsInstanceOf<GooglePlaces.Search.TextSearchApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlacesTextSearchRequest, PlacesTextSearchResponse>>(result);
+    }
+
 
     [Test]
-    public void ResolveSearchWebSearchApi()
+    public void ResolveSearchWebSearchApiTest()
     {
-        var result = provider
+        var result = this.provider
             .GetRequiredService<GoogleSearch.WebSearchApi>();
 
         Assert.IsInstanceOf<HttpEngine<WebSearchRequest, BaseSearchResponse>>(result);
     }
 
     [Test]
-    public void ResolveSearchImageSearchApi()
+    public void ResolveSearchWebSearchApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IWebSearchApi>();
+
+        Assert.IsInstanceOf<GoogleSearch.WebSearchApi>(result);
+        Assert.IsInstanceOf<HttpEngine<WebSearchRequest, BaseSearchResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveSearchImageSearchApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleSearch.ImageSearchApi>();
 
         Assert.IsInstanceOf<HttpEngine<ImageSearchRequest, BaseSearchResponse>>(result);
     }
 
     [Test]
-    public void ResolveSearchVideoSearchChannelsApi()
+    public void ResolveSearchImageSearchApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IImageSearchApi>();
+
+        Assert.IsInstanceOf<GoogleSearch.ImageSearchApi>(result);
+        Assert.IsInstanceOf<HttpEngine<ImageSearchRequest, BaseSearchResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveSearchVideoSearchChannelsApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleSearch.VideoSearch.ChannelsApi>();
 
         Assert.IsInstanceOf<HttpEngine<ChannelSearchRequest, ChannelSearchResponse>>(result);
     }
 
     [Test]
-    public void ResolveSearchVideoSearchPlaylistsApi()
+    public void ResolveSearchVideoSearchChannelsApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IChannelsApi>();
+
+        Assert.IsInstanceOf<GoogleSearch.VideoSearch.ChannelsApi>(result);
+        Assert.IsInstanceOf<HttpEngine<ChannelSearchRequest, ChannelSearchResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveSearchVideoSearchPlaylistsApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleSearch.VideoSearch.PlaylistsApi>();
 
         Assert.IsInstanceOf<HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse>>(result);
     }
 
     [Test]
-    public void ResolveSearchVideoSearchVideosApi()
+    public void ResolveSearchVideoSearchPlaylistsApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IPlaylistsApi>();
+
+        Assert.IsInstanceOf<GoogleSearch.VideoSearch.PlaylistsApi>(result);
+        Assert.IsInstanceOf<HttpEngine<PlaylistSearchRequest, PlaylistSearchResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveSearchVideoSearchVideosApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleSearch.VideoSearch.VideosApi>();
 
         Assert.IsInstanceOf<HttpEngine<VideoSearchRequest, VideoSearchResponse>>(result);
     }
 
+    [Test]
+    public void ResolveSearchVideoSearchVideosApiInterfaceTest()
+    {
+        var result = this.provider
+            .GetRequiredService<IVideosApi>();
+
+        Assert.IsInstanceOf<GoogleSearch.VideoSearch.VideosApi>(result);
+        Assert.IsInstanceOf<HttpEngine<VideoSearchRequest, VideoSearchResponse>>(result);
+    }
+
 
     [Test]
-    public void ResolveTranslateTranslateApi()
+    public void ResolveTranslateTranslateApiTest()
     {
-        var result = provider
+        var result = this.provider
             .GetRequiredService<GoogleTranslate.TranslateApi>();
 
         Assert.IsInstanceOf<HttpEngine<TranslateRequest, TranslateResponse>>(result);
     }
 
     [Test]
-    public void ResolveTranslateDetectApi()
+    public void ResolveTranslateTranslateApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<ITranslateApi>();
+
+        Assert.IsInstanceOf<GoogleTranslate.TranslateApi>(result);
+        Assert.IsInstanceOf<HttpEngine<TranslateRequest, TranslateResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveTranslateDetectApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleTranslate.DetectApi>();
 
         Assert.IsInstanceOf<HttpEngine<DetectRequest, DetectResponse>>(result);
     }
 
     [Test]
-    public void ResolveTranslateLanguagesApi()
+    public void ResolveTranslateDetectApiInterfaceTest()
     {
-        var result = provider
+        var result = this.provider
+            .GetRequiredService<IDetectApi>();
+
+        Assert.IsInstanceOf<GoogleTranslate.DetectApi>(result);
+        Assert.IsInstanceOf<HttpEngine<DetectRequest, DetectResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveTranslateLanguagesApiTest()
+    {
+        var result = this.provider
             .GetRequiredService<GoogleTranslate.LanguagesApi>();
 
+        Assert.IsInstanceOf<HttpEngine<LanguagesRequest, LanguagesResponse>>(result);
+    }
+
+    [Test]
+    public void ResolveTranslateLanguagesApiInterfaceTest()
+    {
+        var result = this.provider
+            .GetRequiredService<ILanguagesApi>();
+
+        Assert.IsInstanceOf<GoogleTranslate.LanguagesApi>(result);
         Assert.IsInstanceOf<HttpEngine<LanguagesRequest, LanguagesResponse>>(result);
     }
 }

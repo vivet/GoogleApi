@@ -1,4 +1,12 @@
 ﻿using System;
+using GoogleApi.Interfaces.Maps;
+using GoogleApi.Interfaces.Maps.Geocode;
+using GoogleApi.Interfaces.Maps.Roads;
+using GoogleApi.Interfaces.Places;
+using GoogleApi.Interfaces.Places.Search;
+using GoogleApi.Interfaces.Search;
+using GoogleApi.Interfaces.Search.Video;
+using GoogleApi.Interfaces.Translate;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GoogleApi.Extensions;
@@ -18,57 +26,64 @@ public static class ServiceCollectionExtensions
     /// </remarks>
     public static IServiceCollection AddGoogleApiClients(this IServiceCollection services)
     {
+        if (services == null) 
+            throw new ArgumentNullException(nameof(services));
+
         services
             .AddHttpClient(nameof(GoogleApi), HttpClientFactory.ConfigureDefaultHttpClient)
             .ConfigurePrimaryHttpMessageHandler(() => HttpClientFactory.GetDefaultHttpClientHandler());
 
         services
-            .AddApi<GoogleMaps.DirectionsApi>()
-            .AddApi<GoogleMaps.DistanceMatrixApi>()
-            .AddApi<GoogleMaps.ElevationApi>()
-            .AddApi<GoogleMaps.GeolocationApi>()
-            .AddApi<GoogleMaps.Geocode.AddressGeocodeApi>()
-            .AddApi<GoogleMaps.Geocode.LocationGeocodeApi>()
-            .AddApi<GoogleMaps.Geocode.PlaceGeocodeApi>()
-            .AddApi<GoogleMaps.Geocode.PlusCodeGeocodeApi>()
-            .AddApi<GoogleMaps.Roads.SnapToRoadApi>()
-            .AddApi<GoogleMaps.Roads.NearestRoadsApi>()
-            .AddApi<GoogleMaps.Roads.SpeedLimitsApi>()
-            .AddApi<GoogleMaps.StreetViewApi>()
-            .AddApi<GoogleMaps.StaticMapsApi>()
-            .AddApi<GoogleMaps.TimeZoneApi>();
+            .AddApi<IDirectionsApi, GoogleMaps.DirectionsApi>()
+            .AddApi<IDistanceMatrixApi, GoogleMaps.DistanceMatrixApi>()
+            .AddApi<IElevationApi, GoogleMaps.ElevationApi>()
+            .AddApi<IGeolocationApi, GoogleMaps.GeolocationApi>()
+            .AddApi<IAddressGeocodeApi, GoogleMaps.Geocode.AddressGeocodeApi>()
+            .AddApi<ILocationGeocodeApi, GoogleMaps.Geocode.LocationGeocodeApi>()
+            .AddApi<IPlaceGeocodeApi, GoogleMaps.Geocode.PlaceGeocodeApi>()
+            .AddApi<IPlusCodeGeocodeApi, GoogleMaps.Geocode.PlusCodeGeocodeApi>()
+            .AddApi<ISnapToRoadApi, GoogleMaps.Roads.SnapToRoadApi>()
+            .AddApi<INearestRoadsApi, GoogleMaps.Roads.NearestRoadsApi>()
+            .AddApi<ISpeedLimitsApi, GoogleMaps.Roads.SpeedLimitsApi>()
+            .AddApi<IStreetViewApi, GoogleMaps.StreetViewApi>()
+            .AddApi<IStaticMapsApi, GoogleMaps.StaticMapsApi>()
+            .AddApi<ITimeZoneApi, GoogleMaps.TimeZoneApi>();
 
         services
-            .AddApi<GooglePlaces.DetailsApi>()
-            .AddApi<GooglePlaces.PhotosApi>()
-            .AddApi<GooglePlaces.AutoCompleteApi>()
-            .AddApi<GooglePlaces.QueryAutoCompleteApi>()
-            .AddApi<GooglePlaces.Search.FindSearchApi>()
-            .AddApi<GooglePlaces.Search.NearBySearchApi>()
-            .AddApi<GooglePlaces.Search.TextSearchApi>();
+            .AddApi<IDetailsApi, GooglePlaces.DetailsApi>()
+            .AddApi<IPhotosApi, GooglePlaces.PhotosApi>()
+            .AddApi<IAutoCompleteApi, GooglePlaces.AutoCompleteApi>()
+            .AddApi<IQueryAutoCompleteApi, GooglePlaces.QueryAutoCompleteApi>()
+            .AddApi<IFindSearchApi, GooglePlaces.Search.FindSearchApi>()
+            .AddApi<INearBySearchApi, GooglePlaces.Search.NearBySearchApi>()
+            .AddApi<ITextSearchApi, GooglePlaces.Search.TextSearchApi>();
 
         services
-            .AddApi<GoogleSearch.WebSearchApi>()
-            .AddApi<GoogleSearch.ImageSearchApi>()
-            .AddApi<GoogleSearch.VideoSearch.ChannelsApi>()
-            .AddApi<GoogleSearch.VideoSearch.PlaylistsApi>()
-            .AddApi<GoogleSearch.VideoSearch.VideosApi>();
+            .AddApi<IWebSearchApi, GoogleSearch.WebSearchApi>()
+            .AddApi<IImageSearchApi, GoogleSearch.ImageSearchApi>()
+            .AddApi<IChannelsApi, GoogleSearch.VideoSearch.ChannelsApi>()
+            .AddApi<IPlaylistsApi, GoogleSearch.VideoSearch.PlaylistsApi>()
+            .AddApi<IVideosApi, GoogleSearch.VideoSearch.VideosApi>();
 
         services
-            .AddApi<GoogleTranslate.DetectApi>()
-            .AddApi<GoogleTranslate.LanguagesApi>()
-            .AddApi<GoogleTranslate.TranslateApi>();
+            .AddApi<IDetectApi, GoogleTranslate.DetectApi>()
+            .AddApi<ILanguagesApi, GoogleTranslate.LanguagesApi>()
+            .AddApi<ITranslateApi, GoogleTranslate.TranslateApi>();
 
         return services;
     }
 
-    private static IServiceCollection AddApi<TClient>(this IServiceCollection services)
-        where TClient : class
+    private static IServiceCollection AddApi<TService, TClient>(this IServiceCollection services)
+        where TClient : class, TService 
+        where TService : class
     {
         services
             .AddHttpClient<TClient>(HttpClientFactory.ConfigureDefaultHttpClient)
             .ConfigurePrimaryHttpMessageHandler(() => HttpClientFactory.GetDefaultHttpClientHandler())
             .SetHandlerLifetime(TimeSpan.FromMinutes(5));
+
+        services
+            .AddSingleton<TService, TClient>();
 
         return services;
     }
