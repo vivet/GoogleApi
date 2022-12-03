@@ -25,6 +25,9 @@ using GoogleApi.Entities.Maps.StreetView.Response;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using GoogleApi.Entities.Maps.TimeZone.Response;
 using System.Net.Http;
+using GoogleApi.Interfaces.Maps;
+using GoogleApi.Interfaces.Maps.Roads;
+using GoogleApi.Interfaces.Maps.Geocode;
 
 namespace GoogleApi;
 
@@ -171,7 +174,7 @@ public partial class GoogleMaps
     /// <summary>
     /// Directions Api.
     /// </summary>
-    public sealed class DirectionsApi : HttpEngine<DirectionsRequest, DirectionsResponse>
+    public sealed class DirectionsApi : HttpEngine<DirectionsRequest, DirectionsResponse>, IDirectionsApi
     {
         /// <summary>
         /// Constructor.
@@ -195,7 +198,7 @@ public partial class GoogleMaps
     /// <summary>
     /// Distance Matrix Api.
     /// </summary>
-    public sealed class DistanceMatrixApi : HttpEngine<DistanceMatrixRequest, DistanceMatrixResponse>
+    public sealed class DistanceMatrixApi : HttpEngine<DistanceMatrixRequest, DistanceMatrixResponse>, IDistanceMatrixApi
     {
         /// <summary>
         /// Constructor.
@@ -219,7 +222,7 @@ public partial class GoogleMaps
     /// <summary>
     /// Elevation Api.
     /// </summary>
-    public sealed class ElevationApi : HttpEngine<ElevationRequest, ElevationResponse>
+    public sealed class ElevationApi : HttpEngine<ElevationRequest, ElevationResponse>, IElevationApi
     {
         /// <summary>
         /// Constructor.
@@ -243,7 +246,7 @@ public partial class GoogleMaps
     /// <summary>
     /// Geolocation Api.
     /// </summary>
-    public sealed class GeolocationApi : HttpEngine<GeolocationRequest, GeolocationResponse>
+    public sealed class GeolocationApi : HttpEngine<GeolocationRequest, GeolocationResponse>, IGeolocationApi
     {
         /// <summary>
         /// Constructor.
@@ -268,7 +271,7 @@ public partial class GoogleMaps
     /// <summary>
     /// Street View Api.
     /// </summary>
-    public sealed class StreetViewApi : HttpEngine<StreetViewRequest, StreetViewResponse>
+    public sealed class StreetViewApi : HttpEngine<StreetViewRequest, StreetViewResponse>, IStreetViewApi
     {
         /// <summary>
         /// Constructor.
@@ -292,7 +295,7 @@ public partial class GoogleMaps
     /// <summary>
     /// Static Maps Api.
     /// </summary>
-    public sealed class StaticMapsApi : HttpEngine<StaticMapsRequest, StaticMapsResponse>
+    public sealed class StaticMapsApi : HttpEngine<StaticMapsRequest, StaticMapsResponse>, IStaticMapsApi
     {
         /// <summary>
         /// Constructor.
@@ -316,7 +319,7 @@ public partial class GoogleMaps
     /// <summary>
     /// Time Zone Api.
     /// </summary>
-    public sealed class TimeZoneApi : HttpEngine<TimeZoneRequest, TimeZoneResponse>
+    public sealed class TimeZoneApi : HttpEngine<TimeZoneRequest, TimeZoneResponse>, ITimeZoneApi
     {
         /// <summary>
         /// Constructor.
@@ -342,7 +345,7 @@ public partial class GoogleMaps
         /// <summary>
         /// Address Geocode Api.
         /// </summary>
-        public sealed class AddressGeocodeApi : HttpEngine<AddressGeocodeRequest, GeocodeResponse>
+        public sealed class AddressGeocodeApi : HttpEngine<AddressGeocodeRequest, GeocodeResponse>, IAddressGeocodeApi
         {
             /// <summary>
             /// Constructor.
@@ -366,7 +369,7 @@ public partial class GoogleMaps
         /// <summary>
         /// Location Geocode Api.
         /// </summary>
-        public sealed class LocationGeocodeApi : HttpEngine<LocationGeocodeRequest, GeocodeResponse>
+        public sealed class LocationGeocodeApi : HttpEngine<LocationGeocodeRequest, GeocodeResponse>, ILocationGeocodeApi
         {
             /// <summary>
             /// Constructor.
@@ -390,7 +393,7 @@ public partial class GoogleMaps
         /// <summary>
         /// Place Geocode Api.
         /// </summary>
-        public sealed class PlaceGeocodeApi : HttpEngine<PlaceGeocodeRequest, GeocodeResponse>
+        public sealed class PlaceGeocodeApi : HttpEngine<PlaceGeocodeRequest, GeocodeResponse>, IPlaceGeocodeApi
         {
             /// <summary>
             /// Constructor.
@@ -414,7 +417,7 @@ public partial class GoogleMaps
         /// <summary>
         /// Plus Code Geocode Api.
         /// </summary>
-        public sealed class PlusCodeGeocodeApi : HttpEngine<PlusCodeGeocodeRequest, PlusCodeGeocodeResponse>
+        public sealed class PlusCodeGeocodeApi : HttpEngine<PlusCodeGeocodeRequest, PlusCodeGeocodeResponse>, IPlusCodeGeocodeApi
         {
             /// <summary>
             /// Constructor.
@@ -441,7 +444,7 @@ public partial class GoogleMaps
         /// <summary>
         /// Snap To Road Api.
         /// </summary>
-        public sealed class SnapToRoadApi : HttpEngine<SnapToRoadsRequest, SnapToRoadsResponse>
+        public sealed class SnapToRoadApi : HttpEngine<SnapToRoadsRequest, SnapToRoadsResponse>, ISnapToRoadApi
         {
             /// <summary>
             /// Constructor.
@@ -465,7 +468,7 @@ public partial class GoogleMaps
         /// <summary>
         /// Nearest Roads Api.
         /// </summary>
-        public sealed class NearestRoadsApi : HttpEngine<NearestRoadsRequest, NearestRoadsResponse>
+        public sealed class NearestRoadsApi : HttpEngine<NearestRoadsRequest, NearestRoadsResponse>, INearestRoadsApi
         {
             /// <summary>
             /// Constructor.
@@ -489,7 +492,7 @@ public partial class GoogleMaps
         /// <summary>
         /// Speed Limits Api.
         /// </summary>
-        public sealed class SpeedLimitsApi : HttpEngine<SpeedLimitsRequest, SpeedLimitsResponse>
+        public sealed class SpeedLimitsApi : HttpEngine<SpeedLimitsRequest, SpeedLimitsResponse>, ISpeedLimitsApi
         {
             /// <summary>
             /// Constructor.
