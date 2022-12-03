@@ -124,6 +124,11 @@ public enum FieldTypes
     Business_Status = 1 << 23,
 
     /// <summary>
+    /// Editorial Summary (billing: atmosphere)
+    /// </summary>
+    Editorial_Summary = 1 << 24,
+
+    /// <summary>
     /// Basic (all).
     /// </summary>
     Basic = Address_Component| Adr_Address | Formatted_Address | Geometry | Icon | Id | Name | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity | Business_Status,
@@ -136,5 +141,5 @@ public enum FieldTypes
     /// <summary>
     /// Atmosphere (all).
     /// </summary>
-    Atmosphere = Price_Level | Rating | User_Ratings_Total | Review
+    Atmosphere = Editorial_Summary | Price_Level | Rating | User_Ratings_Total | Review
 }
