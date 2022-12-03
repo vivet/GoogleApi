@@ -32,5 +32,11 @@ public enum RadioType
     /// Wcdma.
     /// </summary>
     [EnumMember(Value = "wcdma")]
-    Wcdma
+    Wcdma,
+
+    /// <summary>
+    /// Nr.
+    /// </summary>
+    [EnumMember(Value = "nr")]
+    Nr,
 }
