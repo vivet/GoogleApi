@@ -19,6 +19,12 @@ public class SortExpressionJsonConverter : JsonConverter<SortExpression>
     /// <inheritdoc />
     public override SortExpression Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
+        if (typeToConvert == null)
+            throw new ArgumentNullException(nameof(typeToConvert));
+
+        if (options == null)
+            throw new ArgumentNullException(nameof(options));
+
         return SortExpression.FromString(reader.GetString());
     }
 

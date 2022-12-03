@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Search.Video.Common.Enums;
 using GoogleApi.Entities.Search.Video.Videos.Request;
 using NUnit.Framework;
 
@@ -29,10 +28,6 @@ public class VideoSearchTests : BaseTest
         Assert.AreEqual(response.Kind, "youtube#searchListResponse");
         Assert.IsNotNull(response.ETag);
         Assert.IsNotNull(response.PageToken);
-
-        //NOTE: this check yields different outcome depending where the origin of the request comes from
-        //Assert.AreEqual(response.Region, Country.Denmark);
-
         Assert.AreEqual(response.PageInfo.TotalResults, 1000000);
         Assert.AreEqual(response.PageInfo.ResultsPerPage, 1);
 

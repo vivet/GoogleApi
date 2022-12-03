@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<TargetFrameworks>net461;net48;netstandard2.0;netstandard2.1;netcoreapp3.1;net6.0</TargetFrameworks>
+		<TargetFrameworks>net462;net48;netstandard2.0;netstandard2.1;netcoreapp3.1;net6.0;net7.0</TargetFrameworks>
 		<ApplicationIcon>.\..\icon.ico</ApplicationIcon>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<WarningsAsErrors />
@@ -21,7 +21,14 @@
 		<Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReleaseNotes>
-			- Added BusinessStatus.Future_Opening for Google Places.
+			- Removed support for .NET Framework 4.6.1
+			- Added .NET Framework 4.62 support
+			- Added .NET 7 support
+			- System.Text.Json serialization (Newtonsoft Json.NET removed)
+			- Added Language.Mizo
+			- Fixed typo in PlaceLocationType.Unknown
+			- Fixed typo in Maps.ErrorDetail.Domain
+			- Cosmetics code quality fixes.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
@@ -53,4 +60,8 @@
 		<None Include="icon.jpg" Pack="true" PackagePath="icon.jpg" />
 		<None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
 	</ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Serialization\" />
+  </ItemGroup>
 </Project>

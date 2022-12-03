@@ -39,9 +39,9 @@ public class GeocodingPlaceRequestTests
         Assert.AreEqual(languageExpected, language.Value);
 
         var location = queryStringParameters.SingleOrDefault(x => x.Key == "place_id");
-        var locationExpected = request.PlaceId;
+        var expected = request.PlaceId;
         Assert.IsNotNull(location);
-        Assert.AreEqual(locationExpected, location.Value);
+        Assert.AreEqual(expected, location.Value);
     }
 
     [Test]

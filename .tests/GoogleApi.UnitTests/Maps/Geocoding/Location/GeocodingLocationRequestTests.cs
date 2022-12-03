@@ -41,9 +41,9 @@ public class GeocodingLocationRequestTests
         Assert.AreEqual(languageExpected, language.Value);
 
         var location = queryStringParameters.SingleOrDefault(x => x.Key == "latlng");
-        var locationExpected = request.Location.ToString();
+        var expected = request.Location.ToString();
         Assert.IsNotNull(location);
-        Assert.AreEqual(locationExpected, location.Value);
+        Assert.AreEqual(expected, location.Value);
     }
 
     [Test]
@@ -104,10 +104,10 @@ public class GeocodingLocationRequestTests
         var queryStringParameters = request.GetQueryStringParameters();
         Assert.IsNotNull(queryStringParameters);
 
-        var locationType = queryStringParameters.SingleOrDefault(x => x.Key == "location_type");
-        var locationTypeExpected = string.Join("|", request.LocationTypes.Select(x => x.ToString().ToUpper()));
-        Assert.IsNotNull(locationType);
-        Assert.AreEqual(locationTypeExpected, locationType.Value);
+        var type = queryStringParameters.SingleOrDefault(x => x.Key == "location_type");
+        var typeExpected = string.Join("|", request.LocationTypes.Select(x => x.ToString().ToUpper()));
+        Assert.IsNotNull(type);
+        Assert.AreEqual(typeExpected, type.Value);
     }
 
     [Test]

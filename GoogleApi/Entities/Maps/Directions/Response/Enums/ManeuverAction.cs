@@ -7,11 +7,11 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums;
 /// <summary>
 /// Maneuver Action.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<ManeuverAction>))]
 public enum ManeuverAction
 {
     /// <summary>
-    /// Unknown.
+    /// None.
     /// </summary>
     None,
 

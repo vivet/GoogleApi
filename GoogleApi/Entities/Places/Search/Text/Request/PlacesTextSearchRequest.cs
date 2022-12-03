@@ -146,7 +146,7 @@ public class PlacesTextSearchRequest : BasePlacesRequest
                 var attribute = type.DeclaredMembers.FirstOrDefault(x => x.Name == this.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
 
                 if (attribute != null)
-                    parameters.Add("type", attribute.Value.ToLower());
+                    parameters.Add("type", attribute.Value?.ToLower());
             }
 
             if (this.OpenNow)

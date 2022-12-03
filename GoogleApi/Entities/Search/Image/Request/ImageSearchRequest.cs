@@ -35,16 +35,16 @@ public class ImageSearchRequest : WebSearchRequest
         parameters.Add("searchType", this.SearchType.ToString().ToLower());
 
         if (this.ImageOptions.ImageType != null)
-            parameters.Add("imgType", this.ImageOptions.ImageType.ToString().ToLower());
+            parameters.Add("imgType", this.ImageOptions.ImageType.ToString()?.ToLower());
 
         if (this.ImageOptions.ImageSize != null)
-            parameters.Add("imgSize", this.ImageOptions.ImageSize.ToString().ToLower());
+            parameters.Add("imgSize", this.ImageOptions.ImageSize.ToString()?.ToLower());
 
         if (this.ImageOptions.ImageColorType != null)
-            parameters.Add("imgColorType", this.ImageOptions.ImageColorType.ToString().ToLower());
+            parameters.Add("imgColorType", this.ImageOptions.ImageColorType.ToString()?.ToLower());
 
         if (this.ImageOptions.ImageDominantColor != null)
-            parameters.Add("imgDominantColor", this.ImageOptions.ImageDominantColor.ToString().ToLower());
+            parameters.Add("imgDominantColor", this.ImageOptions.ImageDominantColor.ToString()?.ToLower());
 
         return parameters;
     }

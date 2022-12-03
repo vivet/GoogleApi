@@ -64,9 +64,9 @@ public class AutoCompleteRequstTests
         Assert.IsNotNull(queryStringParameters);
 
         var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
-        var locationExpected = request.Location.ToString();
+        var expected = request.Location.ToString();
         Assert.IsNotNull(location);
-        Assert.AreEqual(locationExpected, location.Value);
+        Assert.AreEqual(expected, location.Value);
     }
 
     [Test]

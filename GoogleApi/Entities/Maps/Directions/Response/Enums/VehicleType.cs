@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Maps.Directions.Response.Enums;
 /// <summary>
 /// VehicleType.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<VehicleType>))]
 public enum VehicleType
 {
     /// <summary>

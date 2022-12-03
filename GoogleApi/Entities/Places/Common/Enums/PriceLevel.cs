@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Places.Common.Enums;
 /// <summary>
 /// Specifies the order in which results are listed for place searches.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<PriceLevel>))]
 public enum PriceLevel
 {
     /// <summary>

@@ -11,7 +11,7 @@ public class ErrorDetail
     /// The domain associated with the error.
     /// </summary>
     [JsonPropertyName("domain")]
-    public virtual string Doamin { get; set; }  //NOTE:  is this a typo?
+    public virtual string Domain { get; set; }
 
     /// <summary>
     /// The error reason.

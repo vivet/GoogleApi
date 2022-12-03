@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Places.Common.Enums;
 /// <summary>
 /// Scope.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<Scope>))]
 public enum Scope
 {
     /// <summary>

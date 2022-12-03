@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Search.Video.Common.Enums;
@@ -8,7 +7,7 @@ namespace GoogleApi.Entities.Search.Video.Common.Enums;
 /// <summary>
 /// Country.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<Country>))]
 public enum Country
 {
     /// <summary>

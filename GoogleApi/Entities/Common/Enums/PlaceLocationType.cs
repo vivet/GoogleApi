@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Common.Enums;
 /// https://developers.google.com/places/supported_types#table1
 /// https://developers.google.com/places/supported_types#table2
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<PlaceLocationType>))]
 public enum PlaceLocationType
 {
     /// <summary>

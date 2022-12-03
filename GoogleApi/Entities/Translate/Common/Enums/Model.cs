@@ -7,8 +7,7 @@ namespace GoogleApi.Entities.Translate.Common.Enums;
 /// <summary>
 /// The translation model.
 /// </summary>
-
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<Model>))]
 public enum Model
 {
     /// <summary>

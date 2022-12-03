@@ -113,9 +113,9 @@ public class TextSearchRequestTests
         Assert.AreEqual(radiusExpected, radius.Value);
 
         var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
-        var locationExpected = request.Location.ToString();
+        var expected = request.Location.ToString();
         Assert.IsNotNull(location);
-        Assert.AreEqual(locationExpected, location.Value);
+        Assert.AreEqual(expected, location.Value);
     }
 
     [Test]
@@ -133,7 +133,7 @@ public class TextSearchRequestTests
 
         var type = queryStringParameters.FirstOrDefault(x => x.Key == "type");
         var typeAttribute = request.Type?.GetType().GetMembers().FirstOrDefault(x => x.Name == request.Type.ToString())?.GetCustomAttribute<EnumMemberAttribute>();
-        var typeExpected = typeAttribute?.Value.ToLower();
+        var typeExpected = typeAttribute?.Value?.ToLower();
         Assert.IsNotNull(type);
         Assert.AreEqual(typeExpected, type.Value);
     }

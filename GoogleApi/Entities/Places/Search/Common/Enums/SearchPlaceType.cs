@@ -8,7 +8,7 @@ namespace GoogleApi.Entities.Places.Search.Common.Enums;
 /// Place Types
 /// https://developers.google.com/places/supported_types#table1
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<SearchPlaceType>))]
 public enum SearchPlaceType
 {
     /// <summary>

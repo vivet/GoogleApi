@@ -4,17 +4,13 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-
 using AutoFixture;
-
 using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common.Converters;
 using GoogleApi.Exceptions;
-
-
 using NUnit.Framework;
 
 using RichardSzalay.MockHttp;
@@ -26,19 +22,19 @@ public sealed class HttpEngineTests
 {
     private const string APPLICATION_JSON = "application/json";
 
-    private static System.Text.Json.JsonSerializerOptions _options = new System.Text.Json.JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true,
-                        MaxDepth = 100,
-                        DefaultIgnoreCondition =  JsonIgnoreCondition.WhenWritingDefault,
-                        Converters = {
-                            new BooleanJsonConverter(),
-                            new CustomJsonStringEnumConverter(JsonNamingPolicy.CamelCase, true),
-                            new SortExpressionJsonConverter()
-                        },
-                        ReferenceHandler = ReferenceHandler.Preserve,
-                        NumberHandling = JsonNumberHandling.AllowReadingFromString
-                    };
+    private static readonly JsonSerializerOptions jsonSerializerOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        Converters = {
+            new BooleanJsonConverter(),
+            new CustomJsonStringEnumConverter(JsonNamingPolicy.CamelCase, true),
+            new SortExpressionJsonConverter()
+        },
+        ReferenceHandler = ReferenceHandler.Preserve,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString
+    };
 
     private readonly IFixture fixture = new Fixture();
     private MockHttpMessageHandler mockHttpMessageHandler;
@@ -72,7 +68,7 @@ public sealed class HttpEngineTests
             status = "OK",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -101,7 +97,7 @@ public sealed class HttpEngineTests
             status = "OK",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -130,7 +126,7 @@ public sealed class HttpEngineTests
             status = "OK",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -182,7 +178,7 @@ public sealed class HttpEngineTests
             status = "NOT_FOUND",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -211,7 +207,7 @@ public sealed class HttpEngineTests
             status = "ZERO_RESULTS",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -240,7 +236,7 @@ public sealed class HttpEngineTests
             status = "OVER_QUERY_LIMIT",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -268,7 +264,7 @@ public sealed class HttpEngineTests
             status = "INVALID_REQUEST",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -296,7 +292,7 @@ public sealed class HttpEngineTests
             status = "NO_API_KEY",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -325,7 +321,7 @@ public sealed class HttpEngineTests
             status = "REQUEST_DENIED",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -353,7 +349,7 @@ public sealed class HttpEngineTests
             status = "HTTP_ERROR",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")
@@ -382,7 +378,7 @@ public sealed class HttpEngineTests
             status = "UNKNOWN_ERROR",
             data = new { }
         };
-        var response = JsonSerializer.Serialize(data, _options);
+        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
 
         this.mockHttpMessageHandler
             .When("https://demo.googleapis.com/fakeservice/*")

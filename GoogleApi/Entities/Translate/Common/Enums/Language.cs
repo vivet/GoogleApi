@@ -1,6 +1,5 @@
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Translate.Common.Enums.Converters;
 
 namespace GoogleApi.Entities.Translate.Common.Enums;
@@ -11,7 +10,7 @@ namespace GoogleApi.Entities.Translate.Common.Enums;
 /// These languages are specified within a recognition request using language code parameters as noted on this page.
 /// Most language code parameters conform to ISO-639-1 identifiers, except where noted.
 /// </summary>
-[JsonConverter(typeof(CustomLanguageJsonStringEnumConverter))]
+[JsonConverter(typeof(LanguageEnumConverter))]
 public enum Language
 {
     /// <summary>
@@ -311,8 +310,14 @@ public enum Language
     /// <summary>
     /// Javanese.
     /// </summary>
-    [EnumMember(Value = "jw")]
+    [EnumMember(Value = "jv")]
     Javanese,
+
+    /// <summary>
+    /// Javanese.
+    /// </summary>
+    [EnumMember(Value = "jw")]
+    JavaneseAlternative,
 
     /// <summary>
     /// Kannada.
@@ -840,7 +845,5 @@ public enum Language
     /// Manipuri.
     /// </summary>
     [EnumMember(Value = "mni-Mtei")]
-    Manipuri,
-
-
+    Manipuri
 }

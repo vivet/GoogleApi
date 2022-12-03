@@ -11,7 +11,7 @@ namespace GoogleApi.Entities.Search.Common.Enums;
 /// The following list identifies all of the interface languages that Google supports.
 /// https://developers.google.com/custom-search/docs/xml_results_appendices#interfaceLanguages
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<Language>))]
 public enum Language
 {
     /// <summary>

@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Common.Enums;
 /// <summary>
 /// Response status.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<Status>))]
 public enum Status
 {
     /// <summary>

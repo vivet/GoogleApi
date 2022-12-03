@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Converters;
@@ -17,29 +16,38 @@ namespace GoogleApi;
 
 /// <summary>
 /// Http Engine.
+/// </summary>
+public class HttpEngine
+{
+    /// <summary>
+    /// Json Serializer Options.
+    /// </summary>
+    protected static readonly JsonSerializerOptions jsonSerializerOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+        Converters = 
+        {
+            new BooleanJsonConverter(),
+            new CustomJsonStringEnumConverter(JsonNamingPolicy.CamelCase, true),
+            new SortExpressionJsonConverter()
+        },
+        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString
+    };
+}
+
+/// <summary>
+/// Http Engine.
 /// Manages the http connections, and is responsible for invoking request and handling responses.
 /// </summary>
 /// <typeparam name="TRequest"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
-public class HttpEngine<TRequest, TResponse>
+public class HttpEngine<TRequest, TResponse> : HttpEngine
     where TRequest : IRequest, new()
     where TResponse : IResponse, new()
 {
     private readonly HttpClient httpClient;
-
-    private static JsonSerializerOptions _options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                MaxDepth = 100,
-                DefaultIgnoreCondition =  JsonIgnoreCondition.WhenWritingDefault,
-                Converters = {
-                    new BooleanJsonConverter(),
-                    new CustomJsonStringEnumConverter(JsonNamingPolicy.CamelCase, true),
-                    new SortExpressionJsonConverter()
-                },
-                ReferenceHandler = ReferenceHandler.Preserve,
-                NumberHandling = JsonNumberHandling.AllowReadingFromString
-            };
 
     /// <summary>
     /// Constructor.
@@ -95,9 +103,9 @@ public class HttpEngine<TRequest, TResponse>
                     };
 
                 default:
-                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"} | {request.GetUri().StripApiKey()}")
+                    throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
                     {
-                        Status = response.Status,
+                        Status = response.Status
                     };
             }
         }
@@ -106,7 +114,7 @@ public class HttpEngine<TRequest, TResponse>
             if (ex is GoogleApiException)
                 throw;
 
-            throw new GoogleApiException($"{ex.Message}|{request.GetUri().StripApiKey()}", ex);
+            throw new GoogleApiException(ex.Message, ex);
         }
     }
 
@@ -130,7 +138,8 @@ public class HttpEngine<TRequest, TResponse>
                 {
                     if (x.IsCanceled)
                     {
-                        taskCompletion.SetCanceled();
+                        taskCompletion
+                            .SetCanceled();
                     }
                     else if (x.IsFaulted)
                     {
@@ -197,7 +206,8 @@ public class HttpEngine<TRequest, TResponse>
                 {
                     if (x.IsCanceled)
                     {
-                        taskCompletion.SetCanceled();
+                        taskCompletion
+                            .SetCanceled();
                     }
                     else if (x.IsFaulted)
                     {
@@ -268,7 +278,7 @@ public class HttpEngine<TRequest, TResponse>
             return this.httpClient.GetAsync(uri).Result;
         }
 
-        var serializeObject = JsonSerializer.Serialize(request, _options);
+        var serializeObject = JsonSerializer.Serialize(request, HttpEngine.jsonSerializerOptions);
 
         using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
         {
@@ -302,14 +312,14 @@ public class HttpEngine<TRequest, TResponse>
                     var rawJson = httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
                     var rawStream = (httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)).GetAwaiter().GetResult();
-                    response = JsonSerializer.DeserializeAsync<TResponse>(rawStream, _options).ConfigureAwait(false).GetAwaiter().GetResult()
+                    response = JsonSerializer.DeserializeAsync<TResponse>(rawStream, HttpEngine.jsonSerializerOptions).ConfigureAwait(false).GetAwaiter().GetResult()
                         ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
                     response.RawJson = rawJson;
                     break;
             }
 
-            response.RawQueryString = httpResponse.RequestMessage.RequestUri.PathAndQuery;
+            response.RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery;
             response.Status = httpResponse.IsSuccessStatusCode
                 ? response.Status ?? Status.Ok
                 : Status.HttpError;
@@ -322,22 +332,28 @@ public class HttpEngine<TRequest, TResponse>
         if (request == null)
             throw new ArgumentNullException(nameof(request));
 
-        var uri = request.GetUri();
+        var uri = request
+            .GetUri();
 
         if (request is IRequestQueryString)
         {
-            return await this.httpClient.GetAsync(uri, cancellationToken).ConfigureAwait(false);
+            return await this.httpClient
+                .GetAsync(uri, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        var serializeObject = JsonSerializer.Serialize(request, _options);
+        var serializeObject = JsonSerializer.Serialize(request, HttpEngine.jsonSerializerOptions);
 
         using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
         {
-            var content = await stringContent.ReadAsStreamAsync().ConfigureAwait(false);
+            var content = await stringContent
+                .ReadAsStreamAsync()
+                .ConfigureAwait(false);
 
             using var streamContent = new StreamContent(content);
             {
-                return await this.httpClient.PostAsync(uri, streamContent, cancellationToken).ConfigureAwait(false);
+                return await this.httpClient
+                    .PostAsync(uri, streamContent, cancellationToken).ConfigureAwait(false);
             }
         }
     }
@@ -364,28 +380,19 @@ public class HttpEngine<TRequest, TResponse>
                     var rawJson = httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
                     var rawStream = (httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false)).GetAwaiter().GetResult();
-                    response = JsonSerializer.DeserializeAsync<TResponse>(rawStream, _options).ConfigureAwait(false).GetAwaiter().GetResult()
+                    response = JsonSerializer.DeserializeAsync<TResponse>(rawStream, HttpEngine.jsonSerializerOptions).ConfigureAwait(false).GetAwaiter().GetResult()
                         ?? throw new GoogleApiException($"[{nameof(response)}] was null");
 
                     response.RawJson = rawJson;
                     break;
             }
 
-            response.RawQueryString = httpResponse.RequestMessage.RequestUri.PathAndQuery;
+            response.RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery;
             response.Status = httpResponse.IsSuccessStatusCode
                 ? response.Status ?? Status.Ok
                 : Status.HttpError;
 
             return response;
         }
-    }
-}
-
-internal static class UriExtensions
-{
-    internal static Uri StripApiKey(this Uri subject)
-    {
-        subject = new Uri(Regex.Replace(subject.AbsoluteUri, "(key=([^&]*))", "key=[redacted]", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Singleline | RegexOptions.Compiled));
-        return subject;
     }
 }

@@ -93,11 +93,11 @@ public class PlacesFindSearchRequest : BasePlacesRequest
 
         if (this.Location != null)
         {
-            var locationBias = this.Radius.HasValue
+            var bias = this.Radius.HasValue
                 ? $"circle:{this.Radius}@{this.Location}"
                 : $"point:{this.Location}";
 
-            parameters.Add("locationbias", locationBias);
+            parameters.Add("locationbias", bias);
         }
         else if (this.Bounds != null)
         {

@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Search.Common.Enums;
 /// <summary>
 /// Country.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<Country>))]
 public enum Country
 {
     /// <summary>

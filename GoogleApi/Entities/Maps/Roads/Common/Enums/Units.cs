@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Maps.Roads.Common.Enums;
 /// <summary>
 /// Speed Units.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<Units>))]
 public enum Units
 {
     /// <summary>

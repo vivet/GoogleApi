@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Common.Enums;
@@ -8,7 +7,7 @@ namespace GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 /// <summary>
 /// Location Type.
 /// </summary>
-[JsonConverter(typeof(CustomJsonStringEnumConverter))]
+[JsonConverter(typeof(EnumConverter<GeometryLocationType>))]
 public enum GeometryLocationType
 {
     /// <summary>
