@@ -26,7 +26,7 @@ public static class ServiceCollectionExtensions
     /// </remarks>
     public static IServiceCollection AddGoogleApiClients(this IServiceCollection services)
     {
-        if (services == null) 
+        if (services == null)
             throw new ArgumentNullException(nameof(services));
 
         services
@@ -74,7 +74,7 @@ public static class ServiceCollectionExtensions
     }
 
     private static IServiceCollection AddApi<TService, TClient>(this IServiceCollection services)
-        where TClient : class, TService 
+        where TClient : class, TService
         where TService : class
     {
         services
@@ -83,7 +83,7 @@ public static class ServiceCollectionExtensions
             .SetHandlerLifetime(TimeSpan.FromMinutes(5));
 
         services
-            .AddSingleton<TService, TClient>();
+            .AddTransient<TService, TClient>();
 
         return services;
     }
