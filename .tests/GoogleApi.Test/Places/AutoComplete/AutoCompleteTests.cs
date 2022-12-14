@@ -161,6 +161,90 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
+    public void PlacesAutoCompleteWhenLocationBiasTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationBias = new Coordinate(1, 1)
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesAutoCompleteWhenLocationBiasAndRadiusTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationBias = new Coordinate(1, 1),
+            Radius = 50000
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesAutoCompleteWhenLocationBiasAndBoundsTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationBias = new Coordinate(1, 1),
+            Bounds = new ViewPort(new Coordinate(0, 0), new Coordinate(2, 2))
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesAutoCompleteWhenLocationRestrictionAndRadiusTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationRestriction = new Coordinate(55.69909907220505, 12.5540545836464),
+            Radius = 5000
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesAutoCompleteWhenLocationRestrictionAndBoundsTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationRestriction = new Coordinate(51.491431, -3.16668),
+            Bounds = new ViewPort(new Coordinate(50, -50), new Coordinate(5, -5))
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
     public void PlacesAutoCompleteWhenTypesTest()
     {
         var request = new PlacesAutoCompleteRequest

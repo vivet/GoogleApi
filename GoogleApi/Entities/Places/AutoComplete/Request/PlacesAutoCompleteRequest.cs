@@ -48,11 +48,6 @@ public class PlacesAutoCompleteRequest : BasePlacesRequest
     public virtual string SessionToken { get; set; }
 
     /// <summary>
-    /// The point around which you wish to retrieve Place information.
-    /// </summary>
-    public virtual Coordinate Location { get; set; }
-
-    /// <summary>
     /// The origin point from which to calculate straight-line distance to the destination (returned as distance_meters).
     /// If this value is omitted, straight-line distance will not be returned.
     /// Must be specified as latitude,longitude.
@@ -60,11 +55,37 @@ public class PlacesAutoCompleteRequest : BasePlacesRequest
     public virtual Coordinate Origin { get; set; }
 
     /// <summary>
+    /// The point around which you wish to retrieve Place information.
+    /// </summary>
+    public virtual Coordinate Location { get; set; }
+
+    /// <summary>
+    /// Prefer results in a specified area, by specifying either a radius plus lat/lng,
+    /// or two lat/lng pairs representing the points of a rectangle.
+    /// If this parameter is not specified, the API uses IP address biasing by default.
+    /// </summary>
+    public virtual Coordinate LocationBias { get; set; }
+
+    /// <summary>
+    /// Restrict results to a specified area, by specifying either a radius plus lat/lng,
+    /// or two lat/lng pairs representing the points of a rectangle.
+    /// </summary>
+    public virtual Coordinate LocationRestriction { get; set; }
+
+    /// <summary>
     /// The distance (in meters) within which to return Place results.
     /// Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
-    /// See Location Biasing below.
+    /// The radius is used either with <see cref="Location"/>, <see cref="LocationBias"/> or <see cref="LocationRestriction"/>, in that order.
     /// </summary>
     public virtual double? Radius { get; set; }
+
+    /// <summary>
+    /// Bounds (optional).
+    /// Sets the bias to the defined bounds. 'rectangle:south, west|north, east.'
+    /// Note that east/west values are wrapped to the range -180, 180, and north/south values are clamped to the range -90, 90.
+    /// The Bounds is used either with <see cref="LocationBias"/> or <see cref="LocationRestriction"/>.
+    /// </summary>
+    public virtual ViewPort Bounds { get; set; }
 
     /// <summary>
     /// Strictbounds.
@@ -121,19 +142,45 @@ public class PlacesAutoCompleteRequest : BasePlacesRequest
             parameters.Add("sessiontoken", this.SessionToken);
         }
 
-        if (this.Location != null)
+        if (this.Location != null && this.Radius.HasValue)
         {
             parameters.Add("location", this.Location.ToString());
+            parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
+        }
+        else if (this.LocationBias != null)
+        {
+            if (this.Radius.HasValue)
+            {
+                parameters.Add("locationbias", $"circle:{this.Radius}@{this.LocationBias}");
+            }
+            else if (this.Bounds != null)
+            { 
+                parameters.Add("locationbias", $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}");
+            }
+            else
+            {
+                parameters.Add($"point:{this.LocationBias}");
+            }
+        }
+        else if (this.LocationRestriction != null)
+        {
+            if (this.Radius.HasValue)
+            {
+                parameters.Add("locationrestriction", $"circle:{this.Radius}@{this.LocationRestriction}");
+            }
+            else if (this.Bounds != null)
+            {
+                parameters.Add("locationrestriction", $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}");
+            }
+        }
+        else
+        {
+            parameters.Add("ipbias");
         }
 
         if (this.Origin != null)
         {
             parameters.Add("origin", this.Origin.ToString());
-        }
-
-        if (this.Radius.HasValue)
-        {
-            parameters.Add("radius", this.Radius.Value.ToString(CultureInfo.InvariantCulture));
         }
 
         if (this.Strictbounds)
