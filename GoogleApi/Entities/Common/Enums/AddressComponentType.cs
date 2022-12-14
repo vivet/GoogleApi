@@ -268,5 +268,11 @@ public enum AddressComponentType
     /// See <see href="https://plus.codes"/> for details.
     /// </summary>
     [EnumMember(Value = "plus_code")]
-    Plus_Code
+    Plus_Code,
+
+    /// <summary>
+    /// Tourist Attracrtion.
+    /// </summary>
+    [EnumMember(Value = "tourist_attraction")]
+    Tourist_Attraction
 }
