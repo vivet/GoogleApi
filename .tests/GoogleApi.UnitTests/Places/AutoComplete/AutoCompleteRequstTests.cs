@@ -5,6 +5,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
+using GoogleApi.Entities.Places.Common;
 using NUnit.Framework;
 
 namespace GoogleApi.UnitTests.Places.AutoComplete;
@@ -51,25 +52,6 @@ public class AutoCompleteRequstTests
     }
 
     [Test]
-    public void GetQueryStringParametersWhenLocationTest()
-    {
-        var request = new PlacesAutoCompleteRequest
-        {
-            Key = "key",
-            Input = "input",
-            Location = new Coordinate(1, 1)
-        };
-
-        var queryStringParameters = request.GetQueryStringParameters();
-        Assert.IsNotNull(queryStringParameters);
-
-        var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
-        var expected = request.Location.ToString();
-        Assert.IsNotNull(location);
-        Assert.AreEqual(expected, location.Value);
-    }
-
-    [Test]
     public void GetQueryStringParametersWhenOriginTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -108,6 +90,31 @@ public class AutoCompleteRequstTests
     }
 
     [Test]
+    public void GetQueryStringParametersWhenRadiusLocationTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            Location = new Coordinate(1, 1),
+            Radius = 1000
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var location = queryStringParameters.FirstOrDefault(x => x.Key == "location");
+        var expected = request.Location.ToString();
+        Assert.IsNotNull(location);
+        Assert.AreEqual(expected, location.Value);
+
+        var radius = queryStringParameters.FirstOrDefault(x => x.Key == "radius");
+        var radiusExpected = request.Radius.ToString();
+        Assert.IsNotNull(radius);
+        Assert.AreEqual(radiusExpected, radius.Value);
+    }
+
+    [Test]
     public void GetQueryStringParametersWhenStrictBoundsTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -123,6 +130,138 @@ public class AutoCompleteRequstTests
         var strictbounds = queryStringParameters.FirstOrDefault(x => x.Key == "strictbounds");
         Assert.IsNotNull(strictbounds);
         Assert.Null(strictbounds.Value);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenLocationBiasAndIpBiasTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            LocationBias = new LocationBias
+            {
+                IpBias = true
+            }
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var ipBias = queryStringParameters.FirstOrDefault(x => x.Key == "ipbias");
+        Assert.IsNotNull(ipBias);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenLocationBiasAndPointTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            LocationBias = new LocationBias
+            {
+                Location = new Coordinate(1, 1)
+            }
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var bias = queryStringParameters.FirstOrDefault(x => x.Key == "locationbias");
+        var biasExpected = $"point:{request.LocationBias.Location}";
+        Assert.IsNotNull(bias);
+        Assert.AreEqual(biasExpected, bias.Value);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenLocationBiasAndCircleTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            LocationBias = new LocationBias
+            {
+                Location = new Coordinate(1, 1),
+                Radius = 1000
+            }
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var bias = queryStringParameters.FirstOrDefault(x => x.Key == "locationbias");
+        var biasExpected = $"circle:{request.LocationBias.Radius}@{request.LocationBias.Location}";
+        Assert.IsNotNull(bias);
+        Assert.AreEqual(biasExpected, bias.Value);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenLocationBiasAndRectangularTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            LocationBias = new LocationBias
+            {
+                Bounds = new ViewPort(new Coordinate(1, 1), new Coordinate(2, 2))
+            }
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var bias = queryStringParameters.FirstOrDefault(x => x.Key == "locationbias");
+        var biasExpected = $"rectangle:{request.LocationBias.Bounds.SouthWest}|{request.LocationBias.Bounds.NorthEast}";
+        Assert.IsNotNull(bias);
+        Assert.AreEqual(biasExpected, bias.Value);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenLocationRestrictionAndCircleTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            LocationRestriction = new LocationRestriction
+            {
+                Location = new Coordinate(1, 1),
+                Radius = 1000
+            }
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var bias = queryStringParameters.FirstOrDefault(x => x.Key == "locationrestriction");
+        var biasExpectedExpected = $"circle:{request.LocationRestriction.Radius}@{request.LocationRestriction.Location}";
+        Assert.IsNotNull(bias);
+        Assert.AreEqual(biasExpectedExpected, bias.Value);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenLocationRestrictionAndRectangularTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            LocationRestriction = new LocationRestriction
+            {
+                Bounds = new ViewPort(new Coordinate(1, 1), new Coordinate(2, 2))
+            }
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var restriction = queryStringParameters.FirstOrDefault(x => x.Key == "locationrestriction");
+        var restrictionExpected = $"rectangle:{request.LocationRestriction.Bounds.SouthWest}|{request.LocationRestriction.Bounds.NorthEast}";
+        Assert.IsNotNull(restriction);
+        Assert.AreEqual(restrictionExpected, restriction.Value);
     }
 
     [Test]

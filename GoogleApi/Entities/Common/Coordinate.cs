@@ -34,6 +34,6 @@ public class Coordinate
     /// <inheritdoc />
     public override string ToString()
     {
-        return $"{this.Latitude.ToString(CultureInfo.InvariantCulture)},{this.Longitude.ToString(CultureInfo.InvariantCulture)}";
+        return $"{((decimal)this.Latitude).ToString(CultureInfo.InvariantCulture)},{((decimal)this.Longitude).ToString(CultureInfo.InvariantCulture)}";
     }
 }

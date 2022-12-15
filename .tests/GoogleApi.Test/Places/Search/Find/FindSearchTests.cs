@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
 using NUnit.Framework;
@@ -110,47 +111,119 @@ public class FindSearchTests : BaseTest
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationTest()
+    public void PlacesFindSearchWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesFindSearchRequest
         {
             Key = this.Settings.ApiKey,
-            Input = "picadelly circus",
-            Location = new Coordinate(51.5100913, -0.1345676)
+            Input = "jagtvej 2200 København",
+            LocationBias = new LocationBias
+            {
+                IpBias = true
+            }
         };
 
         var response = GooglePlaces.Search.FindSearch.Query(request);
+
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationAndRadiusTest()
+    public void PlacesFindSearchWhenLocationBiasAndPointTest()
+    {
+        Assert.Inconclusive("Documentation states that 'point' bias is possible, but Google returns invalid request");
+
+        //var request = new PlacesFindSearchRequest
+        //{
+        //    Key = this.Settings.ApiKey,
+        //    Input = "jagtvej 2200 København",
+        //    LocationBias = new LocationBias
+        //    {
+        //        Location = new Coordinate(55.69987296762697, 12.552359427579363)
+        //    }
+        //};
+
+        //var response = GooglePlaces.AutoComplete.Query(request);
+
+        //Assert.IsNotNull(response);
+        //Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesFindSearchWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesFindSearchRequest
         {
             Key = this.Settings.ApiKey,
-            Input = "picadelly circus",
-            Location = new Coordinate(51.5100913, -0.1345676),
-            Radius = 5000
+            Input = "jagtvej 2200 København",
+            LocationBias = new LocationBias
+            {
+                Location = new Coordinate(1, 1),
+                Radius = 1000
+            }
         };
 
         var response = GooglePlaces.Search.FindSearch.Query(request);
+
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchWhenBoundsTest()
+    public void PlacesFindSearchWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesFindSearchRequest
         {
             Key = this.Settings.ApiKey,
-            Input = "new york",
-            Bounds = new ViewPort(new Coordinate(51.5100913, -0.1345676), new Coordinate(50.5100913, -0.0345676))
+            Input = "jagtvej 2200 København",
+            LocationBias = new LocationBias
+            {
+                Bounds = new ViewPort(new Coordinate(1, 1), new Coordinate(2, 2))
+            }
         };
 
         var response = GooglePlaces.Search.FindSearch.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesFindSearchWhenLocationRestrictionAndCircleTest()
+    {
+        var request = new PlacesFindSearchRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationRestriction = new LocationRestriction
+            {
+                Location = new Coordinate(55.69987296762697, 12.552359427579363),
+                Radius = 50000
+            }
+        };
+
+        var response = GooglePlaces.Search.FindSearch.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesFindSearchWhenLocationRestrictionAndRectangularTest()
+    {
+        var request = new PlacesFindSearchRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationRestriction = new LocationRestriction
+            {
+                Bounds = new ViewPort(new Coordinate(54.69987296762697, 11.552359427579363), new Coordinate(56.69987296762697, 13.552359427579363))
+            }
+        };
+
+        var response = GooglePlaces.Search.FindSearch.Query(request);
+
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }

@@ -7,9 +7,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>4.3.2.0</AssemblyVersion>
-		<FileVersion>4.3.2.0</FileVersion>
-		<Version>4.3.2.0</Version>
+		<AssemblyVersion>4.4.0.0</AssemblyVersion>
+		<FileVersion>4.4.0.0</FileVersion>
+		<Version>4.4.0.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -23,6 +23,8 @@
 		<PackageReleaseNotes>
 			- Added missing AddressComponentType.Tourist_Attraction
 			- Implemented location-bias and location-restriction for Places Auto Complete
+			- Fixed location-bias and location-restriction for Places Search Find.
+			- Fixed issue where locations lat/lng was serialized to scientic number.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>

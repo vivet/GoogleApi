@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
 
 namespace GoogleApi.Entities.Places.Search.Find.Request;
@@ -49,28 +49,17 @@ public class PlacesFindSearchRequest : BasePlacesRequest
     public virtual FieldTypes Fields { get; set; } = FieldTypes.Place_Id;
 
     /// <summary>
-    /// Radius (optional).
-    /// Defines the radius of cirkular location bias.
-    /// Ignored if <see cref="Location"/> is null.
+    /// Prefer results in a specified area, by specifying either a radius plus lat/lng,
+    /// or two lat/lng pairs representing the points of a rectangle.
+    /// If this parameter is not specified, the API uses IP address biasing by default.
     /// </summary>
-    public virtual int? Radius { get; set; }
+    public virtual LocationBias LocationBias { get; set; }
 
     /// <summary>
-    /// Bounds (optional).
-    /// Sets the bias to the defined bounds. 'rectangle:south, west|north, east.'
-    /// Note that east/west values are wrapped to the range -180, 180, and north/south values are clamped to the range -90, 90.
-    /// Ignored if <see cref="Location "/> is not null.
+    /// Restrict results to a specified area, by specifying either a radius plus lat/lng,
+    /// or two lat/lng pairs representing the points of a rectangle.
     /// </summary>
-    public virtual ViewPort Bounds { get; set; }
-
-    /// <summary>
-    /// Location (optional).
-    /// The results are biased based on th location (point). If <see cref="Radius"/> is specified as well, the bias is a circle having the center on the location
-    /// and the radius in size.
-    /// - A single lat/lng coordinate.Use the following format: 'point:lat, lng'
-    /// - Circular: A string specifying radius in meters, plus lat/lng in decimal degrees. Format: 'circle:radius @lat, lng.'
-    /// </summary>
-    public virtual Coordinate Location { get; set; }
+    public virtual LocationRestriction LocationRestriction { get; set; }
 
     /// <inheritdoc />
     public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
@@ -91,21 +80,16 @@ public class PlacesFindSearchRequest : BasePlacesRequest
 
         parameters.Add("fields", fields.EndsWith(",") ? fields.Substring(0, fields.Length - 1) : fields);
 
-        if (this.Location != null)
+        var bias = this.LocationBias?.ToString();
+        if (bias != null)
         {
-            var bias = this.Radius.HasValue
-                ? $"circle:{this.Radius}@{this.Location}"
-                : $"point:{this.Location}";
-
             parameters.Add("locationbias", bias);
         }
-        else if (this.Bounds != null)
+
+        var restriction = this.LocationRestriction?.ToString();
+        if (restriction != null)
         {
-            parameters.Add("locationbias", $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}");
-        }
-        else
-        {
-            parameters.Add("locationbias", "ipbias");
+            parameters.Add("locationrestriction", restriction);
         }
 
         return parameters;

@@ -6,6 +6,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
+using GoogleApi.Entities.Places.Common;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.AutoComplete;
@@ -161,13 +162,16 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationBiasTest()
+    public void PlacesAutoCompleteWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "jagtvej 2200 København",
-            LocationBias = new Coordinate(1, 1)
+            LocationBias = new LocationBias
+            {
+                IpBias = true
+            }
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);
@@ -177,14 +181,38 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationBiasAndRadiusTest()
+    public void PlacesAutoCompleteWhenLocationBiasAndPointTest()
+    {
+        Assert.Inconclusive("Documentation states that 'point' bias is possible, but Google returns invalid request");
+
+        //var request = new PlacesAutoCompleteRequest
+        //{
+        //    Key = this.Settings.ApiKey,
+        //    Input = "jagtvej 2200 København",
+        //    LocationBias = new LocationBias
+        //    {
+        //        Location = new Coordinate(55.69987296762697, 12.552359427579363)
+        //    }
+        //};
+
+        //var response = GooglePlaces.AutoComplete.Query(request);
+
+        //Assert.IsNotNull(response);
+        //Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesAutoCompleteWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "jagtvej 2200 København",
-            LocationBias = new Coordinate(1, 1),
-            Radius = 50000
+            LocationBias = new LocationBias
+            {
+                Location = new Coordinate(1, 1),
+                Radius = 1000
+            }
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);
@@ -194,14 +222,16 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationBiasAndBoundsTest()
+    public void PlacesAutoCompleteWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "jagtvej 2200 København",
-            LocationBias = new Coordinate(1, 1),
-            Bounds = new ViewPort(new Coordinate(0, 0), new Coordinate(2, 2))
+            LocationBias = new LocationBias
+            {
+                Bounds = new ViewPort(new Coordinate(1, 1), new Coordinate(2, 2))
+            }
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);
@@ -211,14 +241,17 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationRestrictionAndRadiusTest()
+    public void PlacesAutoCompleteWhenLocationRestrictionAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "jagtvej 2200 København",
-            LocationRestriction = new Coordinate(55.69909907220505, 12.5540545836464),
-            Radius = 5000
+            LocationRestriction = new LocationRestriction
+            {
+                Location = new Coordinate(55.69987296762697, 12.552359427579363),
+                Radius = 50000
+            }
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);
@@ -228,14 +261,16 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationRestrictionAndBoundsTest()
+    public void PlacesAutoCompleteWhenLocationRestrictionAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "jagtvej 2200 København",
-            LocationRestriction = new Coordinate(51.491431, -3.16668),
-            Bounds = new ViewPort(new Coordinate(50, -50), new Coordinate(5, -5))
+            LocationRestriction = new LocationRestriction
+            {
+                Bounds = new ViewPort(new Coordinate(54.69987296762697, 11.552359427579363), new Coordinate(56.69987296762697, 13.552359427579363))
+            }
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);

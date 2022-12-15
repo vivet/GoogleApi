@@ -199,5 +199,4 @@ public class TextSearchTests : BaseTest
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
-
 }
