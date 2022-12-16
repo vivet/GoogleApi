@@ -26,6 +26,7 @@
 			- Added custom converter for AddressComponentType and PlaceLocationType, to avoid serialization errors. Returning unknown now.
 			- Fixed missing enum converters factories, for properly defaulting unknow values.
 			- Refactored converter factories into one generic factory.
+			- Cosmetics fixes.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
