@@ -4,7 +4,6 @@
 	<TargetFrameworks>net462;net48;netcoreapp3.1;net6.0;net7.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
-	<Nullable>disable</Nullable>
 	<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 

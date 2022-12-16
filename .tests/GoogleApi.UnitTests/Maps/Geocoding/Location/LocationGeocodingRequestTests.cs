@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace GoogleApi.UnitTests.Maps.Geocoding.Location;
 
 [TestFixture]
-public class GeocodingLocationRequestTests
+public class LocationGeocodingRequestTests
 {
     [Test]
     public void ConstructorDefaultTest()
@@ -74,8 +74,8 @@ public class GeocodingLocationRequestTests
             Location = new Coordinate(1, 1),
             ResultTypes = new[]
             {
-                PlaceLocationType.Accounting,
-                PlaceLocationType.Administrative_Area_Level_1
+                LocationResultType.Administrative_Area_Level_1,
+                LocationResultType.Administrative_Area_Level_2
             }
         };
 

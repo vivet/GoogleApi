@@ -18,7 +18,7 @@ public class LocationGeocodeTests : BaseTest
         var request = new LocationGeocodeRequest
         {
             Key = this.Settings.ApiKey,
-            Location = new Coordinate(40.7141289, -73.9614074)
+            Location = new Coordinate(38.1864717,-109.9743631)
         };
 
         var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
@@ -49,10 +49,9 @@ public class LocationGeocodeTests : BaseTest
         {
             Key = this.Settings.ApiKey,
             Location = new Coordinate(40.7141289, -73.9614074),
-            ResultTypes = new List<PlaceLocationType>
+            ResultTypes = new List<LocationResultType>
             {
-                PlaceLocationType.Premise,
-                PlaceLocationType.Accounting
+                LocationResultType.Street_Address
             }
         };
         var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
@@ -68,9 +67,9 @@ public class LocationGeocodeTests : BaseTest
         {
             Key = this.Settings.ApiKey,
             Location = new Coordinate(40.7141289, -73.9614074),
-            ResultTypes = new List<PlaceLocationType>
+            ResultTypes = new List<LocationResultType>
             {
-                PlaceLocationType.Accounting
+                LocationResultType.Administrative_Area_Level_7
             }
         };
         var response = GoogleMaps.Geocode.LocationGeocode.Query(request);

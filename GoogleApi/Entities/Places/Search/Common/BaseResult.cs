@@ -93,5 +93,5 @@ public abstract class BaseResult
     /// Types contains an array of feature types describing the given result. See the list of supported types for more information.
     /// XML responses include multiple type elements if more than one type is assigned to the result.
     /// </summary>
-    public virtual IEnumerable<PlaceLocationType?> Types { get; set; }
+    public virtual IEnumerable<PlaceLocationType> Types { get; set; }
 }

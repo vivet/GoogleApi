@@ -22,11 +22,11 @@ public class JsonNamingPolicyDecorator : JsonNamingPolicy
     /// <inheritdoc />
     public override string ConvertName(string name)
     {
-        if (name == null) 
+        if (name == null)
             throw new ArgumentNullException(nameof(name));
         
-        return underlyingNamingPolicy == null 
-            ? name 
+        return underlyingNamingPolicy == null
+            ? name
             : underlyingNamingPolicy
                 .ConvertName(name);
     }

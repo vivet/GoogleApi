@@ -29,7 +29,7 @@ public sealed class HttpEngineTests
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         Converters = {
             new BooleanJsonConverter(),
-            new CustomJsonStringEnumConverter(JsonNamingPolicy.CamelCase, true),
+            new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true),
             new SortExpressionJsonConverter()
         },
         ReferenceHandler = ReferenceHandler.Preserve,

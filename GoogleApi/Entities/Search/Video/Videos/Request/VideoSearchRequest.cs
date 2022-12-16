@@ -71,10 +71,10 @@ public class VideoSearchRequest : BaseVideoSearchRequest
             parameters.Add("relatedToVideoId", this.RelatedToVideoId);
 
         if (this.EventType.HasValue)
-            parameters.Add("eventType", this.EventType.ToString()?.ToLower());
+            parameters.Add("eventType", this.EventType.ToString().ToLower());
 
         if (this.ChannelType.HasValue)
-            parameters.Add("channelType", this.ChannelType.ToString()?.ToLower());
+            parameters.Add("channelType", this.ChannelType.ToString().ToLower());
 
         parameters.Add("videoCaption", this.Options.VideoCaption.ToString().ToLower());
         parameters.Add("videoDefinition", this.Options.VideoDefinition.ToString().ToLower());

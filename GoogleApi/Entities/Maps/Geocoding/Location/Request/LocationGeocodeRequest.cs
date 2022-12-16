@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 
@@ -28,7 +27,7 @@ public class LocationGeocodeRequest : BaseGeocodeRequest
     /// then discards those results that do not match the specified address type(s).
     /// Note: This parameter is available only for requests that include an API key or a client ID.
     /// </summary>
-    public virtual IEnumerable<PlaceLocationType> ResultTypes { get; set; } = new List<PlaceLocationType>();
+    public virtual IEnumerable<LocationResultType> ResultTypes { get; set; } = new List<LocationResultType>();
 
     /// <summary>
     /// location_type — A filter of one or more location types, separated by a pipe (|).

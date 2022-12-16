@@ -10,7 +10,7 @@ public class LocationRestriction
 {
     /// <summary>
     /// Location used for circle restriction.
-    /// <see cref="Location"/> takes precedence over <see cref="Bounds"/>. 
+    /// <see cref="Location"/> takes precedence over <see cref="Bounds"/>.
     /// </summary>
     public virtual Coordinate Location { get; set; }
 
@@ -34,7 +34,7 @@ public class LocationRestriction
         {
             if (this.Radius.HasValue)
             {
-                return $"circle:{Radius}@{this.Location}";
+                return $"circle:{this.Radius}@{this.Location}";
             }
         }
         else if (this.Bounds != null)

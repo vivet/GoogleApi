@@ -13,7 +13,7 @@ public class DateRestrictJsonConverter : JsonConverter<DateRestrict>
     /// <inheritdoc />
     public override bool CanConvert(Type objectType)
     {
-        if (objectType == null) 
+        if (objectType == null)
             throw new ArgumentNullException(nameof(objectType));
         
         return objectType == typeof(DateRestrict);

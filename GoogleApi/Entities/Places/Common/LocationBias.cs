@@ -11,7 +11,7 @@ public class LocationBias
 {
     /// <summary>
     /// Coordinate used for circle and point bias.
-    /// <see cref="Location"/> takes precedence over <see cref="Bounds"/>. 
+    /// <see cref="Location"/> takes precedence over <see cref="Bounds"/>.
     /// </summary>
     public virtual Coordinate Location { get; set; }
 
@@ -31,21 +31,21 @@ public class LocationBias
     /// <summary>
     /// Instructs the API to use IP address biasing.
     /// Pass the string ipbias (this option has no additional parameters).
-    /// <see cref="IpBias"/> takes precedence over <see cref="Location"/> and <see cref="Bounds"/>. 
+    /// <see cref="IpBias"/> takes precedence over <see cref="Location"/> and <see cref="Bounds"/>.
     /// </summary>
     public virtual bool IpBias { get; set; } = false;
 
     /// <inheritdoc />
     public override string ToString()
     {
-        return this.IpBias 
-            ? "ipbias" 
-            : this.Location != null 
+        return this.IpBias
+            ? "ipbias"
+            : this.Location != null
                 ? this.Radius.HasValue
                     ? $"circle:{this.Radius}@{this.Location}"
-                    : $"point:{this.Location}" 
-                : this.Bounds != null 
-                    ? $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}" 
+                    : $"point:{this.Location}"
+                : this.Bounds != null
+                    ? $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}"
                     : null;
     }
 }

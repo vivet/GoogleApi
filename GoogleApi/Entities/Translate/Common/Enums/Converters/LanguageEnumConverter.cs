@@ -11,14 +11,14 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Converters;
 public class LanguageEnumConverter : EnumConverter<Language>
 {
     /// <inheritdoc />
-    public LanguageEnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions) 
+    public LanguageEnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : base(converterOptions, serializerOptions)
     {
 
     }
 
     /// <inheritdoc />
-    public LanguageEnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions) 
+    public LanguageEnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
         : base(converterOptions, namingPolicy, serializerOptions)
     {
 
@@ -27,24 +27,19 @@ public class LanguageEnumConverter : EnumConverter<Language>
     /// <inheritdoc />
     public override Language Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (typeToConvert == null) 
+        if (typeToConvert == null)
             throw new ArgumentNullException(nameof(typeToConvert));
         
-        if (options == null) 
+        if (options == null)
             throw new ArgumentNullException(nameof(options));
         
         try
         {
             return base.Read(ref reader, typeToConvert, options);
         }
-        catch (JsonException ex)
+        catch (JsonException)
         {
-            if (ex.Message.Contains($"Could not parse {nameof(Language)}"))
-            {
-                return Language.Unsupported;
-            }
-
-            throw;
+            return Language.Unsupported;
         }
     }
 }

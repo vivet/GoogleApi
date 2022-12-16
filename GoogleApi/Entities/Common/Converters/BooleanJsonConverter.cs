@@ -14,10 +14,10 @@ public class BooleanJsonConverter : JsonConverter<bool>
     /// <inheritdoc />
     public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (typeToConvert == null) 
+        if (typeToConvert == null)
             throw new ArgumentNullException(nameof(typeToConvert));
         
-        if (options == null) 
+        if (options == null)
             throw new ArgumentNullException(nameof(options));
 
         try
@@ -28,11 +28,11 @@ public class BooleanJsonConverter : JsonConverter<bool>
         {
             var boolString = reader
                 .GetString();
-            
-            var value = boolString == "0" 
-                ? bool.FalseString 
+
+            var value = boolString == "0"
+                ? bool.FalseString
                 : bool.TrueString;
-            
+
             bool.TryParse(value, out var result);
 
             return result;
@@ -42,14 +42,14 @@ public class BooleanJsonConverter : JsonConverter<bool>
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
     {
-        if (writer == null) 
+        if (writer == null)
             throw new ArgumentNullException(nameof(writer));
         
-        if (options == null) 
+        if (options == null)
             throw new ArgumentNullException(nameof(options));
         
-        var result = value 
-            ? "1" 
+        var result = value
+            ? "1"
             : "0";
         
         writer

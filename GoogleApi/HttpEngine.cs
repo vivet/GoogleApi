@@ -10,7 +10,10 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Converters;
+using GoogleApi.Entities.Common.Enums.Converters;
 using GoogleApi.Entities.Search.Common.Converters;
+using GoogleApi.Entities.Translate.Common.Enums.Converters;
+using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi;
 
@@ -26,11 +29,14 @@ public class HttpEngine
     {
         PropertyNameCaseInsensitive = true,
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-        Converters = 
+        Converters =
         {
             new BooleanJsonConverter(),
-            new CustomJsonStringEnumConverter(JsonNamingPolicy.CamelCase, true),
-            new SortExpressionJsonConverter()
+            new EnumJsonConverterFactory<Language, LanguageEnumConverter>(JsonNamingPolicy.CamelCase, true),
+            new EnumJsonConverterFactory<PlaceLocationType, PlaceLocationTypeEnumConverter>(JsonNamingPolicy.CamelCase, true),
+            new EnumJsonConverterFactory<AddressComponentType, AddressComponentTypeEnumConverter>(JsonNamingPolicy.CamelCase, true),
+            new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true),
+            new SortExpressionJsonConverter(),
         },
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         NumberHandling = JsonNumberHandling.AllowReadingFromString

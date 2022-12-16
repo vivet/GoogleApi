@@ -22,7 +22,7 @@ public enum BusinessStatus
 
     //https://github.com/vivet/GoogleApi/issues/305
     /// <summary>
-    /// Future Opening. 
+    /// Future Opening.
     /// </summary>
     Future_Opening = 3
 }

@@ -81,7 +81,7 @@ public class MapMarker
         if (this.Size != null)
         {
             builder
-                .Append($"size:{this.Size.ToString()?.ToLower()}|");
+                .Append($"size:{this.Size.ToString().ToLower()}|");
         }
 
         if (this.Icon != null)
