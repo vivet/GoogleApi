@@ -278,7 +278,7 @@ public class AutoCompleteRequstTests
         Assert.IsNotNull(queryStringParameters);
 
         var region = queryStringParameters.FirstOrDefault(x => x.Key == "region");
-        var regionExpected = request.Offset;
+        var regionExpected = request.Region;
         Assert.IsNotNull(region);
         Assert.AreEqual(regionExpected, region.Value);
     }
