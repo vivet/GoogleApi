@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Maps.Geolocation.Request;
+﻿using static System.Collections.Specialized.BitVector32;
+
+namespace GoogleApi.Entities.Maps.Geolocation.Request;
 
 /// <summary>
 /// The request body's cellTowers array contains zero or more cell tower objects.
@@ -11,6 +13,12 @@ public class CellTower
     /// Specifying only the 16-bit Cell ID value in WCDMA networks may return inaccurate results.
     /// </summary>
     public virtual string CellId { get; set; }
+
+    /// <summary>
+    /// Required for radioType nr; rejected for other types.
+    /// See the Calculating newRadioCellId section below, which also lists the valid value range for the field.
+    /// </summary>
+    public virtual string NewRadioCellId { get; set; }
 
     /// <summary>
     /// Required. The Location Area Code (LAC) for GSM and WCDMAnetworks.

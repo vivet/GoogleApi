@@ -87,6 +87,14 @@ public class PlacesAutoCompleteRequest : BasePlacesRequest
     public virtual LocationRestriction LocationRestriction { get; set; }
 
     /// <summary>
+    /// The region code, specified as a ccTLD ("top-level domain") two-character value.
+    /// Most ccTLD codes are identical to ISO 3166-1 codes, with some notable exceptions.
+    /// For example, the United Kingdom's ccTLD is "uk" (.co.uk) while
+    /// its ISO 3166-1 code is "gb" (technically for the entity of "The United Kingdom of Great Britain and Northern Ireland").
+    /// </summary>
+    public virtual string Region { get; set; }
+
+    /// <summary>
     /// The language in which to return results. See the supported list of domain languages.
     /// Note that we often update supported languages so this list may not be exhaustive.
     /// If language is not supplied, the Place service will attempt to use the native language of the domain from which the request is sent.
@@ -164,6 +172,11 @@ public class PlacesAutoCompleteRequest : BasePlacesRequest
         if (restriction != null)
         {
             parameters.Add("locationrestriction", restriction);
+        }
+
+        if (!string.IsNullOrEmpty(this.Region))
+        {
+            parameters.Add("region", this.Region);
         }
 
         if (this.Types != null && this.Types.Any())

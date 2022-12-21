@@ -265,6 +265,25 @@ public class AutoCompleteRequstTests
     }
 
     [Test]
+    public void PlacesQueryAutoCompleteWhenRegionTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            Region = "region"
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var region = queryStringParameters.FirstOrDefault(x => x.Key == "region");
+        var regionExpected = request.Offset;
+        Assert.IsNotNull(region);
+        Assert.AreEqual(regionExpected, region.Value);
+    }
+
+    [Test]
     public void PlacesQueryAutoCompleteWhenOffsetTest()
     {
         var request = new PlacesAutoCompleteRequest

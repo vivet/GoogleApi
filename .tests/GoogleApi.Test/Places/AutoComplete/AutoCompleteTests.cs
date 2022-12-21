@@ -162,6 +162,23 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
+    public void PlacesAutoCompleteWhenLocationAndRadiusAndRegionTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            Radius = 100,
+            Region = "København"
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
     public void PlacesAutoCompleteWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesAutoCompleteRequest
