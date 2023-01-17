@@ -353,7 +353,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         using var stringContent = new StringContent(serializeObject, Encoding.UTF8);
         {
             var content = await stringContent
-                .ReadAsStreamAsync(cancellationToken)
+                .ReadAsStreamAsync()
                 .ConfigureAwait(false);
 
             using var streamContent = new StreamContent(content);
