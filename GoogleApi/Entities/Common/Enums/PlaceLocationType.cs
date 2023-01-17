@@ -866,12 +866,6 @@ public enum PlaceLocationType
     Town_Square,
 
     /// <summary>
-    /// Address.
-    /// </summary>
-    [EnumMember(Value = "address")]
-    Address,
-
-    /// <summary>
     /// Grocery Or Supermarket.
     /// </summary>
     [EnumMember(Value = "grocery_or_supermarket")]

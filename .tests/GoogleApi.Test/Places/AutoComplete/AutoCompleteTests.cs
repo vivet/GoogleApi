@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using GoogleApi.Entities.Common;
@@ -20,8 +19,7 @@ public class AutoCompleteTests : BaseTest
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
-            Input = "jagtvej 2200 København",
-            Types = new List<RestrictPlaceType> { RestrictPlaceType.Address }
+            Input = "jagtvej 2200 København"
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);
@@ -32,7 +30,7 @@ public class AutoCompleteTests : BaseTest
         var results = response.Predictions.ToArray();
         Assert.IsNotNull(results);
         Assert.IsNotEmpty(results);
-        Assert.AreEqual(1, results.Length);
+        Assert.AreEqual(4, results.Length);
 
         var result = results.FirstOrDefault();
         Assert.IsNotNull(result);
@@ -46,7 +44,7 @@ public class AutoCompleteTests : BaseTest
 
         var matchedSubstrings = result.MatchedSubstrings.ToArray();
         Assert.IsNotNull(matchedSubstrings);
-        Assert.AreEqual(3, matchedSubstrings.Length);
+        Assert.AreEqual(2, matchedSubstrings.Length);
 
         var types = result.Types.ToArray();
         Assert.IsNotNull(types);
@@ -297,13 +295,13 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenTypesTest()
+    public void PlacesAutoCompleteWhenRestrictTypeTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "jagtvej 2200 København",
-            Types = new List<RestrictPlaceType> { RestrictPlaceType.Address }
+            RestrictType = RestrictPlaceType.Address
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);
@@ -313,13 +311,13 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenTypesCitiesTest()
+    public void PlacesAutoCompleteWhenRestrictTypeCitiesTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "København",
-            Types = new List<RestrictPlaceType> { RestrictPlaceType.Cities }
+            RestrictType = RestrictPlaceType.Cities
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);
@@ -329,13 +327,49 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenTypesRegionsTest()
+    public void PlacesAutoCompleteWhenRestrictTypeRegionsTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "Denmark",
-            Types = new List<RestrictPlaceType> { RestrictPlaceType.Regions }
+            RestrictType = RestrictPlaceType.Regions
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesAutoCompleteWhenRestrictTypeGeocodeAndEstablishmentTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "Denmark",
+            RestrictType = RestrictPlaceType.GeocodeAndEstablishment
+        };
+
+        var response = GooglePlaces.AutoComplete.Query(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [Test]
+    public void PlacesAutoCompleteWhenLocationTypesGeocodeAndEstablishmentTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "Denmark",
+            LocationTypes = new []
+            {
+                PlaceLocationType.Cafe,
+                PlaceLocationType.Book_Store
+            }
         };
 
         var response = GooglePlaces.AutoComplete.Query(request);

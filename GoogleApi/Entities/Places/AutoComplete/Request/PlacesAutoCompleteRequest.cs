@@ -102,10 +102,29 @@ public class PlacesAutoCompleteRequest : BasePlacesRequest
     public virtual Language Language { get; set; } = Language.English;
 
     /// <summary>
+    /// Place Location Types
+    /// https://developers.google.com/places/supported_types#table1
+    /// https://developers.google.com/places/supported_types#table2
+    /// You can restrict results from a Place Autocomplete request to be of a certain type by passing the types parameter.
+    /// This parameter specifies a type or a type collection, as listed in Place Types.
+    /// If nothing is specified, all types are returned.
+    /// For the value of the types parameter you can specify either:
+    /// Up to five values from Table 1 or Table 2. For multiple values, separate each value with a | (vertical bar). For example: types=book_store|cafe
+    /// The request will be rejected with an INVALID_REQUEST error if:
+    /// - More than five types are specified.
+    /// - Any unrecognized types are present.
+    /// - Any types from in Table 1 or Table 2 are mixed with any of the filters in Table 3.
+    /// Types will be ignored if <see cref="RestrictType"/> is specificed.
+    /// </summary>
+    public virtual IEnumerable<PlaceLocationType> LocationTypes { get; set; }
+
+    /// <summary>
     /// The types of Place results to return. See Place Types below. If no type is specified, all types will be returned.
     /// https://developers.google.com/places/supported_types#table3
+    /// Any supported filter in Table 3.
+    /// You can safely mix the geocode and establishment types.You cannot mix type collections(address, (cities) or (regions)) with any other type, or an error occurs.
     /// </summary>
-    public virtual IEnumerable<RestrictPlaceType> Types { get; set; }
+    public virtual RestrictPlaceType? RestrictType { get; set; }
 
     /// <summary>
     /// The component filters, separated by a pipe (|).
@@ -179,11 +198,21 @@ public class PlacesAutoCompleteRequest : BasePlacesRequest
             parameters.Add("region", this.Region);
         }
 
-        if (this.Types != null && this.Types.Any())
+        if (this.RestrictType.HasValue)
         {
-            parameters.Add("types", string.Join("|", this.Types.Select(x => x is RestrictPlaceType.Cities or RestrictPlaceType.Regions
-                ? $"({x.ToString().ToLower()})"
-                : $"{x.ToString().ToLower()}")));
+            var restrictPlaceType = this.RestrictType switch
+            {
+                RestrictPlaceType.Cities => $"({this.RestrictType.Value.ToString().ToLower()})",
+                RestrictPlaceType.Regions => $"({this.RestrictType.Value.ToString().ToLower()})",
+                RestrictPlaceType.GeocodeAndEstablishment => $"{nameof(RestrictPlaceType.Geocode).ToLower()}|{nameof(RestrictPlaceType.Establishment).ToLower()}",
+                _ => this.RestrictType.Value.ToString().ToLower()
+            };
+
+            parameters.Add("types", restrictPlaceType);
+        }
+        else if (this.LocationTypes != null && this.LocationTypes.Any())
+        {
+            parameters.Add("types", string.Join("|", this.LocationTypes.Select(x => $"{x.ToString().ToLower()}")));
         }
 
         if (this.Components != null && this.Components.Any())

@@ -42,6 +42,6 @@ public class LocationRestriction
             return $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}";
         }
 
-        return null;
+        return null!;
     }
 }

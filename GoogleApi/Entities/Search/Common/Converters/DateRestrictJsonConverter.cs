@@ -15,7 +15,7 @@ public class DateRestrictJsonConverter : JsonConverter<DateRestrict>
     {
         if (objectType == null)
             throw new ArgumentNullException(nameof(objectType));
-        
+
         return objectType == typeof(DateRestrict);
     }
 

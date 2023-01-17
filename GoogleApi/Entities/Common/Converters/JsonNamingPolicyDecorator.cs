@@ -24,7 +24,7 @@ public class JsonNamingPolicyDecorator : JsonNamingPolicy
     {
         if (name == null)
             throw new ArgumentNullException(nameof(name));
-        
+
         return underlyingNamingPolicy == null
             ? name
             : underlyingNamingPolicy

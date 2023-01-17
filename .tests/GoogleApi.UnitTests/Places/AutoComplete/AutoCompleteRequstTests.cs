@@ -303,16 +303,16 @@ public class AutoCompleteRequstTests
     }
 
     [Test]
-    public void GetQueryStringParametersWhenTypesTest()
+    public void GetQueryStringParametersWhenLocationTypesTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = "key",
             Input = "input",
-            Types = new[]
+            LocationTypes = new[]
             {
-                RestrictPlaceType.Address,
-                RestrictPlaceType.Cities
+                PlaceLocationType.Cafe,
+                PlaceLocationType.Book_Store
             }
         };
 
@@ -320,7 +320,26 @@ public class AutoCompleteRequstTests
         Assert.IsNotNull(queryStringParameters);
 
         var types1 = queryStringParameters.FirstOrDefault(x => x.Key == "types");
-        var types1Expected = string.Join("|", request.Types.Select(x => x is RestrictPlaceType.Cities or RestrictPlaceType.Regions ? $"({x.ToString().ToLower()})" : $"{x.ToString().ToLower()}"));
+        var types1Expected = string.Join("|", request.LocationTypes.Select(x => $"{x.ToString().ToLower()}"));
+        Assert.IsNotNull(types1);
+        Assert.AreEqual(types1Expected, types1.Value);
+    }
+
+    [Test]
+    public void GetQueryStringParametersWhenRestrictTypeTest()
+    {
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = "key",
+            Input = "input",
+            RestrictType = RestrictPlaceType.Cities
+        };
+
+        var queryStringParameters = request.GetQueryStringParameters();
+        Assert.IsNotNull(queryStringParameters);
+
+        var types1 = queryStringParameters.FirstOrDefault(x => x.Key == "types");
+        var types1Expected = RestrictPlaceType.Cities.ToString().ToLower();
         Assert.IsNotNull(types1);
         Assert.AreEqual(types1Expected, types1.Value);
     }

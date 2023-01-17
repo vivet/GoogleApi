@@ -29,10 +29,10 @@ public class LanguageEnumConverter : EnumConverter<Language>
     {
         if (typeToConvert == null)
             throw new ArgumentNullException(nameof(typeToConvert));
-        
+
         if (options == null)
             throw new ArgumentNullException(nameof(options));
-        
+
         try
         {
             return base.Read(ref reader, typeToConvert, options);

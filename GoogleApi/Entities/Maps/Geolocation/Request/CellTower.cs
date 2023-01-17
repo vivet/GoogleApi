@@ -1,6 +1,4 @@
-﻿using static System.Collections.Specialized.BitVector32;
-
-namespace GoogleApi.Entities.Maps.Geolocation.Request;
+﻿namespace GoogleApi.Entities.Maps.Geolocation.Request;
 
 /// <summary>
 /// The request body's cellTowers array contains zero or more cell tower objects.

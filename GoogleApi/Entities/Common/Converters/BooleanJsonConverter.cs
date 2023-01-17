@@ -16,7 +16,7 @@ public class BooleanJsonConverter : JsonConverter<bool>
     {
         if (typeToConvert == null)
             throw new ArgumentNullException(nameof(typeToConvert));
-        
+
         if (options == null)
             throw new ArgumentNullException(nameof(options));
 
@@ -44,14 +44,14 @@ public class BooleanJsonConverter : JsonConverter<bool>
     {
         if (writer == null)
             throw new ArgumentNullException(nameof(writer));
-        
+
         if (options == null)
             throw new ArgumentNullException(nameof(options));
-        
+
         var result = value
             ? "1"
             : "0";
-        
+
         writer
             .WriteStringValue(result);
     }

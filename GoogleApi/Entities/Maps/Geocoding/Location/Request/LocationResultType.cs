@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace GoogleApi.Entities.Maps.Geocoding.Location.Request;
 
 /// <summary>
-/// Location Result Type-
+/// Location Result Type.
 /// </summary>
 public enum LocationResultType
 {
