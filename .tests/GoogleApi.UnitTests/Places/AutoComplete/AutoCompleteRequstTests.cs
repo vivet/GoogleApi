@@ -339,7 +339,7 @@ public class AutoCompleteRequstTests
         Assert.IsNotNull(queryStringParameters);
 
         var types1 = queryStringParameters.FirstOrDefault(x => x.Key == "types");
-        var types1Expected = RestrictPlaceType.Cities.ToString().ToLower();
+        var types1Expected = $"({RestrictPlaceType.Cities.ToString().ToLower()})";
         Assert.IsNotNull(types1);
         Assert.AreEqual(types1Expected, types1.Value);
     }
