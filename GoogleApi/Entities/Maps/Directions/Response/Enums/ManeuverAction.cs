@@ -16,49 +16,49 @@ public enum ManeuverAction
     None,
 
     /// <summary>
-    /// Turn_Slight_Left.
+    /// Turn Slight Left.
     /// </summary>
     [EnumMember(Value = "turn-slight-left")]
     Turn_Slight_Left,
 
     /// <summary>
-    /// Sharp_Left.
+    /// Sharp Left.
     /// </summary>
     [EnumMember(Value = "turn-sharp-left")]
     Sharp_Left,
 
     /// <summary>
-    /// Uturn_Left.
+    /// Uturn Left.
     /// </summary>
     [EnumMember(Value = "uturn-left")]
     Uturn_Left,
 
     /// <summary>
-    /// Turn_Left.
+    /// Turn Left.
     /// </summary>
     [EnumMember(Value = "turn-left")]
     Turn_Left,
 
     /// <summary>
-    /// Turn_Slight_Right.
+    /// Turn Slight Right.
     /// </summary>
     [EnumMember(Value = "turn-slight-right")]
     Turn_Slight_Right,
 
     /// <summary>
-    /// Turn_Sharp_Right.
+    /// Turn Sharp Right.
     /// </summary>
     [EnumMember(Value = "turn-sharp-right")]
     Turn_Sharp_Right,
 
     /// <summary>
-    /// Uturn_Right.
+    /// Uturn Right.
     /// </summary>
     [EnumMember(Value = "uturn-right")]
     Uturn_Right,
 
     /// <summary>
-    /// Turn_Right.
+    /// Turn Right.
     /// </summary>
     [EnumMember(Value = "turn-right")]
     Turn_Right,
@@ -70,13 +70,19 @@ public enum ManeuverAction
     Straight,
 
     /// <summary>
-    /// Ramp_Left.
+    /// Ramp.
+    /// </summary>
+    [EnumMember(Value = "ramp")]
+    Ramp,
+
+    /// <summary>
+    /// Ramp Left.
     /// </summary>
     [EnumMember(Value = "ramp-left")]
     Ramp_Left,
 
     /// <summary>
-    /// Ramp_Right.
+    /// Ramp Right.
     /// </summary>
     [EnumMember(Value = "ramp-right")]
     Ramp_Right,
@@ -88,13 +94,13 @@ public enum ManeuverAction
     Merge,
 
     /// <summary>
-    /// Fork_Left.
+    /// Fork Left.
     /// </summary>
     [EnumMember(Value = "fork-left")]
     Fork_Left,
 
     /// <summary>
-    /// Fork_Right.
+    /// Fork Right.
     /// </summary>
     [EnumMember(Value = "fork-right")]
     Fork_Right,
@@ -106,31 +112,31 @@ public enum ManeuverAction
     Ferry,
 
     /// <summary>
-    /// Ferry_Train.
+    /// Ferry Train.
     /// </summary>
     [EnumMember(Value = "ferry-train")]
     Ferry_Train,
 
     /// <summary>
-    /// Roundabout_Left.
+    /// Roundabout Left.
     /// </summary>
     [EnumMember(Value = "roundabout-left")]
     Roundabout_Left,
 
     /// <summary>
-    /// Roundabout_Right.
+    /// Roundabout Right.
     /// </summary>
     [EnumMember(Value = "roundabout-right")]
     Roundabout_Right,
 
     /// <summary>
-    /// Keep_Left.
+    /// Keep Left.
     /// </summary>
     [EnumMember(Value = "keep-left")]
     Keep_Left,
 
     /// <summary>
-    /// Keep_Right.
+    /// Keep Right.
     /// </summary>
     [EnumMember(Value = "keep-right")]
     Keep_Right
