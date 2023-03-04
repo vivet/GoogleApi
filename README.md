@@ -67,9 +67,9 @@ The following api's are supported.
   * Geocode
     * Place (```GoogleMaps.Geocode.PlaceGeocode```)
     * Address (```GoogleMaps.Geocode.AddressGeocode```)
-    * Location (reverse) (```GoogleMaps.Geocode.```)
-    * Plus Code (```GoogleMaps.Geocode.LocationGeocode```)
-  * Geolocation (```GoogleMaps.Geolocation.PlusCodeGeocode```)
+    * Location (reverse) (```GoogleMaps.Geocode.LocationGeocode```)
+    * Plus Code (```GoogleMaps.Geocode.PlusCodeGeocode```)
+  * Geolocation (```GoogleMaps.Geolocation```)
   * Roads
     * Nearest Roads (```GoogleMaps.Roads.NearestRoads```)
     * Snap To Roads (```GoogleMaps.Roads.SnapToRoad```)
