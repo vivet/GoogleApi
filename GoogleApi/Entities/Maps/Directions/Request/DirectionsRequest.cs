@@ -84,6 +84,16 @@ public class DirectionsRequest : BaseMapsChannelRequest, IRequestQueryString
     /// </summary>
     public virtual TrafficModel TrafficModel { get; set; } = TrafficModel.Best_Guess;
 
+
+    /// <summary>
+    /// Polyline Quality (defaults to overview).
+    /// Specifies the quality of the polyline encoding.
+    /// PolylineQuality specifies the quality of the polyline as HIGH_QUALITY or OVERVIEW (default).
+    /// With OVERVIEW, the polyline is composed using a small number of points and has a lower request latency than HIGH_QUALITY.
+    /// The more points there are, the smoother the polyline (especially in curves).
+    /// </summary>
+    public virtual PolylineQuality PolylineQuality { get; set; } = PolylineQuality.OVERVIEW;
+
     /// <summary>
     /// Specifies one or more preferred modes of transit.
     /// This parameter may only be specified for requests where the mode is transit.
@@ -171,6 +181,7 @@ public class DirectionsRequest : BaseMapsChannelRequest, IRequestQueryString
         parameters.Add("destination", this.Destination.ToString());
         parameters.Add("units", this.Units.ToString().ToLower());
         parameters.Add("language", this.Language.ToCode());
+        parameters.Add("polylineQuality", this.PolylineQuality.ToString());
 
         if (this.Region != null)
         {
@@ -192,39 +203,39 @@ public class DirectionsRequest : BaseMapsChannelRequest, IRequestQueryString
         switch (this.TravelMode)
         {
             case TravelMode.Driving:
-            {
-                if (this.DepartureTime.HasValue)
                 {
-                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-
-                    if (this.WayPoints == null || this.WayPoints.All(x => x.IsVia))
+                    if (this.DepartureTime.HasValue)
                     {
-                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+
+                        if (this.WayPoints == null || this.WayPoints.All(x => x.IsVia))
+                        {
+                            parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
+                        }
                     }
-                }
 
-                break;
-            }
+                    break;
+                }
             case TravelMode.Transit:
-            {
-                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
-
-                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
                 {
-                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower());
-                }
+                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
-                if (this.ArrivalTime.HasValue)
-                {
-                    parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-                }
-                else
-                {
-                    parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
-                }
+                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
+                    {
+                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower());
+                    }
 
-                break;
-            }
+                    if (this.ArrivalTime.HasValue)
+                    {
+                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
+                    }
+
+                    break;
+                }
             case TravelMode.Walking:
             case TravelMode.Bicycling:
                 break;
