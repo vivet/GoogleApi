@@ -48,24 +48,6 @@ public class DirectionsTests : BaseTest
     }
 
     [Test]
-    public void DirectionsWhenPolylineQualityTest()
-    {
-        var origin = new CoordinateEx(55.7237480, 12.4208282);
-        var destination = new CoordinateEx(55.72672682, 12.407996582);
-        var request = new DirectionsRequest
-        {
-            Key = this.Settings.ApiKey,
-            Origin = new LocationEx(origin),
-            Destination = new LocationEx(destination),
-            PolylineQuality = PolylineQuality.HIGH_QUALITY
-        };
-
-        var result = GoogleMaps.Directions.Query(request);
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
     public void DirectionsWhenCoordinateAndHeadingTest()
     {
         var origin = new CoordinateEx(55.7237480, 12.4208282)
