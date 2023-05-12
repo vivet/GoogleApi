@@ -27,7 +27,7 @@ public class TimeZoneResponse : BaseResponse
 
     /// <summary>
     /// TimeZoneName: a string containing the long form name of the time zone.
-    /// This field will be localized if the language parameter is set. eg. "Pacific Daylight Time" or "Australian.
+    /// This field will be localized if the language parameter is set. eg. "Pacific Daylight Time" or "Australian".
     /// </summary>
     public virtual string TimeZoneName { get; set; }
 }
