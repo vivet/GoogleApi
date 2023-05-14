@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Interfaces;
-
 using GoogleApi.Entities.Common.Extensions;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Macs;
-using Org.BouncyCastle.Crypto.Parameters;
 
 namespace GoogleApi.Entities;
 
@@ -57,20 +54,16 @@ public abstract class BaseRequest : IRequest
         }
 
         var url = $"{uri.LocalPath}{uri.Query}&client={this.ClientId}";
-        var bytes = Encoding.UTF8.GetBytes(url);
-        var privateKey = Convert.FromBase64String(this.Key.Replace("-", "+").Replace("_", "/"));
 
-        var hmac = new HMac(new Sha1Digest());
-        hmac.Init(new KeyParameter(privateKey));
+        var privateKey = this.Key.Replace("-", "+").Replace("_", "/");
+        var privateKeyBytes = Convert.FromBase64String(privateKey);
+        var pathAndQueryBytes = Encoding.ASCII.GetBytes(uri.LocalPath + uri.Query);
 
-        var hmacSize = hmac.GetMacSize();
-        var signature = new byte[hmacSize];
-        hmac.BlockUpdate(bytes, 0, bytes.Length);
-        hmac.DoFinal(signature, 0);
+        var hmacsha1 = new HMACSHA1(privateKeyBytes);
+        var computeHash = hmacsha1.ComputeHash(pathAndQueryBytes);
+        var signature = Convert.ToBase64String(computeHash).Replace("+", "-").Replace("/", "_");
 
-        var base64Signature = Convert.ToBase64String(signature).Replace("+", "-").Replace("/", "_");
-
-        return new Uri($"{uri.Scheme}://{uri.Host}{url}&signature={base64Signature}");
+        return new Uri($"{uri.Scheme}://{uri.Host}{url}&signature={signature}");
     }
 
     /// <summary>
