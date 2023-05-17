@@ -80,6 +80,9 @@ The following api's are supported.
   * Time Zone
   * Street View
   * Static Maps
+  * Routes
+    * Directions (```GoogleMaps.Routes.Directions```)
+    * Matrix (```GoogleMaps.Routes.Matrix```)
 
 ##### Google Places
   * Place Search
