@@ -3,7 +3,7 @@
 namespace GoogleApi.Entities.Maps.Directions.Request;
 
 /// <summary>
-/// WayPoint.
+/// Way Point.
 /// </summary>
 public class WayPoint
 {

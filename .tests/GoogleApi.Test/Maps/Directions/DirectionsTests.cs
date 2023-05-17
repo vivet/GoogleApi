@@ -22,7 +22,8 @@ public class DirectionsTests : BaseTest
         {
             Key = this.Settings.ApiKey,
             Origin = new LocationEx(origin),
-            Destination = new LocationEx(destination)
+            Destination = new LocationEx(destination),
+            DepartureTime = DateTime.Now.AddHours(-2)
         };
 
         var result = GoogleMaps.Directions.Query(request);

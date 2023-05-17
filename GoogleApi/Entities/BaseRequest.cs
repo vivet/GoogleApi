@@ -46,7 +46,13 @@ public abstract class BaseRequest : IRequest
                     ? Uri.EscapeDataString(x.Key)
                     : Uri.EscapeDataString(x.Key) + "=" + Uri.EscapeDataString(x.Value));
         var queryString = string.Join("&", queryStringParameters);
-        var uri = new Uri($"{SCHEME}{this.BaseUrl}?{queryString}");
+
+        if (!string.IsNullOrEmpty(queryString))
+        {
+            queryString = $"?{queryString}";
+        }
+
+        var uri = new Uri($"{SCHEME}{this.BaseUrl}{queryString}");
 
         if (this.ClientId == null)
         {
@@ -78,7 +84,10 @@ public abstract class BaseRequest : IRequest
         {
             if (!string.IsNullOrWhiteSpace(this.Key))
             {
-                parameters.Add("key", this.Key);
+                if (this is not IRequestJsonX)
+                {
+                    parameters.Add("key", this.Key);
+                }
             }
         }
         else

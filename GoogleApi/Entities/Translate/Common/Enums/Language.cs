@@ -86,6 +86,12 @@ public enum Language
     Bulgarian,
 
     /// <summary>
+    /// Burmese.
+    /// </summary>
+    [EnumMember(Value = "my")]
+    Burmese,
+
+    /// <summary>
     /// Catalan.
     /// </summary>
     [EnumMember(Value = "ca")]
@@ -444,12 +450,6 @@ public enum Language
     /// </summary>
     [EnumMember(Value = "mn")]
     Mongolian,
-
-    /// <summary>
-    /// Burmese.
-    /// </summary>
-    [EnumMember(Value = "my")]
-    Burmese,
 
     /// <summary>
     /// Nepali.

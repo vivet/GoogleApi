@@ -101,5 +101,17 @@ public enum Status
     /// Indicates that the number of origins or destinations exceeds the per-query limit.
     /// </summary>
     [EnumMember(Value = "MAX_DIMENSIONS_EXCEEDED")]
-    MaxDimensionsExceeded
+    MaxDimensionsExceeded,
+
+    /// <summary>
+    /// Invalid Argument.
+    /// </summary>
+    [EnumMember(Value = "INVALID_ARGUMENT")]
+    InvalidArgument,
+
+    /// <summary>
+    /// Permission Denied.
+    /// </summary>
+    [EnumMember(Value = "PERMISSION_DENIED")]
+    PermissionDenied
 }

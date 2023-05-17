@@ -25,9 +25,15 @@ using GoogleApi.Entities.Maps.StreetView.Response;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using GoogleApi.Entities.Maps.TimeZone.Response;
 using System.Net.Http;
+using GoogleApi.Entities.Maps.Routes.Directions.Request;
+using GoogleApi.Entities.Maps.Routes.Directions.Response;
+using GoogleApi.Entities.Maps.Routes.Matrix.Request;
+using GoogleApi.Entities.Maps.Routes.Matrix.Response;
 using GoogleApi.Interfaces.Maps;
 using GoogleApi.Interfaces.Maps.Roads;
 using GoogleApi.Interfaces.Maps.Geocode;
+using GoogleApi.Interfaces.Maps.Routes.Directions;
+using GoogleApi.Interfaces.Maps.Routes.Matrix;
 
 namespace GoogleApi;
 
@@ -167,6 +173,24 @@ public partial class GoogleMaps
         /// </summary>
         public static SpeedLimitsApi SpeedLimits => new();
     }
+
+    /// <summary>
+    /// Routes (nested class).
+    /// </summary>
+    public static partial class Routes
+    {
+        /// <summary>
+        /// Returns the primary route along with optional alternate routes, given a set of terminal and intermediate waypoints.
+        /// https://developers.google.com/maps/documentation/routes/reference/rest/v2/TopLevel/computeRoutes
+        /// </summary>
+        public static RoutesDirectionsApi Direcions => new();
+
+        /// <summary>
+        /// Takes in a list of origins and destinations and returns a stream containing route information for each combination of origin and destination.
+        /// https://developers.google.com/maps/documentation/routes/reference/rest/v2/TopLevel/computeRouteMatrix
+        /// </summary>
+        public static RoutesMatrixApi Matrix => new();
+    }
 }
 
 public partial class GoogleMaps
@@ -266,7 +290,6 @@ public partial class GoogleMaps
 
         }
     }
-
 
     /// <summary>
     /// Street View Api.
@@ -507,6 +530,57 @@ public partial class GoogleMaps
             /// </summary>
             /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
             public SpeedLimitsApi(HttpClient httpClient)
+                : base(httpClient)
+            {
+
+            }
+        }
+    }
+
+    public static partial class Routes
+    {
+        /// <summary>
+        /// Routes Directions Api.
+        /// </summary>
+        public sealed class RoutesDirectionsApi : HttpEngine<RoutesDirectionsRequest, RoutesDirectionsResponse>, IRoutesDirectionsApi
+        {
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            public RoutesDirectionsApi()
+            {
+
+            }
+
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
+            public RoutesDirectionsApi(HttpClient httpClient)
+                : base(httpClient)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Routes Matrix Api.
+        /// </summary>
+        public sealed class RoutesMatrixApi : HttpEngine<RoutesMatrixRequest, RoutesMatrixResponse>, IRoutesMatrixApi
+        {
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            public RoutesMatrixApi()
+            {
+
+            }
+
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
+            public RoutesMatrixApi(HttpClient httpClient)
                 : base(httpClient)
             {
 

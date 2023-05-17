@@ -2,6 +2,8 @@
 using GoogleApi.Interfaces.Maps;
 using GoogleApi.Interfaces.Maps.Geocode;
 using GoogleApi.Interfaces.Maps.Roads;
+using GoogleApi.Interfaces.Maps.Routes.Directions;
+using GoogleApi.Interfaces.Maps.Routes.Matrix;
 using GoogleApi.Interfaces.Places;
 using GoogleApi.Interfaces.Places.Search;
 using GoogleApi.Interfaces.Search;
@@ -47,7 +49,9 @@ public static class ServiceCollectionExtensions
             .AddApi<ISpeedLimitsApi, GoogleMaps.Roads.SpeedLimitsApi>()
             .AddApi<IStreetViewApi, GoogleMaps.StreetViewApi>()
             .AddApi<IStaticMapsApi, GoogleMaps.StaticMapsApi>()
-            .AddApi<ITimeZoneApi, GoogleMaps.TimeZoneApi>();
+            .AddApi<ITimeZoneApi, GoogleMaps.TimeZoneApi>()
+            .AddApi<IRoutesDirectionsApi, GoogleMaps.Routes.RoutesDirectionsApi>()
+            .AddApi<IRoutesMatrixApi, GoogleMaps.Routes.RoutesMatrixApi>();
 
         services
             .AddApi<IDetailsApi, GooglePlaces.DetailsApi>()

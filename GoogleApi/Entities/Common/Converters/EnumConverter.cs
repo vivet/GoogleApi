@@ -289,8 +289,8 @@ public class EnumConverter<T> : JsonConverter<T>
         // preceded by a negative sign. Identifiers have to start with a letter
         // so we'll just pick the first valid one and check for a negative sign
         // if needed.
-        return (value[0] >= 'A' &&
-                (sNegativeSign == null || !value.StartsWith(sNegativeSign)));
+        return value[0] >= 'A' &&
+               (sNegativeSign == null || !value.StartsWith(sNegativeSign));
     }
     private JsonEncodedText FormatEnumValue(string value, JavaScriptEncoder encoder)
     {
