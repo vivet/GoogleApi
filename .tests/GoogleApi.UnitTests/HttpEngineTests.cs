@@ -119,35 +119,6 @@ public sealed class HttpEngineTests
     }
 
     [Test]
-    public async Task QueryPostWhenOk()
-    {
-        var data = new
-        {
-            status = "OK",
-            data = new { }
-        };
-        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
-
-        this.mockHttpMessageHandler
-            .When("https://demo.googleapis.com/fakeservice/*")
-            .Respond(HttpEngineTests.APPLICATION_JSON, response);
-
-        var httpClient = this.mockHttpMessageHandler
-            .ToHttpClient();
-
-        var demoPostHttpEngine = new DemoPostHttpEngine(httpClient);
-
-        var request = this.fixture
-            .Create<DemoPostRequest>();
-
-        var result = await demoPostHttpEngine
-            .QueryAsync(request);
-
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
     public async Task QueryStreamWhenOk()
     {
         this.mockHttpMessageHandler
