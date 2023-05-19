@@ -43,11 +43,11 @@ public class RouteWayPoint
     public virtual bool VehicleStopover { get; set; }
 
     /// <summary>
-    /// Use Side Of Road.
+    /// Side Of Road.
     /// Indicates that the location of this waypoint is meant to have a preference for the vehicle to stop at a particular side of road.
     /// When you set this value, the route will pass through the location so that the vehicle can stop at the side of road
     /// that the location is biased towards from the center of the road.
     /// This option works only for 'DRIVE' and 'TWO_WHEELER' RouteTravelMode.
     /// </summary>
-    public virtual bool UseSideOfRoad { get; set; } = false;
+    public virtual bool SideOfRoad { get; set; } = false;
 }

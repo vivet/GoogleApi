@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Maps.Routes.Common;
+﻿using GoogleApi.Entities.Maps.Common;
+
+namespace GoogleApi.Entities.Maps.Routes.Common;
 
 /// <summary>
 /// Route Location.

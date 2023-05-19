@@ -1,6 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Routes.Common;
-
-namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
+﻿namespace GoogleApi.Entities.Maps.Common;
 
 /// <summary>
 /// Viewport.

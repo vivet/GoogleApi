@@ -25,6 +25,8 @@ using GoogleApi.Entities.Maps.StreetView.Response;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using GoogleApi.Entities.Maps.TimeZone.Response;
 using System.Net.Http;
+using GoogleApi.Entities.Maps.AddressValidation.Request;
+using GoogleApi.Entities.Maps.AddressValidation.Response;
 using GoogleApi.Entities.Maps.Routes.Directions.Request;
 using GoogleApi.Entities.Maps.Routes.Directions.Response;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request;
@@ -110,6 +112,14 @@ public partial class GoogleMaps
     /// https://developers.google.com/maps/documentation/static-maps/intro
     /// </summary>
     public static StaticMapsApi StaticMaps => new();
+
+    /// <summary>
+    /// The Address Validation API is a service that accepts an address. It identifies address components and validates them.
+    /// It also standardizes the address for mailing and finds the best known latitude/longitude coordinates for it.
+    /// Optionally, for addresses in the United States and Puerto Rico, you can enable the Coding Accuracy Support System (CASS™).
+    /// https://developers.google.com/maps/documentation/address-validation
+    /// </summary>
+    public static AddressValidationApi AddressValidation => new();
 
     /// <summary>
     /// Geocode (nested class).
@@ -357,6 +367,30 @@ public partial class GoogleMaps
         /// </summary>
         /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
         public TimeZoneApi(HttpClient httpClient)
+            : base(httpClient)
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// Address Validation Api.
+    /// </summary>
+    public sealed class AddressValidationApi : HttpEngine<AddressValidationRequest, AddressValidationResponse>, IAddressValidationApi
+    {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        public AddressValidationApi()
+        {
+
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
+        public AddressValidationApi(HttpClient httpClient)
             : base(httpClient)
         {
 

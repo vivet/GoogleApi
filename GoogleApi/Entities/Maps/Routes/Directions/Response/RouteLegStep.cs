@@ -17,14 +17,14 @@ public class RouteLegStep
     /// Distance Meters.
     /// The travel distance of the route leg, in meters.
     /// </summary>
-    public virtual int DistanceMeters { get; set; }
+    public virtual int? DistanceMeters { get; set; }
 
     /// <summary>
     /// Static Duration.
     /// The duration of traveling through the leg, calculated without taking traffic conditions into consideration.
     /// </summary>
     [JsonConverter(typeof(StringSecondsTimeSpanConverter))]
-    public virtual TimeSpan StaticDuration { get; set; }
+    public virtual TimeSpan? StaticDuration { get; set; }
 
     /// <summary>
     /// Polyline.

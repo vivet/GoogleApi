@@ -1,4 +1,4 @@
-﻿namespace GoogleApi.Entities.Maps.Routes.Common;
+﻿namespace GoogleApi.Entities.Maps.Common;
 
 /// <summary>
 /// Lat Lng.

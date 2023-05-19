@@ -107,7 +107,7 @@ public class PhotosTests : BaseTest
         var innerException = exception.InnerExceptions.FirstOrDefault();
         Assert.IsNotNull(innerException);
         Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
-        Assert.AreEqual("Response status code does not indicate success: 403 (Forbidden).", innerException.Message);
+        Assert.AreEqual("PermissionDenied: Forbidden", innerException.Message);
     }
 
     [Test]

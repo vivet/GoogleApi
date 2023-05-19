@@ -26,6 +26,7 @@
 			- Refactored IResponse and BaseResponse for unused properties (html_attributions not needed on interface).
 			- Added Maps Routes Directions Api.
 			- Added Maps Routes Matrix Api.
+			- Added Maps Address Validation Api.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>

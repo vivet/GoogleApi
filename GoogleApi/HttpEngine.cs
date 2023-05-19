@@ -3,6 +3,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Exceptions;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -22,13 +23,15 @@ namespace GoogleApi;
 /// </summary>
 public class HttpEngine
 {
+    // BUG: look at default values and nullable value types for all new Api's
+
     /// <summary>
     /// Json Serializer Options.
     /// </summary>
-    protected static readonly JsonSerializerOptions jsonSerializerOptions = new()
+    internal static readonly JsonSerializerOptions jsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, // BUG "Default" instead of "Null" ignores default enums, but we defined default for enum when no integers
         Converters =
         {
             new BooleanJsonConverter(),
@@ -87,10 +90,44 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
         httpEngineOptions ??= new HttpEngineOptions();
 
+        return this.QueryAsync(request, httpEngineOptions).Result;
+    }
+
+    /// <summary>
+    /// Query Async.
+    /// </summary>
+    /// <param name="request">The request that will be sent.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
+    /// <returns>The <see cref="Task{T}"/>.</returns>
+    public async Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
+    {
+        if (request == null)
+            throw new ArgumentNullException(nameof(request));
+
+        return await this.QueryAsync(request, new HttpEngineOptions(), cancellationToken);
+    }
+
+    /// <summary>
+    /// Query Async.
+    /// </summary>
+    /// <param name="request">The request that will be sent.</param>
+    /// <param name="httpEngineOptions">The <see cref="HttpEngineOptions"/></param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
+    /// <returns>The <see cref="Task{T}"/>.</returns>
+    public async Task<TResponse> QueryAsync(TRequest request, HttpEngineOptions httpEngineOptions, CancellationToken cancellationToken = default)
+    {
+        if (request == null)
+            throw new ArgumentNullException(nameof(request));
+
+        httpEngineOptions ??= new HttpEngineOptions();
+
         try
         {
-            using var result = this.ProcessRequest(request);
-            var response = this.ProcessResponse(result);
+            using var httpResponseMessage = await this.ProcessRequestAsync(request, cancellationToken)
+                .ConfigureAwait(false);
+
+            var response = await this.ProcessResponseAsync(httpResponseMessage)
+                .ConfigureAwait(false);
 
             switch (response.Status)
             {
@@ -101,7 +138,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
                 case Status.InvalidRequest:
                 case Status.InvalidArgument:
-                case Status.PermissionDenied:
                     if (!httpEngineOptions.ThrowOnInvalidRequest)
                     {
                         return response;
@@ -122,178 +158,17 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         catch (Exception ex)
         {
             if (ex is GoogleApiException)
-                throw;
-
-            throw new GoogleApiException(ex.Message, ex)
             {
-                Status = Status.UnknownError
-            };
+                throw;
+            }
+
+            var baseException = ex
+                .GetBaseException();
+
+            throw new GoogleApiException(baseException.Message, baseException);
         }
     }
 
-    /// <summary>
-    /// Query Async.
-    /// </summary>
-    /// <param name="request">The request that will be sent.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
-    /// <returns>The <see cref="Task{T}"/>.</returns>
-    public async Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
-    {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
-        var taskCompletion = new TaskCompletionSource<TResponse>();
-
-        await this.ProcessRequestAsync(request, cancellationToken)
-            .ContinueWith(async x =>
-            {
-                try
-                {
-                    if (x.IsCanceled)
-                    {
-                        taskCompletion
-                            .SetCanceled();
-                    }
-                    else if (x.IsFaulted)
-                    {
-                        throw x.Exception ?? new Exception();
-                    }
-                    else
-                    {
-                        var result = await x;
-                        var response = await this.ProcessResponseAsync(result).ConfigureAwait(false);
-
-                        switch (response.Status)
-                        {
-                            case Status.Ok:
-                            case Status.NotFound:
-                            case Status.ZeroResults:
-                                taskCompletion.SetResult(response);
-                                break;
-
-                            default:
-                                throw new GoogleApiException($"{response.Status}: {response.ErrorMessage}");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (ex is GoogleApiException)
-                    {
-                        taskCompletion.SetException(ex);
-                    }
-                    else
-                    {
-                        var baseException = ex.GetBaseException();
-                        var exception = new GoogleApiException(baseException.Message, baseException);
-
-                        taskCompletion.SetException(exception);
-                    }
-                }
-            }, cancellationToken)
-            .ConfigureAwait(false);
-
-        return await taskCompletion.Task;
-    }
-
-    /// <summary>
-    /// Query Async.
-    /// </summary>
-    /// <param name="request">The request that will be sent.</param>
-    /// <param name="httpEngineOptions">The <see cref="HttpEngineOptions"/></param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
-    /// <returns>The <see cref="Task{T}"/>.</returns>
-    public async Task<TResponse> QueryAsync(TRequest request, HttpEngineOptions httpEngineOptions, CancellationToken cancellationToken = default)
-    {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
-        httpEngineOptions ??= new HttpEngineOptions();
-
-        var taskCompletion = new TaskCompletionSource<TResponse>();
-
-        await this.ProcessRequestAsync(request, cancellationToken)
-            .ContinueWith(async x =>
-            {
-                try
-                {
-                    if (x.IsCanceled)
-                    {
-                        taskCompletion
-                            .SetCanceled();
-                    }
-                    else if (x.IsFaulted)
-                    {
-                        throw x.Exception ?? new Exception();
-                    }
-                    else
-                    {
-                        var result = await x;
-                        var response = await this.ProcessResponseAsync(result).ConfigureAwait(false);
-
-                        switch (response.Status)
-                        {
-                            case Status.Ok:
-                            case Status.NotFound:
-                            case Status.ZeroResults:
-                                taskCompletion.SetResult(response);
-                                break;
-
-                            case Status.InvalidRequest:
-                            case Status.InvalidArgument:
-                                if (!httpEngineOptions.ThrowOnInvalidRequest)
-                                {
-                                    taskCompletion.SetResult(response);
-                                    break;
-                                }
-
-                                throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
-                                {
-                                    Status = response.Status
-                                };
-
-                            default:
-                                throw new GoogleApiException($"{response.Status}: {response.ErrorMessage ?? "No message"}")
-                                {
-                                    Status = response.Status
-                                };
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (ex is GoogleApiException)
-                    {
-                        taskCompletion.SetException(ex);
-                    }
-                    else
-                    {
-                        var baseException = ex.GetBaseException();
-                        var exception = new GoogleApiException(baseException.Message, baseException);
-
-                        taskCompletion.SetException(exception);
-                    }
-                }
-            }, cancellationToken)
-            .ConfigureAwait(false);
-
-        return await taskCompletion.Task;
-    }
-
-    private HttpResponseMessage ProcessRequest(TRequest request)
-    {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
-        return this.ProcessRequestAsync(request).Result;
-    }
-    private TResponse ProcessResponse(HttpResponseMessage httpResponse)
-    {
-        if (httpResponse == null)
-            throw new ArgumentNullException(nameof(httpResponse));
-
-        return this.ProcessResponseAsync(httpResponse).Result;
-    }
     private async Task<HttpResponseMessage> ProcessRequestAsync(TRequest request, CancellationToken cancellationToken = default)
     {
         if (request == null)
@@ -344,12 +219,24 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         if (httpResponse == null)
             throw new ArgumentNullException(nameof(httpResponse));
 
-        var response = new TResponse();
+        var response = new TResponse
+        {
+            RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery
+        };
+
+        if (httpResponse.StatusCode == HttpStatusCode.Forbidden)
+        {
+            response.Status = Status.PermissionDenied;
+            response.ErrorMessage = httpResponse.ReasonPhrase;
+
+            return response;
+        }
 
         switch (response)
         {
             case BaseResponseStream streamResponse:
             {
+
                 streamResponse.Buffer = await httpResponse.Content
                     .ReadAsByteArrayAsync()
                     .ConfigureAwait(false);
@@ -372,7 +259,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
             }
         }
 
-        response.RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery;
         response.Status = httpResponse.IsSuccessStatusCode
             ? response.Status ?? Status.Ok
             : response.Status ?? Status.HttpError;

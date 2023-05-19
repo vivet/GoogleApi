@@ -22,7 +22,7 @@ public class RoutesMatrixResponseConverter : JsonConverter<RoutesMatrixResponse>
         using var document = JsonDocument.ParseValue(ref reader);
         var jsonString = document.RootElement.GetRawText();
 
-        var elements = JsonSerializer.Deserialize<IEnumerable<MatrixElement>>(jsonString);
+        var elements = JsonSerializer.Deserialize<IEnumerable<MatrixElement>>(jsonString, HttpEngine.jsonSerializerOptions);
 
         return new RoutesMatrixResponse
         {

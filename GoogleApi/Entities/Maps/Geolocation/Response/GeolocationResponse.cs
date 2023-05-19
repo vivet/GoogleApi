@@ -1,6 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Common;
-
-using Coordinate = GoogleApi.Entities.Common.Coordinate;
+﻿using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Geolocation.Response;
 

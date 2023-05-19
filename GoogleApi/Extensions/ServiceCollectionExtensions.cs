@@ -51,7 +51,8 @@ public static class ServiceCollectionExtensions
             .AddApi<IStaticMapsApi, GoogleMaps.StaticMapsApi>()
             .AddApi<ITimeZoneApi, GoogleMaps.TimeZoneApi>()
             .AddApi<IRoutesDirectionsApi, GoogleMaps.Routes.RoutesDirectionsApi>()
-            .AddApi<IRoutesMatrixApi, GoogleMaps.Routes.RoutesMatrixApi>();
+            .AddApi<IRoutesMatrixApi, GoogleMaps.Routes.RoutesMatrixApi>()
+            .AddApi<IAddressValidationApi, GoogleMaps.AddressValidationApi>();
 
         services
             .AddApi<IDetailsApi, GooglePlaces.DetailsApi>()

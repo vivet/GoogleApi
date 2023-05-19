@@ -37,22 +37,22 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual RouteTravelMode TravelMode { get; set; } = RouteTravelMode.Drive;
+    public virtual RouteTravelMode TravelMode { get; set; } = RouteTravelMode.Drive; // BUG: Only serialized when nullable, why?
 
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual RoutingPreference RoutingPreference { get; set; } = RoutingPreference.TrafficAware;
+    public virtual RoutingPreference? RoutingPreference { get; set; }
 
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual PolylineQuality PolylineQuality { get; set; } = PolylineQuality.Overview;
+    public virtual PolylineQuality PolylineQuality { get; set; } = Enums.PolylineQuality.Overview; // BUG: Resharper erorr?
 
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual PolylineEncoding PolylineEncoding { get; set; } = PolylineEncoding.EncodedPolyline;
+    public virtual PolylineEncoding PolylineEncoding { get; set; } = Enums.PolylineEncoding.EncodedPolyline; // BUG: Resharper erorr?
 
     /// <summary>
     /// The departure time (optional).
@@ -68,7 +68,7 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// Specifies whether to calculate alternate routes in addition to the route.
     /// No alternative routes are returned for requests that have intermediate waypoints.
     /// </summary>
-    public virtual bool ComputeAlternativeRoutes { get; set; } = false;
+    public virtual bool ComputeAlternativeRoutes { get; set; } = false; // BUG: not serialzied either. Could it be default values
 
     /// <summary>
     /// Route Modifiers (optional).
@@ -110,7 +110,7 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// For example a FUEL_EFFICIENT reference route calculation takes into account various parameters
     /// that would generate an optimal fuel efficient route.
     /// </summary>
-    public virtual IEnumerable<ReferenceRoute> RequestedReferenceRoutes { get; set; } = new List<ReferenceRoute>();
+    public virtual IEnumerable<ReferenceRoute> RequestedReferenceRoutes { get; set; }
 
     /// <summary>
     /// Extra Computations (optional).
@@ -118,5 +118,5 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// Note: These extra computations may return extra fields on the response.
     /// These extra fields must also be specified in the field mask to be returned in the response.
     /// </summary>
-    public virtual IEnumerable<ExtraComputation> ExtraComputations { get; set; } = new List<ExtraComputation>();
+    public virtual IEnumerable<ExtraComputation> ExtraComputations { get; set; }
 }

@@ -29,7 +29,7 @@ public class BooleanJsonConverter : JsonConverter<bool>
             var boolString = reader
                 .GetString();
 
-            var value = boolString == "0"
+            var value = boolString is null or "0" || boolString.ToLower() == "no" || boolString.ToLower() == "n"
                 ? bool.FalseString
                 : bool.TrueString;
 

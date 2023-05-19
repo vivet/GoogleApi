@@ -50,5 +50,5 @@ public class RouteModifiers
     /// Applies only to the DRIVE and TWO_WHEELER RouteTravelMode.
     /// https://developers.google.com/maps/documentation/routes/reference/rest/v2/RouteModifiers#TollPass
     /// </summary>
-    public virtual IEnumerable<string> TollPass { get; set; } = new List<string>();
+    public virtual IEnumerable<string> TollPasses { get; set; }
 }

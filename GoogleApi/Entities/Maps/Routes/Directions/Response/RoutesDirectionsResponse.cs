@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Routes.Common;
 
 namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
@@ -6,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
 /// <summary>
 /// Routes Directions Response.
 /// </summary>
-public class RoutesDirectionsResponse : BaseRouteResponse
+public class RoutesDirectionsResponse : BaseResponse
 {
     /// <summary>
     /// Routes.
@@ -33,4 +36,21 @@ public class RoutesDirectionsResponse : BaseRouteResponse
     /// When fallback mode is used, this field contains detailed info about the fallback response. Otherwise this field is unset.
     /// </summary>
     public virtual FallbackInfo FallbackInfo { get; set; }
+
+    /// <summary>
+    /// Error.
+    /// </summary>
+    public virtual Error Error { get; set; }
+
+    /// <summary>
+    /// Error Message.
+    /// </summary>
+    [JsonIgnore]
+    public override string ErrorMessage => this.Error?.Message;
+
+    /// <summary>
+    /// Status.
+    /// </summary>
+    [JsonIgnore]
+    public override Status? Status => this.Error?.Status ?? Entities.Common.Enums.Status.Ok;
 }

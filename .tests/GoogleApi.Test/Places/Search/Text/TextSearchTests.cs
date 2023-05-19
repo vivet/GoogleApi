@@ -42,20 +42,18 @@ public class TextSearchTests : BaseTest
         var request = new PlacesTextSearchRequest
         {
             Key = this.Settings.ApiKey,
-            Query = "street"
+            Query = "hovedvejen denmark"
         };
 
         var response = GooglePlaces.Search.TextSearch.Query(request);
         Assert.IsNotNull(response);
-        Assert.IsNotNull(response.NextPageToken, request.GetUri().ToString());
+        Assert.IsNotNull(response.NextPageToken);
 
         var requestNextPage = new PlacesTextSearchRequest
         {
             Key = this.Settings.ApiKey,
             PageToken = response.NextPageToken
         };
-
-        Thread.Sleep(1500);
 
         var responseNextPage = GooglePlaces.Search.TextSearch.Query(requestNextPage);
         Assert.IsNotNull(responseNextPage);

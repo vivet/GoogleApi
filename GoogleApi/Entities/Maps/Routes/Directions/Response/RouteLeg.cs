@@ -16,7 +16,7 @@ public class RouteLeg
     /// Distance Meters.
     /// The travel distance of the route leg, in meters.
     /// </summary>
-    public virtual int DistanceMeters { get; set; }
+    public virtual int? DistanceMeters { get; set; }
 
     /// <summary>
     /// Duration.
@@ -25,14 +25,14 @@ public class RouteLeg
     /// If the route_preference is either TRAFFIC_AWARE or TRAFFIC_AWARE_OPTIMAL, then this value is calculated taking traffic conditions into account.
     /// </summary>
     [JsonConverter(typeof(StringSecondsTimeSpanConverter))]
-    public virtual TimeSpan Duration { get; set; }
+    public virtual TimeSpan? Duration { get; set; }
 
     /// <summary>
     /// Static Duration.
     /// The duration of traveling through the leg, calculated without taking traffic conditions into consideration.
     /// </summary>
     [JsonConverter(typeof(StringSecondsTimeSpanConverter))]
-    public virtual TimeSpan StaticDuration { get; set; }
+    public virtual TimeSpan? StaticDuration { get; set; }
 
     /// <summary>
     /// Polyline.

@@ -24,5 +24,5 @@ public class Money
     /// If units is positive, nanos must be positive or zero. If units is zero, nanos can be positive, zero, or negative.
     /// If units is negative, nanos must be negative or zero. For example $-1.75 is represented as units=-1 and nanos=-750,000,000.
     /// </summary>
-    public virtual int Nanos { get; set; }
+    public virtual int? Nanos { get; set; }
 }

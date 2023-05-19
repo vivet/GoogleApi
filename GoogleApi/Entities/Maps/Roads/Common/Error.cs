@@ -13,7 +13,7 @@ public class Error
     /// <summary>
     /// This is the same as the HTTP status of the response.
     /// </summary>
-    public virtual string Code { get; set; }
+    public virtual int? Code { get; set; }
 
     /// <summary>
     /// A short description of the error.

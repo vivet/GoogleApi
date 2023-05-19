@@ -31,7 +31,7 @@ public class GeocodedWaypoint
     /// though it was able to match part of the requested address.
     /// You may wish to examine the original request for misspellings and/or an incomplete address.
     /// </summary>
-    public virtual bool PartialMatch { get; set; }
+    public virtual bool PartialMatch { get; set; } = false;
 
     /// <summary>
     /// Place Id.
@@ -44,5 +44,5 @@ public class GeocodedWaypoint
     /// The index of the corresponding intermediate waypoint in the request.
     /// Only populated if the corresponding waypoint is an intermediate waypoint.
     /// </summary>
-    public virtual int IntermediateWaypointRequestIndex { get; set; }
+    public virtual int? IntermediateWaypointRequestIndex { get; set; }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Routes.Common;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request.Enums;
@@ -160,13 +161,13 @@ public class RouteMatrixTests : BaseTest
             Key = this.Settings.ApiKey
         };
 
-        // TODO: Figure out how to handle bad request for routes matrix, and what happens when one set of coordinates is valid and another is not.
-
-        //var a = GoogleMaps.Routes.Matrix.Query(request);
-
-        var exception = Assert.Throws<GoogleApiException>(() => GoogleMaps.Routes.Matrix.Query(request));
+        var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Routes.Matrix.Query(request));
         Assert.IsNotNull(exception);
-        Assert.AreEqual("InvalidArgument: Origin and destination must be set.", exception.Message);
+
+        var innerException = exception.InnerException;
+        Assert.IsNotNull(innerException);
+        Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
+        Assert.AreEqual("InvalidArgument: Request must contain at least one origin.", innerException.Message);
     }
 
     [Test]

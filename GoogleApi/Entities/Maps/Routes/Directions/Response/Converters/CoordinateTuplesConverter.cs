@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using GoogleApi.Entities.Maps.Routes.Common;
+using GoogleApi.Entities.Maps.Common;
 
 namespace GoogleApi.Entities.Maps.Routes.Directions.Response.Converters;
 
