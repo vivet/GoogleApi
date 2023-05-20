@@ -33,14 +33,14 @@ public class RouteWayPoint
     /// This interprestation may result in severe detours on the route or ZERO_RESULTS in the response status code
     /// if the Directions API is unable to create directions through that point.
     /// </summary>
-    public virtual bool Via { get; set; }
+    public virtual bool? Via { get; set; }
 
     /// <summary>
     /// Indicates that the waypoint is meant for vehicles to stop at, where the intention is to either pickup or drop-off.
     /// When you set this value, the calculated route won't include non-via waypoints on roads that are unsuitable for pickup and drop-off.
     /// This option works only for DRIVE and TWO_WHEELER travel modes, and when the locationType is Location.
     /// </summary>
-    public virtual bool VehicleStopover { get; set; }
+    public virtual bool? VehicleStopover { get; set; }
 
     /// <summary>
     /// Side Of Road.
@@ -49,5 +49,5 @@ public class RouteWayPoint
     /// that the location is biased towards from the center of the road.
     /// This option works only for 'DRIVE' and 'TWO_WHEELER' RouteTravelMode.
     /// </summary>
-    public virtual bool SideOfRoad { get; set; } = false;
+    public virtual bool? SideOfRoad { get; set; }
 }

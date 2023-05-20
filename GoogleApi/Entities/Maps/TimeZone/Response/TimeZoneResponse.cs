@@ -12,13 +12,13 @@ public class TimeZoneResponse : BaseResponse
     /// This will be zero if the time zone is not in Daylight Savings Time during the specified timestamp.
     /// </summary>
     [JsonPropertyName("dstOffset")]
-    public virtual double OffSet { get; set; }
+    public virtual double? OffSet { get; set; }
 
     /// <summary>
     /// RawOffset: the offset from UTC (in seconds) for the given location.
     /// This does not take into effect daylight savings.
     /// </summary>
-    public virtual double RawOffSet { get; set; }
+    public virtual double? RawOffSet { get; set; }
 
     /// <summary>
     /// TimeZoneId: a string containing the ID of the time zone, such as "America/Los_Angeles" or "Australia/Sydney".

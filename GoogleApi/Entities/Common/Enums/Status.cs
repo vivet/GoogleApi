@@ -1,20 +1,12 @@
 ﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Common.Enums;
 
 /// <summary>
 /// Response status.
 /// </summary>
-[JsonConverter(typeof(EnumConverter<Status>))]
 public enum Status
 {
-    /// <summary>
-    /// Set when deserialization fails (default).
-    /// </summary>
-    Undefined = 0,
-
     /// <summary>
     /// Indicates that no errors occurred; the place was successfully detected and at least one result was returned.
     /// </summary>
@@ -22,7 +14,8 @@ public enum Status
     Ok,
 
     /// <summary>
-    /// Indicates that the request was successful but returned no results. This may occur if the search was passed a latlng in a remote location.
+    /// Indicates that the request was successful but returned no results.
+    /// This may occur if the search was passed a latlng in a remote location.
     /// </summary>
     [EnumMember(Value = "ZERO_RESULTS")]
     ZeroResults,
@@ -52,7 +45,8 @@ public enum Status
     MaxElementsExceeded,
 
     /// <summary>
-    /// Indicates that too many waypointss were provided in the request The maximum allowed waypoints is 8, plus the origin, and destination. ( Google Maps Premier customers may contain requests with up to 23 waypoints.)
+    /// Indicates that too many waypointss were provided in the request The maximum allowed waypoints is 8, plus the origin, and destination.
+    /// ( Google Maps Premier customers may contain requests with up to 23 waypoints.)
     /// </summary>
     [EnumMember(Value = "MAX_WAYPOINTS_EXCEEDED")]
     MaxWaypointsExceeded,
@@ -74,12 +68,6 @@ public enum Status
     /// </summary>
     [EnumMember(Value = "UNKNOWN_ERROR")]
     UnknownError,
-
-    /// <summary>
-    /// Indicates the request resulted in a Http error code.
-    /// </summary>
-    [EnumMember(Value = "HTTP_ERROR")]
-    HttpError,
 
     /// <summary>
     /// Indicates the request has none or an invalid key set.

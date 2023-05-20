@@ -1,13 +1,10 @@
 ﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Places.Common.Enums;
 
 /// <summary>
 /// Specifies the order in which results are listed for place searches.
 /// </summary>
-[JsonConverter(typeof(EnumConverter<PriceLevel>))]
 public enum PriceLevel
 {
     /// <summary>

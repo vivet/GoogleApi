@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Routes.Common;
@@ -18,7 +18,7 @@ namespace GoogleApi.Test.Maps.Routes.Directions;
 public class RouteDirectionsTests : BaseTest
 {
     [Test]
-    public void RouteDirectionsTest()
+    public async Task RouteDirectionsTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -33,14 +33,14 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenIntermediatesTest()
+    public async Task RouteDirectionsWhenIntermediatesTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -62,14 +62,14 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenDepartureTimeTest()
+    public async Task RouteDirectionsWhenDepartureTimeTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -86,14 +86,14 @@ public class RouteDirectionsTests : BaseTest
             DepartureTime = DateTime.UtcNow.AddHours(5)
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenGeoJsonLinestringTest()
+    public async Task RouteDirectionsWhenGeoJsonLinestringTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -109,7 +109,7 @@ public class RouteDirectionsTests : BaseTest
             PolylineEncoding = PolylineEncoding.GeoJsonLinestring,
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -117,7 +117,7 @@ public class RouteDirectionsTests : BaseTest
     }
 
     [Test]
-    public void RouteDirectionsWhenComputeAlternativeRoutesTest()
+    public async Task RouteDirectionsWhenComputeAlternativeRoutesTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -133,14 +133,14 @@ public class RouteDirectionsTests : BaseTest
             ComputeAlternativeRoutes = true
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenRouteModifiersAndDriveTest()
+    public async Task RouteDirectionsWhenRouteModifiersAndDriveTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -170,14 +170,14 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenRouteModifiersAndWalkTest()
+    public async Task RouteDirectionsWhenRouteModifiersAndWalkTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -197,14 +197,14 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenLanguageTest()
+    public async Task RouteDirectionsWhenLanguageTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -220,14 +220,14 @@ public class RouteDirectionsTests : BaseTest
             Language = Language.Danish
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenRegionCodeTest()
+    public async Task RouteDirectionsWhenRegionCodeTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -243,14 +243,14 @@ public class RouteDirectionsTests : BaseTest
             Region = "US"
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenRequestedReferenceRoutesTest()
+    public async Task RouteDirectionsWhenRequestedReferenceRoutesTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -271,14 +271,14 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void RouteDirectionsWhenExtraComputationsTest()
+    public async Task RouteDirectionsWhenExtraComputationsTest()
     {
         var request = new RoutesDirectionsRequest
         {
@@ -299,7 +299,7 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.Routes.Direcions.Query(request);
+        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -313,58 +313,8 @@ public class RouteDirectionsTests : BaseTest
             Key = this.Settings.ApiKey
         };
 
-        var exception = Assert.Throws<AggregateException>(() => GoogleMaps.Routes.Direcions.Query(request));
+        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.Direcions.QueryAsync(request));
         Assert.IsNotNull(exception);
-
-        var innerException = exception.InnerException;
-        Assert.IsNotNull(innerException);
-        Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-        Assert.AreEqual("InvalidArgument: Origin and destination must be set.", innerException.Message);
-    }
-
-    [Test]
-    public void DirectionsWhenAsyncTest()
-    {
-        var request = new RoutesDirectionsRequest
-        {
-            Key = this.Settings.ApiKey,
-            Origin = new RouteWayPoint
-            {
-                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.419734, Longitude = -122.0827784 } }
-            },
-            Destination = new RouteWayPoint
-            {
-                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
-            }
-        };
-
-        var result = GoogleMaps.Routes.Direcions.QueryAsync(request).Result;
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void DirectionsWhenAsyncAndCancelledTest()
-    {
-        var request = new RoutesDirectionsRequest
-        {
-            Key = this.Settings.ApiKey,
-            Origin = new RouteWayPoint
-            {
-                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.419734, Longitude = -122.0827784 } }
-            },
-            Destination = new RouteWayPoint
-            {
-                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
-            }
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleMaps.Routes.Direcions.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
+        Assert.AreEqual("InvalidArgument: Origin and destination must be set.", exception.Message);
     }
 }

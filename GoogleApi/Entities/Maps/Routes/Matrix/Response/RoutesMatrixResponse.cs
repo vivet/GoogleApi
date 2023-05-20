@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Routes.Matrix.Response;
 /// <summary>
 /// Routes Matrix Response.
 /// </summary>
-[JsonConverter(typeof(RoutesMatrixResponseConverter))]
+[JsonConverter(typeof(RoutesMatrixResponseJsonConverter))]
 public class RoutesMatrixResponse : BaseResponse
 {
     /// <summary>
@@ -21,11 +21,11 @@ public class RoutesMatrixResponse : BaseResponse
     /// Error Message.
     /// </summary>
     [JsonIgnore]
-    public override string ErrorMessage => this.Elements.Select(x => x.Error?.Message).FirstOrDefault();
+    public override string ErrorMessage => this.Elements?.Select(x => x.Error?.Message).FirstOrDefault();
 
     /// <summary>
     /// Status.
     /// </summary>
     [JsonIgnore]
-    public override Status? Status => this.Elements.Select(x => x.Error?.Status).FirstOrDefault() ?? Entities.Common.Enums.Status.Ok;
+    public override Status Status => this.Elements?.Select(x => x.Error?.Status).FirstOrDefault() ?? Status.Ok;
 }

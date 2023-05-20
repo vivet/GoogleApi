@@ -11,16 +11,16 @@ using GoogleApi.Entities.Common.Converters.Enums;
 namespace GoogleApi.Entities.Common.Converters;
 
 /// <summary>
-/// Enum Converter.
+/// Enum Json Converter.
 /// </summary>
 /// <typeparam name="T">The enum type.</typeparam>
-public class EnumConverter<T> : JsonConverter<T>
+public class EnumJsonConverter<T> : JsonConverter<T>
     where T : struct, Enum
 {
     private const int NAME_CACHE_SIZE_SOFT_LIMIT = 64;
     private const string VALUE_SEPARATOR = ", ";
 
-    private static readonly string sNegativeSign = (int)sEnumTypeCode % 2 == 0 ? null : NumberFormatInfo.CurrentInfo.NegativeSign;
+    private static readonly string sNegativeSign = (int)Type.GetTypeCode(typeof(T)) % 2 == 0 ? null : NumberFormatInfo.CurrentInfo.NegativeSign;
     private static readonly TypeCode sEnumTypeCode = Type.GetTypeCode(typeof(T));
 
     private Type TypeToConvert => typeof(T);
@@ -29,14 +29,14 @@ public class EnumConverter<T> : JsonConverter<T>
     private readonly ConcurrentDictionary<ulong, JsonEncodedText> nameCache;
 
     /// <inheritdoc />
-    public EnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
+    public EnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : this(converterOptions, namingPolicy: null, serializerOptions)
     {
 
     }
 
     /// <inheritdoc />
-    public EnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
+    public EnumJsonConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
     {
         this.converterOptions = converterOptions;
         this.namingPolicy = namingPolicy;
@@ -55,7 +55,7 @@ public class EnumConverter<T> : JsonConverter<T>
             }
 
             var value = (T)values.GetValue(i)!;
-            var key = EnumConverter<T>.ConvertToUInt64(value);
+            var key = EnumJsonConverter<T>.ConvertToUInt64(value);
             var name = names[i];
 
             nameCache.TryAdd(

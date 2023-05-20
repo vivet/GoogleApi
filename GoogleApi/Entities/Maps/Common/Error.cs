@@ -21,7 +21,7 @@ public class Error
     /// <summary>
     /// Status.
     /// </summary>
-    public virtual Status? Status { get; set; }
+    public virtual Status Status { get; set; }
 
     /// <summary>
     /// Details.

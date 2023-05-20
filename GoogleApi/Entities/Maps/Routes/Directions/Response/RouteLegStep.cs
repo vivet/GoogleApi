@@ -23,7 +23,7 @@ public class RouteLegStep
     /// Static Duration.
     /// The duration of traveling through the leg, calculated without taking traffic conditions into consideration.
     /// </summary>
-    [JsonConverter(typeof(StringSecondsTimeSpanConverter))]
+    [JsonConverter(typeof(StringSecondsTimeSpanJsonConverter))]
     public virtual TimeSpan? StaticDuration { get; set; }
 
     /// <summary>

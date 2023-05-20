@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Maps.Routes.Directions.Response.Converters;
 /// <summary>
 /// Coordinate Tuples Converter.
 /// </summary>
-public class CoordinateTuplesConverter : JsonConverter<IEnumerable<LatLng>>
+public class CoordinateTuplesJsonConverter : JsonConverter<IEnumerable<LatLng>>
 {
     /// <inheritdoc />
     public override IEnumerable<LatLng> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

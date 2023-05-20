@@ -11,10 +11,6 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Converters;
-using GoogleApi.Entities.Common.Enums.Converters;
-using GoogleApi.Entities.Search.Common.Converters;
-using GoogleApi.Entities.Translate.Common.Enums.Converters;
-using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi;
 
@@ -23,24 +19,16 @@ namespace GoogleApi;
 /// </summary>
 public class HttpEngine
 {
-    // BUG: look at default values and nullable value types for all new Api's
-
     /// <summary>
     /// Json Serializer Options.
     /// </summary>
     internal static readonly JsonSerializerOptions jsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, // BUG "Default" instead of "Null" ignores default enums, but we defined default for enum when no integers
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         Converters =
         {
-            new BooleanJsonConverter(),
-            new EnumJsonConverterFactory<Language, LanguageEnumConverter>(JsonNamingPolicy.CamelCase, true),
-            new EnumJsonConverterFactory<PlaceLocationType, PlaceLocationTypeEnumConverter>(JsonNamingPolicy.CamelCase, true),
-            new EnumJsonConverterFactory<AddressComponentType, AddressComponentTypeEnumConverter>(JsonNamingPolicy.CamelCase, true),
-            new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true),
-            new SortExpressionJsonConverter(),
-            new JsonStringEnumConverter()
+            new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true)
         },
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         NumberHandling = JsonNumberHandling.AllowReadingFromString,
@@ -76,21 +64,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
     protected HttpEngine(HttpClient httpClient)
     {
         this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-    }
-
-    /// <summary>
-    /// Query.
-    /// </summary>
-    /// <param name="request">The request that will be sent.</param>
-    /// <param name="httpEngineOptions">The <see cref="HttpEngineOptions"/>.</param>
-    /// <returns>The <see cref="IResponse"/>.</returns>
-    public TResponse Query(TRequest request, HttpEngineOptions httpEngineOptions = null)
-    {
-        request = request ?? throw new ArgumentNullException(nameof(request));
-
-        httpEngineOptions ??= new HttpEngineOptions();
-
-        return this.QueryAsync(request, httpEngineOptions).Result;
     }
 
     /// <summary>
@@ -193,10 +166,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
             case IRequestJson:
             {
-                var serializeObject = JsonSerializer.Serialize(request, HttpEngine.jsonSerializerOptions);
-
-                httpRequestMessage.Content = new StringContent(serializeObject, Encoding.UTF8);
-
                 if (request is IRequestJsonX jsonX)
                 {
                     httpRequestMessage.Headers
@@ -205,6 +174,9 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
                     httpRequestMessage.Headers
                         .Add(GoogleHttpHeaders.FIELD_MASK_HEADER, jsonX.FieldMask ?? "*");
                 }
+
+                var serializeObject = JsonSerializer.Serialize(request, HttpEngine.jsonSerializerOptions);
+                httpRequestMessage.Content = new StringContent(serializeObject, Encoding.UTF8);
 
                 return await this.httpClient
                     .SendAsync(httpRequestMessage, cancellationToken)
@@ -258,10 +230,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
                 break;
             }
         }
-
-        response.Status = httpResponse.IsSuccessStatusCode
-            ? response.Status ?? Status.Ok
-            : response.Status ?? Status.HttpError;
 
         return response;
     }

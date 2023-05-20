@@ -20,7 +20,7 @@ public interface IResponse
     /// <summary>
     /// The status returned with the response.
     /// </summary>
-    Status? Status { get; set; }
+    Status Status { get; set; }
 
     /// <summary>
     /// When the status code is other than 'Ok', there may be an additional error_message field within the response object.

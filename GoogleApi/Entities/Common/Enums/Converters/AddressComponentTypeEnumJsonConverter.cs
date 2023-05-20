@@ -9,17 +9,17 @@ namespace GoogleApi.Entities.Common.Enums.Converters;
 /// Custom <see cref="AddressComponentType"/> Enum converter
 /// to avoid breaking changes when Google adds a new <inheritdoc cref="AddressComponentType"/>'s to the list.
 /// </summary>
-public class AddressComponentTypeEnumConverter : EnumConverter<AddressComponentType>
+public class AddressComponentTypeEnumJsonConverter : EnumJsonConverter<AddressComponentType>
 {
     /// <inheritdoc />
-    public AddressComponentTypeEnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
+    public AddressComponentTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : base(converterOptions, serializerOptions)
     {
 
     }
 
     /// <inheritdoc />
-    public AddressComponentTypeEnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
+    public AddressComponentTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
         : base(converterOptions, namingPolicy, serializerOptions)
     {
 

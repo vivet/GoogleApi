@@ -6,9 +6,9 @@ using System.Text.Json.Serialization;
 namespace GoogleApi.Entities.Maps.Routes.Matrix.Response.Converters;
 
 /// <summary>
-/// Routes Matrix Response Converter.
+/// Routes Matrix Response Json Converter.
 /// </summary>
-public class RoutesMatrixResponseConverter : JsonConverter<RoutesMatrixResponse>
+public class RoutesMatrixResponseJsonConverter : JsonConverter<RoutesMatrixResponse>
 {
     /// <inheritdoc />
     public override RoutesMatrixResponse Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

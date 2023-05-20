@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Maps.AddressValidation.Response.Enums;
 
 namespace GoogleApi.Entities.Maps.AddressValidation.Response;
@@ -72,6 +73,7 @@ public class UspsData
     /// Y: The address is a CMRA
     /// N: The address is not a CMRA
     /// </summary>
+    [JsonConverter(typeof(StringBooleanZeroOneJsonConverter))]
     public virtual bool DpvCmra { get; set; }
 
     /// <summary>
@@ -80,6 +82,7 @@ public class UspsData
     /// Y: The address is vacant
     /// N: The address is not vacant
     /// </summary>
+    [JsonConverter(typeof(StringBooleanZeroOneJsonConverter))]
     public virtual bool DpvVacant { get; set; }
 
     /// <summary>
@@ -89,6 +92,7 @@ public class UspsData
     /// Y: The address is not active
     /// N: The address is active
     /// </summary>
+    [JsonConverter(typeof(StringBooleanZeroOneJsonConverter))]
     public virtual bool DpvNoStat { get; set; }
 
     /// <summary>

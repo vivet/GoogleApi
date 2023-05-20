@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
@@ -13,7 +12,7 @@ namespace GoogleApi.Test.Maps.Geocoding.Location;
 public class LocationGeocodeTests : BaseTest
 {
     [Test]
-    public void LocationGeocodeTest()
+    public async Task LocationGeocodeTest()
     {
         var request = new LocationGeocodeRequest
         {
@@ -21,14 +20,14 @@ public class LocationGeocodeTests : BaseTest
             Location = new Coordinate(38.1864717,-109.9743631)
         };
 
-        var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
+        var response = await GoogleMaps.Geocode.LocationGeocode.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void LocationGeocodeWhenNoLocalCodeTest()
+    public async Task LocationGeocodeWhenNoLocalCodeTest()
     {
         var request = new LocationGeocodeRequest
         {
@@ -36,14 +35,14 @@ public class LocationGeocodeTests : BaseTest
             Location = new Coordinate(27.0675, -40.808)
         };
 
-        var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
+        var response = await GoogleMaps.Geocode.LocationGeocode.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void LocationGeocodeWhenResultTypesTest()
+    public async Task LocationGeocodeWhenResultTypesTest()
     {
         var request = new LocationGeocodeRequest
         {
@@ -54,14 +53,14 @@ public class LocationGeocodeTests : BaseTest
                 LocationResultType.Street_Address
             }
         };
-        var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
+        var response = await GoogleMaps.Geocode.LocationGeocode.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void LocationGeocodeWhenResultTypesWhenNoResultsTest()
+    public async Task LocationGeocodeWhenResultTypesWhenNoResultsTest()
     {
         var request = new LocationGeocodeRequest
         {
@@ -72,14 +71,15 @@ public class LocationGeocodeTests : BaseTest
                 LocationResultType.Administrative_Area_Level_7
             }
         };
-        var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
+
+        var response = await GoogleMaps.Geocode.LocationGeocode.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.ZeroResults, response.Status);
     }
 
     [Test]
-    public void LocationGeocodeWhenLoncationTypesTest()
+    public async Task LocationGeocodeWhenLocationTypesTest()
     {
         var request = new LocationGeocodeRequest
         {
@@ -91,40 +91,9 @@ public class LocationGeocodeTests : BaseTest
             }
         };
 
-        var response = GoogleMaps.Geocode.LocationGeocode.Query(request);
+        var response = await GoogleMaps.Geocode.LocationGeocode.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
-    }
-
-    [Test]
-    public void LocationGeocodeWhenAsyncTest()
-    {
-        var request = new LocationGeocodeRequest
-        {
-            Key = this.Settings.ApiKey,
-            Location = new Coordinate(40.7141289, -73.9614074)
-        };
-        var result = GoogleMaps.Geocode.LocationGeocode.QueryAsync(request).Result;
-
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void LocationGeocodeWhenAsyncAndCancelledTest()
-    {
-        var request = new LocationGeocodeRequest
-        {
-            Key = this.Settings.ApiKey,
-            Location = new Coordinate(40.7141289, -73.9614074)
-        };
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleMaps.Geocode.LocationGeocode.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

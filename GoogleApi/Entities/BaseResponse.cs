@@ -17,7 +17,7 @@ public abstract class BaseResponse : IResponse
     public virtual string RawQueryString { get; set; }
 
     /// <inheritdoc />
-    public virtual Status? Status { get; set; }
+    public virtual Status Status { get; set; }
 
     /// <inheritdoc />
     [JsonPropertyName("error_message")]

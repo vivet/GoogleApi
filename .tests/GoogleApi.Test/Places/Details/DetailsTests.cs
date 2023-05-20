@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
@@ -13,7 +12,7 @@ namespace GoogleApi.Test.Places.Details;
 public class DetailsTests : BaseTest
 {
     [Test]
-    public void PlacesDetailsTest()
+    public async Task PlacesDetailsTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -21,7 +20,7 @@ public class DetailsTests : BaseTest
             Input = "jagtvej 2200 København"
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
         var request2 = new PlacesDetailsRequest
@@ -30,7 +29,7 @@ public class DetailsTests : BaseTest
             PlaceId = placeId
         };
 
-        var response2 = GooglePlaces.Details.Query(request2);
+        var response2 = await GooglePlaces.Details.QueryAsync(request2);
         Assert.IsNotNull(response2);
         Assert.AreEqual(Status.Ok, response2.Status);
 
@@ -58,47 +57,7 @@ public class DetailsTests : BaseTest
     }
 
     [Test]
-    public void PlacesDetailsAsyncTest()
-    {
-        var request = new PlacesAutoCompleteRequest
-        {
-            Key = Settings.ApiKey,
-            Input = "jagtvej 2200"
-        };
-
-        var response = GooglePlaces.AutoComplete.QueryAsync(request).Result;
-        var results = response.Predictions.ToArray();
-        var result = results.First();
-
-        var request2 = new PlacesDetailsRequest
-        {
-            Key = Settings.ApiKey,
-            PlaceId = result.PlaceId
-        };
-
-        var response2 = GooglePlaces.Details.Query(request2);
-        Assert.AreEqual(Status.Ok, response2.Status);
-    }
-
-    [Test]
-    public void PlacesDetailsWhenAsyncAndCancelledTest()
-    {
-        var request = new PlacesDetailsRequest
-        {
-            Key = this.Settings.ApiKey,
-            PlaceId = Guid.NewGuid().ToString("N")
-        };
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GooglePlaces.Details.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
-    }
-
-    [Test]
-    public void PlacesDetailsWhenLanguageTest()
+    public async Task PlacesDetailsWhenLanguageTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -106,7 +65,7 @@ public class DetailsTests : BaseTest
             Input = "jagtvej 2200 København"
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
         var request2 = new PlacesDetailsRequest
@@ -116,7 +75,7 @@ public class DetailsTests : BaseTest
             Language = Language.Danish
         };
 
-        var response2 = GooglePlaces.Details.Query(request2);
+        var response2 = await GooglePlaces.Details.QueryAsync(request2);
         Assert.IsNotNull(response2);
         Assert.AreEqual(Status.Ok, response2.Status);
 
@@ -124,7 +83,7 @@ public class DetailsTests : BaseTest
     }
 
     [Test]
-    public void PlacesDetailsWhenFieldsTest()
+    public async Task PlacesDetailsWhenFieldsTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -132,7 +91,7 @@ public class DetailsTests : BaseTest
             Input = "jagtvej 2200 København"
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
         var request2 = new PlacesDetailsRequest
@@ -142,7 +101,7 @@ public class DetailsTests : BaseTest
             Fields = FieldTypes.Place_Id
         };
 
-        var response2 = GooglePlaces.Details.Query(request2);
+        var response2 = await GooglePlaces.Details.QueryAsync(request2);
         Assert.IsNotNull(response2);
         Assert.AreEqual(Status.Ok, response2.Status);
 

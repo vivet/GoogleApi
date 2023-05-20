@@ -8,17 +8,17 @@ namespace GoogleApi.Entities.Translate.Common.Enums.Converters;
 /// <summary>
 /// Custom Language Enum converter to avoid breaking changes when Google adds a new language to the list.
 /// </summary>
-public class LanguageEnumConverter : EnumConverter<Language>
+public class LanguageEnumJsonConverter : EnumJsonConverter<Language>
 {
     /// <inheritdoc />
-    public LanguageEnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
+    public LanguageEnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : base(converterOptions, serializerOptions)
     {
 
     }
 
     /// <inheritdoc />
-    public LanguageEnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
+    public LanguageEnumJsonConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
         : base(converterOptions, namingPolicy, serializerOptions)
     {
 

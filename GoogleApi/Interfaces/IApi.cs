@@ -11,14 +11,6 @@ namespace GoogleApi.Interfaces;
 public interface IApi<in TRequest, TResponse>
 {
     /// <summary>
-    /// Query.
-    /// </summary>
-    /// <param name="request">The objwect of type <typeparamref name="TRequest"/></param>
-    /// <param name="httpEngineOptions">The <see cref="HttpEngineOptions"/> (optional).</param>
-    /// <returns>The object of type <typeparamref name="TResponse"/>.</returns>
-    TResponse Query(TRequest request, HttpEngineOptions httpEngineOptions = null);
-
-    /// <summary>
     /// Query Async.
     /// </summary>
     /// <param name="request">The objwect of type <typeparamref name="TRequest"/></param>

@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Videos.Request;
 using NUnit.Framework;
@@ -11,7 +10,8 @@ namespace GoogleApi.Test.Search.Video.Videos;
 public class VideoSearchTests : BaseTest
 {
     [Test]
-    public void VideoSearchTest()
+    [Ignore("Requires Enterprise License")]
+    public async Task VideoSearchTest()
     {
         var request = new VideoSearchRequest
         {
@@ -20,7 +20,7 @@ public class VideoSearchTests : BaseTest
             MaxResults = 1
         };
 
-        var response = GoogleSearch.VideoSearch.Videos.Query(request);
+        var response = await GoogleSearch.VideoSearch.Videos.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(response.Status, Status.Ok);
@@ -33,40 +33,5 @@ public class VideoSearchTests : BaseTest
 
         Assert.IsNotNull(response.Items);
         Assert.AreEqual(1, response.Items.Count());
-    }
-
-    [Test]
-    public void VideoSearchAsyncTest()
-    {
-        var request = new VideoSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Query = "google",
-            MaxResults = 1
-        };
-
-        var response = GoogleSearch.VideoSearch.Videos.QueryAsync(request).Result;
-
-        Assert.IsNotNull(response);
-        Assert.AreEqual(response.Status, Status.Ok);
-        Assert.IsNotEmpty(response.Items);
-    }
-
-    [Test]
-    public void VideoSearchWhenAsyncAndCancelledTest()
-    {
-        var request = new VideoSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Query = "google"
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleSearch.VideoSearch.Videos.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

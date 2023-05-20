@@ -37,7 +37,7 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual RouteTravelMode TravelMode { get; set; } = RouteTravelMode.Drive; // BUG: Only serialized when nullable, why?
+    public virtual RouteTravelMode TravelMode { get; set; } = RouteTravelMode.Drive;
 
     /// <summary>
     /// Specifies the mode of transportation. (optional).
@@ -47,12 +47,12 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual PolylineQuality PolylineQuality { get; set; } = Enums.PolylineQuality.Overview; // BUG: Resharper erorr?
+    public virtual PolylineQuality PolylineQuality { get; set; } = PolylineQuality.Overview;
 
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual PolylineEncoding PolylineEncoding { get; set; } = Enums.PolylineEncoding.EncodedPolyline; // BUG: Resharper erorr?
+    public virtual PolylineEncoding PolylineEncoding { get; set; } = PolylineEncoding.EncodedPolyline;
 
     /// <summary>
     /// The departure time (optional).
@@ -68,7 +68,7 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// Specifies whether to calculate alternate routes in addition to the route.
     /// No alternative routes are returned for requests that have intermediate waypoints.
     /// </summary>
-    public virtual bool ComputeAlternativeRoutes { get; set; } = false; // BUG: not serialzied either. Could it be default values
+    public virtual bool ComputeAlternativeRoutes { get; set; } = false;
 
     /// <summary>
     /// Route Modifiers (optional).

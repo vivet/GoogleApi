@@ -5,9 +5,9 @@ using System.Text.Json.Serialization;
 namespace GoogleApi.Entities.Common.Converters;
 
 /// <summary>
-/// String Seconds TimeSpan Converter.
+/// String Seconds TimeSpan Json Converter.
 /// </summary>
-public class StringSecondsTimeSpanConverter : JsonConverter<TimeSpan>
+public class StringSecondsTimeSpanJsonConverter : JsonConverter<TimeSpan>
 {
     /// <inheritdoc />
     public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

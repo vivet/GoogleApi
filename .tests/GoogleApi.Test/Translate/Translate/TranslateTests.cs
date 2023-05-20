@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Translate.Request;
@@ -13,7 +12,7 @@ namespace GoogleApi.Test.Translate.Translate;
 public class TranslateTests : BaseTest
 {
     [Test]
-    public void TranslateTest()
+    public async Task TranslateTest()
     {
         var request = new TranslateRequest
         {
@@ -23,7 +22,7 @@ public class TranslateTests : BaseTest
             Qs = new[] { "Hello World" }
         };
 
-        var result = GoogleTranslate.Translate.Query(request);
+        var result = await GoogleTranslate.Translate.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
@@ -33,7 +32,7 @@ public class TranslateTests : BaseTest
     }
 
     [Test]
-    public void TranslateWhenMultipleQsTest()
+    public async Task TranslateWhenMultipleQsTest()
     {
         var request = new TranslateRequest
         {
@@ -43,7 +42,7 @@ public class TranslateTests : BaseTest
             Qs = new[] { "Hello World", "Once upon a time" }
         };
 
-        var result = GoogleTranslate.Translate.Query(request);
+        var result = await GoogleTranslate.Translate.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
@@ -62,7 +61,7 @@ public class TranslateTests : BaseTest
     }
 
     [Test]
-    public void TranslateWhenDetectedSourceLanguageTest()
+    public async Task TranslateWhenDetectedSourceLanguageTest()
     {
         var request = new TranslateRequest
         {
@@ -71,7 +70,7 @@ public class TranslateTests : BaseTest
             Qs = new[] { "Hej med dig min ven" }
         };
 
-        var result = GoogleTranslate.Translate.Query(request);
+        var result = await GoogleTranslate.Translate.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
@@ -79,7 +78,7 @@ public class TranslateTests : BaseTest
     }
 
     [Test]
-    public void TranslateWhenModelNmtTest()
+    public async Task TranslateWhenModelNmtTest()
     {
         var request = new TranslateRequest
         {
@@ -90,46 +89,10 @@ public class TranslateTests : BaseTest
             Qs = new[] { "Hello World" }
         };
 
-        var result = GoogleTranslate.Translate.Query(request);
+        var result = await GoogleTranslate.Translate.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
         Assert.AreEqual(Model.Nmt, result.Data.Translations?.FirstOrDefault()?.Model);
-    }
-
-    [Test]
-    public void TranslateWhenAsyncTest()
-    {
-        var request = new TranslateRequest
-        {
-            Key = this.Settings.ApiKey,
-            Source = Language.English,
-            Target = Language.Danish,
-            Qs = new[] { "Hello World" }
-        };
-
-        var result = GoogleTranslate.Translate.QueryAsync(request).Result;
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void TranslateWhenAsyncAndCancelledTest()
-    {
-        var request = new TranslateRequest
-        {
-            Key = this.Settings.ApiKey,
-            Source = Language.English,
-            Target = Language.Danish,
-            Qs = new[] { "Hello World" }
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleTranslate.Translate.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
@@ -14,7 +13,7 @@ namespace GoogleApi.Test.Places.AutoComplete;
 public class AutoCompleteTests : BaseTest
 {
     [Test]
-    public void PlacesAutoCompleteTest()
+    public async Task PlacesAutoCompleteTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -22,7 +21,7 @@ public class AutoCompleteTests : BaseTest
             Input = "jagtvej 2200 København"
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
@@ -53,39 +52,7 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenAsyncTest()
-    {
-        var request = new PlacesAutoCompleteRequest
-        {
-            Key = this.Settings.ApiKey,
-            Input = "jagtvej 2200 København"
-        };
-
-        var result = GooglePlaces.AutoComplete.QueryAsync(request).Result;
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void PlacesAutoCompleteWhenAsyncAndCancelledTest()
-    {
-        var request = new PlacesAutoCompleteRequest
-        {
-            Key = this.Settings.ApiKey,
-            Input = "jagtvej 2200 København"
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GooglePlaces.AutoComplete.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
-    }
-
-    [Test]
-    public void PlacesAutoCompleteWhenLanguageTest()
+    public async Task PlacesAutoCompleteWhenLanguageTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -94,7 +61,7 @@ public class AutoCompleteTests : BaseTest
             Language = Language.Danish
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
 
@@ -112,7 +79,7 @@ public class AutoCompleteTests : BaseTest
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenOffsetTest()
+    public async Task PlacesAutoCompleteWhenOffsetTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -121,14 +88,14 @@ public class AutoCompleteTests : BaseTest
             Offset = "offset"
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationTest()
+    public async Task PlacesAutoCompleteWhenLocationTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -137,14 +104,14 @@ public class AutoCompleteTests : BaseTest
             Location = new Coordinate(1, 1)
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationAndRadiusTest()
+    public async Task PlacesAutoCompleteWhenLocationAndRadiusTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -153,14 +120,14 @@ public class AutoCompleteTests : BaseTest
             Radius = 100
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationAndRadiusAndRegionTest()
+    public async Task PlacesAutoCompleteWhenLocationAndRadiusAndRegionTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -170,14 +137,14 @@ public class AutoCompleteTests : BaseTest
             Region = "København"
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationBiasAndIpBiasTest()
+    public async Task PlacesAutoCompleteWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -189,35 +156,34 @@ public class AutoCompleteTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationBiasAndPointTest()
+    [Ignore("Google documentation states that 'point' bias is possible, but returns invalid request")]
+    public async Task PlacesAutoCompleteWhenLocationBiasAndPointTest()
     {
-        Assert.Inconclusive("Documentation states that 'point' bias is possible, but Google returns invalid request");
+        var request = new PlacesAutoCompleteRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationBias = new LocationBias
+            {
+                Location = new Coordinate(55.69987296762697, 12.552359427579363)
+            }
+        };
 
-        //var request = new PlacesAutoCompleteRequest
-        //{
-        //    Key = this.Settings.ApiKey,
-        //    Input = "jagtvej 2200 København",
-        //    LocationBias = new LocationBias
-        //    {
-        //        Location = new Coordinate(55.69987296762697, 12.552359427579363)
-        //    }
-        //};
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
-        //var response = GooglePlaces.AutoComplete.Query(request);
-
-        //Assert.IsNotNull(response);
-        //Assert.AreEqual(Status.Ok, response.Status);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationBiasAndCircleTest()
+    public async Task PlacesAutoCompleteWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -230,14 +196,14 @@ public class AutoCompleteTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationBiasAndRectangularTest()
+    public async Task PlacesAutoCompleteWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -249,14 +215,14 @@ public class AutoCompleteTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationRestrictionAndCircleTest()
+    public async Task PlacesAutoCompleteWhenLocationRestrictionAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -269,14 +235,14 @@ public class AutoCompleteTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationRestrictionAndRectangularTest()
+    public async Task PlacesAutoCompleteWhenLocationRestrictionAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -288,14 +254,14 @@ public class AutoCompleteTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenRestrictTypeTest()
+    public async Task PlacesAutoCompleteWhenRestrictTypeTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -304,14 +270,14 @@ public class AutoCompleteTests : BaseTest
             RestrictType = RestrictPlaceType.Address
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenRestrictTypeCitiesTest()
+    public async Task PlacesAutoCompleteWhenRestrictTypeCitiesTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -320,14 +286,14 @@ public class AutoCompleteTests : BaseTest
             RestrictType = RestrictPlaceType.Cities
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenRestrictTypeRegionsTest()
+    public async Task PlacesAutoCompleteWhenRestrictTypeRegionsTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -336,14 +302,14 @@ public class AutoCompleteTests : BaseTest
             RestrictType = RestrictPlaceType.Regions
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenRestrictTypeGeocodeAndEstablishmentTest()
+    public async Task PlacesAutoCompleteWhenRestrictTypeGeocodeAndEstablishmentTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -352,14 +318,14 @@ public class AutoCompleteTests : BaseTest
             RestrictType = RestrictPlaceType.GeocodeAndEstablishment
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesAutoCompleteWhenLocationTypesGeocodeAndEstablishmentTest()
+    public async Task PlacesAutoCompleteWhenLocationTypesGeocodeAndEstablishmentTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
@@ -372,7 +338,7 @@ public class AutoCompleteTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.AutoComplete.Query(request);
+        var response = await GooglePlaces.AutoComplete.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);

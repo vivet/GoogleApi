@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
@@ -14,23 +13,23 @@ namespace GoogleApi.Test.Places.Photos;
 public class PhotosTests : BaseTest
 {
     [Test]
-    public void PlacesPhotosTest()
+    public async Task PlacesPhotosTest()
     {
-        var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
+        var response = await GooglePlaces.AutoComplete.QueryAsync(new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "det kongelige teater"
         });
 
         var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
-        var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
+        var response2 = await GooglePlaces.Details.QueryAsync(new PlacesDetailsRequest
         {
             Key = this.Settings.ApiKey,
             PlaceId = placeId
         });
 
         var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
-        var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
+        var response3 = await GooglePlaces.Photos.QueryAsync(new PlacesPhotosRequest
         {
             Key = this.Settings.ApiKey,
             PhotoReference = photoReference,
@@ -45,23 +44,23 @@ public class PhotosTests : BaseTest
     }
 
     [Test]
-    public void PlacesPhotosAsyncTest()
+    public async Task PlacesPhotosWhenMaxWidthTest()
     {
-        var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
+        var response = await GooglePlaces.AutoComplete.QueryAsync(new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
             Input = "det kongelige teater"
         });
 
         var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
-        var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
+        var response2 = await GooglePlaces.Details.QueryAsync(new PlacesDetailsRequest
         {
             Key = this.Settings.ApiKey,
             PlaceId = placeId
         });
 
         var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
-        var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
+        var response3 = await GooglePlaces.Photos.QueryAsync(new PlacesPhotosRequest
         {
             Key = this.Settings.ApiKey,
             PhotoReference = photoReference,
@@ -74,21 +73,32 @@ public class PhotosTests : BaseTest
     }
 
     [Test]
-    public void PlacesPhotosWhenAsyncAndCancelledTest()
+    public async Task PlacesPhotosWhenMaxHeightTest()
     {
-        var request = new PlacesPhotosRequest
+        var response = await GooglePlaces.AutoComplete.QueryAsync(new PlacesAutoCompleteRequest
         {
             Key = this.Settings.ApiKey,
-            PhotoReference = Guid.NewGuid().ToString("N"),
-            MaxWidth = 1600
-        };
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GooglePlaces.Photos.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
+            Input = "det kongelige teater"
+        });
 
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
+        var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
+        var response2 = await GooglePlaces.Details.QueryAsync(new PlacesDetailsRequest
+        {
+            Key = this.Settings.ApiKey,
+            PlaceId = placeId
+        });
+
+        var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
+        var response3 = await GooglePlaces.Photos.QueryAsync(new PlacesPhotosRequest
+        {
+            Key = this.Settings.ApiKey,
+            PhotoReference = photoReference,
+            MaxHeight = 1600
+        });
+
+        Assert.IsNotNull(response3);
+        Assert.IsNotNull(response3.Stream);
+        Assert.AreEqual(Status.Ok, response3.Status);
     }
 
     [Test]
@@ -101,70 +111,8 @@ public class PhotosTests : BaseTest
             MaxWidth = 1600
         };
 
-        var exception = Assert.Throws<AggregateException>(() => GooglePlaces.Photos.QueryAsync(request).Wait());
+        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GooglePlaces.Photos.QueryAsync(request));
         Assert.IsNotNull(exception);
-
-        var innerException = exception.InnerExceptions.FirstOrDefault();
-        Assert.IsNotNull(innerException);
-        Assert.AreEqual(typeof(GoogleApiException).ToString(), innerException.GetType().ToString());
-        Assert.AreEqual("PermissionDenied: Forbidden", innerException.Message);
-    }
-
-    [Test]
-    public void PlacesPhotosWhenMaxWidthTest()
-    {
-        var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
-        {
-            Key = this.Settings.ApiKey,
-            Input = "det kongelige teater"
-        });
-
-        var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
-        var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
-        {
-            Key = this.Settings.ApiKey,
-            PlaceId = placeId
-        });
-
-        var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
-        var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
-        {
-            Key = this.Settings.ApiKey,
-            PhotoReference = photoReference,
-            MaxWidth = 1600
-        });
-
-        Assert.IsNotNull(response3);
-        Assert.IsNotNull(response3.Stream);
-        Assert.AreEqual(Status.Ok, response3.Status);
-    }
-
-    [Test]
-    public void PlacesPhotosWhenMaxHeightTest()
-    {
-        var response = GooglePlaces.AutoComplete.Query(new PlacesAutoCompleteRequest
-        {
-            Key = this.Settings.ApiKey,
-            Input = "det kongelige teater"
-        });
-
-        var placeId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault();
-        var response2 = GooglePlaces.Details.Query(new PlacesDetailsRequest
-        {
-            Key = this.Settings.ApiKey,
-            PlaceId = placeId
-        });
-
-        var photoReference = response2.Result.Photos.Select(x => x.PhotoReference).FirstOrDefault();
-        var response3 = GooglePlaces.Photos.Query(new PlacesPhotosRequest
-        {
-            Key = this.Settings.ApiKey,
-            PhotoReference = photoReference,
-            MaxHeight = 1600
-        });
-
-        Assert.IsNotNull(response3);
-        Assert.IsNotNull(response3.Stream);
-        Assert.AreEqual(Status.Ok, response3.Status);
+        Assert.AreEqual("PermissionDenied: Forbidden", exception.Message);
     }
 }

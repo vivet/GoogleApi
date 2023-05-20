@@ -19,6 +19,6 @@ public class GeoJsonLinestring
     /// <summary>
     /// Coordinates.
     /// </summary>
-    [JsonConverter(typeof(CoordinateTuplesConverter))]
+    [JsonConverter(typeof(CoordinateTuplesJsonConverter))]
     public virtual IEnumerable<LatLng> Coordinates { get; set; }
 }

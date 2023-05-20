@@ -1,4 +1,6 @@
 using System;
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Search.Common.Converters;
 using GoogleApi.Entities.Search.Common.Enums;
 
 namespace GoogleApi.Entities.Search.Common;
@@ -6,6 +8,7 @@ namespace GoogleApi.Entities.Search.Common;
 /// <summary>
 /// The sort expression to apply to the results.
 /// </summary>
+[JsonConverter(typeof(SortExpressionJsonConverter))]
 public class SortExpression
 {
     /// <summary>

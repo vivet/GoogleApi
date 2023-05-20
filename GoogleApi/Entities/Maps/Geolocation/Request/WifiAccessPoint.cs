@@ -15,20 +15,20 @@ public class WifiAccessPoint
     /// <summary>
     /// The current signal strength measured in dBm.
     /// </summary>
-    public virtual int SignalStrength { get; set; }
+    public virtual int? SignalStrength { get; set; }
 
     /// <summary>
     /// The number of milliseconds since this access point was detected.
     /// </summary>
-    public virtual int Age { get; set; }
+    public virtual int? Age { get; set; }
 
     /// <summary>
     /// The channel over which the client is communicating with the access point.
     /// </summary>
-    public virtual int Channel { get; set; }
+    public virtual int? Channel { get; set; }
 
     /// <summary>
     /// The current signal to noise ratio measured in dB.
     /// </summary>
-    public virtual int SignalToNoiseRatio { get; set; }
+    public virtual int? SignalToNoiseRatio { get; set; }
 }

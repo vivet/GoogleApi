@@ -49,14 +49,14 @@ public class MatrixElement
     /// If you set the routingPreference to TRAFFIC_UNAWARE, then this value is the same as staticDuration.
     /// If you set the routingPreference to either TRAFFIC_AWARE or TRAFFIC_AWARE_OPTIMAL, then this value is calculated taking traffic conditions into account.
     /// </summary>
-    [JsonConverter(typeof(StringSecondsTimeSpanConverter))]
+    [JsonConverter(typeof(StringSecondsTimeSpanJsonConverter))]
     public virtual TimeSpan? Duration { get; set; }
 
     /// <summary>
     /// Static Duration.
     /// The duration of traveling through the route without taking traffic conditions into consideration.
     /// </summary>
-    [JsonConverter(typeof(StringSecondsTimeSpanConverter))]
+    [JsonConverter(typeof(StringSecondsTimeSpanJsonConverter))]
     public virtual TimeSpan? StaticDuration { get; set; }
 
     /// <summary>

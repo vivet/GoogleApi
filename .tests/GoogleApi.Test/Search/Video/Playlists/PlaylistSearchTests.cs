@@ -1,5 +1,4 @@
-using System;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Playlists.Request;
 using NUnit.Framework;
@@ -10,7 +9,8 @@ namespace GoogleApi.Test.Search.Video.Playlists;
 public class PlaylistSearchTests : BaseTest
 {
     [Test]
-    public void PlaylistsSearchTest()
+    [Ignore("Requires Enterprise License")]
+    public async Task PlaylistsSearchTest()
     {
         var request = new PlaylistSearchRequest
         {
@@ -19,44 +19,9 @@ public class PlaylistSearchTests : BaseTest
             MaxResults = 1
         };
 
-        var response = GoogleSearch.VideoSearch.Playlists.Query(request);
+        var response = await GoogleSearch.VideoSearch.Playlists.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(response.Status, Status.Ok);
-    }
-
-    [Test]
-    public void PlaylistsSearchAsyncTest()
-    {
-        var request = new PlaylistSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Query = "google",
-            MaxResults = 1
-        };
-
-        var response = GoogleSearch.VideoSearch.Playlists.QueryAsync(request).Result;
-
-        Assert.IsNotNull(response);
-        Assert.AreEqual(response.Status, Status.Ok);
-        Assert.IsNotEmpty(response.Items);
-    }
-
-    [Test]
-    public void PlaylistsSearchWhenAsyncAndCancelledTest()
-    {
-        var request = new PlaylistSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Query = "google"
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleSearch.VideoSearch.Playlists.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

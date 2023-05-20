@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Common.Enums;
+﻿using System.Runtime.Serialization;
+
+namespace GoogleApi.Entities.Common.Enums;
 
 /// <summary>
 /// Business Status.
@@ -8,21 +10,24 @@ public enum BusinessStatus
     /// <summary>
     /// Operational.
     /// </summary>
-    Operational = 0,
+    [EnumMember(Value = "OPERATIONAL")]
+    Operational,
 
     /// <summary>
     /// Closed Temporarily.
     /// </summary>
-    Closed_Temporarily = 1,
+    [EnumMember(Value = "CLOSED_TEMPORARELY")]
+    Closed_Temporarily,
 
     /// <summary>
     /// Closed Permanently
     /// </summary>
-    Closed_Permanently = 2,
+    [EnumMember(Value = "CLOSED_PERMANENTLY")]
+    Closed_Permanently,
 
-    //https://github.com/vivet/GoogleApi/issues/305
     /// <summary>
     /// Future Opening.
     /// </summary>
-    Future_Opening = 3
+    [EnumMember(Value = "FUTURE_OPENING")]
+    Future_Opening
 }

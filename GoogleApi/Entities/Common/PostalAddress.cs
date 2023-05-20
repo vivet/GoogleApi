@@ -17,7 +17,7 @@ public class PostalAddress
     /// The schema revision of the PostalAddress.
     /// Any value other than 0 will cause the API to return an INVALID_ARGUMENT error.
     /// </summary>
-    public virtual int Revision { get; set; } = 0;
+    public virtual int? Revision { get; set; }
 
     /// <summary>
     /// Optional. CLDR region code of the country/region of the address.
