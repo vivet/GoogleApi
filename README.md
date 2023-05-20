@@ -30,7 +30,7 @@ response.RawQueryString // The querystring sent to Google when invoking the requ
 
 #### Facade
 Each api has a generic facade operation to execute the request and return the response.  
-The example below, simply populates a request, invokes the facade operation, and recieves the response in return.  
+The example below, simply populates a request, invokes the facade operation, and receives the response in return.  
 ```csharp
 TRequest request = new TRequest();
 TResponse response = await {Api}.[{SubGroup}].{Action}.QueryAsync<TRequest, TResponse>(request);
