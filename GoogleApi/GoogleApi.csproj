@@ -59,9 +59,6 @@
   <ItemGroup>
 		<None Remove="GoogleApi.csproj.DotSettings" />
 		<None Remove="GoogleApi.rd.xml" />
-		<Content Include="GoogleApi.rd.xml">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
 		<None Include="icon.jpg" Pack="true" PackagePath="icon.jpg" />
 		<None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
 	</ItemGroup>
