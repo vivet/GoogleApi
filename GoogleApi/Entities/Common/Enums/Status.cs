@@ -101,5 +101,11 @@ public enum Status
     /// Permission Denied.
     /// </summary>
     [EnumMember(Value = "PERMISSION_DENIED")]
-    PermissionDenied
+    PermissionDenied,
+
+    /// <summary>
+    /// Resource Exhausted.
+    /// </summary>
+    [EnumMember(Value = "RESOURCE_EXHAUSTED")]
+    ResourceExhausted,
 }

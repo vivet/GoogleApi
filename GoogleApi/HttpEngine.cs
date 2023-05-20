@@ -107,6 +107,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
                 case Status.Ok:
                 case Status.NotFound:
                 case Status.ZeroResults:
+                case Status.ResourceExhausted:
                     return response;
 
                 case Status.InvalidRequest:

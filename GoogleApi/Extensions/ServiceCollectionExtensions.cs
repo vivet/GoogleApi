@@ -1,9 +1,9 @@
 ﻿using System;
 using GoogleApi.Interfaces.Maps;
+using GoogleApi.Interfaces.Maps.AerialView;
 using GoogleApi.Interfaces.Maps.Geocode;
 using GoogleApi.Interfaces.Maps.Roads;
-using GoogleApi.Interfaces.Maps.Routes.Directions;
-using GoogleApi.Interfaces.Maps.Routes.Matrix;
+using GoogleApi.Interfaces.Maps.Routes;
 using GoogleApi.Interfaces.Places;
 using GoogleApi.Interfaces.Places.Search;
 using GoogleApi.Interfaces.Search;
@@ -44,6 +44,7 @@ public static class ServiceCollectionExtensions
             .AddApi<ILocationGeocodeApi, GoogleMaps.Geocode.LocationGeocodeApi>()
             .AddApi<IPlaceGeocodeApi, GoogleMaps.Geocode.PlaceGeocodeApi>()
             .AddApi<IPlusCodeGeocodeApi, GoogleMaps.Geocode.PlusCodeGeocodeApi>()
+            .AddApi<IAddressValidationApi, GoogleMaps.AddressValidationApi>()
             .AddApi<ISnapToRoadApi, GoogleMaps.Roads.SnapToRoadApi>()
             .AddApi<INearestRoadsApi, GoogleMaps.Roads.NearestRoadsApi>()
             .AddApi<ISpeedLimitsApi, GoogleMaps.Roads.SpeedLimitsApi>()
@@ -52,7 +53,8 @@ public static class ServiceCollectionExtensions
             .AddApi<ITimeZoneApi, GoogleMaps.TimeZoneApi>()
             .AddApi<IRoutesDirectionsApi, GoogleMaps.Routes.RoutesDirectionsApi>()
             .AddApi<IRoutesMatrixApi, GoogleMaps.Routes.RoutesMatrixApi>()
-            .AddApi<IAddressValidationApi, GoogleMaps.AddressValidationApi>();
+            .AddApi<IAerialViewGetVideoApi, GoogleMaps.AerialView.AerialViewGetVideoApi>()
+            .AddApi<IAerialViewRenderVideoApi, GoogleMaps.AerialView.AerialViewRenderApi>();
 
         services
             .AddApi<IDetailsApi, GooglePlaces.DetailsApi>()

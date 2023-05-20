@@ -34,8 +34,12 @@ using GoogleApi.Entities.Maps.Routes.Matrix.Response;
 using GoogleApi.Interfaces.Maps;
 using GoogleApi.Interfaces.Maps.Roads;
 using GoogleApi.Interfaces.Maps.Geocode;
-using GoogleApi.Interfaces.Maps.Routes.Directions;
-using GoogleApi.Interfaces.Maps.Routes.Matrix;
+using GoogleApi.Entities.Maps.AerialView.GetVideo.Request;
+using GoogleApi.Entities.Maps.AerialView.GetVideo.Response;
+using GoogleApi.Entities.Maps.AerialView.RenderVideo.Request;
+using GoogleApi.Entities.Maps.AerialView.RenderVideo.Response;
+using GoogleApi.Interfaces.Maps.Routes;
+using GoogleApi.Interfaces.Maps.AerialView;
 
 namespace GoogleApi;
 
@@ -186,6 +190,9 @@ public partial class GoogleMaps
 
     /// <summary>
     /// Routes (nested class).
+    /// Routes API is the next generation, performance optimized version of the existing Directions API and Distance Matrix API.
+    /// It helps you find the ideal route from A to Z, calculates ETAs and distances for matrices of origin and destination locations, and also offers new features.
+    /// https://developers.google.com/maps/documentation/routes
     /// </summary>
     public static partial class Routes
     {
@@ -200,6 +207,30 @@ public partial class GoogleMaps
         /// https://developers.google.com/maps/documentation/routes/reference/rest/v2/TopLevel/computeRouteMatrix
         /// </summary>
         public static RoutesMatrixApi Matrix => new();
+    }
+
+    /// <summary>
+    /// The Aerial View API is a service that lets you create and display photorealistic 3D aerial videos of any physical address within the United States.
+    /// The videos simulate footage taken by a drone circling overhead.
+    /// https://developers.google.com/maps/documentation/aerial-view/overview
+    /// </summary>
+    public static partial class AerialView
+    {
+        /// <summary>
+        /// Fetches a video given its address or videoId.
+        /// The response will either be a video with a set of playback URIs for ACTIVE videos, a PROCESSING state for pending videos,
+        /// or a 404 error if the video does not exist. Receiving a video is a billable event,
+        /// so callers of this method should be ready to use the returned URIs at the time of request.
+        /// https://developers.google.com/maps/documentation/aerial-view/reference/rest/v1beta/videos/getVideo
+        /// </summary>
+        public static AerialViewGetVideoApi GetVideo => new();
+
+        /// <summary>
+        /// Adds an address to the renderer's queue if a video hasn't already been rendered.
+        /// Otherwise, returns metadata about the video.
+        /// https://developers.google.com/maps/documentation/aerial-view/reference/rest/v1beta/videos/renderVideo
+        /// </summary>
+        public static AerialViewRenderApi RenderVideo => new();
     }
 }
 
@@ -397,6 +428,9 @@ public partial class GoogleMaps
         }
     }
 
+    /// <summary>
+    /// Geocode.
+    /// </summary>
     public static partial class Geocode
     {
         /// <summary>
@@ -496,6 +530,9 @@ public partial class GoogleMaps
         }
     }
 
+    /// <summary>
+    /// Roads.
+    /// </summary>
     public static partial class Roads
     {
         /// <summary>
@@ -571,6 +608,9 @@ public partial class GoogleMaps
         }
     }
 
+    /// <summary>
+    /// Routes.
+    /// </summary>
     public static partial class Routes
     {
         /// <summary>
@@ -615,6 +655,60 @@ public partial class GoogleMaps
             /// </summary>
             /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
             public RoutesMatrixApi(HttpClient httpClient)
+                : base(httpClient)
+            {
+
+            }
+        }
+    }
+
+    /// <summary>
+    /// Aerial View.
+    /// </summary>
+    public static partial class AerialView
+    {
+        /// <summary>
+        /// Aerial View Get Video Api.
+        /// </summary>
+        public sealed class AerialViewGetVideoApi : HttpEngine<GetVideoRequest, GetVideoResponse>, IAerialViewGetVideoApi
+        {
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            public AerialViewGetVideoApi()
+            {
+
+            }
+
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
+            public AerialViewGetVideoApi(HttpClient httpClient)
+                : base(httpClient)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Aerial View Render Video Api.
+        /// </summary>
+        public sealed class AerialViewRenderApi : HttpEngine<RenderVideoRequest, RenderVideoResponse>, IAerialViewRenderVideoApi
+        {
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            public AerialViewRenderApi()
+            {
+
+            }
+
+            /// <summary>
+            /// Constructor.
+            /// </summary>
+            /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
+            public AerialViewRenderApi(HttpClient httpClient)
                 : base(httpClient)
             {
 

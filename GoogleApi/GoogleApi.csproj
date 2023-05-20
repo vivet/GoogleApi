@@ -29,6 +29,7 @@
 			- Added Maps Address Validation Api.
 			- Changed various response contracts for nullable value types.
 			- Cleaned up and removed unnecessary json converters.
+			- Added Maps Aerial View Api.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
