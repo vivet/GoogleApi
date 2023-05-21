@@ -1,5 +1,4 @@
-using System;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Channels.Request;
 using NUnit.Framework;
@@ -10,7 +9,8 @@ namespace GoogleApi.Test.Search.Video.Channels;
 public class ChannelSearchTests : BaseTest
 {
     [Test]
-    public void ChannelSearchTest()
+    [Ignore("Requires Enterprise License")]
+    public async Task ChannelSearchTest()
     {
         var request = new ChannelSearchRequest
         {
@@ -19,44 +19,9 @@ public class ChannelSearchTests : BaseTest
             MaxResults = 1
         };
 
-        var response = GoogleSearch.VideoSearch.Channels.Query(request);
+        var response = await GoogleSearch.VideoSearch.Channels.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(response.Status, Status.Ok);
-    }
-
-    [Test]
-    public void ChannelSearchAsyncTest()
-    {
-        var request = new ChannelSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Query = "google",
-            MaxResults = 1
-        };
-
-        var response = GoogleSearch.VideoSearch.Channels.QueryAsync(request).Result;
-
-        Assert.IsNotNull(response);
-        Assert.AreEqual(response.Status, Status.Ok);
-        Assert.IsNotEmpty(response.Items);
-    }
-
-    [Test]
-    public void ChannelSearchWhenAsyncAndCancelledTest()
-    {
-        var request = new ChannelSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Query = "google"
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleSearch.VideoSearch.Channels.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

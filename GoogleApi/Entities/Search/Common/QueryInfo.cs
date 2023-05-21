@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Search.Common.Enums;
 
 namespace GoogleApi.Entities.Search.Common;
@@ -62,21 +64,21 @@ public class QueryInfo
     /// - medium: Enable SafeSearch
     /// - high: Enable a stricter version of SafeSearch
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("safe")]
+    [JsonPropertyName("safe")]
     public virtual SafetyLevel? SafetyLevel { get; set; }
 
     /// <summary>
     /// The identifier of a custom search engine created using the Custom Search Control Panel, if specified in request.
     /// This is a custom property not defined in the OpenSearch spec.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("cx")]
+    [JsonPropertyName("cx")]
     public virtual string SearchEngineId { get; set; }
 
     /// <summary>
     /// Specifies that results should be sorted according to the specified expression.
     /// For example, sort by date.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("sort")]
+    [JsonPropertyName("sort")]
     public virtual SortExpression SortExpression { get; set; }
 
     /// <summary>
@@ -88,7 +90,8 @@ public class QueryInfo
     /// - 1: Enabled
     /// Note: By default, Google applies filtering to all search results to improve the quality of those results.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("filter")]
+    [JsonPropertyName("filter")]
+    [JsonConverter(typeof(StringBooleanZeroOneJsonConverter))]
     public virtual bool Filter { get; set; }
 
     /// <summary>
@@ -98,7 +101,7 @@ public class QueryInfo
     /// This is particularly true for international customers and, even more specifically,
     /// for customers in English-speaking countries other than the United States.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("gl")]
+    [JsonPropertyName("gl")]
     public virtual GeoLocation? GeoLocation { get; set; }
 
     /// <summary>
@@ -110,7 +113,7 @@ public class QueryInfo
     /// See Country(cr) Parameter Values for a list of valid values for this parameter.
     /// https://developers.google.com/custom-search/docs/xml_results#countryCollections
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("cr")]
+    [JsonPropertyName("cr")]
     public virtual string CountryRestrict { get; set; }
 
     /// <summary>
@@ -124,13 +127,13 @@ public class QueryInfo
     /// - 0: enabled(default)
     /// - 1: disabled
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("disableCnTwTranslation")]
+    [JsonConverter(typeof(StringBooleanZeroOneJsonConverter))]
     public virtual bool DisableCnTwTranslation { get; set; } = true;
 
     /// <summary>
     /// Appends the specified query terms to the query, as if they were combined with a logical AND operator.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("hq")]
+    [JsonPropertyName("hq")]
     public virtual string AndTerms { get; set; }
 
     /// <summary>
@@ -140,13 +143,13 @@ public class QueryInfo
     /// and Supported Interface Languages for a list of supported languages.
     /// https://developers.google.com/custom-search/docs/xml_results#wsInterfaceLanguages
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("hl")]
+    [JsonPropertyName("hl")]
     public virtual Language? InterfaceLanguage { get; set; }
 
     /// <summary>
     /// Specifies all search results should be pages either included or excluded, from a given site.
     /// </summary>
-    [System.Text.Json.Serialization.JsonIgnore]
+    [JsonIgnore]
     public virtual SiteSearch SiteSearch => string.IsNullOrEmpty(this.SiteSearchStr)
         ? null
         : new SiteSearch { Site = SiteSearchStr, Filter = SiteSearchFilterEnum };
@@ -208,7 +211,7 @@ public class QueryInfo
     /// Additional filetypes may be added in the future. An up-to-date list can always be found in Google's file type FAQ.
     /// </summary>
 
-    [System.Text.Json.Serialization.JsonIgnore]
+    [JsonIgnore]
     public virtual IEnumerable<FileType> FileTypes {
         get
         {
@@ -223,7 +226,7 @@ public class QueryInfo
     /// <summary>
     /// CSV list of FileType
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("fileType")]
+    [JsonPropertyName("fileType")]
     public virtual string FileType { get; set; }
 
     /// <summary>
@@ -246,38 +249,36 @@ public class QueryInfo
     /// <summary>
     /// Restricts results to images of a specified size.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("imgSize")]
+    [JsonPropertyName("imgSize")]
     public virtual ImageSize? ImageSize { get; set; }
 
     /// <summary>
     /// Restricts results to images of a specified type.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("imgType")]
+    [JsonPropertyName("imgType")]
     public virtual ImageType? ImageType { get; set; }
 
     /// <summary>
     /// Restricts results to images of a specified color type.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("imgColorType")]
+    [JsonPropertyName("imgColorType")]
     public virtual ColorType? ImageColorType { get; set; }
 
     /// <summary>
     /// Restricts results to images with a specific dominant color.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("imgDominantColor")]
+    [JsonPropertyName("imgDominantColor")]
     public virtual DominantColorType? ImageDominantColor { get; set; }
 
     /// <summary>
     ///  Used to build a SiteSearch object
     /// </summary>
-    // ReSharper disable once MemberCanBePrivate.Global required to be public for System.Text.Json serialization
-    [System.Text.Json.Serialization.JsonPropertyName("siteSearch")]
+    [JsonPropertyName("siteSearch")]
     public string SiteSearchStr { get; set; }
 
     /// <summary>
     ///  Used to build a SiteSearch object
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("siteSearchFilter")]
-    // ReSharper disable once MemberCanBePrivate.Global required to be public for System.Text.Json serialization
+    [JsonPropertyName("siteSearchFilter")]
     public SiteSearchFilter SiteSearchFilterEnum { get; set; } = SiteSearchFilter.Include;
 }

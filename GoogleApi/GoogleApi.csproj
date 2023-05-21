@@ -7,9 +7,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>4.5.5.0</AssemblyVersion>
-		<FileVersion>4.5.5.0</FileVersion>
-		<Version>4.5.5.0</Version>
+		<AssemblyVersion>5.0.0.0</AssemblyVersion>
+		<FileVersion>5.0.0.0</FileVersion>
+		<Version>5.0.0.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -21,7 +21,15 @@
 		<Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReleaseNotes>
-			- Changed clientId/signature implementation, and removed Portable.BouncyCastle dependency.
+			- Improved request and response serialization in HttpEngine.
+			- Removed HttpEngine Query method (only async now) (Breaking).
+			- Removed unused properties for IResponse (html_attributions not needed on interface).
+			- Added Maps Routes Directions Api.
+			- Added Maps Routes Matrix Api.
+			- Added Maps Address Validation Api.
+			- Changed various response properties for nullable value types (Breaking).
+			- Cleaned up and removed unnecessary json converters.
+			- Added Maps Aerial View Api.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
@@ -50,6 +58,7 @@
   
   <ItemGroup>
 		<None Remove="GoogleApi.csproj.DotSettings" />
+		<None Remove="GoogleApi.rd.xml" />
 		<None Include="icon.jpg" Pack="true" PackagePath="icon.jpg" />
 		<None Include="LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
 	</ItemGroup>

@@ -1,13 +1,10 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Search.Common.Enums;
 
 /// <summary>
 /// Site Search Filter.
 /// </summary>
-[JsonConverter(typeof(EnumConverter<SiteSearchFilter>))]
 public enum SiteSearchFilter
 {
     /// <summary>

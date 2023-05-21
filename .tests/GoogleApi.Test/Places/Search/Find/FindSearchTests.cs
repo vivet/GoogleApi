@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common;
@@ -14,7 +13,7 @@ namespace GoogleApi.Test.Places.Search.Find;
 public class FindSearchTests : BaseTest
 {
     [Test]
-    public void PlacesFindSearchTest()
+    public async Task PlacesFindSearchTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -24,7 +23,7 @@ public class FindSearchTests : BaseTest
             Fields = FieldTypes.Basic
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
@@ -36,7 +35,7 @@ public class FindSearchTests : BaseTest
     }
 
     [Test]
-    public void PlacesFindSearchWhenTypeIsPhoneNumberTest()
+    public async Task PlacesFindSearchWhenTypeIsPhoneNumberTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -45,47 +44,14 @@ public class FindSearchTests : BaseTest
             Type = InputType.PhoneNumber
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchAsyncTest()
-    {
-        var request = new PlacesFindSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Input = "picadelly circus"
-        };
-
-        var response = GooglePlaces.Search.FindSearch.QueryAsync(request).Result;
-
-        Assert.IsNotNull(response);
-        Assert.AreEqual(Status.Ok, response.Status);
-    }
-
-    [Test]
-    public void PlacesFindSearchWhenAsyncAndCancelledTest()
-    {
-        var request = new PlacesFindSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Input = "picadelly circus"
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GooglePlaces.Search.FindSearch.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
-    }
-
-    [Test]
-    public void PlacesFindSearchWhenFieldsTest()
+    public async Task PlacesFindSearchWhenFieldsTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -95,7 +61,7 @@ public class FindSearchTests : BaseTest
             Fields = FieldTypes.Basic
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
@@ -111,7 +77,7 @@ public class FindSearchTests : BaseTest
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationBiasAndIpBiasTest()
+    public async Task PlacesFindSearchWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -123,35 +89,34 @@ public class FindSearchTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationBiasAndPointTest()
+    [Ignore("Google documentation states that 'point' bias is possible, but Google returns invalid request")]
+    public async Task PlacesFindSearchWhenLocationBiasAndPointTest()
     {
-        Assert.Inconclusive("Documentation states that 'point' bias is possible, but Google returns invalid request");
+        var request = new PlacesFindSearchRequest
+        {
+            Key = this.Settings.ApiKey,
+            Input = "jagtvej 2200 København",
+            LocationBias = new LocationBias
+            {
+                Location = new Coordinate(55.69987296762697, 12.552359427579363)
+            }
+        };
 
-        //var request = new PlacesFindSearchRequest
-        //{
-        //    Key = this.Settings.ApiKey,
-        //    Input = "jagtvej 2200 København",
-        //    LocationBias = new LocationBias
-        //    {
-        //        Location = new Coordinate(55.69987296762697, 12.552359427579363)
-        //    }
-        //};
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
-        //var response = GooglePlaces.AutoComplete.Query(request);
-
-        //Assert.IsNotNull(response);
-        //Assert.AreEqual(Status.Ok, response.Status);
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationBiasAndCircleTest()
+    public async Task PlacesFindSearchWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -164,14 +129,14 @@ public class FindSearchTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationBiasAndRectangularTest()
+    public async Task PlacesFindSearchWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -183,14 +148,14 @@ public class FindSearchTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationRestrictionAndCircleTest()
+    public async Task PlacesFindSearchWhenLocationRestrictionAndCircleTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -203,14 +168,14 @@ public class FindSearchTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesFindSearchWhenLocationRestrictionAndRectangularTest()
+    public async Task PlacesFindSearchWhenLocationRestrictionAndRectangularTest()
     {
         var request = new PlacesFindSearchRequest
         {
@@ -222,7 +187,7 @@ public class FindSearchTests : BaseTest
             }
         };
 
-        var response = GooglePlaces.Search.FindSearch.Query(request);
+        var response = await GooglePlaces.Search.FindSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);

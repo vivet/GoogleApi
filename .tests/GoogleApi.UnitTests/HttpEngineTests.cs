@@ -28,7 +28,7 @@ public sealed class HttpEngineTests
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         Converters = {
-            new BooleanJsonConverter(),
+            new StringBooleanZeroOneJsonConverter(),
             new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true),
             new SortExpressionJsonConverter()
         },
@@ -58,35 +58,6 @@ public sealed class HttpEngineTests
             .With(_ => _.Key, $"{Guid.NewGuid():N}")
             .With(_ => _.ClientId, $"gme-{Guid.NewGuid():N}")
             .OmitAutoProperties());
-    }
-
-    [Test]
-    public void QueryWhenOkTest()
-    {
-        var data = new
-        {
-            status = "OK",
-            data = new { }
-        };
-        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
-
-        this.mockHttpMessageHandler
-            .When("https://demo.googleapis.com/fakeservice/*")
-            .Respond(HttpEngineTests.APPLICATION_JSON, response);
-
-        var httpClient = this.mockHttpMessageHandler
-            .ToHttpClient();
-
-        var httpEngine = new DemoHttpEngine(httpClient);
-
-        var request = this.fixture
-            .Create<DemoRequest>();
-
-        var result = httpEngine
-            .Query(request);
-
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
@@ -342,35 +313,6 @@ public sealed class HttpEngineTests
     }
 
     [Test]
-    public void QueryWhenHttpError()
-    {
-        var data = new
-        {
-            status = "HTTP_ERROR",
-            data = new { }
-        };
-        var response = JsonSerializer.Serialize(data, HttpEngineTests.jsonSerializerOptions);
-
-        this.mockHttpMessageHandler
-            .When("https://demo.googleapis.com/fakeservice/*")
-            .Respond(HttpEngineTests.APPLICATION_JSON, response);
-
-        var httpClient = this.mockHttpMessageHandler
-            .ToHttpClient();
-
-        var httpEngine = new DemoHttpEngine(httpClient);
-
-        var request = this.fixture
-            .Create<DemoRequest>();
-
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
-
-        Assert.IsNotNull(exception);
-        Assert.IsNotNull(exception.Status);
-        Assert.AreEqual(Status.HttpError, exception.Status);
-    }
-
-    [Test]
     public void QueryWhenUnknownError()
     {
         var data = new
@@ -402,8 +344,10 @@ public sealed class HttpEngineTests
     #region Query Based
     private sealed class DemoHttpEngine : HttpEngine<DemoRequest, DemoResponse>
     {
-        public DemoHttpEngine(HttpClient client) : base(client)
+        public DemoHttpEngine(HttpClient client)
+            : base(client)
         {
+
         }
     }
 
@@ -421,13 +365,14 @@ public sealed class HttpEngineTests
     #region Post Based
     private sealed class DemoPostHttpEngine : HttpEngine<DemoPostRequest, DemoPostResponse>
     {
-        public DemoPostHttpEngine(HttpClient client) : base(client)
+        public DemoPostHttpEngine(HttpClient client)
+            : base(client)
         {
+
         }
     }
 
-
-    private sealed class DemoPostRequest : BaseRequest
+    private sealed class DemoPostRequest : BaseRequest, IRequestJson
     {
         protected override string BaseUrl => "demo.googleapis.com/fakeservice/";
     }
@@ -441,8 +386,10 @@ public sealed class HttpEngineTests
     #region Stream Based
     private sealed class DemoStreamHttpEngine : HttpEngine<DemoStreamRequest, DemoStreamResponse>
     {
-        public DemoStreamHttpEngine(HttpClient client) : base(client)
+        public DemoStreamHttpEngine(HttpClient client)
+            : base(client)
         {
+
         }
     }
 

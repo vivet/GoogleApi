@@ -75,7 +75,7 @@ public class EnumJsonConverterFactory : JsonConverterFactory
             ? EnumConverterOptions.AllowStrings | EnumConverterOptions.AllowNumbers
             : EnumConverterOptions.AllowStrings;
 
-        var converterType = typeof(EnumConverter<>).MakeGenericType(typeToConvert);
+        var converterType = typeof(EnumJsonConverter<>).MakeGenericType(typeToConvert);
 
         return (JsonConverter)Activator.CreateInstance(converterType, enumConverterOptions, policy, options);
     }
@@ -86,7 +86,7 @@ public class EnumJsonConverterFactory : JsonConverterFactory
 /// </summary>
 public class EnumJsonConverterFactory<TEnum, TConverter> : EnumJsonConverterFactory
     where TEnum : struct, Enum
-    where TConverter : EnumConverter<TEnum>
+    where TConverter : EnumJsonConverter<TEnum>
 {
     /// <inheritdoc />
     public EnumJsonConverterFactory()

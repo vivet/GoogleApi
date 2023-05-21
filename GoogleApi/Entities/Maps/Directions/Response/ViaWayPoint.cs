@@ -18,11 +18,11 @@ public class ViaWayPoint
     /// Step Index.
     /// </summary>
     [JsonPropertyName("step_index")]
-    public virtual int StepIndex { get; set; }
+    public virtual int? StepIndex { get; set; }
 
     /// <summary>
     /// Step Interpolation.
     /// </summary>
     [JsonPropertyName("step_interpolation")]
-    public virtual decimal StepInterpolation { get; set; }
+    public virtual decimal? StepInterpolation { get; set; }
 }

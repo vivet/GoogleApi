@@ -9,17 +9,17 @@ namespace GoogleApi.Entities.Common.Enums.Converters;
 /// Custom <see cref="PlaceLocationType"/> Enum converter
 /// to avoid breaking changes when Google adds a new <inheritdoc cref="PlaceLocationType"/>'s to the list.
 /// </summary>
-public class PlaceLocationTypeEnumConverter : EnumConverter<PlaceLocationType>
+public class PlaceLocationTypeEnumJsonConverter : EnumJsonConverter<PlaceLocationType>
 {
     /// <inheritdoc />
-    public PlaceLocationTypeEnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
+    public PlaceLocationTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : base(converterOptions, serializerOptions)
     {
 
     }
 
     /// <inheritdoc />
-    public PlaceLocationTypeEnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
+    public PlaceLocationTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
         : base(converterOptions, namingPolicy, serializerOptions)
     {
 

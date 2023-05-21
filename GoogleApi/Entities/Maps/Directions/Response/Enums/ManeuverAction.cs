@@ -1,13 +1,10 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Maps.Directions.Response.Enums;
 
 /// <summary>
 /// Maneuver Action.
 /// </summary>
-[JsonConverter(typeof(EnumConverter<ManeuverAction>))]
 public enum ManeuverAction
 {
     /// <summary>

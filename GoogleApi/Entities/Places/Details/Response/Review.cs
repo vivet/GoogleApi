@@ -36,7 +36,7 @@ public class Review
     /// <summary>
     /// Rating the user's overall rating for this place. This is a whole number, ranging from 1 to 5.
     /// </summary>
-    public virtual double Rating { get; set; }
+    public virtual double? Rating { get; set; }
 
     /// <summary>
     /// Text contains the user's review. When reviewing a location with Google Places,

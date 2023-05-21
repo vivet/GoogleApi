@@ -111,13 +111,13 @@ public class DetailsResult
     /// rating contains the Place's rating, from 0.0 to 5.0, based on user reviews.
     /// For more granular ratings, inspect the contents of the aspects collection.
     /// </summary>
-    public virtual double Rating { get; set; }
+    public virtual double? Rating { get; set; }
 
     /// <summary>
     /// The total number of user ratings.
     /// </summary>
     [JsonPropertyName("user_ratings_total")]
-    public virtual int UserRatingsTotal { get; set; }
+    public virtual int? UserRatingsTotal { get; set; }
 
     /// <summary>
     /// Reviews, array of up to five reviews.
@@ -152,7 +152,7 @@ public class DetailsResult
     /// would be -480 (-8 hours from UTC).
     /// </summary>
     [JsonPropertyName("utc_offset")]
-    public virtual int UtcOffset { get; set; }
+    public virtual int? UtcOffset { get; set; }
 
     /// <summary>
     /// Website lists the authoritative website for this Place, such as a business' homepage.

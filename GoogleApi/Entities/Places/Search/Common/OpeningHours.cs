@@ -11,5 +11,5 @@ public class OpeningHours
     /// OpenNow is a boolean value indicating if the place is open at the current time.
     /// </summary>
     [JsonPropertyName("open_now")]
-    public virtual bool OpenNow { get; set; }
+    public virtual bool OpenNow { get; set; } = false;
 }

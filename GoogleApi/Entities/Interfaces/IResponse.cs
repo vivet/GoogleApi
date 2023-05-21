@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GoogleApi.Entities.Common.Enums;
 
 namespace GoogleApi.Entities.Interfaces;
@@ -20,9 +19,8 @@ public interface IResponse
 
     /// <summary>
     /// The status returned with the response.
-    /// <see cref="GoogleApi.Entities.Common.Enums.Status.Ok"/> indicates success.
     /// </summary>
-    Status? Status { get; set; }
+    Status Status { get; set; }
 
     /// <summary>
     /// When the status code is other than 'Ok', there may be an additional error_message field within the response object.
@@ -30,9 +28,4 @@ public interface IResponse
     /// Note: This field is not guaranteed to be always present, and its content is subject to change.
     /// </summary>
     string ErrorMessage { get; set; }
-
-    /// <summary>
-    /// html_attributions contain a set of attributions which must be displayed to the user.
-    /// </summary>
-    IEnumerable<string> HtmlAttributions { get; set; }
 }

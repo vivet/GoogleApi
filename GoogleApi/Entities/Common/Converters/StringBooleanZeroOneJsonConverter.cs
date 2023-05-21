@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 namespace GoogleApi.Entities.Common.Converters;
 
 /// <summary>
-/// String Boolean Json Converter.
+/// String Boolean Zero One Json Converter.
 /// Converter for a <see cref="string"/> to a <see cref="string"/>.
 /// If the string value is "1" then true, otherwise false.
 /// </summary>
-public class BooleanJsonConverter : JsonConverter<bool>
+public class StringBooleanZeroOneJsonConverter : JsonConverter<bool>
 {
     /// <inheritdoc />
     public override bool Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -29,7 +29,7 @@ public class BooleanJsonConverter : JsonConverter<bool>
             var boolString = reader
                 .GetString();
 
-            var value = boolString == "0"
+            var value = boolString is null or "0" || boolString.ToLower() == "no" || boolString.ToLower() == "n"
                 ? bool.FalseString
                 : bool.TrueString;
 

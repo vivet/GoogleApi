@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Common;
 
@@ -8,17 +9,22 @@ namespace GoogleApi.Entities.Maps.Common;
 public class Error
 {
     /// <summary>
-    /// This is the same as the HTTP status of the response.
+    /// Code.
     /// </summary>
-    public virtual string Code { get; set; }
+    public virtual int? Code { get; set; }
 
     /// <summary>
-    /// A short description of the error.
+    /// Message.
     /// </summary>
-    public virtual string ErrorMessage { get; set; }
+    public virtual string Message { get; set; }
 
     /// <summary>
-    /// Collection of errors.
+    /// Status.
     /// </summary>
-    public virtual IEnumerable<ErrorDetail> Errors { get; set; }
+    public virtual Status Status { get; set; }
+
+    /// <summary>
+    /// Details.
+    /// </summary>
+    public virtual IEnumerable<ErrorDetail> Details { get; set; }
 }

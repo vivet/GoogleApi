@@ -81,13 +81,13 @@ public abstract class BaseResult
     /// <summary>
     /// Rating contains the place's rating, from 1.0 to 5.0, based on aggregated user reviews.
     /// </summary>
-    public virtual double Rating { get; set; }
+    public virtual double? Rating { get; set; }
 
     /// <summary>
     /// The total number of user ratings.
     /// </summary>
     [JsonPropertyName("user_ratings_total")]
-    public virtual int UserRatingsTotal { get; set; }
+    public virtual int? UserRatingsTotal { get; set; }
 
     /// <summary>
     /// Types contains an array of feature types describing the given result. See the list of supported types for more information.

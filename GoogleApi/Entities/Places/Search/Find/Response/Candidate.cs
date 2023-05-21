@@ -80,13 +80,13 @@ public class Candidate
     /// Rating the user's overall rating for this place. This is a whole number, ranging from 1 to 5.
     /// </summary>
     [JsonPropertyName("rating")]
-    public virtual double Rating { get; set; }
+    public virtual double? Rating { get; set; }
 
     /// <summary>
     /// The total number of user ratings.
     /// </summary>
     [JsonPropertyName("user_ratings_total")]
-    public virtual int UserRatingsTotal { get; set; }
+    public virtual int? UserRatingsTotal { get; set; }
 
     /// <summary>
     /// Photos.

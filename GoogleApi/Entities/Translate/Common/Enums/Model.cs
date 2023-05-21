@@ -1,13 +1,10 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Translate.Common.Enums;
 
 /// <summary>
 /// The translation model.
 /// </summary>
-[JsonConverter(typeof(EnumConverter<Model>))]
 public enum Model
 {
     /// <summary>

@@ -78,10 +78,10 @@ public class MapMarker
                 .Append($"color:{this.Color}|");
         }
 
-        if (this.Size != null)
+        if (this.Size.HasValue)
         {
             builder
-                .Append($"size:{this.Size.ToString().ToLower()}|");
+                .Append($"size:{this.Size?.ToString().ToLower()}|");
         }
 
         if (this.Icon != null)

@@ -13,5 +13,5 @@ public class Term
     /// <summary>
     /// Defining the start position of this term in the description, measured in Unicode characters.
     /// </summary>
-    public virtual int Offset { get; set; }
+    public virtual int? Offset { get; set; }
 }

@@ -9,6 +9,10 @@ Google Maps, Places, Roads, Search and Translate.
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 Do you need support for an additional .Net framework?, let me know.  
 
+**New: Version 5.0.0 with Routes Api (directions and matrix), Ariel View Api and Address Validation Api.**  
+
+***
+
 ### Using the Library
 The library may be consumed, either by using the individual facede implementations or by depdendency injecting the individual api's.  
 Each api implementation consists of a request and a response. The request has properties reflecting the parameters supported, and the response represents the object model for the returned json.  
@@ -77,6 +81,13 @@ The following api's are supported.
   * Time Zone
   * Street View
   * Static Maps
+  * Routes
+    * Directions (```GoogleMaps.Routes.Directions```)
+    * Matrix (```GoogleMaps.Routes.Matrix```)
+  * Address Validation (```GoogleMaps.AddressValidation```)
+  * Aerial View (*beta*)
+    * Directions (```GoogleMaps.AerialView.GetVideo```)
+    * Matrix (```GoogleMaps.AerialView.RenderVideo```)
 
 ##### Google Places
   * Place Search
@@ -91,7 +102,7 @@ The following api's are supported.
 ##### Google Search
   * Web (```GoogleSearch.WebSearch```)
   * Image (```GoogleSearch.ImageSearch```)
-  * Video (*beta*)
+  * Video
     * Channels (```GoogleSearch.VideoSearch.Channels```)
     * Playlists (```GoogleSearch.VideoSearch.Playlists```)
     * Vidoes (```GoogleSearch.VideoSearch.Vidoes```)

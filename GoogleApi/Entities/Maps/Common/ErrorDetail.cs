@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Maps.Routes.Common;
 
 namespace GoogleApi.Entities.Maps.Common;
 
@@ -8,19 +10,13 @@ namespace GoogleApi.Entities.Maps.Common;
 public class ErrorDetail
 {
     /// <summary>
-    /// The domain associated with the error.
+    /// Type.
     /// </summary>
-    [JsonPropertyName("domain")]
-    public virtual string Domain { get; set; }
+    [JsonPropertyName("@type")]
+    public virtual string Type { get; set; }
 
     /// <summary>
-    /// The error reason.
+    /// Field Violations.
     /// </summary>
-    public virtual string Reason { get; set; }
-
-    /// <summary>
-    /// A short description of the error.
-    /// </summary>
-    [JsonPropertyName("message")]
-    public virtual string ErrorMessage { get; set; }
+    public virtual IEnumerable<FieldViolations> FieldViolations { get; set; }
 }

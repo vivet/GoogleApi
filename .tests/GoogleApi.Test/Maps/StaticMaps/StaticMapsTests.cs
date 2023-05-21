@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
@@ -14,7 +13,7 @@ namespace GoogleApi.Test.Maps.StaticMaps;
 public class StaticMapsTests : BaseTest
 {
     [Test]
-    public void StaticMapsTest()
+    public async Task StaticMapsTest()
     {
         var request = new StaticMapsRequest
         {
@@ -23,14 +22,14 @@ public class StaticMapsTests : BaseTest
             ZoomLevel = 1
         };
 
-        var result = GoogleMaps.StaticMaps.Query(request);
+        var result = await GoogleMaps.StaticMaps.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void StaticMapsWhenRegionTest()
+    public async Task StaticMapsWhenRegionTest()
     {
         var request = new StaticMapsRequest
         {
@@ -40,14 +39,14 @@ public class StaticMapsTests : BaseTest
             Region = "us"
         };
 
-        var result = GoogleMaps.StaticMaps.Query(request);
+        var result = await GoogleMaps.StaticMaps.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void StaticMapsWhenPathsTest()
+    public async Task StaticMapsWhenPathsTest()
     {
         var request = new StaticMapsRequest
         {
@@ -81,14 +80,14 @@ public class StaticMapsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.StaticMaps.Query(request);
+        var result = await GoogleMaps.StaticMaps.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void StaticMapsWhenPathsAsEncodedPolylineTest()
+    public async Task StaticMapsWhenPathsAsEncodedPolylineTest()
     {
         var request = new StaticMapsRequest
         {
@@ -122,14 +121,14 @@ public class StaticMapsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.StaticMaps.Query(request);
+        var result = await GoogleMaps.StaticMaps.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void StaticMapsWhenStylesTest()
+    public async Task StaticMapsWhenStylesTest()
     {
         var request = new StaticMapsRequest
         {
@@ -173,14 +172,14 @@ public class StaticMapsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.StaticMaps.Query(request);
+        var result = await GoogleMaps.StaticMaps.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void StaticMapsWhenVisiblesTest()
+    public async Task StaticMapsWhenVisiblesTest()
     {
         var request = new StaticMapsRequest
         {
@@ -192,14 +191,14 @@ public class StaticMapsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.StaticMaps.Query(request);
+        var result = await GoogleMaps.StaticMaps.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
     [Test]
-    public void StaticMapsWhenMarkersTest()
+    public async Task StaticMapsWhenMarkersTest()
     {
         var request = new StaticMapsRequest
         {
@@ -231,42 +230,9 @@ public class StaticMapsTests : BaseTest
             }
         };
 
-        var result = GoogleMaps.StaticMaps.Query(request);
+        var result = await GoogleMaps.StaticMaps.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void StaticMapsWhenAsyncTest()
-    {
-        var request = new StaticMapsRequest
-        {
-            Key = this.Settings.ApiKey,
-            Center = new Location(new Coordinate(60.170877, 24.942796)),
-            ZoomLevel = 1
-        };
-        var result = GoogleMaps.StaticMaps.QueryAsync(request).Result;
-
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void StaticMapsWhenAsyncAndCancelledTest()
-    {
-        var request = new StaticMapsRequest
-        {
-            Key = this.Settings.ApiKey,
-            Center = new Location(new Coordinate(60.170877, 24.942796)),
-            ZoomLevel = 1
-        };
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleMaps.StaticMaps.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

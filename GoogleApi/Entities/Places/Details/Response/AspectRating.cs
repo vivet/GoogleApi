@@ -14,5 +14,5 @@ public class AspectRating
     /// <summary>
     /// Rating the user's rating for this particular aspect, from 0 to 3.
     /// </summary>
-    public virtual double Rating { get; set; }
+    public virtual double? Rating { get; set; }
 }

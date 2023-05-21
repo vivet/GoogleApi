@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Image.Request;
 using GoogleApi.Exceptions;
@@ -12,7 +11,7 @@ namespace GoogleApi.Test.Search.Image;
 public class ImageSearchTests : BaseTest
 {
     [Test]
-    public void ImageSearchTest()
+    public async Task ImageSearchTest()
     {
         var request = new ImageSearchRequest
         {
@@ -21,7 +20,7 @@ public class ImageSearchTests : BaseTest
             Query = "google"
         };
 
-        var response = GoogleSearch.ImageSearch.Query(request);
+        var response = await GoogleSearch.ImageSearch.QueryAsync(request);
         Assert.IsNotNull(response);
         Assert.IsNotEmpty(response.Items);
         Assert.AreEqual(response.Kind, "customsearch#search");
@@ -52,64 +51,31 @@ public class ImageSearchTests : BaseTest
     }
 
     [Test]
-    public void ImageSearchAsyncTest()
+    [Ignore("Inconclusive")]
+    public async Task ImageSearchWhenImageTypeTest()
     {
-        var request = new ImageSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            SearchEngineId = this.Settings.SearchEngineId,
-            Query = "google"
-        };
-
-        var response = GoogleSearch.ImageSearch.QueryAsync(request).Result;
-
-        Assert.IsNotNull(response);
-        Assert.IsNotEmpty(response.Items);
-        Assert.AreEqual(response.Kind, "customsearch#search");
-        Assert.AreEqual(response.Status, Status.Ok);
+        await Task.CompletedTask;
     }
 
     [Test]
-    public void ImageSearchWhenAsyncAndCancelledTest()
+    [Ignore("Inconclusive")]
+    public async Task ImageSearchWhenImageSizeTest()
     {
-        var request = new ImageSearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            SearchEngineId = this.Settings.SearchEngineId,
-            Query = "google"
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleSearch.ImageSearch.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
+        await Task.CompletedTask;
     }
 
     [Test]
-    public void ImageSearchWhenImageTypeTest()
+    [Ignore("Inconclusive")]
+    public async Task ImageSearchWhenImageColorTypeTest()
     {
-        Assert.Inconclusive();
+        await Task.CompletedTask;
     }
 
     [Test]
-    public void ImageSearchWhenImageSizeTest()
+    [Ignore("Inconclusive")]
+    public async Task ImageSearchWhenImageDominantColorTest()
     {
-        Assert.Inconclusive();
-    }
-
-    [Test]
-    public void ImageSearchWhenImageColorTypeTest()
-    {
-        Assert.Inconclusive();
-    }
-
-    [Test]
-    public void ImageSearchWhenImageDominantColorTest()
-    {
-        Assert.Inconclusive();
+        await Task.CompletedTask;
     }
 
     [Test]
@@ -120,13 +86,9 @@ public class ImageSearchTests : BaseTest
             Key = null
         };
 
-        var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.QueryAsync(request).Wait());
+        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
         Assert.IsNotNull(exception);
-
-        var innerException = exception.InnerException;
-        Assert.IsNotNull(innerException);
-        Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-        Assert.AreEqual(innerException.Message, "Key is required");
+        Assert.AreEqual(exception.Message, "Key is required");
     }
 
     [Test]
@@ -138,13 +100,9 @@ public class ImageSearchTests : BaseTest
             Query = null
         };
 
-        var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.QueryAsync(request).Wait());
+        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
         Assert.IsNotNull(exception);
-
-        var innerException = exception.InnerException;
-        Assert.IsNotNull(innerException);
-        Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-        Assert.AreEqual(innerException.Message, "Query is required");
+        Assert.AreEqual(exception.Message, "Query is required");
     }
 
     [Test]
@@ -157,12 +115,8 @@ public class ImageSearchTests : BaseTest
             SearchEngineId = null
         };
 
-        var exception = Assert.Throws<AggregateException>(() => GoogleSearch.ImageSearch.QueryAsync(request).Wait());
+        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
         Assert.IsNotNull(exception);
-
-        var innerException = exception.InnerException;
-        Assert.IsNotNull(innerException);
-        Assert.AreEqual(typeof(GoogleApiException), innerException.GetType());
-        Assert.AreEqual(innerException.Message, "SearchEngineId is required");
+        Assert.AreEqual(exception.Message, "SearchEngineId is required");
     }
 }

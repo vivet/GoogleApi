@@ -1,6 +1,6 @@
-using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
@@ -14,7 +14,7 @@ namespace GoogleApi.Test.Places.Search.NearBy;
 public class NearBySearchTests : BaseTest
 {
     [Test]
-    public void PlacesNearBySearchTest()
+    public async Task PlacesNearBySearchTest()
     {
         var request = new PlacesNearBySearchRequest
         {
@@ -23,13 +23,13 @@ public class NearBySearchTests : BaseTest
             Radius = 1000
         };
 
-        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesTextSearchWhenPageTokenTest()
+    public async Task PlacesTextSearchWhenPageTokenTest()
     {
         var request = new PlacesNearBySearchRequest
         {
@@ -38,7 +38,7 @@ public class NearBySearchTests : BaseTest
             Radius = 1000
         };
 
-        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
         Assert.IsNotNull(response);
         Assert.IsNotNull(response.NextPageToken);
 
@@ -50,13 +50,13 @@ public class NearBySearchTests : BaseTest
 
         Thread.Sleep(1500);
 
-        var responseNextPage = GooglePlaces.Search.NearBySearch.Query(requestNextPage);
+        var responseNextPage = await GooglePlaces.Search.NearBySearch.QueryAsync(requestNextPage);
         Assert.IsNotNull(responseNextPage);
         Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
     }
 
     [Test]
-    public void PlacesTextSearchWhenNameTest()
+    public async Task PlacesTextSearchWhenNameTest()
     {
         var request = new PlacesNearBySearchRequest
         {
@@ -66,13 +66,13 @@ public class NearBySearchTests : BaseTest
             Name = "cafe"
         };
 
-        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesTextSearchWhenKeywordTest()
+    public async Task PlacesTextSearchWhenKeywordTest()
     {
         var request = new PlacesNearBySearchRequest
         {
@@ -82,13 +82,13 @@ public class NearBySearchTests : BaseTest
             Keyword = "cafe"
         };
 
-        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesTextSearchWhenTypeTest()
+    public async Task PlacesTextSearchWhenTypeTest()
     {
         var request = new PlacesNearBySearchRequest
         {
@@ -98,13 +98,13 @@ public class NearBySearchTests : BaseTest
             Type = SearchPlaceType.Cafe
         };
 
-        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
     [Test]
-    public void PlacesTextSearchWhenPriceLevelMinTest()
+    public async Task PlacesTextSearchWhenPriceLevelMinTest()
     {
         var request = new PlacesNearBySearchRequest
         {
@@ -114,7 +114,7 @@ public class NearBySearchTests : BaseTest
             Minprice = PriceLevel.Free
         };
 
-        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.IsEmpty(response.HtmlAttributions);
@@ -127,7 +127,7 @@ public class NearBySearchTests : BaseTest
     }
 
     [Test]
-    public void PlacesTextSearchWhenPriceLevelMaxTest()
+    public async Task PlacesTextSearchWhenPriceLevelMaxTest()
     {
         var request = new PlacesNearBySearchRequest
         {
@@ -137,7 +137,7 @@ public class NearBySearchTests : BaseTest
             Maxprice = PriceLevel.Expensive
         };
 
-        var response = GooglePlaces.Search.NearBySearch.Query(request);
+        var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
         Assert.IsEmpty(response.HtmlAttributions);
@@ -147,42 +147,5 @@ public class NearBySearchTests : BaseTest
         Assert.IsNotNull(result);
         Assert.IsNotNull(result.PlaceId);
         Assert.LessOrEqual(result.PriceLevel, request.Maxprice);
-    }
-
-    [Test]
-    public void PlacesNearBySearchWhenAsyncTest()
-    {
-        var request = new PlacesNearBySearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Location = new Coordinate(51.491431, -3.16668),
-            Radius = 500,
-            Type = SearchPlaceType.School
-        };
-
-        var response = GooglePlaces.Search.NearBySearch.QueryAsync(request).Result;
-
-        Assert.IsNotNull(response);
-        Assert.AreEqual(Status.Ok, response.Status);
-    }
-
-    [Test]
-    public void PlacesNearBySearchWhenAsyncAndCancelledTest()
-    {
-        var request = new PlacesNearBySearchRequest
-        {
-            Key = this.Settings.ApiKey,
-            Location = new Coordinate(51.491431, -3.16668),
-            Radius = 500,
-            Type = SearchPlaceType.School
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GooglePlaces.Search.NearBySearch.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

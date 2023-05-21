@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Detect.Request;
 using NUnit.Framework;
@@ -12,7 +11,7 @@ namespace GoogleApi.Test.Translate.Detect;
 public class DetectTests : BaseTest
 {
     [Test]
-    public void DetectTest()
+    public async Task DetectTest()
     {
         var request = new DetectRequest
         {
@@ -20,7 +19,7 @@ public class DetectTests : BaseTest
             Qs = new[] { "Hello World" }
         };
 
-        var result = GoogleTranslate.Detect.Query(request);
+        var result = await GoogleTranslate.Detect.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
@@ -34,7 +33,7 @@ public class DetectTests : BaseTest
     }
 
     [Test]
-    public void DetectWhenMultipleQsTest()
+    public async Task DetectWhenMultipleQsTest()
     {
         var request = new DetectRequest
         {
@@ -42,7 +41,7 @@ public class DetectTests : BaseTest
             Qs = new[] { "Hello World", "Der var engang" }
         };
 
-        var result = GoogleTranslate.Detect.Query(request);
+        var result = await GoogleTranslate.Detect.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
@@ -58,37 +57,5 @@ public class DetectTests : BaseTest
         var detection2 = detections[1];
         Assert.IsNotNull(detection2);
         Assert.AreEqual(Language.Danish, detection2[0].Language);
-    }
-
-    [Test]
-    public void DetectWhenAsyncTest()
-    {
-        var request = new DetectRequest
-        {
-            Key = this.Settings.ApiKey,
-            Qs = new[] { "Hello World" }
-        };
-
-        var result = GoogleTranslate.Detect.QueryAsync(request).Result;
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void DetectWhenAsyncAndCancelledTest()
-    {
-        var request = new DetectRequest
-        {
-            Key = this.Settings.ApiKey,
-            Qs = new[] { "Hello World" }
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleTranslate.Detect.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

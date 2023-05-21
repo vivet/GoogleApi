@@ -14,7 +14,7 @@ public class OpeningHours
     /// OpenNow is a boolean value indicating if the Place is open at the current time.
     /// </summary>
     [JsonPropertyName("open_now")]
-    public virtual bool OpenNow { get; set; }
+    public virtual bool OpenNow { get; set; } = false;
 
     /// <summary>
     /// periods[] is an array of opening periods covering seven days, starting from Sunday, in chronological order.

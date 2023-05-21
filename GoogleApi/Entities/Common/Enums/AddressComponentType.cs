@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Common.Enums;
 /// <summary>
 /// Location types.
 /// </summary>
-[JsonConverter(typeof(AddressComponentTypeEnumConverter))]
+[JsonConverter(typeof(AddressComponentTypeEnumJsonConverter))]
 public enum AddressComponentType
 {
     /// <summary>

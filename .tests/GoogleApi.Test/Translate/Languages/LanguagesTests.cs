@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Languages.Request;
 using NUnit.Framework;
@@ -12,14 +11,14 @@ namespace GoogleApi.Test.Translate.Languages;
 public class LanguagesTests : BaseTest
 {
     [Test]
-    public void LanguagesTest()
+    public async Task LanguagesTest()
     {
         var request = new LanguagesRequest
         {
             Key = this.Settings.ApiKey
         };
 
-        var result = GoogleTranslate.Languages.Query(request);
+        var result = await GoogleTranslate.Languages.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
@@ -29,7 +28,7 @@ public class LanguagesTests : BaseTest
     }
 
     [Test]
-    public void LanguagesWhenTargetTest()
+    public async Task LanguagesWhenTargetTest()
     {
         var request = new LanguagesRequest
         {
@@ -37,44 +36,12 @@ public class LanguagesTests : BaseTest
             Target = Language.English
         };
 
-        var result = GoogleTranslate.Languages.Query(request);
+        var result = await GoogleTranslate.Languages.QueryAsync(request);
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
 
         var languages = result.Data.Languages;
         Assert.IsNotNull(languages);
         Assert.AreEqual(136, languages.Count());
-    }
-
-    [Test]
-    public void LanguagesWhenAsyncTest()
-    {
-        var request = new LanguagesRequest
-        {
-            Key = this.Settings.ApiKey,
-            Target = Language.English
-        };
-
-        var result = GoogleTranslate.Languages.QueryAsync(request).Result;
-        Assert.IsNotNull(result);
-        Assert.AreEqual(Status.Ok, result.Status);
-    }
-
-    [Test]
-    public void LanguagesWhenAsyncAndCancelledTest()
-    {
-        var request = new LanguagesRequest
-        {
-            Key = this.Settings.ApiKey,
-            Target = Language.English
-        };
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var task = GoogleTranslate.Languages.QueryAsync(request, cancellationTokenSource.Token);
-        cancellationTokenSource.Cancel();
-
-        var exception = Assert.Throws<OperationCanceledException>(() => task.Wait(cancellationTokenSource.Token));
-        Assert.IsNotNull(exception);
-        Assert.AreEqual(exception.Message, "The operation was canceled.");
     }
 }

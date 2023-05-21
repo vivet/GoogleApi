@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 
 using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Geocoding.Common;
@@ -45,7 +46,8 @@ public class Result
     /// Note that if a request includes a misspelled address component, the geocoding service may suggest an alternative address. Suggestions triggered in this way will also be marked as a partial match.
     /// </summary>
     [JsonPropertyName("partial_match")]
-    public virtual bool PartialMatch { get; set; }
+    [JsonConverter(typeof(StringBooleanZeroOneJsonConverter))]
+    public virtual bool PartialMatch { get; set; } =false;
 
     /// <summary>
     /// plus_code is an encoded location reference, derived from latitude and longitude coordinates,

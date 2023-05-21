@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Translate.Common.Enums;
 /// These languages are specified within a recognition request using language code parameters as noted on this page.
 /// Most language code parameters conform to ISO-639-1 identifiers, except where noted.
 /// </summary>
-[JsonConverter(typeof(LanguageEnumConverter))]
+[JsonConverter(typeof(LanguageEnumJsonConverter))]
 public enum Language
 {
     /// <summary>
@@ -84,6 +84,12 @@ public enum Language
     /// </summary>
     [EnumMember(Value = "bg")]
     Bulgarian,
+
+    /// <summary>
+    /// Burmese.
+    /// </summary>
+    [EnumMember(Value = "my")]
+    Burmese,
 
     /// <summary>
     /// Catalan.
@@ -444,12 +450,6 @@ public enum Language
     /// </summary>
     [EnumMember(Value = "mn")]
     Mongolian,
-
-    /// <summary>
-    /// Burmese.
-    /// </summary>
-    [EnumMember(Value = "my")]
-    Burmese,
 
     /// <summary>
     /// Nepali.

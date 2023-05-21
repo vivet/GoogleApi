@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 
-
 namespace GoogleApi.Entities;
 
 /// <summary>
@@ -11,29 +10,21 @@ namespace GoogleApi.Entities;
 /// </summary>
 public abstract class BaseResponse : IResponse
 {
-    /// <summary>
-    /// See <see cref="IResponse.RawJson"/>.
-    /// </summary>
+    /// <inheritdoc />
     public virtual string RawJson { get; set; }
 
-    /// <summary>
-    /// See <see cref="IResponse.RawQueryString"/>.
-    /// </summary>
+    /// <inheritdoc />
     public virtual string RawQueryString { get; set; }
 
-    /// <summary>
-    /// See <see cref="IResponse.Status"/>.
-    /// </summary>
-    public virtual Status? Status { get; set; }
+    /// <inheritdoc />
+    public virtual Status Status { get; set; }
 
-    /// <summary>
-    /// See <see cref="IResponse.ErrorMessage"/>.
-    /// </summary>
+    /// <inheritdoc />
     [JsonPropertyName("error_message")]
     public virtual string ErrorMessage { get; set; }
 
     /// <summary>
-    /// See <see cref="IResponse.HtmlAttributions"/>.
+    /// Html Attributions.
     /// </summary>
     [JsonPropertyName("html_attributions")]
     public virtual IEnumerable<string> HtmlAttributions { get; set; }
