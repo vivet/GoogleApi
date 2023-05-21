@@ -59,6 +59,9 @@ public class MyClass
 ```
 See below for a full list of supported Api's and actions.  
 
+#### Proxy
+If a ```WebProxy``` is required set the static property ```HttpClientFactory.Proxy``` before registrering the GoogleApi dependencies or using the Facade.  
+
 *** 
 
 ### Supported Api's
