@@ -21,15 +21,8 @@
 		<Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReleaseNotes>
-			- Improved request and response serialization in HttpEngine.
-			- Removed HttpEngine Query method (only async now) (Breaking).
-			- Removed unused properties for IResponse (html_attributions not needed on interface).
-			- Added Maps Routes Directions Api.
-			- Added Maps Routes Matrix Api.
-			- Added Maps Address Validation Api.
-			- Changed various response properties for nullable value types (Breaking).
-			- Cleaned up and removed unnecessary json converters.
-			- Added Maps Aerial View Api.
+			- Added alternative HttpClient registration, for omitting the use of HttpClientHandler (Blazor, WASM)
+			- Fixed issue in using Proxy for HttpClient.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>

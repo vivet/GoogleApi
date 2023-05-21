@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 namespace GoogleApi;
 
 /// <summary>
-///   Provide a default global httpClient and a factory a factory method
+/// Provide a default global httpClient and a factory a factory method
 /// </summary>
 public static class HttpClientFactory
 {
@@ -18,14 +18,10 @@ public static class HttpClientFactory
     /// <summary>
     /// Create Default Http Client.
     /// </summary>
-    /// <param name="webProxy">The <see cref="IWebProxy"/> (optional).</param>
-    /// <param name="httpMessageHandler">The <see cref="HttpMessageHandler"/>.</param>
     /// <returns>The <see cref="HttpClient"/>.</returns>
-    public static HttpClient CreateDefaultHttpClient(IWebProxy webProxy = null, HttpMessageHandler httpMessageHandler = null)
+    public static HttpClient CreateDefaultHttpClient()
     {
-        Proxy ??= HttpClientFactory.Proxy;
-        httpMessageHandler ??= HttpClientFactory.GetDefaultHttpClientHandler(webProxy);
-
+        var httpMessageHandler = HttpClientFactory.GetDefaultHttpClientHandler(HttpClientFactory.Proxy);
         var httpClient = new HttpClient(httpMessageHandler);
 
         HttpClientFactory.ConfigureDefaultHttpClient(httpClient);
