@@ -1,6 +1,6 @@
 ﻿using System;
-using GoogleApi.Entities.Common.Extensions;
-
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.Places.Details.Response;
 
@@ -18,13 +18,13 @@ public class Review
     /// <summary>
     /// author_name the name of the user who submitted the review. Anonymous reviews are attributed to "A Google user".
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("author_name")]
+    [JsonPropertyName("author_name")]
     public virtual string AuthorName { get; set; }
 
     /// <summary>
     /// author_url the URL to the users Google+ profile, if available.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("author_url")]
+    [JsonPropertyName("author_url")]
     public virtual string AuthorUrl { get; set; }
 
     /// <summary>
@@ -47,24 +47,19 @@ public class Review
     /// <summary>
     /// The url to the photo.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("profile_photo_url")]
+    [JsonPropertyName("profile_photo_url")]
     public virtual string ProfilePhotoUrl { get; set; }
 
     /// <summary>
     /// The relative time, in human language description.
     /// </summary>
-    [System.Text.Json.Serialization.JsonPropertyName("relative_time_description")]
+    [JsonPropertyName("relative_time_description")]
     public virtual string RelativeTime { get; set; }
 
     /// <summary>
     /// Time the time that the review was submitted, measured in the number of seconds since since midnight, January 1, 1970 UTC.
     /// </summary>
+    [JsonPropertyName("time")]
+    [JsonConverter(typeof(EpochSecondsToDateTimeJsonConverter))]
     public virtual DateTime DateTime { get; set; }
-
-    [System.Text.Json.Serialization.JsonPropertyName("time")]
-    internal int TimeInt
-    {
-        get => this.DateTime.DateTimeToUnixTimestamp();
-        set => this.DateTime = DateTimeExtension.epoch.AddSeconds(value);
-    }
 }
