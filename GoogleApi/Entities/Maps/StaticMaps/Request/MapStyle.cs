@@ -43,7 +43,7 @@ public class MapStyle
 
         if (style == null)
         {
-            return null!;
+            return null;
         }
 
         var featureValue = this.Feature.ToEnumMemberString();
