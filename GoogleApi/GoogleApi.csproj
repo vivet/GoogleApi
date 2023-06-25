@@ -7,9 +7,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>5.0.3.0</AssemblyVersion>
-		<FileVersion>5.0.3.0</FileVersion>
-		<Version>5.0.3.0</Version>
+		<AssemblyVersion>5.0.4.0</AssemblyVersion>
+		<FileVersion>5.0.4.0</FileVersion>
+		<Version>5.0.4.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
