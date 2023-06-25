@@ -45,13 +45,6 @@ namespace GoogleApi;
 
 /// <summary>
 /// The Google Maps Web Services are a collection of HTTP interfaces to Google services providing geographic data for your maps applications.
-/// - Google Maps Directions API
-/// - Google Maps Distance Matrix API
-/// - Google Maps Elevation API
-/// - Google Maps Geocoding API
-/// - Google Maps Geolocation API
-/// - Google Maps Roads API
-/// - Google Maps Time Zone API
 /// Documentation: https://developers.google.com/maps/documentation
 /// </summary>
 public partial class GoogleMaps
