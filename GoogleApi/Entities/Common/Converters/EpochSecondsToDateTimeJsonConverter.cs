@@ -32,7 +32,11 @@ public class EpochSecondsToDateTimeJsonConverter : JsonConverter<DateTime>
 
         if (options == null)
             throw new ArgumentNullException(nameof(options));
-        
-        writer.WriteNumberValue(value.DateTimeToUnixTimestamp());
+
+        var timestamp = value
+            .DateTimeToUnixTimestamp();
+
+        writer
+            .WriteNumberValue(timestamp);
     }
 }
