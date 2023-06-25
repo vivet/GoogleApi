@@ -27,6 +27,12 @@ public class EpochSecondsToDateTimeJsonConverter : JsonConverter<DateTime>
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        if (writer == null)
+            throw new ArgumentNullException(nameof(writer));
+
+        if (options == null)
+            throw new ArgumentNullException(nameof(options));
+        
+        writer.WriteNumberValue(value.DateTimeToUnixTimestamp());
     }
 }
