@@ -451,6 +451,12 @@ public enum PlaceLocationType
     Primary_School,
 
     /// <summary>
+    /// Secondary school.
+    /// </summary>
+    [EnumMember(Value = "secondary_school")]
+    Secondary_School,
+
+    /// <summary>
     /// Real Estate Agency.
     /// </summary>
     [EnumMember(Value = "real_estate_agency")]

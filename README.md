@@ -90,7 +90,7 @@ The following api's are supported.
   * Address Validation (```GoogleMaps.AddressValidation```)
   * Aerial View (*beta*)
     * Directions (```GoogleMaps.AerialView.GetVideo```)
-    * Matrix (```GoogleMaps.AerialView.RenderVideo```)
+    * Render Video (```GoogleMaps.AerialView.RenderVideo```)
 
 ##### Google Places
   * Place Search
