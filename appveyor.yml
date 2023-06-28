@@ -15,7 +15,8 @@ environment:
 build: off
 build_script:
 - ps: >-
-    dotnet build .\GoogleAp.slnoff
+    dotnet build .\GoogleApi.sln;
+test: off
 test_script:
 - ps: >-
     dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj
