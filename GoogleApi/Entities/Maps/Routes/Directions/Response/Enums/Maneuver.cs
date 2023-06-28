@@ -121,4 +121,10 @@ public enum Maneuver
     /// </summary>
     [EnumMember(Value = "ROUNDABOUT_RIGHT")]
     RoundaboutRight,
+
+    /// <summary>
+    /// Depart.
+    /// </summary>
+    [EnumMember(Value = "DEPART")]
+    Depart
 }

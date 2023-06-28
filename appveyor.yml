@@ -1,4 +1,4 @@
-version: 5.0.4.{build}
+version: 5.0.5.{build}
 skip_tags: true
 max_jobs: 1
 image: Visual Studio 2022
@@ -15,8 +15,7 @@ environment:
 build: off
 build_script:
 - ps: >-
-    dotnet build .\GoogleApi.sln;
-test: off
+    dotnet build .\GoogleAp.slnoff
 test_script:
 - ps: >-
     dotnet test .\.tests\GoogleApi.UnitTests\GoogleApi.UnitTests.csproj
