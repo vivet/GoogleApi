@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Places.Details.Request.Enums;
 /// Field Types.
 /// </summary>
 [Flags]
-public enum FieldTypes
+public enum FieldTypes : long
 {
     /// <summary>
     /// Address Component (billing: basic).
@@ -34,9 +34,9 @@ public enum FieldTypes
     Icon = 1 << 5,
 
     /// <summary>
-    /// Id (billing: basic).
+    /// Icon Mask Base Uri (billing: basic).
     /// </summary>
-    Id = 1 << 6,
+    Icon_Mask_Base_Uri = 1 << 6,
 
     /// <summary>
     /// Name (billing: basic).
@@ -129,17 +129,97 @@ public enum FieldTypes
     Editorial_Summary = 1 << 24,
 
     /// <summary>
+    /// Icon Background Color.
+    /// </summary>
+    Icon_Background_Color = 1 << 25,
+
+    /// <summary>
+    /// Wheelchair Accessible Entrance.
+    /// </summary>
+    Wheelchair_Accessible_Entrance = 1 << 26,
+
+    /// <summary>
+    /// Secondary Opening Hours.
+    /// </summary>
+    Secondary_Opening_Hours = 1 << 27,
+
+    /// <summary>
+    /// Current Opening Hours.
+    /// </summary>
+    Current_Opening_Hours = 1 << 28,
+
+    /// <summary>
+    /// Curbside Pickup.
+    /// </summary>
+    Curbside_Pickup = 1 << 29,
+
+    /// <summary>
+    /// Delivery.
+    /// </summary>
+    Delivery = 1 << 30,
+
+    /// <summary>
+    /// Dine In.
+    /// </summary>
+    Dine_In = 1 << 31,
+
+    /// <summary>
+    /// Reservable.
+    /// </summary>
+    Reservable = 4294967296,
+
+    /// <summary>
+    /// Serves Beer.
+    /// </summary>
+    Serves_Beer = 8589934592,
+
+    /// <summary>
+    /// Serves Breakfast.
+    /// </summary>
+    Serves_Breakfast = 17179869184,
+
+    /// <summary>
+    /// Serves Brunch.
+    /// </summary>
+    Serves_Brunch = 34359738368,
+
+    /// <summary>
+    /// Serves Dinner.
+    /// </summary>
+    Serves_Dinner = 68719476736,
+
+    /// <summary>
+    /// Serves Lunch.
+    /// </summary>
+    Serves_Lunch = 137438953472,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    Serves_Vegetarian_Food = 274877906944,
+
+    /// <summary>
+    /// Serves Wine.
+    /// </summary>
+    Serves_Wine = 549755813888,
+
+    /// <summary>
+    /// Takeout.
+    /// </summary>
+    Takeout = 1099511627776,
+
+    /// <summary>
     /// Basic (all).
     /// </summary>
-    Basic = Address_Component| Adr_Address | Formatted_Address | Geometry | Icon | Id | Name | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity | Business_Status,
+    Basic = Address_Component | Adr_Address | Business_Status | Formatted_Address | Geometry | Icon | Icon_Mask_Base_Uri | Icon_Background_Color | Name | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity | Wheelchair_Accessible_Entrance,
 
     /// <summary>
     /// Contact (all).
     /// </summary>
-    Contact = Formatted_Phone_Number | International_Phone_Number | Website | Opening_Hours,
+    Contact = Current_Opening_Hours | Formatted_Phone_Number | International_Phone_Number | Opening_Hours | Secondary_Opening_Hours | Website,
 
     /// <summary>
     /// Atmosphere (all).
     /// </summary>
-    Atmosphere = Editorial_Summary | Price_Level | Rating | User_Ratings_Total | Review
+    Atmosphere = Curbside_Pickup | Delivery | Dine_In | Editorial_Summary | Price_Level | Rating | Reservable | Review | User_Ratings_Total | Serves_Beer | Serves_Breakfast | Serves_Brunch | Serves_Dinner | Serves_Lunch | Serves_Vegetarian_Food | Serves_Wine | Takeout
 }
