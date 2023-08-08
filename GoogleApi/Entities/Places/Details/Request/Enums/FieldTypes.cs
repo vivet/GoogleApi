@@ -131,7 +131,7 @@ public enum FieldTypes
     /// <summary>
     /// Basic (all).
     /// </summary>
-    Basic = Address_Component| Adr_Address | Formatted_Address | Geometry | Icon | Id | Name | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity | Business_Status,
+    Basic = Address_Component| Adr_Address | Formatted_Address | Geometry | Icon | Name | Photo | Place_Id | Plus_Code | Type | Url | Utc_Offset | Vicinity | Business_Status,
 
     /// <summary>
     /// Contact (all).
