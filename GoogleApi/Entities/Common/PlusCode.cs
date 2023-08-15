@@ -23,11 +23,20 @@ public class PlusCode
     public string LocalCode { get; protected set; }
 
     /// <summary>
+    /// Constructor (default).
+    /// </summary>
+    public PlusCode()
+    {
+
+    }
+
+    /// <summary>
     /// Constructor.
     /// </summary>
     /// <param name="globalCode">The global code.</param>
     /// <param name="localCode">The local code (optional).</param>
     public PlusCode(string globalCode, string localCode = null)
+        : this()
     {
         this.GlobalCode = globalCode ?? throw new ArgumentNullException(nameof(globalCode));
         this.LocalCode = localCode;

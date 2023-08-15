@@ -7,9 +7,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>5.0.5.0</AssemblyVersion>
-		<FileVersion>5.0.5.0</FileVersion>
-		<Version>5.0.5.0</Version>
+		<AssemblyVersion>5.1.0.0</AssemblyVersion>
+		<FileVersion>5.1.0.0</FileVersion>
+		<Version>5.1.0.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -21,7 +21,8 @@
 		<Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReleaseNotes>
-			- Updated place details field types.
+			- Updated Places details and Find response. 
+			- Cleaned up duplicated responses between places Find and Details.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
@@ -35,7 +36,6 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
 	</PropertyGroup>
 
 	<ItemGroup>

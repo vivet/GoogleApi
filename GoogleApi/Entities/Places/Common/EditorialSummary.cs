@@ -1,4 +1,4 @@
-﻿namespace GoogleApi.Entities.Places.Details.Response;
+﻿namespace GoogleApi.Entities.Places.Common;
 
 /// <summary>
 /// Contains a summary of the place.

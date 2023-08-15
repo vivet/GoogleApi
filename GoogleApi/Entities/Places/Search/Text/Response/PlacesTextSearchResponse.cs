@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.Search.Text.Response;
 
@@ -11,7 +12,7 @@ public class PlacesTextSearchResponse : BasePlacesResponse
     /// <summary>
     /// Results.
     /// </summary>
-    public virtual IEnumerable<TextResult> Results { get; set; }
+    public virtual IEnumerable<PlaceResult> Results { get; set; }
 
     /// <summary>
     /// Contains a token that can be used to return up to 20 additional results. A next_page_token will not be returned if there are no additional results to display.

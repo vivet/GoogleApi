@@ -24,6 +24,12 @@ public abstract class BaseResponse : IResponse
     public virtual string ErrorMessage { get; set; }
 
     /// <summary>
+    /// Info Messages.
+    /// </summary>
+    [JsonPropertyName("info_messages")]
+    public virtual IEnumerable<string> InfoMessages { get; set; }
+
+    /// <summary>
     /// Html Attributions.
     /// </summary>
     [JsonPropertyName("html_attributions")]

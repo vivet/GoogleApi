@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
-using GoogleApi.Entities.Places.Details.Response;
+using GoogleApi.Entities.Places.Common.Enums;
 
 namespace GoogleApi.Entities.Places.Common;
 
@@ -28,4 +27,16 @@ public class OpeningHours
     /// </summary>
     [JsonPropertyName("weekday_text")]
     public virtual IEnumerable<string> WeekdayTexts { get; set; }
+
+    /// <summary>
+    /// An array of opening periods covering seven days, starting from Sunday, in chronological order.
+    /// See PlaceOpeningHoursPeriod for more information.
+    /// </summary>
+    [JsonPropertyName("special_days")]
+    public virtual IEnumerable<SpecialDay> SpecialDays { get; set; }
+
+    /// <summary>
+    /// A type string used to identify the type of secondary hours.
+    /// </summary>
+    public virtual OpeningHoursType? Type { get; set; }
 }

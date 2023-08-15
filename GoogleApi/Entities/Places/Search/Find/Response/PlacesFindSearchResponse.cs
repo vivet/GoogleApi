@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.Search.Find.Response;
 
@@ -10,5 +11,5 @@ public class PlacesFindSearchResponse : BasePlacesResponse
     /// <summary>
     /// Candidates.
     /// </summary>
-    public virtual IEnumerable<Candidate> Candidates { get; set; }
+    public virtual IEnumerable<PlaceResult> Candidates { get; set; }
 }
