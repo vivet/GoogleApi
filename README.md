@@ -85,8 +85,8 @@ The following api's are supported.
   * Street View
   * Static Maps
   * Routes
-    * Directions (```GoogleMaps.Routes.Directions```)
-    * Matrix (```GoogleMaps.Routes.Matrix```)
+    * RouteDirections (```GoogleMaps.Routes.Directions```)
+    * RouteMatrix (```GoogleMaps.Routes.Matrix```)
   * Address Validation (```GoogleMaps.AddressValidation```)
   * Aerial View (*beta*)
     * Directions (```GoogleMaps.AerialView.GetVideo```)

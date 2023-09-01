@@ -126,5 +126,11 @@ public enum Maneuver
     /// Depart.
     /// </summary>
     [EnumMember(Value = "DEPART")]
-    Depart
+    Depart,
+
+    /// <summary>
+    /// Name Change.
+    /// </summary>
+    [EnumMember(Value = "NAME_CHANGE")]
+    NameChange
 }

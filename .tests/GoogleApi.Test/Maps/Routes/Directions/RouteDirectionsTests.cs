@@ -33,7 +33,7 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -62,7 +62,7 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -86,7 +86,7 @@ public class RouteDirectionsTests : BaseTest
             DepartureTime = DateTime.UtcNow.AddHours(5)
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -109,7 +109,7 @@ public class RouteDirectionsTests : BaseTest
             PolylineEncoding = PolylineEncoding.GeoJsonLinestring,
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -133,7 +133,7 @@ public class RouteDirectionsTests : BaseTest
             ComputeAlternativeRoutes = true
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -170,7 +170,7 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -197,7 +197,7 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -220,7 +220,7 @@ public class RouteDirectionsTests : BaseTest
             Language = Language.Danish
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -243,7 +243,7 @@ public class RouteDirectionsTests : BaseTest
             Region = "US"
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -271,7 +271,7 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -299,7 +299,7 @@ public class RouteDirectionsTests : BaseTest
             }
         };
 
-        var result = await GoogleMaps.Routes.Direcions.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -313,7 +313,7 @@ public class RouteDirectionsTests : BaseTest
             Key = this.Settings.ApiKey
         };
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.Direcions.QueryAsync(request));
+        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RouteDirections.QueryAsync(request));
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Origin and destination must be set.", exception.Message);
     }

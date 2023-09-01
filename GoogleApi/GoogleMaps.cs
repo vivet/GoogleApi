@@ -193,13 +193,13 @@ public partial class GoogleMaps
         /// Returns the primary route along with optional alternate routes, given a set of terminal and intermediate waypoints.
         /// https://developers.google.com/maps/documentation/routes/reference/rest/v2/TopLevel/computeRoutes
         /// </summary>
-        public static RoutesDirectionsApi Direcions => new();
+        public static RoutesDirectionsApi RouteDirections => new();
 
         /// <summary>
         /// Takes in a list of origins and destinations and returns a stream containing route information for each combination of origin and destination.
         /// https://developers.google.com/maps/documentation/routes/reference/rest/v2/TopLevel/computeRouteMatrix
         /// </summary>
-        public static RoutesMatrixApi Matrix => new();
+        public static RoutesMatrixApi RoutesMatrix => new();
     }
 
     /// <summary>

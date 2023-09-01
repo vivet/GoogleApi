@@ -42,7 +42,7 @@ public class RouteMatrixTests : BaseTest
             }
         };
 
-        var result = await GoogleMaps.Routes.Matrix.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -77,7 +77,7 @@ public class RouteMatrixTests : BaseTest
             DepartureTime = DateTime.UtcNow.AddHours(5)
         };
 
-        var result = await GoogleMaps.Routes.Matrix.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -112,7 +112,7 @@ public class RouteMatrixTests : BaseTest
             Language = Language.Danish
         };
 
-        var result = await GoogleMaps.Routes.Matrix.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -147,7 +147,7 @@ public class RouteMatrixTests : BaseTest
             ExtraComputations = new List<ExtraComputation> { ExtraComputation.Tolls }
         };
 
-        var result = await GoogleMaps.Routes.Matrix.QueryAsync(request);
+        var result = await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
@@ -161,7 +161,7 @@ public class RouteMatrixTests : BaseTest
             Key = this.Settings.ApiKey
         };
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.Matrix.QueryAsync(request));
+        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request));
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Request must contain at least one origin.", exception.Message);
     }
