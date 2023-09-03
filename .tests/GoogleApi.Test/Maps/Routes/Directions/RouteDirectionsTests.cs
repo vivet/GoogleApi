@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common;
 using GoogleApi.Entities.Maps.Routes.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Directions.Request;

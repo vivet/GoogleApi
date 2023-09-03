@@ -2,9 +2,7 @@
 using GoogleApi.Entities.Maps.Routes.Common;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Converters;
-using GoogleApi.Entities.Maps.Directions.Response;
 using GoogleApi.Entities.Maps.Routes.Common.Enums;
-using GoogleApi.Entities.Maps.Routes.Directions.Response.Enums;
 
 namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
 
