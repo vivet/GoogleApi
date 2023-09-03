@@ -3,7 +3,7 @@
 namespace GoogleApi.Entities.Maps.Routes.Directions.Request.Enums;
 
 /// <summary>
-/// 
+/// Polyline Encoding.
 /// </summary>
 public enum PolylineEncoding
 {

@@ -2,6 +2,9 @@
 using GoogleApi.Entities.Maps.Routes.Common;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Converters;
+using GoogleApi.Entities.Maps.Directions.Response;
+using GoogleApi.Entities.Maps.Routes.Common.Enums;
+using GoogleApi.Entities.Maps.Routes.Directions.Response.Enums;
 
 namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
 
@@ -56,4 +59,19 @@ public class RouteLegStep
     /// Encapsulates the additional information that the user should be informed about, such as possible traffic zone restriction on a leg step.
     /// </summary>
     public virtual RouteLegStepTravelAdvisory TravelAdvisory { get; set; }
+
+    /// <summary>
+    /// Text representations of properties of the RouteLegStep.
+    /// </summary>
+    public virtual RouteLegStepLocalizedValues LocalizedValues { get; set; }
+
+    /// <summary>
+    /// Details pertaining to this step if the travel mode is TRANSIT.
+    /// </summary>
+    public virtual RouteLegStepTransitDetails TransitDetails { get; set; }
+
+    /// <summary>
+    /// The travel mode used for this step.
+    /// </summary>
+    public virtual RouteTravelMode TravelMode { get; set; }
 }

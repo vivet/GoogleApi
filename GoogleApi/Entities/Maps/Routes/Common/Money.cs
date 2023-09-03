@@ -1,4 +1,4 @@
-﻿namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
+﻿namespace GoogleApi.Entities.Maps.Routes.Common;
 
 /// <summary>
 /// Money.

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common;
 using GoogleApi.Entities.Maps.Routes.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Directions.Request;
@@ -25,12 +26,12 @@ public class RouteDirectionsTests : BaseTest
             Key = this.Settings.ApiKey,
             Origin = new RouteWayPoint
             {
-                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.419734, Longitude = -122.0827784 } }
+                Location = new RouteLocation { LatLng = new LatLng { Latitude = 55.672576, Longitude = 12.489753 } }
             },
             Destination = new RouteWayPoint
             {
-                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
-            }
+                Location = new RouteLocation { LatLng = new LatLng { Latitude = 55.692241, Longitude = 12.538547 } }
+            },
         };
 
         var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
@@ -59,7 +60,8 @@ public class RouteDirectionsTests : BaseTest
                 {
                     Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.411670, Longitude = -122.073595 } }
                 }
-            }
+            },
+            OptimizeWaypointOrder = true
         };
 
         var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);

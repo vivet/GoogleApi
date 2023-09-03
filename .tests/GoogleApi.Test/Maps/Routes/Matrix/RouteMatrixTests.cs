@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common;
+using GoogleApi.Entities.Maps.Routes.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request.Enums;
 using GoogleApi.Exceptions;
@@ -39,7 +41,9 @@ public class RouteMatrixTests : BaseTest
                         Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
                     }
                 }
-            }
+            },
+            TravelMode = RouteTravelMode.Walk,
+            TrafficModel = TrafficModel.Best_Guess
         };
 
         var result = await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request);
@@ -74,7 +78,8 @@ public class RouteMatrixTests : BaseTest
                     }
                 }
             },
-            DepartureTime = DateTime.UtcNow.AddHours(5)
+            DepartureTime = DateTime.UtcNow.AddHours(5),
+            RoutingPreference = RoutingPreference.TrafficAware
         };
 
         var result = await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request);

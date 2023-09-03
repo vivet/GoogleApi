@@ -8,7 +8,7 @@ using GoogleApi.Entities.Maps.Common;
 namespace GoogleApi.Entities.Maps.Routes.Directions.Response.Converters;
 
 /// <summary>
-/// Coordinate Tuples Converter.
+/// Coordinate Tuples Json Converter.
 /// </summary>
 public class CoordinateTuplesJsonConverter : JsonConverter<IEnumerable<LatLng>>
 {

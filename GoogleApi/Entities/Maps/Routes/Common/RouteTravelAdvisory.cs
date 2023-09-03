@@ -26,8 +26,18 @@ public class RouteTravelAdvisory
     public virtual IEnumerable<SpeedReadingInterval> SpeedReadingIntervals { get; set; }
 
     /// <summary>
-    /// Fuel Consumption Microliters.
-    /// The fuel consumption prediction in microliters.
+    /// The predicted fuel consumption in microliters.
     /// </summary>
     public virtual string FuelConsumptionMicroliters { get; set; }
+
+    /// <summary>
+    /// Returned route may have restrictions that are not suitable for requested travel mode or route modifiers.
+    /// </summary>
+    public virtual bool RouteRestrictionsPartiallyIgnored { get; set; }
+
+    /// <summary>
+    /// If present, contains the total fare or ticket costs on this route.
+    /// This property is only returned for TRANSIT requests and only for routes where fare information is available for all transit steps.
+    /// </summary>
+    public virtual Money TransitFare { get; set; }
 }

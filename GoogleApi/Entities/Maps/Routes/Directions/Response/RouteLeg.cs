@@ -66,4 +66,15 @@ public class RouteLeg
     /// Each step represents one navigation instruction.
     /// </summary>
     public virtual IEnumerable<RouteLegStep> Steps { get; set; } = new List<RouteLegStep>();
+
+    /// <summary>
+    /// Text representations of properties of the Route.
+    /// </summary>
+    public virtual RouteLegLocalizedValues LocalizedValues { get; set; }
+
+    /// <summary>
+    /// Overview information about the steps in this RouteLeg.
+    /// This field is only populated for TRANSIT routes.
+    /// </summary>
+    public virtual StepsOverview StepsOverview { get; set; }
 }

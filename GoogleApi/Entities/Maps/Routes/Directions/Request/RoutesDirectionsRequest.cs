@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common;
+using GoogleApi.Entities.Maps.Routes.Common.Converters;
 using GoogleApi.Entities.Maps.Routes.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Directions.Request.Enums;
 using GoogleApi.Entities.Maps.Routes.Directions.Response.Enums;
@@ -55,13 +56,30 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     public virtual PolylineEncoding PolylineEncoding { get; set; } = PolylineEncoding.EncodedPolyline;
 
     /// <summary>
+    /// Optional. Specifies the assumptions to use when calculating time in traffic.
+    /// This setting affects the value returned in the duration field in the Route and RouteLeg which contains the predicted time in traffic based on historical averages.
+    /// TrafficModel is only available for requests that have set RoutingPreference to TRAFFIC_AWARE_OPTIMAL and RouteTravelMode to DRIVE.
+    /// Defaults to BEST_GUESS if traffic is requested and TrafficModel is not specified.
+    /// </summary>
+    public virtual TrafficModel? TrafficModel { get; set; }
+
+    /// <summary>
     /// The departure time (optional).
     /// If you don't set this value, then this value defaults to the time that you made the request.
     /// If you set this value to a time that has already occurred, then the request fails.
     /// A timestamp in RFC3339 UTC "Zulu" format, with nanosecond resolution and up to nine fractional digits.
     /// Examples: "2014-10-02T15:01:23Z" and "2014-10-02T15:01:23.045123456Z".
     /// </summary>
+    [JsonConverter(typeof(DateTimeRfc3339JsonConverter))]
     public virtual DateTime? DepartureTime { get; set; }
+
+    /// <summary>
+    /// Optional. The arrival time.
+    /// Can only be set when RouteTravelMode is set to TRANSIT. You can specify either departureTime or arrivalTime, but not both.
+    /// A timestamp in RFC3339 UTC "Zulu" format, with nanosecond resolution and up to nine fractional digits.Examples: "2014-10-02T15:01:23Z" and "2014-10-02T15:01:23.045123456Z".
+    /// </summary>
+    [JsonConverter(typeof(DateTimeRfc3339JsonConverter))]
+    public virtual DateTime? ArrivalTime { get; set; }
 
     /// <summary>
     /// Compute Alternative Routes (optional).
@@ -102,6 +120,14 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     /// If you don't provide this value, then the display units are inferred from the location of the request.
     /// </summary>
     public virtual Units Units { get; set; } = Units.Metric;
+
+    /// <summary>
+    /// Here is how the Routes API optimizes the order of waypoints in a route:
+    /// The waypoints are automatically indexed using the order you specify in the request, starting with 0.
+    /// Optimizes the order of the waypoints based on the index numbers assigned to the waypoints in the query.
+    /// Returns the optimized waypoint order in the routesobject in the field waypoint_orderbelow routes.optimizedIntermediateWaypointIndex.
+    /// </summary>
+    public virtual bool OptimizeWaypointOrder { get; set; } = false;
 
     /// <summary>
     /// Requested Reference Routes (optional).

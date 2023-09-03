@@ -77,4 +77,9 @@ public class MatrixElement
     /// Error.
     /// </summary>
     public virtual Error Error { get; set; }
+
+    /// <summary>
+    /// Text representations of properties of the Route.
+    /// </summary>
+    public virtual LocalizedValues LocalizedValues { get; set; }
 }

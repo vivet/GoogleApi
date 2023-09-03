@@ -9,12 +9,6 @@ namespace GoogleApi.Entities.Maps.Routes.Common.Enums;
 public enum Speed
 {
     /// <summary>
-    /// Default value. This value is unused.
-    /// </summary>
-    [EnumMember(Value = "SPEED_UNSPECIFIED")]
-    SpeedUnspecified,
-
-    /// <summary>
     /// Normal speed, no slowdown is detected.
     /// </summary>
     [EnumMember(Value = "NORMAL")]

@@ -28,8 +28,14 @@ public enum RouteTravelMode
     /// <summary>
     /// Two-wheeled, motorized vehicle.
     /// For example, motorcycle.
-    /// Note that this differs from the BICYCLE travel mode which covers human-powered mode.
+    /// Be aware that this differs from the BICYCLE travel mode which covers human-powered mode.
     /// </summary>
     [EnumMember(Value = "TWO_WHEELER")]
-    TwoWheeler
+    TwoWheeler,
+
+    /// <summary>
+    /// Travel by public transit routes, where available.
+    /// </summary>
+    [EnumMember(Value = "TRANSIT")]
+    Transit
 }

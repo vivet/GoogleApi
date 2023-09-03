@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common.Enums;
+using GoogleApi.Entities.Maps.Routes.Common.Converters;
 using GoogleApi.Entities.Maps.Routes.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request.Enums;
 
@@ -23,7 +25,7 @@ public class RoutesMatrixRequest : BaseMapsXRequest
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual RoutingPreference RoutingPreference { get; set; } = RoutingPreference.TrafficAware;
+    public virtual RoutingPreference? RoutingPreference { get; set; }
 
     /// <summary>
     /// The departure time (optional).
@@ -32,7 +34,18 @@ public class RoutesMatrixRequest : BaseMapsXRequest
     /// A timestamp in RFC3339 UTC "Zulu" format, with nanosecond resolution and up to nine fractional digits.
     /// Examples: "2014-10-02T15:01:23Z" and "2014-10-02T15:01:23.045123456Z".
     /// </summary>
+    [JsonConverter(typeof(DateTimeRfc3339JsonConverter))]
     public virtual DateTime? DepartureTime { get; set; }
+
+    /// <summary>
+    /// Optional. The arrival time.
+    /// Be aware Can only be set when RouteTravelMode is set to TRANSIT.
+    /// You can specify either departureTime or arrivalTime, but not both.
+    /// A timestamp in RFC3339 UTC "Zulu" format, with nanosecond resolution and up to nine fractional digits.
+    /// Examples: "2014-10-02T15:01:23Z" and "2014-10-02T15:01:23.045123456Z".
+    /// </summary>
+    [JsonConverter(typeof(DateTimeRfc3339JsonConverter))]
+    public virtual DateTime? ArrivalTime { get; set; }
 
     /// <summary>
     /// Language Code (optional).
@@ -43,6 +56,14 @@ public class RoutesMatrixRequest : BaseMapsXRequest
     /// </summary>
     [JsonPropertyName("languageCode")]
     public virtual Language Language { get; set; } = Language.English;
+
+    /// <summary>
+    /// Optional. Specifies the assumptions to use when calculating time in traffic.
+    /// This setting affects the value returned in the duration field in the Route and RouteLeg which contains the predicted time in traffic based on historical averages.
+    /// TrafficModel is only available for requests that have set RoutingPreference to TRAFFIC_AWARE_OPTIMAL and RouteTravelMode to DRIVE.
+    /// Defaults to BEST_GUESS if traffic is requested and TrafficModel is not specified.
+    /// </summary>
+    public virtual TrafficModel? TrafficModel { get; set; }
 
     /// <summary>
     /// Region Code (optional).

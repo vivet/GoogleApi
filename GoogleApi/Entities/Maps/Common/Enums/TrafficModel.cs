@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Maps.Common.Enums;
+﻿using System.Runtime.Serialization;
+
+namespace GoogleApi.Entities.Maps.Common.Enums;
 
 /// <summary>
 /// Traffic Model.
@@ -10,17 +12,20 @@ public enum TrafficModel
     /// given what is known about both historical traffic conditions and live traffic.
     /// Live traffic becomes more important the closer the departure_time is to now.
     /// </summary>
+    [EnumMember(Value = "BEST_GUESS")]
     Best_Guess,
 
     /// <summary>
     /// Pessimistic, indicates that the returned duration_in_traffic should be longer than the actual travel time on most days,
     /// though occasional days with particularly bad traffic conditions may exceed this value.
     /// </summary>
+    [EnumMember(Value = "PESSIMISTIC")]
     Pessimistic,
 
     /// <summary>
     /// Optimistic, indicates that the returned duration_in_traffic should be shorter than the actual travel time on most days,
     /// though occasional days with particularly good traffic conditions may be faster than this value.
     /// </summary>
+    [EnumMember(Value = "OPTIMISTIC")]
     Optimistic
 }
