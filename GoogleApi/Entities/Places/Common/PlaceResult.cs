@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common;
+﻿using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace GoogleApi.Entities.Places.Common;
 
@@ -169,7 +169,7 @@ public class PlaceResult
     /// the Places Service will bias the results to prefer reviews written in that language.
     /// </summary>
     [JsonPropertyName("reviews")]
-    public virtual IEnumerable<Review> Review { get; set; }
+    public virtual IEnumerable<Review> Reviews { get; set; }
 
     /// <summary>
     /// Contains an array of entries for the next seven days including information about secondary hours of a business.
@@ -180,7 +180,7 @@ public class PlaceResult
     /// See PlaceOpeningHours for more information.
     /// </summary>
     [JsonPropertyName("secondary_opening_hours")]
-    public virtual OpeningHours SecondaryOpeningHours { get; set; }
+    public virtual IEnumerable<OpeningHours> SecondaryOpeningHours { get; set; }
 
     /// <summary>
     /// Specifies if the place serves beer.
