@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoogleApi.Entities.Places.Details.Request.Enums;
+namespace GoogleApi.Entities.Places.Common.Enums;
 
 /// <summary>
 /// Field Types.

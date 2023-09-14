@@ -4,6 +4,7 @@ using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Common.Extensions;
+using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request.Enums;
 
 namespace GoogleApi.Entities.Places.Details.Request;
@@ -59,6 +60,23 @@ public class PlacesDetailsRequest : BasePlacesRequest
     /// </summary>
     public virtual FieldTypes Fields { get; set; } = FieldTypes.Basic;
 
+    /// <summary>
+    /// Specify reviews_no_translations=true to disable translation of reviews; specify reviews_no_translations=false to enable translation of reviews.
+    /// Reviews are returned in their original language.
+    /// If omitted, or passed with no value, translation of reviews is enabled.
+    /// If the language parameter was specified in the request, use the specified language as the preferred language for translation.
+    /// If language is omitted, the API attempts to use the Accept-Language header as the preferred language.
+    /// </summary>
+    public virtual bool ReviewsNoTranslations { get; set; } = true;
+
+    /// <summary>
+    /// The sorting method to use when returning reviews. Can be set to most_relevant (default) or newest.
+    /// For most_relevant(default), reviews are sorted by relevance; the service will bias the results to return reviews originally written in the preferred language.
+    /// For newest, reviews are sorted in chronological order; the preferred language does not affect the sort order.
+    /// Google recommends that you display how the reviews are being sorted to the end user.
+    /// </summary>
+    public virtual ReviewSort ReviewsSort { get; set; } = ReviewSort.MostRelevant;
+
     /// <inheritdoc />
     public override IList<KeyValuePair<string, string>> GetQueryStringParameters()
     {
@@ -70,18 +88,30 @@ public class PlacesDetailsRequest : BasePlacesRequest
         parameters.Add("placeid", this.PlaceId);
         parameters.Add("language", this.Language.ToCode());
 
+        if (!string.IsNullOrEmpty(this.Region))
+            parameters.Add("region", this.Region);
+
+        if (!string.IsNullOrEmpty(this.SessionToken))
+            parameters.Add("sessiontoken", this.SessionToken);
+
         var fields = Enum.GetValues(typeof(FieldTypes))
             .Cast<FieldTypes>()
             .Where(x => this.Fields.HasFlag(x) && x != FieldTypes.Basic && x != FieldTypes.Contact && x != FieldTypes.Atmosphere)
             .Aggregate(string.Empty, (current, x) => $"{current}{x.ToString().ToLowerInvariant()},");
 
         parameters.Add("fields", fields.EndsWith(",") ? fields.Substring(0, fields.Length - 1) : fields);
+        parameters.Add("reviews_no_translations", this.ReviewsNoTranslations.ToString().ToLower());
 
-        if (!string.IsNullOrEmpty(this.Region))
-            parameters.Add("region", this.Region);
+        switch (this.ReviewsSort)
+        {
+            case ReviewSort.MostRelevant:
+                parameters.Add("reviews_sort", "most_relevant");
+                break;
 
-        if (!string.IsNullOrEmpty(this.SessionToken))
-            parameters.Add("sessiontoken", this.SessionToken);
+            case ReviewSort.Newest:
+                parameters.Add("reviews_sort", "newest");
+                break;
+        }
 
         return parameters;
     }

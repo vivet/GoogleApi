@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
 using NUnit.Framework;
