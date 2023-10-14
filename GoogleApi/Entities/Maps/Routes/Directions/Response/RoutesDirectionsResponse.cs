@@ -22,12 +22,9 @@ public class RoutesDirectionsResponse : BaseResponse
 
     /// <summary>
     /// Geocoding Results.
-    /// geocodingResults, an array of elements of type GeocodingResults.
-    /// For every location in the request (origin, destination, or intermediate waypoint) that was specified as an address string or as a Plus code,
-    /// the API performs a place ID lookup. Each element of this array contains the place ID corresponding to a location.
-    /// Locations in the request specified as a place ID or as latitude/longitude coordinates are ignored.
+    /// Contains geocoding response info for waypoints specified as addresses.
     /// </summary>
-    public virtual IEnumerable<GeocodingResults> GeocodingResults { get; set; }
+    public virtual GeocodingResults GeocodingResults { get; set; }
 
     /// <summary>
     /// Fallback Info.

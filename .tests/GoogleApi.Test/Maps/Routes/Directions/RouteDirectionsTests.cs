@@ -40,6 +40,36 @@ public class RouteDirectionsTests : BaseTest
     }
 
     [Test]
+    public async Task RouteDirectionsWhenIntermediatesAndGeocdedAddressTest()
+    {
+        var request = new RoutesDirectionsRequest
+        {
+            Key = this.Settings.ApiKey,
+            Origin = new RouteWayPoint
+            {
+                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.419734, Longitude = -122.0827784 } }
+            },
+            Destination = new RouteWayPoint
+            {
+                Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
+            },
+            Intermediates = new RouteWayPoint[]
+            {
+                new()
+                {
+                    Address = "Mountain View, Californien 94043, USA"
+                }
+            },
+            OptimizeWaypointOrder = true
+        };
+
+        var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(Status.Ok, result.Status);
+    }
+
+    [Test]
     public async Task RouteDirectionsWhenIntermediatesTest()
     {
         var request = new RoutesDirectionsRequest
