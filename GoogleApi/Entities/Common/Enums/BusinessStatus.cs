@@ -16,7 +16,7 @@ public enum BusinessStatus
     /// <summary>
     /// Closed Temporarily.
     /// </summary>
-    [EnumMember(Value = "CLOSED_TEMPORARELY")]
+    [EnumMember(Value = "CLOSED_TEMPORARILY")]
     Closed_Temporarily,
 
     /// <summary>
