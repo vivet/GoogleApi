@@ -3,7 +3,7 @@
 /// <summary>
 /// Detect Response.
 /// </summary>
-public class DetectResponse : BaseResponse
+public class DetectResponse : BaseTranslateResponse
 {
     /// <summary>
     /// Container for the detected results.

@@ -3,7 +3,7 @@
 /// <summary>
 /// Languages Response.
 /// </summary>
-public class LanguagesResponse : BaseResponse
+public class LanguagesResponse : BaseTranslateResponse
 {
     /// <summary>
     /// Container for the languages results.

@@ -3,7 +3,7 @@
 /// <summary>
 /// Translate Response.
 /// </summary>
-public class TranslateResponse : BaseResponse
+public class TranslateResponse : BaseTranslateResponse
 {
     /// <summary>
     /// Container for the translated results.
