@@ -13,14 +13,14 @@ public class PlusCode
     /// A 4 character area code.
     /// </summary>
     [JsonPropertyName("global_code")]
-    public string GlobalCode { get; protected set; }
+    public string GlobalCode { get; set; }
 
     /// <summary>
     /// Global Code.
     /// A 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA).
     /// </summary>
     [JsonPropertyName("compound_code")]
-    public string LocalCode { get; protected set; }
+    public string LocalCode { get; set; }
 
     /// <summary>
     /// Constructor (default).
