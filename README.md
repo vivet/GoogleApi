@@ -49,9 +49,9 @@ Then, inject the individual Api's in constructors as needed
 ```csharp
 public class MyClass
 {
-    private {Api}.[{SubGroup}].{Action} api;
+    private Api api;
     
-    public MyClass({Api}.[{SubGroup}].{Action} api)
+    public MyClass(Api api)
     {
         this.api = api
     }
