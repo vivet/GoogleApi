@@ -2,8 +2,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
-using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
+using GoogleApi.Entities.Places.Details.Request.Enums;
 using NUnit.Framework;
 
 namespace GoogleApi.Test.Places.Details;

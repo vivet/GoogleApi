@@ -59,7 +59,7 @@ public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
     /// <summary>
     /// (optional, defaults to driving) — specifies what mode of transport to use when calculating directions. Valid values are specified in Travel Modes.
     /// </summary>
-    public virtual TravelMode TravelMode { get; set; } = TravelMode.Driving;
+    public virtual TravelMode TravelMode { get; set; } = TravelMode.DRIVING;
 
     /// <summary>
     /// Traffic mdel (defaults to best_guess).
@@ -147,11 +147,11 @@ public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
             parameters.Add("avoid", this.Avoid.ToEnumString('|'));
         }
 
-        parameters.Add("mode", this.TravelMode.ToString().ToLower());
+        parameters.Add("mode", this.TravelMode.ToString());
 
         switch (this.TravelMode)
         {
-            case TravelMode.Driving:
+            case TravelMode.DRIVING:
             {
                 if (this.DepartureTime.HasValue)
                 {
@@ -161,7 +161,7 @@ public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
 
                 break;
             }
-            case TravelMode.Transit:
+            case TravelMode.TRANSIT:
             {
                 parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
 
@@ -181,8 +181,8 @@ public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
 
                 break;
             }
-            case TravelMode.Walking:
-            case TravelMode.Bicycling:
+            case TravelMode.WALKING:
+            case TravelMode.BICYCLING:
                 break;
 
             default:

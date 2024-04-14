@@ -22,8 +22,7 @@ public class DirectionsTests : BaseTest
         {
             Key = this.Settings.ApiKey,
             Origin = new LocationEx(origin),
-            Destination = new LocationEx(destination),
-            DepartureTime = DateTime.Now.AddHours(-2)
+            Destination = new LocationEx(destination)
         };
 
         var result = await GoogleMaps.Directions.QueryAsync(request);
@@ -135,7 +134,7 @@ public class DirectionsTests : BaseTest
             Key = this.Settings.ApiKey,
             Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
             Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
-            TravelMode = TravelMode.Driving,
+            TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1)
         };
 
@@ -152,7 +151,7 @@ public class DirectionsTests : BaseTest
             Key = this.Settings.ApiKey,
             Origin = new LocationEx(new Address("285 Bedford Ave, Brooklyn, NY, USA")),
             Destination = new LocationEx(new Address("185 Broadway Ave, Manhattan, NY, USA")),
-            TravelMode = TravelMode.Driving,
+            TravelMode = TravelMode.DRIVING,
             ArrivalTime = DateTime.UtcNow.AddHours(1),
             TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
         };

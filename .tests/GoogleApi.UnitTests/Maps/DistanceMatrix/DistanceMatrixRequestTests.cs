@@ -22,7 +22,7 @@ public class DistanceMatrixRequestTests
 
         Assert.AreEqual(Units.Metric, request.Units);
         Assert.AreEqual(AvoidWay.Nothing, request.Avoid);
-        Assert.AreEqual(TravelMode.Driving, request.TravelMode);
+        Assert.AreEqual(TravelMode.DRIVING, request.TravelMode);
         Assert.AreEqual(TransitMode.Bus | TransitMode.Train | TransitMode.Subway | TransitMode.Tram, request.TransitMode);
         Assert.AreEqual(TransitRoutingPreference.Nothing, request.TransitRoutingPreference);
         Assert.AreEqual(Language.English, request.Language);
@@ -77,7 +77,7 @@ public class DistanceMatrixRequestTests
         Assert.AreEqual(languageExpected, language.Value);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString().ToLower();
+        var modeExpected = request.TravelMode.ToString();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
     }
@@ -226,14 +226,14 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Bicycling
+            TravelMode = TravelMode.BICYCLING
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString().ToLower();
+        var modeExpected = request.TravelMode.ToString();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
     }
@@ -252,7 +252,7 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Driving,
+            TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1)
         };
 
@@ -279,7 +279,7 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Driving,
+            TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1),
             TrafficModel = TrafficModel.Best_Guess
         };
@@ -312,14 +312,14 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Transit
+            TravelMode = TravelMode.TRANSIT
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString().ToLower();
+        var modeExpected = request.TravelMode.ToString();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
 
@@ -348,7 +348,7 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Transit,
+            TravelMode = TravelMode.TRANSIT,
             DepartureTime = DateTime.UtcNow.AddHours(1)
         };
 
@@ -356,7 +356,7 @@ public class DistanceMatrixRequestTests
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString().ToLower();
+        var modeExpected = request.TravelMode.ToString();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
 
@@ -385,7 +385,7 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Transit,
+            TravelMode = TravelMode.TRANSIT,
             ArrivalTime = DateTime.UtcNow.AddHours(1)
         };
 
@@ -393,7 +393,7 @@ public class DistanceMatrixRequestTests
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString().ToLower();
+        var modeExpected = request.TravelMode.ToString();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
 
@@ -426,7 +426,7 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Transit,
+            TravelMode = TravelMode.TRANSIT,
             TransitMode = TransitMode.Subway | TransitMode.Rail
         };
 
@@ -453,7 +453,7 @@ public class DistanceMatrixRequestTests
             {
                 new LocationEx(new Address("address"))
             },
-            TravelMode = TravelMode.Transit,
+            TravelMode = TravelMode.TRANSIT,
             TransitMode = TransitMode.Subway | TransitMode.Rail,
             TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
         };

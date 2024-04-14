@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoogleApi.Entities.Places.Common.Enums;
+namespace GoogleApi.Entities.Places.Details.Request.Enums;
 
 /// <summary>
 /// Field Types.
@@ -221,5 +221,5 @@ public enum FieldTypes : long
     /// <summary>
     /// Atmosphere (all).
     /// </summary>
-    Atmosphere = Curbside_Pickup | Delivery | Dine_In | Editorial_Summary | Price_Level | Rating | Reservable | Review | User_Ratings_Total | Serves_Beer | Serves_Breakfast | Serves_Brunch | Serves_Dinner | Serves_Lunch | Serves_Vegetarian_Food | Serves_Wine | Takeout
+    Atmosphere = Curbside_Pickup | Delivery | Editorial_Summary | Price_Level | Rating | Reservable | Review | Dine_In | User_Ratings_Total | Serves_Beer | Serves_Breakfast | Serves_Brunch | Serves_Dinner | Serves_Lunch | Serves_Vegetarian_Food | Serves_Wine | Takeout
 }

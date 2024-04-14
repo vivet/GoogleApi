@@ -208,7 +208,7 @@ public class DistanceMatrixTests : BaseTest
             {
                 new LocationEx(destination)
             },
-            TravelMode = TravelMode.Driving,
+            TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1)
         };
 
@@ -233,7 +233,7 @@ public class DistanceMatrixTests : BaseTest
             {
                 new LocationEx(destination)
             },
-            TravelMode = TravelMode.Driving,
+            TravelMode = TravelMode.DRIVING,
             ArrivalTime = DateTime.UtcNow.AddHours(1),
             TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
         };
