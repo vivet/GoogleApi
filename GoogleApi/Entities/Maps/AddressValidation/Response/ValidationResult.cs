@@ -19,17 +19,23 @@ public class ValidationResult
     public virtual Address Address { get; set; }
 
     /// <summary>
+    /// English Latin Address.
+    /// Information about the address itself as opposed to the geocode.
+    /// </summary>
+    public virtual Address EnglishLatinAddress { get; set; }
+
+    /// <summary>
     /// Geocode.
     /// Information about the location and place that the address geocoded to.
     /// </summary>
     public virtual Geocode Geocode { get; set; }
 
     /// <summary>
-    /// Address Metadata.
+    /// Metadata.
     /// Other information relevant to deliverability.
     /// Metadata is not guaranteed to be fully populated for every address sent to the Address Validation API.
     /// </summary>
-    public virtual AddressMetadata AddressMetadata { get; set; }
+    public virtual AddressMetadata Metadata { get; set; }
 
     /// <summary>
     /// Extra deliverability flags provided by USPS.

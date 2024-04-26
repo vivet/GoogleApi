@@ -38,4 +38,9 @@ public class AddressValidationRequest : BaseMapsRequest, IRequestJson
     /// where the first line contains the street number and name and the second line contains the city, state, and zip code.
     /// </summary>
     public virtual bool EnableUspsCass { get; set; }
+
+    /// <summary>
+    /// Language Options.
+    /// </summary>
+    public virtual LanguageOptions LanguageOptions { get; set; }
 }

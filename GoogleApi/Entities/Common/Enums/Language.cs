@@ -1,4 +1,6 @@
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common.Enums.Converters;
 
 namespace GoogleApi.Entities.Common.Enums;
 
@@ -8,8 +10,15 @@ namespace GoogleApi.Entities.Common.Enums;
 /// Some APIs allow you to explicitly set a language when you make a request.
 /// https://developers.google.com/maps/faq#languagesupport
 /// </summary>
+[JsonConverter(typeof(LanguageEnumJsonConverter))]
 public enum Language
 {
+    /// <summary>
+    /// Unsupported.
+    /// </summary>
+    [EnumMember(Value = "XX")]
+    Unsupported,
+
     /// <summary>
     /// Afrikaans
     /// </summary>
@@ -500,5 +509,11 @@ public enum Language
     /// Zulu
     /// </summary>
     [EnumMember(Value = "zu")]
-    Zulu
+    Zulu,
+
+    /// <summary>
+    /// Bulgarian Latn
+    /// </summary>
+    [EnumMember(Value = "bg-Latn")]
+    BulgarianLatn
 }

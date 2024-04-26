@@ -23,6 +23,10 @@ public class AddressValidationTests : BaseTest
                 {
                     "1600 Amphitheatre Pkwy"
                 }
+            },
+            LanguageOptions = new LanguageOptions
+            {
+                ReturnEnglishLatinAddress = true
             }
         };
 
