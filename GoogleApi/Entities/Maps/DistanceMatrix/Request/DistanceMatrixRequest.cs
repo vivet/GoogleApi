@@ -147,7 +147,7 @@ public class DistanceMatrixRequest : BaseMapsChannelRequest, IRequestQueryString
             parameters.Add("avoid", this.Avoid.ToEnumString('|'));
         }
 
-        parameters.Add("mode", this.TravelMode.ToString());
+        parameters.Add("mode", this.TravelMode.ToString().ToLower());
 
         switch (this.TravelMode)
         {

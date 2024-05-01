@@ -242,4 +242,42 @@ public class DistanceMatrixTests : BaseTest
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
     }
+
+    [Test]
+    public async Task DistanceMatrixWhenTravelModeWalking()
+    {
+        var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");
+        var destination = new Address("185 Broadway Ave, Manhattan, NY, USA");
+        var drivingRequest = new DistanceMatrixRequest
+        {
+            Key = this.Settings.ApiKey,
+            Origins = new[]
+            {
+                new LocationEx(origin)
+            },
+            Destinations = new[]
+            {
+                new LocationEx(destination)
+            },
+            TravelMode = TravelMode.DRIVING,
+        };
+        var drivingResponse = await GoogleMaps.DistanceMatrix.QueryAsync(drivingRequest);
+
+        var walkingRequest = new DistanceMatrixRequest
+        {
+            Key = this.Settings.ApiKey,
+            Origins = new[]
+            {
+                new LocationEx(origin)
+            },
+            Destinations = new[]
+            {
+                new LocationEx(destination)
+            },
+            TravelMode = TravelMode.WALKING,
+        };
+        var walkingResponse = await GoogleMaps.DistanceMatrix.QueryAsync(walkingRequest);
+
+        Assert.AreNotEqual(walkingResponse.RawJson, drivingResponse.RawJson, "Walking travel mode response cannot be identical to Driving mode");
+    }
 }
