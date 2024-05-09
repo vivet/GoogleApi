@@ -41,16 +41,16 @@ public partial class GooglePlaces
     public static DetailsApi Details => new();
 
     /// <summary>
-    /// The Query Autocomplete service can be used to provide a query prediction for text-based geographic searches, by returning suggested queries as you type.
-    /// https://developers.google.com/places/web-service/query
-    /// </summary>
-    public static AutoCompleteApi AutoComplete => new();
-
-    /// <summary>
     /// The Place Autocomplete service is a web service that returns place predictions in response to an HTTP request.
     /// The request specifies a textual search string and optional geographic bounds. The service can be used to provide autocomplete functionality for text-based geographic searches,
     /// by returning places such as businesses, addresses and points of interest as a user types.
     /// https://developers.google.com/places/web-service/autocomplete
+    /// </summary>
+    public static AutoCompleteApi AutoComplete => new();
+
+    /// <summary>
+    /// The Query Autocomplete service can be used to provide a query prediction for text-based geographic searches, by returning suggested queries as you type.
+    /// https://developers.google.com/places/web-service/query
     /// </summary>
     public static QueryAutoCompleteApi QueryAutoComplete => new();
 
