@@ -71,7 +71,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(languageExpected, language.Value);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString();
+        var modeExpected = request.TravelMode.ToString().ToLower();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
     }
@@ -211,7 +211,7 @@ public class DirectionsRequestTests
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString();
+        var modeExpected = request.TravelMode.ToString().ToLower();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
     }
@@ -340,7 +340,7 @@ public class DirectionsRequestTests
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString();
+        var modeExpected = request.TravelMode.ToString().ToLower();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
 
@@ -371,7 +371,7 @@ public class DirectionsRequestTests
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString();
+        var modeExpected = request.TravelMode.ToString().ToLower();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
 
@@ -402,7 +402,7 @@ public class DirectionsRequestTests
         Assert.IsNotNull(queryStringParameters);
 
         var mode = queryStringParameters.FirstOrDefault(x => x.Key == "mode");
-        var modeExpected = request.TravelMode.ToString();
+        var modeExpected = request.TravelMode.ToString().ToLower();
         Assert.IsNotNull(mode);
         Assert.AreEqual(modeExpected, mode.Value);
 
