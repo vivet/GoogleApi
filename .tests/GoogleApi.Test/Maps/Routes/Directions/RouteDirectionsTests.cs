@@ -30,7 +30,7 @@ public class RouteDirectionsTests : BaseTest
             Destination = new RouteWayPoint
             {
                 Location = new RouteLocation { LatLng = new LatLng { Latitude = 55.692241, Longitude = 12.538547 } }
-            },
+            }
         };
 
         var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);
@@ -137,7 +137,7 @@ public class RouteDirectionsTests : BaseTest
             {
                 Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
             },
-            PolylineEncoding = PolylineEncoding.GeoJsonLinestring,
+            PolylineEncoding = PolylineEncoding.GeoJsonLinestring
         };
 
         var result = await GoogleMaps.Routes.RouteDirections.QueryAsync(request);

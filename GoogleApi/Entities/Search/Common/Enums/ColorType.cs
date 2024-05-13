@@ -13,8 +13,8 @@ public enum ColorType
     /// <summary>
     /// Grayscale.
     /// </summary>
-
     Grey,
+
     /// <summary>
     /// Black and white.
     /// </summary>

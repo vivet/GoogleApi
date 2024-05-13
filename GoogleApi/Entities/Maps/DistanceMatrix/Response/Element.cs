@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 

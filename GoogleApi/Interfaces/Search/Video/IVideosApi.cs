@@ -4,7 +4,4 @@ using GoogleApi.Entities.Search.Video.Videos.Response;
 namespace GoogleApi.Interfaces.Search.Video;
 
 /// <inheritdoc />
-public interface IVideosApi : IApi<VideoSearchRequest, VideoSearchResponse>
-{
-
-}
+public interface IVideosApi : IApi<VideoSearchRequest, VideoSearchResponse>;

@@ -15,14 +15,12 @@ public class PlaceLocationTypeEnumJsonConverter : EnumJsonConverter<PlaceLocatio
     public PlaceLocationTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : base(converterOptions, serializerOptions)
     {
-
     }
 
     /// <inheritdoc />
     public PlaceLocationTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
         : base(converterOptions, namingPolicy, serializerOptions)
     {
-
     }
 
     /// <inheritdoc />

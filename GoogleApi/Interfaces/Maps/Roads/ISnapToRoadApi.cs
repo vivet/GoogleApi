@@ -4,7 +4,4 @@ using GoogleApi.Entities.Maps.Roads.SnapToRoads.Response;
 namespace GoogleApi.Interfaces.Maps.Roads;
 
 /// <inheritdoc />
-public interface ISnapToRoadApi : IApi<SnapToRoadsRequest, SnapToRoadsResponse>
-{
-
-}
+public interface ISnapToRoadApi : IApi<SnapToRoadsRequest, SnapToRoadsResponse>;

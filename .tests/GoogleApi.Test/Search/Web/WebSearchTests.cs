@@ -158,23 +158,23 @@ public class WebSearchTests : BaseTest
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenPrettyPrintTest()
+    public Task WebSearchWhenPrettyPrintTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenUserIpTest()
+    public Task WebSearchWhenUserIpTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenQuotaUserTest()
+    public Task WebSearchWhenQuotaUserTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
@@ -218,7 +218,7 @@ public class WebSearchTests : BaseTest
                 {
                     Expressions = new List<CountryRestrictExpression>
                     {
-                        new() { Country = Country.Denmark},
+                        new() { Country = Country.Denmark },
                         new() { Country = Country.Italy }
                     }
                 }
@@ -272,16 +272,16 @@ public class WebSearchTests : BaseTest
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenExactTermsTest()
+    public Task WebSearchWhenExactTermsTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenExcludeTermsTest()
+    public Task WebSearchWhenExcludeTermsTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
@@ -321,9 +321,9 @@ public class WebSearchTests : BaseTest
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenFilterTest()
+    public Task WebSearchWhenFilterTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
@@ -355,16 +355,16 @@ public class WebSearchTests : BaseTest
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenGooglehostTest()
+    public Task WebSearchWhenGooglehostTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenHighRangeTest()
+    public Task WebSearchWhenHighRangeTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
@@ -396,23 +396,23 @@ public class WebSearchTests : BaseTest
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenAndTermsTest()
+    public Task WebSearchWhenAndTermsTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenLinkSiteTest()
+    public Task WebSearchWhenLinkSiteTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenLowRangeTest()
+    public Task WebSearchWhenLowRangeTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
@@ -444,30 +444,30 @@ public class WebSearchTests : BaseTest
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenOrTermsTest()
+    public Task WebSearchWhenOrTermsTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenRelatedSiteTest()
+    public Task WebSearchWhenRelatedSiteTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenRightsTest()
+    public Task WebSearchWhenRightsTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task WebSearchWhenSafetyLevelTest()
+    public Task WebSearchWhenSafetyLevelTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]

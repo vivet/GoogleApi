@@ -74,8 +74,6 @@ public class FunctionsTests : BaseTest
         Assert.AreEqual(decodePolyLine[0].ToString(), location1.ToString());
         Assert.AreEqual(decodePolyLine[1].ToString(), location2.ToString());
         Assert.AreEqual(decodePolyLine[2].ToString(), location3.ToString());
-
-
     }
 
     [Test]

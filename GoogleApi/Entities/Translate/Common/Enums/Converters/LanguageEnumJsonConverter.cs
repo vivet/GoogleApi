@@ -14,14 +14,12 @@ public class LanguageEnumJsonConverter : EnumJsonConverter<Language>
     public LanguageEnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : base(converterOptions, serializerOptions)
     {
-
     }
 
     /// <inheritdoc />
     public LanguageEnumJsonConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
         : base(converterOptions, namingPolicy, serializerOptions)
     {
-
     }
 
     /// <inheritdoc />

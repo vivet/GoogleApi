@@ -17,7 +17,7 @@ public class LocationGeocodeTests : BaseTest
         var request = new LocationGeocodeRequest
         {
             Key = this.Settings.ApiKey,
-            Location = new Coordinate(38.1864717,-109.9743631)
+            Location = new Coordinate(38.1864717, -109.9743631)
         };
 
         var response = await GoogleMaps.Geocode.LocationGeocode.QueryAsync(request);

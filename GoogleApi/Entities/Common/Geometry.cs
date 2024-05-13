@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 
 namespace GoogleApi.Entities.Common;

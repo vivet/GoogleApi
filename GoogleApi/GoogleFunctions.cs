@@ -27,7 +27,7 @@ public static class GoogleFunctions
 
         var encodedString = new StringBuilder();
 
-        var encodeDiff = (Action<int>) (diff =>
+        var encodeDiff = (Action<int>)(diff =>
         {
             var shifted = diff << 1;
             if (diff < 0)
@@ -37,11 +37,11 @@ public static class GoogleFunctions
 
             while (rem >= 0x20)
             {
-                encodedString.Append((char) ((0x20 | (rem & 0x1f)) + 63));
+                encodedString.Append((char)((0x20 | (rem & 0x1f)) + 63));
                 rem >>= 5;
             }
 
-            encodedString.Append((char) (rem + 63));
+            encodedString.Append((char)(rem + 63));
         });
 
         var lastLat = 0;
@@ -52,8 +52,8 @@ public static class GoogleFunctions
             if (location == null)
                 continue;
 
-            var lat = (int) Math.Round(location.Latitude * 1E5);
-            var lng = (int) Math.Round(location.Longitude * 1E5);
+            var lat = (int)Math.Round(location.Latitude * 1E5);
+            var lng = (int)Math.Round(location.Longitude * 1E5);
 
             encodeDiff(lat - lastLat);
             encodeDiff(lng - lastLng);

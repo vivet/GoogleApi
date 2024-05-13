@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Converters;
 using GoogleApi.Entities.Common.Enums;
@@ -47,7 +46,7 @@ public class Result
     /// </summary>
     [JsonPropertyName("partial_match")]
     [JsonConverter(typeof(StringBooleanZeroOneJsonConverter))]
-    public virtual bool PartialMatch { get; set; } =false;
+    public virtual bool PartialMatch { get; set; } = false;
 
     /// <summary>
     /// plus_code is an encoded location reference, derived from latitude and longitude coordinates,

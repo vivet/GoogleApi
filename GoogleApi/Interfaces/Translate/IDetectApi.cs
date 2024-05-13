@@ -4,7 +4,4 @@ using GoogleApi.Entities.Translate.Detect.Response;
 namespace GoogleApi.Interfaces.Translate;
 
 /// <inheritdoc />
-public interface IDetectApi : IApi<DetectRequest, DetectResponse>
-{
-
-}
+public interface IDetectApi : IApi<DetectRequest, DetectResponse>;

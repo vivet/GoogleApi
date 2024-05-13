@@ -20,7 +20,6 @@ public class GoogleApiException : Exception
     public GoogleApiException(string message)
         : base(message)
     {
-
     }
 
     /// <summary>
@@ -31,6 +30,5 @@ public class GoogleApiException : Exception
     public GoogleApiException(string message, Exception innerException)
         : base(message, innerException)
     {
-
     }
 }

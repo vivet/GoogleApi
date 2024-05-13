@@ -3,7 +3,4 @@
 /// <summary>
 /// SnapToRoads Response.
 /// </summary>
-public class SnapToRoadsResponse : BaseRoadsResponse
-{
-
-}
+public class SnapToRoadsResponse : BaseRoadsResponse;

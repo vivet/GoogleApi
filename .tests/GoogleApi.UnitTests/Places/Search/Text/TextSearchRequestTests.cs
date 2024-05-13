@@ -209,7 +209,6 @@ public class TextSearchRequestTests
         var pagetokenExpected = request.PageToken;
         Assert.IsNotNull(pagetoken);
         Assert.AreEqual(pagetokenExpected, pagetoken.Value);
-
     }
 
     [Test]

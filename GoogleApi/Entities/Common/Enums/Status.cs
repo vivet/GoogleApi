@@ -107,5 +107,5 @@ public enum Status
     /// Resource Exhausted.
     /// </summary>
     [EnumMember(Value = "RESOURCE_EXHAUSTED")]
-    ResourceExhausted,
+    ResourceExhausted
 }

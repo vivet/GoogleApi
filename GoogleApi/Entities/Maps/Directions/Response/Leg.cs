@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Maps.Common;
-
 using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Entities.Maps.Directions.Response;

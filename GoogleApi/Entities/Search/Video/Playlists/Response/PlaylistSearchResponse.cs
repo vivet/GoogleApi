@@ -3,7 +3,4 @@
 /// <summary>
 /// Playlist Search Response.
 /// </summary>
-public class PlaylistSearchResponse : BaseVideoSearchResponse
-{
-
-}
+public class PlaylistSearchResponse : BaseVideoSearchResponse;

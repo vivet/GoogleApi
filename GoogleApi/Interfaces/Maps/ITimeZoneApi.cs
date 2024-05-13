@@ -4,7 +4,4 @@ using GoogleApi.Entities.Maps.TimeZone.Response;
 namespace GoogleApi.Interfaces.Maps;
 
 /// <inheritdoc />
-public interface ITimeZoneApi : IApi<TimeZoneRequest, TimeZoneResponse>
-{
-
-}
+public interface ITimeZoneApi : IApi<TimeZoneRequest, TimeZoneResponse>;

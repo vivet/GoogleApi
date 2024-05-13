@@ -11,14 +11,12 @@ public class Location : Maps.Common.Location
     public Location(Coordinate coordinate)
         : base(coordinate)
     {
-
     }
 
     /// <inheritdoc />
     public Location(Entities.Common.Address address)
         : base(address)
     {
-
     }
 
     /// <summary>
@@ -28,7 +26,6 @@ public class Location : Maps.Common.Location
     public Location(GlobalCode globalCode)
         : base(new Entities.Common.Address(globalCode?.ToString()))
     {
-
     }
 
     /// <summary>
@@ -38,6 +35,5 @@ public class Location : Maps.Common.Location
     public Location(LocalCodeAndLocality localCodeAndLocality)
         : base(new Entities.Common.Address(localCodeAndLocality?.ToString()))
     {
-
     }
 }

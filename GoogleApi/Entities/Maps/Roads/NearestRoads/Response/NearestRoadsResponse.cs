@@ -3,6 +3,4 @@
 /// <summary>
 /// NearestRoads Response.
 /// </summary>
-public class NearestRoadsResponse : BaseRoadsResponse
-{
-}
+public class NearestRoadsResponse : BaseRoadsResponse;

@@ -3,7 +3,4 @@
 /// <summary>
 /// Places Photos Response.
 /// </summary>
-public class PlacesPhotosResponse : BaseResponseStream
-{
-
-}
+public class PlacesPhotosResponse : BaseResponseStream;

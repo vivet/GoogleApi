@@ -22,7 +22,6 @@ public class Coordinate
     /// </summary>
     public Coordinate()
     {
-
     }
 
     /// <summary>

@@ -25,7 +25,6 @@ public class CoordinateEx : Entities.Common.Coordinate
     public CoordinateEx(double latitude, double longitude)
         : base(latitude, longitude)
     {
-
     }
 
     /// <summary>

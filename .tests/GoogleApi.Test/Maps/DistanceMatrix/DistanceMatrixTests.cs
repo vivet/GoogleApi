@@ -259,7 +259,7 @@ public class DistanceMatrixTests : BaseTest
             {
                 new LocationEx(destination)
             },
-            TravelMode = TravelMode.DRIVING,
+            TravelMode = TravelMode.DRIVING
         };
         var drivingResponse = await GoogleMaps.DistanceMatrix.QueryAsync(drivingRequest);
 
@@ -274,7 +274,7 @@ public class DistanceMatrixTests : BaseTest
             {
                 new LocationEx(destination)
             },
-            TravelMode = TravelMode.WALKING,
+            TravelMode = TravelMode.WALKING
         };
         var walkingResponse = await GoogleMaps.DistanceMatrix.QueryAsync(walkingRequest);
 

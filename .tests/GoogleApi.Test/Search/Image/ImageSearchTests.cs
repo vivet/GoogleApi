@@ -52,30 +52,30 @@ public class ImageSearchTests : BaseTest
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task ImageSearchWhenImageTypeTest()
+    public Task ImageSearchWhenImageTypeTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task ImageSearchWhenImageSizeTest()
+    public Task ImageSearchWhenImageSizeTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task ImageSearchWhenImageColorTypeTest()
+    public Task ImageSearchWhenImageColorTypeTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]
     [Ignore("Inconclusive")]
-    public async Task ImageSearchWhenImageDominantColorTest()
+    public Task ImageSearchWhenImageDominantColorTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]

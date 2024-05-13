@@ -4,7 +4,4 @@ using GoogleApi.Entities.Translate.Translate.Response;
 namespace GoogleApi.Interfaces.Translate;
 
 /// <inheritdoc />
-public interface ITranslateApi : IApi<TranslateRequest, TranslateResponse>
-{
-
-}
+public interface ITranslateApi : IApi<TranslateRequest, TranslateResponse>;

@@ -4,7 +4,4 @@ using GoogleApi.Entities.Places.Search.Text.Response;
 namespace GoogleApi.Interfaces.Places.Search;
 
 /// <inheritdoc />
-public interface ITextSearchApi : IApi<PlacesTextSearchRequest, PlacesTextSearchResponse>
-{
-
-}
+public interface ITextSearchApi : IApi<PlacesTextSearchRequest, PlacesTextSearchResponse>;

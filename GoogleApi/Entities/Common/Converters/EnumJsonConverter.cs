@@ -23,7 +23,7 @@ public class EnumJsonConverter<T> : JsonConverter<T>
     private static readonly string sNegativeSign = (int)Type.GetTypeCode(typeof(T)) % 2 == 0 ? null : NumberFormatInfo.CurrentInfo.NegativeSign;
     private static readonly TypeCode sEnumTypeCode = Type.GetTypeCode(typeof(T));
 
-    private Type TypeToConvert => typeof(T);
+    private static Type TypeToConvert => typeof(T);
     private readonly EnumConverterOptions converterOptions;
     private readonly JsonNamingPolicy namingPolicy;
     private readonly ConcurrentDictionary<ulong, JsonEncodedText> nameCache;
@@ -32,7 +32,6 @@ public class EnumJsonConverter<T> : JsonConverter<T>
     public EnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : this(converterOptions, namingPolicy: null, serializerOptions)
     {
-
     }
 
     /// <inheritdoc />
@@ -54,7 +53,7 @@ public class EnumJsonConverter<T> : JsonConverter<T>
                 break;
             }
 
-            var value = (T)values.GetValue(i)!;
+            var value = (T)values.GetValue(i);
             var key = EnumJsonConverter<T>.ConvertToUInt64(value);
             var name = names[i];
 
@@ -78,7 +77,7 @@ public class EnumJsonConverter<T> : JsonConverter<T>
     /// <inheritdoc />
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        JsonTokenType token = reader.TokenType;
+        var token = reader.TokenType;
 
         if (token == JsonTokenType.String)
         {
@@ -102,49 +101,49 @@ public class EnumJsonConverter<T> : JsonConverter<T>
             // Switch cases ordered by expected frequency
 
             case TypeCode.Int32:
-                if (reader.TryGetInt32(out int int32))
+                if (reader.TryGetInt32(out var int32))
                 {
                     return Unsafe.As<int, T>(ref int32);
                 }
                 break;
             case TypeCode.UInt32:
-                if (reader.TryGetUInt32(out uint uint32))
+                if (reader.TryGetUInt32(out var uint32))
                 {
                     return Unsafe.As<uint, T>(ref uint32);
                 }
                 break;
             case TypeCode.UInt64:
-                if (reader.TryGetUInt64(out ulong uint64))
+                if (reader.TryGetUInt64(out var uint64))
                 {
                     return Unsafe.As<ulong, T>(ref uint64);
                 }
                 break;
             case TypeCode.Int64:
-                if (reader.TryGetInt64(out long int64))
+                if (reader.TryGetInt64(out var int64))
                 {
                     return Unsafe.As<long, T>(ref int64);
                 }
                 break;
             case TypeCode.SByte:
-                if (reader.TryGetSByte(out sbyte byte8))
+                if (reader.TryGetSByte(out var byte8))
                 {
                     return Unsafe.As<sbyte, T>(ref byte8);
                 }
                 break;
             case TypeCode.Byte:
-                if (reader.TryGetByte(out byte ubyte8))
+                if (reader.TryGetByte(out var ubyte8))
                 {
                     return Unsafe.As<byte, T>(ref ubyte8);
                 }
                 break;
             case TypeCode.Int16:
-                if (reader.TryGetInt16(out short int16))
+                if (reader.TryGetInt16(out var int16))
                 {
                     return Unsafe.As<short, T>(ref int16);
                 }
                 break;
             case TypeCode.UInt16:
-                if (reader.TryGetUInt16(out ushort uint16))
+                if (reader.TryGetUInt16(out var uint16))
                 {
                     return Unsafe.As<ushort, T>(ref uint16);
                 }
@@ -161,20 +160,20 @@ public class EnumJsonConverter<T> : JsonConverter<T>
         // If strings are allowed, attempt to write it out as a string value
         if (converterOptions.HasFlag(EnumConverterOptions.AllowStrings))
         {
-            ulong key = ConvertToUInt64(value);
+            var key = ConvertToUInt64(value);
 
-            if (nameCache.TryGetValue(key, out JsonEncodedText formatted))
+            if (nameCache.TryGetValue(key, out var formatted))
             {
                 writer.WriteStringValue(formatted);
                 return;
             }
 
-            string original = value.ToString();
+            var original = value.ToString();
             if (IsValidIdentifier(original))
             {
                 // We are dealing with a combination of flag constants since
                 // all constant values were cached during warm-up.
-                JavaScriptEncoder encoder = options.Encoder;
+                var encoder = options.Encoder;
 
                 if (nameCache.Count < NAME_CACHE_SIZE_SOFT_LIMIT)
                 {
@@ -239,8 +238,14 @@ public class EnumJsonConverter<T> : JsonConverter<T>
 
     internal T ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        string enumString = reader.GetString();
-        enumString = namingPolicy?.ConvertName(enumString!);
+        var enumString = reader.GetString();
+
+        if (enumString == null)
+        {
+            throw new NullReferenceException(nameof(enumString));
+        }
+
+        enumString = namingPolicy?.ConvertName(enumString);
 
         // Try parsing case sensitive first
         if (!Enum.TryParse(enumString, out T value)
@@ -275,7 +280,7 @@ public class EnumJsonConverter<T> : JsonConverter<T>
             TypeCode.Byte => (byte)value,
             TypeCode.Int16 => (ulong)(short)value,
             TypeCode.UInt16 => (ushort)value,
-            _ => throw new InvalidOperationException(),
+            _ => throw new InvalidOperationException()
         };
         return result;
     }

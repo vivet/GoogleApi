@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Search.Common.Enums;
 
 namespace GoogleApi.Entities.Search.Common;

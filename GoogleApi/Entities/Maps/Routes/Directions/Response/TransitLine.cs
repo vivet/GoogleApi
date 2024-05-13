@@ -47,5 +47,4 @@ public class TransitLine
     /// The type of vehicle that operates on this transit line.
     /// </summary>
     public virtual TransitVehicle Vehicle { get; set; }
-
 }

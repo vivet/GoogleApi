@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;

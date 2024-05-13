@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using GoogleApi.Entities.Maps.Roads.Common;
 
 namespace GoogleApi.Entities.Maps.Roads;

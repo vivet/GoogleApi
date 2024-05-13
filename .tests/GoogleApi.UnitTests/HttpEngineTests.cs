@@ -12,7 +12,6 @@ using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common.Converters;
 using GoogleApi.Exceptions;
 using NUnit.Framework;
-
 using RichardSzalay.MockHttp;
 
 namespace GoogleApi.UnitTests;
@@ -27,7 +26,8 @@ public sealed class HttpEngineTests
         PropertyNameCaseInsensitive = true,
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        Converters = {
+        Converters =
+        {
             new StringBooleanZeroOneJsonConverter(),
             new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true),
             new SortExpressionJsonConverter()
@@ -45,18 +45,18 @@ public sealed class HttpEngineTests
         this.mockHttpMessageHandler = new MockHttpMessageHandler();
 
         this.fixture.Customize<DemoRequest>(x => x
-            .With(_ => _.Key, $"{Guid.NewGuid():N}")
-            .With(_ => _.ClientId, $"gme-{Guid.NewGuid():N}")
+            .With(y => y.Key, $"{Guid.NewGuid():N}")
+            .With(y => y.ClientId, $"gme-{Guid.NewGuid():N}")
             .OmitAutoProperties());
 
         this.fixture.Customize<DemoPostRequest>(x => x
-            .With(_ => _.Key, $"{Guid.NewGuid():N}")
-            .With(_ => _.ClientId, $"gme-{Guid.NewGuid():N}")
+            .With(y => y.Key, $"{Guid.NewGuid():N}")
+            .With(y => y.ClientId, $"gme-{Guid.NewGuid():N}")
             .OmitAutoProperties());
 
         this.fixture.Customize<DemoStreamRequest>(x => x
-            .With(_ => _.Key, $"{Guid.NewGuid():N}")
-            .With(_ => _.ClientId, $"gme-{Guid.NewGuid():N}")
+            .With(y => y.Key, $"{Guid.NewGuid():N}")
+            .With(y => y.ClientId, $"gme-{Guid.NewGuid():N}")
             .OmitAutoProperties());
     }
 
@@ -342,65 +342,35 @@ public sealed class HttpEngineTests
     }
 
     #region Query Based
-    private sealed class DemoHttpEngine : HttpEngine<DemoRequest, DemoResponse>
-    {
-        public DemoHttpEngine(HttpClient client)
-            : base(client)
-        {
-
-        }
-    }
+    private sealed class DemoHttpEngine(HttpClient client) : HttpEngine<DemoRequest, DemoResponse>(client);
 
     private sealed class DemoRequest : BaseRequest, IRequestQueryString
     {
         protected override string BaseUrl => "demo.googleapis.com/fakeservice/";
     }
 
-    private sealed class DemoResponse : BaseResponse
-    {
-
-    }
+    private sealed class DemoResponse : BaseResponse;
     #endregion
 
     #region Post Based
-    private sealed class DemoPostHttpEngine : HttpEngine<DemoPostRequest, DemoPostResponse>
-    {
-        public DemoPostHttpEngine(HttpClient client)
-            : base(client)
-        {
-
-        }
-    }
+    private sealed class DemoPostHttpEngine(HttpClient client) : HttpEngine<DemoPostRequest, DemoPostResponse>(client);
 
     private sealed class DemoPostRequest : BaseRequest, IRequestJson
     {
         protected override string BaseUrl => "demo.googleapis.com/fakeservice/";
     }
 
-    private sealed class DemoPostResponse : BaseResponse
-    {
-
-    }
+    private sealed class DemoPostResponse : BaseResponse;
     #endregion
 
     #region Stream Based
-    private sealed class DemoStreamHttpEngine : HttpEngine<DemoStreamRequest, DemoStreamResponse>
-    {
-        public DemoStreamHttpEngine(HttpClient client)
-            : base(client)
-        {
-
-        }
-    }
+    private sealed class DemoStreamHttpEngine(HttpClient client) : HttpEngine<DemoStreamRequest, DemoStreamResponse>(client);
 
     private sealed class DemoStreamRequest : BaseRequest, IRequestQueryString
     {
         protected override string BaseUrl => "demo.googleapis.com/fakeservice/";
     }
 
-    private sealed class DemoStreamResponse : BaseResponseStream
-    {
-
-    }
+    private sealed class DemoStreamResponse : BaseResponseStream;
     #endregion
 }

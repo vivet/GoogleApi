@@ -84,7 +84,6 @@ public partial class GoogleSearch
         /// </summary>
         public WebSearchApi()
         {
-
         }
 
         /// <summary>
@@ -94,7 +93,6 @@ public partial class GoogleSearch
         public WebSearchApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -108,7 +106,6 @@ public partial class GoogleSearch
         /// </summary>
         public ImageSearchApi()
         {
-
         }
 
         /// <summary>
@@ -118,7 +115,6 @@ public partial class GoogleSearch
         public ImageSearchApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -134,7 +130,6 @@ public partial class GoogleSearch
             /// </summary>
             public ChannelsApi()
             {
-
             }
 
             /// <summary>
@@ -144,7 +139,6 @@ public partial class GoogleSearch
             public ChannelsApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -158,7 +152,6 @@ public partial class GoogleSearch
             /// </summary>
             public PlaylistsApi()
             {
-
             }
 
             /// <summary>
@@ -168,7 +161,6 @@ public partial class GoogleSearch
             public PlaylistsApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -182,7 +174,6 @@ public partial class GoogleSearch
             /// </summary>
             public VideosApi()
             {
-
             }
 
             /// <summary>
@@ -192,7 +183,6 @@ public partial class GoogleSearch
             public VideosApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
     }

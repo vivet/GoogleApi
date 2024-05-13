@@ -4,7 +4,4 @@ using GoogleApi.Entities.Maps.StreetView.Response;
 namespace GoogleApi.Interfaces.Maps;
 
 /// <inheritdoc />
-public interface IStreetViewApi : IApi<StreetViewRequest, StreetViewResponse>
-{
-
-}
+public interface IStreetViewApi : IApi<StreetViewRequest, StreetViewResponse>;

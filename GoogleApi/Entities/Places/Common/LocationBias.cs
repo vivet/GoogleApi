@@ -38,7 +38,7 @@ public class LocationBias
     /// <inheritdoc />
     public override string ToString()
     {
-        return (this.IpBias
+        return this.IpBias
             ? "ipbias"
             : this.Location != null
                 ? this.Radius.HasValue
@@ -46,6 +46,6 @@ public class LocationBias
                     : $"point:{this.Location}"
                 : this.Bounds != null
                     ? $"rectangle:{this.Bounds.SouthWest}|{this.Bounds.NorthEast}"
-                    : null)!;
+                    : null;
     }
 }

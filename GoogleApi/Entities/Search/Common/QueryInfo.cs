@@ -212,13 +212,14 @@ public class QueryInfo
     /// </summary>
 
     [JsonIgnore]
-    public virtual IEnumerable<FileType> FileTypes {
+    public virtual IEnumerable<FileType> FileTypes
+    {
         get
         {
-            return FileType?.Split(',')
-                .Select(s => Enum.TryParse(s, true, out FileType f)
-                    ? f
-                    : GoogleApi.Entities.Search.Common.Enums.FileType.Unknown)
+            return this.FileType?.Split(',')
+                .Select(x => Enum.TryParse(x, true, out FileType fileType)
+                    ? fileType
+                    : Enums.FileType.Unknown)
                 .ToList();
         }
     }

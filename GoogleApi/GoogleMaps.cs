@@ -239,7 +239,6 @@ public partial class GoogleMaps
         /// </summary>
         public DirectionsApi()
         {
-
         }
 
         /// <summary>
@@ -249,7 +248,6 @@ public partial class GoogleMaps
         public DirectionsApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -263,7 +261,6 @@ public partial class GoogleMaps
         /// </summary>
         public DistanceMatrixApi()
         {
-
         }
 
         /// <summary>
@@ -273,7 +270,6 @@ public partial class GoogleMaps
         public DistanceMatrixApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -287,7 +283,6 @@ public partial class GoogleMaps
         /// </summary>
         public ElevationApi()
         {
-
         }
 
         /// <summary>
@@ -297,7 +292,6 @@ public partial class GoogleMaps
         public ElevationApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -311,7 +305,6 @@ public partial class GoogleMaps
         /// </summary>
         public GeolocationApi()
         {
-
         }
 
         /// <summary>
@@ -321,7 +314,6 @@ public partial class GoogleMaps
         public GeolocationApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -335,7 +327,6 @@ public partial class GoogleMaps
         /// </summary>
         public StreetViewApi()
         {
-
         }
 
         /// <summary>
@@ -345,7 +336,6 @@ public partial class GoogleMaps
         public StreetViewApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -359,7 +349,6 @@ public partial class GoogleMaps
         /// </summary>
         public StaticMapsApi()
         {
-
         }
 
         /// <summary>
@@ -369,7 +358,6 @@ public partial class GoogleMaps
         public StaticMapsApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -383,7 +371,6 @@ public partial class GoogleMaps
         /// </summary>
         public TimeZoneApi()
         {
-
         }
 
         /// <summary>
@@ -393,7 +380,6 @@ public partial class GoogleMaps
         public TimeZoneApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -407,7 +393,6 @@ public partial class GoogleMaps
         /// </summary>
         public AddressValidationApi()
         {
-
         }
 
         /// <summary>
@@ -417,7 +402,6 @@ public partial class GoogleMaps
         public AddressValidationApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -436,7 +420,6 @@ public partial class GoogleMaps
             /// </summary>
             public AddressGeocodeApi()
             {
-
             }
 
             /// <summary>
@@ -446,7 +429,6 @@ public partial class GoogleMaps
             public AddressGeocodeApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -460,7 +442,6 @@ public partial class GoogleMaps
             /// </summary>
             public LocationGeocodeApi()
             {
-
             }
 
             /// <summary>
@@ -470,7 +451,6 @@ public partial class GoogleMaps
             public LocationGeocodeApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -484,7 +464,6 @@ public partial class GoogleMaps
             /// </summary>
             public PlaceGeocodeApi()
             {
-
             }
 
             /// <summary>
@@ -494,7 +473,6 @@ public partial class GoogleMaps
             public PlaceGeocodeApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -508,7 +486,6 @@ public partial class GoogleMaps
             /// </summary>
             public PlusCodeGeocodeApi()
             {
-
             }
 
             /// <summary>
@@ -518,7 +495,6 @@ public partial class GoogleMaps
             public PlusCodeGeocodeApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
     }
@@ -538,7 +514,6 @@ public partial class GoogleMaps
             /// </summary>
             public SnapToRoadApi()
             {
-
             }
 
             /// <summary>
@@ -548,7 +523,6 @@ public partial class GoogleMaps
             public SnapToRoadApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -562,7 +536,6 @@ public partial class GoogleMaps
             /// </summary>
             public NearestRoadsApi()
             {
-
             }
 
             /// <summary>
@@ -572,7 +545,6 @@ public partial class GoogleMaps
             public NearestRoadsApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -586,7 +558,6 @@ public partial class GoogleMaps
             /// </summary>
             public SpeedLimitsApi()
             {
-
             }
 
             /// <summary>
@@ -596,7 +567,6 @@ public partial class GoogleMaps
             public SpeedLimitsApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
     }
@@ -616,7 +586,6 @@ public partial class GoogleMaps
             /// </summary>
             public RoutesDirectionsApi()
             {
-
             }
 
             /// <summary>
@@ -626,7 +595,6 @@ public partial class GoogleMaps
             public RoutesDirectionsApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -640,7 +608,6 @@ public partial class GoogleMaps
             /// </summary>
             public RoutesMatrixApi()
             {
-
             }
 
             /// <summary>
@@ -650,7 +617,6 @@ public partial class GoogleMaps
             public RoutesMatrixApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
     }
@@ -670,7 +636,6 @@ public partial class GoogleMaps
             /// </summary>
             public AerialViewGetVideoApi()
             {
-
             }
 
             /// <summary>
@@ -680,7 +645,6 @@ public partial class GoogleMaps
             public AerialViewGetVideoApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -694,7 +658,6 @@ public partial class GoogleMaps
             /// </summary>
             public AerialViewRenderApi()
             {
-
             }
 
             /// <summary>
@@ -704,7 +667,6 @@ public partial class GoogleMaps
             public AerialViewRenderApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
     }

@@ -4,7 +4,4 @@ using GoogleApi.Entities.Maps.AerialView.RenderVideo.Response;
 namespace GoogleApi.Interfaces.Maps.AerialView;
 
 /// <inheritdoc />
-public interface IAerialViewRenderVideoApi : IApi<RenderVideoRequest, RenderVideoResponse>
-{
-
-}
+public interface IAerialViewRenderVideoApi : IApi<RenderVideoRequest, RenderVideoResponse>;

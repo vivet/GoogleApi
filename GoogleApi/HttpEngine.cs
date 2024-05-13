@@ -43,8 +43,8 @@ public class HttpEngine
 /// <typeparam name="TRequest"></typeparam>
 /// <typeparam name="TResponse"></typeparam>
 public class HttpEngine<TRequest, TResponse> : HttpEngine
-    where TRequest : IRequest, new()
-    where TResponse : IResponse, new()
+    where TRequest : class, IRequest, new()
+    where TResponse : class, IResponse, new()
 {
     private readonly HttpClient httpClient;
 
@@ -54,7 +54,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
     protected HttpEngine()
         : this(HttpClientFactory.CreateDefaultHttpClient())
     {
-
     }
 
     /// <summary>
@@ -72,12 +71,12 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
     /// <param name="request">The request that will be sent.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
     /// <returns>The <see cref="Task{T}"/>.</returns>
-    public async Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
+    public Task<TResponse> QueryAsync(TRequest request, CancellationToken cancellationToken = default)
     {
         if (request == null)
             throw new ArgumentNullException(nameof(request));
 
-        return await this.QueryAsync(request, new HttpEngineOptions(), cancellationToken);
+        return this.QueryAsync(request, new HttpEngineOptions(), cancellationToken);
     }
 
     /// <summary>
@@ -209,7 +208,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         {
             case BaseResponseStream streamResponse:
             {
-
                 streamResponse.Buffer = await httpResponse.Content
                     .ReadAsByteArrayAsync()
                     .ConfigureAwait(false);

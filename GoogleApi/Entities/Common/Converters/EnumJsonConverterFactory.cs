@@ -27,7 +27,6 @@ public class EnumJsonConverterFactory : JsonConverterFactory
     public EnumJsonConverterFactory()
         : this(null, true)
     {
-
     }
 
     /// <summary>
@@ -62,9 +61,9 @@ public class EnumJsonConverterFactory : JsonConverterFactory
         var policy = this.jsonNamingPolicy;
 
         var query = from field in typeToConvert.GetFields(BindingFlags.Public | BindingFlags.Static)
-                    let attr = field.GetCustomAttribute<EnumMemberAttribute>()
-                    where attr != null
-                    select (field.Name, attr.Value);
+            let attr = field.GetCustomAttribute<EnumMemberAttribute>()
+            where attr != null
+            select (field.Name, attr.Value);
         var dictionary = query.ToDictionary(p => p.Item1, p => p.Item2);
         if (dictionary.Count > 0)
         {
@@ -92,14 +91,12 @@ public class EnumJsonConverterFactory<TEnum, TConverter> : EnumJsonConverterFact
     public EnumJsonConverterFactory()
         : this(null, true)
     {
-
     }
 
     /// <inheritdoc />
     public EnumJsonConverterFactory(JsonNamingPolicy namingPolicy, bool allowIntegerValues)
         : base(namingPolicy, allowIntegerValues)
     {
-
     }
 
     /// <inheritdoc />
@@ -118,9 +115,9 @@ public class EnumJsonConverterFactory<TEnum, TConverter> : EnumJsonConverterFact
 
         var query = from field in typeToConvert
                 .GetFields(BindingFlags.Public | BindingFlags.Static)
-                    let attr = field.GetCustomAttribute<EnumMemberAttribute>()
-                    where attr != null
-                    select (field.Name, attr.Value);
+            let attr = field.GetCustomAttribute<EnumMemberAttribute>()
+            where attr != null
+            select (field.Name, attr.Value);
 
         var dictionary = query
             .ToDictionary(x => x.Item1, x => x.Item2);

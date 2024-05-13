@@ -96,7 +96,6 @@ public partial class GooglePlaces
         /// </summary>
         public AutoCompleteApi()
         {
-
         }
 
         /// <summary>
@@ -105,7 +104,6 @@ public partial class GooglePlaces
         /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
         public AutoCompleteApi(HttpClient httpClient) : base(httpClient)
         {
-
         }
     }
 
@@ -119,7 +117,6 @@ public partial class GooglePlaces
         /// </summary>
         public DetailsApi()
         {
-
         }
 
         /// <summary>
@@ -129,7 +126,6 @@ public partial class GooglePlaces
         public DetailsApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -143,7 +139,6 @@ public partial class GooglePlaces
         /// </summary>
         public PhotosApi()
         {
-
         }
 
         /// <summary>
@@ -153,7 +148,6 @@ public partial class GooglePlaces
         public PhotosApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -167,7 +161,6 @@ public partial class GooglePlaces
         /// </summary>
         public QueryAutoCompleteApi()
         {
-
         }
 
         /// <summary>
@@ -177,7 +170,6 @@ public partial class GooglePlaces
         public QueryAutoCompleteApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -193,7 +185,6 @@ public partial class GooglePlaces
             /// </summary>
             public FindSearchApi()
             {
-
             }
 
             /// <summary>
@@ -203,7 +194,6 @@ public partial class GooglePlaces
             public FindSearchApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -217,7 +207,6 @@ public partial class GooglePlaces
             /// </summary>
             public NearBySearchApi()
             {
-
             }
 
             /// <summary>
@@ -227,7 +216,6 @@ public partial class GooglePlaces
             public NearBySearchApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
 
@@ -241,7 +229,6 @@ public partial class GooglePlaces
             /// </summary>
             public TextSearchApi()
             {
-
             }
 
             /// <summary>
@@ -251,7 +238,6 @@ public partial class GooglePlaces
             public TextSearchApi(HttpClient httpClient)
                 : base(httpClient)
             {
-
             }
         }
     }

@@ -3,7 +3,6 @@
 /// <summary>
 /// Rights - Filters based on licensing.
 /// </summary>
-
 public enum RightsType
 {
     /// <summary>

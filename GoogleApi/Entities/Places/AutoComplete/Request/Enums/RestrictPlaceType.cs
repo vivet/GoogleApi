@@ -6,7 +6,6 @@
 /// In general only a single type is allowed.  The exception is that you can safely mix the geocode and establishment types.
 /// https://developers.google.com/places/supported_types#table3
 /// </summary>
-
 public enum RestrictPlaceType
 {
     /// <summary>

@@ -145,7 +145,7 @@ public class StyleRule
 
         if (builder.Length == 0)
         {
-            return null!;
+            return null;
         }
 
         return builder

@@ -1,5 +1,4 @@
-﻿
-namespace GoogleApi.Entities.Maps.Common;
+﻿namespace GoogleApi.Entities.Maps.Common;
 
 /// <summary>
 /// Distance.

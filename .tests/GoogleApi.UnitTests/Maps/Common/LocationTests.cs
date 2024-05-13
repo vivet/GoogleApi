@@ -35,5 +35,4 @@ public class LocationTests
 
         Assert.AreEqual(location.String, toString);
     }
-
 }

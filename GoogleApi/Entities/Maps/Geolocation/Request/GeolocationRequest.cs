@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Geolocation.Request.Enums;
 

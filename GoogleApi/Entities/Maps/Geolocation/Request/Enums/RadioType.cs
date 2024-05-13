@@ -35,5 +35,5 @@ public enum RadioType
     /// Nr.
     /// </summary>
     [EnumMember(Value = "nr")]
-    Nr,
+    Nr
 }

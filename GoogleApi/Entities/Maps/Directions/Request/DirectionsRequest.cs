@@ -192,39 +192,39 @@ public class DirectionsRequest : BaseMapsChannelRequest, IRequestQueryString
         switch (this.TravelMode)
         {
             case TravelMode.DRIVING:
+            {
+                if (this.DepartureTime.HasValue)
                 {
-                    if (this.DepartureTime.HasValue)
+                    parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+
+                    if (this.WayPoints == null || this.WayPoints.All(x => x.IsVia))
                     {
-                        parameters.Add("departure_time", this.DepartureTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-
-                        if (this.WayPoints == null || this.WayPoints.All(x => x.IsVia))
-                        {
-                            parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
-                        }
+                        parameters.Add("traffic_model", this.TrafficModel.ToString().ToLower());
                     }
-
-                    break;
                 }
+
+                break;
+            }
             case TravelMode.TRANSIT:
+            {
+                parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
+
+                if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
                 {
-                    parameters.Add("transit_mode", this.TransitMode.ToEnumString('|'));
-
-                    if (this.TransitRoutingPreference != TransitRoutingPreference.Nothing)
-                    {
-                        parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower());
-                    }
-
-                    if (this.ArrivalTime.HasValue)
-                    {
-                        parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
-                    }
-                    else
-                    {
-                        parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
-                    }
-
-                    break;
+                    parameters.Add("transit_routing_preference", this.TransitRoutingPreference.ToString().ToLower());
                 }
+
+                if (this.ArrivalTime.HasValue)
+                {
+                    parameters.Add("arrival_time", this.ArrivalTime.Value.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture));
+                }
+                else
+                {
+                    parameters.Add("departure_time", this.DepartureTime?.DateTimeToUnixTimestamp().ToString(CultureInfo.InvariantCulture) ?? "now");
+                }
+
+                break;
+            }
             case TravelMode.WALKING:
             case TravelMode.BICYCLING:
                 break;

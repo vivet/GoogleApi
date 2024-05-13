@@ -71,7 +71,6 @@ public class NearBySearchRequestTests
         var radiusExpected = request.Radius.ToString();
         Assert.IsNotNull(radius);
         Assert.AreEqual(radiusExpected, radius.Value);
-
     }
 
     [Test]
@@ -209,7 +208,6 @@ public class NearBySearchRequestTests
         var pagetokenExpected = request.PageToken;
         Assert.IsNotNull(pagetoken);
         Assert.AreEqual(pagetokenExpected, pagetoken.Value);
-
     }
 
     [Test]

@@ -4,7 +4,4 @@ using GoogleApi.Entities.Maps.Elevation.Response;
 namespace GoogleApi.Interfaces.Maps;
 
 /// <inheritdoc />
-public interface IElevationApi : IApi<ElevationRequest, ElevationResponse>
-{
-
-}
+public interface IElevationApi : IApi<ElevationRequest, ElevationResponse>;

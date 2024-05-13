@@ -4,7 +4,4 @@ using GoogleApi.Entities.Search.Web.Request;
 namespace GoogleApi.Interfaces.Search;
 
 /// <inheritdoc />
-public interface IWebSearchApi : IApi<WebSearchRequest, BaseSearchResponse>
-{
-
-}
+public interface IWebSearchApi : IApi<WebSearchRequest, BaseSearchResponse>;

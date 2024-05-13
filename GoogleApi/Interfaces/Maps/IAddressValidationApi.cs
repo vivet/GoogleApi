@@ -4,7 +4,4 @@ using GoogleApi.Entities.Maps.AddressValidation.Response;
 namespace GoogleApi.Interfaces.Maps;
 
 /// <inheritdoc />
-public interface IAddressValidationApi : IApi<AddressValidationRequest, AddressValidationResponse>
-{
-
-}
+public interface IAddressValidationApi : IApi<AddressValidationRequest, AddressValidationResponse>;

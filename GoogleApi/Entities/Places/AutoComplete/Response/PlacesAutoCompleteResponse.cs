@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using GoogleApi.Entities.Places.Common;
 
 namespace GoogleApi.Entities.Places.AutoComplete.Response;

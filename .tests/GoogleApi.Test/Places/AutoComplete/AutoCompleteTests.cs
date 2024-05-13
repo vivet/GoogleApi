@@ -331,7 +331,7 @@ public class AutoCompleteTests : BaseTest
         {
             Key = this.Settings.ApiKey,
             Input = "Denmark",
-            LocationTypes = new []
+            LocationTypes = new[]
             {
                 PlaceLocationType.Cafe,
                 PlaceLocationType.Book_Store

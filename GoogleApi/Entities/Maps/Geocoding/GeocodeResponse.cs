@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-
 using GoogleApi.Entities.Maps.Geocoding.Common;
 
 namespace GoogleApi.Entities.Maps.Geocoding;

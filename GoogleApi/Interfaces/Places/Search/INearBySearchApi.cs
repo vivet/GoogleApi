@@ -4,7 +4,4 @@ using GoogleApi.Entities.Places.Search.NearBy.Response;
 namespace GoogleApi.Interfaces.Places.Search;
 
 /// <inheritdoc />
-public interface INearBySearchApi : IApi<PlacesNearBySearchRequest, PlacesNearbySearchResponse>
-{
-
-}
+public interface INearBySearchApi : IApi<PlacesNearBySearchRequest, PlacesNearbySearchResponse>;

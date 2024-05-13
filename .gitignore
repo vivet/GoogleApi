@@ -4,7 +4,7 @@
 _ReSharper*
 **/bin
 **/obj
-*.DotSettings
+*.DotSettings.User
 packages
 .vs
 project.lock.json

@@ -3,7 +3,4 @@
 /// <summary>
 /// Channel Search Response.
 /// </summary>
-public class ChannelSearchResponse : BaseVideoSearchResponse
-{
-
-}
+public class ChannelSearchResponse : BaseVideoSearchResponse;

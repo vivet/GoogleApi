@@ -27,7 +27,6 @@ public class PlusCode
     /// </summary>
     public PlusCode()
     {
-
     }
 
     /// <summary>

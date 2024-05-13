@@ -499,7 +499,7 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Destinations = new []
+            Destinations = new[]
             {
                 new LocationEx(new Address("address"))
             }
@@ -516,7 +516,7 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new []
+            Origins = new[]
             {
                 new LocationEx(new Address("address"))
             }

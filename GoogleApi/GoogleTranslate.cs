@@ -47,7 +47,6 @@ public partial class GoogleTranslate
         /// </summary>
         public TranslateApi()
         {
-
         }
 
         /// <summary>
@@ -57,7 +56,6 @@ public partial class GoogleTranslate
         public TranslateApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -71,7 +69,6 @@ public partial class GoogleTranslate
         /// </summary>
         public DetectApi()
         {
-
         }
 
         /// <summary>
@@ -81,7 +78,6 @@ public partial class GoogleTranslate
         public DetectApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 
@@ -95,7 +91,6 @@ public partial class GoogleTranslate
         /// </summary>
         public LanguagesApi()
         {
-
         }
 
         /// <summary>
@@ -105,7 +100,6 @@ public partial class GoogleTranslate
         public LanguagesApi(HttpClient httpClient)
             : base(httpClient)
         {
-
         }
     }
 }

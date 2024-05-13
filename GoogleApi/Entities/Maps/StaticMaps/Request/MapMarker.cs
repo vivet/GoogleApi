@@ -62,7 +62,7 @@ public class MapMarker
 
         if (!this.Locations.Any())
         {
-            return null!;
+            return null;
         }
 
         var hasLabel = !string.IsNullOrEmpty(this.Label) && this.Size is not (MarkerSize.Tiny or MarkerSize.Small);
@@ -95,7 +95,7 @@ public class MapMarker
 
         if (builder.Length == 0)
         {
-            return null!;
+            return null;
         }
 
         return builder

@@ -79,9 +79,9 @@ public class GeolocationTests : BaseTest
 
     [Test]
     [Ignore("No valid example for Cell Towers.")]
-    public async Task GeolocationWhenCellTowersTest()
+    public Task GeolocationWhenCellTowersTest()
     {
-        await Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
     [Test]

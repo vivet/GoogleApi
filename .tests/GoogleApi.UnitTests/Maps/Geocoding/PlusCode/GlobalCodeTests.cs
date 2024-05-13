@@ -21,5 +21,4 @@ public class GlobalCodeTests
         var toString = globalCode.ToString();
         Assert.AreEqual(globalCode.Code, toString);
     }
-
 }

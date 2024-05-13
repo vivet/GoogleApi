@@ -4,7 +4,4 @@ using GoogleApi.Entities.Maps.Routes.Directions.Response;
 namespace GoogleApi.Interfaces.Maps.Routes;
 
 /// <inheritdoc />
-public interface IRoutesDirectionsApi : IApi<RoutesDirectionsRequest, RoutesDirectionsResponse>
-{
-
-}
+public interface IRoutesDirectionsApi : IApi<RoutesDirectionsRequest, RoutesDirectionsResponse>;

@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Response.Enums;
-
 using Coordinate = GoogleApi.Entities.Common.Coordinate;
 
 namespace GoogleApi.Entities.Maps.Directions.Response;

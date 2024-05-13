@@ -15,14 +15,12 @@ public class AddressComponentTypeEnumJsonConverter : EnumJsonConverter<AddressCo
     public AddressComponentTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
         : base(converterOptions, serializerOptions)
     {
-
     }
 
     /// <inheritdoc />
     public AddressComponentTypeEnumJsonConverter(EnumConverterOptions converterOptions, JsonNamingPolicy namingPolicy, JsonSerializerOptions serializerOptions)
         : base(converterOptions, namingPolicy, serializerOptions)
     {
-
     }
 
     /// <inheritdoc />

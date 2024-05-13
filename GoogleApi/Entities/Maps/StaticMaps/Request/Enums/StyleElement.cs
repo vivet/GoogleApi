@@ -9,7 +9,6 @@ namespace GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 /// </summary>
 public enum StyleElement
 {
-
     /// <summary>
     /// selects all elements of the specified feature. (default)
     /// </summary>
