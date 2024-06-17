@@ -89,7 +89,7 @@ The following api's are supported.
     * RouteMatrix (```GoogleMaps.Routes.Matrix```)
   * Address Validation (```GoogleMaps.AddressValidation```)
   * Aerial View (*beta*)
-    * Directions (```GoogleMaps.AerialView.GetVideo```)
+    * Get Video (```GoogleMaps.AerialView.GetVideo```)
     * Render Video (```GoogleMaps.AerialView.RenderVideo```)
 
 ##### Google Places
