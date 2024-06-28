@@ -47,7 +47,6 @@ public class Step
     /// fork-right, ferry, ferry-train, roundabout-left, roundabout-right.
     /// Values in this list are subject to change.
     /// </summary>
-    [JsonPropertyName("maneuverAction")]
     public virtual ManeuverAction Maneuver { get; set; }
 
     /// <summary>
