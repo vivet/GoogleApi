@@ -107,5 +107,11 @@ public enum Status
     /// Resource Exhausted.
     /// </summary>
     [EnumMember(Value = "RESOURCE_EXHAUSTED")]
-    ResourceExhausted
+    ResourceExhausted,
+
+    /// <summary>
+    /// Data Not Available.
+    /// </summary>
+    [EnumMember(Value = "DATA_NOT_AVAILABE")]
+    DataNotAvailable
 }
