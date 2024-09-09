@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
 		<TargetFrameworks>net462;net48;net481;netstandard2.0;netstandard2.1;net6.0;net8.0</TargetFrameworks>
-		<ApplicationIcon>.\..\icon.ico</ApplicationIcon>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<WarningsAsErrors />
 		<NoWarn />
@@ -42,6 +41,7 @@
 	<ItemGroup>
 		<None Include="..\LICENSE" Pack="true" Visible="false" PackagePath="" />
 		<None Include="..\README.md" Pack="true" Visible="false" PackagePath="" />
+		<None Include="..\icon.jpg" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -67,6 +67,5 @@
 	<ItemGroup>
 		<None Remove="GoogleApi.csproj.DotSettings" />
 		<None Remove="GoogleApi.rd.xml" />
-		<None Include="icon.jpg" Pack="true" PackagePath="icon.jpg" />
 	</ItemGroup>
 </Project>
