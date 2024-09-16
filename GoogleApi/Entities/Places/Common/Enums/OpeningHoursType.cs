@@ -8,7 +8,13 @@ namespace GoogleApi.Entities.Places.Common.Enums;
 /// Set for secondary_opening_hours only
 /// </summary>
 public enum OpeningHoursType
-{
+{   
+    /// <summary>
+    /// Default value when secondary hour type is not specified.
+    /// </summary>    
+    [EnumMember(Value = "SECONDARY_HOURS_TYPE_UNSPECIFIED")]
+    Secondary_Hours_Type_Unspecified,
+
     /// <summary>
     /// Drive Through.
     /// </summary>
@@ -70,8 +76,20 @@ public enum OpeningHoursType
     Pickup,
 
     /// <summary>
+    /// The access hours for storage places.
+    /// </summary>
+    [EnumMember(Value = "ACCESS")]
+    Access,
+
+    /// <summary>
     /// Senior Hours.
     /// </summary>
     [EnumMember(Value = "SENIOR_HOURS")]
-    Senior_Hours
+    Senior_Hours,
+
+    /// <summary>
+    /// Online service hours.
+    /// </summary>
+    [EnumMember(Value = "ONLINE_SERVICE_HOURS")]
+    Online_Service_Hours
 }
