@@ -187,11 +187,11 @@ public class DirectionsTests : BaseTest
         var request = new DirectionsRequest
         {
             Key = this.Settings.ApiKey,
-            Origin = new LocationEx(new Address("NYC, USA")),
-            Destination = new LocationEx(new Address("Miami, USA")),
+            Origin = new LocationEx(new Address("Copehagen, Denmark")),
+            Destination = new LocationEx(new Address("Roskilde, Denmark")),
             WayPoints = new List<WayPoint>
             {
-                new(new LocationEx(new Address("Philadelphia, USA")), true)
+                new(new LocationEx(new Address("Køge, Denmark")), true)
             },
             OptimizeWaypoints = true
         };

@@ -10,7 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using GoogleApi.Entities.Common.Converters;
+using GoogleApi.Entities.Common.Converters.Factories;
 
 namespace GoogleApi;
 
@@ -28,7 +28,7 @@ public class HttpEngine
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         Converters =
         {
-            new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true)
+            new JsonStringEnumConverterFactory()
         },
         ReferenceHandler = ReferenceHandler.IgnoreCycles,
         NumberHandling = JsonNumberHandling.AllowReadingFromString,

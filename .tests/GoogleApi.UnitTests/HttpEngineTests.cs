@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using GoogleApi.Entities;
 using GoogleApi.Entities.Common.Converters;
+using GoogleApi.Entities.Common.Converters.Factories;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common.Converters;
@@ -29,7 +30,7 @@ public sealed class HttpEngineTests
         Converters =
         {
             new StringBooleanZeroOneJsonConverter(),
-            new EnumJsonConverterFactory(JsonNamingPolicy.CamelCase, true),
+            new JsonStringEnumConverterFactory(),
             new SortExpressionJsonConverter()
         },
         ReferenceHandler = ReferenceHandler.Preserve,

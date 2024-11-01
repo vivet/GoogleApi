@@ -1,13 +1,10 @@
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Enums.Converters;
 
 namespace GoogleApi.Entities.Common.Enums;
 
 /// <summary>
 /// Location types.
 /// </summary>
-[JsonConverter(typeof(AddressComponentTypeEnumJsonConverter))]
 public enum AddressComponentType
 {
     /// <summary>

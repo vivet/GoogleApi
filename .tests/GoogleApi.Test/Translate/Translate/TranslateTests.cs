@@ -28,7 +28,7 @@ public class TranslateTests : BaseTest
 
         var translation1 = result.Data.Translations.FirstOrDefault();
         Assert.IsNotNull(translation1);
-        Assert.AreEqual("Hej Verden", translation1.TranslatedText);
+        Assert.AreEqual("Hej verden", translation1.TranslatedText);
     }
 
     [Test]
@@ -53,7 +53,7 @@ public class TranslateTests : BaseTest
 
         var translation1 = translations[0];
         Assert.IsNotNull(translation1);
-        Assert.AreEqual("Hej Verden", translation1.TranslatedText);
+        Assert.AreEqual("Hej verden", translation1.TranslatedText);
 
         var translation2 = translations[1];
         Assert.IsNotNull(translation2);

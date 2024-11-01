@@ -24,7 +24,7 @@ public class LanguagesTests : BaseTest
 
         var languages = result.Data.Languages;
         Assert.IsNotNull(languages);
-        Assert.AreEqual(136, languages.Count());
+        Assert.AreEqual(193, languages.Count());
     }
 
     [Test]
@@ -42,6 +42,6 @@ public class LanguagesTests : BaseTest
 
         var languages = result.Data.Languages;
         Assert.IsNotNull(languages);
-        Assert.AreEqual(136, languages.Count());
+        Assert.AreEqual(193, languages.Count());
     }
 }

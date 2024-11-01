@@ -6,9 +6,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>5.4.9.0</AssemblyVersion>
-		<FileVersion>5.4.9.0</FileVersion>
-		<Version>5.4.9.0</Version>
+		<AssemblyVersion>5.5.0.0</AssemblyVersion>
+		<FileVersion>5.5.0.0</FileVersion>
+		<Version>5.5.5.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -23,6 +23,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>
 			- Updated NuGets.
+			- Fixed json converters where enums that should default didn't work as expected.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
