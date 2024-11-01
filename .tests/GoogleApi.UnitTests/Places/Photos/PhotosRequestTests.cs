@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
 using GoogleApi.Entities.Places.Photos.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Places.Photos;
 
-[TestFixture]
+[TestClass]
 public class PhotosRequestTests
 {
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlacesPhotosRequest
@@ -32,7 +32,7 @@ public class PhotosRequestTests
         Assert.AreEqual(photoreferenceExpected, photoreference.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxWidthTest()
     {
         var request = new PlacesPhotosRequest
@@ -51,7 +51,7 @@ public class PhotosRequestTests
         Assert.AreEqual(maxwidthExpected, maxwidth.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxHeightTest()
     {
         var request = new PlacesPhotosRequest
@@ -70,7 +70,7 @@ public class PhotosRequestTests
         Assert.AreEqual(maxheightExpected, maxheight.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlacesPhotosRequest
@@ -78,16 +78,13 @@ public class PhotosRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new PlacesPhotosRequest
@@ -95,16 +92,13 @@ public class PhotosRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPhotoReferenceIsNullTest()
     {
         var request = new PlacesPhotosRequest
@@ -113,16 +107,13 @@ public class PhotosRequestTests
             PhotoReference = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'PhotoReference' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPhotoReferenceIsStringEmptyTest()
     {
         var request = new PlacesPhotosRequest
@@ -131,16 +122,13 @@ public class PhotosRequestTests
             PhotoReference = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'PhotoReference' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxHeightIsNullAndMaxWidthIsNullTest()
     {
         var request = new PlacesPhotosRequest
@@ -149,16 +137,13 @@ public class PhotosRequestTests
             PhotoReference = "photoReference"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxHeight' or 'MaxWidth' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxHeightIsLessThanOneTest()
     {
         var request = new PlacesPhotosRequest
@@ -168,16 +153,13 @@ public class PhotosRequestTests
             MaxHeight = 0
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxHeight' must be greater than or equal to 1 and less than or equal to 1.600");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxHeightIsGreaterThanSexteenHundredthsTest()
     {
         var request = new PlacesPhotosRequest
@@ -187,16 +169,13 @@ public class PhotosRequestTests
             MaxHeight = 1601
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxHeight' must be greater than or equal to 1 and less than or equal to 1.600");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxWidthIsLessThanOneTest()
     {
         var request = new PlacesPhotosRequest
@@ -206,16 +185,13 @@ public class PhotosRequestTests
             MaxWidth = 0
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxWidth' must be greater than or equal to 1 and less than or equal to 1.600");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxWidthIsGreaterThanSexteenHundredthsTest()
     {
         var request = new PlacesPhotosRequest
@@ -225,11 +201,8 @@ public class PhotosRequestTests
             MaxWidth = 1601
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxWidth' must be greater than or equal to 1 and less than or equal to 1.600");
     }

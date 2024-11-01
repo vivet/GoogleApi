@@ -4,14 +4,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.Details;
 
-[TestFixture]
+[TestClass]
 public class DetailsTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlacesDetailsTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -43,7 +43,7 @@ public class DetailsTests : BaseTest
         Assert.IsNotNull(result.AdrAddress);
         Assert.IsNotNull(result.Geometry);
         Assert.IsNotNull(result.Geometry.Location);
-        Assert.Contains(PlaceLocationType.Route, result.Types.ToArray());
+        Assert.IsTrue(result.Types.Contains(PlaceLocationType.Route));
         Assert.AreEqual(BusinessStatus.Operational, result.BusinessStatus);
 
         var formattedAddress = result.FormattedAddress.ToLower();
@@ -53,10 +53,10 @@ public class DetailsTests : BaseTest
 
         var addressComponents = result.AddressComponents?.ToArray();
         Assert.IsNotNull(addressComponents);
-        Assert.GreaterOrEqual(addressComponents.Length, 4);
+        Assert.IsTrue(addressComponents.Length >= 4);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesDetailsWhenLanguageTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -82,7 +82,7 @@ public class DetailsTests : BaseTest
         Assert.IsNotNull(response2.Result.PlaceId);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesDetailsWhenFieldsTest()
     {
         var request = new PlacesAutoCompleteRequest

@@ -12,12 +12,12 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Search.Common.Converters;
 using GoogleApi.Exceptions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RichardSzalay.MockHttp;
 
 namespace GoogleApi.UnitTests;
 
-[TestFixture]
+[TestClass]
 public sealed class HttpEngineTests
 {
     private const string APPLICATION_JSON = "application/json";
@@ -38,10 +38,9 @@ public sealed class HttpEngineTests
     };
 
     private readonly IFixture fixture = new Fixture();
-    private MockHttpMessageHandler mockHttpMessageHandler;
+    private readonly MockHttpMessageHandler mockHttpMessageHandler;
 
-    [SetUp]
-    public void SetUp()
+    public HttpEngineTests()
     {
         this.mockHttpMessageHandler = new MockHttpMessageHandler();
 
@@ -61,7 +60,7 @@ public sealed class HttpEngineTests
             .OmitAutoProperties());
     }
 
-    [Test]
+    [TestMethod]
     public async Task QueryAsyncWhenOkTest()
     {
         var data = new
@@ -90,7 +89,7 @@ public sealed class HttpEngineTests
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task QueryPostWhenOk()
     {
         var data = new
@@ -119,7 +118,7 @@ public sealed class HttpEngineTests
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task QueryStreamWhenOk()
     {
         this.mockHttpMessageHandler
@@ -142,7 +141,7 @@ public sealed class HttpEngineTests
         Assert.IsNotNull(result.Buffer);
     }
 
-    [Test]
+    [TestMethod]
     public async Task QueryWhenNotFound()
     {
         var data = new
@@ -171,7 +170,7 @@ public sealed class HttpEngineTests
         Assert.AreEqual(Status.NotFound, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task QueryWhenZeroResults()
     {
         var data = new
@@ -200,8 +199,8 @@ public sealed class HttpEngineTests
         Assert.AreEqual(Status.ZeroResults, result.Status);
     }
 
-    [Test]
-    public void QueryWhenOverLimit()
+    [TestMethod]
+    public async Task QueryWhenOverLimit()
     {
         var data = new
         {
@@ -222,14 +221,14 @@ public sealed class HttpEngineTests
         var request = this.fixture
             .Create<DemoRequest>();
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
         Assert.IsNotNull(exception);
         Assert.IsNotNull(exception.Status);
         Assert.AreEqual(exception.Status, Status.OverQueryLimit);
     }
 
-    [Test]
-    public void QueryWhenInvalidRequest()
+    [TestMethod]
+    public async Task QueryWhenInvalidRequest()
     {
         var data = new
         {
@@ -250,14 +249,14 @@ public sealed class HttpEngineTests
 
         var httpEngine = new DemoHttpEngine(httpClient);
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
         Assert.IsNotNull(exception);
         Assert.IsNotNull(exception.Status);
         Assert.AreEqual(exception.Status, Status.InvalidRequest);
     }
 
-    [Test]
-    public void QueryWhenNoApiKey()
+    [TestMethod]
+    public async Task QueryWhenNoApiKey()
     {
         var data = new
         {
@@ -278,15 +277,15 @@ public sealed class HttpEngineTests
         var request = this.fixture
             .Create<DemoRequest>();
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
 
         Assert.IsNotNull(exception);
         Assert.IsNotNull(exception.Status);
         Assert.AreEqual(exception.Status, Status.InvalidKey);
     }
 
-    [Test]
-    public void QueryWhenRequestDenied()
+    [TestMethod]
+    public async Task QueryWhenRequestDenied()
     {
         var data = new
         {
@@ -307,14 +306,14 @@ public sealed class HttpEngineTests
         var request = this.fixture
             .Create<DemoRequest>();
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(Status.RequestDenied, exception.Status);
     }
 
-    [Test]
-    public void QueryWhenUnknownError()
+    [TestMethod]
+    public async Task QueryWhenUnknownError()
     {
         var data = new
         {
@@ -335,7 +334,7 @@ public sealed class HttpEngineTests
         var request = this.fixture
             .Create<DemoRequest>();
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await httpEngine.QueryAsync(request, new HttpEngineOptions { ThrowOnInvalidRequest = true }));
 
         Assert.IsNotNull(exception);
         Assert.IsNotNull(exception.Status);

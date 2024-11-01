@@ -1,14 +1,14 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Directions.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Directions;
 
-[TestFixture]
+[TestClass]
 public class WayPointTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var wayPoint = new WayPoint(new LocationEx(new Address("address")));
@@ -17,7 +17,7 @@ public class WayPointTests
         Assert.IsFalse(wayPoint.IsVia);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenIsViaTest()
     {
         var wayPoint = new WayPoint(new LocationEx(new Address("address")), true);
@@ -26,7 +26,7 @@ public class WayPointTests
         Assert.IsTrue(wayPoint.IsVia);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var wayPoint = new WayPoint(new LocationEx(new Address("address")));
@@ -35,7 +35,7 @@ public class WayPointTests
         Assert.AreEqual(wayPoint.Location.ToString(), toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenIsViaTest()
     {
         var wayPoint = new WayPoint(new LocationEx(new Address("address")), true);

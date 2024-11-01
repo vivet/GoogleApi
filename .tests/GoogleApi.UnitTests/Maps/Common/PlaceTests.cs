@@ -1,13 +1,13 @@
 using System;
 using GoogleApi.Entities.Maps.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Common;
 
-[TestFixture]
+[TestClass]
 public class PlaceTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var place = new Place("id");
@@ -15,17 +15,13 @@ public class PlaceTests
         Assert.AreEqual("id", place.Id);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenNullTest()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-        {
-            var address = new Place(null);
-            Assert.IsNotNull(address);
-        });
+        Assert.ThrowsException<ArgumentNullException>(() => new Place(null));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var place = new Place("id");
@@ -34,7 +30,7 @@ public class PlaceTests
         Assert.AreEqual(place.Id, toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenPrefixTest()
     {
         var place = new Place("id");

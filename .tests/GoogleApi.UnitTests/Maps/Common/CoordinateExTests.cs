@@ -1,13 +1,13 @@
 using System.Globalization;
 using GoogleApi.Entities.Maps.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Common;
 
-[TestFixture]
+[TestClass]
 public class CoordinateExTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var coordinate = new CoordinateEx(1, 1);
@@ -18,7 +18,7 @@ public class CoordinateExTests
         Assert.IsFalse(coordinate.UseSideOfRoad);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var coordinate = new CoordinateEx(1, 1);
@@ -27,7 +27,7 @@ public class CoordinateExTests
         Assert.AreEqual($"{coordinate.Latitude.ToString(CultureInfo.InvariantCulture)},{coordinate.Longitude.ToString(CultureInfo.InvariantCulture)}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenHeadingTest()
     {
         var coordinate = new CoordinateEx(1, 1)
@@ -39,7 +39,7 @@ public class CoordinateExTests
         Assert.AreEqual($"heading={coordinate.Heading}:{coordinate.Latitude.ToString(CultureInfo.InvariantCulture)},{coordinate.Longitude.ToString(CultureInfo.InvariantCulture)}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenHeadingAndSideOfRoadTest()
     {
         var coordinate = new CoordinateEx(1, 1)
@@ -52,7 +52,7 @@ public class CoordinateExTests
         Assert.AreEqual($"side_of_road:{coordinate.Latitude.ToString(CultureInfo.InvariantCulture)},{coordinate.Longitude.ToString(CultureInfo.InvariantCulture)}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenSideOfRoadTest()
     {
         var coordinate = new CoordinateEx(1, 1)

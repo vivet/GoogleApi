@@ -4,14 +4,14 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Geocoding.Location;
 
-[TestFixture]
+[TestClass]
 public class LocationGeocodeTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task LocationGeocodeTest()
     {
         var request = new LocationGeocodeRequest
@@ -26,7 +26,7 @@ public class LocationGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task LocationGeocodeWhenNoLocalCodeTest()
     {
         var request = new LocationGeocodeRequest
@@ -41,7 +41,7 @@ public class LocationGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task LocationGeocodeWhenResultTypesTest()
     {
         var request = new LocationGeocodeRequest
@@ -59,7 +59,7 @@ public class LocationGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task LocationGeocodeWhenResultTypesWhenNoResultsTest()
     {
         var request = new LocationGeocodeRequest
@@ -78,7 +78,7 @@ public class LocationGeocodeTests : BaseTest
         Assert.AreEqual(Status.ZeroResults, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task LocationGeocodeWhenLocationTypesTest()
     {
         var request = new LocationGeocodeRequest

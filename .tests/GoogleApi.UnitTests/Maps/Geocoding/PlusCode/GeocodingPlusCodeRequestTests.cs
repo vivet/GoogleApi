@@ -4,14 +4,14 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode;
 
-[TestFixture]
+[TestClass]
 public class GeocodingPlusCodeRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlusCodeGeocodeRequest();
@@ -19,7 +19,7 @@ public class GeocodingPlusCodeRequestTests
         Assert.IsFalse(request.UseEncryptedKey);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenCoordinateTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -47,7 +47,7 @@ public class GeocodingPlusCodeRequestTests
         Assert.AreEqual(addressExpected, address.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAddressTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -65,7 +65,7 @@ public class GeocodingPlusCodeRequestTests
         Assert.AreEqual(addressExpected, address.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenGlobalCodeTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -83,7 +83,7 @@ public class GeocodingPlusCodeRequestTests
         Assert.AreEqual(addressExpected, address.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocalCodeAndLocalityTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -101,7 +101,7 @@ public class GeocodingPlusCodeRequestTests
         Assert.AreEqual(addressExpected, address.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenUseEncryptedKeyTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -120,7 +120,7 @@ public class GeocodingPlusCodeRequestTests
         Assert.AreEqual(keyExpected, key.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenEmailTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -139,7 +139,7 @@ public class GeocodingPlusCodeRequestTests
         Assert.AreEqual(emailExpected, email.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -147,10 +147,10 @@ public class GeocodingPlusCodeRequestTests
             Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1))
         };
 
-        Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        request.GetQueryStringParameters();
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAddressIsNullTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -158,11 +158,8 @@ public class GeocodingPlusCodeRequestTests
             Key = "key"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Address is required");
     }

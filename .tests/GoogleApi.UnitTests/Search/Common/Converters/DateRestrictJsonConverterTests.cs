@@ -3,14 +3,14 @@ using System.IO;
 using System.Text.Json;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Converters;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Search.Common.Converters;
 
-[TestFixture]
+[TestClass]
 public class DateRestrictJsonConverterTests
 {
-    [Test]
+    [TestMethod]
     public void CanConvertWhenTrueTest()
     {
         var converter = new DateRestrictJsonConverter();
@@ -19,7 +19,7 @@ public class DateRestrictJsonConverterTests
         Assert.IsTrue(result);
     }
 
-    [Test]
+    [TestMethod]
     public void CanConvertWhenFalseTest()
     {
         var converter = new DateRestrictJsonConverter();
@@ -28,18 +28,18 @@ public class DateRestrictJsonConverterTests
         Assert.IsFalse(result);
     }
 
-    [Test]
+    [TestMethod]
     public void ReadJsonTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void WriteJsonTest()
     {
         var writer = new Utf8JsonWriter(new MemoryStream());
         var sut = new DateRestrictJsonConverter();
 
-        Assert.Throws<NotImplementedException>(() => sut.Write(writer, new DateRestrict(), new JsonSerializerOptions()));
+        Assert.ThrowsException<NotImplementedException>(() => sut.Write(writer, new DateRestrict(), new JsonSerializerOptions()));
     }
 }

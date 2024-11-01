@@ -1,15 +1,15 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.QueryAutoComplete;
 
-[TestFixture]
+[TestClass]
 public class QueryAutoCompleteTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlacesQueryAutoCompleteTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -25,7 +25,7 @@ public class QueryAutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenOffsetTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -41,7 +41,7 @@ public class QueryAutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -57,7 +57,7 @@ public class QueryAutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationAndRadiusTest()
     {
         var request = new PlacesQueryAutoCompleteRequest

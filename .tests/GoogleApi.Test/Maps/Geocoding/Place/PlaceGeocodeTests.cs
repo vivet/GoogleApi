@@ -1,14 +1,14 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Geocoding.Place;
 
-[TestFixture]
+[TestClass]
 public class PlaceGeocodeTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlaceGeocodeTest()
     {
         var request = new PlaceGeocodeRequest

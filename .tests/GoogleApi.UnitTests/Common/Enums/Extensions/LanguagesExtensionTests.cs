@@ -1,493 +1,493 @@
-using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GoogleApi.Entities.Common.Enums;
 
 namespace GoogleApi.UnitTests.Common.Enums.Extensions;
 
-[TestFixture]
+[TestClass]
 public class LanguagesExtensionTests
 {
-    [Test]
+    [TestMethod]
     public void ToCodeWhenAfrikaansTest()
     {
         Assert.AreEqual("af", Language.Afrikaans.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenAlbanianTest()
     {
         Assert.AreEqual("sq", Language.Albanian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenAmharicTest()
     {
         Assert.AreEqual("am", Language.Amharic.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenArabicTest()
     {
         Assert.AreEqual("ar", Language.Arabic.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenArmenianTest()
     {
         Assert.AreEqual("hy", Language.Armenian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenAzerbaijaniTest()
     {
         Assert.AreEqual("az", Language.Azerbaijani.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenBasqueTest()
     {
         Assert.AreEqual("eu", Language.Basque.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenBelarusianTest()
     {
         Assert.AreEqual("be", Language.Belarusian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenBengaliTest()
     {
         Assert.AreEqual("bn", Language.Bengali.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenBosnianTest()
     {
         Assert.AreEqual("bs", Language.Bosnian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenBulgarianTest()
     {
         Assert.AreEqual("bg", Language.Bulgarian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenBurmeseTest()
     {
         Assert.AreEqual("my", Language.Burmese.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenCatalanTest()
     {
         Assert.AreEqual("ca", Language.Catalan.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenChineseTest()
     {
         Assert.AreEqual("zh", Language.Chinese.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenChineseSimplifiedTest()
     {
         Assert.AreEqual("zh-CN", Language.ChineseSimplified.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenChineseHongKongTest()
     {
         Assert.AreEqual("zh-HK", Language.ChineseHongKong.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenChineseTraditionalTest()
     {
         Assert.AreEqual("zh-TW", Language.ChineseTraditional.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenCroatianTest()
     {
         Assert.AreEqual("hr", Language.Croatian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenCzechTest()
     {
         Assert.AreEqual("cs", Language.Czech.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenDanishTest()
     {
         Assert.AreEqual("da", Language.Danish.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenDutchTest()
     {
         Assert.AreEqual("nl", Language.Dutch.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenEnglishTest()
     {
         Assert.AreEqual("en", Language.English.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenEnglishAustralianTest()
     {
         Assert.AreEqual("en-AU", Language.EnglishAustralian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenEnglishGreatBritainTest()
     {
         Assert.AreEqual("en-GB", Language.EnglishGreatBritain.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenEstonianTest()
     {
         Assert.AreEqual("et", Language.Estonian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenFarsiTest()
     {
         Assert.AreEqual("fa", Language.Farsi.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenFinnishTest()
     {
         Assert.AreEqual("fi", Language.Finnish.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenFilipinoTest()
     {
         Assert.AreEqual("fil", Language.Filipino.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenFrenchTest()
     {
         Assert.AreEqual("fr", Language.French.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenFrenchCanadaTest()
     {
         Assert.AreEqual("fr-CA", Language.FrenchCanada.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenGalicianTest()
     {
         Assert.AreEqual("gl", Language.Galician.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenGeorgianTest()
     {
         Assert.AreEqual("ka", Language.Georgian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenGermanTest()
     {
         Assert.AreEqual("de", Language.German.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenGreekTest()
     {
         Assert.AreEqual("el", Language.Greek.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenGujaratiTest()
     {
         Assert.AreEqual("gu", Language.Gujarati.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenHebrewTest()
     {
         Assert.AreEqual("iw", Language.Hebrew.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenHindiTest()
     {
         Assert.AreEqual("hi", Language.Hindi.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenHungarianTest()
     {
         Assert.AreEqual("hu", Language.Hungarian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenIcelandicTest()
     {
         Assert.AreEqual("is", Language.Icelandic.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenIndonesianTest()
     {
         Assert.AreEqual("id", Language.Indonesian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenItalianTest()
     {
         Assert.AreEqual("it", Language.Italian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenJapaneseTest()
     {
         Assert.AreEqual("ja", Language.Japanese.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenKannadaTest()
     {
         Assert.AreEqual("kn", Language.Kannada.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenKazakhTest()
     {
         Assert.AreEqual("kk", Language.Kazakh.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenKhmerTest()
     {
         Assert.AreEqual("km", Language.Khmer.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenKoreanTest()
     {
         Assert.AreEqual("ko", Language.Korean.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenKyrgyzTest()
     {
         Assert.AreEqual("ky", Language.Kyrgyz.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenLaoTest()
     {
         Assert.AreEqual("lo", Language.Lao.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenLatvianTest()
     {
         Assert.AreEqual("lv", Language.Latvian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenLithuanianTest()
     {
         Assert.AreEqual("lt", Language.Lithuanian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenMacedonianTest()
     {
         Assert.AreEqual("mk", Language.Macedonian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenMalayTest()
     {
         Assert.AreEqual("ms", Language.Malay.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenMalayalamTest()
     {
         Assert.AreEqual("ml", Language.Malayalam.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenMarathiTest()
     {
         Assert.AreEqual("mr", Language.Marathi.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenMongolianTest()
     {
         Assert.AreEqual("mn", Language.Mongolian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenNepaliTest()
     {
         Assert.AreEqual("ne", Language.Nepali.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenNorwegianTest()
     {
         Assert.AreEqual("no", Language.Norwegian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenPolishTest()
     {
         Assert.AreEqual("pl", Language.Polish.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenPortugueseTest()
     {
         Assert.AreEqual("pt", Language.Portuguese.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenPortugueseBrazilTest()
     {
         Assert.AreEqual("pt-BR", Language.PortugueseBrazil.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenPortuguesePortugalTest()
     {
         Assert.AreEqual("pt-PT", Language.PortuguesePortugal.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenPunjabiTest()
     {
         Assert.AreEqual("pa", Language.Punjabi.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenRomanianTest()
     {
         Assert.AreEqual("ro", Language.Romanian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenRussianTest()
     {
         Assert.AreEqual("ru", Language.Russian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSerbianTest()
     {
         Assert.AreEqual("sr", Language.Serbian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSinhaleseTest()
     {
         Assert.AreEqual("si", Language.Sinhalese.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSlovakTest()
     {
         Assert.AreEqual("sk", Language.Slovak.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSlovenianTest()
     {
         Assert.AreEqual("sl", Language.Slovenian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSpanishTest()
     {
         Assert.AreEqual("es", Language.Spanish.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSpanishLatinAmericaTest()
     {
         Assert.AreEqual("es-419", Language.SpanishLatinAmerica.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSwahiliTest()
     {
         Assert.AreEqual("sw", Language.Swahili.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenSwedishTest()
     {
         Assert.AreEqual("sv", Language.Swedish.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenTamilTest()
     {
         Assert.AreEqual("ta", Language.Tamil.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenTeluguTest()
     {
         Assert.AreEqual("te", Language.Telugu.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenThaiTest()
     {
         Assert.AreEqual("th", Language.Thai.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenTurkishTest()
     {
         Assert.AreEqual("tr", Language.Turkish.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenUkrainianTest()
     {
         Assert.AreEqual("uk", Language.Ukrainian.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenUrduTest()
     {
         Assert.AreEqual("ur", Language.Urdu.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenUzbekTest()
     {
         Assert.AreEqual("uz", Language.Uzbek.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenVietnameseTest()
     {
         Assert.AreEqual("vi", Language.Vietnamese.ToCode());
     }
 
-    [Test]
+    [TestMethod]
     public void ToCodeWhenZuluTest()
     {
         Assert.AreEqual("zu", Language.Zulu.ToCode());

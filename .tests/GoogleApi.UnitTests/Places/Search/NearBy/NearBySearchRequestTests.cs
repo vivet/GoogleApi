@@ -8,14 +8,14 @@ using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Places.Search.NearBy;
 
-[TestFixture]
+[TestClass]
 public class NearBySearchRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlacesNearBySearchRequest();
@@ -30,7 +30,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(Ranking.Prominence, request.Rankby);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -73,7 +73,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(radiusExpected, radius.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenNameTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -93,7 +93,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(nameExpected, name.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeywordTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -113,7 +113,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(keywordExpected, keyword.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTypeTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -134,7 +134,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(typeExpected, type.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOpenNowTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -152,7 +152,7 @@ public class NearBySearchRequestTests
         Assert.IsNotNull(radius);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMinpriceTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -172,7 +172,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(minpriceExpected, minprice.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxpriceTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -192,7 +192,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(maxpriceExpected, maxprice.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPageTokenTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -210,7 +210,7 @@ public class NearBySearchRequestTests
         Assert.AreEqual(pagetokenExpected, pagetoken.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -218,16 +218,13 @@ public class NearBySearchRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -235,16 +232,13 @@ public class NearBySearchRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationIsNullTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -253,16 +247,13 @@ public class NearBySearchRequestTests
             Location = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Location' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusIsNullTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -272,16 +263,13 @@ public class NearBySearchRequestTests
             Radius = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' is required, when 'Rankby' is not Distance");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusIsLessThanOneTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -291,16 +279,13 @@ public class NearBySearchRequestTests
             Radius = 0
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusIsGereaterThanFiftyThousandTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -310,16 +295,13 @@ public class NearBySearchRequestTests
             Radius = 50001
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRankByDistanceAndRadiusIsNotNullTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -330,16 +312,13 @@ public class NearBySearchRequestTests
             Rankby = Ranking.Distance
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' cannot be specified, when using 'Rankby' is distance");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRankByDistanceAndNameIsNullAndKeywordIsNullAndTypeIsNullTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -349,11 +328,8 @@ public class NearBySearchRequestTests
             Rankby = Ranking.Distance
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Keyword', 'Name' or 'Type' is required, If 'Rankby' is distance");
     }

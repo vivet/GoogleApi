@@ -2,14 +2,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Videos.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Search.Video.Videos;
 
-[TestFixture]
+[TestClass]
 public class VideoSearchTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     [Ignore("Requires Enterprise License")]
     public async Task VideoSearchTest()
     {

@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
-using NUnit.Framework;
-using Coordinate = GoogleApi.Entities.Common.Coordinate;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class StaticMapsTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task StaticMapsTest()
     {
         var request = new StaticMapsRequest
@@ -28,7 +28,7 @@ public class StaticMapsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StaticMapsWhenRegionTest()
     {
         var request = new StaticMapsRequest
@@ -45,7 +45,7 @@ public class StaticMapsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StaticMapsWhenPathsTest()
     {
         var request = new StaticMapsRequest
@@ -86,7 +86,7 @@ public class StaticMapsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StaticMapsWhenPathsAsEncodedPolylineTest()
     {
         var request = new StaticMapsRequest
@@ -127,7 +127,7 @@ public class StaticMapsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StaticMapsWhenStylesTest()
     {
         var request = new StaticMapsRequest
@@ -178,7 +178,7 @@ public class StaticMapsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StaticMapsWhenVisiblesTest()
     {
         var request = new StaticMapsRequest
@@ -197,7 +197,7 @@ public class StaticMapsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StaticMapsWhenMarkersTest()
     {
         var request = new StaticMapsRequest

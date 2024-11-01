@@ -2,15 +2,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Detect.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi.Test.Translate.Detect;
 
-[TestFixture]
+[TestClass]
 public class DetectTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task DetectTest()
     {
         var request = new DetectRequest
@@ -25,14 +25,14 @@ public class DetectTests : BaseTest
 
         var detections = result.Data.Detections?.ToArray();
         Assert.IsNotNull(detections);
-        Assert.IsNotEmpty(detections);
+        Assert.IsTrue(detections.Any());
 
         var detection = detections.FirstOrDefault();
         Assert.IsNotNull(detection);
         Assert.AreEqual(Language.English, detection[0].Language);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DetectWhenMultipleQsTest()
     {
         var request = new DetectRequest
@@ -47,7 +47,7 @@ public class DetectTests : BaseTest
 
         var detections = result.Data.Detections?.ToArray();
         Assert.IsNotNull(detections);
-        Assert.IsNotEmpty(detections);
+        Assert.IsTrue(detections.Any());
         Assert.AreEqual(2, detections.Length);
 
         var detection1 = detections[0];

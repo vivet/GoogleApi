@@ -3,14 +3,14 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Places.QueryAutoComplete;
 
-[TestFixture]
+[TestClass]
 public class QueryAutoCompleteRequstTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlacesQueryAutoCompleteRequest();
@@ -21,7 +21,7 @@ public class QueryAutoCompleteRequstTests
         Assert.AreEqual(Language.English, request.Language);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -48,7 +48,7 @@ public class QueryAutoCompleteRequstTests
         Assert.AreEqual("en", language.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -67,7 +67,7 @@ public class QueryAutoCompleteRequstTests
         Assert.AreEqual(expected, location.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -86,7 +86,7 @@ public class QueryAutoCompleteRequstTests
         Assert.AreEqual(radiusExpected, radius.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void PlacesQueryAutoCompleteWhenOffsetTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -105,7 +105,7 @@ public class QueryAutoCompleteRequstTests
         Assert.AreEqual(offsetExpected, offset.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -113,16 +113,13 @@ public class QueryAutoCompleteRequstTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -130,16 +127,13 @@ public class QueryAutoCompleteRequstTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenInputIsNullTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -148,16 +142,13 @@ public class QueryAutoCompleteRequstTests
             Input = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Input' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenInputIsStringEmptyTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -166,16 +157,13 @@ public class QueryAutoCompleteRequstTests
             Input = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Input' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusIsLessThanOneTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -185,16 +173,13 @@ public class QueryAutoCompleteRequstTests
             Radius = 0
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusIsGereaterThanFiftyThousandTest()
     {
         var request = new PlacesQueryAutoCompleteRequest
@@ -204,11 +189,8 @@ public class QueryAutoCompleteRequstTests
             Radius = 50001
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
     }

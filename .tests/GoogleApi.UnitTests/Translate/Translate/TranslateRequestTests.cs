@@ -4,14 +4,14 @@ using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Translate.Translate;
 
-[TestFixture]
+[TestClass]
 public class TranslateRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new TranslateRequest();
@@ -22,7 +22,7 @@ public class TranslateRequestTests
         Assert.AreEqual(Format.Html, request.Format);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new TranslateRequest
@@ -64,7 +64,7 @@ public class TranslateRequestTests
         Assert.AreEqual(formatExpected, format.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new TranslateRequest
@@ -72,16 +72,13 @@ public class TranslateRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new TranslateRequest
@@ -89,16 +86,13 @@ public class TranslateRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTargetIsNullTest()
     {
         var request = new TranslateRequest
@@ -107,16 +101,13 @@ public class TranslateRequestTests
             Target = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Target' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQsIsNullTest()
     {
         var request = new TranslateRequest
@@ -126,16 +117,13 @@ public class TranslateRequestTests
             Qs = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Qs' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQsIsEmptyTest()
     {
         var request = new TranslateRequest
@@ -145,16 +133,13 @@ public class TranslateRequestTests
             Qs = Array.Empty<string>()
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Qs' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSourceIsNotValidNmtTest()
     {
         var request = new TranslateRequest
@@ -166,16 +151,13 @@ public class TranslateRequestTests
             Model = Model.Nmt
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Source' is not compatible with model 'Nmt'");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTargetIsNotValidNmtTest()
     {
         var request = new TranslateRequest
@@ -187,16 +169,13 @@ public class TranslateRequestTests
             Model = Model.Nmt
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Target' is not compatible with model 'Nmt'");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenModelIsNmtAndSourceOrTargetIsNotEnglishTest()
     {
         var request = new TranslateRequest
@@ -208,11 +187,8 @@ public class TranslateRequestTests
             Qs = new[] { "Hej Verden" }
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Source' or 'Target' must be english");
     }

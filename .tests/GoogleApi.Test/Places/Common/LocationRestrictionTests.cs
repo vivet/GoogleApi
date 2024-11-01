@@ -1,13 +1,13 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.Common;
 
-[TestFixture]
+[TestClass]
 public class LocationRestrictionTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public void ToStringWhenLocationRestrictionAndCircleTest()
     {
         var restriction = new LocationRestriction
@@ -21,7 +21,7 @@ public class LocationRestrictionTests : BaseTest
         Assert.AreEqual($"circle:{restriction.Radius}@{restriction.Location}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLocationRestrictionAndRectangularTest()
     {
         var restriction = new LocationRestriction

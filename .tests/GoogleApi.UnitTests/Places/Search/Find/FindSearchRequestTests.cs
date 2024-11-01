@@ -6,14 +6,14 @@ using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Places.Search.Find;
 
-[TestFixture]
+[TestClass]
 public class FindSearchRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlacesFindSearchRequest();
@@ -23,7 +23,7 @@ public class FindSearchRequestTests
         Assert.AreEqual(FieldTypes.Place_Id, request.Fields);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlacesFindSearchRequest
@@ -58,7 +58,7 @@ public class FindSearchRequestTests
         Assert.AreEqual("place_id", fields.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenFieldsTest()
     {
         var request = new PlacesFindSearchRequest
@@ -82,7 +82,7 @@ public class FindSearchRequestTests
         Assert.AreEqual(fieldsExpected, fields.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesFindSearchRequest
@@ -102,7 +102,7 @@ public class FindSearchRequestTests
         Assert.IsNotNull(ipBias);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndPointTest()
     {
         var request = new PlacesFindSearchRequest
@@ -124,7 +124,7 @@ public class FindSearchRequestTests
         Assert.AreEqual(biasExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesFindSearchRequest
@@ -147,7 +147,7 @@ public class FindSearchRequestTests
         Assert.AreEqual(biasExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesFindSearchRequest
@@ -169,7 +169,7 @@ public class FindSearchRequestTests
         Assert.AreEqual(biasExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationRestrictionAndCircleTest()
     {
         var request = new PlacesFindSearchRequest
@@ -192,7 +192,7 @@ public class FindSearchRequestTests
         Assert.AreEqual(biasExpectedExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationRestrictionAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -214,7 +214,7 @@ public class FindSearchRequestTests
         Assert.AreEqual(restrictionExpected, restriction.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlacesFindSearchRequest
@@ -222,16 +222,13 @@ public class FindSearchRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new PlacesFindSearchRequest
@@ -239,16 +236,13 @@ public class FindSearchRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenInputIsNullTest()
     {
         var request = new PlacesFindSearchRequest
@@ -257,16 +251,13 @@ public class FindSearchRequestTests
             Input = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Input' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenInputIsStringEmptyTest()
     {
         var request = new PlacesFindSearchRequest
@@ -275,11 +266,8 @@ public class FindSearchRequestTests
             Input = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Input' is required");
     }

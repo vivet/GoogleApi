@@ -1,14 +1,14 @@
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class MapStyleTests
 {
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var mapStyle = new MapStyle();
@@ -17,7 +17,7 @@ public class MapStyleTests
         Assert.IsNull(toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenStyleIsNotNullTest()
     {
         var mapStyle = new MapStyle
@@ -34,7 +34,7 @@ public class MapStyleTests
         Assert.AreEqual($"feature:{mapStyle.Feature.ToEnumMemberString()}|element:{mapStyle.Element.ToEnumMemberString()}|{mapStyle.Style}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenStyleIsNotNullAndComplexTest()
     {
         var mapStyle = new MapStyle

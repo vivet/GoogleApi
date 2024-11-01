@@ -2,15 +2,15 @@ using System;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
 using GoogleApi.Entities.Search.Image.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
 namespace GoogleApi.UnitTests.Search.Image;
 
-[TestFixture]
+[TestClass]
 public class ImageSearchRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new ImageSearchRequest();
@@ -25,7 +25,7 @@ public class ImageSearchRequestTests
         Assert.IsNull(request.ImageOptions.ImageDominantColor);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new ImageSearchRequest
@@ -35,10 +35,10 @@ public class ImageSearchRequestTests
             Query = "abc"
         };
 
-        Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        request.GetQueryStringParameters();
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new ImageSearchRequest
@@ -46,16 +46,13 @@ public class ImageSearchRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new ImageSearchRequest
@@ -63,16 +60,13 @@ public class ImageSearchRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQueryIsNullTest()
     {
         var request = new ImageSearchRequest
@@ -81,16 +75,13 @@ public class ImageSearchRequestTests
             Query = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQueryIsStringEmptyTest()
     {
         var request = new ImageSearchRequest
@@ -99,16 +90,13 @@ public class ImageSearchRequestTests
             Query = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSearchEngineIdIsNullTest()
     {
         var request = new ImageSearchRequest
@@ -118,16 +106,13 @@ public class ImageSearchRequestTests
             SearchEngineId = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSearchEngineIdIsStringEmptyTest()
     {
         var request = new ImageSearchRequest
@@ -137,16 +122,13 @@ public class ImageSearchRequestTests
             SearchEngineId = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOptionsNumberIsLessThanOneTest()
     {
         var request = new ImageSearchRequest
@@ -160,15 +142,12 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOptionsNumberIsGreaterThanNineTest()
     {
         var request = new ImageSearchRequest
@@ -182,15 +161,12 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSafetyLevelInterfaceLanguageIsNotSupportedTest()
     {
         var request = new ImageSearchRequest
@@ -205,16 +181,12 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriTest()
     {
         var request = new ImageSearchRequest
@@ -230,25 +202,25 @@ public class ImageSearchRequestTests
         Assert.AreEqual($"/customsearch/v1?key={request.Key}&q={request.Query}&alt={request.Alt.ToString().ToLower()}&prettyPrint={request.PrettyPrint.ToString().ToLower()}&cx={request.SearchEngineId}&c2coff=1&fileType={string.Join(",", request.Options.FileTypes)}&filter=0&hl={request.Options.InterfaceLanguage.ToHl()}&num={request.Options.Number}&rights={string.Join(",", request.Options.Rights)}&safe={request.Options.SafetyLevel.ToString().ToLower()}&start={request.Options.StartIndex.ToString()}&searchType=image", uri.PathAndQuery);
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenImageTypeTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenImageSizeTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenImageColorTypeTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenImageDominantColorTest()
     {
         Assert.Inconclusive();

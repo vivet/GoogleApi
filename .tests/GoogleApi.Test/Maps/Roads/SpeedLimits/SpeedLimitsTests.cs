@@ -2,15 +2,15 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Roads.SpeedLimits;
 
-[TestFixture]
+[TestClass]
 public class SpeedLimitsTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     [Ignore("Requires Enterprise License")]
     public async Task SpeedLimitsTest()
     {
@@ -30,7 +30,7 @@ public class SpeedLimitsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("Requires Enterprise License")]
     public async Task SpeedLimitsWhenPlaceIdsTest()
     {

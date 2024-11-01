@@ -5,14 +5,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.DistanceMatrix;
 
-[TestFixture]
+[TestClass]
 public class DistanceMatrixTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixTest()
     {
         var origin1 = new Address("285 Bedford Ave, Brooklyn, NY, USA");
@@ -40,7 +40,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenAddressTest()
     {
         var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");
@@ -64,7 +64,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenCoordinateTest()
     {
         var origin = new CoordinateEx(55.7237480, 12.4208282);
@@ -87,7 +87,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenCoordinateAndHeadingTest()
     {
         var origin = new CoordinateEx(55.7237480, 12.4208282)
@@ -116,7 +116,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenCoordinateAndUseSideOfRoadTest()
     {
         var origin = new CoordinateEx(55.7237480, 12.4208282)
@@ -145,7 +145,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenPlaceIdTest()
     {
         var origin = new Place("ChIJaSLMpEVQUkYRL4xNOWBfwhQ");
@@ -168,7 +168,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenAvoidWayTest()
     {
         var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");
@@ -192,7 +192,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenTravelModeDrivingAndDepartureTimeTest()
     {
         var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");
@@ -217,7 +217,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenTravelModeTransitAndArrivalTimeTest()
     {
         var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");
@@ -243,7 +243,7 @@ public class DistanceMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DistanceMatrixWhenTravelModeWalking()
     {
         var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");

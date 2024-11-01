@@ -1,14 +1,14 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geolocation.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Geolocation;
 
-[TestFixture]
+[TestClass]
 public class GeolocationTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task GeolocationTest()
     {
         var request = new GeolocationRequest
@@ -21,7 +21,7 @@ public class GeolocationTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task GeolocationWhenCarrierTest()
     {
         var request = new GeolocationRequest
@@ -35,7 +35,7 @@ public class GeolocationTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task GeolocationWhenHomeMobileCountryCodeTest()
     {
         var request = new GeolocationRequest
@@ -49,7 +49,7 @@ public class GeolocationTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task GeolocationWhenHomeMobileNetworkCodeTest()
     {
         var request = new GeolocationRequest
@@ -63,7 +63,7 @@ public class GeolocationTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task GeolocationWhenConsiderIpTest()
     {
         var request = new GeolocationRequest
@@ -77,14 +77,14 @@ public class GeolocationTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("No valid example for Cell Towers.")]
     public Task GeolocationWhenCellTowersTest()
     {
         return Task.CompletedTask;
     }
 
-    [Test]
+    [TestMethod]
     public async Task GeolocationWhenWifiAccessPointsTest()
     {
         var request = new GeolocationRequest

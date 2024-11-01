@@ -1,13 +1,13 @@
 using System;
 using GoogleApi.Entities.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Common;
 
-[TestFixture]
+[TestClass]
 public class AddressTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var address = new Address("address");
@@ -15,17 +15,13 @@ public class AddressTests
         Assert.AreEqual("address", address.String);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenNullTest()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-        {
-            var address = new Address(null);
-            Assert.IsNotNull(address);
-        });
+        Assert.ThrowsException<ArgumentNullException>(() => new Address(null));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var address = new Address("address");

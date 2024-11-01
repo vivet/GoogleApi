@@ -9,14 +9,14 @@ using GoogleApi.Entities.Maps.Routes.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request.Enums;
 using GoogleApi.Exceptions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Routes.Matrix;
 
-[TestFixture]
+[TestClass]
 public class RouteMatrixTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task RouteMatrixTest()
     {
         var request = new RoutesMatrixRequest
@@ -52,7 +52,7 @@ public class RouteMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteMatrixWhenDepartureTimeTest()
     {
         var request = new RoutesMatrixRequest
@@ -88,7 +88,7 @@ public class RouteMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteMatrixWhenLanguageTest()
     {
         var request = new RoutesMatrixRequest
@@ -123,7 +123,7 @@ public class RouteMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteMatrixWhenExtraComputationsTest()
     {
         var request = new RoutesMatrixRequest
@@ -158,15 +158,16 @@ public class RouteMatrixTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
-    public void DirectionsWhenBadRequestTest()
+    [TestMethod]
+    public async Task DirectionsWhenBadRequestTest()
     {
         var request = new RoutesMatrixRequest
         {
             Key = this.Settings.ApiKey
         };
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request));
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Request must contain at least one origin.", exception.Message);
     }

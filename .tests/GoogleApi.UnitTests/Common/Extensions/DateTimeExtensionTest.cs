@@ -1,13 +1,13 @@
 using System;
 using GoogleApi.Entities.Common.Extensions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Common.Extensions;
 
-[TestFixture]
+[TestClass]
 public class DateTimeExtensionTest
 {
-    [Test]
+    [TestMethod]
     public void DateTimeToUnixTimestampTest()
     {
         var dateTime = DateTime.UtcNow;

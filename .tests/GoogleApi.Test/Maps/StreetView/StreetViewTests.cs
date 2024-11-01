@@ -2,15 +2,15 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StreetView.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.StreetView;
 
-[TestFixture]
+[TestClass]
 public class StreetViewTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task StreetViewWhenLocationTest()
     {
         var request = new StreetViewRequest
@@ -25,7 +25,7 @@ public class StreetViewTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StreetViewWhenPanoramaIdTest()
     {
         var request = new StreetViewRequest
@@ -40,7 +40,7 @@ public class StreetViewTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task StreetViewWhenHeadingTest()
     {
         var request = new StreetViewRequest

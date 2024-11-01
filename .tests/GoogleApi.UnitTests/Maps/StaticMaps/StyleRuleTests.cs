@@ -1,14 +1,14 @@
 using System;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class StyleRuleTests
 {
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var styleRule = new StyleRule();
@@ -17,7 +17,7 @@ public class StyleRuleTests
         Assert.IsNull(toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenHueTest()
     {
         var styleRule = new StyleRule
@@ -29,7 +29,7 @@ public class StyleRuleTests
         Assert.AreEqual($"hue:{styleRule.Hue}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLightnessTest()
     {
         var styleRule = new StyleRule
@@ -41,7 +41,7 @@ public class StyleRuleTests
         Assert.AreEqual($"lightness:{styleRule.Lightness}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLightnessIsSmallerTest()
     {
         var styleRule = new StyleRule
@@ -49,16 +49,13 @@ public class StyleRuleTests
             Lightness = -101
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var toString = styleRule.ToString();
-            Assert.IsNull(toString);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
+
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains($"The {nameof(styleRule.Lightness)} must be between -100 and 100."));
+        Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Lightness)} must be between -100 and 100."));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLightnessIsHigherTest()
     {
         var styleRule = new StyleRule
@@ -66,17 +63,13 @@ public class StyleRuleTests
             Lightness = 101
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var toString = styleRule.ToString();
-            Assert.IsNull(toString);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains($"The {nameof(styleRule.Lightness)} must be between -100 and 100."));
+        Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Lightness)} must be between -100 and 100."));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenSaturationTest()
     {
         var styleRule = new StyleRule
@@ -88,7 +81,7 @@ public class StyleRuleTests
         Assert.AreEqual($"saturation:{styleRule.Saturation}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenSaturationIsSmallerTest()
     {
         var styleRule = new StyleRule
@@ -96,17 +89,13 @@ public class StyleRuleTests
             Saturation = -101
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var toString = styleRule.ToString();
-            Assert.IsNull(toString);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains($"The {nameof(styleRule.Saturation)} must be between -100 and 100."));
+        Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Saturation)} must be between -100 and 100."));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenSaturationIsHigherTest()
     {
         var styleRule = new StyleRule
@@ -114,17 +103,13 @@ public class StyleRuleTests
             Saturation = 101
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var toString = styleRule.ToString();
-            Assert.IsNull(toString);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains($"The {nameof(styleRule.Saturation)} must be between -100 and 100."));
+        Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Saturation)} must be between -100 and 100."));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenGammaTest()
     {
         var styleRule = new StyleRule
@@ -136,7 +121,7 @@ public class StyleRuleTests
         Assert.AreEqual($"gamma:{styleRule.Gamma}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenGammaIsSmallerTest()
     {
         var styleRule = new StyleRule
@@ -144,17 +129,13 @@ public class StyleRuleTests
             Gamma = 0
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var toString = styleRule.ToString();
-            Assert.IsNull(toString);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00"));
+        Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00"));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenGammaIsHigherTest()
     {
         var styleRule = new StyleRule
@@ -162,17 +143,13 @@ public class StyleRuleTests
             Gamma = 101
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var toString = styleRule.ToString();
-            Assert.IsNull(toString);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00"));
+        Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00"));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenInvertLightnessTest()
     {
         var styleRule = new StyleRule
@@ -184,7 +161,7 @@ public class StyleRuleTests
         Assert.AreEqual("invert_lightness:true", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenVisibilityTest()
     {
         var styleRule = new StyleRule
@@ -196,7 +173,7 @@ public class StyleRuleTests
         Assert.AreEqual($"visibility:{styleRule.Visibility.ToString().ToLower()}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenColorTest()
     {
         var styleRule = new StyleRule
@@ -208,7 +185,7 @@ public class StyleRuleTests
         Assert.AreEqual($"color:{styleRule.Color}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenWeightTest()
     {
         var styleRule = new StyleRule
@@ -220,7 +197,7 @@ public class StyleRuleTests
         Assert.AreEqual($"weight:{styleRule.Weight}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenAllStylesTest()
     {
         var styleRule = new StyleRule

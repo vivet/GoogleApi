@@ -1,28 +1,24 @@
 using System;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class MapMarkerIconTests
 {
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
-        var exception = Assert.Throws<ArgumentNullException>(() =>
-        {
-            var markerIcon = new MapMarkerIcon(null);
-            Assert.IsNull(markerIcon);
-        });
+        var exception = Assert.ThrowsException<ArgumentNullException>(() => new MapMarkerIcon(null));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.StartsWith("Value cannot be null"));
         Assert.IsTrue(exception.Message.Contains("url"));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenAnchorTest()
     {
         var mapMarkerIcon = new MapMarkerIcon("url")
@@ -34,7 +30,7 @@ public class MapMarkerIconTests
         Assert.AreEqual($"icon:{mapMarkerIcon.Url}|anchor:{mapMarkerIcon.Anchor.ToString().ToLower()}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenAnchorCoordinateTest()
     {
         var mapMarkerIcon = new MapMarkerIcon("url")

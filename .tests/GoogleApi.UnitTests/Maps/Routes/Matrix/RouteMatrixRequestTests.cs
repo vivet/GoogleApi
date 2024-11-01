@@ -1,13 +1,13 @@
 using System;
 using GoogleApi.Entities.Maps.Routes.Matrix.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Routes.Matrix;
 
-[TestFixture]
+[TestClass]
 public class RouteMatrixRequestTests
 {
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new RoutesMatrixRequest
@@ -15,12 +15,13 @@ public class RouteMatrixRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new RoutesMatrixRequest
@@ -28,7 +29,8 @@ public class RouteMatrixRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }

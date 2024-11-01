@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.TimeZone.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.TimeZone;
 
-[TestFixture]
+[TestClass]
 public class TimeZoneTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task TimeZoneTest()
     {
         var location = new Coordinate(40.7141289, -73.9614074);
@@ -26,7 +26,7 @@ public class TimeZoneTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task TimeZoneWhenLanguageTest()
     {
         var location = new Coordinate(40.7141289, -73.9614074);
@@ -43,7 +43,7 @@ public class TimeZoneTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task TimeZoneWhenTimeStampTest()
     {
         var location = new Coordinate(40.7141289, -73.9614074);

@@ -5,14 +5,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.Search.Text;
 
-[TestFixture]
+[TestClass]
 public class TextSearchTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchTest()
     {
         var request = new PlacesTextSearchRequest
@@ -24,7 +24,7 @@ public class TextSearchTests : BaseTest
         var response = await GooglePlaces.Search.TextSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
-        Assert.IsEmpty(response.HtmlAttributions);
+        Assert.IsTrue(!response.HtmlAttributions.Any());
         Assert.AreEqual(Status.Ok, response.Status);
 
         var result = response.Results.FirstOrDefault();
@@ -35,7 +35,7 @@ public class TextSearchTests : BaseTest
         Assert.AreEqual(result.BusinessStatus, BusinessStatus.Operational);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("Returns null for page-token. Can't find good exampel for page-token")]
     public async Task PlacesTextSearchWhenPageTokenTest()
     {
@@ -60,7 +60,7 @@ public class TextSearchTests : BaseTest
         Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenRegionTest()
     {
         var request = new PlacesTextSearchRequest
@@ -75,7 +75,7 @@ public class TextSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenRadiusTest()
     {
         var request = new PlacesTextSearchRequest
@@ -90,7 +90,7 @@ public class TextSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenRadiusAndLocationTest()
     {
         var request = new PlacesTextSearchRequest
@@ -106,7 +106,7 @@ public class TextSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenTypeTest()
     {
         var request = new PlacesTextSearchRequest
@@ -121,7 +121,7 @@ public class TextSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenPriceLevelMinTest()
     {
         var request = new PlacesTextSearchRequest
@@ -134,16 +134,16 @@ public class TextSearchTests : BaseTest
         var response = await GooglePlaces.Search.TextSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
-        Assert.IsEmpty(response.HtmlAttributions);
+        Assert.IsTrue(!response.HtmlAttributions.Any());
         Assert.AreEqual(Status.Ok, response.Status);
 
         var result = response.Results.FirstOrDefault();
         Assert.IsNotNull(result);
         Assert.IsNotNull(result.PlaceId);
-        Assert.GreaterOrEqual(result.PriceLevel, request.Minprice);
+        Assert.IsTrue(result.PriceLevel >= request.Minprice);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenPriceLevelMaxTest()
     {
         var request = new PlacesTextSearchRequest
@@ -156,12 +156,12 @@ public class TextSearchTests : BaseTest
         var response = await GooglePlaces.Search.TextSearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
-        Assert.IsEmpty(response.HtmlAttributions);
+        Assert.IsTrue(!response.HtmlAttributions.Any());
         Assert.AreEqual(Status.Ok, response.Status);
 
         var result = response.Results.FirstOrDefault();
         Assert.IsNotNull(result);
         Assert.IsNotNull(result.PlaceId);
-        Assert.LessOrEqual(result.PriceLevel, request.Maxprice);
+        Assert.IsTrue(result.PriceLevel <= request.Maxprice);
     }
 }

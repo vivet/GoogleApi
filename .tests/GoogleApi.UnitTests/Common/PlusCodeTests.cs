@@ -1,13 +1,13 @@
 using System;
 using GoogleApi.Entities.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Common;
 
-[TestFixture]
+[TestClass]
 public class PlusCodeTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var plusCode = new PlusCode("global", "local");
@@ -16,27 +16,20 @@ public class PlusCodeTests
         Assert.AreEqual("local", plusCode.LocalCode);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenGlobalCodeIsNullTest()
     {
-        Assert.Throws<ArgumentNullException>(() =>
-        {
-            var plusCode = new PlusCode(null, "local");
-            Assert.IsNotNull(plusCode);
-        });
+        Assert.ThrowsException<ArgumentNullException>(() => new PlusCode(null, "local"));
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenLocalCodeIsNullTest()
     {
-        Assert.DoesNotThrow(() =>
-        {
-            var plusCode = new PlusCode("global");
-            Assert.IsNotNull(plusCode);
-        });
+        var plusCode = new PlusCode("global");
+        Assert.IsNotNull(plusCode);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var plusCode = new PlusCode("global", "local");

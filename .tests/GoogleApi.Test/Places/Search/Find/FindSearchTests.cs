@@ -5,14 +5,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common;
 using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.Search.Find;
 
-[TestFixture]
+[TestClass]
 public class FindSearchTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchTest()
     {
         var request = new PlacesFindSearchRequest
@@ -34,7 +34,7 @@ public class FindSearchTests : BaseTest
         Assert.AreEqual(candidate.BusinessStatus, BusinessStatus.Operational);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchWhenTypeIsPhoneNumberTest()
     {
         var request = new PlacesFindSearchRequest
@@ -50,7 +50,7 @@ public class FindSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchWhenFieldsTest()
     {
         var request = new PlacesFindSearchRequest
@@ -76,7 +76,7 @@ public class FindSearchTests : BaseTest
         Assert.IsNotNull(candidate.Geometry.ViewPort);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesFindSearchRequest
@@ -95,7 +95,7 @@ public class FindSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("Google documentation states that 'point' bias is possible, but Google returns invalid request")]
     public async Task PlacesFindSearchWhenLocationBiasAndPointTest()
     {
@@ -115,7 +115,7 @@ public class FindSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesFindSearchRequest
@@ -135,7 +135,7 @@ public class FindSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesFindSearchRequest
@@ -154,7 +154,7 @@ public class FindSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchWhenLocationRestrictionAndCircleTest()
     {
         var request = new PlacesFindSearchRequest
@@ -174,7 +174,7 @@ public class FindSearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesFindSearchWhenLocationRestrictionAndRectangularTest()
     {
         var request = new PlacesFindSearchRequest

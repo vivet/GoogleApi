@@ -1,12 +1,12 @@
 using GoogleApi.Entities.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Common;
 
-[TestFixture]
+[TestClass]
 public class ViewPortTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var southWest = new Coordinate(1, 1);
@@ -17,7 +17,7 @@ public class ViewPortTests
         Assert.AreEqual(southWest, viewPort.SouthWest);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var southWest = new Coordinate(1, 1);

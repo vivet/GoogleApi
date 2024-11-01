@@ -2,21 +2,21 @@ using System;
 using System.Linq;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad;
 
-[TestFixture]
+[TestClass]
 public class SnapToRoadRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new SnapToRoadsRequest();
         Assert.IsFalse(request.Interpolate);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new SnapToRoadsRequest
@@ -48,7 +48,7 @@ public class SnapToRoadRequestTests
         Assert.AreEqual(interpolateExpected, interpolate.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new SnapToRoadsRequest
@@ -56,16 +56,13 @@ public class SnapToRoadRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new SnapToRoadsRequest
@@ -73,16 +70,13 @@ public class SnapToRoadRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPointsIsNullTest()
     {
         var request = new SnapToRoadsRequest
@@ -90,16 +84,13 @@ public class SnapToRoadRequestTests
             Key = "key"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathCotaninsMoreThanHundredLocationsTest()
     {
         var request = new SnapToRoadsRequest
@@ -108,11 +99,8 @@ public class SnapToRoadRequestTests
             Path = new Coordinate[101]
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' must contain equal or less than 100 coordinates");
     }

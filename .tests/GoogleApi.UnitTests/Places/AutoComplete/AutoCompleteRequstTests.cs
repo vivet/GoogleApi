@@ -6,14 +6,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
 using GoogleApi.Entities.Places.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Places.AutoComplete;
 
-[TestFixture]
+[TestClass]
 public class AutoCompleteRequstTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlacesAutoCompleteRequest();
@@ -24,7 +24,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(Language.English, request.Language);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -51,14 +51,15 @@ public class AutoCompleteRequstTests
         Assert.AreEqual("en", language.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOriginTest()
     {
         var request = new PlacesAutoCompleteRequest
         {
             Key = "key",
             Input = "input",
-            Location = new Coordinate(1, 1)
+            Location = new Coordinate(1, 1),
+            Origin = new Coordinate(1, 1)
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -67,10 +68,10 @@ public class AutoCompleteRequstTests
         var origin = queryStringParameters.FirstOrDefault(x => x.Key == "origin");
         var originExpected = request.Origin;
         Assert.IsNotNull(origin);
-        Assert.AreEqual(originExpected, origin.Value);
+        Assert.AreEqual(originExpected.ToString(), origin.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -89,7 +90,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(radiusExpected, radius.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusLocationTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -114,7 +115,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(radiusExpected, radius.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenStrictBoundsTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -129,10 +130,10 @@ public class AutoCompleteRequstTests
 
         var strictbounds = queryStringParameters.FirstOrDefault(x => x.Key == "strictbounds");
         Assert.IsNotNull(strictbounds);
-        Assert.Null(strictbounds.Value);
+        Assert.IsNull(strictbounds.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -152,7 +153,7 @@ public class AutoCompleteRequstTests
         Assert.IsNotNull(ipBias);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndPointTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -174,7 +175,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(biasExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -197,7 +198,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(biasExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -219,7 +220,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(biasExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationRestrictionAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -242,7 +243,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(biasExpectedExpected, bias.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationRestrictionAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -264,7 +265,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(restrictionExpected, restriction.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void PlacesQueryAutoCompleteWhenRegionTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -283,7 +284,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(regionExpected, region.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void PlacesQueryAutoCompleteWhenOffsetTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -302,7 +303,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(offsetExpected, offset.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationTypesTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -325,7 +326,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(types1Expected, types1.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRestrictTypeTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -344,7 +345,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(types1Expected, types1.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenComponentsTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -367,7 +368,7 @@ public class AutoCompleteRequstTests
         Assert.AreEqual(components1Expected, components1.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -375,16 +376,13 @@ public class AutoCompleteRequstTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -392,16 +390,13 @@ public class AutoCompleteRequstTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenInputIsNullTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -410,16 +405,13 @@ public class AutoCompleteRequstTests
             Input = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Input' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenInputIsStringEmptyTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -428,16 +420,13 @@ public class AutoCompleteRequstTests
             Input = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Input' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusIsZeroTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -447,16 +436,13 @@ public class AutoCompleteRequstTests
             Radius = 0
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusIsGereaterThanFiftyThousandTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -466,11 +452,8 @@ public class AutoCompleteRequstTests
             Radius = 50001
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' must be greater than or equal to 1 and less than or equal to 50.000");
     }

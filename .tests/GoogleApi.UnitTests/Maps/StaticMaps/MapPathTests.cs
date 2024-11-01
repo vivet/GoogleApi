@@ -3,14 +3,14 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class MapPathTests
 {
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var mapPath = new MapPath
@@ -29,7 +29,7 @@ public class MapPathTests
         Assert.AreEqual($"weight:{mapPath.Weight}|geodesic:{mapPath.Geodesic.ToString().ToLower()}|{mapPath.Points.First()}|{mapPath.Points.Last()}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenColorTest()
     {
         var mapPath = new MapPath
@@ -49,7 +49,7 @@ public class MapPathTests
         Assert.AreEqual($"weight:{mapPath.Weight}|geodesic:{mapPath.Geodesic.ToString().ToLower()}|color:{mapPath.Color}|{mapPath.Points.First()}|{mapPath.Points.Last()}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenFillColorTest()
     {
         var mapPath = new MapPath

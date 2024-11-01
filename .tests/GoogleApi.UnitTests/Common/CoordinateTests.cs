@@ -1,13 +1,13 @@
 using System.Globalization;
 using GoogleApi.Entities.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Common;
 
-[TestFixture]
+[TestClass]
 public class CoordinateTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var coordinate = new Coordinate(1, 1);
@@ -16,7 +16,7 @@ public class CoordinateTests
         Assert.AreEqual(1, coordinate.Longitude);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var coordinate = new Coordinate(1, 1);
@@ -25,7 +25,7 @@ public class CoordinateTests
         Assert.AreEqual($"{coordinate.Latitude.ToString(CultureInfo.InvariantCulture)},{coordinate.Longitude.ToString(CultureInfo.InvariantCulture)}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWithVerySmallLatitudeAndLongtitudeTest()
     {
         var coordinate = new Coordinate(-0.000004, 34.5259883333333);

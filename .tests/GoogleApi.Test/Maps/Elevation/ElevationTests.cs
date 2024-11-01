@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Elevation.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Elevation;
 
-[TestFixture]
+[TestClass]
 public class ElevationTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task ElevationWhenLocationsTest()
     {
         var coordinate = new Coordinate(40.7141289, -73.9614074);
@@ -36,7 +36,7 @@ public class ElevationTests : BaseTest
         Assert.AreEqual(76.35161590576172, result.Resolution.GetValueOrDefault(), 0.5);
     }
 
-    [Test]
+    [TestMethod]
     public async Task ElevationWhenLocationsAndMultipleCoordinatesTest()
     {
         var coordinate1 = new Coordinate(40.7141289, -73.9614074);
@@ -71,7 +71,7 @@ public class ElevationTests : BaseTest
         Assert.AreEqual(76.35161590576172, result2.Resolution.GetValueOrDefault(), 0.5);
     }
 
-    [Test]
+    [TestMethod]
     public async Task ElevationWhenPathTest()
     {
         var coordinate1 = new Coordinate(40.7141289, -73.9614074);

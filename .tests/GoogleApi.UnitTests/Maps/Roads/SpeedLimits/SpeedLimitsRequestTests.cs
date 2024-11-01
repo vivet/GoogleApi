@@ -4,21 +4,21 @@ using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits;
 
-[TestFixture]
+[TestClass]
 public class SpeedLimitsRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new SpeedLimitsRequest();
         Assert.AreEqual(Units.Kph, request.Unit);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathTest()
     {
         var request = new SpeedLimitsRequest
@@ -45,7 +45,7 @@ public class SpeedLimitsRequestTests
         Assert.AreEqual(pathExpected, path.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathAndTooManyTest()
     {
         var request = new SpeedLimitsRequest
@@ -54,16 +54,13 @@ public class SpeedLimitsRequestTests
             Path = new Coordinate[101]
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' must contain equal or less than 100 coordinates");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPlacesTest()
     {
         var request = new SpeedLimitsRequest
@@ -90,7 +87,7 @@ public class SpeedLimitsRequestTests
         Assert.AreEqual(place2Expected, place2.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPlacesAndTooManyTest()
     {
         var request = new SpeedLimitsRequest
@@ -99,16 +96,13 @@ public class SpeedLimitsRequestTests
             Places = new Place[101]
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Places' must contain equal or less than 100 places");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new SpeedLimitsRequest
@@ -116,16 +110,13 @@ public class SpeedLimitsRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new SpeedLimitsRequest
@@ -133,16 +124,13 @@ public class SpeedLimitsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathIsNullAndPlacesIsNullTest()
     {
         var request = new SpeedLimitsRequest
@@ -150,11 +138,8 @@ public class SpeedLimitsRequestTests
             Key = "key"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' or 'Places' is required");
     }

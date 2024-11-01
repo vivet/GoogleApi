@@ -1,12 +1,12 @@
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode;
 
-[TestFixture]
+[TestClass]
 public class LocalCodeAndLocalityTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var localCodeAndLocality = new LocalCodeAndLocality("code", "locality");
@@ -14,7 +14,7 @@ public class LocalCodeAndLocalityTests
         Assert.AreEqual("locality", localCodeAndLocality.Locality);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var localCodeAndLocality = new LocalCodeAndLocality("code", "locality");

@@ -10,14 +10,14 @@ using GoogleApi.Entities.Maps.Routes.Directions.Request;
 using GoogleApi.Entities.Maps.Routes.Directions.Request.Enums;
 using GoogleApi.Entities.Maps.Routes.Directions.Response.Enums;
 using GoogleApi.Exceptions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Routes.Directions;
 
-[TestFixture]
+[TestClass]
 public class RouteDirectionsTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsTest()
     {
         var request = new RoutesDirectionsRequest
@@ -39,7 +39,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenIntermediatesAndGeocdedAddressTest()
     {
         var request = new RoutesDirectionsRequest
@@ -69,7 +69,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenIntermediatesTest()
     {
         var request = new RoutesDirectionsRequest
@@ -99,7 +99,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenDepartureTimeTest()
     {
         var request = new RoutesDirectionsRequest
@@ -123,7 +123,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenGeoJsonLinestringTest()
     {
         var request = new RoutesDirectionsRequest
@@ -144,10 +144,10 @@ public class RouteDirectionsTests : BaseTest
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
-        Assert.NotNull(result.Routes.First().Polyline.GeoJsonLinestring);
+        Assert.IsNotNull(result.Routes.First().Polyline.GeoJsonLinestring);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenComputeAlternativeRoutesTest()
     {
         var request = new RoutesDirectionsRequest
@@ -170,7 +170,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenRouteModifiersAndDriveTest()
     {
         var request = new RoutesDirectionsRequest
@@ -207,7 +207,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenRouteModifiersAndWalkTest()
     {
         var request = new RoutesDirectionsRequest
@@ -234,7 +234,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenLanguageTest()
     {
         var request = new RoutesDirectionsRequest
@@ -257,7 +257,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenRegionCodeTest()
     {
         var request = new RoutesDirectionsRequest
@@ -280,7 +280,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenRequestedReferenceRoutesTest()
     {
         var request = new RoutesDirectionsRequest
@@ -308,7 +308,7 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task RouteDirectionsWhenExtraComputationsTest()
     {
         var request = new RoutesDirectionsRequest
@@ -336,15 +336,16 @@ public class RouteDirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
-    public void DirectionsWhenBadRequestTest()
+    [TestMethod]
+    public async Task DirectionsWhenBadRequestTest()
     {
         var request = new RoutesDirectionsRequest
         {
             Key = this.Settings.ApiKey
         };
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RouteDirections.QueryAsync(request));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RouteDirections.QueryAsync(request));
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Origin and destination must be set.", exception.Message);
     }

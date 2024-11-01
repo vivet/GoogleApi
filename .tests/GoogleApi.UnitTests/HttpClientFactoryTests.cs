@@ -1,40 +1,39 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests;
 
-[TestFixture]
+[TestClass]
 public class HttpClientFactoryTests
 {
-    [Test]
+    [TestMethod]
     public void CreateDefaultHttpClientTest()
     {
         var httpClient = HttpClientFactory.CreateDefaultHttpClient();
         var defaultHttpClientHandler = HttpClientFactory.GetDefaultHttpClientHandler();
 
         var expected = new MediaTypeWithQualityHeaderValue("application/json");
-        Assert.Contains(expected, httpClient.DefaultRequestHeaders.Accept.ToArray());
 
+        Assert.IsTrue(httpClient.DefaultRequestHeaders.Accept.Contains(expected));
         Assert.AreEqual(httpClient.Timeout, TimeSpan.FromSeconds(30));
 
         var hasGZip = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.GZip);
-        Assert.True(hasGZip);
+        Assert.IsTrue(hasGZip);
 
         var hasDeflate = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.Deflate);
-        Assert.True(hasDeflate);
+        Assert.IsTrue(hasDeflate);
     }
 
-    [Test]
+    [TestMethod]
     public void CreateDefaultHttpClientWhenWebProxyTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void ConfigureDefaultHttpClientTest()
     {
         var httpClient = new HttpClient();
@@ -42,22 +41,22 @@ public class HttpClientFactoryTests
         HttpClientFactory.ConfigureDefaultHttpClient(httpClient);
 
         var expected = new MediaTypeWithQualityHeaderValue("application/json");
-        Assert.Contains(expected, httpClient.DefaultRequestHeaders.Accept.ToArray());
 
+        Assert.IsTrue(httpClient.DefaultRequestHeaders.Accept.Contains(expected));
         Assert.AreEqual(httpClient.Timeout, TimeSpan.FromSeconds(30));
     }
 
-    [Test]
+    [TestMethod]
     public void GetDefaultHttpClientHandlerTest()
     {
         var defaultHttpClientHandler = HttpClientFactory.GetDefaultHttpClientHandler();
 
-        Assert.IsInstanceOf<HttpClientHandler>(defaultHttpClientHandler);
+        Assert.IsInstanceOfType<HttpClientHandler>(defaultHttpClientHandler);
 
         var hasGZip = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.GZip);
-        Assert.True(hasGZip);
+        Assert.IsTrue(hasGZip);
 
         var hasDeflate = defaultHttpClientHandler.AutomaticDecompression.HasFlag(DecompressionMethods.Deflate);
-        Assert.True(hasDeflate);
+        Assert.IsTrue(hasDeflate);
     }
 }

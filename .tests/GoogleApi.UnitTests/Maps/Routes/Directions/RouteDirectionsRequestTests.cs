@@ -1,13 +1,13 @@
 using System;
 using GoogleApi.Entities.Maps.Routes.Directions.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Routes.Directions;
 
-[TestFixture]
+[TestClass]
 public class RouteDirectionsRequestTests
 {
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new RoutesDirectionsRequest
@@ -15,12 +15,13 @@ public class RouteDirectionsRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new RoutesDirectionsRequest
@@ -28,7 +29,8 @@ public class RouteDirectionsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }

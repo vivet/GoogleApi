@@ -1,14 +1,14 @@
 using System;
 using System.Linq;
 using GoogleApi.Entities.Maps.AerialView.GetVideo.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.AerialView.GetVideo;
 
-[TestFixture]
+[TestClass]
 public class GetVideoRequestTests
 {
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAddressTest()
     {
         var request = new GetVideoRequest
@@ -31,7 +31,7 @@ public class GetVideoRequestTests
         Assert.AreEqual(originExpected, address.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenVideoIdTest()
     {
         var request = new GetVideoRequest
@@ -54,7 +54,7 @@ public class GetVideoRequestTests
         Assert.AreEqual(originExpected, videoId.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new GetVideoRequest
@@ -62,12 +62,13 @@ public class GetVideoRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new GetVideoRequest
@@ -75,12 +76,13 @@ public class GetVideoRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAddressAndVideoIdIsNullTest()
     {
         var request = new GetVideoRequest
@@ -88,12 +90,13 @@ public class GetVideoRequestTests
             Key = "key"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("Either an 'Address' or a 'VideoId' is required.", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAddressAndVideoIdIsNotNullTest()
     {
         var request = new GetVideoRequest
@@ -103,7 +106,8 @@ public class GetVideoRequestTests
             VideoId = "videoId"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("Only one of 'Address' or 'VideoId' can be specified.", exception.Message);
     }

@@ -3,14 +3,14 @@ using System.IO;
 using System.Text.Json;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Converters;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Search.Common.Converters;
 
-[TestFixture]
+[TestClass]
 public class SortExpressionJsonConverterTests
 {
-    [Test]
+    [TestMethod]
     public void CanConvertWhenTrueTest()
     {
         var converter = new SortExpressionJsonConverter();
@@ -19,7 +19,7 @@ public class SortExpressionJsonConverterTests
         Assert.IsTrue(result);
     }
 
-    [Test]
+    [TestMethod]
     public void CanConvertWhenFalseTest()
     {
         var converter = new SortExpressionJsonConverter();
@@ -28,18 +28,18 @@ public class SortExpressionJsonConverterTests
         Assert.IsFalse(result);
     }
 
-    [Test]
+    [TestMethod]
     public void ReadJsonTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void WriteJsonTest()
     {
         var writer = new Utf8JsonWriter(new MemoryStream());
         var sut = new SortExpressionJsonConverter();
 
-        Assert.Throws<NotImplementedException>(() => sut.Write(writer, new SortExpression(), new JsonSerializerOptions()));
+        Assert.ThrowsException<NotImplementedException>(() => sut.Write(writer, new SortExpression(), new JsonSerializerOptions()));
     }
 }

@@ -1,15 +1,15 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Roads.SnapToRoad;
 
-[TestFixture]
+[TestClass]
 public class SnapToRoadTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task SnapToRoadTest()
     {
         var request = new SnapToRoadsRequest

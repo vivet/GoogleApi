@@ -1,13 +1,13 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.Common;
 
-[TestFixture]
+[TestClass]
 public class LocationBiasTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public void ToStringWhenIpBiasTest()
     {
         var bias = new LocationBias
@@ -20,7 +20,7 @@ public class LocationBiasTests : BaseTest
         Assert.AreEqual("ipbias", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenPointTest()
     {
         var bias = new LocationBias
@@ -33,7 +33,7 @@ public class LocationBiasTests : BaseTest
         Assert.AreEqual($"point:{bias.Location}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenCircleTest()
     {
         var bias = new LocationBias
@@ -47,7 +47,7 @@ public class LocationBiasTests : BaseTest
         Assert.AreEqual($"circle:{bias.Radius}@{bias.Location}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTestWhenRectangularTest()
     {
         var bias = new LocationBias

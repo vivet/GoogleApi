@@ -8,14 +8,14 @@ using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Directions;
 
-[TestFixture]
+[TestClass]
 public class DirectionsRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultsTest()
     {
         var request = new DirectionsRequest();
@@ -32,7 +32,7 @@ public class DirectionsRequestTests
         Assert.IsFalse(request.OptimizeWaypoints);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new DirectionsRequest
@@ -76,7 +76,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(modeExpected, mode.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenChannelTest()
     {
         var request = new DirectionsRequest
@@ -96,7 +96,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(channelExpected, channel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLanguageTest()
     {
         var request = new DirectionsRequest
@@ -116,7 +116,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(languageExpected, language.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenUnitsTest()
     {
         var request = new DirectionsRequest
@@ -136,7 +136,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(unitsExpected, units.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRegionTest()
     {
         var request = new DirectionsRequest
@@ -156,7 +156,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(regionExpected, region.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAlternativesTest()
     {
         var request = new DirectionsRequest
@@ -176,7 +176,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(alternativesExpected, alternatives.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAvoidTest()
     {
         var request = new DirectionsRequest
@@ -196,7 +196,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(avoidExpected, avoid.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeTest()
     {
         var request = new DirectionsRequest
@@ -216,7 +216,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(modeExpected, mode.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeTest()
     {
         var request = new DirectionsRequest
@@ -237,7 +237,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(departureTimeExpected, departureTime.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeAndTrafficModelTest()
     {
         var request = new DirectionsRequest
@@ -264,7 +264,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(trafficModelExpected, trafficModel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeAndTrafficModelAndWayPointsTest()
     {
         var request = new DirectionsRequest
@@ -294,7 +294,7 @@ public class DirectionsRequestTests
         Assert.IsNull(trafficModel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeDrivingAndDepartureTimeAndTrafficModelAndWayPointsViaTest()
     {
         var request = new DirectionsRequest
@@ -325,7 +325,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(trafficModelExpected, trafficModel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeTransitTest()
     {
         var request = new DirectionsRequest
@@ -355,7 +355,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(DEPARTURE_TIME_EXPECTED, departureTime.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeTransitAndDepartureTimeTest()
     {
         var request = new DirectionsRequest
@@ -386,7 +386,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(departureTimeExpected, departureTime.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeTransitAndArrivalTimeTest()
     {
         var request = new DirectionsRequest
@@ -421,7 +421,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(arrivalTimeExpected, arrivalTime.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeTransitAndTransitModeTest()
     {
         var request = new DirectionsRequest
@@ -442,7 +442,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(transitModeExpected, transitMode.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTravelModeTransitAndTransitRoutingPreferenceTest()
     {
         var request = new DirectionsRequest
@@ -464,7 +464,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(transitRoutingPreferenceExpected, transitRoutingPreference.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenWayPointsTest()
     {
         var request = new DirectionsRequest
@@ -487,7 +487,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(wayPointsExpected, wayPoints.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenWayPointsAndOptimizedTest()
     {
         var request = new DirectionsRequest
@@ -511,7 +511,7 @@ public class DirectionsRequestTests
         Assert.AreEqual(wayPointsExpected, wayPoints.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new DirectionsRequest
@@ -519,12 +519,13 @@ public class DirectionsRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new DirectionsRequest
@@ -532,12 +533,13 @@ public class DirectionsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOriginIsNullTest()
     {
         var request = new DirectionsRequest
@@ -546,12 +548,13 @@ public class DirectionsRequestTests
             Destination = new LocationEx(new Address("address"))
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Origin' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenDestinationIsNullTest()
     {
         var request = new DirectionsRequest
@@ -560,7 +563,8 @@ public class DirectionsRequestTests
             Origin = new LocationEx(new Address("address"))
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Destination' is required", exception.Message);
     }

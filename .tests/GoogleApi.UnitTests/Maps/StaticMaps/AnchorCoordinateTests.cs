@@ -1,12 +1,12 @@
 using GoogleApi.Entities.Maps.StaticMaps.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class AnchorCoordinateTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var anchorCoordinate = new AnchorCoordinate(1, 1);
@@ -15,7 +15,7 @@ public class AnchorCoordinateTests
         Assert.AreEqual(1, anchorCoordinate.Y);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var anchorCoordinate = new AnchorCoordinate(1, 1);

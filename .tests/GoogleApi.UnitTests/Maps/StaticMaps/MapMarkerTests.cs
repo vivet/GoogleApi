@@ -3,14 +3,14 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class MapMarkerTests
 {
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var mapMarker = new MapMarker();
@@ -19,7 +19,7 @@ public class MapMarkerTests
         Assert.IsNull(toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLocationsOnlyTest()
     {
         var mapMarker = new MapMarker
@@ -34,7 +34,7 @@ public class MapMarkerTests
         Assert.AreEqual($"{string.Join("|", mapMarker.Locations.Select(x => x.ToString()))}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLocationsMultipleTest()
     {
         var mapMarker = new MapMarker
@@ -50,7 +50,7 @@ public class MapMarkerTests
         Assert.AreEqual($"{string.Join("|", mapMarker.Locations.Select(x => x.ToString()))}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLabelTest()
     {
         var mapMarker = new MapMarker
@@ -66,7 +66,7 @@ public class MapMarkerTests
         Assert.AreEqual($"label:{mapMarker.Label}|{string.Join("|", mapMarker.Locations.Select(x => x.ToString()))}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLabelAndSizeIsTinyTest()
     {
         var mapMarker = new MapMarker
@@ -83,7 +83,7 @@ public class MapMarkerTests
         Assert.AreEqual($"size:{mapMarker.Size?.ToString().ToLower()}|{string.Join("|", mapMarker.Locations.Select(x => x.ToString()))}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenLabelAndSizeIsSmallTest()
     {
         var mapMarker = new MapMarker
@@ -100,7 +100,7 @@ public class MapMarkerTests
         Assert.AreEqual($"size:{mapMarker.Size?.ToString().ToLower()}|{string.Join("|", mapMarker.Locations.Select(x => x.ToString()))}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenColorTest()
     {
         var mapMarker = new MapMarker
@@ -116,7 +116,7 @@ public class MapMarkerTests
         Assert.AreEqual($"color:{mapMarker.Color}|{string.Join("|", mapMarker.Locations.Select(x => x.ToString()))}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenIconTest()
     {
         var mapMarker = new MapMarker
@@ -132,7 +132,7 @@ public class MapMarkerTests
         Assert.AreEqual($"{mapMarker.Icon}|{string.Join("|", mapMarker.Locations.Select(x => x.ToString()))}", toString);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenAllTest()
     {
         var mapMarker = new MapMarker

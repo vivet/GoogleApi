@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Geocoding.Address;
 
-[TestFixture]
+[TestClass]
 public class AddressGeocodeTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task AddressGeocodeTest()
     {
         var request = new AddressGeocodeRequest
@@ -24,7 +24,7 @@ public class AddressGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task AddressGeocodeWhenRegionTest()
     {
         var request = new AddressGeocodeRequest
@@ -39,7 +39,7 @@ public class AddressGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task AddressGeocodeWhenBoundsTest()
     {
         var request = new AddressGeocodeRequest
@@ -54,7 +54,7 @@ public class AddressGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task AddressGeocodeWhenComponentsTest()
     {
         var request = new AddressGeocodeRequest

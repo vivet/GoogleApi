@@ -1,13 +1,13 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode;
 
-[TestFixture]
+[TestClass]
 public class LocationTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorWhenCoordinateTest()
     {
         var coordinate = new Coordinate(1, 1);
@@ -15,7 +15,7 @@ public class LocationTests
         Assert.AreEqual(coordinate.ToString(), location.String);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenAddressTest()
     {
         var address = new Entities.Common.Address("address");
@@ -23,7 +23,7 @@ public class LocationTests
         Assert.AreEqual(address.ToString(), location.String);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenGlobalCodeTest()
     {
         var globalCode = new GlobalCode("code");
@@ -31,7 +31,7 @@ public class LocationTests
         Assert.AreEqual(globalCode.ToString(), location.String);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenLocalCodeAndLocalityTest()
     {
         var localCodeAndLocality = new LocalCodeAndLocality("code", "locality");

@@ -1,13 +1,13 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Common;
 
-[TestFixture]
+[TestClass]
 public class LocationTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorWhenAddressTest()
     {
         var address = new Address("address");
@@ -16,7 +16,7 @@ public class LocationTests
         Assert.AreEqual(address.ToString(), location.String);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenCoordinateTest()
     {
         var coordinate = new Coordinate(1, 1);
@@ -25,7 +25,7 @@ public class LocationTests
         Assert.AreEqual(coordinate.ToString(), location.String);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var coordinate = new Coordinate(1, 1);

@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.AerialView.GetVideo.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.AerialView.GetVideo;
 
-[TestFixture]
+[TestClass]
 public class GetVideoTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task GetVideoWhenVideoIdTest()
     {
         var request = new GetVideoRequest
@@ -23,7 +23,7 @@ public class GetVideoTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task GetVideoWhenAddressTest()
     {
         var request = new GetVideoRequest
@@ -38,7 +38,7 @@ public class GetVideoTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task GetVideoWhenNotFoundTest()
     {
         var request = new GetVideoRequest

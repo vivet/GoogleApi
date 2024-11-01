@@ -1,13 +1,13 @@
 using System;
 using GoogleApi.Entities.Maps.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Common;
 
-[TestFixture]
+[TestClass]
 public class MapSizeTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorTest()
     {
         var mapSize = new MapSize(1, 1);
@@ -16,59 +16,43 @@ public class MapSizeTests
         Assert.AreEqual(1, mapSize.Height);
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenWidthIsLowerTest()
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var size = new MapSize(0, 1);
-            Assert.IsNotNull(size);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(0, 1));
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
+        Assert.IsTrue(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenWidthIsHigherTest()
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var size = new MapSize(4097, 1);
-            Assert.IsNotNull(size);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(4097, 1));
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
+        Assert.IsTrue(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenHeightIsLowerTest()
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var size = new MapSize(1, 0);
-            Assert.IsNotNull(size);
-        });
-
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(1, 0));
+        
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));
+        Assert.IsTrue(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));
     }
 
-    [Test]
+    [TestMethod]
     public void ConstructorWhenHeightIsHigherTest()
     {
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var size = new MapSize(1, 4097);
-            Assert.IsNotNull(size);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(1, 4097));
 
         Assert.IsNotNull(exception);
-        Assert.True(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));
+        Assert.IsTrue(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var mapSize = new MapSize(1, 1);

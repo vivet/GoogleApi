@@ -4,14 +4,14 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.AddressValidation.Request;
 using GoogleApi.Exceptions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.AddressValidation;
 
-[TestFixture]
+[TestClass]
 public class AddressValidationTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task AddressValidationTest()
     {
         var request = new AddressValidationRequest
@@ -36,7 +36,7 @@ public class AddressValidationTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task AddressValidationWhenEnableUspsCassTest()
     {
         var request = new AddressValidationRequest
@@ -56,18 +56,18 @@ public class AddressValidationTests : BaseTest
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
-        Assert.NotNull(result.Result.UspsData);
+        Assert.IsNotNull(result.Result.UspsData);
     }
 
-    [Test]
-    public void AddressValidationWhenBadRequestTest()
+    [TestMethod]
+    public async Task AddressValidationWhenBadRequestTest()
     {
         var request = new AddressValidationRequest
         {
             Key = this.Settings.ApiKey
         };
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.AddressValidation.QueryAsync(request));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleMaps.AddressValidation.QueryAsync(request));
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Address is missing from request.", exception.Message);
     }

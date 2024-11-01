@@ -7,14 +7,14 @@ using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StaticMaps;
 
-[TestFixture]
+[TestClass]
 public class StaticMapsRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new StaticMapsRequest();
@@ -26,7 +26,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(Language.English, request.Language);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new StaticMapsRequest
@@ -75,7 +75,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(zoomExpected, zoom.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenChannelTest()
     {
         var request = new StaticMapsRequest
@@ -95,7 +95,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(channelExpected, channel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenCenterIsNullTest()
     {
         var request = new StaticMapsRequest
@@ -104,12 +104,12 @@ public class StaticMapsRequestTests
             ZoomLevel = 1
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("Center is required, unless Markers, Paths or Visibles is defined", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenZoomLevelIsNullTest()
     {
         var request = new StaticMapsRequest
@@ -118,12 +118,12 @@ public class StaticMapsRequestTests
             Center = new Location(new Coordinate(1, 1))
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("ZoomLevel is required, unless Markers, Paths or Visibles is defined", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRegionTest()
     {
         var request = new StaticMapsRequest
@@ -143,7 +143,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(regionExpected, region.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathsTest()
     {
         var request = new StaticMapsRequest
@@ -177,7 +177,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(pathExpected, path.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathsAndEncodedPointsTest()
     {
         var request = new StaticMapsRequest
@@ -211,7 +211,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(pathExpected, path.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathsMultipleTest()
     {
         var request = new StaticMapsRequest
@@ -262,7 +262,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(pathExpected2, path2.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathsWhenPointsIsEmptyAndEncodedPointsIsNotNullTest()
     {
         var request = new StaticMapsRequest
@@ -280,10 +280,10 @@ public class StaticMapsRequestTests
             }
         };
 
-        Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        request.GetQueryStringParameters();
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPathsWhenPointsIsEmptyAndEncodedPointsIsNullTest()
     {
         var request = new StaticMapsRequest
@@ -300,12 +300,12 @@ public class StaticMapsRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("Paths must contain two or more locations", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenStylesTest()
     {
         var request = new StaticMapsRequest
@@ -343,7 +343,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(styleExpected, style.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenStylesMultipleTest()
     {
         var request = new StaticMapsRequest
@@ -402,7 +402,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(styleExpected2, style2.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenVisiblesTest()
     {
         var request = new StaticMapsRequest
@@ -425,7 +425,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(visibleExpected, visible.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenVisiblesMultipleTest()
     {
         var request = new StaticMapsRequest
@@ -449,7 +449,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(visibleExpected, visible.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMarkersTest()
     {
         var request = new StaticMapsRequest
@@ -482,7 +482,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(markersExpected, markers.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMarkersMultipleTest()
     {
         var request = new StaticMapsRequest
@@ -531,7 +531,7 @@ public class StaticMapsRequestTests
         Assert.AreEqual(markersExpected2, markers2.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMarkersAndLocationsIsEmptyTest()
     {
         var request = new StaticMapsRequest
@@ -548,12 +548,12 @@ public class StaticMapsRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("Markers must contain at least one location", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new StaticMapsRequest
@@ -561,12 +561,12 @@ public class StaticMapsRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new StaticMapsRequest
@@ -574,7 +574,7 @@ public class StaticMapsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }

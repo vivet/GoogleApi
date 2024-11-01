@@ -3,14 +3,14 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StreetView.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.StreetView;
 
-[TestFixture]
+[TestClass]
 public class StreetViewRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new StreetViewRequest();
@@ -21,7 +21,7 @@ public class StreetViewRequestTests
         Assert.AreEqual(90, request.FieldOfView);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPanoramaTest()
     {
         var request = new StreetViewRequest
@@ -74,7 +74,7 @@ public class StreetViewRequestTests
         Assert.AreEqual(sourceExpected, source.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationTest()
     {
         var request = new StreetViewRequest
@@ -112,7 +112,7 @@ public class StreetViewRequestTests
         Assert.AreEqual(fovExpected, fov.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenChannelTest()
     {
         var request = new StreetViewRequest
@@ -131,7 +131,7 @@ public class StreetViewRequestTests
         Assert.AreEqual(channelExpected, channel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenHeadingTest()
     {
         var request = new StreetViewRequest
@@ -150,7 +150,7 @@ public class StreetViewRequestTests
         Assert.AreEqual(headingExpected, heading.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new StreetViewRequest
@@ -158,12 +158,13 @@ public class StreetViewRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new StreetViewRequest
@@ -171,12 +172,13 @@ public class StreetViewRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationIsNullAndPanoramIdIsNullTest()
     {
         var request = new StreetViewRequest
@@ -186,12 +188,13 @@ public class StreetViewRequestTests
             Location = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Location' or 'PanoramaId' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationIsNullAndPanoramIdIsEmptyTest()
     {
         var request = new StreetViewRequest
@@ -201,12 +204,13 @@ public class StreetViewRequestTests
             Location = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Location' or 'PanoramaId' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPitchIsOutOfRangeLowerTest()
     {
         var request = new StreetViewRequest
@@ -216,12 +220,13 @@ public class StreetViewRequestTests
             Pitch = -100
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Pitch' must be greater than -90 and less than 90");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPitchIsOutOfRangeHigherTest()
     {
         var request = new StreetViewRequest
@@ -231,12 +236,13 @@ public class StreetViewRequestTests
             Pitch = 100
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Pitch' must be greater than -90 and less than 90");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenHeadingIsOutOfRangeLowerTest()
     {
         var request = new StreetViewRequest
@@ -246,12 +252,13 @@ public class StreetViewRequestTests
             Heading = -1
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Heading' must be greater than 0 and less than 360");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenHeadingIsOutOfRangeHigherTest()
     {
         var request = new StreetViewRequest
@@ -261,12 +268,13 @@ public class StreetViewRequestTests
             Heading = 361
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Heading' must be greater than 0 and less than 360");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenFieldOfViewIsOutOfRangeLowerTest()
     {
         var request = new StreetViewRequest
@@ -276,12 +284,13 @@ public class StreetViewRequestTests
             FieldOfView = -1
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'FieldOfView' must be greater than 0 and less than 120");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenFieldOfViewIsOutOfRangeHigherTest()
     {
         var request = new StreetViewRequest
@@ -291,7 +300,8 @@ public class StreetViewRequestTests
             FieldOfView = 121
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'FieldOfView' must be greater than 0 and less than 120");
     }

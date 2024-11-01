@@ -3,14 +3,14 @@ using System.Linq;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Languages.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Translate.Languages;
 
-[TestFixture]
+[TestClass]
 public class LanguagesRequestTests
 {
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new LanguagesRequest
@@ -27,7 +27,7 @@ public class LanguagesRequestTests
         Assert.AreEqual(keyExpected, key.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTargetTest()
     {
         var request = new LanguagesRequest
@@ -50,7 +50,7 @@ public class LanguagesRequestTests
         Assert.AreEqual(targetExpected, target.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new LanguagesRequest
@@ -58,16 +58,13 @@ public class LanguagesRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new LanguagesRequest
@@ -75,11 +72,8 @@ public class LanguagesRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }

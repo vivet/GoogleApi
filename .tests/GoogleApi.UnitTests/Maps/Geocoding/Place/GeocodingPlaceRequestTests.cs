@@ -3,21 +3,21 @@ using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Geocoding.Place;
 
-[TestFixture]
+[TestClass]
 public class GeocodingPlaceRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlaceGeocodeRequest();
         Assert.AreEqual(Language.English, request.Language);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlaceGeocodeRequest
@@ -44,7 +44,7 @@ public class GeocodingPlaceRequestTests
         Assert.AreEqual(expected, location.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenChannelTest()
     {
         var request = new PlaceGeocodeRequest
@@ -63,7 +63,7 @@ public class GeocodingPlaceRequestTests
         Assert.AreEqual(channelExpected, channel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlaceGeocodeRequest
@@ -71,12 +71,13 @@ public class GeocodingPlaceRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new PlaceGeocodeRequest
@@ -84,12 +85,13 @@ public class GeocodingPlaceRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPlaceIdIsNullTest()
     {
         var request = new PlaceGeocodeRequest
@@ -97,11 +99,8 @@ public class GeocodingPlaceRequestTests
             Key = "key"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'PlaceId' is required");
     }

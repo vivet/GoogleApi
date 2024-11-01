@@ -7,14 +7,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Places.Search.Text;
 
-[TestFixture]
+[TestClass]
 public class TextSearchRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlacesTextSearchRequest();
@@ -28,7 +28,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(Language.English, request.Language);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlacesTextSearchRequest
@@ -55,7 +55,7 @@ public class TextSearchRequestTests
         Assert.AreEqual("en", language.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRegionTest()
     {
         var request = new PlacesTextSearchRequest
@@ -74,7 +74,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(regionExpected, region.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusTest()
     {
         var request = new PlacesTextSearchRequest
@@ -93,7 +93,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(radiusExpected, radius.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRadiusAndLocationTest()
     {
         var request = new PlacesTextSearchRequest
@@ -118,7 +118,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(expected, location.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenTypeTest()
     {
         var request = new PlacesTextSearchRequest
@@ -138,7 +138,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(typeExpected, type.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOpenNowTest()
     {
         var request = new PlacesTextSearchRequest
@@ -155,7 +155,7 @@ public class TextSearchRequestTests
         Assert.IsNotNull(radius);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMinpriceTest()
     {
         var request = new PlacesTextSearchRequest
@@ -174,7 +174,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(minpriceExpected, minprice.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenMaxpriceTest()
     {
         var request = new PlacesTextSearchRequest
@@ -193,7 +193,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(maxpriceExpected, maxprice.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPageTokenTest()
     {
         var request = new PlacesTextSearchRequest
@@ -211,7 +211,7 @@ public class TextSearchRequestTests
         Assert.AreEqual(pagetokenExpected, pagetoken.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlacesTextSearchRequest
@@ -219,16 +219,13 @@ public class TextSearchRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new PlacesTextSearchRequest
@@ -236,16 +233,13 @@ public class TextSearchRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQueryIsNullTest()
     {
         var request = new PlacesTextSearchRequest
@@ -254,16 +248,13 @@ public class TextSearchRequestTests
             Query = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Query' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQueryIsStringEmptyTest()
     {
         var request = new PlacesTextSearchRequest
@@ -272,16 +263,13 @@ public class TextSearchRequestTests
             Query = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Query' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenLocationAndRadiusIsNullTest()
     {
         var request = new PlacesTextSearchRequest
@@ -291,11 +279,8 @@ public class TextSearchRequestTests
             Location = new Coordinate(0, 0)
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Radius' is required when 'Location' is specified");
     }

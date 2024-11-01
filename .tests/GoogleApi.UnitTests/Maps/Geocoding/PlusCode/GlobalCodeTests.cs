@@ -1,19 +1,19 @@
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode;
 
-[TestFixture]
+[TestClass]
 public class GlobalCodeTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var globalCode = new GlobalCode("code");
         Assert.AreEqual("code", globalCode.Code);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         var globalCode = new GlobalCode("code");

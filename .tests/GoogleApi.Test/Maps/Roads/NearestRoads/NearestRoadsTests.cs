@@ -1,15 +1,15 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Roads.NearestRoads;
 
-[TestFixture]
+[TestClass]
 public class NearestRoadsTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task NearestRoadsTest()
     {
         var request = new NearestRoadsRequest

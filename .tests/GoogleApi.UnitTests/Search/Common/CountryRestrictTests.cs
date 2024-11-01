@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Search.Common;
 
-[TestFixture]
+[TestClass]
 public class CountryRestrictTests
 {
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         const string EXPECTED = "(-countryIT.countryAF).";
@@ -36,7 +36,7 @@ public class CountryRestrictTests
         Assert.AreEqual(EXPECTED, actual);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenNestedExpressionsTest()
     {
         const string EXPECTED = "(-countryIT.(-countryES|countryPT).countryAF).";
@@ -80,13 +80,13 @@ public class CountryRestrictTests
         Assert.AreEqual(EXPECTED, actual);
     }
 
-    [Test]
+    [TestMethod]
     public void FromStringTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void FromStringNestedExpressionsTest()
     {
         Assert.Inconclusive();

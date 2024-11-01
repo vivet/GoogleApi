@@ -2,15 +2,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Languages.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi.Test.Translate.Languages;
 
-[TestFixture]
+[TestClass]
 public class LanguagesTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task LanguagesTest()
     {
         var request = new LanguagesRequest
@@ -27,7 +27,7 @@ public class LanguagesTests : BaseTest
         Assert.AreEqual(193, languages.Count());
     }
 
-    [Test]
+    [TestMethod]
     public async Task LanguagesWhenTargetTest()
     {
         var request = new LanguagesRequest

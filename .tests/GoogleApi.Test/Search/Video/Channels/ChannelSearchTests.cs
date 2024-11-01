@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Channels.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Search.Video.Channels;
 
-[TestFixture]
+[TestClass]
 public class ChannelSearchTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     [Ignore("Requires Enterprise License")]
     public async Task ChannelSearchTest()
     {

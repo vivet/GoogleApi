@@ -6,14 +6,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.Search.NearBy;
 
-[TestFixture]
+[TestClass]
 public class NearBySearchTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlacesNearBySearchTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -28,7 +28,7 @@ public class NearBySearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenPageTokenTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -55,7 +55,7 @@ public class NearBySearchTests : BaseTest
         Assert.AreNotEqual(response.Results.FirstOrDefault()?.PlaceId, responseNextPage.Results.FirstOrDefault()?.PlaceId);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenNameTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -71,7 +71,7 @@ public class NearBySearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenKeywordTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -87,7 +87,7 @@ public class NearBySearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenTypeTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -103,7 +103,7 @@ public class NearBySearchTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenPriceLevelMinTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -117,16 +117,16 @@ public class NearBySearchTests : BaseTest
         var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
-        Assert.IsEmpty(response.HtmlAttributions);
+        Assert.IsTrue(!response.HtmlAttributions.Any());
         Assert.AreEqual(Status.Ok, response.Status);
 
         var result = response.Results.FirstOrDefault();
         Assert.IsNotNull(result);
         Assert.IsNotNull(result.PlaceId);
-        Assert.GreaterOrEqual(result.PriceLevel, request.Minprice);
+        Assert.IsTrue(result.PriceLevel >= request.Minprice);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesTextSearchWhenPriceLevelMaxTest()
     {
         var request = new PlacesNearBySearchRequest
@@ -140,12 +140,12 @@ public class NearBySearchTests : BaseTest
         var response = await GooglePlaces.Search.NearBySearch.QueryAsync(request);
 
         Assert.IsNotNull(response);
-        Assert.IsEmpty(response.HtmlAttributions);
+        Assert.IsTrue(!response.HtmlAttributions.Any());
         Assert.AreEqual(Status.Ok, response.Status);
 
         var result = response.Results.FirstOrDefault();
         Assert.IsNotNull(result);
         Assert.IsNotNull(result.PlaceId);
-        Assert.LessOrEqual(result.PriceLevel, request.Maxprice);
+        Assert.IsTrue(result.PriceLevel <= request.Maxprice);
     }
 }

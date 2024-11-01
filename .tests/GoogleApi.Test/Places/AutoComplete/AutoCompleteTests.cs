@@ -5,14 +5,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.AutoComplete.Request.Enums;
 using GoogleApi.Entities.Places.Common;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.AutoComplete;
 
-[TestFixture]
+[TestClass]
 public class AutoCompleteTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -28,7 +28,7 @@ public class AutoCompleteTests : BaseTest
 
         var results = response.Predictions.ToArray();
         Assert.IsNotNull(results);
-        Assert.IsNotEmpty(results);
+        Assert.IsTrue(results.Any());
         Assert.AreEqual(3, results.Length);
 
         var result = results.FirstOrDefault();
@@ -47,11 +47,11 @@ public class AutoCompleteTests : BaseTest
 
         var types = result.Types.ToArray();
         Assert.IsNotNull(types);
-        Assert.Contains(PlaceLocationType.Route, types);
-        Assert.Contains(PlaceLocationType.Geocode, types);
+        Assert.IsTrue(types.Contains(PlaceLocationType.Route));
+        Assert.IsTrue(types.Contains(PlaceLocationType.Geocode));
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLanguageTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -67,8 +67,8 @@ public class AutoCompleteTests : BaseTest
 
         var results = response.Predictions.ToArray();
         Assert.IsNotNull(results);
-        Assert.IsNotEmpty(results);
-        Assert.GreaterOrEqual(results.Length, 2);
+        Assert.IsTrue(results.Any());
+        Assert.IsTrue(results.Length >= 2);
 
         var result = results.FirstOrDefault();
         Assert.IsNotNull(result);
@@ -78,7 +78,7 @@ public class AutoCompleteTests : BaseTest
         Assert.IsTrue(description.Contains("jagtvej"), "2");
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenOffsetTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -94,7 +94,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -110,7 +110,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationAndRadiusTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -126,7 +126,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationAndRadiusAndRegionTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -143,7 +143,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationBiasAndIpBiasTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -162,7 +162,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("Google documentation states that 'point' bias is possible, but returns invalid request")]
     public async Task PlacesAutoCompleteWhenLocationBiasAndPointTest()
     {
@@ -182,7 +182,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationBiasAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -202,7 +202,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationBiasAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -221,7 +221,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationRestrictionAndCircleTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -241,7 +241,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationRestrictionAndRectangularTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -260,7 +260,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenRestrictTypeTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -276,7 +276,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenRestrictTypeCitiesTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -292,7 +292,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenRestrictTypeRegionsTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -308,7 +308,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenRestrictTypeGeocodeAndEstablishmentTest()
     {
         var request = new PlacesAutoCompleteRequest
@@ -324,7 +324,7 @@ public class AutoCompleteTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesAutoCompleteWhenLocationTypesGeocodeAndEstablishmentTest()
     {
         var request = new PlacesAutoCompleteRequest

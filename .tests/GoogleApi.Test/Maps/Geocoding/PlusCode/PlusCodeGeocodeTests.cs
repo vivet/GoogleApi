@@ -1,15 +1,15 @@
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
-using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Geocoding.PlusCode;
 
-[TestFixture]
+[TestClass]
 public class PlusCodeGeocodeTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlusCodeGeocodeWhenLocationTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -26,7 +26,7 @@ public class PlusCodeGeocodeTests : BaseTest
         Assert.AreEqual("87G8P27Q+JF", response.PlusCode.GlobalCode);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlusCodeGeocodeWhenLocationWhenKeyIsNullTest()
     {
         var request = new PlusCodeGeocodeRequest
@@ -42,7 +42,7 @@ public class PlusCodeGeocodeTests : BaseTest
         Assert.AreEqual("87G8P27Q+JF", response.PlusCode.GlobalCode);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("Returns IP restriction issue")]
     public async Task PlusCodeGeocodeWhenAddressTest()
     {
@@ -58,7 +58,7 @@ public class PlusCodeGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("Returns IP restriction issue")]
     public async Task PlusCodeGeocodeWhenGlobalCodeTest()
     {
@@ -74,7 +74,7 @@ public class PlusCodeGeocodeTests : BaseTest
         Assert.AreEqual(Status.Ok, response.Status);
     }
 
-    [Test]
+    [TestMethod]
     [Ignore("Returns IP restriction issue")]
     public async Task PlusCodeGeocodeWhenLocalCodeAndLocalityTest()
     {

@@ -5,21 +5,21 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Maps.Geocoding.Address;
 
-[TestFixture]
+[TestClass]
 public class GeocodingAddressRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new AddressGeocodeRequest();
         Assert.AreEqual(Language.English, request.Language);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new AddressGeocodeRequest
@@ -47,7 +47,7 @@ public class GeocodingAddressRequestTests
         Assert.AreEqual(addressExpected, address.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenChannelTest()
     {
         var request = new AddressGeocodeRequest
@@ -66,7 +66,7 @@ public class GeocodingAddressRequestTests
         Assert.AreEqual(channelExpected, channel.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRegionTest()
     {
         var request = new AddressGeocodeRequest
@@ -85,7 +85,7 @@ public class GeocodingAddressRequestTests
         Assert.AreEqual(regionExpected, region.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenBoundsTest()
     {
         var request = new AddressGeocodeRequest
@@ -104,7 +104,7 @@ public class GeocodingAddressRequestTests
         Assert.AreEqual(boundsExpected, bounds.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenComponentsTest()
     {
         var request = new AddressGeocodeRequest
@@ -126,7 +126,7 @@ public class GeocodingAddressRequestTests
         Assert.AreEqual(componentsExpected, components.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new AddressGeocodeRequest
@@ -134,12 +134,13 @@ public class GeocodingAddressRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsEmptyTest()
     {
         var request = new AddressGeocodeRequest
@@ -147,12 +148,13 @@ public class GeocodingAddressRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() => request.GetQueryStringParameters());
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenAddressIsNullAndComponentsIsEmptyTest()
     {
         var request = new AddressGeocodeRequest
@@ -160,11 +162,8 @@ public class GeocodingAddressRequestTests
             Key = "key"
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Address' or 'Components' is required");
     }

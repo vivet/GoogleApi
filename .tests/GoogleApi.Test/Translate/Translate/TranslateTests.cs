@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Translate.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
 namespace GoogleApi.Test.Translate.Translate;
 
-[TestFixture]
+[TestClass]
 public class TranslateTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task TranslateTest()
     {
         var request = new TranslateRequest
@@ -31,7 +31,7 @@ public class TranslateTests : BaseTest
         Assert.AreEqual("Hej verden", translation1.TranslatedText);
     }
 
-    [Test]
+    [TestMethod]
     public async Task TranslateWhenMultipleQsTest()
     {
         var request = new TranslateRequest
@@ -48,7 +48,7 @@ public class TranslateTests : BaseTest
 
         var translations = result.Data.Translations?.ToArray();
         Assert.IsNotNull(translations);
-        Assert.IsNotEmpty(translations);
+        Assert.IsTrue(translations.Any());
         Assert.AreEqual(2, translations.Length);
 
         var translation1 = translations[0];
@@ -60,7 +60,7 @@ public class TranslateTests : BaseTest
         Assert.AreEqual("Der var engang", translation2.TranslatedText);
     }
 
-    [Test]
+    [TestMethod]
     public async Task TranslateWhenDetectedSourceLanguageTest()
     {
         var request = new TranslateRequest
@@ -77,7 +77,7 @@ public class TranslateTests : BaseTest
         Assert.AreEqual(Language.Danish, result.Data.Translations.FirstOrDefault()?.DetectedSourceLanguage);
     }
 
-    [Test]
+    [TestMethod]
     public async Task TranslateWhenModelNmtTest()
     {
         var request = new TranslateRequest

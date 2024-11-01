@@ -1,13 +1,13 @@
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Search.Common;
 
-[TestFixture]
+[TestClass]
 public class CountryRestrictExpressionTests
 {
-    [Test]
+    [TestMethod]
     public void ToStringTest()
     {
         const string EXPECTED = "-countryIT.";
@@ -25,7 +25,7 @@ public class CountryRestrictExpressionTests
         Assert.AreEqual(EXPECTED, actual);
     }
 
-    [Test]
+    [TestMethod]
     public void ToStringWhenNestedCountryRestrictTest()
     {
         Assert.Inconclusive();

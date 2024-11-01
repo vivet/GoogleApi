@@ -6,14 +6,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Directions;
 
-[TestFixture]
+[TestClass]
 public class DirectionsTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenAddressTest()
     {
         var origin = new Address("285 Bedford Ave, Brooklyn, NY, USA");
@@ -30,7 +30,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenCoordinateTest()
     {
         var origin = new CoordinateEx(55.7237480, 12.4208282);
@@ -47,7 +47,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenCoordinateAndHeadingTest()
     {
         var origin = new CoordinateEx(55.7237480, 12.4208282)
@@ -70,7 +70,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenCoordinateAndUseSideOfRoadTest()
     {
         var origin = new CoordinateEx(55.7237480, 12.4208282)
@@ -93,7 +93,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenPlaceIdTest()
     {
         var origin = new Place("ChIJo9YpQWBZwokR7OeY0hiWh8g");
@@ -110,7 +110,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenAvoidWayTest()
     {
         var request = new DirectionsRequest
@@ -126,7 +126,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenTravelModeDrivingAndDepartureTimeTest()
     {
         var request = new DirectionsRequest
@@ -143,7 +143,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenTravelModeTransitAndArrivalTimeTest()
     {
         var request = new DirectionsRequest
@@ -161,7 +161,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenWayPointsTest()
     {
         var request = new DirectionsRequest
@@ -181,7 +181,7 @@ public class DirectionsTests : BaseTest
         Assert.AreEqual(Status.Ok, result.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task DirectionsWhenWayPointsAndOptimizedTest()
     {
         var request = new DirectionsRequest

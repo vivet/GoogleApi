@@ -3,14 +3,14 @@ using System.Linq;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Places.Details;
 
-[TestFixture]
+[TestClass]
 public class DetailsRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new PlacesDetailsRequest();
@@ -18,7 +18,7 @@ public class DetailsRequestTests
         Assert.AreEqual(Language.English, request.Language);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new PlacesDetailsRequest
@@ -45,7 +45,7 @@ public class DetailsRequestTests
         Assert.AreEqual("en", language.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenFieldsTest()
     {
         var request = new PlacesDetailsRequest
@@ -69,7 +69,7 @@ public class DetailsRequestTests
         Assert.AreEqual(fieldsExpected, fields.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenRegionTest()
     {
         var request = new PlacesDetailsRequest
@@ -88,7 +88,7 @@ public class DetailsRequestTests
         Assert.AreEqual(regionExpected, region.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSessionTokenTest()
     {
         var request = new PlacesDetailsRequest
@@ -107,7 +107,7 @@ public class DetailsRequestTests
         Assert.AreEqual(sessiontokenExpected, sessiontoken.Value);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new PlacesDetailsRequest
@@ -115,16 +115,13 @@ public class DetailsRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new PlacesDetailsRequest
@@ -132,16 +129,13 @@ public class DetailsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPlaceIdIsNullTest()
     {
         var request = new PlacesDetailsRequest
@@ -150,16 +144,13 @@ public class DetailsRequestTests
             PlaceId = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'PlaceId' is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenPlaceIdIsStringEmptyTest()
     {
         var request = new PlacesDetailsRequest
@@ -168,11 +159,8 @@ public class DetailsRequestTests
             PlaceId = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'PlaceId' is required");
     }

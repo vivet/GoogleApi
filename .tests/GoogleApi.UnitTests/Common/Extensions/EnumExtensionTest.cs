@@ -2,14 +2,14 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Common.Extensions;
 
-[TestFixture]
+[TestClass]
 public class EnumExtensionTest
 {
-    [Test]
+    [TestMethod]
     public void ToEnumStringTest()
     {
         const AddressComponentType ENUM = AddressComponentType.Postal_Code;
@@ -18,7 +18,7 @@ public class EnumExtensionTest
         Assert.AreEqual("postal_code", result);
     }
 
-    [Test]
+    [TestMethod]
     public void ToEnumStringWhenFlagsTest()
     {
         const AvoidWay ENUM = AvoidWay.Highways | AvoidWay.Tolls;
@@ -27,7 +27,7 @@ public class EnumExtensionTest
         Assert.AreEqual("tolls|highways", result);
     }
 
-    [Test]
+    [TestMethod]
     public void ToEnumMemberStringTest()
     {
         const StyleFeature ENUM = StyleFeature.Transit;

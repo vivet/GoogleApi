@@ -2,14 +2,14 @@ using System;
 using GoogleApi.Entities.Search.Common.Enums;
 using GoogleApi.Entities.Search.Common.Enums.Extensions;
 using GoogleApi.Entities.Search.Web.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.UnitTests.Search.Web;
 
-[TestFixture]
+[TestClass]
 public class WebSearchRequestTests
 {
-    [Test]
+    [TestMethod]
     public void ConstructorDefaultTest()
     {
         var request = new WebSearchRequest();
@@ -18,7 +18,7 @@ public class WebSearchRequestTests
         Assert.AreEqual(request.Alt, AltType.Json);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersTest()
     {
         var request = new WebSearchRequest
@@ -28,10 +28,10 @@ public class WebSearchRequestTests
             Query = "abc"
         };
 
-        Assert.DoesNotThrow(() => request.GetQueryStringParameters());
+        request.GetQueryStringParameters();
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsNullTest()
     {
         var request = new WebSearchRequest
@@ -39,16 +39,13 @@ public class WebSearchRequestTests
             Key = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenKeyIsStringEmptyTest()
     {
         var request = new WebSearchRequest
@@ -56,16 +53,13 @@ public class WebSearchRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQueryIsNullTest()
     {
         var request = new WebSearchRequest
@@ -74,16 +68,13 @@ public class WebSearchRequestTests
             Query = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenQueryIsStringEmptyTest()
     {
         var request = new WebSearchRequest
@@ -92,16 +83,13 @@ public class WebSearchRequestTests
             Query = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSearchEngineIdIsNullTest()
     {
         var request = new WebSearchRequest
@@ -111,16 +99,13 @@ public class WebSearchRequestTests
             SearchEngineId = null
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSearchEngineIdIsStringEmptyTest()
     {
         var request = new WebSearchRequest
@@ -130,16 +115,13 @@ public class WebSearchRequestTests
             SearchEngineId = string.Empty
         };
 
-        var exception = Assert.Throws<ArgumentException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOptionsNumberIsLessThanOneTest()
     {
         var request = new WebSearchRequest
@@ -153,15 +135,12 @@ public class WebSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenOptionsNumberIsGreaterThanTenTest()
     {
         var request = new WebSearchRequest
@@ -175,15 +154,12 @@ public class WebSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
     }
 
-    [Test]
+    [TestMethod]
     public void GetQueryStringParametersWhenSafetyLevelInterfaceLanguageIsNotSupportedTest()
     {
         var request = new WebSearchRequest
@@ -198,15 +174,12 @@ public class WebSearchRequestTests
             }
         };
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var parameters = request.GetQueryStringParameters();
-            Assert.IsNull(parameters);
-        });
+        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+
         Assert.IsNotNull(exception);
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriTest()
     {
         var request = new WebSearchRequest
@@ -222,109 +195,109 @@ public class WebSearchRequestTests
         Assert.AreEqual($"/customsearch/v1?key={request.Key}&q={request.Query}&alt={request.Alt.ToString().ToLower()}&prettyPrint={request.PrettyPrint.ToString().ToLower()}&cx={request.SearchEngineId}&c2coff=1&fileType={string.Join(",", request.Options.FileTypes)}&filter=0&hl={request.Options.InterfaceLanguage.ToHl()}&num={request.Options.Number}&rights={string.Join(",", request.Options.Rights)}&safe={request.Options.SafetyLevel.ToString().ToLower()}&start={request.Options.StartIndex.ToString()}", uri.PathAndQuery);
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenCallbackTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenFieldsTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenCountryRestrictionTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenDateRestrictionTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenExactTermsTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenExcludeTermsTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenGoogleHostTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenHighRangeTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenAndTermsTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenLinkSiteTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenLowRangeTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenNumberTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenOrTermsTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenRelatedSiteTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenSearchTypeTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenSiteSearchTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenSiteSearchFilterTest()
     {
         Assert.Inconclusive();
     }
 
-    [Test]
+    [TestMethod]
     public void GetUriWhenSortExpressionTest()
     {
         Assert.Inconclusive();

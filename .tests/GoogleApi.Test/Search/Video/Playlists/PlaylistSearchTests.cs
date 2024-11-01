@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Playlists.Request;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Search.Video.Playlists;
 
-[TestFixture]
+[TestClass]
 public class PlaylistSearchTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     [Ignore("Requires Enterprise License")]
     public async Task PlaylistsSearchTest()
     {

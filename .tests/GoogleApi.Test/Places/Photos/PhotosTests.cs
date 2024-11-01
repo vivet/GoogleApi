@@ -5,14 +5,14 @@ using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Photos.Request;
 using GoogleApi.Exceptions;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Places.Photos;
 
-[TestFixture]
+[TestClass]
 public class PhotosTests : BaseTest
 {
-    [Test]
+    [TestMethod]
     public async Task PlacesPhotosTest()
     {
         var response = await GooglePlaces.AutoComplete.QueryAsync(new PlacesAutoCompleteRequest
@@ -40,10 +40,10 @@ public class PhotosTests : BaseTest
         Assert.IsNotNull(response3.Stream);
         Assert.IsNotNull(response3.Buffer);
         Assert.AreEqual(Status.Ok, response3.Status);
-        Assert.GreaterOrEqual(response3.Stream.Length, 1000);
+        Assert.IsTrue(response3.Stream.Length >= 1000);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesPhotosWhenMaxWidthTest()
     {
         var response = await GooglePlaces.AutoComplete.QueryAsync(new PlacesAutoCompleteRequest
@@ -72,7 +72,7 @@ public class PhotosTests : BaseTest
         Assert.AreEqual(Status.Ok, response3.Status);
     }
 
-    [Test]
+    [TestMethod]
     public async Task PlacesPhotosWhenMaxHeightTest()
     {
         var response = await GooglePlaces.AutoComplete.QueryAsync(new PlacesAutoCompleteRequest
@@ -101,8 +101,8 @@ public class PhotosTests : BaseTest
         Assert.AreEqual(Status.Ok, response3.Status);
     }
 
-    [Test]
-    public void PlacesPhotosWhenInvalidKeyTest()
+    [TestMethod]
+    public async Task PlacesPhotosWhenInvalidKeyTest()
     {
         var request = new PlacesPhotosRequest
         {
@@ -111,7 +111,7 @@ public class PhotosTests : BaseTest
             MaxWidth = 1600
         };
 
-        var exception = Assert.ThrowsAsync<GoogleApiException>(async () => await GooglePlaces.Photos.QueryAsync(request));
+        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GooglePlaces.Photos.QueryAsync(request));
         Assert.IsNotNull(exception);
         Assert.AreEqual("PermissionDenied: Forbidden", exception.Message);
     }
