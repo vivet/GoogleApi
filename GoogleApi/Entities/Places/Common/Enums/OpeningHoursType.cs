@@ -8,10 +8,10 @@ namespace GoogleApi.Entities.Places.Common.Enums;
 /// Set for secondary_opening_hours only
 /// </summary>
 public enum OpeningHoursType
-{   
+{
     /// <summary>
     /// Default value when secondary hour type is not specified.
-    /// </summary>    
+    /// </summary>
     [EnumMember(Value = "SECONDARY_HOURS_TYPE_UNSPECIFIED")]
     Secondary_Hours_Type_Unspecified,
 
@@ -91,5 +91,11 @@ public enum OpeningHoursType
     /// Online service hours.
     /// </summary>
     [EnumMember(Value = "ONLINE_SERVICE_HOURS")]
-    Online_Service_Hours
+    Online_Service_Hours,
+
+    /// <summary>
+    /// Reception.
+    /// </summary>
+    [EnumMember(Value = "RECEPTION")]
+    Reception,
 }
