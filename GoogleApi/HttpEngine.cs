@@ -3,7 +3,6 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Exceptions;
 using System;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -195,14 +194,6 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         {
             RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery
         };
-
-        if (httpResponse.StatusCode == HttpStatusCode.Forbidden)
-        {
-            response.Status = Status.PermissionDenied;
-            response.ErrorMessage = httpResponse.ReasonPhrase;
-
-            return response;
-        }
 
         switch (response)
         {

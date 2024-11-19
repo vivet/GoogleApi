@@ -27,5 +27,5 @@ public class RoutesMatrixResponse : BaseResponse
     /// Status.
     /// </summary>
     [JsonIgnore]
-    public override Status Status => this.Elements?.Select(x => x.Error?.Status).FirstOrDefault() ?? Status.Ok;
+    public override Status Status => this.Elements?.Select(x => x.Error?.Status).FirstOrDefault() ?? base.Status;
 }

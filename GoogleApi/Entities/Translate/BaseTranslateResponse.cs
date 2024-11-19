@@ -18,7 +18,7 @@ public abstract class BaseTranslateResponse : BaseResponse
     /// Status.
     /// </summary>
     [JsonIgnore]
-    public override Status Status => this.Error?.Status ?? Status.Ok;
+    public override Status Status => this.Error?.Status ?? base.Status;
 
     /// <summary>
     /// Error Message.

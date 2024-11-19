@@ -24,5 +24,5 @@ public abstract class BaseAerialViewResponse : BaseResponse
     /// Status.
     /// </summary>
     [JsonIgnore]
-    public override Status Status => Error?.Status ?? Status.Ok;
+    public override Status Status => Error?.Status ?? base.Status;
 }
