@@ -7,6 +7,10 @@ namespace GoogleApi.Entities.Places.Common.Enums;
 /// For example, DRIVE_THROUGH, HAPPY_HOUR, DELIVERY, TAKEOUT, KITCHEN, BREAKFAST, LUNCH, DINNER, BRUNCH, PICKUP, SENIOR_HOURS.
 /// Set for secondary_opening_hours only
 /// </summary>
+/// <remarks>
+/// Enum Documentation
+/// https://developers.google.com/maps/documentation/places/android-sdk/reference/com/google/android/libraries/places/api/model/OpeningHours.HoursType
+/// </remarks>
 public enum OpeningHoursType
 {
     /// <summary>
@@ -97,5 +101,5 @@ public enum OpeningHoursType
     /// Takeout.
     /// </summary>
     [EnumMember(Value = "TAKEOUT")]
-    Takeout,
+    Takeout
 }
