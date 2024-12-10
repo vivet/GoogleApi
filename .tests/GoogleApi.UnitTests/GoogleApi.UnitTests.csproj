@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<TargetFrameworks>net462;net48;net481;net6.0;net8.0</TargetFrameworks>
+	<TargetFrameworks>net462;net48;net481;net8.0;net9.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
 	<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
@@ -14,12 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="RichardSzalay.MockHttp" Version="7.0.0" />
-	<PackageReference Include="AutoFixture" Version="4.18.1" />
-	<PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.18.1" />
-	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-	<PackageReference Include="MSTest.TestAdapter" Version="3.6.1" />
-	<PackageReference Include="MSTest.TestFramework" Version="3.6.1" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+	<PackageReference Include="MSTest.TestAdapter" Version="3.6.4" />
+	<PackageReference Include="MSTest.TestFramework" Version="3.6.4" />
   </ItemGroup>
 
   <ItemGroup>
