@@ -29,8 +29,8 @@ public class CoordinateTuplesJsonConverter : JsonConverter<IEnumerable<LatLng>>
         return coordinates?
             .Select(x =>
             {
-                var latitude = x[0];
-                var longitide = x[1];
+                var latitude = x[1];
+                var longitide = x[0];
 
                 return new LatLng
                 {
