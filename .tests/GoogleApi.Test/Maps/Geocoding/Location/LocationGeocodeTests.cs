@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
@@ -95,5 +96,27 @@ public class LocationGeocodeTests : BaseTest
 
         Assert.IsNotNull(response);
         Assert.AreEqual(Status.Ok, response.Status);
+    }
+
+    [TestMethod]
+    public async Task LocationGeocodeWhenAddressDescriptorsTest()
+    {
+        var request = new LocationGeocodeRequest
+        {
+            Key = this.Settings.ApiKey,
+            Location = new Coordinate(55.67772841677067, 12.57136831027441),
+            ExtraComputations = 
+            [
+                ExtraComputation.AddressDescriptors,
+                ExtraComputation.BuildingAndEntrances
+            ]
+        };
+
+        var response = await GoogleMaps.Geocode.LocationGeocode.QueryAsync(request);
+
+        Assert.IsNotNull(response);
+        Assert.AreEqual(Status.Ok, response.Status);
+        Assert.IsNotNull(response.AddressDescriptor.Areas.FirstOrDefault());
+        Assert.IsNotNull(response.AddressDescriptor.Landmarks.FirstOrDefault());
     }
 }

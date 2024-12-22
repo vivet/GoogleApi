@@ -6,20 +6,8 @@ namespace GoogleApi.Entities.Maps.Geocoding.PlusCode.Response;
 /// <summary>
 /// Plus Code.
 /// </summary>
-public class PlusCode
+public class PlusCode : BasePlusCode
 {
-    /// <summary>
-    /// Global Code.
-    /// </summary>
-    [JsonPropertyName("global_code")]
-    public virtual string GlobalCode { get; set; }
-
-    /// <summary>
-    /// Local Code.
-    /// </summary>
-    [JsonPropertyName("local_code")]
-    public virtual string LocalCode { get; set; }
-
     /// <summary>
     /// Best Street Address.
     /// </summary>
