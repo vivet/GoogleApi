@@ -11,7 +11,7 @@ nuget:
 environment:
   NUGET_HOST: https://www.nuget.org
   NUGET_APIKEY: 
-    secure: /vHTgQBuJuGNirZJcRhuYKr1M7BzjDE3/Gy+sONcNKzqaod1qDI/IeW3WljxMV1P
+    secure: GmL+s4FAMc4kMD/O+LST8XV2QXxjvpjV0muni1WttUxjwaQRXDwyXDRHpE3RvEl5
 build: off
 build_script:
 - ps: >-
