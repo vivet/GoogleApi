@@ -6,9 +6,9 @@
 		<NoWarn />
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>5.7.3.0</AssemblyVersion>
-		<FileVersion>5.7.3.0</FileVersion>
-		<Version>5.7.3.0</Version>
+		<AssemblyVersion>5.7.4.0</AssemblyVersion>
+		<FileVersion>5.7.4.0</FileVersion>
+		<Version>5.7.4.0</Version>
 		<SignAssembly>True</SignAssembly>
 		<AssemblyOriginatorKeyFile>GoogleApi.snk</AssemblyOriginatorKeyFile>
 		<LangVersion>latest</LangVersion>
@@ -22,7 +22,7 @@
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes>
-			- Added support for extra_computations for Maps geocode address, location and place.
+			- Added specific version for older .NET versions.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
@@ -51,8 +51,9 @@
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Remove="GoogleApi.csproj.DotSettings" />
-		<None Remove="GoogleApi.rd.xml" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+		<PackageReference Update="System.Text.Json" Version="8.0.5" />
+		<PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+		<PackageReference Update="Microsoft.Extensions.Http" Version="8.0.1" />
 	</ItemGroup>
 </Project>
