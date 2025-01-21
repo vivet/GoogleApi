@@ -82,6 +82,12 @@ public class RoutesDirectionsRequest : BaseMapsXRequest
     public virtual DateTime? ArrivalTime { get; set; }
 
     /// <summary>
+    /// Transit Preferences.
+    /// Transit routes, which you request by setting a travelMode of TRANSIT, differ from routes using different travelMode options.
+    /// </summary>
+    public virtual TransitPreferences TransitPreferences { get; set; }
+
+    /// <summary>
     /// Compute Alternative Routes (optional).
     /// Specifies whether to calculate alternate routes in addition to the route.
     /// No alternative routes are returned for requests that have intermediate waypoints.
