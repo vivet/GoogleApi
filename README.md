@@ -9,8 +9,6 @@ Google Maps, Places, Roads, Search and Translate.
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 Do you need support for an additional .Net framework?, let me know.  
 
-**New: Version 5.0.0 with Routes Api (directions and matrix), Ariel View Api and Address Validation Api.**  
-
 ***
 
 ### Using the Library
