@@ -547,7 +547,7 @@ public enum PlaceLocationType
     /// Tourist Attracton.
     /// </summary>
     [EnumMember(Value = "tourist_attraction")]
-    Tourist_Attracton,
+    Tourist_Attraction,
 
     /// <summary>
     /// Train Station.
