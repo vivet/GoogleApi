@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace GoogleApi.Entities.Common;
 
 /// <summary>
-/// Location.
+/// Coordinate.
 /// </summary>
 public class Coordinate
 {

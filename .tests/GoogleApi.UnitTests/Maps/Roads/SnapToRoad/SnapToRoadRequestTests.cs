@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Maps.Roads.Common;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,11 +22,11 @@ public class SnapToRoadRequestTests
         var request = new SnapToRoadsRequest
         {
             Key = "key",
-            Path = new[]
-            {
-                new Coordinate(1, 1),
-                new Coordinate(2, 2)
-            }
+            Path =
+            [
+                new LatLng(1, 1),
+                new LatLng(2, 2)
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -96,7 +96,7 @@ public class SnapToRoadRequestTests
         var request = new SnapToRoadsRequest
         {
             Key = "abc",
-            Path = new Coordinate[101]
+            Path = new LatLng[101]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);

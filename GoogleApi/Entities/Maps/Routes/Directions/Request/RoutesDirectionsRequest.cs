@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common;
 using GoogleApi.Entities.Maps.Routes.Common.Converters;
@@ -14,7 +15,7 @@ namespace GoogleApi.Entities.Maps.Routes.Directions.Request;
 /// <summary>
 /// Routes Directions Request.
 /// </summary>
-public class RoutesDirectionsRequest : BaseMapsXRequest
+public class RoutesDirectionsRequest : BaseRequestX, IRequestJsonX
 {
     /// <inheritdoc />
     protected internal override string BaseUrl => "routes.googleapis.com/directions/v2:computeRoutes";

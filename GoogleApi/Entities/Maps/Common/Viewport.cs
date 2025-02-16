@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Maps.Common;
+﻿using GoogleApi.Entities.Common;
+
+namespace GoogleApi.Entities.Maps.Common;
 
 /// <summary>
 /// Viewport.

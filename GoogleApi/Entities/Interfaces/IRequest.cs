@@ -17,12 +17,6 @@ public interface IRequest
     string Key { get; set; }
 
     /// <summary>
-    /// The client ID provided to you by Google Enterprise Support, or null to disable URL signing.
-    /// All client IDs begin with a "gme-" prefix.
-    /// </summary>
-    string ClientId { get; set; }
-
-    /// <summary>
     /// Returns the Uri for the request.
     /// </summary>
     /// <returns>The <see cref="Uri"/>.</returns>

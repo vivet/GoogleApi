@@ -20,22 +20,17 @@ public abstract class BaseRequest : IRequest
     [JsonIgnore]
     protected internal abstract string BaseUrl { get; }
 
-    /// <summary>
-    /// See <see cref="IRequest.Key"/>.
-    /// </summary>
+    /// <inheritdoc />
     [JsonIgnore]
     public virtual string Key { get; set; }
 
     /// <summary>
-    /// See <see cref="IRequest.ClientId"/>.
+    /// See Client Id.
     /// </summary>
     [JsonIgnore]
     public virtual string ClientId { get; set; }
 
-    /// <summary>
-    /// See <see cref="IRequest.GetUri()"/>.
-    /// </summary>
-    /// <returns>The <see cref="Uri"/>.</returns>
+    /// <inheritdoc />
     public virtual Uri GetUri()
     {
         const string SCHEME = "https://";
@@ -72,10 +67,7 @@ public abstract class BaseRequest : IRequest
         return new Uri($"{uri.Scheme}://{uri.Host}{url}&signature={signature}");
     }
 
-    /// <summary>
-    /// See <see cref="IRequest.GetQueryStringParameters()"/>.
-    /// </summary>
-    /// <returns>The <see cref="IList{KeyValuePair}"/> collection.</returns>
+    /// <inheritdoc />
     public virtual IList<KeyValuePair<string, string>> GetQueryStringParameters()
     {
         var parameters = new List<KeyValuePair<string, string>>();
@@ -84,19 +76,21 @@ public abstract class BaseRequest : IRequest
         {
             if (!string.IsNullOrWhiteSpace(this.Key))
             {
-                if (this is not IRequestJsonX)
-                {
-                    parameters.Add("key", this.Key);
-                }
+                parameters
+                    .Add("key", this.Key);
             }
         }
         else
         {
             if (string.IsNullOrWhiteSpace(this.Key))
+            {
                 throw new ArgumentException("Key is required");
+            }
 
             if (!this.ClientId.StartsWith("gme-"))
+            {
                 throw new ArgumentException("ClientId must begin with 'gme-'");
+            }
         }
 
         return parameters;

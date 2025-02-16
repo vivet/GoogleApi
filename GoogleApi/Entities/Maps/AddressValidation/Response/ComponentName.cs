@@ -19,6 +19,7 @@ public class ComponentName
     /// Language.
     /// The BCP-47 language code.
     /// This will not be present if the component name is not associated with a language, such as a street number.
+    /// https://developers.google.com/maps/faq#languagesupport
     /// </summary>
     [JsonPropertyName("languageCode")]
     public virtual Language? Language { get; set; }

@@ -9,7 +9,7 @@ namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
 /// <summary>
 /// Routes Directions Response.
 /// </summary>
-public class RoutesDirectionsResponse : BaseResponse
+public class RoutesDirectionsResponse : BaseResponseX
 {
     /// <summary>
     /// Routes.

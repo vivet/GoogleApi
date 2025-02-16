@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
@@ -23,7 +24,7 @@ public class SpeedLimitsRequest : BaseMapsRequest, IRequestQueryString
     /// Latitude and longitude values should be separated by commas.
     /// Coordinates should be separated by the pipe character: "|". For example: path=60.170880,24.942795|60.170879,24.942796|60.170877,24.942796.
     /// </summary>
-    public virtual IEnumerable<Coordinate> Path { get; set; } = new List<Coordinate>();
+    public virtual IEnumerable<LatLng> Path { get; set; } = new List<LatLng>();
 
     /// <summary>
     /// placeId — The place ID of the road segment.

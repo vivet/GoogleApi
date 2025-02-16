@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.Maps.Routes.Matrix.Response;
 /// Routes Matrix Response.
 /// </summary>
 [JsonConverter(typeof(RoutesMatrixResponseJsonConverter))]
-public class RoutesMatrixResponse : BaseResponse
+public class RoutesMatrixResponse : BaseResponseX
 {
     /// <summary>
     /// Matrix Element.

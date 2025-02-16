@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.Common;
 
@@ -10,7 +11,7 @@ public class SnappedPoint
     /// <summary>
     /// Location — Contains a latitude and longitude value.
     /// </summary>
-    public virtual Coordinate Location { get; set; }
+    public virtual LatLng Location { get; set; }
 
     /// <summary>
     /// OriginalIndex — An integer that indicates the corresponding value in the original request.

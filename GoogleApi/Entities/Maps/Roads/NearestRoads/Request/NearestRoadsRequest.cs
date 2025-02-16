@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
@@ -20,7 +21,7 @@ public class NearestRoadsRequest : BaseMapsRequest, IRequestQueryString
     /// Coordinates should be separated by the pipe character: "|".
     /// For example: points=60.170880,24.942795|60.170879,24.942796|60.170877,24.942796.
     /// </summary>
-    public virtual IEnumerable<Coordinate> Points { get; set; } = new List<Coordinate>();
+    public virtual IEnumerable<LatLng> Points { get; set; } = new List<LatLng>();
 
     /// <inheritdoc />
     public override IList<KeyValuePair<string, string>> GetQueryStringParameters()

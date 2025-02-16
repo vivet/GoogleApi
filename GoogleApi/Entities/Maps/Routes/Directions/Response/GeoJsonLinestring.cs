@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Routes.Directions.Response.Converters;
 
 namespace GoogleApi.Entities.Maps.Routes.Directions.Response;

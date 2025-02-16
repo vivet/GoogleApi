@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using GoogleApi.Entities.Maps.Roads.Common;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,11 +15,11 @@ public class NearestRoadsRequestTests
         var request = new NearestRoadsRequest
         {
             Key = "key",
-            Points = new[]
-            {
-                new Coordinate(1, 1),
-                new Coordinate(2, 2)
-            }
+            Points =
+            [
+                new LatLng(1, 1),
+                new LatLng(2, 2)
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -84,7 +84,7 @@ public class NearestRoadsRequestTests
         var request = new NearestRoadsRequest
         {
             Key = "abc",
-            Points = new Coordinate[101]
+            Points = new LatLng[101]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);

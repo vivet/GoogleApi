@@ -7,6 +7,8 @@ using GoogleApi.Interfaces.Maps.Roads;
 using GoogleApi.Interfaces.Maps.Routes;
 using GoogleApi.Interfaces.Places;
 using GoogleApi.Interfaces.Places.Search;
+using GoogleApi.Interfaces.PlacesNew;
+using GoogleApi.Interfaces.PlacesNew.Search;
 using GoogleApi.Interfaces.Search;
 using GoogleApi.Interfaces.Search.Video;
 using GoogleApi.Interfaces.Translate;
@@ -63,6 +65,14 @@ public static class ServiceCollectionExtensions
             .AddApi<IFindSearchApi, GooglePlaces.Search.FindSearchApi>(useHttpClientHandler)
             .AddApi<INearBySearchApi, GooglePlaces.Search.NearBySearchApi>(useHttpClientHandler)
             .AddApi<ITextSearchApi, GooglePlaces.Search.TextSearchApi>(useHttpClientHandler);
+
+        services
+            .AddApi<IDetailsNewApi, GooglePlacesNew.DetailsNewApi>(useHttpClientHandler)
+            .AddApi<IPhotosNewApi, GooglePlacesNew.Photos.PhotosNewApi>(useHttpClientHandler)
+            .AddApi<IPhotosNewSkipHttpRedirectApi, GooglePlacesNew.Photos.PhotosNewSkipHttpRedirectApi>(useHttpClientHandler)
+            .AddApi<IAutoCompleteNewApi, GooglePlacesNew.AutoCompleteNewApi>(useHttpClientHandler)
+            .AddApi<INearBySearchNewApi, GooglePlacesNew.Search.NearBySearchNewApi>(useHttpClientHandler)
+            .AddApi<ITextSearchNewApi, GooglePlacesNew.Search.TextSearchNewApi>(useHttpClientHandler);
 
         services
             .AddApi<IWebSearchApi, GoogleSearch.WebSearchApi>(useHttpClientHandler)

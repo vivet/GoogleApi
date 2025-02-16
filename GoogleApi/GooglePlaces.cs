@@ -102,7 +102,8 @@ public partial class GooglePlaces
         /// Constructor.
         /// </summary>
         /// <param name="httpClient">The <see cref="HttpClient"/>.</param>
-        public AutoCompleteApi(HttpClient httpClient) : base(httpClient)
+        public AutoCompleteApi(HttpClient httpClient) 
+            : base(httpClient)
         {
         }
     }

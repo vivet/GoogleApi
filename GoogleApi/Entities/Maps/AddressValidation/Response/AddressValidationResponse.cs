@@ -8,7 +8,7 @@ namespace GoogleApi.Entities.Maps.AddressValidation.Response;
 /// Address Validation Response.
 /// The response to an address validation request.
 /// </summary>
-public class AddressValidationResponse : BaseResponse
+public class AddressValidationResponse : BaseResponseX
 {
     /// <summary>
     /// Response Id.

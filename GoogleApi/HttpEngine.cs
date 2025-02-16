@@ -155,25 +155,27 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
         using var httpRequestMessage = new HttpRequestMessage(method, uri);
 
+        if (request is IRequestX jsonX)
+        {
+            httpRequestMessage.Headers
+                .Add(GoogleHttpHeaders.API_KEY_HEADER, request.Key);
+
+            httpRequestMessage.Headers
+                .Add(GoogleHttpHeaders.FIELD_MASK_HEADER, jsonX.FieldMask ?? "*");
+        }
+
         switch (request)
         {
             case IRequestQueryString:
+            case IRequestQueryStringX:
             {
                 return await this.httpClient
                     .SendAsync(httpRequestMessage, cancellationToken);
             }
 
             case IRequestJson:
+            case IRequestJsonX:
             {
-                if (request is IRequestJsonX jsonX)
-                {
-                    httpRequestMessage.Headers
-                        .Add(GoogleHttpHeaders.API_KEY_HEADER, request.Key);
-
-                    httpRequestMessage.Headers
-                        .Add(GoogleHttpHeaders.FIELD_MASK_HEADER, jsonX.FieldMask ?? "*");
-                }
-
                 var serializeObject = JsonSerializer.Serialize(request, HttpEngine.jsonSerializerOptions);
                 httpRequestMessage.Content = new StringContent(serializeObject, Encoding.UTF8);
 
@@ -190,10 +192,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         if (httpResponse == null)
             throw new ArgumentNullException(nameof(httpResponse));
 
-        var response = new TResponse
-        {
-            RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery
-        };
+        var response = new TResponse();
 
         switch (response)
         {
@@ -216,6 +215,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
                 response = JsonSerializer.Deserialize<TResponse>(rawJson, HttpEngine.jsonSerializerOptions) ?? new TResponse();
                 response.RawJson = rawJson;
+                response.RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery;
 
                 break;
             }

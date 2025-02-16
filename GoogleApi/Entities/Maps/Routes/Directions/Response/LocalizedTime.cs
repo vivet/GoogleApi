@@ -1,4 +1,5 @@
-﻿using GoogleApi.Entities.Maps.Routes.Common;
+﻿using GoogleApi.Entities.Common;
+using GoogleApi.Entities.Maps.Routes.Common;
 
 namespace GoogleApi.Entities.Maps.Routes.Directions.Response;
 
