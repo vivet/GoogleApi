@@ -52,6 +52,11 @@ public abstract class BaseRequestX : IRequestX
     {
         var parameters = new List<KeyValuePair<string, string>>();
 
+        if (string.IsNullOrEmpty(this.Key))
+        {
+            throw new ArgumentException($"'{nameof(this.Key)}' is required");
+        }
+        
         return parameters;
     }
 }
