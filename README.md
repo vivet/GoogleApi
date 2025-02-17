@@ -9,6 +9,8 @@ Google Maps, Places, Roads, Search and Translate.
 Feel free to contribute, throw questions and report issues. **I usually respond fast (24-48 hours).**  
 Do you need support for an additional .Net framework?, let me know.  
 
+**NOTE: Google Places New Added**  
+
 ***
 
 ### Using the Library
@@ -99,6 +101,15 @@ The following api's are supported.
   * Place Photos (```GooglePlaces.Photos```)
   * Place Autocomplete (```GooglePlaces.AutoComplete```)
   * Query Autocomplete (```GooglePlaces.QueryAutoComplete```)
+
+##### Google Places (new)
+  * Place Search
+    * Near By (```GooglePlacesNew.Search.NearBySearchNew```)
+    * Text (```GooglePlacesNew.Search.TextSearchNew```)
+  * Place Details (```GooglePlacesNew.DetailsNew```)
+  * Place Photos (```GooglePlacesNew.PhotosNew```)
+  * Place Photos Skip-Http-Redirect (```GooglePlacesNew.PhotosNewSkipHttpRedirect```)
+  * Place Autocomplete (```GooglePlacesNew.AutoCompleteNew```)
 
 ##### Google Search
   * Web (```GoogleSearch.WebSearch```)

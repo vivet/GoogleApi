@@ -21,13 +21,14 @@
 		<Description>Google Places, Maps, Roads, Search and Translate. Requests and Responses are complete with Google api documentation and references.</Description>
 		<PackageTags>google api map maps place places elevation snaptoroad snaptoroads snap road roads speed speedlimit coordinate geo geocode geocoder geocoding geolocation search text nearby radar translate translation detect detection language languages nearest geography point geocoordinate address location latitude longitude distance duration matrix distancematrix direction directions travel path journey trip photo photos timezone time zone autocomplete auto-complete traffic spatial</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageReleaseNotes>
+		<PackageReleaseNotes>	
 			- Cleaned up base classes used by requests and responses for the old and new Google API's.
-			- Added Places Api Auto-Complete.
-			- Added Places Api Text Search.
-			- Added Places Api Nearby Search.
-			- Added Places Api Details.
-			- Added Places Api Photos.
+			- Added Places New Auto-Complete Api.
+			- Added Places New Text Search Api.
+			- Added Places New Nearby Search Api.
+			- Added Places New Details Api.
+			- Added Places New Photos Api.
+			- Added Places New Photos Api (Skip-Http-Redirect)
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
