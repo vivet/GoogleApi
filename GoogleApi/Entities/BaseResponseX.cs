@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 
@@ -15,10 +16,20 @@ public abstract class BaseResponseX : IResponse
     /// <inheritdoc />
     public virtual string RawQueryString { get; set; }
 
-    /// <inheritdoc />
-    public virtual Status Status { get; set; }
+    /// <summary>
+    /// Error.
+    /// </summary>
+    public virtual Error Error { get; set; }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Error Message.
+    /// </summary>
     [JsonIgnore]
-    public virtual string ErrorMessage { get; set; }
+    public virtual string ErrorMessage => this.Error?.Message;
+
+    /// <summary>
+    /// Status.
+    /// </summary>
+    [JsonIgnore]
+    public virtual Status Status => this.Error?.Status ?? Status.Ok;
 }

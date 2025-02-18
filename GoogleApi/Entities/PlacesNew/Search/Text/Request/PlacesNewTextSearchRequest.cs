@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.PlacesNew.Common;
 using GoogleApi.Entities.PlacesNew.Common.Enums;
 using GoogleApi.Entities.PlacesNew.Search.Common;
-using GoogleApi.Entities.PlacesNew.Search.Common.Enums;
+using GoogleApi.Entities.PlacesNew.Search.Text.Request.Enums;
+using PriceLevel = GoogleApi.Entities.PlacesNew.Common.Enums.PriceLevel;
 
 namespace GoogleApi.Entities.PlacesNew.Search.Text.Request;
 
@@ -16,7 +18,7 @@ namespace GoogleApi.Entities.PlacesNew.Search.Text.Request;
 /// that include non-address components such as business names.Requests like the first two examples in the following table
 /// may return zero results unless a location — such as region, location restriction, or location bias — is set.
 /// </summary>
-public class PlacesNewTextSearchRequest : BasePlacesNewRequest
+public class PlacesNewTextSearchRequest : BasePlacesNewRequest, IRequestJsonX
 {
     /// <summary>
     /// Base Url.
@@ -36,7 +38,7 @@ public class PlacesNewTextSearchRequest : BasePlacesNewRequest
     /// Restricts the results to places matching the specified type defined by Table A. Only one type may be specified.
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// </summary>
-    public virtual string IncludedType { get; set; }
+    public virtual PlaceLocationTypeA IncludedType { get; set; }
 
     /// <summary>
     /// Optional.
@@ -140,7 +142,7 @@ public class PlacesNewTextSearchRequest : BasePlacesNewRequest
     /// You can set rankPreference to RELEVANCE or DISTANCE (rank results by distance).
     /// For a non-categorical query such as "Mountain View, CA", we recommend that you leave rankPreference unse
     /// </summary>
-    public virtual RankPreference RankPreference { get; set; } = RankPreference.Popularity;
+    public virtual RankPreference? RankPreference { get; set; }
 
     /// <summary>
     /// Optional.

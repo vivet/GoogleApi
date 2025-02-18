@@ -113,5 +113,10 @@ public enum Status
     /// Data Not Available.
     /// </summary>
     [EnumMember(Value = "DATA_NOT_AVAILABE")]
-    DataNotAvailable
+    DataNotAvailable,
+
+    /// <summary>
+    /// Matrix Element Errors.
+    /// </summary>
+    MatrixElementErrors
 }

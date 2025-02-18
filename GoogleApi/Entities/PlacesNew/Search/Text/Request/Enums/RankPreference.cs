@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.PlacesNew.Search.Common.Enums;
+namespace GoogleApi.Entities.PlacesNew.Search.Text.Request.Enums;
 
 /// <summary>
 /// The type of ranking to use. If this parameter is omitted, results are ranked by popularity.
@@ -8,13 +8,13 @@ namespace GoogleApi.Entities.PlacesNew.Search.Common.Enums;
 public enum RankPreference
 {
     /// <summary>
-    /// Sorts results based on their popularity (default).
+    /// Ranks results by relevance.Sort order determined by normal ranking stack.
     /// </summary>
-    [EnumMember(Value = "POPULARITY")]
+    [EnumMember(Value = "RELEVANCE")]
     Popularity,
 
     /// <summary>
-    /// Sorts results in ascending order by their distance from the specified location.
+    /// Ranks results by distance.
     /// </summary>
     [EnumMember(Value = "DISTANCE")]
     Distance

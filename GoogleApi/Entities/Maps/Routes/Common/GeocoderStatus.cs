@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Maps.Common;
+using GoogleApi.Entities.Maps.Routes.Common.Enums;
 
 namespace GoogleApi.Entities.Maps.Routes.Common;
 
@@ -14,7 +15,7 @@ public class GeocoderStatus
     /// Code.
     /// The status code, which should be an enum value of google.rpc.Code.
     /// </summary>
-    public virtual int Code { get; set; }
+    public virtual GeocoderStatusCode Code { get; set; }
 
     /// <summary>
     /// Message.

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.PlacesNew.Common.Enums;
+using PriceLevel = GoogleApi.Entities.PlacesNew.Common.Enums.PriceLevel;
 
 namespace GoogleApi.Entities.PlacesNew.Common;
 
@@ -29,14 +31,14 @@ public class Place
     /// A set of type tags for this result. For example, "political" and "locality".
     /// For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
     /// </summary>
-    public virtual IEnumerable<PlaceLocationType> Types { get; set; }
+    public virtual IEnumerable<PlaceLocationTypeAB> Types { get; set; } = new List<PlaceLocationTypeAB>();
 
     /// <summary>
     /// The primary type of the given result. This type must one of the Places API supported types.
     /// For example, "restaurant", "cafe", "airport", etc. A place can only have a single primary type.
     /// For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
     /// </summary>
-    public virtual PlaceLocationType PrimaryType { get; set; }
+    public virtual PlaceLocationTypeAB PrimaryType { get; set; }
 
     /// <summary>
     /// The display name of the primary type, localized to the request language if applicable.
@@ -77,7 +79,7 @@ public class Place
     /// The type of the component can change.
     /// A particular component may be missing in a later response.
     /// </summary>
-    public virtual IEnumerable<AddressComponent> AddressComponents { get; set; }
+    public virtual IEnumerable<AddressComponent> AddressComponents { get; set; } = new List<AddressComponent>();
 
     /// <summary>
     /// Plus code of the place location lat/long
@@ -114,7 +116,7 @@ public class Place
     /// <summary>
     /// List of reviews about this place, sorted by relevance. A maximum of 5 reviews can be returned.
     /// </summary>
-    public virtual IEnumerable<Review> Reviews { get; set; }
+    public virtual IEnumerable<Review> Reviews { get; set; } = new List<Review>(); 
 
     /// <summary>
     /// The regular hours of operation. Note that if a place is always open (24 hours), the close field will not be set.
@@ -126,7 +128,7 @@ public class Place
     /// <summary>
     /// Information (including references) about photos of this place. A maximum of 10 photos can be returned.
     /// </summary>
-    public virtual IEnumerable<Photo> Photos { get; set; }
+    public virtual IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
 
     /// <summary>
     /// The place's address in adr microformat: http://microformats.org/wiki/adr.
@@ -146,7 +148,7 @@ public class Place
     /// <summary>
     /// A set of data provider that must be shown with this result.
     /// </summary>
-    public virtual IEnumerable<Attribution> Attributions { get; set; }
+    public virtual IEnumerable<Attribution> Attributions { get; set; } = new List<Attribution>();
 
     /// <summary>
     /// A truncated URL to an icon mask. User can access different icon type by appending type suffix to the end (eg, ".svg" or ".png").
@@ -171,7 +173,7 @@ public class Place
     /// This field populates the type subfield, which draws from a predefined list of opening hours types (such as DRIVE_THROUGH, PICKUP, or TAKEOUT)
     /// based on the types of the place. This field includes the specialDays subfield of all hours, set for dates that have exceptional hours.
     /// </summary>
-    public virtual IEnumerable<OpeningHours> CurrentSecondaryOpeningHours { get; set; }
+    public virtual IEnumerable<OpeningHours> CurrentSecondaryOpeningHours { get; set; } = new List<OpeningHours>();
 
     /// <summary>
     /// Contains an array of entries for information about regular secondary hours of a business.
@@ -179,7 +181,7 @@ public class Place
     /// This field populates the type subfield, which draws from a predefined list of opening hours types (such as DRIVE_THROUGH, PICKUP, or TAKEOUT)
     /// based on the types of the place.
     /// </summary>
-    public virtual IEnumerable<OpeningHours> RegularSecondaryOpeningHours { get; set; }
+    public virtual IEnumerable<OpeningHours> RegularSecondaryOpeningHours { get; set; } = new List<OpeningHours>();
 
     /// <summary>
     /// Contains a summary of the place. A summary is comprised of a textual overview, and also includes the language code for these if applicable.
@@ -200,7 +202,7 @@ public class Place
     /// <summary>
     /// A list of sub destinations related to the place.
     /// </summary>
-    public virtual IEnumerable<SubDestination> SubDestinations { get; set; }
+    public virtual IEnumerable<SubDestination> SubDestinations { get; set; } = new List<SubDestination>();
 
     /// <summary>
     /// The most recent information about fuel options in a gas station. This information is updated regularly.
@@ -227,7 +229,7 @@ public class Place
     /// <summary>
     /// List of places in which the current place is located.
     /// </summary>
-    public virtual IEnumerable<ContainingPlace> ContainingPlaces { get; set; }
+    public virtual IEnumerable<ContainingPlace> ContainingPlaces { get; set; } = new List<ContainingPlace>();
 
     /// <summary>
     /// The address descriptor of the place. Address descriptors include additional information that help describe a location using landmarks and areas.

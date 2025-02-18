@@ -19,10 +19,13 @@ public class JsonStringEnumConverterFactory : JsonConverterFactory
     {
         this.customConverters = new Dictionary<Type, JsonConverter>
         {
-            { typeof(Entities.Common.Enums.Language), new JsonStringEnumOrDefaultConverter<Entities.Common.Enums.Language>() },
-            { typeof(Entities.Common.Enums.AddressComponentType), new JsonStringEnumOrDefaultConverter<Entities.Common.Enums.AddressComponentType>() },
-            { typeof(Entities.Common.Enums.PlaceLocationType), new JsonStringEnumOrDefaultConverter<Entities.Common.Enums.PlaceLocationType>() },
-            { typeof(Entities.Translate.Common.Enums.Language), new JsonStringEnumOrDefaultConverter<Entities.Translate.Common.Enums.Language>() }
+            { typeof(Enums.Language), new JsonStringEnumOrDefaultConverter<Enums.Language>() },
+            { typeof(Enums.AddressComponentType), new JsonStringEnumOrDefaultConverter<Enums.AddressComponentType>() },
+            { typeof(Enums.PlaceLocationType), new JsonStringEnumOrDefaultConverter<Enums.PlaceLocationType>() },
+            { typeof(PlacesNew.Common.Enums.PlaceLocationTypeA), new JsonStringEnumOrDefaultConverter<PlacesNew.Common.Enums.PlaceLocationTypeA>() },
+            { typeof(PlacesNew.Common.Enums.PlaceLocationTypeB), new JsonStringEnumOrDefaultConverter<PlacesNew.Common.Enums.PlaceLocationTypeB>() },
+            { typeof(PlacesNew.Common.Enums.PlaceLocationTypeAB), new JsonStringEnumOrDefaultConverter<PlacesNew.Common.Enums.PlaceLocationTypeAB>() },
+            { typeof(Translate.Common.Enums.Language), new JsonStringEnumOrDefaultConverter<Translate.Common.Enums.Language>() }
         };
     }
 

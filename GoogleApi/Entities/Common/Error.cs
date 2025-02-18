@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Maps.Common;
 
-namespace GoogleApi.Entities.Maps.Common;
+namespace GoogleApi.Entities.Common;
 
 /// <summary>
 /// Error.

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.PlacesNew.Common.Enums;
 
 namespace GoogleApi.Entities.PlacesNew.Common;
@@ -28,9 +27,9 @@ public class Landmark
 
     /// <summary>
     /// A set of type tags for this landmark.
-    /// For a complete list of possible values, see https://developers.google.com/maps/documentation/places/web-service/place-types.
+    /// For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
     /// </summary>
-    public virtual IEnumerable<PlaceLocationType> Types { get; set; }
+    public virtual IEnumerable<PlaceLocationTypeAB> Types { get; set; } = new List<PlaceLocationTypeAB>();
 
     /// <summary>
     /// Defines the spatial relationship between the target location and the landmark.

@@ -72,13 +72,13 @@ public class PlacesNewPhotosRequest : BasePlacesNewRequest, IRequestQueryStringX
         if (this.MaxWidthPx.HasValue)
         {
             parameters
-                .Add("maxwidth", this.MaxWidthPx.Value.ToString());
+                .Add("maxWidthPx", this.MaxWidthPx.Value.ToString());
         }
 
         if (this.MaxHeightPx.HasValue)
         {
             parameters
-                .Add("maxheight", this.MaxHeightPx.Value.ToString());
+                .Add("maxHeightPx", this.MaxHeightPx.Value.ToString());
         }
 
         return parameters;

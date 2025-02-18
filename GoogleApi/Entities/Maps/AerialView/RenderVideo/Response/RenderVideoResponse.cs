@@ -6,7 +6,7 @@ namespace GoogleApi.Entities.Maps.AerialView.RenderVideo.Response;
 /// <summary>
 /// Render Video Response.
 /// </summary>
-public class RenderVideoResponse : BaseAerialViewResponse
+public class RenderVideoResponse : BaseResponseX
 {
     /// <summary>
     /// State.

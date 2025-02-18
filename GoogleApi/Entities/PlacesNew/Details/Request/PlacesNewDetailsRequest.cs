@@ -4,6 +4,7 @@ using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
 using System.Collections.Generic;
 using System;
+using System.Text.Json.Serialization;
 
 namespace GoogleApi.Entities.PlacesNew.Details.Request;
 
@@ -17,7 +18,7 @@ public class PlacesNewDetailsRequest : BasePlacesNewRequest, IRequestQueryString
     /// <summary>
     /// Base Url.
     /// </summary>
-    protected internal override string BaseUrl => $"{base.BaseUrl}/places/{this.PlaceId}";
+    protected internal override string BaseUrl => $"{base.BaseUrl}places/{this.PlaceId.Replace("places/", "")}";
 
     /// <summary>
     /// Required.
@@ -43,6 +44,7 @@ public class PlacesNewDetailsRequest : BasePlacesNewRequest, IRequestQueryString
     /// * The preferred language has a small influence on the set of results that the API chooses to return, and the order in which they are returned. The geocoder interprets abbreviations differently depending on language, such as the abbreviations for street types, or synonyms that may be valid in one language but not in another.
     /// Current list of supported languages: https://developers.google.com/maps/faq#languagesupport.
     /// </summary>
+    [JsonPropertyName("languageCode")]
     public virtual Language Language { get; set; } = Language.English;
 
     /// <summary>
@@ -56,6 +58,7 @@ public class PlacesNewDetailsRequest : BasePlacesNewRequest, IRequestQueryString
     /// while its ISO 3166-1 code is "gb" (technically for the entity of "The United Kingdom of Great Britain and Northern Ireland").
     /// The parameter can affect results based on applicable law.
     /// </summary>
+    [JsonPropertyName("regionCode")]
     public virtual string Region { get; set; }
 
     /// <summary>

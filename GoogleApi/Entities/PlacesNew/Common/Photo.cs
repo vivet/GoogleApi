@@ -27,7 +27,7 @@ public class Photo
     /// <summary>
     /// This photo's authors.
     /// </summary>
-    public virtual IEnumerable<AuthorAttribution> AuthorAttributions { get; set; }
+    public virtual IEnumerable<AuthorAttribution> AuthorAttributions { get; set; } = new List<AuthorAttribution>();
 
     /// <summary>
     /// A link where users can flag a problem with the photo.

@@ -34,6 +34,7 @@ public class AddressValidationTests : BaseTest
 
         Assert.IsNotNull(result);
         Assert.AreEqual(Status.Ok, result.Status);
+        Assert.IsNotNull(result.Result.Address.FormattedAddress);
     }
 
     [TestMethod]

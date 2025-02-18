@@ -29,6 +29,7 @@
 			- Added Places New Details Api.
 			- Added Places New Photos Api.
 			- Added Places New Photos Api (Skip-Http-Redirect)
+			- Improved handling matrix elements errors in routes matrix response.
 		</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<RepositoryType>GitHub</RepositoryType>
@@ -43,6 +44,11 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Entities\PlacesNew\Search\Common\Enums\**" />
+	  <EmbeddedResource Remove="Entities\PlacesNew\Search\Common\Enums\**" />
+	  <None Remove="Entities\PlacesNew\Search\Common\Enums\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\LICENSE" Pack="true" Visible="false" PackagePath="" />

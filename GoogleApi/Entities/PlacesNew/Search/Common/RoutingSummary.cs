@@ -13,7 +13,7 @@ public class RoutingSummary
     /// the origin to the destination.When you do a search along route, legs contains two legs: one from the origin to place,
     /// and one from the place to the destination.
     /// </summary>
-    public virtual IEnumerable<Leg> Legs { get; set; }
+    public virtual IEnumerable<Leg> Legs { get; set; } = new List<Leg>();
 
     /// <summary>
     /// A link to show directions on Google Maps using the waypoints from the given routing summary.

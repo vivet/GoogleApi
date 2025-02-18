@@ -43,9 +43,10 @@ public class Review
     public virtual AuthorAttribution AuthorAttribution { get; set; }
 
     /// <summary>
-    /// Time the time that the review was submitted, measured in the number of seconds since since midnight, January 1, 1970 UTC.
+    /// The timestamp when the connector availability information in this aggregation was last updated.
+    /// A timestamp in RFC3339 UTC "Zulu" format, with nanosecond resolution and up to nine fractional digits.
+    /// Examples: "2014-10-02T15:01:23Z" and "2014-10-02T15:01:23.045123456Z".
     /// </summary>
-    [JsonConverter(typeof(EpochSecondsToDateTimeJsonConverter))]
     public virtual DateTime PublishTime { get; set; }
 
     /// <summary>

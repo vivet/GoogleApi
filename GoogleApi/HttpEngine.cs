@@ -1,15 +1,20 @@
-﻿using GoogleApi.Entities;
-using GoogleApi.Entities.Common.Enums;
+﻿using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Interfaces;
 using GoogleApi.Exceptions;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Converters.Factories;
+using GoogleApi.Entities.Places.Photos.Response;
+using GoogleApi.Entities.PlacesNew.Common;
+using GoogleApi.Entities.PlacesNew.Details.Response;
+using GoogleApi.Entities.PlacesNew.Photos.Response;
 
 namespace GoogleApi;
 
@@ -149,7 +154,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         var uri = request
             .GetUri();
 
-        var method = request is IRequestQueryString
+        var method = request is IRequestQueryString or IRequestQueryStringX
             ? HttpMethod.Get
             : HttpMethod.Post;
 
@@ -193,34 +198,123 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
             throw new ArgumentNullException(nameof(httpResponse));
 
         var response = new TResponse();
+        string rawJson = null;
 
         switch (response)
         {
-            case BaseResponseStream streamResponse:
+            case IResponseStream responseStream:
             {
-                streamResponse.Buffer = await httpResponse.Content
-                    .ReadAsByteArrayAsync()
-                    .ConfigureAwait(false);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    responseStream.Buffer = await httpResponse.Content
+                        .ReadAsByteArrayAsync()
+                        .ConfigureAwait(false);
+                }
+                else
+                {
+                    if (responseStream is PlacesPhotosResponse placesPhotosResponse)
+                    {
+                        switch (httpResponse.StatusCode)
+                        {
+                            case HttpStatusCode.NotFound:
+                                placesPhotosResponse.Status = Status.NotFound;
+                                placesPhotosResponse.ErrorMessage = "The resounrce was not found.";
+                                break;
+                            
+                            case HttpStatusCode.Forbidden:
+                            case HttpStatusCode.Unauthorized:
+                                placesPhotosResponse.Status = Status.InvalidKey;
+                                placesPhotosResponse.ErrorMessage = "The key is invalid.";
+                                break;
+                            
+                            default:
+                                placesPhotosResponse.Status = Status.UnknownError;
+                                placesPhotosResponse.ErrorMessage = "An error occurred";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        rawJson = await httpResponse.Content
+                            .ReadAsStringAsync()
+                            .ConfigureAwait(false);
 
-                response = (TResponse)(IResponse)streamResponse;
+                        if (string.IsNullOrEmpty(rawJson))
+                        {
+                            var error404 = this.Get404Error();
+
+                            response = new PlacesNewPhotosResponse
+                            {
+                                Error = error404
+                            } as TResponse ?? new TResponse();
+                        }
+                        else
+                        {
+                            response = JsonSerializer.Deserialize<TResponse>(rawJson, HttpEngine.jsonSerializerOptions) ?? new TResponse();
+                        }
+                    }
+                }
 
                 break;
             }
 
             default:
             {
-                var rawJson = await httpResponse.Content
+                rawJson = await httpResponse.Content
                     .ReadAsStringAsync()
                     .ConfigureAwait(false);
 
-                response = JsonSerializer.Deserialize<TResponse>(rawJson, HttpEngine.jsonSerializerOptions) ?? new TResponse();
-                response.RawJson = rawJson;
-                response.RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery;
+                if (response is PlacesNewDetailsResponse)
+                {
+                    if (httpResponse.IsSuccessStatusCode)
+                    {
+                        response = new PlacesNewDetailsResponse
+                        {
+                            Place = JsonSerializer.Deserialize<Place>(rawJson, HttpEngine.jsonSerializerOptions)
+                        } as TResponse ?? new TResponse();
+                    }
+                    else
+                    {
+                        response = JsonSerializer.Deserialize<TResponse>(rawJson, HttpEngine.jsonSerializerOptions) ?? new TResponse();
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(rawJson))
+                    {
+                        // BUG: It's not always PlacesNewPhotosSkipHttpRedirectResponse. 
+                        // can we make this more generic, to work with all response types?
+
+                        var error404 = this.Get404Error();
+
+                        response = new PlacesNewPhotosSkipHttpRedirectResponse
+                        {
+                            Error = error404
+                        } as TResponse ?? new TResponse();
+                    }
+                    else
+                    {
+                        response = JsonSerializer.Deserialize<TResponse>(rawJson, HttpEngine.jsonSerializerOptions) ?? new TResponse();
+                    }
+                }
 
                 break;
             }
         }
 
+        response.RawJson = rawJson;
+        response.RawQueryString = httpResponse.RequestMessage?.RequestUri?.PathAndQuery;
+
         return response;
+    }
+
+    private Error Get404Error()
+    {
+        return new Error
+        {
+            Status = Status.NotFound,
+            Code = 404,
+            Message = "The resource could not be found."
+        };
     }
 }

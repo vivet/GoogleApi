@@ -11,11 +11,11 @@ public class References
     /// <summary>
     /// Reviews that serve as references.
     /// </summary>
-    public virtual IEnumerable<Review> Reviews { get; set; }
+    public virtual IEnumerable<Review> Reviews { get; set; } = new List<Review>();
 
     /// <summary>
     /// The list of resource names of the referenced places.
     /// This name can be used in other APIs that accept Place resource names.
     /// </summary>
-    public virtual IEnumerable<string> Places { get; set; }
+    public virtual IEnumerable<string> Places { get; set; } = new List<string>();
 }

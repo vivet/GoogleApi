@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.PlacesNew.Search.Common.Enums;
+namespace GoogleApi.Entities.PlacesNew.Search.Text.Request.Enums;
 
 /// <summary>
 /// Place Types

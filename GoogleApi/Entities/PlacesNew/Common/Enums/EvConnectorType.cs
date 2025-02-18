@@ -1,4 +1,4 @@
-﻿namespace GoogleApi.Entities.PlacesNew.Search.Text.Request.Enums;
+﻿namespace GoogleApi.Entities.PlacesNew.Common.Enums;
 
 /// <summary>
 /// See http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6872107 for additional information/context on EV charging connector types.

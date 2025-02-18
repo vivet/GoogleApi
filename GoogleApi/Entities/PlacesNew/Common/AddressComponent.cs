@@ -24,7 +24,7 @@ public class AddressComponent
     /// <summary>
     /// An array indicating the type(s) of the address component.
     /// </summary>
-    public virtual IEnumerable<AddressComponentType> Types { get; set; }
+    public virtual IEnumerable<AddressComponentType> Types { get; set; } = new List<AddressComponentType>();
 
     /// <summary>
     /// The language used to format this components, in CLDR notation.

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.PlacesNew.Common;
+using GoogleApi.Entities.PlacesNew.Common.Enums;
 
 namespace GoogleApi.Entities.PlacesNew.AutoComplete.Request;
 
@@ -24,7 +27,7 @@ namespace GoogleApi.Entities.PlacesNew.AutoComplete.Request;
 /// Each query prediction in the response includes the text field containing a recommended text search string.
 /// Use that string as an input to Text Search (New) to perform a more detailed search.
 /// </summary>
-public class PlacesNewAutoCompleteRequest : BasePlacesNewRequest
+public class PlacesNewAutoCompleteRequest : BasePlacesNewRequest, IRequestJsonX
 {
     /// <summary>
     /// Base Url.
@@ -52,7 +55,7 @@ public class PlacesNewAutoCompleteRequest : BasePlacesNewRequest
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-b
     /// </summary>
-    public virtual IEnumerable<string> IncludedPrimaryTypes { get; set; }
+    public virtual IEnumerable<PlaceLocationTypeAB> IncludedPrimaryTypes { get; set; } = new List<PlaceLocationTypeAB>();
 
     /// <summary>
     /// If set to true, the response includes businesses that visit or deliver to customers directly, but don't have a physical business location.
@@ -71,7 +74,7 @@ public class PlacesNewAutoCompleteRequest : BasePlacesNewRequest
     /// If omitted, no restrictions are applied to the response. For example, to limit the regions to Germany and France: "includedRegionCodes": ["de", "fr"].
     /// If you specify both locationRestriction and includedRegionCodes, the results are located in the area of intersection of the two settings.
     /// </summary>
-    public virtual IEnumerable<string> IncludedRegionCodes { get; set; }
+    public virtual IEnumerable<string> IncludedRegionCodes { get; set; } = new List<string>();
 
     /// <summary>
     /// The zero-based Unicode character offset indicating the cursor position in input.
@@ -97,6 +100,7 @@ public class PlacesNewAutoCompleteRequest : BasePlacesNewRequest
     ///   * All other addresses are returned in the preferred language, after matching terms have been chosen to match the terms in the input parameter.
     ///     If a name is not available in the preferred language, the API uses the closest match.
     /// </summary>
+    [JsonPropertyName("languageCode")]
     public virtual Language Language { get; set; } = Language.English;
 
     /// <summary>
@@ -139,6 +143,7 @@ public class PlacesNewAutoCompleteRequest : BasePlacesNewRequest
     /// If you specify an invalid region code, the API returns an INVALID_ARGUMENT error.
     /// The parameter can affect results based on applicable law.
     /// </summary>
+    [JsonPropertyName("regionCode")]
     public virtual string Region { get; set; }
 
     /// <summary>

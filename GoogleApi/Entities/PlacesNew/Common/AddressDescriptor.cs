@@ -12,11 +12,11 @@ public class AddressDescriptor
     /// A ranked list of nearby landmarks.
     /// The most recognizable and nearby landmarks are ranked first.
     /// </summary>
-    public virtual IEnumerable<Landmark> Landmarks { get; set; }
+    public virtual IEnumerable<Landmark> Landmarks { get; set; } = new List<Landmark>();
 
     /// <summary>
     /// A ranked list of containing or adjacent areas.
     /// The most recognizable and precise areas are ranked first.
     /// </summary>
-    public virtual IEnumerable<Area> Areas { get; set; }
+    public virtual IEnumerable<Area> Areas { get; set; } = new List<Area>();
 }

@@ -1,6 +1,4 @@
-﻿using GoogleApi.Entities.PlacesNew.Search.Common;
-
-namespace GoogleApi.Entities.PlacesNew.Common;
+﻿namespace GoogleApi.Entities.PlacesNew.Common;
 
 /// <summary>
 /// Within Rectangle.
@@ -8,7 +6,7 @@ namespace GoogleApi.Entities.PlacesNew.Common;
 public class WithinRectangle : BaseWithin
 {
     /// <summary>
-    /// Circle.
+    /// Rectangle.
     /// </summary>
-    public virtual Rectangle Circle { get; set; }
+    public virtual Rectangle Rectangle { get; set; }
 }

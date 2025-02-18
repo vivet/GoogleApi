@@ -1,8 +1,4 @@
-﻿using GoogleApi.Entities.Maps.Common;
-using System.Text.Json.Serialization;
-using GoogleApi.Entities.Common.Enums;
-
-namespace GoogleApi.Entities.Maps.AddressValidation.Response;
+﻿namespace GoogleApi.Entities.Maps.AddressValidation.Response;
 
 /// <summary>
 /// Address Validation Response.
@@ -22,21 +18,4 @@ public class AddressValidationResponse : BaseResponseX
     /// The result of the address validation.
     /// </summary>
     public virtual ValidationResult Result { get; set; }
-
-    /// <summary>
-    /// Error.
-    /// </summary>
-    public virtual Error Error { get; set; }
-
-    /// <summary>
-    /// Error Message.
-    /// </summary>
-    [JsonIgnore]
-    public override string ErrorMessage => this.Error?.Message;
-
-    /// <summary>
-    /// Status.
-    /// </summary>
-    [JsonIgnore]
-    public override Status Status => this.Error?.Status ?? base.Status;
 }

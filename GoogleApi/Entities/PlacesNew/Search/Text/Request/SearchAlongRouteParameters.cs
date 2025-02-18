@@ -15,5 +15,4 @@ public class SearchAlongRouteParameters
     /// Polyline.
     /// </summary>
     public virtual Polyline Polyline { get; set; }
-
 }

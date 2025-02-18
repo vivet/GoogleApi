@@ -15,7 +15,7 @@ public class RoutesMatrixResponse : BaseResponseX
     /// <summary>
     /// Matrix Element.
     /// </summary>
-    public virtual IEnumerable<MatrixElement> Elements { get; set; }
+    public virtual IEnumerable<MatrixElement> Elements { get; set; } = new List<MatrixElement>();
 
     /// <summary>
     /// Error Message.

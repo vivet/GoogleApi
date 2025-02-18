@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.PlacesNew.Common;
+using GoogleApi.Entities.PlacesNew.Common.Enums;
 using GoogleApi.Entities.PlacesNew.Search.Common;
-using GoogleApi.Entities.PlacesNew.Search.Common.Enums;
+using GoogleApi.Entities.PlacesNew.Search.NearBy.Request.Enums;
 
 namespace GoogleApi.Entities.PlacesNew.Search.NearBy.Request;
 
@@ -11,7 +13,7 @@ namespace GoogleApi.Entities.PlacesNew.Search.NearBy.Request;
 /// A Nearby Search (New) request takes one or more place types, and returns a list of matching places within the specified area.
 /// A field mask specifying one or more data types is required. Nearby Search (New) only supports POST requests.
 /// </summary>
-public class PlacesNewNearBySearchRequest : BasePlacesNewRequest
+public class PlacesNewNearBySearchRequest : BasePlacesNewRequest, IRequestJsonX
 {
     /// <summary>
     /// Base Url.
@@ -33,7 +35,7 @@ public class PlacesNewNearBySearchRequest : BasePlacesNewRequest
     /// If this parameter is omitted, places of all types are returned.
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// </summary>
-    public virtual IEnumerable<string> IncludedTypes { get; set; } = new List<string>();
+    public virtual IEnumerable<PlaceLocationTypeA> IncludedTypes { get; set; } = new List<PlaceLocationTypeA>();
 
     /// <summary>
     /// Optional.
@@ -44,14 +46,14 @@ public class PlacesNewNearBySearchRequest : BasePlacesNewRequest
     /// If there are any conflicting types, such as a type appearing in both includedTypes and excludedTypes, an INVALID_REQUEST error is returned.
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// </summary>
-    public virtual IEnumerable<string> ExcludedTypes { get; set; } = new List<string>();
+    public virtual IEnumerable<PlaceLocationTypeA> ExcludedTypes { get; set; } = new List<PlaceLocationTypeA>();
 
     /// <summary>
     /// Optional.
     /// A comma-separated list of primary place types from Table A to include in a search.
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// </summary>
-    public virtual IEnumerable<string> IncludedPrimaryTypes { get; set; } = new List<string>();
+    public virtual IEnumerable<PlaceLocationTypeA> IncludedPrimaryTypes { get; set; } = new List<PlaceLocationTypeA>();
 
     /// <summary>
     /// Optional.
@@ -60,7 +62,7 @@ public class PlacesNewNearBySearchRequest : BasePlacesNewRequest
     /// an INVALID_ARGUMENT error is returned.
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// </summary>
-    public virtual IEnumerable<string> ExcludedPrimaryTypes { get; set; } = new List<string>();
+    public virtual IEnumerable<PlaceLocationTypeA> ExcludedPrimaryTypes { get; set; } = new List<PlaceLocationTypeA>();
 
     /// <summary>
     /// Optional.

@@ -10,5 +10,5 @@ public class PlacesNewAutoCompleteResponse : BaseResponseX
     /// <summary>
     /// Contains a list of suggestions, ordered in descending order of relevance.
     /// </summary>
-    public virtual IEnumerable<Suggestion> Suggestions { get; set; }
+    public virtual IEnumerable<Suggestion> Suggestions { get; set; } = new List<Suggestion>();
 }

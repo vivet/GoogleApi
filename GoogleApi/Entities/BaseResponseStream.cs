@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
+using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities;
 
 /// <summary>
 /// Base Response Stream.
 /// </summary>
-public class BaseResponseStream : BaseResponse
+public class BaseResponseStream : BaseResponse, IResponseStream
 {
     /// <summary>
     /// Buffer.

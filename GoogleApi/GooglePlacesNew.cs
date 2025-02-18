@@ -26,14 +26,14 @@ public partial class GooglePlacesNew
     /// such as its complete address, phone number, user rating and reviews.
     /// https://developers.google.com/maps/documentation/places/web-service/place-details
     /// </summary>
-    public static DetailsNewApi DetailsNew => new();
+    public static DetailsNewApi Details => new();
 
     /// <summary>
     /// The Autocomplete (New) service is a web service that returns place predictions and query predictions in response to an HTTP request.
     /// In the request, specify a text search string and geographic bounds that controls the search area.
     /// https://developers.google.com/maps/documentation/places/web-service/place-autocomplete
     /// </summary>
-    public static AutoCompleteNewApi AutoCompleteNew => new();
+    public static AutoCompleteNewApi AutoComplete => new();
 
     /// <summary>
     /// Search (nested class).
@@ -46,7 +46,7 @@ public partial class GooglePlacesNew
         /// The service responds with a list of places matching the text string and any location bias that has been set.
         /// https://developers.google.com/maps/documentation/places/web-service/text-search
         /// </summary>
-        public static TextSearchNewApi TextSearchNew => new();
+        public static TextSearchNewApi TextSearch => new();
 
         /// <summary>
         /// A Nearby Search (New) request takes one or more place types, and returns a list of matching places within the specified area.
@@ -54,7 +54,7 @@ public partial class GooglePlacesNew
         /// https://developers.google.com/maps/documentation/places/web-service/nearby-search
         /// https://developers.google.com/maps/documentation/places/web-service/place-photos#skiphttpredirect
         /// </summary>
-        public static NearBySearchNewApi NearBySearchNew => new();
+        public static NearBySearchNewApi NearBySearch => new();
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public partial class GooglePlacesNew
         /// you can then access the referenced photos and resize the image to the optimal size for your application.
         /// https://developers.google.com/maps/documentation/places/web-service/place-photos
         /// </summary>
-        public static PhotosNewApi PhotosNew => new();
+        public static PhotosNewApi Photo => new();
 
         /// <summary>
         /// The Place Photo (New) service is a read-only API that allows you to add high quality photographic content to your application.
@@ -80,7 +80,7 @@ public partial class GooglePlacesNew
         /// you can then access the referenced photos and resize the image to the optimal size for your application.
         /// https://developers.google.com/maps/documentation/places/web-service/place-photos
         /// </summary>
-        public static PhotosNewSkipHttpRedirectApi PhotosNewSkipHttpRedirect => new();
+        public static PhotosNewSkipHttpRedirectApi PhotoSkipHttpRedirect => new();
     }
 }
 

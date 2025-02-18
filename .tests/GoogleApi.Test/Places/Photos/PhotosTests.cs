@@ -113,6 +113,6 @@ public class PhotosTests : BaseTest
 
         var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GooglePlaces.Photos.QueryAsync(request));
         Assert.IsNotNull(exception);
-        Assert.AreEqual("PermissionDenied: Forbidden", exception.Message);
+        Assert.AreEqual("InvalidKey: The key is invalid.", exception.Message);
     }
 }

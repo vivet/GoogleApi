@@ -3,4 +3,4 @@
 /// <summary>
 /// Places New Photos Response.
 /// </summary>
-public class PlacesNewPhotosResponse : BaseResponseStream;
+public class PlacesNewPhotosResponse : BaseResponseStreamX;

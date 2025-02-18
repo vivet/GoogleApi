@@ -18,5 +18,5 @@ public class EvChargeOptions
     /// <summary>
     /// A list of EV charging connector aggregations that contain connectors of the same type and same charge rate.
     /// </summary>
-    public virtual IEnumerable<ConnectorAggregation> ConnectorAggregation { get; set; }
+    public virtual IEnumerable<ConnectorAggregation> ConnectorAggregation { get; set; } = new List<ConnectorAggregation>();
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GoogleApi.Entities.PlacesNew.Common.Enums;
 
 namespace GoogleApi.Entities.PlacesNew.AutoComplete.Response;
 
@@ -43,11 +44,11 @@ public class PlacePrediction
     /// A type is a categorization of a Place.
     /// Places with shared types will share similar characteristics.
     /// </summary>
-    public virtual IEnumerable<string> Types { get; set; }
+    public virtual IEnumerable<PlaceLocationTypeAB> Types { get; set; } = new List<PlaceLocationTypeAB>();
 
     /// <summary>
     /// The length of the geodesic in meters from origin if origin is specified.
     /// Certain predictions such as routes may not populate this field.
     /// </summary>
-    public virtual int DistanceMeters { get; set; }
+    public virtual int? DistanceMeters { get; set; }
 }

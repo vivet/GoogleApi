@@ -18,5 +18,5 @@ public class FormattableText
     /// by criteria other than string matching (for example, spell corrections or transliterations).
     /// These values are Unicode character offsets of text.The ranges are guaranteed to be ordered in increasing offset values.
     /// </summary>
-    public virtual IEnumerable<StringRange> Matches { get; set; }
+    public virtual IEnumerable<StringRange> Matches { get; set; } = new List<StringRange>();
 }

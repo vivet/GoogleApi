@@ -53,13 +53,13 @@ public class RouteDirectionsTests : BaseTest
             {
                 Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
             },
-            Intermediates = new RouteWayPoint[]
-            {
+            Intermediates =
+            [
                 new()
                 {
                     Address = "Mountain View, Californien 94043, USA"
                 }
-            },
+            ],
             OptimizeWaypointOrder = true
         };
 
@@ -83,13 +83,13 @@ public class RouteDirectionsTests : BaseTest
             {
                 Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
             },
-            Intermediates = new RouteWayPoint[]
-            {
+            Intermediates =
+            [
                 new()
                 {
                     Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.411670, Longitude = -122.073595 } }
                 }
-            },
+            ],
             OptimizeWaypointOrder = true
         };
 
