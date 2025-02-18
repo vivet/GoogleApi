@@ -37,11 +37,11 @@ public class SpeedLimitsTests : BaseTest
         var request = new SpeedLimitsRequest
         {
             Key = this.Settings.ApiKey,
-            Places = new[]
-            {
+            Places =
+            [
                 new Place("ChIJaSLMpEVQUkYRL4xNOWBfwhQ"),
                 new Place("ChIJuc03_GlQUkYRlLku0KsLdJw")
-            }
+            ]
         };
 
         var result = await GoogleMaps.Roads.SpeedLimits.QueryAsync(request);

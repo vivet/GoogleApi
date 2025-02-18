@@ -43,7 +43,7 @@ public class AutoCompleteNewTests : BaseTest
             Input = "jagtvej 2200 København",
             IncludedPrimaryTypes = 
             [
-                PlaceLocationTypeAB.Geocode
+                PlaceLocationTypeAb.Geocode
             ]
         };
 

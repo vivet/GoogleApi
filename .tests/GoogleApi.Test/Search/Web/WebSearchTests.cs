@@ -294,11 +294,11 @@ public class WebSearchTests : BaseTest
             Query = "google",
             Options =
             {
-                FileTypes = new[]
-                {
+                FileTypes =
+                [
                     FileType.Text,
                     FileType.AdobePortableDocumentFormat
-                }
+                ]
             }
         };
 

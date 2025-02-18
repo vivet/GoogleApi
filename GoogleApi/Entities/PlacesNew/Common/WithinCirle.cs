@@ -1,6 +1,4 @@
-﻿using GoogleApi.Entities.PlacesNew.Search.Common;
-
-namespace GoogleApi.Entities.PlacesNew.Common;
+﻿namespace GoogleApi.Entities.PlacesNew.Common;
 
 /// <summary>
 /// Within Circle.

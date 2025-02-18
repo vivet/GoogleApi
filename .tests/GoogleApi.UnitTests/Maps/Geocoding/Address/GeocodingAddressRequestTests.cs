@@ -110,11 +110,11 @@ public class GeocodingAddressRequestTests
         var request = new AddressGeocodeRequest
         {
             Key = "key",
-            Components = new[]
-            {
+            Components =
+            [
                 new KeyValuePair<Component, string>(Component.Administrative_Area, "component1"),
                 new KeyValuePair<Component, string>(Component.Locality, "component2")
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GoogleApi.Entities.PlacesNew.Search.NearBy.Request;
+namespace GoogleApi.Entities.PlacesNew.Search.NearBy.Request.Enums;
 
 /// <summary>
 /// Place Travel mode.

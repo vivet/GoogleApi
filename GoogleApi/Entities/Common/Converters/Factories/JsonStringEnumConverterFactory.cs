@@ -24,7 +24,7 @@ public class JsonStringEnumConverterFactory : JsonConverterFactory
             { typeof(Enums.PlaceLocationType), new JsonStringEnumOrDefaultConverter<Enums.PlaceLocationType>() },
             { typeof(PlacesNew.Common.Enums.PlaceLocationTypeA), new JsonStringEnumOrDefaultConverter<PlacesNew.Common.Enums.PlaceLocationTypeA>() },
             { typeof(PlacesNew.Common.Enums.PlaceLocationTypeB), new JsonStringEnumOrDefaultConverter<PlacesNew.Common.Enums.PlaceLocationTypeB>() },
-            { typeof(PlacesNew.Common.Enums.PlaceLocationTypeAB), new JsonStringEnumOrDefaultConverter<PlacesNew.Common.Enums.PlaceLocationTypeAB>() },
+            { typeof(PlacesNew.Common.Enums.PlaceLocationTypeAb), new JsonStringEnumOrDefaultConverter<PlacesNew.Common.Enums.PlaceLocationTypeAb>() },
             { typeof(Translate.Common.Enums.Language), new JsonStringEnumOrDefaultConverter<Translate.Common.Enums.Language>() }
         };
     }

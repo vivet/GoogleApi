@@ -37,7 +37,7 @@ public class DetailsNewTests : BaseTest
         Assert.IsNotNull(place);
         Assert.IsNotNull(place.AdrFormatAddress);
         Assert.IsNotNull(place.Location);
-        Assert.IsTrue(place.Types.Contains(PlaceLocationTypeAB.Route));
+        Assert.IsTrue(place.Types.Contains(PlaceLocationTypeAb.Route));
         Assert.AreEqual(BusinessStatus.Operational, place.BusinessStatus);
 
         var formattedAddress = place.FormattedAddress.ToLower();

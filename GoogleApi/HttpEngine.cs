@@ -241,7 +241,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
                         if (string.IsNullOrEmpty(rawJson))
                         {
-                            var error404 = this.Get404Error();
+                            var error404 = Get404Error();
 
                             response = new PlacesNewPhotosResponse
                             {
@@ -285,7 +285,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
                         // BUG: It's not always PlacesNewPhotosSkipHttpRedirectResponse. 
                         // can we make this more generic, to work with all response types?
 
-                        var error404 = this.Get404Error();
+                        var error404 = Get404Error();
 
                         response = new PlacesNewPhotosSkipHttpRedirectResponse
                         {
@@ -308,7 +308,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         return response;
     }
 
-    private Error Get404Error()
+    private static Error Get404Error()
     {
         return new Error
         {

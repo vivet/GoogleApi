@@ -72,11 +72,11 @@ public class LocationGeocodingRequestTests
         {
             Key = "key",
             Location = new Coordinate(1, 1),
-            ResultTypes = new[]
-            {
+            ResultTypes =
+            [
                 LocationResultType.Administrative_Area_Level_1,
                 LocationResultType.Administrative_Area_Level_2
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -95,10 +95,10 @@ public class LocationGeocodingRequestTests
         {
             Key = "key",
             Location = new Coordinate(1, 1),
-            LocationTypes = new[]
-            {
+            LocationTypes =
+            [
                 GeometryLocationType.Rooftop
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();

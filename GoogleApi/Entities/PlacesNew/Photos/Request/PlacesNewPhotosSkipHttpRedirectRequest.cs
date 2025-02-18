@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.Common.Extensions;
-using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities.PlacesNew.Photos.Request;
 

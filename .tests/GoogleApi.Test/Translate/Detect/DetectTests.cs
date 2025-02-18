@@ -16,7 +16,7 @@ public class DetectTests : BaseTest
         var request = new DetectRequest
         {
             Key = this.Settings.ApiKey,
-            Qs = new[] { "Hello World" }
+            Qs = ["Hello World"]
         };
 
         var result = await GoogleTranslate.Detect.QueryAsync(request);
@@ -38,7 +38,7 @@ public class DetectTests : BaseTest
         var request = new DetectRequest
         {
             Key = this.Settings.ApiKey,
-            Qs = new[] { "Hello World", "Der var engang" }
+            Qs = ["Hello World", "Der var engang"]
         };
 
         var result = await GoogleTranslate.Detect.QueryAsync(request);

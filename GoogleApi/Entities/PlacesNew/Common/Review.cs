@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common;
-using GoogleApi.Entities.Common.Converters;
 
 namespace GoogleApi.Entities.PlacesNew.Common;
 

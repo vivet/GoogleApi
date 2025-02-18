@@ -31,14 +31,14 @@ public class Place
     /// A set of type tags for this result. For example, "political" and "locality".
     /// For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
     /// </summary>
-    public virtual IEnumerable<PlaceLocationTypeAB> Types { get; set; } = new List<PlaceLocationTypeAB>();
+    public virtual IEnumerable<PlaceLocationTypeAb> Types { get; set; } = new List<PlaceLocationTypeAb>();
 
     /// <summary>
     /// The primary type of the given result. This type must one of the Places API supported types.
     /// For example, "restaurant", "cafe", "airport", etc. A place can only have a single primary type.
     /// For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
     /// </summary>
-    public virtual PlaceLocationTypeAB PrimaryType { get; set; }
+    public virtual PlaceLocationTypeAb PrimaryType { get; set; }
 
     /// <summary>
     /// The display name of the primary type, localized to the request language if applicable.

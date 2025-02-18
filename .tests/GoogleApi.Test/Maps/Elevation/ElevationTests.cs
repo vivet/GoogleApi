@@ -17,10 +17,10 @@ public class ElevationTests : BaseTest
         var request = new ElevationRequest
         {
             Key = this.Settings.ApiKey,
-            Locations = new[]
-            {
+            Locations =
+            [
                 coordinate
-            }
+            ]
         };
         var response = await GoogleMaps.Elevation.QueryAsync(request);
 
@@ -44,11 +44,11 @@ public class ElevationTests : BaseTest
         var request = new ElevationRequest
         {
             Key = this.Settings.ApiKey,
-            Locations = new[]
-            {
+            Locations =
+            [
                 coordinate1,
                 coordinate2
-            }
+            ]
         };
         var response = await GoogleMaps.Elevation.QueryAsync(request);
 
@@ -79,11 +79,11 @@ public class ElevationTests : BaseTest
         var request = new ElevationRequest
         {
             Key = this.Settings.ApiKey,
-            Path = new[]
-            {
+            Path =
+            [
                 coordinate1,
                 coordinate2
-            },
+            ],
             Samples = 2
         };
         var response = await GoogleMaps.Elevation.QueryAsync(request);

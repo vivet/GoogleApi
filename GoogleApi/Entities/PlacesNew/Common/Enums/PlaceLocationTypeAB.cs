@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.PlacesNew.Common.Enums;
 /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
 /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-b
 /// </summary>
-public enum PlaceLocationTypeAB
+public enum PlaceLocationTypeAb
 {
     /// <summary>
     /// Car Dealer.
@@ -2048,5 +2048,4 @@ public enum PlaceLocationTypeAB
     /// </summary>
     [EnumMember(Value = "town_square")]
     TownSquare
-
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using GoogleApi.Entities.Interfaces;
 
 namespace GoogleApi.Entities;
@@ -17,5 +16,5 @@ public class BaseResponseStream : BaseResponse, IResponseStream
     /// <summary>
     /// Stream.
     /// </summary>
-    public virtual MemoryStream Stream => new(this.Buffer ?? Array.Empty<byte>());
+    public virtual MemoryStream Stream => new(this.Buffer ?? []);
 }

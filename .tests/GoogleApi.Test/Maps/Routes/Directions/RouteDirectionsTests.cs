@@ -55,7 +55,7 @@ public class RouteDirectionsTests : BaseTest
             },
             Intermediates =
             [
-                new()
+                new RouteWayPoint
                 {
                     Address = "Mountain View, Californien 94043, USA"
                 }
@@ -85,7 +85,7 @@ public class RouteDirectionsTests : BaseTest
             },
             Intermediates =
             [
-                new()
+                new RouteWayPoint
                 {
                     Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.411670, Longitude = -122.073595 } }
                 }

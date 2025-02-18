@@ -29,7 +29,7 @@ public class Landmark
     /// A set of type tags for this landmark.
     /// For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
     /// </summary>
-    public virtual IEnumerable<PlaceLocationTypeAB> Types { get; set; } = new List<PlaceLocationTypeAB>();
+    public virtual IEnumerable<PlaceLocationTypeAb> Types { get; set; } = new List<PlaceLocationTypeAb>();
 
     /// <summary>
     /// Defines the spatial relationship between the target location and the landmark.

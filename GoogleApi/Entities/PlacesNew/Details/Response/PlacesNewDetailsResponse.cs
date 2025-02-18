@@ -1,5 +1,4 @@
-﻿using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.PlacesNew.Common;
+﻿using GoogleApi.Entities.PlacesNew.Common;
 
 namespace GoogleApi.Entities.PlacesNew.Details.Response;
 

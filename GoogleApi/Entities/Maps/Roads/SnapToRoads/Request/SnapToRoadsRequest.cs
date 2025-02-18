@@ -4,7 +4,6 @@ using System.Linq;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Interfaces;
-using GoogleApi.Entities.Maps.Roads.Common;
 
 namespace GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 

@@ -55,7 +55,7 @@ public class PlacesNewAutoCompleteRequest : BasePlacesNewRequest, IRequestJsonX
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-b
     /// </summary>
-    public virtual IEnumerable<PlaceLocationTypeAB> IncludedPrimaryTypes { get; set; } = new List<PlaceLocationTypeAB>();
+    public virtual IEnumerable<PlaceLocationTypeAb> IncludedPrimaryTypes { get; set; } = new List<PlaceLocationTypeAb>();
 
     /// <summary>
     /// If set to true, the response includes businesses that visit or deliver to customers directly, but don't have a physical business location.

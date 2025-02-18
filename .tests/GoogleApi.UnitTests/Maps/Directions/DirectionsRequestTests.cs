@@ -275,10 +275,10 @@ public class DirectionsRequestTests
             TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1),
             TrafficModel = TrafficModel.Best_Guess,
-            WayPoints = new[]
-            {
+            WayPoints =
+            [
                 new WayPoint(new LocationEx(new Address("waypoint_address")))
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -305,10 +305,10 @@ public class DirectionsRequestTests
             TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1),
             TrafficModel = TrafficModel.Best_Guess,
-            WayPoints = new[]
-            {
+            WayPoints =
+            [
                 new WayPoint(new LocationEx(new Address("waypoint_address")), true)
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -472,10 +472,10 @@ public class DirectionsRequestTests
             Key = "key",
             Origin = new LocationEx(new Address("address")),
             Destination = new LocationEx(new Address("address")),
-            WayPoints = new[]
-            {
+            WayPoints =
+            [
                 new WayPoint(new LocationEx(new Address("waypoint_address")))
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -495,10 +495,10 @@ public class DirectionsRequestTests
             Key = "key",
             Origin = new LocationEx(new Address("address")),
             Destination = new LocationEx(new Address("address")),
-            WayPoints = new[]
-            {
+            WayPoints =
+            [
                 new WayPoint(new LocationEx(new Address("waypoint_address")))
-            },
+            ],
             OptimizeWaypoints = true
         };
 

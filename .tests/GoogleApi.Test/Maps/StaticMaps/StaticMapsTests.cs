@@ -184,11 +184,11 @@ public class StaticMapsTests : BaseTest
         var request = new StaticMapsRequest
         {
             Key = this.Settings.ApiKey,
-            Visibles = new[]
-            {
+            Visibles =
+            [
                 new Location(new Coordinate(60.170877, 24.942796)),
                 new Location(new Coordinate(60.180877, 24.952796))
-            }
+            ]
         };
 
         var result = await GoogleMaps.StaticMaps.QueryAsync(request);
@@ -203,18 +203,18 @@ public class StaticMapsTests : BaseTest
         var request = new StaticMapsRequest
         {
             Key = this.Settings.ApiKey,
-            Markers = new[]
-            {
+            Markers =
+            [
                 new MapMarker
                 {
                     Label = "label1",
                     Size = MarkerSize.Normal,
                     Color = "color2",
                     Icon = new MapMarkerIcon("url1"),
-                    Locations = new[]
-                    {
+                    Locations =
+                    [
                         new Location(new Coordinate(60.170877, 24.942796))
-                    }
+                    ]
                 },
                 new MapMarker
                 {
@@ -222,12 +222,12 @@ public class StaticMapsTests : BaseTest
                     Size = MarkerSize.Mid,
                     Color = "color2",
                     Icon = new MapMarkerIcon("url2"),
-                    Locations = new[]
-                    {
+                    Locations =
+                    [
                         new Location(new Coordinate(60.180877, 24.952796))
-                    }
+                    ]
                 }
-            }
+            ]
         };
 
         var result = await GoogleMaps.StaticMaps.QueryAsync(request);

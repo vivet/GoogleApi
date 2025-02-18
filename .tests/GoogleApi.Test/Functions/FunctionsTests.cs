@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

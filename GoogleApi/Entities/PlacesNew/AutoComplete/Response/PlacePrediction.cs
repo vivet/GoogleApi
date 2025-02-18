@@ -44,7 +44,7 @@ public class PlacePrediction
     /// A type is a categorization of a Place.
     /// Places with shared types will share similar characteristics.
     /// </summary>
-    public virtual IEnumerable<PlaceLocationTypeAB> Types { get; set; } = new List<PlaceLocationTypeAB>();
+    public virtual IEnumerable<PlaceLocationTypeAb> Types { get; set; } = new List<PlaceLocationTypeAb>();
 
     /// <summary>
     /// The length of the geodesic in meters from origin if origin is specified.

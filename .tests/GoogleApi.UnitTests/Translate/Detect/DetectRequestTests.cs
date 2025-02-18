@@ -14,10 +14,10 @@ public class DetectRequestTests
         var request = new DetectRequest
         {
             Key = "key",
-            Qs = new[]
-            {
+            Qs =
+            [
                 "qs"
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using GoogleApi.Entities.PlacesNew.Common.Enums;
-using GoogleApi.Entities.PlacesNew.Search.Text.Request.Enums;
 
 namespace GoogleApi.Entities.PlacesNew.Search.Text.Request;
 

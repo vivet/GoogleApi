@@ -16,10 +16,10 @@ public class ElevationRequestTests
         var request = new ElevationRequest
         {
             Key = "key",
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Coordinate(1, 1)
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -42,11 +42,11 @@ public class ElevationRequestTests
         var request = new ElevationRequest
         {
             Key = "key",
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Coordinate(1, 1),
                 new Coordinate(2, 2)
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -64,11 +64,11 @@ public class ElevationRequestTests
         var request = new ElevationRequest
         {
             Key = "key",
-            Path = new[]
-            {
+            Path =
+            [
                 new Coordinate(1, 1),
                 new Coordinate(2, 2)
-            },
+            ],
             Samples = 2
         };
 
@@ -90,10 +90,10 @@ public class ElevationRequestTests
         var request = new ElevationRequest
         {
             Key = "key",
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Coordinate(1, 1)
-            },
+            ],
             Channel = "channel"
         };
 
@@ -222,10 +222,10 @@ public class ElevationRequestTests
         var request = new ElevationRequest
         {
             Key = "key",
-            Path = new[]
-            {
+            Path =
+            [
                 new Coordinate(1, 1)
-            }
+            ]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
@@ -240,11 +240,11 @@ public class ElevationRequestTests
         var request = new ElevationRequest
         {
             Key = "key",
-            Path = new[]
-            {
+            Path =
+            [
                 new Coordinate(1, 1),
                 new Coordinate(2, 2)
-            },
+            ],
             Samples = null
         };
 

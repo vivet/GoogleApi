@@ -410,10 +410,10 @@ public class StaticMapsRequestTests
             Key = "key",
             Center = new Location(new Coordinate(1, 1)),
             ZoomLevel = 1,
-            Visibles = new[]
-            {
+            Visibles =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -433,11 +433,11 @@ public class StaticMapsRequestTests
             Key = "key",
             Center = new Location(new Coordinate(1, 1)),
             ZoomLevel = 1,
-            Visibles = new[]
-            {
+            Visibles =
+            [
                 new Location(new Coordinate(1, 1)),
                 new Location(new Coordinate(2, 2))
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -457,20 +457,20 @@ public class StaticMapsRequestTests
             Key = "key",
             Center = new Location(new Coordinate(1, 1)),
             ZoomLevel = 1,
-            Markers = new[]
-            {
+            Markers =
+            [
                 new MapMarker
                 {
                     Label = "label",
                     Size = MarkerSize.Normal,
                     Color = "color",
                     Icon = new MapMarkerIcon("url"),
-                    Locations = new[]
-                    {
+                    Locations =
+                    [
                         new Location(new Coordinate(1, 1))
-                    }
+                    ]
                 }
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -490,18 +490,18 @@ public class StaticMapsRequestTests
             Key = "key",
             Center = new Location(new Coordinate(1, 1)),
             ZoomLevel = 1,
-            Markers = new[]
-            {
+            Markers =
+            [
                 new MapMarker
                 {
                     Label = "label1",
                     Size = MarkerSize.Normal,
                     Color = "color2",
                     Icon = new MapMarkerIcon("url1"),
-                    Locations = new[]
-                    {
+                    Locations =
+                    [
                         new Location(new Coordinate(1, 1))
-                    }
+                    ]
                 },
                 new MapMarker
                 {
@@ -509,12 +509,12 @@ public class StaticMapsRequestTests
                     Size = MarkerSize.Mid,
                     Color = "color2",
                     Icon = new MapMarkerIcon("url2"),
-                    Locations = new[]
-                    {
+                    Locations =
+                    [
                         new Location(new Coordinate(2, 2))
-                    }
+                    ]
                 }
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -539,13 +539,13 @@ public class StaticMapsRequestTests
             Key = "key",
             Center = new Location(new Coordinate(1, 1)),
             ZoomLevel = 1,
-            Markers = new[]
-            {
+            Markers =
+            [
                 new MapMarker
                 {
                     Label = "label"
                 }
-            }
+            ]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
