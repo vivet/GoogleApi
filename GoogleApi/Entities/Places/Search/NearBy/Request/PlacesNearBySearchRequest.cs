@@ -9,7 +9,6 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Places.Search.NearBy.Request.Enums;
 using GoogleApi.Entities.Common.Extensions;
-using GoogleApi.Entities.Places.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 
 namespace GoogleApi.Entities.Places.Search.NearBy.Request;

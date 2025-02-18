@@ -60,10 +60,10 @@ public class AddressGeocodeTests : BaseTest
         var request = new AddressGeocodeRequest
         {
             Key = this.Settings.ApiKey,
-            Components = new[]
-            {
+            Components =
+            [
                 new KeyValuePair<Component, string>(Component.Country, "dk")
-            }
+            ]
         };
         var result = await GoogleMaps.Geocode.AddressGeocode.QueryAsync(request);
 

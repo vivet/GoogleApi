@@ -29,10 +29,10 @@ public class TranslateRequestTests
         {
             Key = "key",
             Target = Language.Afrikaans,
-            Qs = new[]
-            {
+            Qs =
+            [
                 "query"
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -147,7 +147,7 @@ public class TranslateRequestTests
             Key = "key",
             Source = Language.Filipino,
             Target = Language.English,
-            Qs = new[] { "Hej Verden" },
+            Qs = ["Hej Verden"],
             Model = Model.Nmt
         };
 
@@ -165,7 +165,7 @@ public class TranslateRequestTests
             Key = "key",
             Source = Language.English,
             Target = Language.Filipino,
-            Qs = new[] { "Hej Verden" },
+            Qs = ["Hej Verden"],
             Model = Model.Nmt
         };
 
@@ -184,7 +184,7 @@ public class TranslateRequestTests
             Source = Language.Danish,
             Target = Language.Danish,
             Model = Model.Nmt,
-            Qs = new[] { "Hej Verden" }
+            Qs = ["Hej Verden"]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);

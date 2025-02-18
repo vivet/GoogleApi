@@ -23,16 +23,16 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin1),
                 new LocationEx(origin2)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination1),
                 new LocationEx(destination2)
-            }
+            ]
         };
 
         var response = await GoogleMaps.DistanceMatrix.QueryAsync(request);
@@ -49,14 +49,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            }
+            ]
         };
 
         var response = await GoogleMaps.DistanceMatrix.QueryAsync(request);
@@ -72,14 +72,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            }
+            ]
         };
 
         var response = await GoogleMaps.DistanceMatrix.QueryAsync(request);
@@ -101,14 +101,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            }
+            ]
         };
 
         var response = await GoogleMaps.DistanceMatrix.QueryAsync(request);
@@ -130,14 +130,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            }
+            ]
         };
 
         var response = await GoogleMaps.DistanceMatrix.QueryAsync(request);
@@ -153,14 +153,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            }
+            ]
         };
 
         var response = await GoogleMaps.DistanceMatrix.QueryAsync(request);
@@ -176,14 +176,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            },
+            ],
             Avoid = AvoidWay.Highways
         };
 
@@ -200,14 +200,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            },
+            ],
             TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1)
         };
@@ -225,14 +225,14 @@ public class DistanceMatrixTests : BaseTest
         var request = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            },
+            ],
             TravelMode = TravelMode.DRIVING,
             ArrivalTime = DateTime.UtcNow.AddHours(1),
             TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
@@ -251,14 +251,14 @@ public class DistanceMatrixTests : BaseTest
         var drivingRequest = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            },
+            ],
             TravelMode = TravelMode.DRIVING
         };
         var drivingResponse = await GoogleMaps.DistanceMatrix.QueryAsync(drivingRequest);
@@ -266,14 +266,14 @@ public class DistanceMatrixTests : BaseTest
         var walkingRequest = new DistanceMatrixRequest
         {
             Key = this.Settings.ApiKey,
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(origin)
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(destination)
-            },
+            ],
             TravelMode = TravelMode.WALKING
         };
         var walkingResponse = await GoogleMaps.DistanceMatrix.QueryAsync(walkingRequest);

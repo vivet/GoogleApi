@@ -36,16 +36,16 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address1")),
                 new LocationEx(new Address("address2"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address1")),
                 new LocationEx(new Address("address2"))
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -88,14 +88,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             Channel = "channel"
         };
 
@@ -114,14 +114,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             Language = Language.Afrikaans
         };
 
@@ -140,14 +140,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             Units = Units.Imperial
         };
 
@@ -166,14 +166,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             Region = "region"
         };
 
@@ -192,14 +192,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             Avoid = AvoidWay.Highways | AvoidWay.Ferries
         };
 
@@ -218,14 +218,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.BICYCLING
         };
 
@@ -244,14 +244,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1)
         };
@@ -271,14 +271,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.DRIVING,
             DepartureTime = DateTime.UtcNow.AddHours(1),
             TrafficModel = TrafficModel.Best_Guess
@@ -304,14 +304,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.TRANSIT
         };
 
@@ -340,14 +340,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.TRANSIT,
             DepartureTime = DateTime.UtcNow.AddHours(1)
         };
@@ -377,14 +377,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.TRANSIT,
             ArrivalTime = DateTime.UtcNow.AddHours(1)
         };
@@ -418,14 +418,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.TRANSIT,
             TransitMode = TransitMode.Subway | TransitMode.Rail
         };
@@ -445,14 +445,14 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            },
-            Destinations = new[]
-            {
+            ],
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            },
+            ],
             TravelMode = TravelMode.TRANSIT,
             TransitMode = TransitMode.Subway | TransitMode.Rail,
             TransitRoutingPreference = TransitRoutingPreference.Fewer_Transfers
@@ -501,10 +501,10 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Destinations = new[]
-            {
+            Destinations =
+            [
                 new LocationEx(new Address("address"))
-            }
+            ]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
@@ -519,10 +519,10 @@ public class DistanceMatrixRequestTests
         var request = new DistanceMatrixRequest
         {
             Key = "key",
-            Origins = new[]
-            {
+            Origins =
+            [
                 new LocationEx(new Address("address"))
-            }
+            ]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);

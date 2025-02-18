@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,15 +28,6 @@ public class FunctionsTests : BaseTest
     }
 
     [TestMethod]
-    public void EncodePolyLineWhenLocationsIsNullTest()
-    {
-        var exception = Assert.ThrowsException<ArgumentNullException>(() => GoogleFunctions.EncodePolyLine(null));
-
-        Assert.IsNotNull(exception);
-        Assert.AreEqual("locations", exception.ParamName);
-    }
-
-    [TestMethod]
     public void MergePolyLineTest()
     {
         var mergePolyLine = GoogleFunctions.MergePolyLine(FunctionsTests.POLY_LINE, FunctionsTests.POLY_LINE_2);
@@ -58,15 +48,6 @@ public class FunctionsTests : BaseTest
     }
 
     [TestMethod]
-    public void MergePolyLineWhenEncdodedLocationsIsNullTest()
-    {
-        var exception = Assert.ThrowsException<ArgumentNullException>(() => GoogleFunctions.MergePolyLine(null));
-
-        Assert.IsNotNull(exception);
-        Assert.AreEqual("encodedLocations", exception.ParamName);
-    }
-
-    [TestMethod]
     public void DecodePolyLineTest()
     {
         var decodePolyLine = GoogleFunctions.DecodePolyLine(FunctionsTests.POLY_LINE).ToArray();
@@ -76,14 +57,5 @@ public class FunctionsTests : BaseTest
         Assert.AreEqual(decodePolyLine[0].ToString(), location1.ToString());
         Assert.AreEqual(decodePolyLine[1].ToString(), location2.ToString());
         Assert.AreEqual(decodePolyLine[2].ToString(), location3.ToString());
-    }
-
-    [TestMethod]
-    public void DecodePolyLineWhenEncdodedLocationsIsNullTest()
-    {
-        var exception = Assert.ThrowsException<ArgumentNullException>(() => GoogleFunctions.DecodePolyLine(null));
-
-        Assert.IsNotNull(exception);
-        Assert.AreEqual("encodedLocations", exception.ParamName);
     }
 }

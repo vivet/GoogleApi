@@ -24,10 +24,10 @@ public class MapMarkerTests
     {
         var mapMarker = new MapMarker
         {
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();
@@ -39,11 +39,11 @@ public class MapMarkerTests
     {
         var mapMarker = new MapMarker
         {
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1)),
                 new Location(new Coordinate(2, 2))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();
@@ -56,10 +56,10 @@ public class MapMarkerTests
         var mapMarker = new MapMarker
         {
             Label = "label",
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();
@@ -73,10 +73,10 @@ public class MapMarkerTests
         {
             Label = "label",
             Size = MarkerSize.Tiny,
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();
@@ -90,10 +90,10 @@ public class MapMarkerTests
         {
             Label = "label",
             Size = MarkerSize.Small,
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();
@@ -106,10 +106,10 @@ public class MapMarkerTests
         var mapMarker = new MapMarker
         {
             Color = "color",
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();
@@ -122,10 +122,10 @@ public class MapMarkerTests
         var mapMarker = new MapMarker
         {
             Icon = new MapMarkerIcon("url"),
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();
@@ -141,10 +141,10 @@ public class MapMarkerTests
             Size = MarkerSize.Normal,
             Color = "color",
             Icon = new MapMarkerIcon("url"),
-            Locations = new[]
-            {
+            Locations =
+            [
                 new Location(new Coordinate(1, 1))
-            }
+            ]
         };
 
         var toString = mapMarker.ToString();

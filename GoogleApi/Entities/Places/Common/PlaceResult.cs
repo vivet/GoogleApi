@@ -1,6 +1,5 @@
 ﻿using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Places.Common.Enums;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 

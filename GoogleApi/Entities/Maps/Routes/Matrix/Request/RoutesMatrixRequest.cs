@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using GoogleApi.Entities.Common.Enums;
+using GoogleApi.Entities.Interfaces;
 using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common.Converters;
 using GoogleApi.Entities.Maps.Routes.Common.Enums;
@@ -12,7 +13,7 @@ namespace GoogleApi.Entities.Maps.Routes.Matrix.Request;
 /// <summary>
 /// Routes Matrix Request.
 /// </summary>
-public class RoutesMatrixRequest : BaseMapsXRequest
+public class RoutesMatrixRequest : BaseRequestX, IRequestJsonX
 {
     /// <inheritdoc />
     protected internal override string BaseUrl => "routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix";

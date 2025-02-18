@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GoogleApi.Entities.Common.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,7 +18,7 @@ public class ListExtensionTest
 
         list.Add(KEY, VALUE);
 
-        Assert.IsTrue(list.Contains(new KeyValuePair<string, string>(KEY, VALUE)));
+        Assert.IsTrue(list.Any(x => x is { Key: KEY, Value: VALUE }));
     }
 
     [TestMethod]

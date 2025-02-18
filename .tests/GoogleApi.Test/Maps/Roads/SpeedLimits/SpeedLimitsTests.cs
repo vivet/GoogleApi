@@ -1,8 +1,8 @@
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleApi.Test.Maps.Roads.SpeedLimits;
@@ -17,12 +17,12 @@ public class SpeedLimitsTests : BaseTest
         var request = new SpeedLimitsRequest
         {
             Key = this.Settings.ApiKey,
-            Path = new[]
-            {
-                new Coordinate(60.170880, 24.942795),
-                new Coordinate(60.170879, 24.942796),
-                new Coordinate(60.170877, 24.942796)
-            }
+            Path =
+            [
+                new LatLng(60.170880, 24.942795),
+                new LatLng(60.170879, 24.942796),
+                new LatLng(60.170877, 24.942796)
+            ]
         };
 
         var result = await GoogleMaps.Roads.SpeedLimits.QueryAsync(request);
@@ -37,11 +37,11 @@ public class SpeedLimitsTests : BaseTest
         var request = new SpeedLimitsRequest
         {
             Key = this.Settings.ApiKey,
-            Places = new[]
-            {
+            Places =
+            [
                 new Place("ChIJaSLMpEVQUkYRL4xNOWBfwhQ"),
                 new Place("ChIJuc03_GlQUkYRlLku0KsLdJw")
-            }
+            ]
         };
 
         var result = await GoogleMaps.Roads.SpeedLimits.QueryAsync(request);

@@ -331,11 +331,11 @@ public class AutoCompleteTests : BaseTest
         {
             Key = this.Settings.ApiKey,
             Input = "Denmark",
-            LocationTypes = new[]
-            {
+            LocationTypes =
+            [
                 PlaceLocationType.Cafe,
                 PlaceLocationType.Book_Store
-            }
+            ]
         };
 
         var response = await GooglePlaces.AutoComplete.QueryAsync(request);

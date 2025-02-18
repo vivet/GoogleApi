@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Converters;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Routes.Common;
 using GoogleApi.Entities.Maps.Routes.Matrix.Response.Enums;
 
@@ -74,12 +74,12 @@ public class MatrixElement
     public virtual FallbackInfo FallbackInfo { get; set; }
 
     /// <summary>
-    /// Error.
-    /// </summary>
-    public virtual Error Error { get; set; }
-
-    /// <summary>
     /// Text representations of properties of the Route.
     /// </summary>
     public virtual LocalizedValues LocalizedValues { get; set; }
+
+    /// <summary>
+    /// Error.
+    /// </summary>
+    public virtual Error Error { get; set; }
 }

@@ -19,7 +19,7 @@ public class TranslateTests : BaseTest
             Key = this.Settings.ApiKey,
             Source = Language.English,
             Target = Language.Danish,
-            Qs = new[] { "Hello World" }
+            Qs = ["Hello World"]
         };
 
         var result = await GoogleTranslate.Translate.QueryAsync(request);
@@ -39,7 +39,7 @@ public class TranslateTests : BaseTest
             Key = this.Settings.ApiKey,
             Source = Language.English,
             Target = Language.Danish,
-            Qs = new[] { "Hello World", "Once upon a time" }
+            Qs = ["Hello World", "Once upon a time"]
         };
 
         var result = await GoogleTranslate.Translate.QueryAsync(request);
@@ -67,7 +67,7 @@ public class TranslateTests : BaseTest
         {
             Key = this.Settings.ApiKey,
             Target = Language.Albanian,
-            Qs = new[] { "Hej med dig min ven" }
+            Qs = ["Hej med dig min ven"]
         };
 
         var result = await GoogleTranslate.Translate.QueryAsync(request);
@@ -86,7 +86,7 @@ public class TranslateTests : BaseTest
             Source = Language.English,
             Target = Language.Danish,
             Model = Model.Nmt,
-            Qs = new[] { "Hello World" }
+            Qs = ["Hello World"]
         };
 
         var result = await GoogleTranslate.Translate.QueryAsync(request);

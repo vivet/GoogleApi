@@ -90,8 +90,8 @@ public class GeolocationTests : BaseTest
         var request = new GeolocationRequest
         {
             Key = this.Settings.ApiKey,
-            WifiAccessPoints = new[]
-            {
+            WifiAccessPoints =
+            [
                 new WifiAccessPoint
                 {
                     MacAddress = "00:25:9c:cf:1c:ac",
@@ -104,7 +104,7 @@ public class GeolocationTests : BaseTest
                     SignalStrength = -55,
                     SignalToNoiseRatio = 0
                 }
-            }
+            ]
         };
         var result = await GoogleMaps.Geolocation.QueryAsync(request);
 

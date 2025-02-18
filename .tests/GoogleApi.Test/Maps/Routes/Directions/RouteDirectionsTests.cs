@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
-using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Routes.Common;
 using GoogleApi.Entities.Maps.Routes.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Directions.Request;
@@ -53,13 +53,13 @@ public class RouteDirectionsTests : BaseTest
             {
                 Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
             },
-            Intermediates = new RouteWayPoint[]
-            {
-                new()
+            Intermediates =
+            [
+                new RouteWayPoint
                 {
                     Address = "Mountain View, Californien 94043, USA"
                 }
-            },
+            ],
             OptimizeWaypointOrder = true
         };
 
@@ -83,13 +83,13 @@ public class RouteDirectionsTests : BaseTest
             {
                 Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.417670, Longitude = -122.079595 } }
             },
-            Intermediates = new RouteWayPoint[]
-            {
-                new()
+            Intermediates =
+            [
+                new RouteWayPoint
                 {
                     Location = new RouteLocation { LatLng = new LatLng { Latitude = 37.411670, Longitude = -122.073595 } }
                 }
-            },
+            ],
             OptimizeWaypointOrder = true
         };
 

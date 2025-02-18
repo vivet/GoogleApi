@@ -7,7 +7,7 @@ namespace GoogleApi.Entities.Maps.AerialView.GetVideo.Response;
 /// <summary>
 /// Get Video Response.
 /// </summary>
-public class GetVideoResponse : BaseAerialViewResponse
+public class GetVideoResponse : BaseResponseX
 {
     /// <summary>
     /// Uris.

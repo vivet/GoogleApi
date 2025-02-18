@@ -310,11 +310,11 @@ public class AutoCompleteRequstTests
         {
             Key = "key",
             Input = "input",
-            LocationTypes = new[]
-            {
+            LocationTypes =
+            [
                 PlaceLocationType.Cafe,
                 PlaceLocationType.Book_Store
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -352,11 +352,11 @@ public class AutoCompleteRequstTests
         {
             Key = "key",
             Input = "input",
-            Components = new[]
-            {
+            Components =
+            [
                 new KeyValuePair<Component, string>(Component.Country, "country"),
                 new KeyValuePair<Component, string>(Component.Locality, "locality")
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();

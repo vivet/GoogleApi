@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Maps.Routes.Common;
+﻿using GoogleApi.Entities.Common;
+
+namespace GoogleApi.Entities.Maps.Routes.Common;
 
 /// <summary>
 /// Text representations of certain properties.

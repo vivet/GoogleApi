@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Common;
-using GoogleApi.Entities.Maps.Roads.Common;
 using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,11 +24,11 @@ public class SpeedLimitsRequestTests
         var request = new SpeedLimitsRequest
         {
             Key = "key",
-            Path = new[]
-            {
-                new Coordinate(1, 1),
-                new Coordinate(2, 2)
-            }
+            Path =
+            [
+                new LatLng(1, 1),
+                new LatLng(2, 2)
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -51,7 +51,7 @@ public class SpeedLimitsRequestTests
         var request = new SpeedLimitsRequest
         {
             Key = "key",
-            Path = new Coordinate[101]
+            Path = new LatLng[101]
         };
 
         var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
@@ -66,11 +66,11 @@ public class SpeedLimitsRequestTests
         var request = new SpeedLimitsRequest
         {
             Key = "key",
-            Places = new[]
-            {
+            Places =
+            [
                 new Place("place1"),
                 new Place("place2")
-            }
+            ]
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
