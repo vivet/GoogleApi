@@ -12,7 +12,7 @@ public class PlacesNewTextSearchResponse : BaseResponseX
     /// <summary>
     /// A list of places that meet the user's text search criteria.
     /// </summary>
-    public virtual IEnumerable<Place> Places { get; set; }
+    public virtual IEnumerable<Place> Places { get; set; } = new List<Place>();
 
     /// <summary>
     /// A list of routing summaries where each entry associates to the corresponding place in the same index in the places field.
