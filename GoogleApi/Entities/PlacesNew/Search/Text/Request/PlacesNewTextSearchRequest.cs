@@ -38,7 +38,7 @@ public class PlacesNewTextSearchRequest : BasePlacesNewRequest, IRequestJsonX
     /// Restricts the results to places matching the specified type defined by Table A. Only one type may be specified.
     /// https://developers.google.com/maps/documentation/places/web-service/place-types#table-a
     /// </summary>
-    public virtual PlaceLocationTypeA IncludedType { get; set; }
+    public virtual PlaceLocationTypeA? IncludedType { get; set; }
 
     /// <summary>
     /// Optional.
