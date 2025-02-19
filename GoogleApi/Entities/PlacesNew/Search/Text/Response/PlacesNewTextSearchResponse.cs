@@ -10,7 +10,7 @@ namespace GoogleApi.Entities.PlacesNew.Search.Text.Response;
 public class PlacesNewTextSearchResponse : BaseResponseX
 {
     /// <summary>
-    /// A list of places that meet the user's text search criteria..
+    /// A list of places that meet the user's text search criteria.
     /// </summary>
     public virtual IEnumerable<Place> Places { get; set; }
 
