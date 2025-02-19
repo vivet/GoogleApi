@@ -38,7 +38,7 @@ public class Place
     /// For example, "restaurant", "cafe", "airport", etc. A place can only have a single primary type.
     /// For the complete list of possible values, see Table A and Table B at https://developers.google.com/maps/documentation/places/web-service/place-types
     /// </summary>
-    public virtual PlaceLocationTypeAb PrimaryType { get; set; }
+    public virtual PlaceLocationTypeAb? PrimaryType { get; set; }
 
     /// <summary>
     /// The display name of the primary type, localized to the request language if applicable.
