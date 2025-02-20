@@ -99,7 +99,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
         try
         {
-            using var httpResponseMessage = await this.ProcessRequestAsync(request, cancellationToken)
+            using var httpResponseMessage = await this.ProcessRequestAsync(request, httpEngineOptions, cancellationToken)
                 .ConfigureAwait(false);
 
             var response = await this.ProcessResponseAsync(httpResponseMessage)
@@ -146,7 +146,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
         }
     }
 
-    private async Task<HttpResponseMessage> ProcessRequestAsync(TRequest request, CancellationToken cancellationToken = default)
+    private async Task<HttpResponseMessage> ProcessRequestAsync(TRequest request, HttpEngineOptions httpEngineOptions, CancellationToken cancellationToken = default)
     {
         if (request == null)
             throw new ArgumentNullException(nameof(request));
@@ -159,6 +159,12 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
             : HttpMethod.Post;
 
         using var httpRequestMessage = new HttpRequestMessage(method, uri);
+
+        if (httpEngineOptions.AdditionalHeaders != null) {
+            foreach (var header in httpEngineOptions.AdditionalHeaders ) { 
+                httpRequestMessage.Headers.Add(header.Key, header.Value); 
+            }
+        }
 
         if (request is IRequestX jsonX)
         {
