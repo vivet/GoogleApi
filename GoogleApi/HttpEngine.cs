@@ -160,6 +160,12 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
 
         using var httpRequestMessage = new HttpRequestMessage(method, uri);
 
+        if (request.Referer != null)
+        {
+            httpRequestMessage.Headers
+                .Add(GoogleHttpHeaders.REFERER_HEADER, request.Referer);
+        }
+
         if (request is IRequestX jsonX)
         {
             httpRequestMessage.Headers

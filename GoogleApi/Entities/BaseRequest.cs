@@ -24,6 +24,10 @@ public abstract class BaseRequest : IRequest
     [JsonIgnore]
     public virtual string Key { get; set; }
 
+    /// <inheritdoc />
+    [JsonIgnore]
+    public virtual string Referer { get; set; }
+
     /// <summary>
     /// See Client Id.
     /// </summary>

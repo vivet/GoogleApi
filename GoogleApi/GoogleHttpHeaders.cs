@@ -11,6 +11,11 @@ internal static class GoogleHttpHeaders
     internal const string API_KEY_HEADER = "X-Goog-Api-Key";
 
     /// <summary>
+    /// Referer Header.
+    /// </summary>
+    internal const string REFERER_HEADER = "Referer";
+
+    /// <summary>
     /// Field-Mask header.
     /// </summary>
     internal const string FIELD_MASK_HEADER = "X-Goog-FieldMask";

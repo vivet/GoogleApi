@@ -23,6 +23,10 @@ public abstract class BaseRequestX : IRequestX
 
     /// <inheritdoc />
     [JsonIgnore]
+    public virtual string Referer { get; set; }
+
+    /// <inheritdoc />
+    [JsonIgnore]
     public virtual string FieldMask { get; set; } = "*";
 
     /// <inheritdoc />

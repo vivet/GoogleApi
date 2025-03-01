@@ -17,6 +17,12 @@ public interface IRequest
     string Key { get; set; }
 
     /// <summary>
+    /// Specify the http referer for the request, to restrict your API key to specific domains.
+    /// https://cloud.google.com/api-keys/docs/add-restrictions-api-keys#add-client-restrictions
+    /// </summary>
+    string Referer { get; set; }
+
+    /// <summary>
     /// Returns the Uri for the request.
     /// </summary>
     /// <returns>The <see cref="Uri"/>.</returns>
