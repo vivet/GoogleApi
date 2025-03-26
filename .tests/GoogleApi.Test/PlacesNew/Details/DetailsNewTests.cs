@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using GoogleApi.Entities.Common.Enums;
@@ -17,7 +18,8 @@ public class DetailsNewTests : BaseTest
         var request = new PlacesNewAutoCompleteRequest
         {
             Key = Settings.ApiKey,
-            Input = "jagtvej 2200 København"
+            Input = "jagtvej 2200 København",
+            SessionToken = Guid.NewGuid().ToString()
         };
 
         var response = await GooglePlacesNew.AutoComplete.QueryAsync(request);
@@ -26,7 +28,8 @@ public class DetailsNewTests : BaseTest
         var request2 = new PlacesNewDetailsRequest
         {
             Key = Settings.ApiKey,
-            PlaceId = placeId
+            PlaceId = placeId,
+            SessionToken = request.SessionToken
         };
 
         var result = await GooglePlacesNew.Details.QueryAsync(request2);

@@ -43,4 +43,13 @@ public class AddressValidationRequest : BaseMapsRequest, IRequestJson
     /// Language Options.
     /// </summary>
     public virtual LanguageOptions LanguageOptions { get; set; }
+
+    /// <summary>
+    /// Optional.
+    /// Session tokens are user-generated strings that track Autocomplete (New) calls as "sessions."
+    /// Autocomplete (New) uses session tokens to group the query and place selection phases of a user autocomplete search into a discrete session for billing purposes.
+    /// Session tokens are passed into Place Details (New) calls that follow Autocomplete (New) calls. For more information,
+    /// see https://developers.google.com/maps/documentation/places/web-service/place-session-tokens.
+    /// </summary>
+    public virtual string SessionToken { get; set; }
 }
