@@ -49,12 +49,12 @@ public class RoutesDirectionsRequest : BaseRequestX, IRequestJsonX
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual PolylineQuality PolylineQuality { get; set; } = PolylineQuality.Overview;
+    public virtual PolylineQuality? PolylineQuality { get; set; }
 
     /// <summary>
     /// Specifies the mode of transportation. (optional).
     /// </summary>
-    public virtual PolylineEncoding PolylineEncoding { get; set; } = PolylineEncoding.EncodedPolyline;
+    public virtual PolylineEncoding? PolylineEncoding { get; set; }
 
     /// <summary>
     /// Optional. Specifies the assumptions to use when calculating time in traffic.
