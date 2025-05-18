@@ -1,4 +1,6 @@
-﻿namespace GoogleApi.Entities.Common;
+﻿using System.Globalization;
+
+namespace GoogleApi.Entities.Common;
 
 /// <summary>
 /// Lat Lng.
@@ -33,5 +35,11 @@ public class LatLng
     {
         this.Latitude = latitude;
         this.Longitude = longitude;
+    }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"{((decimal)this.Latitude).ToString(CultureInfo.InvariantCulture)},{((decimal)this.Longitude).ToString(CultureInfo.InvariantCulture)}";
     }
 }
