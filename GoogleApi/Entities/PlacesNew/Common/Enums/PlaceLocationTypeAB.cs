@@ -1138,10 +1138,16 @@ public enum PlaceLocationTypeAb
     Farmstay,
 
     /// <summary>
-    /// Guest House Hostel.
+    /// Guest House.
     /// </summary>
-    [EnumMember(Value = "guest_house_hostel")]
-    GuestHouseHostel,
+    [EnumMember(Value = "guest_house")]
+    GuestHouse,
+
+    /// <summary>
+    /// Hostel.
+    /// </summary>
+    [EnumMember(Value = "hostel")]
+    Hostel,
 
     /// <summary>
     /// Hotel.
