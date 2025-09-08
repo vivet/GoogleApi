@@ -1,5 +1,5 @@
 # Google Api
-[![Build status](https://ci.appveyor.com/api/projects/status/ogah0hor3j6hmklv/branch/master?svg=true)](https://ci.appveyor.com/project/vivet/googleapi/branch/master)
+[![Build and Deploy](https://github.com/Vivet/GoogleApi/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/Vivet/GoogleApi/actions/workflows/build-and-deploy.yml)
 [![NuGet](https://img.shields.io/nuget/dt/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi)
 [![NuGet](https://img.shields.io/nuget/v/GoogleApi.svg)](https://www.nuget.org/packages/GoogleApi)
 
