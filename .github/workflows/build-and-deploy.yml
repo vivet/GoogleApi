@@ -1,0 +1,70 @@
+name: Build and Deploy
+on:
+  pull_request:
+    branches:
+      - master 
+  push:
+    branches:
+      - master 
+env:
+  APP_NAME: GoogleApi
+  VERSION: 5.8.10
+  NUGET_HOST: https://www.nuget.org
+  NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    concurrency:
+      group: ${{ github.repository }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Build and Test
+        shell: pwsh
+        run: |
+          dotnet build -c Release .\$env:APP_NAME.sln;
+          if ($LastExitCode -ne 0)
+          { 
+              throw "Build failed";
+          };
+
+          dotnet test .\.tests\UnitTests.$env:APP_NAME\UnitTests.$env:APP_NAME.csproj --framework net9.0
+          if ($LastExitCode -ne 0)
+          { 
+              throw "Tests failed";
+          };
+
+          dotnet pack --output nupkgs /p:PackageVersion=$env:VERSION;
+          if ($LastExitCode -ne 0)
+          { 
+              throw "Pack failed";
+          };
+
+      - name: Push NuGet
+        if: github.ref == 'refs/heads/master'
+        shell: pwsh
+        run: |
+          dotnet nuget push nupkgs/$env:APP_NAME"."$env:VERSION.nupkg -s $env:NUGET_HOST -k $env:NUGET_APIKEY
+          dotnet nuget push nupkgs/$env:APP_NAME"."$env:VERSION.snupkg -s $env:NUGET_HOST -k $env:NUGET_APIKEY
+
+      - name: GitHub Release
+        if: github.ref == 'refs/heads/master'
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ env.VERSION }}
+          name: "Release ${{ env.VERSION }}"
+          body: |
+            Version: ${{ env.VERSION }}
+            Commit: ${{ github.sha }}
+          artifacts: "nupkgs/*"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
