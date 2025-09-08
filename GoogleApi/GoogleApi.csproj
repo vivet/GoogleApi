@@ -37,11 +37,6 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="Entities\PlacesNew\Search\Common\Enums\**" />
-	  <EmbeddedResource Remove="Entities\PlacesNew\Search\Common\Enums\**" />
-	  <None Remove="Entities\PlacesNew\Search\Common\Enums\**" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\LICENSE" Pack="true" Visible="false" PackagePath="" />
