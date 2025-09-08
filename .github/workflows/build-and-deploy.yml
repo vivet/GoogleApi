@@ -36,7 +36,7 @@ jobs:
               throw "Build failed";
           };
 
-          dotnet test .\.tests\UnitTests.$env:APP_NAME\UnitTests.$env:APP_NAME.csproj
+          dotnet test .\.tests\UnitTests.$env:APP_NAME\UnitTests.$env:APP_NAME.csproj --framework net9.0
           if ($LastExitCode -ne 0)
           { 
               throw "Tests failed";
