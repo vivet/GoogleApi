@@ -3,7 +3,7 @@ using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.StaticMaps;
+namespace UnitTests.GoogleApi.Maps.StaticMaps;
 
 [TestClass]
 public class MapMarkerIconTests
@@ -11,7 +11,7 @@ public class MapMarkerIconTests
     [TestMethod]
     public void ToStringTest()
     {
-        var exception = Assert.ThrowsException<ArgumentNullException>(() => new MapMarkerIcon(null));
+        var exception = Assert.Throws<ArgumentNullException>(() => new MapMarkerIcon(null));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.StartsWith("Value cannot be null"));

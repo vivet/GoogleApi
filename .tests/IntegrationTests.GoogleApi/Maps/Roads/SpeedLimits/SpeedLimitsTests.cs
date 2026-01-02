@@ -1,11 +1,12 @@
+using System.Threading.Tasks;
+using GoogleApi;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
-using System.Threading.Tasks;
-using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Roads.SpeedLimits;
+namespace IntegrationTests.GoogleApi.Maps.Roads.SpeedLimits;
 
 [TestClass]
 public class SpeedLimitsTests : BaseTest

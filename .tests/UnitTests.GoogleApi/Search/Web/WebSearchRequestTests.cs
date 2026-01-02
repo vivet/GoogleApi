@@ -4,7 +4,7 @@ using GoogleApi.Entities.Search.Common.Enums.Extensions;
 using GoogleApi.Entities.Search.Web.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Search.Web;
+namespace UnitTests.GoogleApi.Search.Web;
 
 [TestClass]
 public class WebSearchRequestTests
@@ -39,7 +39,7 @@ public class WebSearchRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
@@ -53,7 +53,7 @@ public class WebSearchRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
@@ -68,7 +68,7 @@ public class WebSearchRequestTests
             Query = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
@@ -83,7 +83,7 @@ public class WebSearchRequestTests
             Query = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
@@ -99,7 +99,7 @@ public class WebSearchRequestTests
             SearchEngineId = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
@@ -115,7 +115,7 @@ public class WebSearchRequestTests
             SearchEngineId = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
@@ -135,7 +135,7 @@ public class WebSearchRequestTests
             }
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
     }
@@ -154,7 +154,7 @@ public class WebSearchRequestTests
             }
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
     }
@@ -174,7 +174,7 @@ public class WebSearchRequestTests
             }
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
     }

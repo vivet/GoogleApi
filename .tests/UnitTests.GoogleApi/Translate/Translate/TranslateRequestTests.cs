@@ -6,7 +6,7 @@ using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Request.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Translate.Translate;
+namespace UnitTests.GoogleApi.Translate.Translate;
 
 [TestClass]
 public class TranslateRequestTests
@@ -72,7 +72,7 @@ public class TranslateRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -86,7 +86,7 @@ public class TranslateRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -101,7 +101,7 @@ public class TranslateRequestTests
             Target = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Target' is required");
@@ -117,7 +117,7 @@ public class TranslateRequestTests
             Qs = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Qs' is required");
@@ -133,7 +133,7 @@ public class TranslateRequestTests
             Qs = Array.Empty<string>()
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Qs' is required");
@@ -151,7 +151,7 @@ public class TranslateRequestTests
             Model = Model.Nmt
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Source' is not compatible with model 'Nmt'");
@@ -169,7 +169,7 @@ public class TranslateRequestTests
             Model = Model.Nmt
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Target' is not compatible with model 'Nmt'");
@@ -187,7 +187,7 @@ public class TranslateRequestTests
             Qs = ["Hej Verden"]
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Source' or 'Target' must be english");

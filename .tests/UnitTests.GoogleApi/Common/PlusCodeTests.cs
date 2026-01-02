@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Common;
+namespace UnitTests.GoogleApi.Common;
 
 [TestClass]
 public class PlusCodeTests
@@ -19,7 +19,7 @@ public class PlusCodeTests
     [TestMethod]
     public void ConstructorWhenGlobalCodeIsNullTest()
     {
-        Assert.ThrowsException<ArgumentNullException>(() => new PlusCode(null, "local"));
+        Assert.Throws<ArgumentNullException>(() => new PlusCode(null, "local"));
     }
 
     [TestMethod]

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common;
@@ -9,7 +10,7 @@ using GoogleApi.Entities.Maps.Routes.Matrix.Request.Enums;
 using GoogleApi.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Routes.Matrix;
+namespace IntegrationTests.GoogleApi.Maps.Routes.Matrix;
 
 [TestClass]
 public class RouteMatrixTests : BaseTest
@@ -163,7 +164,7 @@ public class RouteMatrixTests : BaseTest
             Key = this.Settings.ApiKey
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RoutesMatrix.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Request must contain at least one origin.", exception.Message);

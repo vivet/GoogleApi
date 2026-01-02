@@ -2,7 +2,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Places.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Places.Common;
+namespace IntegrationTests.GoogleApi.Places.Common;
 
 [TestClass]
 public class LocationBiasTests : BaseTest

@@ -4,7 +4,7 @@ using System.Linq;
 using GoogleApi.Entities.Common.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Common.Extensions;
+namespace UnitTests.GoogleApi.Common.Extensions;
 
 [TestClass]
 public class ListExtensionTest
@@ -27,7 +27,7 @@ public class ListExtensionTest
         const string VALUE = "testName";
         var queryStringParameters = new List<KeyValuePair<string, string>>();
 
-        var exception = Assert.ThrowsException<ArgumentNullException>(() => queryStringParameters.Add(null, VALUE));
+        var exception = Assert.Throws<ArgumentNullException>(() => queryStringParameters.Add(null, VALUE));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.StartsWith("Value cannot be null"));

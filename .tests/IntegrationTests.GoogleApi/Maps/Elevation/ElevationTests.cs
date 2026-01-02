@@ -1,11 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Elevation.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Elevation;
+namespace IntegrationTests.GoogleApi.Maps.Elevation;
 
 [TestClass]
 public class ElevationTests : BaseTest

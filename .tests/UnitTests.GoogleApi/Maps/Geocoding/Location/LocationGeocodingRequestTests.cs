@@ -7,7 +7,7 @@ using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Geocoding.Location;
+namespace UnitTests.GoogleApi.Maps.Geocoding.Location;
 
 [TestClass]
 public class LocationGeocodingRequestTests
@@ -118,7 +118,7 @@ public class LocationGeocodingRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -132,7 +132,7 @@ public class LocationGeocodingRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -146,7 +146,7 @@ public class LocationGeocodingRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Location' is required");

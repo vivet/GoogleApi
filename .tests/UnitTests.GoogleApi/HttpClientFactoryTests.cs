@@ -2,9 +2,10 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using GoogleApi;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests;
+namespace UnitTests.GoogleApi;
 
 [TestClass]
 public class HttpClientFactoryTests

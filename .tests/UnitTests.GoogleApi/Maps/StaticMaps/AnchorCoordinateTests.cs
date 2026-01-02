@@ -1,7 +1,7 @@
 using GoogleApi.Entities.Maps.StaticMaps.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.StaticMaps;
+namespace UnitTests.GoogleApi.Maps.StaticMaps;
 
 [TestClass]
 public class AnchorCoordinateTests

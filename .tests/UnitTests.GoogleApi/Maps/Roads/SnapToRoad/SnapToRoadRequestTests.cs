@@ -4,7 +4,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Roads.SnapToRoad;
+namespace UnitTests.GoogleApi.Maps.Roads.SnapToRoad;
 
 [TestClass]
 public class SnapToRoadRequestTests
@@ -56,7 +56,7 @@ public class SnapToRoadRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -70,7 +70,7 @@ public class SnapToRoadRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -84,7 +84,7 @@ public class SnapToRoadRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' is required");
@@ -99,7 +99,7 @@ public class SnapToRoadRequestTests
             Path = new LatLng[101]
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' must contain equal or less than 100 coordinates");

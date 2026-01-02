@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
+using GoogleApi;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SnapToRoads.Request;
-using System.Threading.Tasks;
-using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Roads.SnapToRoad;
+namespace IntegrationTests.GoogleApi.Maps.Roads.SnapToRoad;
 
 [TestClass]
 public class SnapToRoadTests : BaseTest

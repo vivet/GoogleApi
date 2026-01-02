@@ -1,12 +1,13 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Request.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Places.Details;
+namespace IntegrationTests.GoogleApi.Places.Details;
 
 [TestClass]
 public class DetailsTests : BaseTest

@@ -3,7 +3,7 @@ using System.Linq;
 using GoogleApi.Entities.Maps.AerialView.GetVideo.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.AerialView.GetVideo;
+namespace UnitTests.GoogleApi.Maps.AerialView.GetVideo;
 
 [TestClass]
 public class GetVideoRequestTests
@@ -62,7 +62,7 @@ public class GetVideoRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -76,7 +76,7 @@ public class GetVideoRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -90,7 +90,7 @@ public class GetVideoRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("Either an 'Address' or a 'VideoId' is required.", exception.Message);
@@ -106,7 +106,7 @@ public class GetVideoRequestTests
             VideoId = "videoId"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("Only one of 'Address' or 'VideoId' can be specified.", exception.Message);

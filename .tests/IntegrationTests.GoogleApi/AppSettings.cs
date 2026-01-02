@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace GoogleApi.Test;
+namespace IntegrationTests.GoogleApi;
 
 public class AppSettings
 {

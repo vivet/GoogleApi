@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.PlacesNew.AutoComplete.Request;
 using GoogleApi.Entities.PlacesNew.Details.Request;
 using GoogleApi.Entities.PlacesNew.Photos.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.PlacesNew.Photos;
+namespace IntegrationTests.GoogleApi.PlacesNew.Photos;
 
 [TestClass]
 public class PhotosNewSkipHttpRedirectTests : BaseTest

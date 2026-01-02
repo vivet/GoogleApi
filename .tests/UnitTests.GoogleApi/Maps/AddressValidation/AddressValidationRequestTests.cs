@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Maps.AddressValidation.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.AddressValidation;
+namespace UnitTests.GoogleApi.Maps.AddressValidation;
 
 [TestClass]
 public class AddressValidationRequestTests
@@ -15,7 +15,7 @@ public class AddressValidationRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -29,7 +29,7 @@ public class AddressValidationRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);

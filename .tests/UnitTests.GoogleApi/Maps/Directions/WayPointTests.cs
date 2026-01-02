@@ -3,7 +3,7 @@ using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.Directions.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Directions;
+namespace UnitTests.GoogleApi.Maps.Directions;
 
 [TestClass]
 public class WayPointTests

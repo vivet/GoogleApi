@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geolocation.Request;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Geolocation;
+namespace IntegrationTests.GoogleApi.Maps.Geolocation;
 
 [TestClass]
 public class GeolocationTests : BaseTest

@@ -1,11 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Detect.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
-namespace GoogleApi.Test.Translate.Detect;
+namespace IntegrationTests.GoogleApi.Translate.Detect;
 
 [TestClass]
 public class DetectTests : BaseTest

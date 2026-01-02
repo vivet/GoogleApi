@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
@@ -7,7 +8,7 @@ using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.StaticMaps;
+namespace IntegrationTests.GoogleApi.Maps.StaticMaps;
 
 [TestClass]
 public class StaticMapsTests : BaseTest

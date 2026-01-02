@@ -1,7 +1,7 @@
 using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Common;
+namespace UnitTests.GoogleApi.Common;
 
 [TestClass]
 public class ViewPortTests

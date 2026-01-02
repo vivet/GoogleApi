@@ -10,7 +10,7 @@ using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.Directions.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Directions;
+namespace UnitTests.GoogleApi.Maps.Directions;
 
 [TestClass]
 public class DirectionsRequestTests
@@ -519,7 +519,7 @@ public class DirectionsRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -533,7 +533,7 @@ public class DirectionsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -548,7 +548,7 @@ public class DirectionsRequestTests
             Destination = new LocationEx(new Address("address"))
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Origin' is required", exception.Message);
@@ -563,7 +563,7 @@ public class DirectionsRequestTests
             Origin = new LocationEx(new Address("address"))
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Destination' is required", exception.Message);

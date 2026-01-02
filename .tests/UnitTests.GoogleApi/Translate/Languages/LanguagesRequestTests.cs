@@ -5,7 +5,7 @@ using GoogleApi.Entities.Translate.Common.Enums.Extensions;
 using GoogleApi.Entities.Translate.Languages.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Translate.Languages;
+namespace UnitTests.GoogleApi.Translate.Languages;
 
 [TestClass]
 public class LanguagesRequestTests
@@ -58,7 +58,7 @@ public class LanguagesRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -72,7 +72,7 @@ public class LanguagesRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");

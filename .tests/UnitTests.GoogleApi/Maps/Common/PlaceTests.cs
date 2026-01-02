@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Maps.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Common;
+namespace UnitTests.GoogleApi.Maps.Common;
 
 [TestClass]
 public class PlaceTests
@@ -18,7 +18,7 @@ public class PlaceTests
     [TestMethod]
     public void ConstructorWhenNullTest()
     {
-        Assert.ThrowsException<ArgumentNullException>(() => new Place(null));
+        Assert.Throws<ArgumentNullException>(() => new Place(null));
     }
 
     [TestMethod]

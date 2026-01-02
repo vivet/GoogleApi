@@ -2,7 +2,7 @@ using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Common.Enums.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Common.Enums.Extensions;
+namespace UnitTests.GoogleApi.Common.Enums.Extensions;
 
 [TestClass]
 public class StringExtensionTests

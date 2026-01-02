@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Playlists.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Search.Video.Playlists;
+namespace IntegrationTests.GoogleApi.Search.Video.Playlists;
 
 [TestClass]
 public class PlaylistSearchTests : BaseTest

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.PlacesNew.AutoComplete.Request;
@@ -7,7 +8,7 @@ using GoogleApi.Entities.PlacesNew.Common;
 using GoogleApi.Entities.PlacesNew.Common.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.PlacesNew.AutoComplete;
+namespace IntegrationTests.GoogleApi.PlacesNew.AutoComplete;
 
 [TestClass]
 public class AutoCompleteNewTests : BaseTest

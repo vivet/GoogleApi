@@ -1,11 +1,12 @@
+using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
 using GoogleApi.Entities.Maps.StreetView.Request;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.StreetView;
+namespace IntegrationTests.GoogleApi.Maps.StreetView;
 
 [TestClass]
 public class StreetViewTests : BaseTest

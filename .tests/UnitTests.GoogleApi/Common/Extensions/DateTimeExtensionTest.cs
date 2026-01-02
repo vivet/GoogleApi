@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Common.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Common.Extensions;
+namespace UnitTests.GoogleApi.Common.Extensions;
 
 [TestClass]
 public class DateTimeExtensionTest

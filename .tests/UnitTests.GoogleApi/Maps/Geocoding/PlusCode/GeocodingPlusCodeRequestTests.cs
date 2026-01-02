@@ -6,7 +6,7 @@ using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode;
+namespace UnitTests.GoogleApi.Maps.Geocoding.PlusCode;
 
 [TestClass]
 public class GeocodingPlusCodeRequestTests
@@ -25,7 +25,7 @@ public class GeocodingPlusCodeRequestTests
         var request = new PlusCodeGeocodeRequest
         {
             Key = "abc",
-            Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1))
+            Address = new global::GoogleApi.Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1))
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -53,7 +53,7 @@ public class GeocodingPlusCodeRequestTests
         var request = new PlusCodeGeocodeRequest
         {
             Key = "abc",
-            Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Entities.Common.Address("address"))
+            Address = new global::GoogleApi.Entities.Maps.Geocoding.PlusCode.Request.Location(new global::GoogleApi.Entities.Common.Address("address"))
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -71,7 +71,7 @@ public class GeocodingPlusCodeRequestTests
         var request = new PlusCodeGeocodeRequest
         {
             Key = "abc",
-            Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new GlobalCode("global_code"))
+            Address = new global::GoogleApi.Entities.Maps.Geocoding.PlusCode.Request.Location(new GlobalCode("global_code"))
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -89,7 +89,7 @@ public class GeocodingPlusCodeRequestTests
         var request = new PlusCodeGeocodeRequest
         {
             Key = "abc",
-            Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new LocalCodeAndLocality("local_code", "locality"))
+            Address = new global::GoogleApi.Entities.Maps.Geocoding.PlusCode.Request.Location(new LocalCodeAndLocality("local_code", "locality"))
         };
 
         var queryStringParameters = request.GetQueryStringParameters();
@@ -107,7 +107,7 @@ public class GeocodingPlusCodeRequestTests
         var request = new PlusCodeGeocodeRequest
         {
             Key = "abc",
-            Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1)),
+            Address = new global::GoogleApi.Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1)),
             UseEncryptedKey = true
         };
 
@@ -126,7 +126,7 @@ public class GeocodingPlusCodeRequestTests
         var request = new PlusCodeGeocodeRequest
         {
             Key = "abc",
-            Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1)),
+            Address = new global::GoogleApi.Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1)),
             Email = "email"
         };
 
@@ -144,7 +144,7 @@ public class GeocodingPlusCodeRequestTests
     {
         var request = new PlusCodeGeocodeRequest
         {
-            Address = new Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1))
+            Address = new global::GoogleApi.Entities.Maps.Geocoding.PlusCode.Request.Location(new Coordinate(1, 1))
         };
 
         request.GetQueryStringParameters();
@@ -158,7 +158,7 @@ public class GeocodingPlusCodeRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Address is required");

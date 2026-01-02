@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Routes.Common;
@@ -12,7 +13,7 @@ using GoogleApi.Entities.Maps.Routes.Directions.Response.Enums;
 using GoogleApi.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Routes.Directions;
+namespace IntegrationTests.GoogleApi.Maps.Routes.Directions;
 
 [TestClass]
 public class RouteDirectionsTests : BaseTest
@@ -372,7 +373,7 @@ public class RouteDirectionsTests : BaseTest
             Key = this.Settings.ApiKey
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RouteDirections.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.Routes.RouteDirections.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Origin and destination must be set.", exception.Message);
