@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Channels.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Search.Video.Channels;
+namespace IntegrationTests.GoogleApi.Search.Video.Channels;
 
 [TestClass]
 public class ChannelSearchTests : BaseTest

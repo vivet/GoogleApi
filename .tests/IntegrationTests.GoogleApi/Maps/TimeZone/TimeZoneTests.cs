@@ -1,11 +1,12 @@
 using System;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.TimeZone;
+namespace IntegrationTests.GoogleApi.Maps.TimeZone;
 
 [TestClass]
 public class TimeZoneTests : BaseTest

@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Common;
+namespace UnitTests.GoogleApi.Common;
 
 [TestClass]
 public class AddressTests
@@ -18,7 +18,7 @@ public class AddressTests
     [TestMethod]
     public void ConstructorWhenNullTest()
     {
-        Assert.ThrowsException<ArgumentNullException>(() => new Address(null));
+        Assert.Throws<ArgumentNullException>(() => new Address(null));
     }
 
     [TestMethod]

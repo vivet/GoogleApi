@@ -1,4 +1,9 @@
-﻿using GoogleApi.Entities.Maps.Directions.Request;
+﻿using System;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using GoogleApi;
+using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Directions.Response;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using GoogleApi.Entities.Maps.DistanceMatrix.Response;
@@ -53,11 +58,6 @@ using GoogleApi.Entities.Translate.Languages.Request;
 using GoogleApi.Entities.Translate.Languages.Response;
 using GoogleApi.Entities.Translate.Translate.Request;
 using GoogleApi.Entities.Translate.Translate.Response;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using GoogleApi.Extensions;
 using GoogleApi.Interfaces.Maps;
 using GoogleApi.Interfaces.Maps.Geocode;
@@ -67,9 +67,10 @@ using GoogleApi.Interfaces.Places.Search;
 using GoogleApi.Interfaces.Search;
 using GoogleApi.Interfaces.Search.Video;
 using GoogleApi.Interfaces.Translate;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Extensions;
+namespace UnitTests.GoogleApi.Extensions;
 
 [TestClass]
 public class ServiceCollectionExtensionTests

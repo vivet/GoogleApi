@@ -7,7 +7,7 @@ using GoogleApi.Entities.Common.Extensions;
 using GoogleApi.Entities.Maps.TimeZone.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.TimeZone;
+namespace UnitTests.GoogleApi.Maps.TimeZone;
 
 [TestClass]
 public class TimeZoneRequestTests
@@ -62,7 +62,7 @@ public class TimeZoneRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -76,7 +76,7 @@ public class TimeZoneRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -90,7 +90,7 @@ public class TimeZoneRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Location' is required");

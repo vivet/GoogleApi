@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.Maps.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Common;
+namespace UnitTests.GoogleApi.Maps.Common;
 
 [TestClass]
 public class MapSizeTests
@@ -19,7 +19,7 @@ public class MapSizeTests
     [TestMethod]
     public void ConstructorWhenWidthIsLowerTest()
     {
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(0, 1));
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new MapSize(0, 1));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
@@ -28,7 +28,7 @@ public class MapSizeTests
     [TestMethod]
     public void ConstructorWhenWidthIsHigherTest()
     {
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(4097, 1));
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new MapSize(4097, 1));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains("'width' must be greater than 1 and less than 4096."));
@@ -37,7 +37,7 @@ public class MapSizeTests
     [TestMethod]
     public void ConstructorWhenHeightIsLowerTest()
     {
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(1, 0));
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new MapSize(1, 0));
         
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));
@@ -46,7 +46,7 @@ public class MapSizeTests
     [TestMethod]
     public void ConstructorWhenHeightIsHigherTest()
     {
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new MapSize(1, 4097));
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new MapSize(1, 4097));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains("'height' must be greater than 1 and less than 4096."));

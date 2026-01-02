@@ -7,7 +7,7 @@ using GoogleApi.Entities.Common.Enums.Extensions;
 using GoogleApi.Entities.Maps.Geocoding.Address.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Geocoding.Address;
+namespace UnitTests.GoogleApi.Maps.Geocoding.Address;
 
 [TestClass]
 public class GeocodingAddressRequestTests
@@ -134,7 +134,7 @@ public class GeocodingAddressRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -148,7 +148,7 @@ public class GeocodingAddressRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
@@ -162,7 +162,7 @@ public class GeocodingAddressRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Address' or 'Components' is required");

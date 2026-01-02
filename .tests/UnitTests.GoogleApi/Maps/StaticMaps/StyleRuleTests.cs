@@ -3,7 +3,7 @@ using GoogleApi.Entities.Maps.StaticMaps.Request;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.StaticMaps;
+namespace UnitTests.GoogleApi.Maps.StaticMaps;
 
 [TestClass]
 public class StyleRuleTests
@@ -49,7 +49,7 @@ public class StyleRuleTests
             Lightness = -101
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Lightness)} must be between -100 and 100."));
@@ -63,7 +63,7 @@ public class StyleRuleTests
             Lightness = 101
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Lightness)} must be between -100 and 100."));
@@ -89,7 +89,7 @@ public class StyleRuleTests
             Saturation = -101
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Saturation)} must be between -100 and 100."));
@@ -103,7 +103,7 @@ public class StyleRuleTests
             Saturation = 101
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Saturation)} must be between -100 and 100."));
@@ -129,7 +129,7 @@ public class StyleRuleTests
             Gamma = 0
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00"));
@@ -143,7 +143,7 @@ public class StyleRuleTests
             Gamma = 101
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(styleRule.ToString);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(styleRule.ToString);
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains($"The {nameof(styleRule.Gamma)} must be between 0.01 and 10.00"));

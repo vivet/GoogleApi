@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
@@ -9,7 +10,7 @@ using GoogleApi.Entities.Maps.StaticMaps.Request.Enums;
 using GoogleApi.Entities.Maps.StaticMaps.Request.Enums.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.StaticMaps;
+namespace UnitTests.GoogleApi.Maps.StaticMaps;
 
 [TestClass]
 public class StaticMapsRequestTests
@@ -104,7 +105,7 @@ public class StaticMapsRequestTests
             ZoomLevel = 1
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("Center is required, unless Markers, Paths or Visibles is defined", exception.Message);
     }
@@ -118,7 +119,7 @@ public class StaticMapsRequestTests
             Center = new Location(new Coordinate(1, 1))
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("ZoomLevel is required, unless Markers, Paths or Visibles is defined", exception.Message);
     }
@@ -300,7 +301,7 @@ public class StaticMapsRequestTests
             }
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("Paths must contain two or more locations", exception.Message);
     }
@@ -548,7 +549,7 @@ public class StaticMapsRequestTests
             ]
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("Markers must contain at least one location", exception.Message);
     }
@@ -561,7 +562,7 @@ public class StaticMapsRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }
@@ -574,7 +575,7 @@ public class StaticMapsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
         Assert.IsNotNull(exception);
         Assert.AreEqual("'Key' is required", exception.Message);
     }

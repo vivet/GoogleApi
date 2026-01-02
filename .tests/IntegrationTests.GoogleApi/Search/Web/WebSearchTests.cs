@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
@@ -9,7 +10,7 @@ using GoogleApi.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
-namespace GoogleApi.Test.Search.Web;
+namespace IntegrationTests.GoogleApi.Search.Web;
 
 [TestClass]
 public class WebSearchTests : BaseTest
@@ -503,7 +504,7 @@ public class WebSearchTests : BaseTest
             }
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains($"SafetyLevel is not allowed for specified InterfaceLanguage: {request.Options.InterfaceLanguage}"));
@@ -626,7 +627,7 @@ public class WebSearchTests : BaseTest
             Key = null
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
@@ -641,7 +642,7 @@ public class WebSearchTests : BaseTest
             Query = null
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
@@ -657,7 +658,7 @@ public class WebSearchTests : BaseTest
             SearchEngineId = null
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
@@ -677,7 +678,7 @@ public class WebSearchTests : BaseTest
             }
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains("Number must be between 1 and 10"));
@@ -697,7 +698,7 @@ public class WebSearchTests : BaseTest
             }
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.WebSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.IsTrue(exception.Message.Contains("Number must be between 1 and 10"));

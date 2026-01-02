@@ -1,10 +1,11 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Video.Videos.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Search.Video.Videos;
+namespace IntegrationTests.GoogleApi.Search.Video.Videos;
 
 [TestClass]
 public class VideoSearchTests : BaseTest

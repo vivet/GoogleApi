@@ -2,7 +2,7 @@
 using GoogleApi.Entities.Maps.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Common;
+namespace UnitTests.GoogleApi.Maps.Common;
 
 [TestClass]
 public class LocationExTests

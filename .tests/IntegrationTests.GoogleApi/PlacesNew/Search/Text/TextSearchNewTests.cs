@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.PlacesNew.Search.Text.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.PlacesNew.Search.Text;
+namespace IntegrationTests.GoogleApi.PlacesNew.Search.Text;
 
 [TestClass]
 public class TextSearchNewTests : BaseTest

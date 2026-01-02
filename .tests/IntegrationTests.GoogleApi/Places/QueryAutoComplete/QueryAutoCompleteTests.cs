@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.QueryAutoComplete.Request;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Places.QueryAutoComplete;
+namespace IntegrationTests.GoogleApi.Places.QueryAutoComplete;
 
 [TestClass]
 public class QueryAutoCompleteTests : BaseTest

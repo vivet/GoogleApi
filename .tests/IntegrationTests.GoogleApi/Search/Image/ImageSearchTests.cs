@@ -1,11 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Search.Image.Request;
 using GoogleApi.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Search.Image;
+namespace IntegrationTests.GoogleApi.Search.Image;
 
 [TestClass]
 public class ImageSearchTests : BaseTest
@@ -86,7 +87,7 @@ public class ImageSearchTests : BaseTest
             Key = null
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
@@ -101,7 +102,7 @@ public class ImageSearchTests : BaseTest
             Query = null
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
@@ -117,7 +118,7 @@ public class ImageSearchTests : BaseTest
             SearchEngineId = null
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleSearch.ImageSearch.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");

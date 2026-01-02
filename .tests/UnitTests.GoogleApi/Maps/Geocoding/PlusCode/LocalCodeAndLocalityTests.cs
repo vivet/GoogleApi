@@ -1,7 +1,7 @@
 using GoogleApi.Entities.Maps.Geocoding.PlusCode.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Geocoding.PlusCode;
+namespace UnitTests.GoogleApi.Maps.Geocoding.PlusCode;
 
 [TestClass]
 public class LocalCodeAndLocalityTests

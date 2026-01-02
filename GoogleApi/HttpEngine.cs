@@ -288,7 +288,7 @@ public class HttpEngine<TRequest, TResponse> : HttpEngine
                 {
                     if (string.IsNullOrEmpty(rawJson))
                     {
-                        // BUG: It's not always PlacesNewPhotosSkipHttpRedirectResponse. 
+                        // TODO: It's not always PlacesNewPhotosSkipHttpRedirectResponse. 
                         // can we make this more generic, to work with all response types?
 
                         var error404 = Get404Error();

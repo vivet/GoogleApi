@@ -1,10 +1,11 @@
+using System.Threading.Tasks;
+using GoogleApi;
+using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
-using System.Threading.Tasks;
-using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Roads.NearestRoads;
+namespace IntegrationTests.GoogleApi.Maps.Roads.NearestRoads;
 
 [TestClass]
 public class NearestRoadsTests : BaseTest

@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.PlacesNew.Search.Text.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.PlacesNew.Search.Text;
+namespace UnitTests.GoogleApi.PlacesNew.Search.Text;
 
 [TestClass]
 public class TextSearchNewRequestTests
@@ -15,7 +15,7 @@ public class TextSearchNewRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -29,7 +29,7 @@ public class TextSearchNewRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");

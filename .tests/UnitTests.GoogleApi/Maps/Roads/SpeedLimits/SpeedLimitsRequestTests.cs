@@ -6,7 +6,7 @@ using GoogleApi.Entities.Maps.Roads.Common.Enums;
 using GoogleApi.Entities.Maps.Roads.SpeedLimits.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Roads.SpeedLimits;
+namespace UnitTests.GoogleApi.Maps.Roads.SpeedLimits;
 
 [TestClass]
 public class SpeedLimitsRequestTests
@@ -54,7 +54,7 @@ public class SpeedLimitsRequestTests
             Path = new LatLng[101]
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' must contain equal or less than 100 coordinates");
@@ -96,7 +96,7 @@ public class SpeedLimitsRequestTests
             Places = new Place[101]
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Places' must contain equal or less than 100 places");
@@ -110,7 +110,7 @@ public class SpeedLimitsRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -124,7 +124,7 @@ public class SpeedLimitsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -138,7 +138,7 @@ public class SpeedLimitsRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Path' or 'Places' is required");

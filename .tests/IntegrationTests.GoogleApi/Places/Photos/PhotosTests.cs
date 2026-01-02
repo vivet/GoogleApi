@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.AutoComplete.Request;
 using GoogleApi.Entities.Places.Details.Request;
@@ -7,7 +8,7 @@ using GoogleApi.Entities.Places.Photos.Request;
 using GoogleApi.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Places.Photos;
+namespace IntegrationTests.GoogleApi.Places.Photos;
 
 [TestClass]
 public class PhotosTests : BaseTest
@@ -111,7 +112,7 @@ public class PhotosTests : BaseTest
             MaxWidth = 1600
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GooglePlaces.Photos.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GooglePlaces.Photos.QueryAsync(request));
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidKey: The key is invalid.", exception.Message);
     }

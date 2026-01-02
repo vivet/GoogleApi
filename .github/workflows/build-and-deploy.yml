@@ -8,7 +8,7 @@ on:
       - master 
 env:
   APP_NAME: GoogleApi
-  VERSION: 5.8.11
+  VERSION: 5.8.12
   NUGET_HOST: https://api.nuget.org/v3/index.json
   NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
 jobs:

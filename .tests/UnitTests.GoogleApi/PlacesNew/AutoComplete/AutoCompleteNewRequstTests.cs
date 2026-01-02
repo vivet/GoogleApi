@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.PlacesNew.AutoComplete.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.PlacesNew.AutoComplete;
+namespace UnitTests.GoogleApi.PlacesNew.AutoComplete;
 
 [TestClass]
 public class AutoCompleteNewRequstTests
@@ -15,7 +15,7 @@ public class AutoCompleteNewRequstTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -29,7 +29,7 @@ public class AutoCompleteNewRequstTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");

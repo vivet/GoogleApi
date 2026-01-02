@@ -2,7 +2,7 @@ using System;
 using GoogleApi.Entities.PlacesNew.Details.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.PlacesNew.Details;
+namespace UnitTests.GoogleApi.PlacesNew.Details;
 
 [TestClass]
 public class DetailsNewRequestTests
@@ -15,7 +15,7 @@ public class DetailsNewRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -29,7 +29,7 @@ public class DetailsNewRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Common;
@@ -7,7 +8,7 @@ using GoogleApi.Entities.Places.Search.Find.Request;
 using GoogleApi.Entities.Places.Search.Find.Request.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Places.Search.Find;
+namespace IntegrationTests.GoogleApi.Places.Search.Find;
 
 [TestClass]
 public class FindSearchTests : BaseTest

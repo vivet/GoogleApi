@@ -5,7 +5,7 @@ using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Converters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Search.Common.Converters;
+namespace UnitTests.GoogleApi.Search.Common.Converters;
 
 [TestClass]
 public class DateRestrictJsonConverterTests
@@ -40,6 +40,6 @@ public class DateRestrictJsonConverterTests
         var writer = new Utf8JsonWriter(new MemoryStream());
         var sut = new DateRestrictJsonConverter();
 
-        Assert.ThrowsException<NotImplementedException>(() => sut.Write(writer, new DateRestrict(), new JsonSerializerOptions()));
+        Assert.Throws<NotImplementedException>(() => sut.Write(writer, new DateRestrict(), new JsonSerializerOptions()));
     }
 }

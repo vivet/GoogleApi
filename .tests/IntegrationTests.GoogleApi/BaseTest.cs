@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace GoogleApi.Test;
+namespace IntegrationTests.GoogleApi;
 
 public abstract class BaseTest
 {

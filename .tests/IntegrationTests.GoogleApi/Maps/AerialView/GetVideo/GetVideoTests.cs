@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.AerialView.GetVideo.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.AerialView.GetVideo;
+namespace IntegrationTests.GoogleApi.Maps.AerialView.GetVideo;
 
 [TestClass]
 public class GetVideoTests : BaseTest

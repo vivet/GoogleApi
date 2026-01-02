@@ -1,12 +1,13 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Translate.Common.Enums;
 using GoogleApi.Entities.Translate.Translate.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Translate.Common.Enums.Language;
 
-namespace GoogleApi.Test.Translate.Translate;
+namespace IntegrationTests.GoogleApi.Translate.Translate;
 
 [TestClass]
 public class TranslateTests : BaseTest

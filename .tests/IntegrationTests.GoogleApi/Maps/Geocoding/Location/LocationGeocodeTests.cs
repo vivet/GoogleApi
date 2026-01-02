@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Location.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Geocoding.Location;
+namespace IntegrationTests.GoogleApi.Maps.Geocoding.Location;
 
 [TestClass]
 public class LocationGeocodeTests : BaseTest

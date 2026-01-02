@@ -1,13 +1,14 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.NearBy.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Places.Search.NearBy;
+namespace IntegrationTests.GoogleApi.Places.Search.NearBy;
 
 [TestClass]
 public class NearBySearchTests : BaseTest

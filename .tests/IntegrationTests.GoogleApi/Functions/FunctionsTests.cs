@@ -1,8 +1,9 @@
 using System.Linq;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Functions;
+namespace IntegrationTests.GoogleApi.Functions;
 
 [TestClass]
 public class FunctionsTests : BaseTest

@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Geocoding.Place.Request;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.Geocoding.Place;
+namespace IntegrationTests.GoogleApi.Maps.Geocoding.Place;
 
 [TestClass]
 public class PlaceGeocodeTests : BaseTest

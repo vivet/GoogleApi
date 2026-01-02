@@ -4,7 +4,7 @@ using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Maps.Roads.NearestRoads.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Maps.Roads.NearestRoads;
+namespace UnitTests.GoogleApi.Maps.Roads.NearestRoads;
 
 [TestClass]
 public class NearestRoadsRequestTests
@@ -44,7 +44,7 @@ public class NearestRoadsRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -58,7 +58,7 @@ public class NearestRoadsRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -72,7 +72,7 @@ public class NearestRoadsRequestTests
             Key = "key"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Points' is required");
@@ -87,7 +87,7 @@ public class NearestRoadsRequestTests
             Points = new LatLng[101]
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Points' must contain equal or less than 100 coordinates");

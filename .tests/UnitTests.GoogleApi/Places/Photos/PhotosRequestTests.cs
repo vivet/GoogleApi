@@ -3,7 +3,7 @@ using System.Linq;
 using GoogleApi.Entities.Places.Photos.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Places.Photos;
+namespace UnitTests.GoogleApi.Places.Photos;
 
 [TestClass]
 public class PhotosRequestTests
@@ -78,7 +78,7 @@ public class PhotosRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -92,7 +92,7 @@ public class PhotosRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'Key' is required");
@@ -107,7 +107,7 @@ public class PhotosRequestTests
             PhotoReference = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'PhotoReference' is required");
@@ -122,7 +122,7 @@ public class PhotosRequestTests
             PhotoReference = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'PhotoReference' is required");
@@ -137,7 +137,7 @@ public class PhotosRequestTests
             PhotoReference = "photoReference"
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxHeight' or 'MaxWidth' is required");
@@ -153,7 +153,7 @@ public class PhotosRequestTests
             MaxHeight = 0
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxHeight' must be greater than or equal to 1 and less than or equal to 1.600");
@@ -169,7 +169,7 @@ public class PhotosRequestTests
             MaxHeight = 1601
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxHeight' must be greater than or equal to 1 and less than or equal to 1.600");
@@ -185,7 +185,7 @@ public class PhotosRequestTests
             MaxWidth = 0
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxWidth' must be greater than or equal to 1 and less than or equal to 1.600");
@@ -201,7 +201,7 @@ public class PhotosRequestTests
             MaxWidth = 1601
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "'MaxWidth' must be greater than or equal to 1 and less than or equal to 1.600");

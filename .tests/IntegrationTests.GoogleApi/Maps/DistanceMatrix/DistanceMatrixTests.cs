@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.Common;
@@ -7,7 +8,7 @@ using GoogleApi.Entities.Maps.Common.Enums;
 using GoogleApi.Entities.Maps.DistanceMatrix.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.DistanceMatrix;
+namespace IntegrationTests.GoogleApi.Maps.DistanceMatrix;
 
 [TestClass]
 public class DistanceMatrixTests : BaseTest

@@ -3,7 +3,7 @@ using GoogleApi.Entities.Search.Common;
 using GoogleApi.Entities.Search.Common.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.UnitTests.Search.Common;
+namespace UnitTests.GoogleApi.Search.Common;
 
 [TestClass]
 public class CountryRestrictTests

@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Maps.AerialView.RenderVideo.Request;
 using GoogleApi.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Maps.AerialView.RenderVideo;
+namespace IntegrationTests.GoogleApi.Maps.AerialView.RenderVideo;
 
 [TestClass]
 public class RenderVideoTests : BaseTest
@@ -33,7 +34,7 @@ public class RenderVideoTests : BaseTest
             Address = "test"
         };
 
-        var exception = await Assert.ThrowsExceptionAsync<GoogleApiException>(async () => await GoogleMaps.AerialView.RenderVideo.QueryAsync(request));
+        var exception = await Assert.ThrowsAsync<GoogleApiException>(async () => await GoogleMaps.AerialView.RenderVideo.QueryAsync(request));
 
         Assert.IsNotNull(exception);
         Assert.AreEqual("InvalidArgument: Address not supported.", exception.Message);

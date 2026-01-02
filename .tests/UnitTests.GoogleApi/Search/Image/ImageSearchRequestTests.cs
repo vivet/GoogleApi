@@ -5,7 +5,7 @@ using GoogleApi.Entities.Search.Image.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Language = GoogleApi.Entities.Search.Common.Enums.Language;
 
-namespace GoogleApi.UnitTests.Search.Image;
+namespace UnitTests.GoogleApi.Search.Image;
 
 [TestClass]
 public class ImageSearchRequestTests
@@ -46,7 +46,7 @@ public class ImageSearchRequestTests
             Key = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
@@ -60,7 +60,7 @@ public class ImageSearchRequestTests
             Key = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Key is required");
@@ -75,7 +75,7 @@ public class ImageSearchRequestTests
             Query = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
@@ -90,7 +90,7 @@ public class ImageSearchRequestTests
             Query = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "Query is required");
@@ -106,7 +106,7 @@ public class ImageSearchRequestTests
             SearchEngineId = null
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
@@ -122,7 +122,7 @@ public class ImageSearchRequestTests
             SearchEngineId = string.Empty
         };
 
-        var exception = Assert.ThrowsException<ArgumentException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
         Assert.AreEqual(exception.Message, "SearchEngineId is required");
@@ -142,7 +142,7 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
     }
@@ -161,7 +161,7 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
     }
@@ -181,7 +181,7 @@ public class ImageSearchRequestTests
             }
         };
 
-        var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(request.GetQueryStringParameters);
 
         Assert.IsNotNull(exception);
     }

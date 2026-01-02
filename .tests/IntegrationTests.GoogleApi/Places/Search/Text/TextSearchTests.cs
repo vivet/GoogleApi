@@ -1,12 +1,13 @@
 using System.Linq;
 using System.Threading.Tasks;
+using GoogleApi;
 using GoogleApi.Entities.Common;
 using GoogleApi.Entities.Common.Enums;
 using GoogleApi.Entities.Places.Search.Common.Enums;
 using GoogleApi.Entities.Places.Search.Text.Request;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GoogleApi.Test.Places.Search.Text;
+namespace IntegrationTests.GoogleApi.Places.Search.Text;
 
 [TestClass]
 public class TextSearchTests : BaseTest
