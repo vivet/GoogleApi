@@ -8,7 +8,7 @@ public class AuthorAttribution
     /// <summary>
     /// Name of the author of the Photo or Review.
     /// </summary>
-    public virtual string DdisplayName { get; set; }
+    public virtual string DisplayName { get; set; }
 
     /// <summary>
     /// URI of the author of the Photo or Review.
