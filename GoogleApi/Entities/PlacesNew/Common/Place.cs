@@ -126,6 +126,12 @@ public class Place
     public virtual OpeningHours RegularOpeningHours { get; set; }
 
     /// <summary>
+    /// Represents a time zone from the IANA Time Zone Database.
+    /// https://www.iana.org/time-zones
+    /// </summary>
+    public virtual TimeZone TimeZone { get; set; }
+
+    /// <summary>
     /// Information (including references) about photos of this place. A maximum of 10 photos can be returned.
     /// </summary>
     public virtual IEnumerable<Photo> Photos { get; set; } = new List<Photo>();
