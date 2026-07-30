@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
+using System.Threading.Tasks;
 using GoogleApi;
 using GoogleApi.Entities.Maps.Directions.Request;
 using GoogleApi.Entities.Maps.Directions.Response;
@@ -666,4 +669,48 @@ public class ServiceCollectionExtensionTests
         Assert.IsInstanceOfType<GoogleTranslate.LanguagesApi>(result);
         Assert.IsInstanceOfType<HttpEngine<LanguagesRequest, LanguagesResponse>>(result);
     }
+
+    [TestMethod]
+    public async Task ResolveApiInterfaceUsesItsOwnNamedHttpClientTest()
+    {
+        var handled = new List<string>();
+
+        var services = new ServiceCollection();
+        services.AddGoogleApiClients();
+
+        services
+            .AddHttpClient(nameof(GoogleTranslate.LanguagesApi))
+            .ConfigurePrimaryHttpMessageHandler(() => new StubHandler("named", handled));
+
+        services
+            .AddHttpClient(string.Empty)
+            .ConfigurePrimaryHttpMessageHandler(() => new StubHandler("default", handled));
+
+        var languagesApi = services
+            .BuildServiceProvider()
+            .GetRequiredService<ILanguagesApi>();
+
+        await languagesApi.QueryAsync(new LanguagesRequest { Key = "key" }, TestContext.CancellationToken);
+
+        // Resolving the interface should use the named client that AddGoogleApiClients configured
+        // for the concrete type via the internal AddApi call.
+        Assert.HasCount(1, handled);
+        Assert.AreEqual("named", handled[0]);
+    }
+
+    private sealed class StubHandler(string name, List<string> handled)
+        : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            handled.Add(name);
+
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{}")
+            });
+        }
+    }
+
+    public TestContext TestContext { get; set; }
 }

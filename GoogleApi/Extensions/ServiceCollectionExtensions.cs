@@ -104,7 +104,7 @@ public static class ServiceCollectionExtensions
         }
 
         services
-            .AddTransient<TService, TClient>();
+            .AddTransient<TService>(provider => provider.GetRequiredService<TClient>());
 
         return services;
     }
