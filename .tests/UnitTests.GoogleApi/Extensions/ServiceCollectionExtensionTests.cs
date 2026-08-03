@@ -81,7 +81,7 @@ public class ServiceCollectionExtensionTests
     {
         var services = new ServiceCollection();
         services
-            .AddGoogleApiClients();
+            .AddGoogleApiClients(configureHttpClient: null);
 
         this.provider = services
             .BuildServiceProvider();
