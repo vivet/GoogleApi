@@ -144,4 +144,4 @@ Most importantly, the ```ApiKey```, used to identify the Google subscription.
 ```
 More information about generating a key can be found here: https://console.developers.google.com/  
 
-*** 
+***

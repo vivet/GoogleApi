@@ -8,7 +8,7 @@ on:
       - master 
 env:
   APP_NAME: GoogleApi
-  VERSION: 5.8.15
+  VERSION: 5.8.16
   NUGET_HOST: https://api.nuget.org/v3/index.json
   NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
 jobs:
@@ -20,10 +20,7 @@ jobs:
       group: ${{ github.repository }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 9.0.x
+      - uses: actions/checkout@v6
 
       - name: Build and Test
         shell: pwsh
