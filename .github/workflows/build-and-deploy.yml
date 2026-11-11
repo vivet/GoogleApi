@@ -8,14 +8,14 @@ on:
       - master 
 env:
   APP_NAME: GoogleApi
-  VERSION: 5.8.18
+  VERSION: 5.8.19
   NUGET_HOST: https://api.nuget.org/v3/index.json
-  NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
     concurrency:
       group: ${{ github.repository }}
       cancel-in-progress: true
@@ -43,11 +43,18 @@ jobs:
               throw "Pack failed";
           };
 
+      - name: NuGet Login (Trusted Publishing)
+        if: github.ref == 'refs/heads/master'
+        id: nuget-login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: vivet
+
       - name: Push NuGet
         if: github.ref == 'refs/heads/master'
         shell: pwsh
         run: |
-          dotnet nuget push "nupkgs/*.nupkg" -s $env:NUGET_HOST -k $env:NUGET_APIKEY --skip-duplicate
+          dotnet nuget push "nupkgs/*.nupkg" -s $env:NUGET_HOST -k ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --skip-duplicate
 
           if ($LastExitCode -ne 0)
           { 
